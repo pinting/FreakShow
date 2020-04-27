@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Images/Environmnent/Building00.png" type="Texture" id=1]
+[ext_resource path="res://Images/Environmnent/Dirt00.jpg" type="Texture" id=2]
+[ext_resource path="res://Images/Environmnent/Road00.jpg" type="Texture" id=3]
+[ext_resource path="res://Images/Environmnent/Dumpster00.png" type="Texture" id=4]
+[ext_resource path="res://Images/Environmnent/Light00.png" type="Texture" id=5]
+[ext_resource path="res://Images/Environmnent/Lamp00.png" type="Texture" id=6]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 50.3338, -8.16223 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 243.432, 260.741 )
+scale = Vector2( -575.346, 5.55094 )
+zoom = Vector2( 2, 2 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+modulate = Color( 1, 1, 1, 0.956863 )
+light_mask = 0
+color = Color( 0.388235, 0.388235, 0.388235, 1 )
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Road" type="Node2D" parent="Environment"]
+
+[node name="Dirt00" type="Sprite" parent="Environment/Road"]
+position = Vector2( 440.765, 700.514 )
+scale = Vector2( 0.70614, 0.70614 )
+z_index = 1
+texture = ExtResource( 2 )
+flip_v = true
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 730 )
+
+[node name="Road00" type="Sprite" parent="Environment/Road"]
+position = Vector2( -38.1214, 417.117 )
+z_index = 1
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 50 )
+
+[node name="Street" type="Node2D" parent="Environment"]
+
+[node name="Building00" type="Sprite" parent="Environment/Street"]
+light_mask = 2
+position = Vector2( 438.478, -666.245 )
+scale = Vector2( 0.70614, 0.70614 )
+z_index = -1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 3000 )
+
+[node name="Lamp00" type="Sprite" parent="Environment/Street"]
+position = Vector2( 59.9558, -165.842 )
+scale = Vector2( 0.506836, 0.506836 )
+texture = ExtResource( 6 )
+
+[node name="Light2D" type="Light2D" parent="Environment/Street/Lamp00"]
+position = Vector2( -258.63, 256.038 )
+scale = Vector2( 4.89849, 4.19926 )
+z_index = 1
+texture = ExtResource( 5 )
+energy = 0.81
+range_height = 670.3
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Dumpster00" type="Sprite" parent="Environment/Street"]
+position = Vector2( 608.231, 261.323 )
+scale = Vector2( 0.691593, 0.691593 )
+texture = ExtResource( 4 )
