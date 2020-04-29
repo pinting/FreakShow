@@ -1,62 +1,69 @@
 [gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Images/Environmnent/Light00.png" type="Texture" id=1]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft00.png" type="Texture" id=2]
+[ext_resource path="res://Images/Characters/Buka/Buka17.png" type="Texture" id=2]
 [ext_resource path="res://Actors/Player.gd" type="Script" id=3]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft12.png" type="Texture" id=4]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft04.png" type="Texture" id=5]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft09.png" type="Texture" id=6]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft08.png" type="Texture" id=7]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft07.png" type="Texture" id=8]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft06.png" type="Texture" id=9]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft05.png" type="Texture" id=10]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft17.png" type="Texture" id=11]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft03.png" type="Texture" id=12]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft01.png" type="Texture" id=13]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft02.png" type="Texture" id=14]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft16.png" type="Texture" id=15]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft19.png" type="Texture" id=16]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft20.png" type="Texture" id=17]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft10.png" type="Texture" id=18]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft11.png" type="Texture" id=19]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft13.png" type="Texture" id=20]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft14.png" type="Texture" id=21]
-[ext_resource path="res://Images/Characters/Buka/LeftBuka/BukaLeft15.png" type="Texture" id=22]
+[ext_resource path="res://Images/Characters/Buka/Buka15.png" type="Texture" id=4]
+[ext_resource path="res://Images/Characters/Buka/Buka20.png" type="Texture" id=5]
+[ext_resource path="res://Images/Characters/Buka/Buka19.png" type="Texture" id=6]
+[ext_resource path="res://Images/Characters/Buka/Buka13.png" type="Texture" id=7]
+[ext_resource path="res://Images/Characters/Buka/Buka12.png" type="Texture" id=8]
+[ext_resource path="res://Images/Characters/Buka/Buka10.png" type="Texture" id=9]
+[ext_resource path="res://Images/Characters/Buka/Buka11.png" type="Texture" id=10]
+[ext_resource path="res://Images/Characters/Buka/Buka16.png" type="Texture" id=11]
+[ext_resource path="res://Images/Characters/Buka/Buka14.png" type="Texture" id=12]
+[ext_resource path="res://Images/Characters/Buka/Buka09.png" type="Texture" id=13]
+[ext_resource path="res://Images/Characters/Buka/Buka05.png" type="Texture" id=14]
+[ext_resource path="res://Images/Characters/Buka/Buka08.png" type="Texture" id=15]
+[ext_resource path="res://Images/Characters/Buka/Buka00.png" type="Texture" id=16]
+[ext_resource path="res://Images/Characters/Buka/Buka02.png" type="Texture" id=17]
+[ext_resource path="res://Images/Characters/Buka/Buka03.png" type="Texture" id=18]
+[ext_resource path="res://Images/Characters/Buka/Buka06.png" type="Texture" id=19]
+[ext_resource path="res://Images/Characters/Buka/Buka04.png" type="Texture" id=20]
+[ext_resource path="res://Images/Characters/Buka/Buka07.png" type="Texture" id=21]
+[ext_resource path="res://Images/Characters/Buka/Buka01.png" type="Texture" id=22]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 5 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 4 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"frames": [ ExtResource( 16 ) ],
+"loop": false,
+"name": "idle",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "jump",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 22 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 14 ), ExtResource( 19 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "run",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": false,
-"name": "stand",
+"name": "fall",
 "speed": 15.0
 } ]
 
-[sub_resource type="OccluderPolygon2D" id=1]
-polygon = PoolVector2Array( 30.6752, -249.348, 17.0504, -13.8824, 43.806, 113.94, 69.4777, -10.8865 )
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( 44.1895, -243.212, 17.0066, -38.7774, 35.9523, 61.8913, 65.6064, -28.7105 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 3 )
 
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 208.608, 233.459 )
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 228.416, 248.994 )
-scale = Vector2( 0.484061, 0.45506 )
-frames = SubResource( 3 )
-animation = "stand"
+frames = SubResource( 1 )
+animation = "fall"
+playing = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="AnimatedSprite"]
 show_behind_parent = true
 light_mask = 2
-position = Vector2( -43.3347, -30.0237 )
+position = Vector2( -46.9447, 14.5879 )
 scale = Vector2( 0.939369, 0.999235 )
-occluder = SubResource( 1 )
+occluder = SubResource( 2 )
 light_mask = 2
 
 [node name="Light2D" type="Light2D" parent="AnimatedSprite"]
@@ -66,10 +73,14 @@ texture = ExtResource( 1 )
 energy = 0.89
 mode = 2
 
+[node name="Camera" type="Camera2D" parent="AnimatedSprite"]
+position = Vector2( -10.2412, -56.1932 )
+current = true
+zoom = Vector2( 2, 2 )
+
 [node name="Body" type="CollisionPolygon2D" parent="."]
 position = Vector2( -1.52588e-05, 0 )
-scale = Vector2( 1, 1 )
-polygon = PoolVector2Array( 197.238, 110.028, 230.688, 110.864, 232.779, 131.352, 229.852, 149.75, 239.469, 159.367, 246.159, 263.897, 242.395, 392.678, 220.235, 393.096, 210.618, 260.552, 215.218, 157.694, 195.984, 139.715 )
+polygon = PoolVector2Array( 216.543, -42.9109, 240.978, -60.8301, 267.857, -50.2415, 265.413, -3.00003, 254.825, 15.7336, 253.434, 260.454, 289.527, 556.013, 161.079, 553.692, 182.689, 254.607, 189.664, 49.9429, 207.583, -5.44357 )
 
 [node name="PlatformDetector" type="RayCast2D" parent="."]
-position = Vector2( 234.412, 387.579 )
+position = Vector2( 209.375, 549.908 )

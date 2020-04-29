@@ -3,12 +3,8 @@ extends Actor
 
 const FLOOR_DETECT_DISTANCE = 20.0
 
-export(String) var action_suffix = ""
-
 onready var platform_detector = $PlatformDetector
 onready var sprite = $AnimatedSprite
-onready var shoot_timer = $ShootAnimation
-onready var camera = $Camera
 
 func _ready():
 	pass
@@ -16,7 +12,7 @@ func _ready():
 func _physics_process(_delta):
 	var direction = get_direction()
 
-	var is_jump_interrupted = Input.is_action_just_released("jump" + action_suffix) and _velocity.y < 0.0
+	var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
 	
 	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
 
@@ -34,8 +30,8 @@ func _physics_process(_delta):
 
 func get_direction():
 	return Vector2(
-		Input.get_action_strength("move_right" + action_suffix) - Input.get_action_strength("move_left" + action_suffix),
-		-1 if is_on_floor() and Input.is_action_just_pressed("jump" + action_suffix) else 0
+		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+		-1 if is_on_floor() and Input.is_action_just_pressed("jump") else 0
 	)
 
 func calculate_move_velocity(linear_velocity, direction, speed, is_jump_interrupted):
@@ -57,6 +53,6 @@ func get_animation():
 	if is_on_floor():
 		animation = "run" if abs(_velocity.x) > 0.1 else "idle"
 	else:
-		animation = "falling" if _velocity.y > 0 else "jumping"
+		animation = "fall" if _velocity.y > 0 else "jump"
 	
 	return animation

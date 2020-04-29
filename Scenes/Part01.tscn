@@ -1,72 +1,76 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Images/Environmnent/Building00.png" type="Texture" id=1]
 [ext_resource path="res://Images/Environmnent/Dirt00.jpg" type="Texture" id=2]
-[ext_resource path="res://Images/Environmnent/Road00.jpg" type="Texture" id=3]
-[ext_resource path="res://Images/Environmnent/Dumpster00.png" type="Texture" id=4]
+[ext_resource path="res://Images/Environmnent/Road00.png" type="Texture" id=3]
 [ext_resource path="res://Images/Environmnent/Light00.png" type="Texture" id=5]
 [ext_resource path="res://Images/Environmnent/Lamp00.png" type="Texture" id=6]
 [ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+ambient_light_color = Color( 1, 1, 1, 1 )
+fog_enabled = true
+ssao_enabled = true
+glow_enabled = true
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1642.36, 15.7468 )
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 50.3338, -8.16223 )
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
-position = Vector2( 7.78271, -5.83704 )
+position = Vector2( 86.7828, 113.163 )
+scale = Vector2( 0.5, 0.5 )
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 modulate = Color( 1, 1, 1, 0.956863 )
 light_mask = 0
 color = Color( 0.388235, 0.388235, 0.388235, 1 )
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
 [node name="Environment" type="Node2D" parent="."]
 
-[node name="Road" type="Node2D" parent="Environment"]
+[node name="Lamp00" type="Sprite" parent="Environment"]
+position = Vector2( -435.417, -106.749 )
+texture = ExtResource( 6 )
 
-[node name="Underground" type="Sprite" parent="Environment/Road"]
-position = Vector2( 440.765, 700.514 )
-scale = Vector2( 0.70614, 0.70614 )
-z_index = 1
-texture = ExtResource( 2 )
-flip_v = true
-region_enabled = true
-region_rect = Rect2( 0, 0, 4000, 730 )
+[node name="Light2D" type="Light2D" parent="Environment/Lamp00"]
+position = Vector2( 107.034, -80.381 )
+scale = Vector2( 4.89849, 4.19926 )
+texture = ExtResource( 5 )
+energy = 0.7
+range_height = 670.3
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
 
-[node name="Road" type="Sprite" parent="Environment/Road"]
-position = Vector2( -38.1214, 417.117 )
-z_index = 1
-texture = ExtResource( 3 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 4000, 50 )
-
-[node name="Street" type="Node2D" parent="Environment"]
-
-[node name="Building" type="Sprite" parent="Environment/Street"]
+[node name="Building00" type="Sprite" parent="Environment"]
 light_mask = 2
-position = Vector2( 438.478, -666.245 )
+position = Vector2( 439.478, -666.245 )
 scale = Vector2( 0.70614, 0.70614 )
 z_index = -1
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 4000, 3000 )
 
-[node name="Lamp" type="Sprite" parent="Environment/Street"]
-position = Vector2( 59.9558, -165.842 )
-scale = Vector2( 0.506836, 0.506836 )
-texture = ExtResource( 6 )
+[node name="Road00" type="Sprite" parent="Environment"]
+position = Vector2( 439.566, 402.637 )
+scale = Vector2( 1.71771, 1 )
+texture = ExtResource( 3 )
 
-[node name="Light2D" type="Light2D" parent="Environment/Street/Lamp"]
-position = Vector2( -326.338, 106.172 )
-scale = Vector2( 4.89849, 4.19926 )
-z_index = 1
-texture = ExtResource( 5 )
-energy = 0.81
-range_height = 670.3
-range_item_cull_mask = 2
-shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 1 )
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Road00"]
 
-[node name="Dumpster" type="Sprite" parent="Environment/Street"]
-position = Vector2( 608.231, 261.323 )
-scale = Vector2( 0.691593, 0.691593 )
-texture = ExtResource( 4 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Road00/StaticBody2D"]
+position = Vector2( -821.745, 7.0137 )
+shape = SubResource( 1 )
+
+[node name="Dirt00" type="Sprite" parent="Environment"]
+position = Vector2( 439.921, 670.179 )
+scale = Vector2( 0.70614, 0.70614 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 730 )
