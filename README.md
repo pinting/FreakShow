@@ -1,10 +1,9 @@
-# Project Alice
+# FreakShow
 
-Unity3D experiment with photo based assets.
+Godot experiment with photo based assets.
 
 ## Credits
 
-* Zsuzsa Buka - Model of the main character
 * Denes Tornyi - Programming
 
 ## Copyright

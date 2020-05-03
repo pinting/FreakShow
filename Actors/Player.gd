@@ -1,58 +1,182 @@
 class_name Player
-extends Actor
+extends RigidBody2D
 
-const FLOOR_DETECT_DISTANCE = 20.0
+onready var character = $Character
 
-onready var platform_detector = $PlatformDetector
-onready var sprite = $AnimatedSprite
+const WALK_ACCEL = 500.0
+const WALK_DEACCEL = 500.0
+const WALK_MAX_VELOCITY = 140.0
+const AIR_ACCEL = 100.0
+const AIR_DEACCEL = 100.0
+const JUMP_VELOCITY = 380
+const STOP_JUMP_FORCE = 150.0
+const MAX_FLOOR_AIRBORNE_TIME = 1
 
-func _ready():
-	pass
+var wait_for_animation = false
+var animation_prefix = "b"
+var animation_queue = []
 
-func _physics_process(_delta):
-	var direction = get_direction()
+var siding_left = false
+var jumping = false
+var stopping_jump = false
 
-	var is_jump_interrupted = Input.is_action_just_released("jump") and _velocity.y < 0.0
-	
-	_velocity = calculate_move_velocity(_velocity, direction, speed, is_jump_interrupted)
+var floor_h_velocity = 0.0
+var airborne_time = 1e20
 
-	var snap_vector = Vector2.DOWN * FLOOR_DETECT_DISTANCE if direction.y == 0.0 else Vector2.ZERO
-	var is_on_platform = platform_detector.is_colliding()
-	
-	_velocity = move_and_slide_with_snap(
-		_velocity, snap_vector, FLOOR_NORMAL, not is_on_platform, 4, 0.9, false
-	)
-	
-	if direction.x != 0:
-		sprite.scale.x = 1 if direction.x > 0 else -1
-	
-	sprite.animation = get_animation()
+# Prepend side prefix (A or B) and set animation.
+# @property name Name of the animation without side prefix.
+func set_animation(name):
+	character.animation = animation_prefix + "_" + name
 
-func get_direction():
-	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		-1 if is_on_floor() and Input.is_action_just_pressed("jump") else 0
-	)
-
-func calculate_move_velocity(linear_velocity, direction, speed, is_jump_interrupted):
-	var velocity = linear_velocity
+# Remove the side prefix from the name of the animation.
+# @property name Name of the animation with side prefix.
+func remove_animation_prefix(name):
+	return character.animation.substr(character.animation.find("_") + 1)
 	
-	velocity.x = speed.x * direction.x
-	
-	if direction.y != 0.0:
-		velocity.y = speed.y * direction.y
-	
-	if is_jump_interrupted:
-		velocity.y = 0.0
-	
-	return velocity
-
-func get_animation():
-	var animation = "idle"
-	
-	if is_on_floor():
-		animation = "run" if abs(_velocity.x) > 0.1 else "idle"
+# Update animation
+# @property next_animation Name of the next animation without side prefix.
+func update_animation(next_animation):
+	if wait_for_animation:
+		# Check if the last frame is played
+		var last_frame = character.frames.get_frame_count(character.animation) - 1
+		
+		if character.frame == last_frame:
+			if len(animation_queue) > 0:
+				set_animation(animation_queue.pop_front())
+				
+				# If the queue is empty, do not wait anymore
+				if len(animation_queue) == 0:
+					wait_for_animation = false
 	else:
-		animation = "fall" if _velocity.y > 0 else "jump"
+		var current_animation = character.animation
+		var raw_name = remove_animation_prefix(current_animation)
+
+		if current_animation != animation_prefix + "_" + next_animation:
+			var translation = raw_name + "_to_" + next_animation
+
+			if character.frames.has_animation(animation_prefix + "_" + translation):
+				wait_for_animation = true
+				
+				set_animation(translation)
+				animation_queue.push_back(next_animation)
+			else:
+				set_animation(next_animation)
+
+# Integrate forces (override).
+# @property state State of the body.
+func _integrate_forces(state):
+	var lv = state.get_linear_velocity()
+	var step = state.get_step()
+	var next_animation = "stand"
+	var will_side_left = siding_left
 	
-	return animation
+	# Get the controls.
+	var move_left = Input.is_action_pressed("move_left")
+	var move_right = Input.is_action_pressed("move_right")
+	var jump = Input.is_action_pressed("jump")
+	
+	# Deapply prev floor velocity.
+	lv.x -= floor_h_velocity
+	floor_h_velocity = 0.0
+	
+	# Find the floor (a contact with upwards facing collision normal).
+	var found_floor = false
+	var floor_index = -1
+	
+	for x in range(state.get_contact_count()):
+		var ci = state.get_contact_local_normal(x)
+		
+		if ci.dot(Vector2(0, -1)) > 0.6:
+			found_floor = true
+			floor_index = x
+	
+	if found_floor:
+		airborne_time = 0.0
+	else:
+		airborne_time += step # Time it spent in the air.
+	
+	var on_floor = airborne_time < MAX_FLOOR_AIRBORNE_TIME
+
+	# Process jump.
+	if jumping:
+		if lv.y > 0:
+			# Set off the jumping flag if going down.
+			jumping = false
+		elif not jump:
+			stopping_jump = true
+		
+		if stopping_jump:
+			lv.y += STOP_JUMP_FORCE * step
+	
+	if on_floor:
+		# Process logic when character is on floor.
+		if move_left and not move_right:
+			if lv.x > -WALK_MAX_VELOCITY:
+				lv.x -= WALK_ACCEL * step
+		elif move_right and not move_left:
+			if lv.x < WALK_MAX_VELOCITY:
+				lv.x += WALK_ACCEL * step
+		else:
+			var xv = abs(lv.x)
+			xv -= WALK_DEACCEL * step
+			if xv < 0:
+				xv = 0
+			lv.x = sign(lv.x) * xv
+		
+		# Check jump.
+		if not jumping and jump:
+			lv.y = -JUMP_VELOCITY
+			jumping = true
+			stopping_jump = false
+		
+		# Check siding.
+		if lv.x < 0 and move_left:
+			will_side_left = true
+		elif lv.x > 0 and move_right:
+			will_side_left = false
+		if jumping:
+			next_animation = "jump"
+		elif abs(lv.x) < 0.1:
+			next_animation = "stand"
+		else:
+			next_animation = "walk"
+	else:
+		# Process logic when the character is in the air.
+		if move_left and not move_right:
+			if lv.x > -WALK_MAX_VELOCITY:
+				lv.x -= AIR_ACCEL * step
+		elif move_right and not move_left:
+			if lv.x < WALK_MAX_VELOCITY:
+				lv.x += AIR_ACCEL * step
+		else:
+			var xv = abs(lv.x)
+			
+			xv -= AIR_DEACCEL * step
+			
+			if xv < 0:
+				xv = 0
+			lv.x = sign(lv.x) * xv
+		
+		next_animation = "jump"
+	
+	# Update siding
+	if will_side_left != siding_left:
+		if will_side_left:
+			character.scale.x = -1 * abs(character.scale.x)
+			animation_prefix = "a"
+		else:
+			character.scale.x = abs(character.scale.x)
+			animation_prefix = "b"
+		
+		siding_left = will_side_left
+	
+	update_animation(next_animation)
+	
+	# Apply floor velocity.
+	if found_floor:
+		floor_h_velocity = state.get_contact_collider_velocity_at_position(floor_index).x
+		lv.x += floor_h_velocity
+	
+	# Finally, apply gravity and set back the linear velocity.
+	lv += state.get_total_gravity() * step
+	state.set_linear_velocity(lv)

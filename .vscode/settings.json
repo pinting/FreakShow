@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "**/.import": true,
+        "**/.vscode": true
+    }
+}
