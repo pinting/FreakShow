@@ -12,10 +12,7 @@ const JUMP_VELOCITY = 380
 const STOP_JUMP_FORCE = 150.0
 const MAX_FLOOR_AIRBORNE_TIME = 1
 
-var wait_for_animation = false
 var animation_prefix = "b"
-var animation_queue = []
-
 var siding_left = false
 var jumping = false
 var stopping_jump = false
@@ -27,40 +24,14 @@ var airborne_time = 1e20
 # @property name Name of the animation without side prefix.
 func set_animation(name):
 	character.animation = animation_prefix + "_" + name
-
-# Remove the side prefix from the name of the animation.
-# @property name Name of the animation with side prefix.
-func remove_animation_prefix(name):
-	return character.animation.substr(character.animation.find("_") + 1)
 	
 # Update animation
 # @property next_animation Name of the next animation without side prefix.
 func update_animation(next_animation):
-	if wait_for_animation:
-		# Check if the last frame is played
-		var last_frame = character.frames.get_frame_count(character.animation) - 1
-		
-		if character.frame == last_frame:
-			if len(animation_queue) > 0:
-				set_animation(animation_queue.pop_front())
-				
-				# If the queue is empty, do not wait anymore
-				if len(animation_queue) == 0:
-					wait_for_animation = false
-	else:
-		var current_animation = character.animation
-		var raw_name = remove_animation_prefix(current_animation)
+	var current_animation = character.animation
 
-		if current_animation != animation_prefix + "_" + next_animation:
-			var translation = raw_name + "_to_" + next_animation
-
-			if character.frames.has_animation(animation_prefix + "_" + translation):
-				wait_for_animation = true
-				
-				set_animation(translation)
-				animation_queue.push_back(next_animation)
-			else:
-				set_animation(next_animation)
+	if current_animation != animation_prefix + "_" + next_animation:
+		set_animation(next_animation)
 
 # Integrate forces (override).
 # @property state State of the body.
