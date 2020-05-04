@@ -5,7 +5,7 @@ onready var character = $Character
 
 const WALK_ACCEL = 500.0
 const WALK_DEACCEL = 500.0
-const WALK_MAX_VELOCITY = 150.0
+const WALK_MAX_VELOCITY = 200.0
 const AIR_ACCEL = 50.0
 const AIR_DEACCEL = 600.0
 const JUMP_VELOCITY = 200

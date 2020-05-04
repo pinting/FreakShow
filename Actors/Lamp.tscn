@@ -26,10 +26,10 @@ texture = ExtResource( 4 )
 mode = 2
 
 [node name="DirectionalLight" type="Light2D" parent="."]
-position = Vector2( -34.853, -53.5209 )
-scale = Vector2( 1.02458, 1.08576 )
+position = Vector2( -49.3108, 13.4423 )
+scale = Vector2( 1.1917, 1.26286 )
 texture = ExtResource( 1 )
-energy = 0.65
+mode = 2
 range_height = 670.3
 range_item_cull_mask = 2
 shadow_enabled = true

@@ -27,7 +27,6 @@ color = Color( 0.807843, 0.188235, 0.054902, 1 )
 
 [node name="Barrel" type="Sprite"]
 material = SubResource( 1 )
-position = Vector2( 1226.31, 286.217 )
 scale = Vector2( 0.384745, 0.384745 )
 texture = ExtResource( 1 )
 

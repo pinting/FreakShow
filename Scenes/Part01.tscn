@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Building04.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Dirt00.jpg" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=3]
 [ext_resource path="res://Actors/Lamp.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Actors/Barrel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Actors/Crate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Actors/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Part01.gd" type="Script" id=8]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -17,11 +19,12 @@ glow_intensity = 4.0
 glow_strength = 1.3
 glow_hdr_threshold = 0.5
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 823.296, 10.8967 )
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 50.3338, -8.16223 )
+script = ExtResource( 8 )
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 252.567, -50.5399 )
@@ -36,10 +39,17 @@ environment = SubResource( 1 )
 
 [node name="Environment" type="Node2D" parent="."]
 
+[node name="Crate" parent="Environment" groups=[
+"pickable",
+] instance=ExtResource( 6 )]
+position = Vector2( 643.364, 298.315 )
+input_pickable = true
+
 [node name="Lamp" parent="Environment" instance=ExtResource( 4 )]
 z_index = -1
 
 [node name="Barrel" parent="Environment" instance=ExtResource( 5 )]
+position = Vector2( 1023.88, 286.571 )
 z_index = 1
 
 [node name="Building" type="Sprite" parent="Environment"]
@@ -52,7 +62,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 4000, 3000 )
 
 [node name="Road" type="Sprite" parent="Environment"]
-position = Vector2( 439.566, 402.637 )
+position = Vector2( 437.822, 402.637 )
 scale = Vector2( 1.71771, 1 )
 z_index = 1
 texture = ExtResource( 3 )
@@ -61,11 +71,12 @@ texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Road/StaticBody2D"]
 position = Vector2( -1.21246, 3.92276 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="Dirt" type="Sprite" parent="Environment"]
 position = Vector2( 442.079, 670.179 )
 scale = Vector2( 0.70614, 0.70614 )
+z_index = 1
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 4000, 730 )
