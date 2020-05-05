@@ -12,30 +12,24 @@ friction = 0.0
 [node name="Player" type="RigidBody2D"]
 position = Vector2( -3.60498, 0 )
 mode = 2
-mass = 5000.0
+mass = 80.0
 physics_material_override = SubResource( 1 )
 custom_integrator = true
 contacts_reported = 3
 script = ExtResource( 3 )
 
-[node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 202.226, 59.2207 )
-current = true
-zoom = Vector2( 3, 3 )
-smoothing_enabled = true
-smoothing_speed = 4.0
-
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
-position = Vector2( -15.9635, 118.326 )
+position = Vector2( -20.9635, 118.326 )
 scale = Vector2( 0.481536, 0.481536 )
-polygon = PoolVector2Array( 186.604, -127.041, 224.278, -161.39, 258.627, -154.742, 344.168, -125.262, 342.388, -25.5536, 376.217, 237.961, 374.437, 675.964, 158.956, 666.574, 158.956, 517.43, 163.336, 251.906, 131.203, 10.3549, 179.956, -52.8031 )
+polygon = PoolVector2Array( 186.604, -127.041, 224.278, -161.39, 312.882, -160.02, 335.263, -123.962, 342.388, -25.5536, 376.217, 237.961, 373.499, 673.761, 78.0508, 673.633, 129.095, 456.367, 151.315, 247.758, 131.203, 10.3549, 154.971, -58.0625 )
 
 [node name="Character" type="AnimatedSprite" parent="."]
 material = SubResource( 2 )
 position = Vector2( 102.032, 248.422 )
 scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 2 )
-animation = "b_stand"
+animation = "a_walk"
+frame = 4
 playing = true
 
 [node name="Light" type="Light2D" parent="Character"]

@@ -5,12 +5,12 @@ onready var character = $Character
 
 const WALK_ACCEL = 500.0
 const WALK_DEACCEL = 500.0
-const WALK_MAX_VELOCITY = 200.0
+const WALK_MAX_VELOCITY = 170.0
 const AIR_ACCEL = 50.0
 const AIR_DEACCEL = 600.0
 const JUMP_VELOCITY = 200
 const STOP_JUMP_FORCE = 450.0
-const MAX_FLOOR_AIRBORNE_TIME = 0.15
+const MAX_FLOOR_AIRBORNE_TIME = 2
 
 var animation_prefix = "b"
 var siding_left = false
