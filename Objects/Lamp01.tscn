@@ -7,8 +7,7 @@
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-[sub_resource type="CanvasItemMaterial" id=2]
-blend_mode = 1
+[sub_resource type="ShaderMaterial" id=2]
 
 [node name="Texture" type="Sprite"]
 material = SubResource( 1 )
@@ -17,8 +16,17 @@ texture = ExtResource( 2 )
 
 [node name="Glow" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.619608 )
+light_mask = 2
 material = SubResource( 2 )
 texture = ExtResource( 3 )
+
+[node name="GlowLight" type="Light2D" parent="Glow"]
+position = Vector2( -1.85999, -442.193 )
+z_as_relative = false
+texture = ExtResource( 4 )
+energy = 1.5
+mode = 2
+range_item_cull_mask = 2
 
 [node name="AreaLight" type="Light2D" parent="."]
 position = Vector2( -1.85999, -442.193 )
@@ -27,13 +35,11 @@ texture = ExtResource( 4 )
 mode = 2
 
 [node name="DirectionalLight" type="Light2D" parent="."]
-position = Vector2( -49.3108, 13.4423 )
-scale = Vector2( 1.1917, 1.26286 )
+position = Vector2( -49.3108, -1.13297 )
+scale = Vector2( 1.1917, 1.22748 )
 z_index = 1
 z_as_relative = false
 texture = ExtResource( 1 )
 mode = 2
-range_height = 670.3
-range_item_cull_mask = 2
 shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 0.0352941 )
+shadow_color = Color( 0.972549, 0.972549, 0.972549, 0.0352941 )

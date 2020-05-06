@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sky02.png-fb75fc4eece753047af8ef229564b40d.stex"
+path="res://.import/Door02.png-29840280c38970266753971858127fc2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Environmnent/Sky02.png"
-dest_files=[ "res://.import/Sky02.png-fb75fc4eece753047af8ef229564b40d.stex" ]
+source_file="res://Assets/Environmnent/Door02.png"
+dest_files=[ "res://.import/Door02.png-29840280c38970266753971858127fc2.stex" ]
 
 [params]
 

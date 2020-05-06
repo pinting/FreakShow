@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Border00.png-3a4f276f1f4d93885c358c87db6f9dda.stex"
+path="res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Environmnent/Border00.png"
-dest_files=[ "res://.import/Border00.png-3a4f276f1f4d93885c358c87db6f9dda.stex" ]
+source_file="res://Assets/Environmnent/Moon00_Glow.png"
+dest_files=[ "res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.stex" ]
 
 [params]
 

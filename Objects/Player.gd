@@ -3,9 +3,9 @@ extends RigidBody2D
 
 onready var character = $Character
 
-const WALK_ACCEL = 500.0
-const WALK_DEACCEL = 500.0
-const WALK_MAX_VELOCITY = 170.0
+const WALK_ACCEL = 300.0
+const WALK_DEACCEL = 10000.0
+const WALK_MAX_VELOCITY = 150.0
 const AIR_ACCEL = 50.0
 const AIR_DEACCEL = 600.0
 const JUMP_VELOCITY = 200
@@ -142,6 +142,8 @@ func _integrate_forces(state):
 		siding_left = will_side_left
 	
 	update_animation(next_animation)
+	
+	character.speed_scale = abs(lv.x) / WALK_MAX_VELOCITY
 	
 	# Apply floor velocity.
 	if found_floor:

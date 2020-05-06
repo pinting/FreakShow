@@ -1,20 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Lamp01.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=3]
 
-
-
-[sub_resource type="CanvasItemMaterial" id=4]
-
 [node name="Lamp01" type="Sprite"]
-material = SubResource( 4 )
-position = Vector2( -112.617, -172.892 )
-scale = Vector2( 0.140437, 0.140437 )
+light_mask = 2
+position = Vector2( -112.515, -172.768 )
+scale = Vector2( 0.140817, 0.140817 )
 texture = ExtResource( 1 )
+region_rect = Rect2( 100, 10, 537, 654 )
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="AreaLight" type="Light2D" parent="."]
 position = Vector2( 116.51, 1099.48 )
 scale = Vector2( 6.72706, 3.85796 )
 texture = ExtResource( 3 )
@@ -22,7 +19,16 @@ energy = 0.76
 mode = 2
 shadow_enabled = true
 
-[node name="Light2D2" type="Light2D" parent="."]
+[node name="GlowLight" type="Light2D" parent="."]
+position = Vector2( 18.1555, 244.509 )
+scale = Vector2( 0.950682, 0.695291 )
+texture = ExtResource( 3 )
+energy = 1.5
+mode = 2
+range_item_cull_mask = 2
+shadow_enabled = true
+
+[node name="DirectionalLight" type="Light2D" parent="."]
 position = Vector2( -73.9277, 1493.82 )
 scale = Vector2( 3.18337, 3.18337 )
 texture = ExtResource( 2 )

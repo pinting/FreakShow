@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Actors/Player.gd"
+"path": "res://Objects/Player.gd"
 } ]
 _global_script_class_icons={
 "Player": ""
@@ -47,7 +47,8 @@ jump={
 
 [rendering]
 
-quality/2d/use_pixel_snap=true
+quality/filters/anisotropic_filter_level=16
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+quality/filters/msaa=4
 environment/default_environment="res://default_env.tres"

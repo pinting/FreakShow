@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Building07.png-4926763bafc1f6088522e9f4705cac89.stex"
+path="res://.import/Fridge00.png-e84a081bdd83eaa3f6064b969d347436.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Environmnent/Building07.png"
-dest_files=[ "res://.import/Building07.png-4926763bafc1f6088522e9f4705cac89.stex" ]
+source_file="res://Assets/Environmnent/Fridge00.png"
+dest_files=[ "res://.import/Fridge00.png-e84a081bdd83eaa3f6064b969d347436.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
