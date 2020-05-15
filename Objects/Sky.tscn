@@ -19,7 +19,7 @@ script = ExtResource( 4 )
 self_modulate = Color( 1, 1, 1, 0.592157 )
 light_mask = 2
 use_parent_material = true
-position = Vector2( 419.669, -380.177 )
+position = Vector2( 419.669, -232.177 )
 scale = Vector2( 0.290099, 0.290099 )
 texture = ExtResource( 2 )
 

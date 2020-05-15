@@ -58,7 +58,7 @@ mass = 8.16327
 position = Vector2( 85.9729, 148.471 )
 
 [node name="Sky" parent="Player" instance=ExtResource( 9 )]
-position = Vector2( 81.2356, 146.209 )
+position = Vector2( 81.2358, 146.209 )
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 light_mask = 0
