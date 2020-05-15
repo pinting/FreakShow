@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Building04.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Dirt00.jpg" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=20]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
+[ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=23]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -53,15 +54,11 @@ script = ExtResource( 8 )
 position = Vector2( -5093.77, -801.629 )
 mass = 8.16327
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 110.885, -303.086 )
-current = true
-zoom = Vector2( 3, 3 )
-smoothing_speed = 0.6
+[node name="Camera2D" parent="Player" instance=ExtResource( 23 )]
+position = Vector2( 85.9729, 148.471 )
 
 [node name="Sky" parent="Player" instance=ExtResource( 9 )]
-position = Vector2( 157.08, 90.2134 )
-scale = Vector2( 2.03161, 2.03161 )
+position = Vector2( 81.2356, 146.209 )
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 light_mask = 0
@@ -114,7 +111,7 @@ scale = Vector2( 6.73623, 0.673623 )
 polygon = PoolVector2Array( -409.365, -373.253, -265.772, -3.59259, -409.206, -14.3621 )
 
 [node name="Foot" type="Sprite" parent="Environment/Buildings/Building00"]
-position = Vector2( -0.0210552, 781.112 )
+position = Vector2( -1.16229, 781.112 )
 scale = Vector2( 0.896692, 0.896692 )
 z_index = 2
 texture = ExtResource( 14 )
