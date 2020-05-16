@@ -24,6 +24,15 @@ config/name="FreakShow"
 run/main_scene="res://Scenes/Part01.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://AutoLoad/Global.gd"
+
+[display]
+
+window/size/width=910
+window/size/height=540
+
 [input]
 
 move_left={
@@ -44,6 +53,11 @@ jump={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[physics]
+
+2d/physics_engine="GodotPhysics"
+2d/thread_model=2
 
 [rendering]
 

@@ -55,10 +55,11 @@ position = Vector2( -5093.77, -801.629 )
 mass = 8.16327
 
 [node name="Camera2D" parent="Player" instance=ExtResource( 23 )]
-position = Vector2( 85.9729, 148.471 )
+position = Vector2( 87.3112, 39.7529 )
 
-[node name="Sky" parent="Player" instance=ExtResource( 9 )]
-position = Vector2( 81.2358, 146.209 )
+[node name="Sky" parent="." instance=ExtResource( 9 )]
+position = Vector2( -5006.46, -761.876 )
+scale = Vector2( 2.5, 2.5 )
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 light_mask = 0

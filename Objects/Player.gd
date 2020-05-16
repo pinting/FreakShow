@@ -3,14 +3,14 @@ extends RigidBody2D
 
 onready var character = $Character
 
-const WALK_ACCEL = 300.0
-const WALK_DEACCEL = 10000.0
+const WALK_ACCEL = 200.0
+const WALK_DEACCEL = 200.0
 const WALK_MAX_VELOCITY = 150.0
 const AIR_ACCEL = 50.0
 const AIR_DEACCEL = 600.0
 const JUMP_VELOCITY = 200
 const STOP_JUMP_FORCE = 450.0
-const MAX_FLOOR_AIRBORNE_TIME = 2
+const MAX_FLOOR_AIRBORNE_TIME = 0.3
 
 var animation_prefix = "b"
 var siding_left = false
@@ -82,11 +82,9 @@ func _integrate_forces(state):
 	if on_floor:
 		# Process logic when character is on floor.
 		if move_left and not move_right:
-			if lv.x > -WALK_MAX_VELOCITY:
-				lv.x -= WALK_ACCEL * step
+			lv.x -= WALK_ACCEL * step
 		elif move_right and not move_left:
-			if lv.x < WALK_MAX_VELOCITY:
-				lv.x += WALK_ACCEL * step
+			lv.x += WALK_ACCEL * step
 		else:
 			var xv = abs(lv.x)
 			xv -= WALK_DEACCEL * step
@@ -114,11 +112,9 @@ func _integrate_forces(state):
 	else:
 		# Process logic when the character is in the air.
 		if move_left and not move_right:
-			if lv.x > -WALK_MAX_VELOCITY:
-				lv.x -= AIR_ACCEL * step
+			lv.x -= AIR_ACCEL * step
 		elif move_right and not move_left:
-			if lv.x < WALK_MAX_VELOCITY:
-				lv.x += AIR_ACCEL * step
+			lv.x += AIR_ACCEL * step
 		else:
 			var xv = abs(lv.x)
 			
@@ -140,10 +136,14 @@ func _integrate_forces(state):
 			animation_prefix = "b"
 		
 		siding_left = will_side_left
+		
+	# Check for max
+	if(abs(lv.x) > WALK_MAX_VELOCITY):
+		lv.x = lv.x * abs(1 / lv.x) * WALK_MAX_VELOCITY
 	
 	update_animation(next_animation)
 	
-	character.speed_scale = abs(lv.x) / WALK_MAX_VELOCITY
+	character.speed_scale = abs(lv.x / WALK_MAX_VELOCITY)
 	
 	# Apply floor velocity.
 	if found_floor:

@@ -1,8 +1,9 @@
 extends Sprite
 
-var ZOOM = Vector2(4, 4)
-
-func _ready():
-	var resolution = Vector2(OS.get_window_size().x, OS.get_window_size().y)
+func _process(delta):
+	var camera = Global.current_camera
 	
-	scale = (resolution / Vector2(1920, 1080)) * ZOOM
+	if(camera == null):
+		return
+	
+	position = camera.get_camera_screen_center()
