@@ -10,7 +10,7 @@ const AIR_ACCEL = 50.0
 const AIR_DEACCEL = 600.0
 const JUMP_VELOCITY = 200
 const STOP_JUMP_FORCE = 450.0
-const MAX_FLOOR_AIRBORNE_TIME = 0.3
+const MAX_FLOOR_AIRBORNE_TIME = 0.4
 
 var animation_prefix = "b"
 var siding_left = false

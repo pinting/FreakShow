@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Building04.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Dirt00.jpg" type="Texture" id=2]
@@ -13,16 +13,20 @@
 [ext_resource path="res://Assets/Environmnent/Foot00.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Environmnent/Building05.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Environmnent/Wall00.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Environmnent/Block03.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Environmnent/Block02.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Environmnent/Door01.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Environmnent/Pillar00.png" type="Texture" id=16]
-[ext_resource path="res://Objects/Lamp00.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Environmnent/Pillar00_NoEdge.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Environmnent/Light02.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Environmnent/Sign01.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Environmnent/Sign03.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=20]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Environmnent/Foot01.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Environmnent/Lamp01.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=27]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -39,6 +43,9 @@ shader_param/OCTAVES = 4
 [sub_resource type="ImageTexture" id=3]
 size = Vector2( 1000, 1000 )
 
+[sub_resource type="OccluderPolygon2D" id=7]
+polygon = PoolVector2Array( -755.046, 358.611, -746.624, -351.282, 739.821, -348.393, 736.839, 363.904, 842.832, 363.943, 842.994, -4641.98, -2294.13, -4638.31, -2280.3, 352.482, -2280.3, 541.701, 843.484, 548.341, 844.456, 363.771, 739.819, 358.83 )
+
 [sub_resource type="CanvasItemMaterial" id=4]
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -51,11 +58,11 @@ position = Vector2( 50.3338, -8.16223 )
 script = ExtResource( 8 )
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
-position = Vector2( -5093.77, -801.629 )
+position = Vector2( -4952.48, -477.238 )
 mass = 8.16327
 
 [node name="Camera2D" parent="Player" instance=ExtResource( 23 )]
-position = Vector2( 87.3112, 39.7529 )
+position = Vector2( 0.49675, -519.114 )
 
 [node name="Sky" parent="." instance=ExtResource( 9 )]
 position = Vector2( -5006.46, -761.876 )
@@ -63,7 +70,7 @@ scale = Vector2( 2.5, 2.5 )
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 light_mask = 0
-color = Color( 0.235294, 0.235294, 0.235294, 1 )
+color = Color( 0.137255, 0.137255, 0.137255, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
@@ -72,35 +79,37 @@ environment = SubResource( 1 )
 
 [node name="Fog" type="Sprite" parent="Environment"]
 material = SubResource( 2 )
-position = Vector2( -3.02234, -2591.98 )
-scale = Vector2( 19.9083, 5.16595 )
+scale = Vector2( 20, 15 )
 texture = SubResource( 3 )
 
 [node name="Lamps" type="Node2D" parent="Environment"]
+position = Vector2( 1, -314 )
 
 [node name="Lamp00" parent="Environment/Lamps" instance=ExtResource( 4 )]
-position = Vector2( -488.136, -512.717 )
+position = Vector2( -486.112, -433.104 )
+scale = Vector2( 0.9, 0.9 )
 z_index = -1
 
 [node name="Lamp01" parent="Environment/Lamps" instance=ExtResource( 4 )]
-position = Vector2( 2090.85, -507.227 )
+position = Vector2( 2092.8, -432.943 )
+scale = Vector2( 0.9, 0.9 )
 z_index = -1
 
 [node name="Lamp02" parent="Environment/Lamps" instance=ExtResource( 4 )]
-position = Vector2( 4721.1, -504.149 )
+position = Vector2( 4714.48, -431.537 )
+scale = Vector2( 0.9, 0.9 )
 z_index = -1
 
 [node name="Buildings" type="Node2D" parent="Environment"]
+position = Vector2( 3.33398, 21.1144 )
 
 [node name="Building00" type="Sprite" parent="Environment/Buildings"]
-position = Vector2( -5525.73, -2623.84 )
-scale = Vector2( 3.50493, 3.50493 )
+position = Vector2( -5513.44, -2722.57 )
 z_index = -1
 texture = ExtResource( 12 )
 
 [node name="Stairs" type="Sprite" parent="Environment/Buildings/Building00"]
-position = Vector2( 618.96, 672.497 )
-scale = Vector2( 0.42355, 0.42355 )
+position = Vector2( 2043.52, 2556.97 )
 z_index = 1
 texture = ExtResource( 10 )
 
@@ -109,100 +118,136 @@ position = Vector2( 2259.74, 189.146 )
 scale = Vector2( 6.73623, 0.673623 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Buildings/Building00/Stairs/StaticBody2D"]
-polygon = PoolVector2Array( -409.365, -373.253, -265.772, -3.59259, -409.206, -14.3621 )
+position = Vector2( -0.179306, -31.2253 )
+polygon = PoolVector2Array( -406.184, -367.723, -265.082, -53.8368, -406.217, -56.6987 )
 
 [node name="Foot" type="Sprite" parent="Environment/Buildings/Building00"]
-position = Vector2( -1.16229, 781.112 )
-scale = Vector2( 0.896692, 0.896692 )
+position = Vector2( -0.778809, 2596.04 )
 z_index = 2
-texture = ExtResource( 14 )
+texture = ExtResource( 24 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 910, 300 )
+region_rect = Rect2( 0, 0, 3143, 195 )
 
 [node name="Inside" type="Sprite" parent="Environment/Buildings/Building00"]
-position = Vector2( 199.758, 556.177 )
-scale = Vector2( 0.414465, 0.414465 )
+position = Vector2( 720.639, 2139.67 )
 texture = ExtResource( 13 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 1000, 435 )
+region_rect = Rect2( 0, 0, 1500, 706 )
 
-[node name="Lamp" parent="Environment/Buildings/Building00/Inside" instance=ExtResource( 17 )]
+[node name="Lamp" type="Sprite" parent="Environment/Buildings/Building00/Inside"]
+light_mask = 2
+position = Vector2( -119.05, -313.793 )
+z_index = 1
+texture = ExtResource( 25 )
+region_rect = Rect2( 100, 10, 537, 654 )
+
+[node name="GlowLight" type="Light2D" parent="Environment/Buildings/Building00/Inside/Lamp"]
+position = Vector2( -1.0293, 34.1636 )
+scale = Vector2( 0.371896, 0.27199 )
+texture = ExtResource( 27 )
+energy = 1.5
+mode = 2
+range_item_cull_mask = 2
+shadow_enabled = true
+
+[node name="DirectionalLight" type="Light2D" parent="Environment/Buildings/Building00/Inside/Lamp"]
+position = Vector2( -12.0398, 334.938 )
+scale = Vector2( 0.895131, 0.820487 )
+texture = ExtResource( 26 )
+mode = 2
+
+[node name="AreaLight" type="Light2D" parent="Environment/Buildings/Building00/Inside/Lamp"]
+position = Vector2( 115.174, -33.7008 )
+scale = Vector2( 1.44007, 1.38687 )
+texture = ExtResource( 17 )
+energy = 0.25
+mode = 2
+range_height = -2048.0
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 0.207843 )
 
 [node name="Pillar" type="Sprite" parent="Environment/Buildings/Building00/Inside"]
-position = Vector2( 465.24, 0.581177 )
-scale = Vector2( 0.440131, 0.440132 )
+position = Vector2( 793.235, 6.44567 )
+scale = Vector2( 1.14504, 1.03135 )
 z_index = 1
 texture = ExtResource( 16 )
 
+[node name="BehindWall" type="Sprite" parent="Environment/Buildings/Building00/Inside/Pillar"]
+position = Vector2( -2.49414, 24.0571 )
+scale = Vector2( 0.136059, 1 )
+z_index = -1
+texture = ExtResource( 14 )
+
 [node name="Door" type="Sprite" parent="Environment/Buildings/Building00/Inside"]
-position = Vector2( -107.745, 67.6731 )
-scale = Vector2( 0.322891, 0.322891 )
+position = Vector2( -109.88, 19.8866 )
 texture = ExtResource( 15 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Buildings/Building00/Inside"]
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Environment/Buildings/Building00/Inside/StaticBody2D"]
+occluder = SubResource( 7 )
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Buildings/Building00/Inside/StaticBody2D"]
-position = Vector2( -0.0373535, 0.0884705 )
-polygon = PoolVector2Array( -504.217, 220.652, 503.457, 216.912, 502.516, 466.553, -1469.05, 468.461, -1472.18, -2916.2, 496.989, -2905.25, 499.415, -223.995, -499.982, -223.995 )
+position = Vector2( 342.693, -124.131 )
+polygon = PoolVector2Array( -1100.03, 459.236, 502.633, 461.751, 502.733, 680.608, -2626.58, 677.462, -2631.19, -4507.7, 505.743, -4504.4, 499.415, -223.995, -1089.73, -226.049 )
 
 [node name="Building01" type="Sprite" parent="Environment/Buildings"]
-position = Vector2( 1166.78, -2206.96 )
-scale = Vector2( 1.16136, 1.16136 )
+position = Vector2( 1143.95, -2549.08 )
 z_index = -3
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 4000, 3000 )
+region_rect = Rect2( 0, 0, 3765, 4240 )
 
 [node name="Foot" type="Sprite" parent="Environment/Buildings/Building01"]
-position = Vector2( 0.286865, 1693.59 )
+position = Vector2( 0, 2318.47 )
 texture = ExtResource( 11 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 4000, 400 )
+region_rect = Rect2( 0, 0, 3765, 400 )
 
 [node name="Wall" type="Sprite" parent="Environment/Buildings/Building01"]
+visible = false
 modulate = Color( 1, 0.913725, 0.862745, 1 )
-position = Vector2( -281.741, 1300.72 )
-scale = Vector2( 0.951356, 0.991187 )
+position = Vector2( 70.0371, 1763.3 )
+scale = Vector2( 1.22714, 1.00881 )
 texture = ExtResource( 14 )
 region_enabled = true
-region_rect = Rect2( 80, 0, 1150, 400 )
+region_rect = Rect2( 0, 0, 1472, 703 )
 
 [node name="Sign01" type="Sprite" parent="Environment/Buildings/Building01"]
-position = Vector2( -286.399, 1176.67 )
+visible = false
+position = Vector2( 67.1076, 1752.74 )
 rotation = 0.00691588
-scale = Vector2( 0.93235, 0.93235 )
 texture = ExtResource( 18 )
 
 [node name="Sign02" type="Sprite" parent="Environment/Buildings/Building01"]
-position = Vector2( 1808.38, 1630.98 )
+position = Vector2( 1711.08, 2009.78 )
 rotation = 0.00342183
-scale = Vector2( 0.562279, 0.562279 )
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 19 )
 
 [node name="Barrel" parent="Environment" instance=ExtResource( 5 )]
-position = Vector2( -3131.12, -107.993 )
-scale = Vector2( 0.384746, 0.384746 )
+position = Vector2( -2732.01, -140.124 )
+scale = Vector2( 1, 1 )
 z_index = 1
 
 [node name="Crate" parent="Environment" groups=[
 "pickable",
 ] instance=ExtResource( 6 )]
-position = Vector2( -5432.61, -449.479 )
+position = Vector2( -5336.29, -324.66 )
 z_index = -1
 z_as_relative = false
 input_pickable = true
 mass = 120.0
 
 [node name="Fence" type="Sprite" parent="Environment"]
-position = Vector2( -2720.23, -357.401 )
+position = Vector2( -2721.87, -407.393 )
 z_index = -4
 texture = ExtResource( 22 )
 region_enabled = true
-region_rect = Rect2( 0, 1, 4000, 700 )
+region_rect = Rect2( 0, 1, 4000, 780 )
 
 [node name="Dirt" type="Sprite" parent="Environment"]
-position = Vector2( 0, 357.105 )
-z_index = 1
+position = Vector2( 0, 355.53 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 20000, 730 )
@@ -216,16 +261,15 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 20000, 20 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Road"]
-visible = false
+position = Vector2( -861.146, 1753.42 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Road/StaticBody2D"]
-position = Vector2( -1.21246, 3.92276 )
+position = Vector2( 54.6433, -1752.32 )
 scale = Vector2( 10, 1 )
 shape = SubResource( 5 )
 
 [node name="Car" type="Sprite" parent="Environment"]
 material = SubResource( 6 )
-position = Vector2( 1527.98, -206.27 )
-scale = Vector2( 0.341813, 0.341813 )
+position = Vector2( 1527.01, -224.394 )
 z_index = -2
 texture = ExtResource( 20 )

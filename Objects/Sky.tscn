@@ -19,14 +19,14 @@ script = ExtResource( 4 )
 self_modulate = Color( 1, 1, 1, 0.592157 )
 light_mask = 2
 use_parent_material = true
-position = Vector2( 356.576, -282.669 )
+position = Vector2( 367.605, -314.907 )
 scale = Vector2( 0.290099, 0.290099 )
 texture = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="Moon00"]
-position = Vector2( 58.0928, 74.1543 )
-scale = Vector2( 2.38395, 2.38395 )
+position = Vector2( 6.91577, 18.5909 )
+scale = Vector2( 0.958887, 1.07598 )
 texture = ExtResource( 3 )
-energy = 1.36
+energy = 1.65
 mode = 2
 range_item_cull_mask = 2

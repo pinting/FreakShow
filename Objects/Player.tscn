@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=1]
 [ext_resource path="res://Animations/Rabit00.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Objects/Player.gd" type="Script" id=3]
 
@@ -10,7 +9,6 @@ friction = 0.0
 [sub_resource type="CanvasItemMaterial" id=2]
 
 [node name="Player" type="RigidBody2D"]
-position = Vector2( -3.60498, 0 )
 mode = 2
 mass = 80.0
 physics_material_override = SubResource( 1 )
@@ -19,22 +17,14 @@ contacts_reported = 3
 script = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -20.9635, 118.326 )
-scale = Vector2( 0.481536, 0.481536 )
-polygon = PoolVector2Array( 186.604, -127.041, 224.278, -161.39, 312.882, -160.02, 335.263, -123.962, 342.388, -25.5536, 376.217, 237.961, 373.499, 673.761, 78.0508, 673.633, 129.095, 456.367, 151.315, 247.758, 131.203, 10.3549, 154.971, -58.0625 )
+position = Vector2( -164.175, -161.505 )
+scale = Vector2( 0.65, 0.65 )
+polygon = PoolVector2Array( 186.604, -127.041, 224.278, -161.39, 312.882, -160.02, 335.263, -123.962, 342.388, -25.5536, 376.217, 237.961, 395.613, 632.634, 85.1644, 627.784, 129.095, 456.367, 151.315, 247.758, 131.203, 10.3549, 154.971, -58.0625 )
 
 [node name="Character" type="AnimatedSprite" parent="."]
 material = SubResource( 2 )
-position = Vector2( 102.032, 248.422 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.65, 0.65 )
 frames = ExtResource( 2 )
 animation = "a_walk"
-frame = 36
+frame = 20
 playing = true
-
-[node name="Light2D" type="Light2D" parent="Character"]
-visible = false
-position = Vector2( -6.3497, 0.227356 )
-scale = Vector2( 0.939369, 0.999235 )
-texture = ExtResource( 1 )
-energy = 0.3
