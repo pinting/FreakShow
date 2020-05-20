@@ -26,7 +26,7 @@ scale = 6.0
 scale_curve = SubResource( 4 )
 color = Color( 0.807843, 0.188235, 0.054902, 1 )
 
-[node name="Barrel" type="Sprite"]
+[node name="Sprite" type="Sprite"]
 material = SubResource( 1 )
 scale = Vector2( 0.384745, 0.384745 )
 texture = ExtResource( 1 )

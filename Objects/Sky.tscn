@@ -15,7 +15,7 @@ z_as_relative = false
 texture = ExtResource( 1 )
 script = ExtResource( 4 )
 
-[node name="Moon00" type="Sprite" parent="."]
+[node name="Moon" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.592157 )
 light_mask = 2
 use_parent_material = true
@@ -23,7 +23,7 @@ position = Vector2( 367.605, -314.907 )
 scale = Vector2( 0.290099, 0.290099 )
 texture = ExtResource( 2 )
 
-[node name="Light2D" type="Light2D" parent="Moon00"]
+[node name="Light2D" type="Light2D" parent="Moon"]
 position = Vector2( 6.91577, 18.5909 )
 scale = Vector2( 0.958887, 1.07598 )
 texture = ExtResource( 3 )

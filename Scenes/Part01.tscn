@@ -6,7 +6,6 @@
 [ext_resource path="res://Objects/Lamp01.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/Barrel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Crate.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Part01.gd" type="Script" id=8]
 [ext_resource path="res://Objects/Sky.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Environmnent/Stairs00.png" type="Texture" id=10]
@@ -27,6 +26,7 @@
 [ext_resource path="res://Assets/Environmnent/Lamp01.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=27]
+[ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=28]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -43,26 +43,25 @@ shader_param/OCTAVES = 4
 [sub_resource type="ImageTexture" id=3]
 size = Vector2( 1000, 1000 )
 
-[sub_resource type="OccluderPolygon2D" id=7]
+[sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -755.046, 358.611, -746.624, -351.282, 739.821, -348.393, 736.839, 363.904, 842.832, 363.943, 842.994, -4641.98, -2294.13, -4638.31, -2280.3, 352.482, -2280.3, 541.701, 843.484, 548.341, 844.456, 363.771, 739.819, 358.83 )
 
-[sub_resource type="CanvasItemMaterial" id=4]
+[sub_resource type="CanvasItemMaterial" id=5]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 823.296, 10.8967 )
 
-[sub_resource type="CanvasItemMaterial" id=6]
+[sub_resource type="CanvasItemMaterial" id=7]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 50.3338, -8.16223 )
 script = ExtResource( 8 )
 
-[node name="Player" parent="." instance=ExtResource( 7 )]
-position = Vector2( -4952.48, -477.238 )
-mass = 8.16327
+[node name="Player" parent="." instance=ExtResource( 28 )]
+position = Vector2( -304.82, -280.255 )
 
 [node name="Camera2D" parent="Player" instance=ExtResource( 23 )]
-position = Vector2( 0.49675, -519.114 )
+position = Vector2( 0, 0 )
 
 [node name="Sky" parent="." instance=ExtResource( 9 )]
 position = Vector2( -5006.46, -761.876 )
@@ -185,7 +184,7 @@ texture = ExtResource( 15 )
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Buildings/Building00/Inside"]
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Environment/Buildings/Building00/Inside/StaticBody2D"]
-occluder = SubResource( 7 )
+occluder = SubResource( 4 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Buildings/Building00/Inside/StaticBody2D"]
 position = Vector2( 342.693, -124.131 )
@@ -233,7 +232,7 @@ z_index = 1
 [node name="Crate" parent="Environment" groups=[
 "pickable",
 ] instance=ExtResource( 6 )]
-position = Vector2( -5336.29, -324.66 )
+position = Vector2( -1802.56, -121.416 )
 z_index = -1
 z_as_relative = false
 input_pickable = true
@@ -253,7 +252,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 20000, 730 )
 
 [node name="Road" type="Sprite" parent="Environment"]
-material = SubResource( 4 )
+material = SubResource( 5 )
 position = Vector2( 0, -17.8947 )
 z_index = -1
 texture = ExtResource( 3 )
@@ -266,10 +265,10 @@ position = Vector2( -861.146, 1753.42 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Road/StaticBody2D"]
 position = Vector2( 54.6433, -1752.32 )
 scale = Vector2( 10, 1 )
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 
 [node name="Car" type="Sprite" parent="Environment"]
-material = SubResource( 6 )
+material = SubResource( 7 )
 position = Vector2( 1527.01, -224.394 )
 z_index = -2
 texture = ExtResource( 20 )

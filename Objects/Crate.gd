@@ -9,7 +9,7 @@ func _input_event(viewport, event, shape_idx):
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			emit_signal("clicked", self)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if held:
 		apply_central_impulse(get_global_mouse_position() - position)
 
