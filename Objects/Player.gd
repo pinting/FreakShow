@@ -1,13 +1,14 @@
 class_name Player
 extends KinematicBody2D
 
-const MAX_SPEED = Vector2(1000, 18000)
-const ACCELERATION = Vector2(1000, 18000)
+const MAX_SPEED = Vector2(1600, 18000)
+const ACCELERATION = Vector2(1600, 18000)
 const FLOOR_NORMAL = Vector2.UP
 const FLOOR_DETECT_DISTANCE = 20.0
 const FRICTION = 0.001
 const GRAVITY = 200
 const WALK_THRESHOLD = 1
+const ANIMATION_SPEED = 1.0
 
 onready var platform_detector = $PlatformDetector
 onready var sprite = $AnimatedSprite
@@ -50,7 +51,7 @@ func _physics_process(delta):
 	if(next_animation[1]):
 		sprite.speed_scale = 0
 	else:
-		sprite.speed_scale = 1
+		sprite.speed_scale = ANIMATION_SPEED
 	
 	set_animation(next_animation[0])
 

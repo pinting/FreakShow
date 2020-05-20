@@ -31,21 +31,21 @@ mode = 2
 range_item_cull_mask = 2
 
 [node name="AreaLight" type="Light2D" parent="."]
+visible = false
 position = Vector2( 4.56331, -11.8355 )
 scale = Vector2( 1.80111, 1.61472 )
 z_as_relative = false
 texture = ExtResource( 4 )
 energy = 0.7
 mode = 2
-shadow_enabled = true
-shadow_color = Color( 0, 0, 0, 1 )
+shadow_color = Color( 1, 1, 1, 1 )
 
 [node name="DirectionalLight" type="Light2D" parent="."]
-position = Vector2( -45.6404, 155.89 )
-scale = Vector2( 1.1842, 1.6086 )
+visible = false
+position = Vector2( -45.6404, 193.678 )
+scale = Vector2( 1.1842, 1.70032 )
 z_index = 1
 z_as_relative = false
 texture = ExtResource( 1 )
 mode = 2
-shadow_enabled = true
 shadow_color = Color( 0.972549, 0.972549, 0.972549, 0.0352941 )
