@@ -4,18 +4,19 @@
 [ext_resource path="res://Objects/Crate.gd" type="Script" id=2]
 
 [sub_resource type="OccluderPolygon2D" id=1]
-polygon = PoolVector2Array( -101.789, -88.3545, -101.789, 89.0314, 101.83, 89.4478, 100.997, -88.3545 )
+polygon = PoolVector2Array( -101.789, -88.3545, -101.502, 105.672, 120.072, 105.672, 120.889, -87.0492 )
 
 [node name="RigidBody2D" type="RigidBody2D"]
 mass = 100.0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2( -9.52715, -8.71056 )
 occluder = SubResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -101.373, -87.9381, 101.621, -88.1463, 101.413, 89.4478, -102.206, 88.8232 )
+position = Vector2( -9.52716, -8.16613 )
+polygon = PoolVector2Array( -101.373, -87.9381, 120.344, -88.1381, 119.528, 104.583, -100.413, 105.399 )
