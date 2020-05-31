@@ -1,8 +1,8 @@
 shader_type canvas_item;
 render_mode blend_premul_alpha;
 
-uniform float radius = 5.0;
-uniform float amount = 0.25;
+uniform float radius = 10.0;
+uniform float amount = 0.5;
 
 void fragment() {
 	float r = radius;

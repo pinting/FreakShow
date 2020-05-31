@@ -1,31 +1,22 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Building04.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Sign00.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Environmnent/RoadTilted00.png" type="Texture" id=3]
-[ext_resource path="res://Objects/Lamp01.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Objects/Barrel.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Objects/Crate.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Light01.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Environment/Building01.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Environment/Building00.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Sounds/Wind00.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Objects/Environment/Lamp01.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Environment/Barrel00.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Pickable/Crate00.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Environment/Light01.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Part01.gd" type="Script" id=8]
-[ext_resource path="res://Objects/Sky.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/Environmnent/Stairs00.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Environmnent/Foot00.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Environmnent/Building05.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Environmnent/Wall00.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Environmnent/Block02.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Environmnent/Door01.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Environmnent/Pillar00_NoEdge.png" type="Texture" id=16]
-[ext_resource path="res://Objects/Light00.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Environmnent/Sign01.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Environmnent/Sign03.png" type="Texture" id=19]
+[ext_resource path="res://Objects/Environment/Sky00.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Music/Part00_Beginning.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Objects/BackgroundTrain.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=20]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Assets/Environmnent/Foot01.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Environmnent/Lamp01.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Environmnent/Dirt00.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=27]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=28]
 
 [sub_resource type="Environment" id=1]
@@ -41,28 +32,25 @@ shader_param/color = Vector3( 0.5, 0.4, 0.2 )
 shader_param/OCTAVES = 4
 
 [sub_resource type="ImageTexture" id=3]
-size = Vector2( 1000, 1000 )
+size = Vector2( 10000, 2000 )
 
-[sub_resource type="OccluderPolygon2D" id=4]
-polygon = PoolVector2Array( -755.046, 358.611, -746.624, -351.282, 739.821, -348.393, 736.839, 363.904, 842.832, 363.943, 842.994, -4641.98, -2294.13, -4638.31, -2280.3, 352.482, -2280.3, 541.701, 843.484, 548.341, 844.456, 363.771, 739.819, 358.83 )
+[sub_resource type="CanvasItemMaterial" id=4]
 
-[sub_resource type="CanvasItemMaterial" id=5]
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 3883.84, 9.02079 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 823.296, 10.8967 )
+[sub_resource type="CanvasItemMaterial" id=6]
 
-[sub_resource type="CanvasItemMaterial" id=7]
-
-[node name="Node2D" type="Node2D"]
+[node name="Part01" type="Node2D"]
 position = Vector2( 50.3338, -8.16223 )
 script = ExtResource( 8 )
 
 [node name="Player" parent="." instance=ExtResource( 28 )]
-position = Vector2( -301.629, -222.018 )
+position = Vector2( -4885.63, -262.707 )
 z_index = 1
 
 [node name="Camera2D" parent="Player" instance=ExtResource( 23 )]
-position = Vector2( 0, 0 )
+position = Vector2( 6.06445, -312.324 )
 
 [node name="Sky" parent="." instance=ExtResource( 9 )]
 position = Vector2( -5006.46, -761.876 )
@@ -75,21 +63,36 @@ color = Color( 0.137255, 0.137255, 0.137255, 1 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
+[node name="Wind" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -8.0
+pitch_scale = 0.01
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+pitch_scale = 0.01
+
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="Fog" type="Sprite" parent="Environment"]
+show_behind_parent = true
 material = SubResource( 2 )
-scale = Vector2( 20, 15 )
+scale = Vector2( 10, 10 )
 texture = SubResource( 3 )
+
+[node name="Train" parent="Environment" instance=ExtResource( 15 )]
+
+[node name="TriggerPoint" type="Node2D" parent="Environment/Train"]
+position = Vector2( 429.499, 39.6719 )
 
 [node name="Lamps" type="Node2D" parent="Environment"]
 light_mask = 0
-position = Vector2( 1, -314 )
+position = Vector2( 5.69043, -276.478 )
 z_index = 1
 z_as_relative = false
 
 [node name="Lamp00" parent="Environment/Lamps" instance=ExtResource( 4 )]
-position = Vector2( -486.112, -433.104 )
+position = Vector2( -553.112, -433.104 )
 scale = Vector2( 0.9, 0.9 )
 z_index = -1
 
@@ -107,6 +110,7 @@ position = Vector2( -1182.14, 936.966 )
 scale = Vector2( 3.67457, 1.10197 )
 
 [node name="Lamp02" parent="Environment/Lamps" instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 4714.48, -431.537 )
 scale = Vector2( 0.9, 0.9 )
 z_index = -1
@@ -115,112 +119,22 @@ z_index = -1
 position = Vector2( -1057.77, 958.185 )
 scale = Vector2( 3.67457, 1.10197 )
 
+[node name="Lamp03" parent="Environment/Lamps" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 7594.72, -431.537 )
+scale = Vector2( 0.9, 0.9 )
+z_index = -1
+
+[node name="Light" parent="Environment/Lamps/Lamp03" instance=ExtResource( 7 )]
+position = Vector2( -1057.77, 958.185 )
+scale = Vector2( 3.67457, 1.10197 )
+
 [node name="Buildings" type="Node2D" parent="Environment"]
 position = Vector2( 3.33398, 21.1144 )
 
-[node name="Building00" type="Sprite" parent="Environment/Buildings"]
-position = Vector2( -5519.25, -2635.14 )
-z_index = -1
-texture = ExtResource( 12 )
+[node name="Building00" parent="Environment/Buildings" instance=ExtResource( 2 )]
 
-[node name="Stairs" type="Sprite" parent="Environment/Buildings/Building00"]
-position = Vector2( 2044.07, 2517.01 )
-z_index = 2
-texture = ExtResource( 10 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Buildings/Building00/Stairs"]
-position = Vector2( 2259.74, 189.146 )
-scale = Vector2( 6.73623, 0.673623 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Buildings/Building00/Stairs/StaticBody2D"]
-position = Vector2( -0.652893, 27.086 )
-polygon = PoolVector2Array( -406.03, -340.291, -265.082, -53.8368, -406.217, -56.6987 )
-
-[node name="Foot" type="Sprite" parent="Environment/Buildings/Building00"]
-position = Vector2( -0.778809, 2596.04 )
-z_index = 3
-texture = ExtResource( 24 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 3143, 195 )
-
-[node name="Inside" type="Sprite" parent="Environment/Buildings/Building00"]
-position = Vector2( 720.639, 2139.67 )
-texture = ExtResource( 13 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 1500, 706 )
-
-[node name="Lamp" type="Sprite" parent="Environment/Buildings/Building00/Inside"]
-light_mask = 2
-position = Vector2( -71.6125, -312.607 )
-z_index = 1
-texture = ExtResource( 25 )
-region_rect = Rect2( 100, 10, 537, 654 )
-
-[node name="Light" parent="Environment/Buildings/Building00/Inside/Lamp" instance=ExtResource( 17 )]
-
-[node name="Pillar" type="Sprite" parent="Environment/Buildings/Building00/Inside"]
-position = Vector2( 793.235, 6.44567 )
-scale = Vector2( 1.14504, 1.03135 )
-z_index = 2
-texture = ExtResource( 16 )
-
-[node name="BehindWall" type="Sprite" parent="Environment/Buildings/Building00/Inside/Pillar"]
-position = Vector2( -2.49414, 24.0571 )
-scale = Vector2( 0.136059, 1 )
-z_index = -1
-texture = ExtResource( 14 )
-
-[node name="Door" type="Sprite" parent="Environment/Buildings/Building00/Inside"]
-position = Vector2( -63.5544, 72.2096 )
-scale = Vector2( 0.835042, 0.835042 )
-texture = ExtResource( 15 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Buildings/Building00/Inside"]
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Environment/Buildings/Building00/Inside/StaticBody2D"]
-occluder = SubResource( 4 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Buildings/Building00/Inside/StaticBody2D"]
-position = Vector2( 342.062, -124.265 )
-polygon = PoolVector2Array( -1093.22, 478.92, 501.566, 479.823, 502.733, 680.608, -2634.42, 678.054, -2638.01, -4515.34, 505.743, -4504.4, 499.415, -223.995, -1089.73, -226.049 )
-
-[node name="Sign" type="Sprite" parent="Environment/Buildings/Building00/Inside"]
-position = Vector2( 460.821, -148.753 )
-texture = ExtResource( 2 )
-
-[node name="Building01" type="Sprite" parent="Environment/Buildings"]
-position = Vector2( 1143.95, -2549.08 )
-z_index = -3
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 3765, 4240 )
-
-[node name="Foot" type="Sprite" parent="Environment/Buildings/Building01"]
-position = Vector2( 0, 2318.47 )
-texture = ExtResource( 11 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 3765, 400 )
-
-[node name="Wall" type="Sprite" parent="Environment/Buildings/Building01"]
-visible = false
-modulate = Color( 1, 0.913725, 0.862745, 1 )
-position = Vector2( 70.0371, 1763.3 )
-scale = Vector2( 1.22714, 1.00881 )
-texture = ExtResource( 14 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 1472, 703 )
-
-[node name="Sign01" type="Sprite" parent="Environment/Buildings/Building01"]
-visible = false
-position = Vector2( 67.1076, 1752.74 )
-rotation = 0.00691588
-texture = ExtResource( 18 )
-
-[node name="Sign02" type="Sprite" parent="Environment/Buildings/Building01"]
-position = Vector2( 1711.08, 2009.78 )
-rotation = 0.00342183
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 19 )
+[node name="Building01" parent="Environment/Buildings" instance=ExtResource( 1 )]
 
 [node name="Barrel" parent="Environment" instance=ExtResource( 5 )]
 position = Vector2( -2631.3, 18.4274 )
@@ -230,33 +144,27 @@ z_index = 1
 [node name="Crate" parent="Environment" groups=[
 "pickable",
 ] instance=ExtResource( 6 )]
-position = Vector2( -1520.78, -23.0137 )
+position = Vector2( -1520.78, 23.2627 )
 z_as_relative = false
 input_pickable = true
 mass = 120.0
 
 [node name="Fence" type="Sprite" parent="Environment"]
-position = Vector2( -2721.87, -407.393 )
+position = Vector2( 3073.64, -409.696 )
 z_index = -4
 texture = ExtResource( 22 )
 region_enabled = true
-region_rect = Rect2( 0, 1, 4000, 780 )
-
-[node name="Dirt" type="Sprite" parent="Environment"]
-light_mask = 4
-position = Vector2( -13.4731, 573.105 )
-texture = ExtResource( 26 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 20000, 730 )
+region_rect = Rect2( 0, 1, 15500, 780 )
 
 [node name="Road" type="Sprite" parent="Environment"]
 light_mask = 3
-material = SubResource( 5 )
-position = Vector2( -21.8899, 67.8959 )
-scale = Vector2( 2.50822, 0.946084 )
+material = SubResource( 4 )
+position = Vector2( -24.6379, 92.6248 )
+scale = Vector2( 1, 0.943857 )
 z_index = -1
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 20000, 20 )
+texture = ExtResource( 27 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 21695, 250 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Environment/Road"]
 position = Vector2( -859.793, 1915.78 )
@@ -264,11 +172,18 @@ position = Vector2( -859.793, 1915.78 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Road/StaticBody2D"]
 position = Vector2( 54.6433, -1913.25 )
 scale = Vector2( 3, 1 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
+
+[node name="Dirt" type="Sprite" parent="Environment"]
+light_mask = 2
+position = Vector2( -13.4731, 573.105 )
+texture = ExtResource( 26 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 21675, 730 )
 
 [node name="Car" type="Sprite" parent="Environment"]
-material = SubResource( 7 )
-position = Vector2( 1440.1, -146.132 )
+material = SubResource( 6 )
+position = Vector2( 1396.74, -115.782 )
 scale = Vector2( 0.752367, 0.752367 )
 z_index = -1
 texture = ExtResource( 20 )

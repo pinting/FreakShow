@@ -1,5 +1,7 @@
 extends Node
 
-var resolution = Vector2(1920, 1080)
+const RESOLUTION = Vector2(1920, 1080)
+const CAMERA_ZOOM = Vector2(2, 2)
+
 var current_camera = null
-var camera_zoom = Vector2(2, 2)
+var player_position = Vector2(0, 0)

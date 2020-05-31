@@ -1,14 +1,14 @@
 class_name Player
 extends KinematicBody2D
 
-const MAX_SPEED = Vector2(1600, 18000)
-const ACCELERATION = Vector2(1600, 18000)
-const FLOOR_NORMAL = Vector2.UP
-const FLOOR_DETECT_DISTANCE = 20.0
-const FRICTION = 0.001
-const GRAVITY = 200
-const WALK_THRESHOLD = 1
-const ANIMATION_SPEED = 1.0
+export var MAX_SPEED = Vector2(1600, 18000)
+export var ACCELERATION = Vector2(1600, 18000)
+export var FLOOR_NORMAL = Vector2.UP
+export var FLOOR_DETECT_DISTANCE = 20.0
+export var FRICTION = 0.001
+export var GRAVITY = 200
+export var WALK_THRESHOLD = 1
+export var ANIMATION_SPEED = 1.0
 
 onready var platform_detector = $PlatformDetector
 onready var sprite = $AnimatedSprite
@@ -19,6 +19,7 @@ var current_second = 0
 var current_accleleration = ACCELERATION;
 
 func _ready():
+	Global.player_position = get_global_position()
 	pass
 
 func _physics_process(delta):
@@ -54,6 +55,8 @@ func _physics_process(delta):
 		sprite.speed_scale = ANIMATION_SPEED
 	
 	set_animation(next_animation[0])
+	
+	Global.player_position = get_global_position()
 
 func get_direction():
 	return Vector2(
@@ -72,13 +75,13 @@ func calculate_next_velocity(delta, direction, is_on_platform, is_jump_interrupt
 	if direction.x != 0.0:
 		next_velocity.x += direction.x * current_accleleration.x * delta
 		
-		if (abs(next_velocity.x) > abs(MAX_SPEED.x)):
+		if (abs(next_velocity.x) > MAX_SPEED.x):
 			next_velocity.x = direction.x * MAX_SPEED.x
 	
 	if direction.y != 0.0:
 		next_velocity.y += direction.y * current_accleleration.y * delta
 		
-		if (abs(next_velocity.y) > abs(MAX_SPEED.y)):
+		if (abs(next_velocity.y) > MAX_SPEED.y):
 			next_velocity.y = direction.y * MAX_SPEED.y
 	
 	if is_jump_interrupted && next_velocity.y > 0.0:

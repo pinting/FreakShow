@@ -1,7 +1,7 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
-uniform float amount = 20.0;
+uniform float amount = 1.0;
 
 void fragment() {
 	vec2 uv = UV * 0.05;

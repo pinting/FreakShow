@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Sky00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Moon00.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Environment/Sky00.gd" type="Script" id=4]
+
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[node name="Sky00" type="Sprite"]
+self_modulate = Color( 1, 1, 1, 0.305882 )
+light_mask = 0
+material = SubResource( 1 )
+z_index = -100
+z_as_relative = false
+texture = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Moon" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.592157 )
+light_mask = 524288
+use_parent_material = true
+position = Vector2( 376.937, -213.952 )
+scale = Vector2( 0.290099, 0.290099 )
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="Moon"]
+position = Vector2( 6.91577, 18.5909 )
+scale = Vector2( 0.958887, 1.07598 )
+texture = ExtResource( 3 )
+energy = 1.65
+mode = 2
+range_item_cull_mask = 524288

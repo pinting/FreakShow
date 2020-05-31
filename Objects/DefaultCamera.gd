@@ -9,7 +9,7 @@ func _ready():
 	pass
 
 func _on_Camera2D_draw():
-	zoom = (Global.resolution / OS.get_window_size()) * Global.camera_zoom
+	zoom = (Global.RESOLUTION / OS.get_window_size()) * Global.CAMERA_ZOOM
  
 func _process(delta):
 	if is_current():
