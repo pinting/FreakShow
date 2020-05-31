@@ -5,7 +5,6 @@
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=3]
 [ext_resource path="res://Objects/Environment/Sky00.gd" type="Script" id=4]
 
-
 [sub_resource type="CanvasItemMaterial" id=1]
 
 [node name="Sky00" type="Sprite"]

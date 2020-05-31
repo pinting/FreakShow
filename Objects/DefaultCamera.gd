@@ -9,7 +9,10 @@ func _ready():
 	pass
 
 func _on_Camera2D_draw():
-	zoom = (Global.RESOLUTION / OS.get_window_size()) * Global.CAMERA_ZOOM
+	var scale = (Global.RESOLUTION / OS.get_window_size()) * Global.CAMERA_ZOOM
+	var max_scale = max(scale.x, scale.y)
+	
+	zoom = Vector2(max_scale, max_scale)
  
 func _process(delta):
 	if is_current():
