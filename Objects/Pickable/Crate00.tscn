@@ -5,6 +5,7 @@
 
 [node name="Crate00" type="RigidBody2D"]
 mass = 100.0
+gravity_scale = 2.0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

@@ -19,57 +19,58 @@
 [ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=27]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=28]
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="Environment" id=3]
 background_mode = 4
 glow_enabled = true
 glow_intensity = 1.0
 glow_strength = 1.4
 glow_hdr_threshold = 0.4
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 21 )
 shader_param/color = Vector3( 0.5, 0.4, 0.2 )
 shader_param/OCTAVES = 4
 
-[sub_resource type="ImageTexture" id=3]
+[sub_resource type="ImageTexture" id=5]
 size = Vector2( 10000, 2000 )
 
-[sub_resource type="CanvasItemMaterial" id=4]
+[sub_resource type="CanvasItemMaterial" id=6]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 3883.84, 9.02079 )
 
-[sub_resource type="CanvasItemMaterial" id=6]
+[sub_resource type="CanvasItemMaterial" id=8]
 
 [node name="Part01" type="Node2D"]
 position = Vector2( 59.2303, 0.734743 )
 script = ExtResource( 8 )
 
-[node name="Intro" type="Node2D" parent="."]
+[node name="IntroDarkness" type="Node2D" parent="."]
 visible = false
 z_index = 100
 
-[node name="TextureRect" type="TextureRect" parent="Intro"]
+[node name="TextureRect" type="TextureRect" parent="IntroDarkness"]
 light_mask = 0
 margin_left = -100000.0
 margin_top = -100000.0
 margin_right = -97952.0
 margin_bottom = -97952.0
 rect_scale = Vector2( 100, 100 )
-texture = SubResource( 8 )
+texture = SubResource( 2 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Player" parent="." instance=ExtResource( 28 )]
-position = Vector2( -4885.63, -262.707 )
+position = Vector2( 4884.64, -240.125 )
+scale = Vector2( 0.7, 0.7 )
 z_index = 1
 
 [node name="Camera2D" parent="Player" instance=ExtResource( 23 )]
@@ -84,7 +85,7 @@ light_mask = 0
 color = Color( 0.137255, 0.137255, 0.137255, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 1 )
+environment = SubResource( 3 )
 
 [node name="Wind" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
@@ -99,65 +100,36 @@ pitch_scale = 0.01
 
 [node name="Fog" type="Sprite" parent="Environment"]
 show_behind_parent = true
-material = SubResource( 2 )
+material = SubResource( 4 )
 scale = Vector2( 10, 10 )
-texture = SubResource( 3 )
+texture = SubResource( 5 )
 
 [node name="Train" parent="Environment" instance=ExtResource( 15 )]
 
 [node name="TriggerPoint" type="Node2D" parent="Environment/Train"]
 position = Vector2( 429.499, 39.6719 )
 
-[node name="Lamps" type="Node2D" parent="Environment"]
-light_mask = 0
-position = Vector2( 5.69043, -276.478 )
-z_index = 1
-z_as_relative = false
+[node name="Building00" parent="Environment" instance=ExtResource( 2 )]
+position = Vector2( -5516.51, -2480.91 )
 
-[node name="Lamp00" parent="Environment/Lamps" instance=ExtResource( 4 )]
-position = Vector2( -553.112, -433.104 )
+[node name="Lamp00" parent="Environment" instance=ExtResource( 4 )]
+position = Vector2( -547.43, -709.59 )
 scale = Vector2( 0.9, 0.9 )
-z_index = -1
 
-[node name="Light" parent="Environment/Lamps/Lamp00" instance=ExtResource( 7 )]
+[node name="Light" parent="Environment/Lamp00" instance=ExtResource( 7 )]
 position = Vector2( -1184.55, 913.627 )
 scale = Vector2( 3.67457, 1.10197 )
 
-[node name="Lamp01" parent="Environment/Lamps" instance=ExtResource( 4 )]
-position = Vector2( 2092.8, -432.943 )
+[node name="Lamp01" parent="Environment" instance=ExtResource( 4 )]
+position = Vector2( 2098.49, -709.43 )
 scale = Vector2( 0.9, 0.9 )
-z_index = -1
 
-[node name="Light" parent="Environment/Lamps/Lamp01" instance=ExtResource( 7 )]
+[node name="Light" parent="Environment/Lamp01" instance=ExtResource( 7 )]
 position = Vector2( -1182.14, 936.966 )
 scale = Vector2( 3.67457, 1.10197 )
 
-[node name="Lamp02" parent="Environment/Lamps" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 4714.48, -431.537 )
-scale = Vector2( 0.9, 0.9 )
-z_index = -1
-
-[node name="Light" parent="Environment/Lamps/Lamp02" instance=ExtResource( 7 )]
-position = Vector2( -1057.77, 958.185 )
-scale = Vector2( 3.67457, 1.10197 )
-
-[node name="Lamp03" parent="Environment/Lamps" instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 7594.72, -431.537 )
-scale = Vector2( 0.9, 0.9 )
-z_index = -1
-
-[node name="Light" parent="Environment/Lamps/Lamp03" instance=ExtResource( 7 )]
-position = Vector2( -1057.77, 958.185 )
-scale = Vector2( 3.67457, 1.10197 )
-
-[node name="Buildings" type="Node2D" parent="Environment"]
-position = Vector2( 3.33398, 21.1144 )
-
-[node name="Building00" parent="Environment/Buildings" instance=ExtResource( 2 )]
-
-[node name="Building01" parent="Environment/Buildings" instance=ExtResource( 1 )]
+[node name="Building01" parent="Environment" instance=ExtResource( 1 )]
+position = Vector2( 1126.5, -2518.44 )
 
 [node name="Barrel" parent="Environment" instance=ExtResource( 5 )]
 position = Vector2( -2631.3, 18.4274 )
@@ -181,7 +153,7 @@ region_rect = Rect2( 0, 1, 15500, 780 )
 
 [node name="Road" type="Sprite" parent="Environment"]
 light_mask = 3
-material = SubResource( 4 )
+material = SubResource( 6 )
 position = Vector2( -24.6379, 92.6248 )
 scale = Vector2( 1, 0.943857 )
 z_index = -1
@@ -195,7 +167,7 @@ position = Vector2( -859.793, 1915.78 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Road/StaticBody2D"]
 position = Vector2( 54.6433, -1913.25 )
 scale = Vector2( 3, 1 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="Dirt" type="Sprite" parent="Environment"]
 light_mask = 2
@@ -205,8 +177,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 21675, 730 )
 
 [node name="Car" type="Sprite" parent="Environment"]
-material = SubResource( 6 )
-position = Vector2( 1396.74, -115.782 )
-scale = Vector2( 0.752367, 0.752367 )
+material = SubResource( 8 )
+position = Vector2( 1391.17, -173.358 )
 z_index = -1
 texture = ExtResource( 20 )

@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Environmnent/Sign00.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Environmnent/Stairs00.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Environmnent/Foot01.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Environmnent/Lamp01.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Lamp02.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Environmnent/Pillar00.png" type="Texture" id=9]
 [ext_resource path="res://Objects/Environment/Light00.tscn" type="PackedScene" id=10]
 
@@ -44,14 +44,15 @@ region_rect = Rect2( 0, 0, 1500, 706 )
 
 [node name="Lamp" type="Sprite" parent="Inside"]
 light_mask = 2
-position = Vector2( -71.6125, -312.607 )
+position = Vector2( -73.8079, -301.684 )
+scale = Vector2( 0.9, 0.9 )
 z_index = 1
 texture = ExtResource( 8 )
 region_rect = Rect2( 100, 10, 537, 654 )
 
 [node name="Light" parent="Inside/Lamp" instance=ExtResource( 10 )]
-position = Vector2( 1.07129, 4.57294 )
-scale = Vector2( 1, 1.05 )
+position = Vector2( 5.92773, 40.3459 )
+scale = Vector2( 1.11111, 1.11924 )
 
 [node name="Pillar" type="Sprite" parent="Inside"]
 position = Vector2( 779.661, 28.0104 )
@@ -60,8 +61,7 @@ z_index = 2
 texture = ExtResource( 9 )
 
 [node name="Door" type="Sprite" parent="Inside"]
-position = Vector2( -63.5544, 81.8135 )
-scale = Vector2( 0.835042, 0.835042 )
+position = Vector2( -66.5974, 36.3538 )
 texture = ExtResource( 4 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Inside"]
