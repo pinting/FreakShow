@@ -2,10 +2,10 @@ class_name Player
 extends KinematicBody2D
 
 # Max velocity
-export var MAX_SPEED = 250
+export var MAX_SPEED = 308
 
 # Max acceleration
-export var ACCELERATION = 1000
+export var ACCELERATION = 1320
 
 # Jump force
 export var JUMP_FORCE = 400
@@ -16,10 +16,13 @@ export var FRICTION = 0.05
 # Gravity (only Y axis)
 export var GRAVITY = 300
 
+# Sprint speed
+export var SPRINT_SCALE = 1.35
+
 # Velocity limit
 export var WALK_THRESHOLD = 0.1
 
-# Speed of the animation
+# Speed of the animation (sprint modifies it)
 export var ANIMATION_SPEED = 1
 
 # Defines how many waves (100% to 0% to 100% in walk acceleration) happen in a second 
@@ -52,8 +55,9 @@ var current_velocity = Vector2(0, 0)
 # Current second (since launch)
 var current_second = 0
 
-# Current acceleration
-var current_acceleration = ACCELERATION;
+var current_max_speed = MAX_SPEED
+var current_acceleration = ACCELERATION
+var current_animation_speed = ANIMATION_SPEED
 
 func _ready():
 	Global.player_position = get_global_position()
@@ -62,13 +66,15 @@ func _physics_process(delta):
 	var direction = get_direction()
 	
 	if(direction.x != 0 || current_velocity.x != 0):
-		current_acceleration = ACCELERATION * abs(sin(WALK_WAVE_COUNT * PI * current_second))
+		var rad = WALK_WAVE_COUNT  * current_second * current_animation_speed * PI
+		
+		current_acceleration = ACCELERATION * abs(sin(rad))
 		current_second += delta
 	
 	var snap_vector = -1 * FLOOR_NORMAL * FLOOR_DETECT_DISTANCE if direction.y == 0 else Vector2.ZERO
 	var on_platform = platform_detector_00.is_colliding() || platform_detector_01.is_colliding()
 	var next_velocity = calculate_next_velocity(delta, direction)
-	print(next_velocity)
+	
 	current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, FLOOR_NORMAL, on_platform, 4, 0.9, false)
 	
 	if(is_on_floor() && direction.x != 0):
@@ -83,15 +89,26 @@ func _physics_process(delta):
 	if(next_animation.freeze):
 		animated_sprite.speed_scale = 0
 	else:
-		animated_sprite.speed_scale = ANIMATION_SPEED
+		animated_sprite.speed_scale = current_animation_speed
 	
 	Global.player_position = get_global_position()
 
 func get_direction():
-	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
-		-1 if(is_on_floor() and Input.is_action_just_pressed("jump")) else 0
-	)
+	var right = Input.get_action_strength("move_right")
+	var left = Input.get_action_strength("move_left")
+	var jump = Input.is_action_just_pressed("jump")
+	var sprint = Input.is_action_pressed("sprint")
+	
+	var x = right - left
+	var y = -1 if(is_on_floor() and jump) else 0
+	
+	var speed_mod = SPRINT_SCALE if sprint else 1
+	
+	current_max_speed = speed_mod * MAX_SPEED
+	current_acceleration = speed_mod * ACCELERATION
+	current_animation_speed = speed_mod * ANIMATION_SPEED
+	
+	return Vector2(x, y)
 
 func calculate_next_velocity(delta, direction):
 	var next_velocity = current_velocity
@@ -104,8 +121,8 @@ func calculate_next_velocity(delta, direction):
 	else:
 		next_velocity.y += GRAVITY * delta
 	
-	if(abs(next_velocity.x) > MAX_SPEED):
-		next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * MAX_SPEED
+	if(abs(next_velocity.x) > current_max_speed):
+		next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * current_max_speed
 	elif(direction.x) != 0.0:
 		next_velocity.x += direction.x * current_acceleration * delta
 	
