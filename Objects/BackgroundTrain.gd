@@ -40,7 +40,7 @@ func start():
 	visible = true
 	started = true
 	
-	if(!Global.DEBUG):
+	if not Global.DEBUG:
 		audio_stream_00.play()
 		audio_stream_01.play()
 		audio_stream_02.play()
@@ -66,11 +66,11 @@ func _process(delta):
 	
 	current_second += delta
 	
-	if(!started && abs(trigger_position.x - player_position.x) < DETECT_THRESHOLD):
+	if not started && abs(trigger_position.x - player_position.x) < DETECT_THRESHOLD:
 		start()
 	
-	if(started):
+	if started:
 		move()
 	
-		if(abs(trigger_position.x - self_position.x) > DESTROY_AFTER):
+		if abs(trigger_position.x - self_position.x) > DESTROY_AFTER:
 			get_parent().remove_child(self)

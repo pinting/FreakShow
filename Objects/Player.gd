@@ -26,7 +26,7 @@ export var WALK_THRESHOLD = 0.1
 export var ANIMATION_SPEED = 1
 
 # Defines how many waves (100% to 0% to 100% in walk acceleration) happen in a second 
-export var WALK_WAVE_COUNT = 2
+export var WALK_WAVE_COUNT = 0.5
 
 # Prefix of the front side
 export var SIDE_A_PREFIX = "a"
@@ -49,12 +49,8 @@ onready var collision_polygon = $CollisionPolygon2D
 # Set the default side
 var animation_prefix = SIDE_A_PREFIX
 
-# The current velocity the player moves
-var current_velocity = Vector2(0, 0)
-
-# Current second (since launch)
 var current_second = 0
-
+var current_velocity = Vector2(0, 0)
 var current_max_speed = MAX_SPEED
 var current_acceleration = ACCELERATION
 var current_animation_speed = ANIMATION_SPEED
@@ -65,8 +61,8 @@ func _ready():
 func _physics_process(delta):
 	var direction = get_direction()
 	
-	if(direction.x != 0 || current_velocity.x != 0):
-		var rad = WALK_WAVE_COUNT  * current_second * current_animation_speed * PI
+	if direction.x != 0 || current_velocity.x != 0:
+		var rad = WALK_WAVE_COUNT * current_second * current_animation_speed * PI
 		
 		current_acceleration = ACCELERATION * abs(sin(rad))
 		current_second += delta
@@ -77,7 +73,7 @@ func _physics_process(delta):
 	
 	current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, FLOOR_NORMAL, on_platform, 4, 0.9, false)
 	
-	if(is_on_floor() && direction.x != 0):
+	if is_on_floor() && direction.x != 0:
 		animated_sprite.scale.x = abs(animated_sprite.scale.x) * (1 if direction.x > 0 else -1)
 		animated_sprite.scale.x = abs(animated_sprite.scale.x) * (1 if direction.x > 0 else -1)
 		animation_prefix = SIDE_A_PREFIX if direction.x > 0 else SIDE_B_PREFIX
@@ -86,7 +82,7 @@ func _physics_process(delta):
 	
 	set_animation(next_animation.name)
 	
-	if(next_animation.freeze):
+	if next_animation.freeze:
 		animated_sprite.speed_scale = 0
 	else:
 		animated_sprite.speed_scale = current_animation_speed
@@ -100,7 +96,7 @@ func get_direction():
 	var sprint = Input.is_action_pressed("sprint")
 	
 	var x = right - left
-	var y = -1 if(is_on_floor() and jump) else 0
+	var y = -1 if is_on_floor() and jump else 0
 	
 	var speed_mod = SPRINT_SCALE if sprint else 1
 	
@@ -113,17 +109,17 @@ func get_direction():
 func calculate_next_velocity(delta, direction):
 	var next_velocity = current_velocity
 	
-	if(is_on_floor()):
+	if is_on_floor():
 		next_velocity.x *= pow(FRICTION, delta)
 		
-		if(direction.y != 0):
+		if direction.y != 0:
 			next_velocity.y += direction.y * JUMP_FORCE
 	else:
 		next_velocity.y += GRAVITY * delta
 	
-	if(abs(next_velocity.x) > current_max_speed):
+	if abs(next_velocity.x) > current_max_speed:
 		next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * current_max_speed
-	elif(direction.x) != 0.0:
+	elif direction.x != 0:
 		next_velocity.x += direction.x * current_acceleration * delta
 	
 	return next_velocity
@@ -132,25 +128,25 @@ func get_next_animation(direction):
 	var next_animation = "stand"
 	var freeze = false
 	
-	if(is_on_floor()):
-		if(abs(current_velocity.x) > WALK_THRESHOLD):
-			if(not direction.x):
+	if is_on_floor():
+		if abs(current_velocity.x) > WALK_THRESHOLD:
+			if not direction.x:
 				next_animation = "walk_to_stand"
 			else:
 				next_animation = "walk"
 		else:
-			if(direction.x):
+			if direction.x:
 				next_animation = "stand_to_walk"
 			else:
 				next_animation = "stand"
 	else:
-		if(current_velocity.y > 0):
+		if current_velocity.y > 0:
 			next_animation = "jump"
 			freeze = true
 		else: 
 			next_animation = "jump"
 	
-	return { 
+	return {
 		"name": next_animation,
 		"freeze": freeze
 	}

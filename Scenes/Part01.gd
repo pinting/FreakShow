@@ -9,7 +9,7 @@ onready var wind = $Wind
 var sum = 0
 
 func _ready():
-	if(!Global.DEBUG):
+	if not Global.DEBUG:
 		intro_darkness.visible = true
 	
 		background_music.play()
@@ -18,7 +18,7 @@ func _ready():
 func _process(delta):
 	var v = delta / FADE_SECONDS
 	
-	if(sum < 1.0):
+	if sum < 1.0:
 		sum += v
 		
 		# Make vinyl mix sound effect
