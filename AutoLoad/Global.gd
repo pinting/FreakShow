@@ -7,7 +7,7 @@ const RESOLUTION = Vector2(1920, 1080)
 const CAMERA_ZOOM = Vector2(2, 2)
 
 # Turn off sounds and intro screen
-const DEBUG = true
+const DEBUG = false
 
 # Current camera object
 var current_camera = null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Objects/Environment/Building01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Environment/Building00.tscn" type="PackedScene" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://Objects/Environment/Light01.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Part01.gd" type="Script" id=8]
 [ext_resource path="res://Objects/Environment/Sky00.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/Music/Part00_Beginning.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Music/Cluster_GrossesWasser.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Objects/MusicPlayer.gd" type="Script" id=11]
 [ext_resource path="res://Objects/BackgroundTrain.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=20]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
@@ -92,7 +93,14 @@ stream = ExtResource( 3 )
 volume_db = -8.0
 pitch_scale = 0.01
 
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="Node" parent="."]
+script = ExtResource( 11 )
+
+[node name="AudioStreamPlayer00" type="AudioStreamPlayer" parent="MusicPlayer"]
+stream = ExtResource( 10 )
+pitch_scale = 0.01
+
+[node name="AudioStreamPlayer01" type="AudioStreamPlayer" parent="MusicPlayer"]
 stream = ExtResource( 10 )
 pitch_scale = 0.01
 

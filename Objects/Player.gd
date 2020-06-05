@@ -42,7 +42,6 @@ export var FLOOR_DETECT_DISTANCE = 20.0
 
 onready var platform_detector_00 = $PlatformDetector00
 onready var platform_detector_01 = $PlatformDetector01
-
 onready var animated_sprite = $AnimatedSprite
 onready var collision_polygon = $CollisionPolygon2D
 

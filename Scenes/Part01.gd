@@ -1,28 +1,32 @@
 extends "res://Scenes/BaseScene.gd"
 
-export var FADE_SECONDS = 10.0
+export var FADE_IN_SECONDS = 5
 
 onready var intro_darkness = $IntroDarkness
-onready var background_music = $BackgroundMusic
+onready var music_player = $MusicPlayer
 onready var wind = $Wind
 
 var sum = 0
 
 func _ready():
+	music_player.add_part(0, 3 * 60 + 20, false, 0, 10)
+	music_player.add_part(14.3, 3 * 60 + 20, true, 10, 10)
+	
 	if not Global.DEBUG:
 		intro_darkness.visible = true
 	
-		background_music.play()
+		music_player.start()
 		wind.play()
 
 func _process(delta):
-	var v = delta / FADE_SECONDS
+	var v = delta / FADE_IN_SECONDS
 	
 	if sum < 1.0:
 		sum += v
 		
 		# Make vinyl mix sound effect
-		background_music.pitch_scale = sum
+		music_player.master_player.pitch_scale = sum
+		music_player.slave_player.pitch_scale = sum
 		wind.pitch_scale = sum
 		
 		# Make the darkness fade

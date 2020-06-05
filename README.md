@@ -1,21 +1,29 @@
 # FreakShow
 
-Video game experiment with photo based assets.
+A video game experiment with photo based assets.
 
-## Assets
+## Setup
 
-https://drive.google.com/drive/folders/1TkZq8ey2pnUnsuJqPiyte0j6XtUkRXH6
+The game was imagined based on a selection of music tracks - however, I do not own the rights to include them with the assets thus it is the duty of the end user to provide the necessary files to the engine.
+
+* Clone the repository
+* Place the proprietary music files into `Assets/Music`
+* Open the project file with Godot 3.2.x
+* Select `Project` -> `Export`
+* Click on `Export All`
+* The DMG and EXE application packs will be placed into the `out` folder
 
 ## Credits
 
-* Denes Tornyi - Programming, photo assets, character actor
-* Gergo Tornyi - Character actor
-* Zsuzsa Buka - Character actor
-* Imre Herczeg - Character actor
-* Cluster - Grosses Wasser is used as music of Part01
-* Godot Engine - Engine, shaders, sprites of particles
+* Denes Tornyi - programming, photo assets, character actor
+* Godot Engine - engine, shaders, sprites of particles
 
-## Copyright
+## Music
 
-Project FreakShow is proprietary licensed to Denes Tornyi.
-Copyright (c) 2020 - present Denes Tornyi.
+The following tracks were used, but they are not commited to the repository because of copyright issues.
+
+* `Cluster - Grosses Wasser` is used as music of Part01.
+
+## License
+
+Copyright (c) 2020 Dénes Tornyi. Licensed under the Apache license.

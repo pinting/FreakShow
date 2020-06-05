@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Cluster_GrossesWasser.ogg-4acc0072b27e96441e90963f21f5c579.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/Cluster_GrossesWasser.ogg"
+dest_files=[ "res://.import/Cluster_GrossesWasser.ogg-4acc0072b27e96441e90963f21f5c579.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
