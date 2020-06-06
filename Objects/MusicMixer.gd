@@ -4,14 +4,20 @@ extends Node
 # Playback stream
 export (AudioStream) var STREAM
 
-# Should the parts repeat
-export var GLOBAL_LOOP = false
+# Should the whole thing repeat
+export var LOOP = false
+
+# If auto play
+export var AUTOPLAY = false
 
 # Playing volume in DB
 export var MAX_VOLUME = 0
 
 # Muting volume in DB
 export var MIN_VOLUME = -60
+
+# Parts of the music
+export var PARTS = []
 
 const EPS = 0.05
 
@@ -20,12 +26,10 @@ onready var player_01 = $AudioStreamPlayer01
 
 var master_player = null
 var slave_player = null
-
 var stopped = true
-var next = false
-var parts = []
-var current_part_index = 0
+var parts = PARTS
 
+var _current_part_index = 0
 var _playback_prev_position = 0
 var _playback_prev_diff = 0
 var _virtual_position = 0
@@ -41,6 +45,9 @@ func _ready():
 	slave_player = player_01
 	slave_player.stream = STREAM
 	slave_player.volume_db = MIN_VOLUME
+	
+	if AUTOPLAY:
+		play()
 
 func add_part(start, end, loop, in_duration, out_duration, offset = 0):
 	# A part needs to start earlier than end
@@ -50,24 +57,32 @@ func add_part(start, end, loop, in_duration, out_duration, offset = 0):
 	assert(end - start - out_duration + offset > 0)
 	
 	var new_part = {
+		# At start the fade in will start
 		"start": start,
+		# At end the fade out will end
 		"end": end,
+		# If the part is looped, so the next is the current
 		"loop": loop,
+		# Duration of the fade in effect
 		"in_duration": in_duration if in_duration > EPS else EPS,
+		# Duration of the fade out effect
 		"out_duration": out_duration if out_duration > EPS else EPS,
+		# Offset the start to the previous one
+		# This does not apply to the first played part
+		# Too large negative offset can break the mixer
 		"offset": offset
 	}
 	
 	parts.append(new_part)
 
-func start():
+func play():
 	if len(parts) == 0:
 		return
 	
 	master_player.play(parts[0].start)
 	
 	stopped = false
-	current_part_index = 0
+	_current_part_index = 0
 	
 	_playback_prev_position = parts[0].start
 	_virtual_position = parts[0].start
@@ -76,17 +91,17 @@ func start():
 	_mixing = false
 
 func get_next():
-	if len(parts) > current_part_index + 1:
-		return current_part_index + 1
-	elif GLOBAL_LOOP:
+	if len(parts) > _current_part_index + 1:
+		return _current_part_index + 1
+	elif LOOP:
 		return 0
 	else:
 		return -1
 
-func stop_loop():
+func next():
 	_break_loop = true
 	
-func stop_loop_now():
+func next_now():
 	_break_loop = true
 	_break_loop_now = true
 
@@ -106,7 +121,7 @@ func _process(delta):
 	
 	_virtual_position += abs(position_diff)
 	
-	var current_part = parts[current_part_index]
+	var current_part = parts[_current_part_index]
 	
 	var diff_to_start = current_part.start - _virtual_position
 	var diff_to_end = current_part.end - _virtual_position
@@ -133,7 +148,7 @@ func _process(delta):
 		Global.debug_if_integer(diff_to_start, "master min volume")
 	
 	# Determinate if the current or the next part should be played as next
-	var next_part_index = get_next() if not current_part.loop or _break_loop else current_part_index
+	var next_part_index = get_next() if not current_part.loop or _break_loop else _current_part_index
 	
 	# If no next part is present and we are close to the end, stop
 	if next_part_index == -1:
@@ -174,10 +189,14 @@ func _finish_mixing(next_part_index):
 	slave_player.volume_db = MIN_VOLUME
 	
 	# Set the next part as current and stop mixing
-	current_part_index = next_part_index
+	_current_part_index = next_part_index
 	
 	_virtual_position = master_player.get_playback_position()
 	_playback_prev_position = _virtual_position
 	_break_loop = false
 	_break_loop_now = false
 	_mixing = false
+
+func set_pitch_scale(value):
+	master_player.pitch_scale = value
+	slave_player.pitch_scale = value

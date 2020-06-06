@@ -20,7 +20,7 @@ func _ready():
 		wind.pitch_scale = 0.01
 	
 	if not Global.NO_SOUNDS:
-		music_mixer.start()
+		music_mixer.play()
 		wind.play()
 
 func _process(delta):
@@ -30,8 +30,7 @@ func _process(delta):
 	sum += delta / FADE_IN_SECONDS
 	
 	# Make vinyl mix sound effect
-	music_mixer.master_player.pitch_scale = min(sum, 1)
-	music_mixer.slave_player.pitch_scale = min(sum, 1)
+	music_mixer.set_pitch_scale(min(sum, 1))
 	wind.pitch_scale = min(sum, 1)
 	
 	# Make the darkness fade

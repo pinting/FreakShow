@@ -58,7 +58,7 @@ func _ready():
 	Global.player_position = get_global_position()
 
 func _physics_process(delta):
-	var direction = get_direction()
+	var direction = _get_direction()
 	
 	if direction.x != 0 || current_velocity.x != 0:
 		var rad = WALK_WAVE_COUNT * current_second * current_animation_speed * PI
@@ -68,7 +68,7 @@ func _physics_process(delta):
 	
 	var snap_vector = -1 * FLOOR_NORMAL * FLOOR_DETECT_DISTANCE if direction.y == 0 else Vector2.ZERO
 	var on_platform = platform_detector_00.is_colliding() || platform_detector_01.is_colliding()
-	var next_velocity = calculate_next_velocity(delta, direction)
+	var next_velocity = _calculate_next_velocity(delta, direction)
 	
 	current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, FLOOR_NORMAL, on_platform, 4, 0.9, false)
 	
@@ -77,9 +77,9 @@ func _physics_process(delta):
 		animated_sprite.scale.x = abs(animated_sprite.scale.x) * (1 if direction.x > 0 else -1)
 		animation_prefix = SIDE_A_PREFIX if direction.x > 0 else SIDE_B_PREFIX
 	
-	var next_animation = get_next_animation(direction)
+	var next_animation = _get_next_animation(direction)
 	
-	set_animation(next_animation.name)
+	_set_animation(next_animation.name)
 	
 	if next_animation.freeze:
 		animated_sprite.speed_scale = 0
@@ -88,7 +88,7 @@ func _physics_process(delta):
 	
 	Global.player_position = get_global_position()
 
-func get_direction():
+func _get_direction():
 	var right = Input.get_action_strength("move_right")
 	var left = Input.get_action_strength("move_left")
 	var jump = Input.is_action_just_pressed("jump")
@@ -105,7 +105,7 @@ func get_direction():
 	
 	return Vector2(x, y)
 
-func calculate_next_velocity(delta, direction):
+func _calculate_next_velocity(delta, direction):
 	var next_velocity = current_velocity
 	
 	if is_on_floor():
@@ -123,7 +123,7 @@ func calculate_next_velocity(delta, direction):
 	
 	return next_velocity
 
-func get_next_animation(direction):
+func _get_next_animation(direction):
 	var next_animation = "stand"
 	var freeze = false
 	
@@ -150,7 +150,7 @@ func get_next_animation(direction):
 		"freeze": freeze
 	}
 
-func set_animation(name):
+func _set_animation(name):
 	animated_sprite.animation = animation_prefix + "_" + name
 
 func get_animation():
