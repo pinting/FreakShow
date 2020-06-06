@@ -10,7 +10,7 @@
 [ext_resource path="res://Scenes/Part01.gd" type="Script" id=8]
 [ext_resource path="res://Objects/Environment/Sky00.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Music/Cluster_GrossesWasser.ogg" type="AudioStream" id=10]
-[ext_resource path="res://Objects/MusicPlayer.gd" type="Script" id=11]
+[ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Objects/BackgroundTrain.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=20]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
@@ -52,11 +52,11 @@ extents = Vector2( 3883.84, 9.02079 )
 position = Vector2( 59.2303, 0.734743 )
 script = ExtResource( 8 )
 
-[node name="IntroDarkness" type="Node2D" parent="."]
+[node name="Intro" type="Node2D" parent="."]
 visible = false
 z_index = 100
 
-[node name="TextureRect" type="TextureRect" parent="IntroDarkness"]
+[node name="TextureRect" type="TextureRect" parent="Intro"]
 light_mask = 0
 margin_left = -100000.0
 margin_top = -100000.0
@@ -91,18 +91,9 @@ environment = SubResource( 3 )
 [node name="Wind" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -8.0
-pitch_scale = 0.01
 
-[node name="MusicPlayer" type="Node" parent="."]
-script = ExtResource( 11 )
-
-[node name="AudioStreamPlayer00" type="AudioStreamPlayer" parent="MusicPlayer"]
-stream = ExtResource( 10 )
-pitch_scale = 0.01
-
-[node name="AudioStreamPlayer01" type="AudioStreamPlayer" parent="MusicPlayer"]
-stream = ExtResource( 10 )
-pitch_scale = 0.01
+[node name="MusicMixer" parent="." instance=ExtResource( 11 )]
+STREAM = ExtResource( 10 )
 
 [node name="Environment" type="Node2D" parent="."]
 
