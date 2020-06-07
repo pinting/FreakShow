@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Objects/Environment/Building01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Environment/Building00.tscn" type="PackedScene" id=2]
@@ -11,7 +11,12 @@
 [ext_resource path="res://Objects/Environment/Sky00.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Music/Cluster_GrossesWasser.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Environmnent/Hoop00_Overlay.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Environmnent/Hoop00.png" type="Texture" id=13]
+[ext_resource path="res://Objects/Pickable/Ball00.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/BackgroundTrain.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Environmnent/Building08.png" type="Texture" id=16]
+[ext_resource path="res://Objects/Environment/Lamp00.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=20]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
@@ -44,19 +49,22 @@ size = Vector2( 10000, 2000 )
 [sub_resource type="CanvasItemMaterial" id=6]
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 3883.84, 9.02079 )
+extents = Vector2( 30000, 20 )
 
-[sub_resource type="CanvasItemMaterial" id=8]
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 30.2461, 595.944 )
+
+[sub_resource type="CanvasItemMaterial" id=9]
 
 [node name="Part01" type="Node2D"]
 position = Vector2( 59.2303, 0.734743 )
 script = ExtResource( 8 )
 
-[node name="Intro" type="Node2D" parent="."]
+[node name="BlackScreen" type="Node2D" parent="."]
 visible = false
 z_index = 100
 
-[node name="TextureRect" type="TextureRect" parent="Intro"]
+[node name="TextureRect" type="TextureRect" parent="BlackScreen"]
 light_mask = 0
 margin_left = -100000.0
 margin_top = -100000.0
@@ -70,7 +78,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 28 )]
-position = Vector2( 4884.64, -240.125 )
+position = Vector2( -4874.23, -302.971 )
 scale = Vector2( 0.7, 0.7 )
 z_index = 1
 
@@ -88,95 +96,175 @@ color = Color( 0.137255, 0.137255, 0.137255, 1 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
-[node name="Wind" type="AudioStreamPlayer" parent="."]
+[node name="WindSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -8.0
 
 [node name="MusicMixer" parent="." instance=ExtResource( 11 )]
 STREAM = ExtResource( 10 )
 
-[node name="Environment" type="Node2D" parent="."]
+[node name="Environment" type="Node" parent="."]
 
 [node name="Fog" type="Sprite" parent="Environment"]
 show_behind_parent = true
 material = SubResource( 4 )
+position = Vector2( 58.452, 97.433 )
 scale = Vector2( 10, 10 )
 texture = SubResource( 5 )
 
-[node name="Train" parent="Environment" instance=ExtResource( 15 )]
+[node name="Road" type="Sprite" parent="Environment"]
+light_mask = 3
+material = SubResource( 6 )
+position = Vector2( 59.2303, 93.3597 )
+scale = Vector2( 1, 0.943857 )
+z_index = -1
+texture = ExtResource( 27 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 35000, 250 )
 
-[node name="TriggerPoint" type="Node2D" parent="Environment/Train"]
-position = Vector2( 429.499, 39.6719 )
+[node name="GroundForAll" type="StaticBody2D" parent="Environment/Road"]
+position = Vector2( 0, 1915.78 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="Bottom" type="CollisionShape2D" parent="Environment/Road/GroundForAll"]
+position = Vector2( 54.6433, -1913.25 )
+shape = SubResource( 7 )
+
+[node name="LeftEnd" type="CollisionShape2D" parent="Environment/Road/GroundForAll"]
+position = Vector2( -17525.8, -2490.26 )
+shape = SubResource( 8 )
+
+[node name="RightEnd" type="CollisionShape2D" parent="Environment/Road/GroundForAll"]
+position = Vector2( 17529.6, -2490.27 )
+shape = SubResource( 8 )
+
+[node name="GroundForPickable" type="StaticBody2D" parent="Environment/Road"]
+position = Vector2( 0, 1915.78 )
+collision_layer = 14
+collision_mask = 14
+
+[node name="Bottom" type="CollisionShape2D" parent="Environment/Road/GroundForPickable"]
+position = Vector2( 57.2507, -1946.4 )
+shape = SubResource( 7 )
+
+[node name="Dirt" type="Sprite" parent="Environment"]
+light_mask = 2
+position = Vector2( 59.2303, 573.84 )
+texture = ExtResource( 26 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 35000, 730 )
+
+[node name="Fence" type="Sprite" parent="Environment"]
+position = Vector2( 59.2303, -408.974 )
+z_index = -4
+texture = ExtResource( 22 )
+region_enabled = true
+region_rect = Rect2( 0, 1, 30000, 780 )
+
+[node name="BackgroundTrain" parent="Environment" instance=ExtResource( 15 )]
+position = Vector2( -4041.36, -815.776 )
+z_index = -5
 
 [node name="Building00" parent="Environment" instance=ExtResource( 2 )]
-position = Vector2( -5516.51, -2480.91 )
+position = Vector2( -5457.28, -2480.18 )
+
+[node name="Building01" parent="Environment" instance=ExtResource( 1 )]
+position = Vector2( 1185.73, -2517.71 )
 
 [node name="Lamp00" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -547.43, -709.59 )
+position = Vector2( 0, -710 )
 scale = Vector2( 0.9, 0.9 )
+z_as_relative = false
 
 [node name="Light" parent="Environment/Lamp00" instance=ExtResource( 7 )]
 position = Vector2( -1184.55, 913.627 )
 scale = Vector2( 3.67457, 1.10197 )
 
 [node name="Lamp01" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2098.49, -709.43 )
+position = Vector2( 2450, -710 )
 scale = Vector2( 0.9, 0.9 )
+z_as_relative = false
 
 [node name="Light" parent="Environment/Lamp01" instance=ExtResource( 7 )]
 position = Vector2( -1182.14, 936.966 )
 scale = Vector2( 3.67457, 1.10197 )
 
-[node name="Building01" parent="Environment" instance=ExtResource( 1 )]
-position = Vector2( 1126.5, -2518.44 )
+[node name="Car" type="Sprite" parent="Environment"]
+material = SubResource( 9 )
+position = Vector2( 1450.4, -172.623 )
+z_index = -1
+texture = ExtResource( 20 )
+
+[node name="Building02" type="Sprite" parent="Environment"]
+position = Vector2( 14544.2, -1355.51 )
+texture = ExtResource( 16 )
 
 [node name="Barrel" parent="Environment" instance=ExtResource( 5 )]
-position = Vector2( -2631.3, 18.4274 )
+position = Vector2( 13731.7, 39.1575 )
 scale = Vector2( 1, 1 )
 z_index = 1
 
-[node name="Crate" parent="Environment" groups=[
+[node name="Hoop" type="Sprite" parent="Environment"]
+position = Vector2( 16551.3, -492.83 )
+z_index = -1
+texture = ExtResource( 13 )
+
+[node name="Lamp" parent="Environment/Hoop" instance=ExtResource( 17 )]
+position = Vector2( 139.316, -178.558 )
+scale = Vector2( 1, 0.943857 )
+
+[node name="Light" parent="Environment/Hoop/Lamp" instance=ExtResource( 7 )]
+position = Vector2( -487.555, 751.631 )
+scale = Vector2( 1.53996, 0.550927 )
+
+[node name="Overlay" type="Sprite" parent="Environment/Hoop"]
+position = Vector2( -1.49023, -292.386 )
+z_index = 2
+texture = ExtResource( 12 )
+
+[node name="HoopBody" type="StaticBody2D" parent="Environment/Hoop/Overlay"]
+position = Vector2( 1.49023, 292.386 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon00" type="CollisionPolygon2D" parent="Environment/Hoop/Overlay/HoopBody"]
+position = Vector2( -1.44922, 0.483215 )
+polygon = PoolVector2Array( -85.7197, -312.615, -80.5654, -315.353, -63.8135, -275.407 )
+
+[node name="CollisionPolygon01" type="CollisionPolygon2D" parent="Environment/Hoop/Overlay/HoopBody"]
+position = Vector2( 176.644, 16.9705 )
+scale = Vector2( 1.15769, 1.03912 )
+polygon = PoolVector2Array( -83.5967, -319.037, -79.2837, -314.852, -99.0415, -279.355 )
+
+[node name="Trigger" type="Node" parent="."]
+
+[node name="TriggerPoint00_Train" type="Node2D" parent="Trigger"]
+position = Vector2( 3212.52, -174.784 )
+scale = Vector2( 20, 15 )
+
+[node name="TriggerPoint01_Music" type="Node2D" parent="Trigger"]
+position = Vector2( 14924.4, -135.376 )
+scale = Vector2( 20, 15 )
+
+[node name="TriggerPoint02_Music" type="Node2D" parent="Trigger"]
+position = Vector2( 16547.4, -769.045 )
+scale = Vector2( 20, 15 )
+
+[node name="Pickable" type="Node" parent="."]
+
+[node name="Crate" parent="Pickable" groups=[
 "pickable",
 ] instance=ExtResource( 6 )]
-position = Vector2( -1520.78, 23.2627 )
+position = Vector2( -5325.61, -132.051 )
 z_as_relative = false
 input_pickable = true
+collision_layer = 2
+collision_mask = 2
 mass = 120.0
 
-[node name="Fence" type="Sprite" parent="Environment"]
-position = Vector2( 3073.64, -409.696 )
-z_index = -4
-texture = ExtResource( 22 )
-region_enabled = true
-region_rect = Rect2( 0, 1, 15500, 780 )
-
-[node name="Road" type="Sprite" parent="Environment"]
-light_mask = 3
-material = SubResource( 6 )
-position = Vector2( -24.6379, 92.6248 )
-scale = Vector2( 1, 0.943857 )
-z_index = -1
-texture = ExtResource( 27 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 21695, 250 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Road"]
-position = Vector2( -859.793, 1915.78 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Road/StaticBody2D"]
-position = Vector2( 54.6433, -1913.25 )
-scale = Vector2( 3, 1 )
-shape = SubResource( 7 )
-
-[node name="Dirt" type="Sprite" parent="Environment"]
-light_mask = 2
-position = Vector2( -13.4731, 573.105 )
-texture = ExtResource( 26 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 21675, 730 )
-
-[node name="Car" type="Sprite" parent="Environment"]
-material = SubResource( 8 )
-position = Vector2( 1391.17, -173.358 )
-z_index = -1
-texture = ExtResource( 20 )
+[node name="Ball" parent="Pickable" instance=ExtResource( 14 )]
+position = Vector2( 12569.5, -42.2125 )
+input_pickable = true
+collision_layer = 2
+collision_mask = 2

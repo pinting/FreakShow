@@ -1,16 +1,13 @@
 extends Node2D
 
-# Size of the detect interval
-export var DETECT_THRESHOLD = 10
-
 # Start the train from X set in Editor minus this
 export var START_FROM = 15000
 
 # Speed to move on the X axis
 export var SPEED = 20
 
-# Destory the rain after this X + TriggerPoint.X
-export var DESTROY_AFTER = 15000
+# Destory the train from X set in Editor plus this
+export var STOP_AFTER = 15000
 
 # Amplitude of the shake (Y axis)
 export var SHAKE_AMP = 0.1
@@ -21,8 +18,6 @@ export var SHAKE_COUNT = 15
 # Difference in rhythem per train
 export var RHYTHM_DIFF = 0.33
 
-onready var trigger_point = $TriggerPoint
-
 onready var train_00 = $Train00
 onready var audio_stream_00 = $Train00/AudioStreamPlayer2D
 
@@ -32,21 +27,34 @@ onready var audio_stream_01 = $Train01/AudioStreamPlayer2D
 onready var train_02 = $Train02
 onready var audio_stream_02 = $Train02/AudioStreamPlayer2D
 
-var started = false
-var current_second = 0
+var _started = false
+var _current_second = 0
+var _base_position = Vector2(0, 0)
+
+func _ready():
+	visible = false
 
 func start():
+	_base_position = get_global_position()
+	
 	position.x -= START_FROM
 	visible = true
-	started = true
+	_started = true
 	
-	if not Global.DEBUG:
+	if not Global.NO_SOUND:
 		audio_stream_00.play()
 		audio_stream_01.play()
 		audio_stream_02.play()
 
-func move():
-	var s = current_second
+func _process(delta):
+	var self_position = get_global_position()
+	
+	if not _started:
+		return
+	
+	_current_second += delta
+
+	var s = _current_second
 	var m = SHAKE_AMP
 	var c = SHAKE_COUNT
 	
@@ -56,21 +64,6 @@ func move():
 	
 	position.x += SPEED
 
-func _ready():
-	visible = false
-
-func _process(delta):
-	var player_position = Global.player_position
-	var trigger_position = trigger_point.get_global_position()
-	var self_position = get_global_position()
-	
-	current_second += delta
-	
-	if not started && abs(trigger_position.x - player_position.x) < DETECT_THRESHOLD:
-		start()
-	
-	if started:
-		move()
-	
-		if abs(trigger_position.x - self_position.x) > DESTROY_AFTER:
-			get_parent().remove_child(self)
+	if abs(_base_position.x - self_position.x) > STOP_AFTER:
+		_started = false
+		visible = false

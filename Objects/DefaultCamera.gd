@@ -14,7 +14,7 @@ func _on_Camera2D_draw():
 	
 	zoom = Vector2(max_scale, max_scale)
  
-func _process(delta):
+func _process(_delta):
 	if is_current():
 		Global.current_camera = self
 		

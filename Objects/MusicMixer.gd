@@ -171,7 +171,7 @@ func _process(delta):
 		if _mixing:
 			if slave_player.volume_db < MAX_VOLUME:
 				slave_player.volume_db += volume_diff * (delta / next_part.in_duration)
-				Global.debug_if_integer(diff_to_start, str("slave fade in ", slave_player.volume_db))
+				Global.debug_if_integer(diff_to_end, str("slave fade in ", slave_player.volume_db))
 			elif _break_loop_now or diff_to_end < 0:
 				_finish_mixing(next_part_index)
 
@@ -196,7 +196,3 @@ func _finish_mixing(next_part_index):
 	_break_loop = false
 	_break_loop_now = false
 	_mixing = false
-
-func set_pitch_scale(value):
-	master_player.pitch_scale = value
-	slave_player.pitch_scale = value

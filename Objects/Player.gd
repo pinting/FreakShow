@@ -53,11 +53,14 @@ var current_velocity = Vector2(0, 0)
 var current_max_speed = MAX_SPEED
 var current_acceleration = ACCELERATION
 var current_animation_speed = ANIMATION_SPEED
+var crouching = false
 
 func _ready():
 	Global.player_position = get_global_position()
 
 func _physics_process(delta):
+	crouching = Input.is_action_pressed("crouch")
+	
 	var direction = _get_direction()
 	
 	if direction.x != 0 || current_velocity.x != 0:
@@ -124,20 +127,22 @@ func _calculate_next_velocity(delta, direction):
 	return next_velocity
 
 func _get_next_animation(direction):
-	var next_animation = "stand"
+	var next_animation = "stand_still"
 	var freeze = false
 	
 	if is_on_floor():
 		if abs(current_velocity.x) > WALK_THRESHOLD:
 			if not direction.x:
-				next_animation = "walk_to_stand"
+				next_animation = "move_to_still"
 			else:
-				next_animation = "walk"
+				next_animation = "move"
 		else:
 			if direction.x:
-				next_animation = "stand_to_walk"
+				next_animation = "still_to_move"
 			else:
-				next_animation = "stand"
+				next_animation = "still"
+				
+		next_animation = ("crouch" if crouching else "stand") + "_" + next_animation
 	else:
 		if current_velocity.y > 0:
 			next_animation = "jump"

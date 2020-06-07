@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Objects/Player.gd" type="Script" id=1]
-[ext_resource path="res://Animations/Rabit00.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Animations/Rabbit00.tres" type="SpriteFrames" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -16,7 +16,7 @@ polygon = PoolVector2Array( 186.604, -127.041, 224.278, -161.39, 312.882, -160.0
 material = SubResource( 1 )
 position = Vector2( -0.811218, -2.12614 )
 frames = ExtResource( 2 )
-animation = "a_stand"
+animation = "a_stand_still"
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]

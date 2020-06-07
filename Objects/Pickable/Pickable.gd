@@ -4,7 +4,7 @@ signal clicked
 
 var held = false
 
-func _input_event(viewport, event, shape_idx):
+func _input_event(viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			emit_signal("clicked", self)

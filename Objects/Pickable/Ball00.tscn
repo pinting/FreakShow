@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Objects/Pickable/Pickable.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Environmnent/Ball00.png" type="Texture" id=2]
+
+[node name="Ball00" type="RigidBody2D" groups=[
+"pickable",
+]]
+position = Vector2( 8887.22, 1.52717 )
+mass = 100.0
+gravity_scale = 2.0
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 1.39941, -0.302296 )
+polygon = PoolVector2Array( -36.1797, -55.1901, -17.8877, -62.2113, 4.10059, -65.1677, 27.9355, -61.1027, 48.4443, -46.6908, 62.1172, -27.29, 66.1826, 0.24053, 58.9766, 30.3578, 46.043, 47.9109, 26.457, 60.1056, 3.73047, 65.0944, -21.3984, 63.9858, -38.9512, 53.2692, -53.917, 39.4115, -64.8184, 18.5326, -66.2969, -4.37869, -60.3838, -24.7033, -50.9609, -42.4411 )

@@ -1,18 +1,21 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Floor01.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Building05.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Wall00.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Environmnent/Door02.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Environmnent/Sign00.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/Sign04.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Environmnent/Stairs00.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Environmnent/Foot01.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Environmnent/Lamp02.png" type="Texture" id=8]
+[ext_resource path="res://Objects/Environment/Lamp02.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Environmnent/Pillar00.png" type="Texture" id=9]
 [ext_resource path="res://Objects/Environment/Light00.tscn" type="PackedScene" id=10]
 
 [sub_resource type="OccluderPolygon2D" id=1]
-polygon = PoolVector2Array( -755.046, 358.611, -746.624, -351.282, 739.821, -348.393, 736.839, 363.904, 842.832, 363.943, 842.994, -4641.98, -2294.13, -4638.31, -2280.3, 352.482, -2280.3, 541.701, 843.484, 548.341, 844.456, 363.771, 739.819, 358.83 )
+polygon = PoolVector2Array( -753.59, 407.076, -746.624, -351.282, 711.923, -347.36, 712.603, 404.682, 848.141, 405.235, 842.994, -4641.98, -2294.13, -4638.31, -2280.3, 352.482, -2280.3, 541.701, 843.484, 548.341, 847.565, 404.928, 713.626, 406.32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 738.009, 19.4386 )
 
 [node name="Building00" type="Sprite"]
 light_mask = 2
@@ -20,19 +23,34 @@ position = Vector2( -5519.84, -2502.02 )
 z_index = -1
 texture = ExtResource( 2 )
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2( 720.639, 2116.56 )
+scale = Vector2( 1, 0.937116 )
+occluder = SubResource( 1 )
+
+[node name="BuildingBody" type="StaticBody2D" parent="."]
+position = Vector2( 720.639, 2117.47 )
+scale = Vector2( 1, 0.937116 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BuildingBody"]
+position = Vector2( 343.026, -107.12 )
+polygon = PoolVector2Array( -1092.41, 496.057, 501.529, 500.603, 1294.23, 646.725, -2634.42, 678.054, -2636.08, -4821.08, 511.55, -4817.7, 504.476, -240.495, -1091.79, -245.218 )
+
+[node name="GroundForPickable" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundForPickable"]
+position = Vector2( 710.789, 2472.7 )
+shape = SubResource( 2 )
+
 [node name="Stairs" type="Sprite" parent="."]
 position = Vector2( 1962.3, 2483.77 )
 scale = Vector2( 0.830447, 0.830447 )
 z_index = 2
 texture = ExtResource( 6 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Stairs"]
-position = Vector2( 2259.74, 168.675 )
-scale = Vector2( 6.73623, 0.673623 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stairs/StaticBody2D"]
-position = Vector2( -0.466919, 154.201 )
-polygon = PoolVector2Array( -405.979, -400.198, -282.76, -254.548, -405.835, -265.687 )
 
 [node name="Inside" type="Sprite" parent="."]
 position = Vector2( 720.639, 2117.47 )
@@ -42,17 +60,13 @@ texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1500, 706 )
 
-[node name="Lamp" type="Sprite" parent="Inside"]
-light_mask = 2
-position = Vector2( -73.8079, -301.684 )
-scale = Vector2( 0.9, 0.9 )
+[node name="Lamp" parent="Inside" instance=ExtResource( 8 )]
+position = Vector2( -73.6113, -294.089 )
 z_index = 1
-texture = ExtResource( 8 )
-region_rect = Rect2( 100, 10, 537, 654 )
 
 [node name="Light" parent="Inside/Lamp" instance=ExtResource( 10 )]
-position = Vector2( 5.92773, 40.3459 )
-scale = Vector2( 1.11111, 1.11924 )
+position = Vector2( 5.13818, 28.7161 )
+scale = Vector2( 0.999999, 1.00732 )
 
 [node name="Pillar" type="Sprite" parent="Inside"]
 position = Vector2( 779.661, 28.0104 )
@@ -61,17 +75,8 @@ z_index = 2
 texture = ExtResource( 9 )
 
 [node name="Door" type="Sprite" parent="Inside"]
-position = Vector2( -66.5974, 36.3538 )
+position = Vector2( -76.5974, 36.3538 )
 texture = ExtResource( 4 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Inside"]
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Inside/StaticBody2D"]
-occluder = SubResource( 1 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Inside/StaticBody2D"]
-position = Vector2( 343.026, -107.12 )
-polygon = PoolVector2Array( -1090.02, 504.079, 501.529, 500.603, 502.733, 680.608, -2634.42, 678.054, -2636.08, -4821.08, 511.55, -4817.7, 499.415, -223.995, -1089.73, -226.049 )
 
 [node name="Sign" type="Sprite" parent="Inside"]
 position = Vector2( 460.821, -148.753 )
