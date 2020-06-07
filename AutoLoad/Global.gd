@@ -7,7 +7,7 @@ const RESOLUTION = Vector2(1920, 1080)
 const CAMERA_ZOOM = Vector2(2, 2)
 
 # Enable debug messages
-const DEBUG = false
+const DEBUG = true
 
 # Disable sounds
 const NO_SOUNDS = false

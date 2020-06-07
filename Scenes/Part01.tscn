@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Objects/Environment/Building01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Environment/Building00.tscn" type="PackedScene" id=2]
@@ -16,7 +16,7 @@
 [ext_resource path="res://Objects/Pickable/Ball00.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/BackgroundTrain.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Assets/Environmnent/Building08.png" type="Texture" id=16]
-[ext_resource path="res://Objects/Environment/Lamp00.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Objects/Environment/Building03.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=20]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
@@ -51,9 +51,6 @@ size = Vector2( 10000, 2000 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 30000, 20 )
 
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 30.2461, 595.944 )
-
 [sub_resource type="CanvasItemMaterial" id=9]
 
 [node name="Part01" type="Node2D"]
@@ -78,7 +75,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 28 )]
-position = Vector2( -4874.23, -302.971 )
+position = Vector2( 15592.7, -312.161 )
 scale = Vector2( 0.7, 0.7 )
 z_index = 1
 
@@ -121,7 +118,7 @@ scale = Vector2( 1, 0.943857 )
 z_index = -1
 texture = ExtResource( 27 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 35000, 250 )
+region_rect = Rect2( 0, 0, 50000, 250 )
 
 [node name="GroundForAll" type="StaticBody2D" parent="Environment/Road"]
 position = Vector2( 0, 1915.78 )
@@ -131,14 +128,6 @@ collision_mask = 15
 [node name="Bottom" type="CollisionShape2D" parent="Environment/Road/GroundForAll"]
 position = Vector2( 54.6433, -1913.25 )
 shape = SubResource( 7 )
-
-[node name="LeftEnd" type="CollisionShape2D" parent="Environment/Road/GroundForAll"]
-position = Vector2( -17525.8, -2490.26 )
-shape = SubResource( 8 )
-
-[node name="RightEnd" type="CollisionShape2D" parent="Environment/Road/GroundForAll"]
-position = Vector2( 17529.6, -2490.27 )
-shape = SubResource( 8 )
 
 [node name="GroundForPickable" type="StaticBody2D" parent="Environment/Road"]
 position = Vector2( 0, 1915.78 )
@@ -154,14 +143,14 @@ light_mask = 2
 position = Vector2( 59.2303, 573.84 )
 texture = ExtResource( 26 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 35000, 730 )
+region_rect = Rect2( 0, 0, 50000, 730 )
 
 [node name="Fence" type="Sprite" parent="Environment"]
-position = Vector2( 59.2303, -408.974 )
+position = Vector2( 4265.8, -403.631 )
 z_index = -4
 texture = ExtResource( 22 )
 region_enabled = true
-region_rect = Rect2( 0, 1, 30000, 780 )
+region_rect = Rect2( 0, 1, 20000, 780 )
 
 [node name="BackgroundTrain" parent="Environment" instance=ExtResource( 15 )]
 position = Vector2( -4041.36, -815.776 )
@@ -207,17 +196,9 @@ scale = Vector2( 1, 1 )
 z_index = 1
 
 [node name="Hoop" type="Sprite" parent="Environment"]
-position = Vector2( 16551.3, -492.83 )
+position = Vector2( 16822.9, -498.997 )
 z_index = -1
 texture = ExtResource( 13 )
-
-[node name="Lamp" parent="Environment/Hoop" instance=ExtResource( 17 )]
-position = Vector2( 139.316, -178.558 )
-scale = Vector2( 1, 0.943857 )
-
-[node name="Light" parent="Environment/Hoop/Lamp" instance=ExtResource( 7 )]
-position = Vector2( -487.555, 751.631 )
-scale = Vector2( 1.53996, 0.550927 )
 
 [node name="Overlay" type="Sprite" parent="Environment/Hoop"]
 position = Vector2( -1.49023, -292.386 )
@@ -229,27 +210,29 @@ position = Vector2( 1.49023, 292.386 )
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionPolygon00" type="CollisionPolygon2D" parent="Environment/Hoop/Overlay/HoopBody"]
+[node name="LeftSide" type="CollisionPolygon2D" parent="Environment/Hoop/Overlay/HoopBody"]
 position = Vector2( -1.44922, 0.483215 )
 polygon = PoolVector2Array( -85.7197, -312.615, -80.5654, -315.353, -63.8135, -275.407 )
 
-[node name="CollisionPolygon01" type="CollisionPolygon2D" parent="Environment/Hoop/Overlay/HoopBody"]
+[node name="RightSide" type="CollisionPolygon2D" parent="Environment/Hoop/Overlay/HoopBody"]
 position = Vector2( 176.644, 16.9705 )
 scale = Vector2( 1.15769, 1.03912 )
 polygon = PoolVector2Array( -83.5967, -319.037, -79.2837, -314.852, -99.0415, -279.355 )
 
+[node name="Building03" parent="Environment" instance=ExtResource( 17 )]
+
 [node name="Trigger" type="Node" parent="."]
 
-[node name="TriggerPoint00_Train" type="Node2D" parent="Trigger"]
+[node name="TriggerPoint00" type="Node2D" parent="Trigger"]
 position = Vector2( 3212.52, -174.784 )
 scale = Vector2( 20, 15 )
 
-[node name="TriggerPoint01_Music" type="Node2D" parent="Trigger"]
+[node name="TriggerPoint01" type="Node2D" parent="Trigger"]
 position = Vector2( 14924.4, -135.376 )
 scale = Vector2( 20, 15 )
 
-[node name="TriggerPoint02_Music" type="Node2D" parent="Trigger"]
-position = Vector2( 16547.4, -769.045 )
+[node name="TriggerPoint02" type="Node2D" parent="Trigger"]
+position = Vector2( 16549.8, -789.092 )
 scale = Vector2( 20, 15 )
 
 [node name="Pickable" type="Node" parent="."]
@@ -266,7 +249,7 @@ mass = 120.0
 can_sleep = false
 
 [node name="Ball" parent="Pickable" instance=ExtResource( 14 )]
-position = Vector2( 12569.5, -42.2125 )
+position = Vector2( 13433.1, -20.3397 )
 input_pickable = true
 collision_layer = 2
 collision_mask = 2

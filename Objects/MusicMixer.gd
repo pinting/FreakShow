@@ -35,6 +35,7 @@ var _playback_prev_diff = 0
 var _virtual_position = 0
 var _break_loop = false # Wait until the end
 var _break_loop_now = false # Break it ASAP
+var _forced_next = null
 var _mixing = false
 
 func _ready():
@@ -74,6 +75,8 @@ func add_part(start, end, loop, in_duration, out_duration, offset = 0):
 	}
 	
 	parts.append(new_part)
+	
+	return len(parts) - 1
 
 func play():
 	if len(parts) == 0:
@@ -91,19 +94,27 @@ func play():
 	_mixing = false
 
 func get_next():
-	if len(parts) > _current_part_index + 1:
+	var current_part = parts[_current_part_index]
+	
+	if _forced_next != null:
+		assert(len(parts) > _forced_next)
+		return _forced_next
+	elif current_part.loop and not _break_loop:
+		return _current_part_index
+	elif len(parts) > _current_part_index + 1:
 		return _current_part_index + 1
 	elif LOOP:
 		return 0
 	else:
 		return -1
 
-func next():
-	_break_loop = true
-	
-func next_now():
-	_break_loop = true
+func force_next(value):
+	if _mixing:
+		_finish_mixing(get_next())
+		
+	_forced_next = value
 	_break_loop_now = true
+	_break_loop = true
 
 func _process(delta):
 	if stopped:
@@ -131,7 +142,7 @@ func _process(delta):
 	var volume_diff = abs(MAX_VOLUME - MIN_VOLUME)
 	
 	# Fade in the current part 
-	if diff_to_start < 0:
+	if not _break_loop_now and diff_to_start < 0:
 		if abs(diff_to_start) < current_part.in_duration:
 			master_player.volume_db += volume_diff * (delta / current_part.in_duration)
 			Global.debug_if_integer(diff_to_start, str("master fade in ", master_player.volume_db))
@@ -148,7 +159,7 @@ func _process(delta):
 		Global.debug_if_integer(diff_to_start, "master min volume")
 	
 	# Determinate if the current or the next part should be played as next
-	var next_part_index = get_next() if not current_part.loop or _break_loop else _current_part_index
+	var next_part_index = get_next()
 	
 	# If no next part is present and we are close to the end, stop
 	if next_part_index == -1:
@@ -201,4 +212,5 @@ func _finish_mixing(next_part_index):
 	_playback_prev_position = _virtual_position
 	_break_loop = false
 	_break_loop_now = false
+	_forced_next = null
 	_mixing = false
