@@ -4,7 +4,7 @@ extends Node2D
 export var START_FROM = 15000
 
 # Speed to move on the X axis
-export var SPEED = 20
+export var SPEED = 25
 
 # Destory the train from X set in Editor plus this
 export var STOP_AFTER = 50000
@@ -58,9 +58,9 @@ func _process(delta):
 	var m = SHAKE_AMP
 	var c = SHAKE_COUNT
 	
-	train_00.position.y += m * sin(c * s + 0 * RHYTHM_DIFF)
-	train_01.position.y += m * sin(c * s + 1 * RHYTHM_DIFF)
-	train_02.position.y += m * sin(c * s + 2 * RHYTHM_DIFF)
+	train_00.position.y += m * sin(c * s + 0 * RHYTHM_DIFF) * randf()
+	train_01.position.y += m * sin(c * s + 1 * RHYTHM_DIFF) * randf()
+	train_02.position.y += m * sin(c * s + 2 * RHYTHM_DIFF) * randf()
 	
 	position.x += SPEED
 

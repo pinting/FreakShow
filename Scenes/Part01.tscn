@@ -11,11 +11,10 @@
 [ext_resource path="res://Objects/Environment/Sky00.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Music/Cluster_GrossesWasser.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Environmnent/Hoop00_Overlay.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Environmnent/Hoop00.png" type="Texture" id=13]
+[ext_resource path="res://Objects/Environment/Hoop00.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Environment/Building02.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Objects/Pickable/Ball00.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/BackgroundTrain.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/Environmnent/Building08.png" type="Texture" id=16]
 [ext_resource path="res://Objects/Environment/Building03.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=20]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
@@ -53,6 +52,9 @@ extents = Vector2( 30000, 20 )
 
 [sub_resource type="CanvasItemMaterial" id=9]
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 74.0137, 2552.49 )
+
 [node name="Part01" type="Node2D"]
 position = Vector2( 59.2303, 0.734743 )
 script = ExtResource( 8 )
@@ -75,7 +77,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 28 )]
-position = Vector2( 15592.7, -312.161 )
+position = Vector2( -4974.91, -304.654 )
 scale = Vector2( 0.7, 0.7 )
 z_index = 1
 
@@ -186,40 +188,23 @@ position = Vector2( 1450.4, -172.623 )
 z_index = -1
 texture = ExtResource( 20 )
 
-[node name="Building02" type="Sprite" parent="Environment"]
-position = Vector2( 14544.2, -1355.51 )
-texture = ExtResource( 16 )
+[node name="Building02" parent="Environment" instance=ExtResource( 13 )]
 
 [node name="Barrel" parent="Environment" instance=ExtResource( 5 )]
 position = Vector2( 13731.7, 39.1575 )
 scale = Vector2( 1, 1 )
 z_index = 1
 
-[node name="Hoop" type="Sprite" parent="Environment"]
-position = Vector2( 16822.9, -498.997 )
-z_index = -1
-texture = ExtResource( 13 )
-
-[node name="Overlay" type="Sprite" parent="Environment/Hoop"]
-position = Vector2( -1.49023, -292.386 )
-z_index = 2
-texture = ExtResource( 12 )
-
-[node name="HoopBody" type="StaticBody2D" parent="Environment/Hoop/Overlay"]
-position = Vector2( 1.49023, 292.386 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="LeftSide" type="CollisionPolygon2D" parent="Environment/Hoop/Overlay/HoopBody"]
-position = Vector2( -1.44922, 0.483215 )
-polygon = PoolVector2Array( -85.7197, -312.615, -80.5654, -315.353, -63.8135, -275.407 )
-
-[node name="RightSide" type="CollisionPolygon2D" parent="Environment/Hoop/Overlay/HoopBody"]
-position = Vector2( 176.644, 16.9705 )
-scale = Vector2( 1.15769, 1.03912 )
-polygon = PoolVector2Array( -83.5967, -319.037, -79.2837, -314.852, -99.0415, -279.355 )
+[node name="Hoop" parent="Environment" instance=ExtResource( 12 )]
 
 [node name="Building03" parent="Environment" instance=ExtResource( 17 )]
+
+[node name="HiddenWall" type="StaticBody2D" parent="Environment/Building03"]
+position = Vector2( -4595.7, -967.434 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Building03/HiddenWall"]
+position = Vector2( 3714.87, -1087.35 )
+shape = SubResource( 10 )
 
 [node name="Trigger" type="Node" parent="."]
 
@@ -232,7 +217,7 @@ position = Vector2( 14924.4, -135.376 )
 scale = Vector2( 20, 15 )
 
 [node name="TriggerPoint02" type="Node2D" parent="Trigger"]
-position = Vector2( 16549.8, -789.092 )
+position = Vector2( 16821.7, -795.479 )
 scale = Vector2( 20, 15 )
 
 [node name="Pickable" type="Node" parent="."]
@@ -249,7 +234,7 @@ mass = 120.0
 can_sleep = false
 
 [node name="Ball" parent="Pickable" instance=ExtResource( 14 )]
-position = Vector2( 13433.1, -20.3397 )
+position = Vector2( 12567.6, -83.0794 )
 input_pickable = true
 collision_layer = 2
 collision_mask = 2

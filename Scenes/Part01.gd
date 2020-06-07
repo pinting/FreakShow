@@ -19,7 +19,9 @@ onready var black_screen = $BlackScreen
 onready var music_mixer = $MusicMixer
 onready var wind_sound = $WindSound
 onready var player = $Player
+
 onready var ball = $Pickable/Ball
+
 onready var background_train = $Environment/BackgroundTrain
 
 onready var trigger_point_00 = $Trigger/TriggerPoint00
@@ -74,6 +76,8 @@ func _trigger_point_check(delta):
 		
 		var xd = abs(trigger.x - object.x)
 		var yd = abs(trigger.y - object.y)
+		
+		print(xd, "-", yd)
 		
 		if xd < DETECT_THRESHOLD and yd < DETECT_THRESHOLD:
 			ball_is_stuck_counter -= delta
