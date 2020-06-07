@@ -77,8 +77,6 @@ func _trigger_point_check(delta):
 		var xd = abs(trigger.x - object.x)
 		var yd = abs(trigger.y - object.y)
 		
-		print(xd, "-", yd)
-		
 		if xd < DETECT_THRESHOLD and yd < DETECT_THRESHOLD:
 			ball_is_stuck_counter -= delta
 			
