@@ -84,6 +84,7 @@ z_index = 1
 
 [node name="Camera2D" parent="Player" instance=ExtResource( 23 )]
 position = Vector2( 6.06445, -312.324 )
+smoothing_speed = 0.35
 
 [node name="Sky" parent="." instance=ExtResource( 9 )]
 position = Vector2( -5006.46, -761.876 )
@@ -262,9 +263,11 @@ input_pickable = true
 collision_layer = 2
 collision_mask = 2
 mass = 120.0
+can_sleep = false
 
 [node name="Ball" parent="Pickable" instance=ExtResource( 14 )]
 position = Vector2( 12569.5, -42.2125 )
 input_pickable = true
 collision_layer = 2
 collision_mask = 2
+can_sleep = false

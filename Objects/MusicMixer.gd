@@ -172,8 +172,14 @@ func _process(delta):
 			if slave_player.volume_db < MAX_VOLUME:
 				slave_player.volume_db += volume_diff * (delta / next_part.in_duration)
 				Global.debug_if_integer(diff_to_end, str("slave fade in ", slave_player.volume_db))
-			elif _break_loop_now or diff_to_end < 0:
+			elif diff_to_end < 0:
 				_finish_mixing(next_part_index)
+			elif _break_loop_now:
+				if master_player.volume_db > MIN_VOLUME:
+					master_player.volume_db -= volume_diff * (delta / current_part.out_duration)
+					Global.debug_if_integer(diff_to_start, str("master fade out ", master_player.volume_db))
+				else:
+					_finish_mixing(next_part_index)
 
 func _finish_mixing(next_part_index):
 	Global.debug(str("new master index ", next_part_index))

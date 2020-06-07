@@ -7,7 +7,7 @@ export var START_FROM = 15000
 export var SPEED = 20
 
 # Destory the train from X set in Editor plus this
-export var STOP_AFTER = 15000
+export var STOP_AFTER = 50000
 
 # Amplitude of the shake (Y axis)
 export var SHAKE_AMP = 0.1
@@ -41,7 +41,7 @@ func start():
 	visible = true
 	_started = true
 	
-	if not Global.NO_SOUND:
+	if not Global.NO_SOUNDS:
 		audio_stream_00.play()
 		audio_stream_01.play()
 		audio_stream_02.play()
@@ -67,3 +67,7 @@ func _process(delta):
 	if abs(_base_position.x - self_position.x) > STOP_AFTER:
 		_started = false
 		visible = false
+		
+		audio_stream_00.stop()
+		audio_stream_01.stop()
+		audio_stream_02.stop()

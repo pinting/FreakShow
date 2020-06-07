@@ -19,6 +19,7 @@ onready var player = $Player
 onready var ball = $Pickable/Ball
 onready var background_train = $Environment/BackgroundTrain
 
+onready var triggers = $Trigger
 onready var trigger_point_00_train = $Trigger/TriggerPoint00_Train
 onready var trigger_point_01_music = $Trigger/TriggerPoint01_Music
 onready var trigger_point_02_music = $Trigger/TriggerPoint02_Music
@@ -27,7 +28,7 @@ var current_second = 0
 
 func _ready():
 	music_mixer.add_part(0, 3 * 60 + 20, true, 0, 10, -30)
-	music_mixer.add_part(5 * 60 + 33, 7 * 60 + 27, true, 10, 10, -30)
+	music_mixer.add_part(5 * 60 + 36, 7 * 60 + 27, true, 10, 10, -30)
 	music_mixer.add_part(8 * 60 + 21, 9 * 60 + 56.5, true, 5, 5, -10)
 	
 	if not Global.NO_INTRO:
@@ -41,28 +42,28 @@ func _ready():
 		music_mixer.play()
 
 func _trigger_point_check():
-	if trigger_point_00_train:
+	if trigger_point_00_train.visible:
 		var p = trigger_point_00_train.position
 		
 		if(abs(p.x - player.position.x) < DETECT_THRESHOLD):
-			get_parent().remove_child(trigger_point_00_train)
+			trigger_point_00_train.visible = false
 			background_train.start()
 	
-	if trigger_point_01_music:
+	if trigger_point_01_music.visible:
 		var p = trigger_point_01_music.position
 		
 		if abs(p.x - player.position.x) < DETECT_THRESHOLD:
-			get_parent().remove_child(trigger_point_01_music)
+			trigger_point_01_music.visible = false
 			music_mixer.next_now()
 	
-	elif trigger_point_02_music:
+	elif trigger_point_02_music.visible:
 		var p = trigger_point_02_music.position
 		
 		var x_diff = abs(p.x - ball.position.x)
 		var y_diff = abs(p.y - ball.position.y)
 		
 		if(x_diff < DETECT_THRESHOLD and y_diff < DETECT_THRESHOLD):
-			get_parent().remove_child(trigger_point_02_music)
+			trigger_point_02_music.visible = false
 			music_mixer.next_now()
 
 func _intro(delta):

@@ -2,16 +2,16 @@ class_name Player
 extends KinematicBody2D
 
 # Max velocity
-export var MAX_SPEED = 308
+export var MAX_SPEED = 280
 
 # Max acceleration
-export var ACCELERATION = 1320
+export var ACCELERATION = 6000
 
 # Jump force
 export var JUMP_FORCE = 400
 
 # Friction on the platform (only X axis)
-export var FRICTION = 0.05
+export var FRICTION = 0.001
 
 # Gravity (only Y axis)
 export var GRAVITY = 300
@@ -20,13 +20,14 @@ export var GRAVITY = 300
 export var SPRINT_SCALE = 1.35
 
 # Velocity limit
-export var WALK_THRESHOLD = 0.1
+export var WALK_THRESHOLD = 10
 
 # Speed of the animation (sprint modifies it)
 export var ANIMATION_SPEED = 1
 
 # Defines how many waves (100% to 0% to 100% in walk acceleration) happen in a second 
-export var WALK_WAVE_COUNT = 0.5
+export var WALK_WAVE_COUNT = 1.25
+export var WALK_WAVE_OFFSET = PI / 2
 
 # Prefix of the front side
 export var SIDE_A_PREFIX = "a"
@@ -63,31 +64,31 @@ func _physics_process(delta):
 	
 	var direction = _get_direction()
 	
-	if direction.x != 0 || current_velocity.x != 0:
+	if current_velocity.x != 0:
 		var rad = WALK_WAVE_COUNT * current_second * current_animation_speed * PI
 		
-		current_acceleration = ACCELERATION * abs(sin(rad))
+		current_acceleration = ACCELERATION * abs(sin(rad + WALK_WAVE_OFFSET))
 		current_second += delta
 	
 	var snap_vector = -1 * FLOOR_NORMAL * FLOOR_DETECT_DISTANCE if direction.y == 0 else Vector2.ZERO
-	var on_platform = platform_detector_00.is_colliding() || platform_detector_01.is_colliding()
+	var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 	var next_velocity = _calculate_next_velocity(delta, direction)
 	
 	current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, FLOOR_NORMAL, on_platform, 4, 0.9, false)
 	
-	if is_on_floor() && direction.x != 0:
+	if is_on_floor() and direction.x != 0:
 		animated_sprite.scale.x = abs(animated_sprite.scale.x) * (1 if direction.x > 0 else -1)
 		animated_sprite.scale.x = abs(animated_sprite.scale.x) * (1 if direction.x > 0 else -1)
 		animation_prefix = SIDE_A_PREFIX if direction.x > 0 else SIDE_B_PREFIX
 	
 	var next_animation = _get_next_animation(direction)
 	
-	_set_animation(next_animation.name)
-	
 	if next_animation.freeze:
 		animated_sprite.speed_scale = 0
 	else:
 		animated_sprite.speed_scale = current_animation_speed
+	
+	_set_animation(next_animation.name)
 	
 	Global.player_position = get_global_position()
 
@@ -133,12 +134,12 @@ func _get_next_animation(direction):
 	if is_on_floor():
 		if abs(current_velocity.x) > WALK_THRESHOLD:
 			if not direction.x:
-				next_animation = "move_to_still"
+				next_animation = "still_to_move"
 			else:
 				next_animation = "move"
 		else:
 			if direction.x:
-				next_animation = "still_to_move"
+				next_animation = "move_to_still"
 			else:
 				next_animation = "still"
 				
