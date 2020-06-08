@@ -13,6 +13,3 @@ mono_crash.*.json
 # Mac specific files
 .DS_Store
 */**/.DS_Store
-
-# Output directory
-out/

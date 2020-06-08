@@ -96,7 +96,7 @@ scale = Vector2( 2.5, 2.5 )
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 light_mask = 0
-color = Color( 0.137255, 0.137255, 0.137255, 1 )
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )

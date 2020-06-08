@@ -48,7 +48,7 @@
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_Move/Rabbit00_A_Stand_Move37.png" type="Texture" id=46]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_Still/Rabbit00_A_Stand_Still00.png" type="Texture" id=47]
 [ext_resource path="res://Assets/Characters/Rabbit00/B/Jump/Rabbit00_B_Jump00.png" type="Texture" id=48]
-[ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_Still/Rabbit00_B_Stand_still00.png" type="Texture" id=49]
+[ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_Still/Rabbit00_B_Stand_Still00.png" type="Texture" id=49]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove14.png" type="Texture" id=50]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove08.png" type="Texture" id=51]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove05.png" type="Texture" id=52]
@@ -389,9 +389,9 @@
 
 [resource]
 animations = [ {
-"frames": [ ExtResource( 279 ), ExtResource( 263 ), ExtResource( 280 ), ExtResource( 278 ), ExtResource( 281 ), ExtResource( 282 ), ExtResource( 270 ), ExtResource( 276 ), ExtResource( 277 ), ExtResource( 264 ), ExtResource( 265 ), ExtResource( 275 ), ExtResource( 266 ), ExtResource( 267 ), ExtResource( 269 ), ExtResource( 268 ), ExtResource( 271 ), ExtResource( 272 ), ExtResource( 273 ), ExtResource( 274 ), ExtResource( 283 ), ExtResource( 284 ) ],
+"frames": [ ExtResource( 49 ) ],
 "loop": false,
-"name": "a_crouch_still_to_move",
+"name": "b_stand_still",
 "speed": 30.0
 }, {
 "frames": [ ExtResource( 286 ) ],
@@ -399,14 +399,14 @@ animations = [ {
 "name": "b_crouch_still",
 "speed": 30.0
 }, {
+"frames": [ ExtResource( 279 ), ExtResource( 263 ), ExtResource( 280 ), ExtResource( 278 ), ExtResource( 281 ), ExtResource( 282 ), ExtResource( 270 ), ExtResource( 276 ), ExtResource( 277 ), ExtResource( 264 ), ExtResource( 265 ), ExtResource( 275 ), ExtResource( 266 ), ExtResource( 267 ), ExtResource( 269 ), ExtResource( 268 ), ExtResource( 271 ), ExtResource( 272 ), ExtResource( 273 ), ExtResource( 274 ), ExtResource( 283 ), ExtResource( 284 ) ],
+"loop": false,
+"name": "a_crouch_still_to_move",
+"speed": 30.0
+}, {
 "frames": [ ExtResource( 288 ), ExtResource( 296 ), ExtResource( 301 ), ExtResource( 287 ), ExtResource( 291 ), ExtResource( 306 ), ExtResource( 289 ), ExtResource( 294 ), ExtResource( 295 ), ExtResource( 302 ), ExtResource( 290 ), ExtResource( 293 ), ExtResource( 292 ), ExtResource( 297 ), ExtResource( 298 ), ExtResource( 299 ), ExtResource( 300 ), ExtResource( 303 ), ExtResource( 304 ), ExtResource( 305 ) ],
 "loop": false,
 "name": "b_crouch_still_to_move",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 49 ) ],
-"loop": false,
-"name": "b_stand_still",
 "speed": 30.0
 }, {
 "frames": [ ExtResource( 144 ), ExtResource( 137 ), ExtResource( 140 ), ExtResource( 138 ), ExtResource( 139 ), ExtResource( 141 ), ExtResource( 142 ), ExtResource( 143 ), ExtResource( 152 ), ExtResource( 158 ), ExtResource( 164 ), ExtResource( 167 ), ExtResource( 159 ) ],
