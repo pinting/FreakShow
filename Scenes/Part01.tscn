@@ -1,21 +1,23 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://Objects/Environment/Building01.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Objects/Environment/Building00.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Environment/House01.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Environment/House00.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sounds/Wind00.ogg" type="AudioStream" id=3]
-[ext_resource path="res://Objects/Environment/Lamp01.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Environment/StreetLamp00.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/Environment/Barrel00.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Pickable/Crate00.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Environment/Light01.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Environment/StreetLight00.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Part01.gd" type="Script" id=8]
 [ext_resource path="res://Objects/Environment/Sky00.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Music/Cluster_GrossesWasser.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Objects/Environment/Hoop00.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Objects/Environment/Building02.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Environmnent/Building08.png" type="Texture" id=13]
 [ext_resource path="res://Objects/Pickable/Ball00.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/BackgroundTrain.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Objects/Environment/Building03.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Objects/Environment/House02.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Objects/Environment/SideLight00.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Objects/Environment/SideLamp00.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=20]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
@@ -50,10 +52,13 @@ size = Vector2( 10000, 2000 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 30000, 20 )
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="CanvasItemMaterial" id=8]
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 74.0137, 2552.49 )
+
+[sub_resource type="PhysicsMaterial" id=10]
+bounce = 0.9
 
 [node name="Part01" type="Node2D"]
 position = Vector2( 59.2303, 0.734743 )
@@ -77,9 +82,9 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 28 )]
-position = Vector2( -4974.91, -304.654 )
+position = Vector2( -4869.37, -346.298 )
 scale = Vector2( 0.7, 0.7 )
-z_index = 1
+z_index = 2
 
 [node name="Camera2D" parent="Player" instance=ExtResource( 23 )]
 position = Vector2( 6.06445, -312.324 )
@@ -96,11 +101,13 @@ color = Color( 0.137255, 0.137255, 0.137255, 1 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
-[node name="WindSound" type="AudioStreamPlayer" parent="."]
+[node name="Sound" type="Node" parent="."]
+
+[node name="WindSound" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource( 3 )
 volume_db = -8.0
 
-[node name="MusicMixer" parent="." instance=ExtResource( 11 )]
+[node name="MusicMixer" parent="Sound" instance=ExtResource( 11 )]
 STREAM = ExtResource( 10 )
 
 [node name="Environment" type="Node" parent="."]
@@ -110,6 +117,7 @@ show_behind_parent = true
 material = SubResource( 4 )
 position = Vector2( 58.452, 97.433 )
 scale = Vector2( 10, 10 )
+z_index = 50
 texture = SubResource( 5 )
 
 [node name="Road" type="Sprite" parent="Environment"]
@@ -162,7 +170,8 @@ z_index = -5
 position = Vector2( -5457.28, -2480.18 )
 
 [node name="Building01" parent="Environment" instance=ExtResource( 1 )]
-position = Vector2( 1185.73, -2517.71 )
+position = Vector2( 1181.73, -2507.7 )
+z_index = -1
 
 [node name="Lamp00" parent="Environment" instance=ExtResource( 4 )]
 position = Vector2( 0, -710 )
@@ -179,32 +188,42 @@ scale = Vector2( 0.9, 0.9 )
 z_as_relative = false
 
 [node name="Light" parent="Environment/Lamp01" instance=ExtResource( 7 )]
-position = Vector2( -1182.14, 936.966 )
+position = Vector2( -1182.14, 913.627 )
 scale = Vector2( 3.67457, 1.10197 )
 
 [node name="Car" type="Sprite" parent="Environment"]
-material = SubResource( 9 )
-position = Vector2( 1450.4, -172.623 )
+material = SubResource( 8 )
+position = Vector2( 1452.35, -174.554 )
 z_index = -1
 texture = ExtResource( 20 )
 
-[node name="Building02" parent="Environment" instance=ExtResource( 13 )]
+[node name="Building02" type="Sprite" parent="Environment"]
+position = Vector2( 14821, -1326.98 )
+z_index = -1
+texture = ExtResource( 13 )
 
 [node name="Barrel" parent="Environment" instance=ExtResource( 5 )]
 position = Vector2( 13731.7, 39.1575 )
 scale = Vector2( 1, 1 )
-z_index = 1
+z_index = 3
 
 [node name="Hoop" parent="Environment" instance=ExtResource( 12 )]
 
-[node name="Building03" parent="Environment" instance=ExtResource( 17 )]
+[node name="Building03" parent="Environment" instance=ExtResource( 16 )]
+position = Vector2( 19164.3, -387.949 )
+
+[node name="Lamp" parent="Environment/Building03" instance=ExtResource( 19 )]
+position = Vector2( -733.645, -457.52 )
+
+[node name="Light" parent="Environment/Building03/Lamp" instance=ExtResource( 17 )]
+position = Vector2( -557.078, 466.713 )
 
 [node name="HiddenWall" type="StaticBody2D" parent="Environment/Building03"]
 position = Vector2( -4595.7, -967.434 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Building03/HiddenWall"]
 position = Vector2( 3714.87, -1087.35 )
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 
 [node name="Trigger" type="Node" parent="."]
 
@@ -234,8 +253,9 @@ mass = 120.0
 can_sleep = false
 
 [node name="Ball" parent="Pickable" instance=ExtResource( 14 )]
-position = Vector2( 12567.6, -83.0794 )
+position = Vector2( 12563.7, -22.2667 )
 input_pickable = true
 collision_layer = 2
 collision_mask = 2
+physics_material_override = SubResource( 10 )
 can_sleep = false

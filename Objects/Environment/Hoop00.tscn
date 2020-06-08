@@ -9,7 +9,7 @@ z_index = -1
 texture = ExtResource( 2 )
 
 [node name="Overlay" type="Sprite" parent="."]
-position = Vector2( -1.49023, -292.386 )
+position = Vector2( 0.330083, -287.013 )
 z_index = 2
 texture = ExtResource( 1 )
 

@@ -1,23 +1,25 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Objects/Player.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Rabbit00.tres" type="SpriteFrames" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-[node name="Player" type="KinematicBody2D"]
-script = ExtResource( 1 )
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 92.2406, 411.831 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( -243.499, -243.689 )
-polygon = PoolVector2Array( 186.604, -127.041, 224.278, -161.39, 312.882, -160.02, 335.263, -123.962, 293.277, -27.4882, 329.646, 239.684, 324.051, 652.332, 182.635, 652.195, 199.557, 429.922, 151.315, 247.758, 131.203, 10.3549, 154.971, -58.0625 )
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 163.599, 200.07 )
+
+[node name="Player" type="KinematicBody2D"]
+position = Vector2( -1.66553, -111.588 )
+script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
 position = Vector2( -0.811218, -2.12614 )
 frames = ExtResource( 2 )
-animation = "a_stand_still_to_move"
-frame = 26
+animation = "a_stand_still"
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
@@ -29,3 +31,12 @@ cast_to = Vector2( 0, 10 )
 position = Vector2( -59.5135, 408.771 )
 enabled = true
 cast_to = Vector2( 0, 10 )
+
+[node name="StandCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 4.35031, 81.4967 )
+shape = SubResource( 2 )
+
+[node name="CrouchCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 7.35227, 293.279 )
+shape = SubResource( 3 )
+disabled = true

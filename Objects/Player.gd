@@ -44,7 +44,8 @@ export var FLOOR_DETECT_DISTANCE = 20.0
 onready var platform_detector_00 = $PlatformDetector00
 onready var platform_detector_01 = $PlatformDetector01
 onready var animated_sprite = $AnimatedSprite
-onready var collision_polygon = $CollisionPolygon2D
+onready var stand_collision = $StandCollision
+onready var crouch_collision = $CrouchCollision
 
 # Set the default side
 var animation_prefix = SIDE_A_PREFIX
@@ -60,7 +61,7 @@ func _ready():
 	Global.player_position = get_global_position()
 
 func _physics_process(delta):
-	crouching = Input.is_action_pressed("crouch")
+	_check_crouch()
 	
 	var direction = _get_direction()
 	
@@ -78,7 +79,6 @@ func _physics_process(delta):
 	
 	if is_on_floor() and direction.x != 0:
 		animated_sprite.scale.x = abs(animated_sprite.scale.x) * (1 if direction.x > 0 else -1)
-		animated_sprite.scale.x = abs(animated_sprite.scale.x) * (1 if direction.x > 0 else -1)
 		animation_prefix = SIDE_A_PREFIX if direction.x > 0 else SIDE_B_PREFIX
 	
 	var next_animation = _get_next_animation(direction)
@@ -92,16 +92,22 @@ func _physics_process(delta):
 	
 	Global.player_position = get_global_position()
 
+func _check_crouch():
+	if Input.is_action_just_pressed("crouch"):
+		crouching = not crouching
+		stand_collision.disabled = not crouching
+		crouch_collision.disabled = crouching
+
 func _get_direction():
 	var right = Input.get_action_strength("move_right")
 	var left = Input.get_action_strength("move_left")
 	var jump = Input.is_action_just_pressed("jump")
 	var sprint = Input.is_action_pressed("sprint")
 	
+	var on_floor = is_on_floor()
 	var x = right - left
-	var y = -1 if is_on_floor() and jump else 0
-	
-	var speed_mod = SPRINT_SCALE if sprint else 1
+	var y = -1 if on_floor and jump and not crouching else 0
+	var speed_mod = SPRINT_SCALE if sprint and on_floor else 1
 	
 	current_max_speed = speed_mod * MAX_SPEED
 	current_acceleration = speed_mod * ACCELERATION
@@ -134,12 +140,12 @@ func _get_next_animation(direction):
 	if is_on_floor():
 		if abs(current_velocity.x) > WALK_THRESHOLD:
 			if not direction.x:
-				next_animation = "still_to_move"
+				next_animation = "move_to_still"
 			else:
 				next_animation = "move"
 		else:
 			if direction.x:
-				next_animation = "move_to_still"
+				next_animation = "still_to_move"
 			else:
 				next_animation = "still"
 				

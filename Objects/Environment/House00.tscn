@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Floor01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Building05.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Wall00.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Door02.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Sign04.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/Stairs00.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Foot01.png" type="Texture" id=7]
+[ext_resource path="res://Objects/Environment/RoomLamp00.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Environmnent/Pillar00.png" type="Texture" id=9]
+[ext_resource path="res://Objects/Environment/RoomLight00.tscn" type="PackedScene" id=10]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -753.59, 407.076, -746.624, -351.282, 711.923, -347.36, 712.603, 404.682, 848.141, 405.235, 842.994, -4641.98, -2294.13, -4638.31, -2280.3, 352.482, -2280.3, 541.701, 843.484, 548.341, 847.565, 404.928, 713.626, 406.32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 738.009, 19.4386 )
+
+[node name="Building00" type="Sprite"]
+light_mask = 2
+z_index = -1
+texture = ExtResource( 2 )
+
+[node name="LightOccluder" type="LightOccluder2D" parent="."]
+position = Vector2( 720.639, 2116.56 )
+scale = Vector2( 1, 0.937116 )
+occluder = SubResource( 1 )
+
+[node name="HouseBody" type="StaticBody2D" parent="."]
+position = Vector2( 720.639, 2117.47 )
+scale = Vector2( 1, 0.937116 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="Walls" type="CollisionPolygon2D" parent="HouseBody"]
+position = Vector2( 343.026, -107.12 )
+polygon = PoolVector2Array( -1092.41, 496.057, 501.529, 500.603, 1294.23, 646.725, -2634.42, 678.054, -2636.08, -4821.08, 511.55, -4817.7, 504.476, -240.495, -1091.79, -245.218 )
+
+[node name="GroundForPickable" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Ground" type="CollisionShape2D" parent="GroundForPickable"]
+position = Vector2( 710.789, 2472.7 )
+shape = SubResource( 2 )
+
+[node name="Stairs" type="Sprite" parent="."]
+position = Vector2( 1962.3, 2483.77 )
+scale = Vector2( 0.830447, 0.830447 )
+z_index = 3
+texture = ExtResource( 6 )
+
+[node name="Inside" type="Sprite" parent="."]
+position = Vector2( 720.639, 2117.47 )
+scale = Vector2( 1, 0.937116 )
+z_index = 1
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1500, 706 )
+
+[node name="Lamp" parent="Inside" instance=ExtResource( 8 )]
+position = Vector2( -73.6113, -294.089 )
+z_index = 1
+
+[node name="Light" parent="Inside/Lamp" instance=ExtResource( 10 )]
+position = Vector2( 5.13818, 28.7161 )
+scale = Vector2( 0.999999, 1.00732 )
+
+[node name="Pillar" type="Sprite" parent="Inside"]
+position = Vector2( 779.661, 28.0104 )
+scale = Vector2( 1.1497, 1.06931 )
+z_index = 3
+texture = ExtResource( 9 )
+
+[node name="Door" type="Sprite" parent="Inside"]
+position = Vector2( -76.5974, 36.3538 )
+texture = ExtResource( 4 )
+
+[node name="Sign" type="Sprite" parent="Inside"]
+position = Vector2( 460.821, -148.753 )
+texture = ExtResource( 5 )
+
+[node name="Floor" type="Sprite" parent="Inside"]
+position = Vector2( -5.3441, 374.233 )
+scale = Vector2( 0.997046, 0.491 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1495, 140 )
+
+[node name="Foot" type="Sprite" parent="."]
+light_mask = 2
+position = Vector2( -2.93018, 2592.19 )
+scale = Vector2( 0.998416, 1 )
+z_index = 3
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3143, 195 )

@@ -13,20 +13,25 @@ export var FADE_OUT_DURATION = 3
 export var LOW_PITCH_LENGTH = 5
 
 # Seconds to wait for the ball to be stuck
-export var BALL_IS_STUCK_TIMEOUT = 2
+export var BALL_IS_STUCK_TIMEOUT = 1
 
 onready var black_screen = $BlackScreen
-onready var music_mixer = $MusicMixer
-onready var wind_sound = $WindSound
 onready var player = $Player
 
-onready var ball = $Pickable/Ball
+# Sound
+onready var music_mixer = $Sound/MusicMixer
+onready var wind_sound = $Sound/WindSound
 
+# Environment
 onready var background_train = $Environment/BackgroundTrain
 
+# Trigger
 onready var trigger_point_00 = $Trigger/TriggerPoint00
 onready var trigger_point_01 = $Trigger/TriggerPoint01
 onready var trigger_point_02 = $Trigger/TriggerPoint02
+
+# Pickable
+onready var ball = $Pickable/Ball
 
 var ball_is_stuck_counter = BALL_IS_STUCK_TIMEOUT
 var current_second = 0
