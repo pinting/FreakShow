@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Objects/Environment/House01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/Environment/House00.tscn" type="PackedScene" id=2]
@@ -22,9 +22,17 @@
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Assets/Environmnent/Graffiti01.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Environmnent/Graffiti02.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Environmnent/Dirt00.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=27]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Assets/Environmnent/Graffiti03.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Environmnent/Graffiti05.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Environmnent/Graffiti04.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Environmnent/Graffiti06.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Environmnent/Sign01.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Environmnent/Graffiti07.png" type="Texture" id=34]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
@@ -115,7 +123,7 @@ STREAM = ExtResource( 10 )
 [node name="Fog" type="Sprite" parent="Environment"]
 show_behind_parent = true
 material = SubResource( 4 )
-position = Vector2( 58.452, 97.433 )
+position = Vector2( 56.7031, 97.4326 )
 scale = Vector2( 10, 10 )
 z_index = 50
 texture = SubResource( 5 )
@@ -162,6 +170,38 @@ texture = ExtResource( 22 )
 region_enabled = true
 region_rect = Rect2( 0, 1, 20000, 780 )
 
+[node name="Graffiti00" type="Sprite" parent="Environment/Fence"]
+modulate = Color( 0, 0, 0, 0.823529 )
+position = Vector2( -7430.75, 32.6986 )
+scale = Vector2( 0.574805, 0.574805 )
+texture = ExtResource( 32 )
+
+[node name="Graffiti01" type="Sprite" parent="Environment/Fence"]
+modulate = Color( 0, 0, 0, 0.823529 )
+position = Vector2( 0.108887, 63.8206 )
+scale = Vector2( 0.544392, 0.544392 )
+texture = ExtResource( 24 )
+
+[node name="Graffiti02" type="Sprite" parent="Environment/Fence"]
+modulate = Color( 0, 0, 0, 0.823529 )
+position = Vector2( 2696.42, 60.4556 )
+texture = ExtResource( 25 )
+
+[node name="Graffiti03" type="Sprite" parent="Environment/Fence"]
+modulate = Color( 0, 0, 0, 0.823529 )
+position = Vector2( 1372.08, 93.497 )
+texture = ExtResource( 29 )
+
+[node name="Graffiti04" type="Sprite" parent="Environment/Fence"]
+modulate = Color( 0, 0, 0, 0.823529 )
+position = Vector2( 5569, 56.2399 )
+texture = ExtResource( 30 )
+
+[node name="Graffiti05" type="Sprite" parent="Environment/Fence"]
+modulate = Color( 0, 0, 0, 0.823529 )
+position = Vector2( 7645.45, 53.3038 )
+texture = ExtResource( 31 )
+
 [node name="BackgroundTrain" parent="Environment" instance=ExtResource( 15 )]
 position = Vector2( -4041.36, -815.776 )
 z_index = -5
@@ -172,6 +212,12 @@ position = Vector2( -5457.28, -2480.18 )
 [node name="Building01" parent="Environment" instance=ExtResource( 1 )]
 position = Vector2( 1181.73, -2507.7 )
 z_index = -1
+
+[node name="Graffiti" type="Sprite" parent="Environment/Building01"]
+self_modulate = Color( 1, 1, 1, 0.823529 )
+position = Vector2( -760.556, 1980.98 )
+scale = Vector2( 0.449461, 0.449461 )
+texture = ExtResource( 34 )
 
 [node name="Lamp00" parent="Environment" instance=ExtResource( 4 )]
 position = Vector2( 0, -710 )
@@ -220,10 +266,19 @@ position = Vector2( -557.078, 466.713 )
 
 [node name="HiddenWall" type="StaticBody2D" parent="Environment/Building03"]
 position = Vector2( -4595.7, -967.434 )
+collision_layer = 15
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Building03/HiddenWall"]
 position = Vector2( 3714.87, -1087.35 )
 shape = SubResource( 9 )
+
+[node name="Sign" type="Sprite" parent="Environment/Building03"]
+modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+position = Vector2( 81.4851, -458.677 )
+rotation = 0.00594584
+scale = Vector2( 0.848142, 0.848142 )
+texture = ExtResource( 33 )
 
 [node name="Trigger" type="Node" parent="."]
 
