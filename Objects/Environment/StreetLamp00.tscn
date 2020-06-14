@@ -8,22 +8,28 @@
 
 [sub_resource type="ShaderMaterial" id=2]
 
-[node name="StreetLamp00" type="Sprite"]
+[node name="StreetLamp00" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
 texture = ExtResource( 2 )
 
-[node name="Glow" type="Sprite" parent="."]
+[node name="Glow" type="Sprite" parent="Sprite"]
 self_modulate = Color( 1, 1, 1, 0.941176 )
 light_mask = 2
 material = SubResource( 2 )
 position = Vector2( 2.15933, -763.063 )
 texture = ExtResource( 3 )
 
-[node name="GlowLight" type="Light2D" parent="Glow"]
-position = Vector2( -3.69528, 9.87994 )
+[node name="GlowLight" type="Light2D" parent="Sprite/Glow"]
+position = Vector2( -3.69528, 9.87988 )
 scale = Vector2( 0.236523, 0.272367 )
 z_as_relative = false
 texture = ExtResource( 4 )
 energy = 1.5
 mode = 2
 range_item_cull_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -1.52588e-05, 0.192993 )
+polygon = PoolVector2Array( -30.8615, 821.627, 22.8807, 820.363, 25.4098, 441.005, 10.8677, 391.689, 15.7424, -643.24, 19.6022, -643.626, 19.6022, -678.75, 13.0406, -687.627, 13.4266, -711.365, 28.571, -724.001, 29.2032, -803.034, 12.7644, -817.576, -16.3196, -815.679, -24.5391, -803.034, -25.3639, -723.909, -9.73193, -706.733, -9.53894, -684.732, -15.7145, -680.1, -17.4575, 395.103, -29.4704, 443.155 )

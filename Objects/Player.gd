@@ -19,9 +19,6 @@ export var GRAVITY = 300
 # Sprint speed
 export var SPRINT_SCALE = 1.35
 
-# Velocity limit
-export var WALK_THRESHOLD = 10
-
 # Speed of the animation (sprint modifies it)
 export var ANIMATION_SPEED = 1
 
@@ -56,6 +53,8 @@ var current_max_speed = MAX_SPEED
 var current_acceleration = ACCELERATION
 var current_animation_speed = ANIMATION_SPEED
 var crouching = false
+var transition = false
+var moving_x = false
 
 func _ready():
 	Global.player_position = get_global_position()
@@ -77,8 +76,22 @@ func _physics_process(delta):
 	
 	current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, FLOOR_NORMAL, on_platform, 4, 0.9, false)
 	
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		var body = collision.collider
+		
+		if body.is_in_group("pickable"):
+			var position_diff = body.get_global_position() - get_global_position()
+			
+			body.apply_central_impulse(position_diff.normalized() * body.KICK_FORCE)
+	
 	if is_on_floor() and direction.x != 0:
-		animated_sprite.scale.x = abs(animated_sprite.scale.x) * (1 if direction.x > 0 else -1)
+		var m = 1 if direction.x > 0 else -1
+		
+		animated_sprite.scale.x = abs(animated_sprite.scale.x) * m
+		crouch_collision.scale.x = abs(crouch_collision.scale.x) * m
+		stand_collision.scale.x = abs(stand_collision.scale.x) * m
+		
 		animation_prefix = SIDE_A_PREFIX if direction.x > 0 else SIDE_B_PREFIX
 	
 	var next_animation = _get_next_animation(direction)
@@ -95,8 +108,9 @@ func _physics_process(delta):
 func _check_crouch():
 	if Input.is_action_just_pressed("crouch"):
 		crouching = not crouching
-		stand_collision.disabled = not crouching
-		crouch_collision.disabled = crouching
+		
+	stand_collision.disabled = crouching
+	crouch_collision.disabled = not crouching
 
 func _get_direction():
 	var right = Input.get_action_strength("move_right")
@@ -137,21 +151,42 @@ func _get_next_animation(direction):
 	var next_animation = "stand_still"
 	var freeze = false
 	
+	var current_animation = animated_sprite.animation
+	var last_frame = animated_sprite.frames.get_frame_count(current_animation) - 1
+	var animation_looped = animated_sprite.frames.get_animation_loop(current_animation)
+	
 	if is_on_floor():
-		if abs(current_velocity.x) > WALK_THRESHOLD:
-			if not direction.x:
-				next_animation = "move_to_still"
+		if direction.x:
+			if not moving_x:
+				moving_x = true
+				transition = true
+			elif not animation_looped and animated_sprite.frame == last_frame:
+				transition = false
+				
+			if transition:
+				next_animation = "still_to_move"
 			else:
 				next_animation = "move"
 		else:
-			if direction.x:
-				next_animation = "still_to_move"
+			if moving_x:
+				moving_x = false
+				transition = true
+			elif not animation_looped and animated_sprite.frame == last_frame:
+				transition = false
+				
+			if transition:
+				next_animation = "move_to_still"
 			else:
 				next_animation = "still"
 				
 		next_animation = ("crouch" if crouching else "stand") + "_" + next_animation
 	else:
+		if abs(current_velocity.x) > 0:
+			moving_x = true
+			transition = false
+		
 		if current_velocity.y > 0:
+			# When falling, freeze the current frame of the jump animation
 			next_animation = "jump"
 			freeze = true
 		else: 

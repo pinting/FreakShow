@@ -1,42 +1,38 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Objects/Player.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Rabbit00.tres" type="SpriteFrames" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 92.2406, 411.831 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 163.599, 200.07 )
-
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
 position = Vector2( -1.66553, -111.588 )
+collision_layer = 10
+collision_mask = 10
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( -0.811218, -2.12614 )
+position = Vector2( -0.811218, -2.95939 )
 frames = ExtResource( 2 )
 animation = "a_stand_still"
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
-position = Vector2( 79.3065, 409.108 )
+position = Vector2( 72.28, 495.781 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 
 [node name="PlatformDetector01" type="RayCast2D" parent="."]
-position = Vector2( -59.5135, 408.771 )
+position = Vector2( -51.2906, 496.192 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 
-[node name="StandCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 4.35031, 81.4967 )
-shape = SubResource( 2 )
+[node name="CrouchCollision" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.642532, 0 )
+polygon = PoolVector2Array( 72.1871, 496.019, -51.9472, 495.985, -73.2801, 466.725, -116.13, 407.475, -164.8, 277.866, -57.4096, 145.083, 95.3698, 70.2806, 160.968, 97.2604, 122.35, 206.238, 112.298, 281.358, 117.589, 317.86, 50.9325, 362.297, 74.2092, 425.779 )
 
-[node name="CrouchCollision" type="CollisionShape2D" parent="."]
-position = Vector2( 7.35227, 293.279 )
-shape = SubResource( 3 )
-disabled = true
+[node name="StandCollision" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -51.7286, 496.019, 73.0905, 495.758, 59.7819, -170.704, 83.5267, -312.183, 18.2286, -336.917, -35.197, -305.257, -39.9453, -199.198, -96.1416, -156.062 )

@@ -1,8 +1,17 @@
 extends RigidBody2D
 
+# Force the body can be grabbed
+export var GRAB_FORCE = Vector2(5, 5)
+
+# Force kickable bodies are kicked with
+export var KICK_FORCE = Vector2(100, 100)
+
+# Force max kick velocity
+export var MAX_VELOCITY = Vector2(400, 400)
+
 signal clicked
 
-var held = false
+var picked_up = false
 
 func _input_event(viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
@@ -10,20 +19,24 @@ func _input_event(viewport, event, _shape_idx):
 			emit_signal("clicked", self)
 
 func _physics_process(_delta):
-	if held:
-		apply_central_impulse(get_global_mouse_position() - position)
+	if picked_up:
+		var position_diff = get_global_mouse_position() - get_global_position()
+		var grab_force = position_diff.normalized() * GRAB_FORCE
+		
+		if abs(linear_velocity.x) < MAX_VELOCITY.x and abs(linear_velocity.y) < MAX_VELOCITY.y :
+			apply_central_impulse(grab_force)
 
 
 func pickup():
-	if held:
+	if picked_up:
 		return
 	
-	held = true
+	picked_up = true
 
 func drop(impulse = Vector2.ZERO):
-	if not held:
+	if not picked_up:
 		return
 	
 	apply_central_impulse(impulse)
 	
-	held = false
+	picked_up = false

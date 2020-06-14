@@ -1,7 +1,7 @@
 extends "res://Scenes/BaseScene.gd"
 
 # Size of a trigger point detect field
-export var DETECT_THRESHOLD = 100
+export var DETECT_THRESHOLD = 15
 
 # Time after the black screen fades out
 export var FADE_OUT_AFTER = 2
@@ -15,6 +15,9 @@ export var LOW_PITCH_LENGTH = 5
 # Seconds to wait for the ball to be stuck
 export var BALL_IS_STUCK_TIMEOUT = 1
 
+# Delay to wait before starting the game (if intro is ON)
+export var START_DELAY = 1
+
 onready var black_screen = $BlackScreen
 onready var player = $Player
 
@@ -25,16 +28,17 @@ onready var wind_sound = $Sound/WindSound
 # Environment
 onready var background_train = $Environment/BackgroundTrain
 
-# Trigger
-onready var trigger_point_00 = $Trigger/TriggerPoint00
-onready var trigger_point_01 = $Trigger/TriggerPoint01
-onready var trigger_point_02 = $Trigger/TriggerPoint02
+# Triggers
+onready var trigger_point_00 = $Triggers/TriggerPoint00
+onready var trigger_point_01 = $Triggers/TriggerPoint01
+onready var trigger_point_02 = $Triggers/TriggerPoint02
 
 # Pickable
 onready var ball = $Pickable/Ball
 
 var ball_is_stuck_counter = BALL_IS_STUCK_TIMEOUT
 var current_second = 0
+var delay = 0
 
 var music_00
 var music_01
@@ -89,6 +93,7 @@ func _trigger_point_check(delta):
 				# Turn off previous trigger point too
 				trigger_point_01.visible = false
 				trigger_point_02.visible = false
+				ball.mode = RigidBody2D.MODE_STATIC
 				music_mixer.force_next(music_02)
 		else:
 			ball_is_stuck_counter = BALL_IS_STUCK_TIMEOUT
@@ -96,7 +101,12 @@ func _trigger_point_check(delta):
 func _intro(delta):
 	if Global.NO_INTRO:
 		return
-		
+	
+	delay += delta
+	
+	if delay < START_DELAY:
+		return
+	
 	current_second += delta
 	
 	var pitch_value = current_second / LOW_PITCH_LENGTH

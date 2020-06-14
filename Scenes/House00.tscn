@@ -1,0 +1,143 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Floor01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Building05.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Wall00.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Door02.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Graffiti03.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/Stairs00.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Foot01.png" type="Texture" id=7]
+[ext_resource path="res://Objects/Environment/RoomLamp00.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Environmnent/Pillar00.png" type="Texture" id=9]
+[ext_resource path="res://Objects/Environment/RoomLight00.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Environmnent/Graffiti00.png" type="Texture" id=11]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -753.59, 407.076, -746.624, -351.282, 711.923, -347.36, 712.603, 404.682, 848.141, 405.235, 848.574, -5232.52, -2299.02, -5235.85, -2290.62, 611.897, 846.756, 613.875, 847.565, 404.928, 713.626, 406.32 )
+
+[node name="House00" type="Sprite"]
+z_index = -3
+texture = ExtResource( 2 )
+
+[node name="Inside" type="Sprite" parent="."]
+position = Vector2( 754.309, 2089.98 )
+scale = Vector2( 1.04482, 1.04482 )
+z_index = 1
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1500, 578 )
+
+[node name="Lamp" parent="Inside" instance=ExtResource( 8 )]
+position = Vector2( -43.7984, -236.879 )
+scale = Vector2( 0.957105, 0.896919 )
+z_index = 2
+z_as_relative = false
+
+[node name="Light" parent="Inside/Lamp" instance=ExtResource( 10 )]
+position = Vector2( 5.13818, 29.9773 )
+scale = Vector2( 0.999999, 1.00732 )
+
+[node name="Pillar" type="Sprite" parent="Inside"]
+position = Vector2( 718.647, 28.8204 )
+scale = Vector2( 1.03134, 0.898912 )
+z_index = 3
+z_as_relative = false
+texture = ExtResource( 9 )
+
+[node name="Door" type="Sprite" parent="Inside"]
+position = Vector2( -41.9587, 37.3825 )
+scale = Vector2( 0.860356, 0.806254 )
+z_index = 1
+texture = ExtResource( 4 )
+
+[node name="Graffiti00" type="Sprite" parent="Inside"]
+modulate = Color( 0, 0, 0, 0.823529 )
+position = Vector2( -287.664, -34.7262 )
+scale = Vector2( 0.409751, 0.409752 )
+texture = ExtResource( 11 )
+
+[node name="Graffiti01" type="Sprite" parent="Inside"]
+modulate = Color( 0, 0, 0, 0.823529 )
+position = Vector2( 365.205, 33.4097 )
+scale = Vector2( 0.409752, 0.409752 )
+texture = ExtResource( 5 )
+
+[node name="Floor" type="Sprite" parent="Inside"]
+position = Vector2( -39.9537, 316.456 )
+scale = Vector2( 0.954278, 0.440387 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1495, 140 )
+
+[node name="Stairs" type="Sprite" parent="."]
+position = Vector2( 1962.74, 2442.79 )
+scale = Vector2( 0.830447, 0.778225 )
+z_index = 2
+z_as_relative = false
+texture = ExtResource( 6 )
+
+[node name="Foot" type="Sprite" parent="."]
+light_mask = 2
+position = Vector2( -2.49402, 2544.39 )
+scale = Vector2( 0.998416, 0.937116 )
+z_as_relative = false
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3143, 195 )
+
+[node name="LightOccluder" type="LightOccluder2D" parent="."]
+position = Vector2( 721.075, 2098.67 )
+scale = Vector2( 1, 0.878186 )
+occluder = SubResource( 1 )
+
+[node name="CollisionBack" type="StaticBody2D" parent="."]
+position = Vector2( 0.435974, 119.932 )
+scale = Vector2( 1, 0.937116 )
+z_index = 100
+
+[node name="Ground" type="CollisionPolygon2D" parent="CollisionBack"]
+position = Vector2( 3.63138, -56.6606 )
+z_index = 100
+z_as_relative = false
+polygon = PoolVector2Array( -33.3467, 2491.76, 1552.65, 2485.88, 2680.81, 2744.84, 2640.43, 2743.66, 1552.65, 2512.44, -31.773, 2523.06 )
+
+[node name="CollisionCenter" type="StaticBody2D" parent="."]
+position = Vector2( 3.26984, 109.541 )
+scale = Vector2( 1, 0.937116 )
+z_index = 100
+collision_layer = 2
+collision_mask = 2
+
+[node name="Ground" type="CollisionPolygon2D" parent="CollisionCenter"]
+position = Vector2( -0.234589, -24.8149 )
+z_index = 100
+z_as_relative = false
+polygon = PoolVector2Array( -33.3467, 2491.76, 1552.65, 2485.88, 2615.03, 2726.04, 2566.94, 2723.69, 1552.65, 2512.44, -31.773, 2523.06 )
+
+[node name="CollisionFront" type="StaticBody2D" parent="."]
+position = Vector2( 0.435974, 127.489 )
+scale = Vector2( 1, 0.937116 )
+z_index = 100
+collision_layer = 4
+collision_mask = 4
+
+[node name="Ground" type="CollisionPolygon2D" parent="CollisionFront"]
+position = Vector2( -0.234619, -24.8147 )
+z_index = 100
+z_as_relative = false
+polygon = PoolVector2Array( -33.3467, 2491.76, 1552.65, 2485.88, 2531.97, 2705.71, 2485.72, 2706.11, 1552.65, 2512.44, -31.773, 2523.06 )
+
+[node name="CollisionAll" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="Walls" type="CollisionPolygon2D" parent="CollisionAll"]
+position = Vector2( -0.111572, 0.367676 )
+polygon = PoolVector2Array( -28.8685, 1788.68, 1569.39, 1789.08, 1570.13, -2494.04, -1577.78, -2499.21, -1568.93, 2633.67, 1567.59, 2635.08, 1565.3, 2454.31, -33.7491, 2456.96 )
+
+[node name="CollisionPlayer" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionPlayer"]
+polygon = PoolVector2Array( 30.5609, 1826.42, 31.8317, 2543.21, -138.464, 2542.55, -139.675, 1670.53, 1570.33, 1675.36, 1570.12, 1829.98 )

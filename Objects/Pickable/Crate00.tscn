@@ -3,10 +3,17 @@
 [ext_resource path="res://Assets/Environmnent/Crate00.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Pickable/Pickable.gd" type="Script" id=2]
 
-[node name="Crate00" type="RigidBody2D"]
+[node name="Crate00" type="RigidBody2D" groups=[
+"pickable",
+]]
+collision_layer = 4
+collision_mask = 4
 mass = 100.0
 gravity_scale = 2.0
+contacts_reported = 3
+contact_monitor = true
 script = ExtResource( 2 )
+GRAB_FORCE = Vector2( 500, 500 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
