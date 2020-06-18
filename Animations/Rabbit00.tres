@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=387 format=2]
+[gd_resource type="SpriteFrames" load_steps=378 format=2]
 
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_Move/Rabbit00_A_Stand_Move31.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_Move/Rabbit00_A_Stand_Move32.png" type="Texture" id=2]
@@ -55,11 +55,7 @@
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove12.png" type="Texture" id=53]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove13.png" type="Texture" id=54]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove06.png" type="Texture" id=55]
-[ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove02.png" type="Texture" id=56]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove07.png" type="Texture" id=57]
-[ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove00.png" type="Texture" id=58]
-[ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove03.png" type="Texture" id=59]
-[ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove01.png" type="Texture" id=60]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove04.png" type="Texture" id=61]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove09.png" type="Texture" id=62]
 [ext_resource path="res://Assets/Characters/Rabbit00/A/Stand_StillToMove/Rabbit00_A_Stand_StillToMove10.png" type="Texture" id=63]
@@ -169,12 +165,7 @@
 [ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_MoveToStill/Rabbit00_B_Stand_MoveToStill11.png" type="Texture" id=167]
 [ext_resource path="res://Assets/Characters/Rabbit00/B/Jump/Rabbit00_B_Jump11.png" type="Texture" id=168]
 [ext_resource path="res://Assets/Characters/Rabbit00/B/Jump/Rabbit00_B_Jump08.png" type="Texture" id=169]
-[ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_StillToMove/Rabbit00_B_Stand_StillToMove00.png" type="Texture" id=170]
 [ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_StillToMove/Rabbit00_B_Stand_StillToMove05.png" type="Texture" id=171]
-[ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_StillToMove/Rabbit00_B_Stand_StillToMove01.png" type="Texture" id=172]
-[ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_StillToMove/Rabbit00_B_Stand_StillToMove03.png" type="Texture" id=173]
-[ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_StillToMove/Rabbit00_B_Stand_StillToMove02.png" type="Texture" id=174]
-[ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_StillToMove/Rabbit00_B_Stand_StillToMove04.png" type="Texture" id=175]
 [ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_StillToMove/Rabbit00_B_Stand_StillToMove09.png" type="Texture" id=176]
 [ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_StillToMove/Rabbit00_B_Stand_StillToMove07.png" type="Texture" id=177]
 [ext_resource path="res://Assets/Characters/Rabbit00/B/Stand_StillToMove/Rabbit00_B_Stand_StillToMove10.png" type="Texture" id=178]
@@ -419,7 +410,7 @@ animations = [ {
 "name": "b_crouch_move_to_still",
 "speed": 30.0
 }, {
-"frames": [ ExtResource( 58 ), ExtResource( 60 ), ExtResource( 56 ), ExtResource( 59 ), ExtResource( 61 ), ExtResource( 52 ), ExtResource( 55 ), ExtResource( 57 ), ExtResource( 51 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 64 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 72 ), ExtResource( 69 ), ExtResource( 67 ), ExtResource( 75 ), ExtResource( 76 ), ExtResource( 70 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 71 ), ExtResource( 73 ), ExtResource( 66 ), ExtResource( 65 ) ],
+"frames": [ ExtResource( 61 ), ExtResource( 52 ), ExtResource( 55 ), ExtResource( 57 ), ExtResource( 51 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 64 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 72 ), ExtResource( 69 ), ExtResource( 67 ), ExtResource( 75 ), ExtResource( 76 ), ExtResource( 70 ), ExtResource( 74 ), ExtResource( 68 ), ExtResource( 71 ), ExtResource( 73 ), ExtResource( 66 ), ExtResource( 65 ) ],
 "loop": false,
 "name": "a_stand_still_to_move",
 "speed": 30.0
@@ -454,7 +445,7 @@ animations = [ {
 "name": "b_stand_move",
 "speed": 30.0
 }, {
-"frames": [ ExtResource( 170 ), ExtResource( 172 ), ExtResource( 174 ), ExtResource( 173 ), ExtResource( 175 ), ExtResource( 171 ), ExtResource( 185 ), ExtResource( 177 ), ExtResource( 182 ), ExtResource( 176 ), ExtResource( 178 ), ExtResource( 180 ), ExtResource( 184 ), ExtResource( 183 ), ExtResource( 179 ), ExtResource( 181 ) ],
+"frames": [ ExtResource( 171 ), ExtResource( 185 ), ExtResource( 177 ), ExtResource( 182 ), ExtResource( 176 ), ExtResource( 178 ), ExtResource( 180 ), ExtResource( 184 ), ExtResource( 183 ), ExtResource( 179 ), ExtResource( 181 ) ],
 "loop": false,
 "name": "b_stand_still_to_move",
 "speed": 30.0

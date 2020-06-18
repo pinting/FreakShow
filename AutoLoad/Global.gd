@@ -10,10 +10,10 @@ const CAMERA_ZOOM = Vector2(2, 2)
 const DEBUG = true
 
 # Disable sounds
-const NO_SOUNDS = true
+const NO_SOUNDS = false
 
 # Disable intro
-const NO_INTRO = true
+const NO_INTRO = false
 
 # Current camera object
 var current_camera = null
