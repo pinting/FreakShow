@@ -15,6 +15,12 @@ The game was imagined based on a selection of music tracks - however, I do not o
 
 ## Credits
 
+* Diana Baranyi - photo assets
+* Zsofi Szabo - photo assets
+* Zsofi Kenesei - character actor
+* Gergo Tornyi - character actor
+* Imre Herczeg - character actor
+* Zsuzsa Buka - experimental character actor
 * Denes Tornyi - programming, photo assets, character actor
 * Godot Engine - engine, shaders, sprites of particles
 
@@ -22,7 +28,7 @@ The game was imagined based on a selection of music tracks - however, I do not o
 
 The following tracks were used, but they are not commited to the repository.
 
-* `Cluster - Grosses Wasser` is used as music of Part01.
+* Part01 was imagined based on `Cluster - Grosses Wasser`. Thanks to Hans-Joachim Roedelius, Dieter Moebius, Peter Baumann and William Roper.
 
 ## License
 

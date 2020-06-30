@@ -27,16 +27,6 @@ texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1500, 578 )
 
-[node name="Lamp" parent="Inside" instance=ExtResource( 8 )]
-position = Vector2( -43.7984, -236.879 )
-scale = Vector2( 0.957105, 0.896919 )
-z_index = 2
-z_as_relative = false
-
-[node name="Light" parent="Inside/Lamp" instance=ExtResource( 10 )]
-position = Vector2( 5.13818, 29.9773 )
-scale = Vector2( 0.999999, 1.00732 )
-
 [node name="Pillar" type="Sprite" parent="Inside"]
 position = Vector2( 718.647, 28.8204 )
 scale = Vector2( 1.03134, 0.898912 )
@@ -49,6 +39,15 @@ position = Vector2( -41.9587, 37.3825 )
 scale = Vector2( 0.860356, 0.806254 )
 z_index = 1
 texture = ExtResource( 4 )
+
+[node name="Lamp" parent="Inside" instance=ExtResource( 8 )]
+position = Vector2( -43.7984, -236.879 )
+scale = Vector2( 0.957105, 0.896919 )
+z_index = 1
+
+[node name="Light" parent="Inside/Lamp" instance=ExtResource( 10 )]
+position = Vector2( 5.13818, 29.9773 )
+scale = Vector2( 0.999999, 1.00732 )
 
 [node name="Graffiti00" type="Sprite" parent="Inside"]
 modulate = Color( 0, 0, 0, 0.823529 )

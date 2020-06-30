@@ -1,6 +1,9 @@
 class_name Player
 extends KinematicBody2D
 
+# Animation
+export (SpriteFrames) var FRAMES
+
 # Max velocity
 export var MAX_SPEED = 280
 
@@ -57,6 +60,7 @@ var transition = false
 var moving_x = false
 
 func _ready():
+	animated_sprite.frames = FRAMES
 	Global.player_position = get_global_position()
 
 func _physics_process(delta):

@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Wall00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Building04.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Floor01.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Graffiti40.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Part00_Door.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Environmnent/Graffiti32.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Graffiti41.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Environmnent/Graffiti38.png" type="Texture" id=8]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( -6882.82, -3575.52, -6882.89, -8526.9, 647.054, -8526.46, 647.118, -3579.69 )
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -6881.84, -4986.47, -6881.91, -639.545, 648.004, -639.524, 648.061, -4986.54 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4649.23, 1556.21 )
+
+[node name="Building" type="Sprite"]
+light_mask = 0
+z_index = -2
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 7530, 10000 )
+
+[node name="Floor" type="Sprite" parent="."]
+position = Vector2( -0.0117188, 582.965 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 7530, 140 )
+
+[node name="Wall" type="Sprite" parent="Floor"]
+position = Vector2( -0.115723, -343.054 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 7530, 578 )
+
+[node name="Graffiti00" type="Sprite" parent="Floor/Wall"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 1737.22, -108.307 )
+rotation = -0.0131194
+texture = ExtResource( 6 )
+
+[node name="Graffiti01" type="Sprite" parent="Floor/Wall"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 1132.21, 105.854 )
+rotation = -0.334296
+scale = Vector2( 0.355005, 0.355005 )
+texture = ExtResource( 8 )
+
+[node name="Door00" parent="Floor" instance=ExtResource( 5 )]
+position = Vector2( -3280, -310.925 )
+
+[node name="Door01" parent="Floor/Door00" instance=ExtResource( 5 )]
+position = Vector2( 941, 0 )
+
+[node name="Door02" parent="Floor/Door00/Door01" instance=ExtResource( 5 )]
+position = Vector2( 939.391, -1.60934 )
+
+[node name="Door03" parent="Floor/Door00/Door01/Door02" instance=ExtResource( 5 )]
+position = Vector2( 941, 0 )
+
+[node name="Door04" parent="Floor/Door00/Door01/Door02/Door03" instance=ExtResource( 5 )]
+position = Vector2( 941, 0 )
+
+[node name="Door05" parent="Floor/Door00/Door01/Door02/Door03/Door04" instance=ExtResource( 5 )]
+position = Vector2( 938.139, 0 )
+
+[node name="Door06" parent="Floor/Door00/Door01/Door02/Door03/Door04/Door05" instance=ExtResource( 5 )]
+position = Vector2( 941, 0 )
+
+[node name="Door07" parent="Floor/Door00/Door01/Door02/Door03/Door04/Door05/Door06" instance=ExtResource( 5 )]
+position = Vector2( 941, 0 )
+
+[node name="Graffiti" type="Sprite" parent="Floor/Door00/Door01/Door02/Door03"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 79.2732, 120.928 )
+rotation = 0.291425
+scale = Vector2( 0.1604, 0.1604 )
+texture = ExtResource( 4 )
+
+[node name="Graffiti" type="Sprite" parent="Floor/Door00/Door01"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( -1.98193, 152.572 )
+rotation = 0.186776
+scale = Vector2( 0.488666, 0.488666 )
+texture = ExtResource( 7 )
+
+[node name="Top" type="LightOccluder2D" parent="Floor"]
+position = Vector2( 3117.46, 2943.92 )
+occluder = SubResource( 1 )
+
+[node name="Bottom" type="LightOccluder2D" parent="Floor"]
+position = Vector2( 3116.98, 5056.55 )
+occluder = SubResource( 2 )
+
+[node name="CollisionAll" type="StaticBody2D" parent="Floor"]
+collision_layer = 15
+collision_mask = 15
+
+[node name="Top" type="CollisionShape2D" parent="Floor/CollisionAll"]
+position = Vector2( -40.1072, -2163.65 )
+shape = SubResource( 3 )
+
+[node name="Bottom" type="CollisionShape2D" parent="Floor/CollisionAll"]
+position = Vector2( -29.3419, 1599.23 )
+shape = SubResource( 3 )
