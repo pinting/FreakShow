@@ -2,6 +2,12 @@
 
 A video game experiment with photo based assets.
 
+## Preview
+
+<img src="https://github.com/pinting/FreakShow/raw/master/screenshot.png" width="600" />
+
+Watch a [recording](https://youtu.be/lFruJy84yJ8) about the latest demo.
+
 ## Setup
 
 The game was imagined based on a selection of music tracks - however, I do not own the rights to include them with the assets thus it is the duty of the end user to provide the necessary files to the engine. They can be purchased for personal usage through popular 3rd party services.
@@ -21,7 +27,6 @@ The game was imagined based on a selection of music tracks - however, I do not o
 * Gergo Tornyi - character actor
 * Imre Herczeg - character actor
 * Zsuzsa Buka - experimental character actor
-* Denes Tornyi - programming, photo assets, character actor
 * Godot Engine - engine, shaders, sprites of particles
 
 ## Music
