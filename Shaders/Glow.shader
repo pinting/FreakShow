@@ -4,34 +4,38 @@ render_mode blend_premul_alpha;
 uniform float radius = 10.0;
 uniform float amount = 0.5;
 
-void fragment() {
+void fragment()
+{
+	vec2 pixel_size = TEXTURE_PIXEL_SIZE;
+	vec4 color = texture(TEXTURE, UV);
+	
 	float r = radius;
-	vec2 ps = TEXTURE_PIXEL_SIZE;
-	vec4 col = texture(TEXTURE, UV);
-	vec4 glow = col;
+	vec4 glow = color;
 
-	glow += texture(TEXTURE, UV + vec2(-r, -r) * ps);
-	glow += texture(TEXTURE, UV + vec2(-r, 0.0) * ps);
-	glow += texture(TEXTURE, UV + vec2(-r, r) * ps);
-	glow += texture(TEXTURE, UV + vec2(0.0, -r) * ps);
-	glow += texture(TEXTURE, UV + vec2(0.0, r) * ps);
-	glow += texture(TEXTURE, UV + vec2(r, -r) * ps);
-	glow += texture(TEXTURE, UV + vec2(r, 0.0) * ps);
-	glow += texture(TEXTURE, UV + vec2(r, r) * ps);
+	glow += texture(TEXTURE, UV + vec2(-r, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, 0.0) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(0.0, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(0.0, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, 0.0) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, r) * pixel_size);
 
 	r *= 2.0;
-	glow += texture(TEXTURE, UV + vec2(-r, -r) * ps);
-	glow += texture(TEXTURE, UV + vec2(-r, 0.0) * ps);
-	glow += texture(TEXTURE, UV + vec2(-r, r) * ps);
-	glow += texture(TEXTURE, UV + vec2(0.0, -r) * ps);
-	glow += texture(TEXTURE, UV + vec2(0.0, r) * ps);
-	glow += texture(TEXTURE, UV + vec2(r, -r) * ps);
-	glow += texture(TEXTURE, UV + vec2(r, 0.0) * ps);
-	glow += texture(TEXTURE, UV + vec2(r, r) * ps);
+	
+	glow += texture(TEXTURE, UV + vec2(-r, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, 0.0) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(0.0, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(0.0, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, 0.0) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, r) * pixel_size);
 
-	glow /= 17.0;
+	glow /= 17.0; // Number of texture calls
 	glow *= amount;
-	col.rgb *= col.a;
+	
+	color.rgb *= color.a;
 
-	COLOR = glow + col;
+	COLOR = glow + color;
 }

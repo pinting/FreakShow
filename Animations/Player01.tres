@@ -181,9 +181,9 @@ animations = [ {
 "name": "default",
 "speed": 30.0
 }, {
-"frames": [ ExtResource( 67 ), ExtResource( 66 ), ExtResource( 81 ), ExtResource( 47 ), ExtResource( 163 ), ExtResource( 144 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 159 ), ExtResource( 61 ), ExtResource( 58 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 131 ), ExtResource( 135 ), ExtResource( 132 ), ExtResource( 136 ) ],
+"frames": [ ExtResource( 37 ) ],
 "loop": false,
-"name": "b_stand_still_to_move",
+"name": "b_crouch_still",
 "speed": 30.0
 }, {
 "frames": [ ExtResource( 60 ) ],
@@ -191,49 +191,9 @@ animations = [ {
 "name": "b_stand_still",
 "speed": 30.0
 }, {
-"frames": [ ExtResource( 77 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 161 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 160 ), ExtResource( 162 ), ExtResource( 158 ), ExtResource( 150 ), ExtResource( 147 ), ExtResource( 155 ), ExtResource( 149 ), ExtResource( 142 ), ExtResource( 141 ), ExtResource( 157 ), ExtResource( 143 ), ExtResource( 148 ), ExtResource( 156 ), ExtResource( 140 ), ExtResource( 151 ), ExtResource( 146 ) ],
-"loop": false,
-"name": "b_crouch_move_to_still",
-"speed": 30.0
-}, {
 "frames": [ ExtResource( 60 ) ],
 "loop": false,
 "name": "a_stand_still",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 37 ) ],
-"loop": false,
-"name": "b_crouch_still",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 53 ), ExtResource( 74 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 76 ), ExtResource( 75 ), ExtResource( 177 ), ExtResource( 62 ) ],
-"loop": false,
-"name": "a_crouch_still_to_move",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 53 ), ExtResource( 74 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 76 ), ExtResource( 75 ), ExtResource( 177 ), ExtResource( 62 ) ],
-"loop": false,
-"name": "b_crouch_still_to_move",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 152 ), ExtResource( 64 ), ExtResource( 145 ), ExtResource( 153 ), ExtResource( 154 ), ExtResource( 20 ), ExtResource( 50 ), ExtResource( 3 ), ExtResource( 48 ), ExtResource( 7 ), ExtResource( 19 ), ExtResource( 5 ), ExtResource( 51 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 28 ), ExtResource( 49 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "b_stand_move_to_still",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 67 ), ExtResource( 66 ), ExtResource( 81 ), ExtResource( 47 ), ExtResource( 163 ), ExtResource( 144 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 159 ), ExtResource( 61 ), ExtResource( 58 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 131 ), ExtResource( 135 ), ExtResource( 132 ), ExtResource( 136 ) ],
-"loop": false,
-"name": "a_stand_still_to_move",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 65 ), ExtResource( 139 ), ExtResource( 138 ), ExtResource( 31 ), ExtResource( 164 ), ExtResource( 167 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 78 ), ExtResource( 63 ), ExtResource( 73 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 137 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 45 ), ExtResource( 70 ), ExtResource( 69 ), ExtResource( 134 ), ExtResource( 133 ), ExtResource( 72 ), ExtResource( 71 ), ExtResource( 56 ), ExtResource( 46 ), ExtResource( 79 ), ExtResource( 57 ), ExtResource( 178 ) ],
-"loop": true,
-"name": "a_stand_move",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 152 ), ExtResource( 64 ), ExtResource( 145 ), ExtResource( 153 ), ExtResource( 154 ), ExtResource( 20 ), ExtResource( 50 ), ExtResource( 3 ), ExtResource( 48 ), ExtResource( 7 ) ],
-"loop": false,
-"name": "a_stand_move_to_still",
 "speed": 30.0
 }, {
 "frames": [ ExtResource( 176 ), ExtResource( 165 ), ExtResource( 166 ), ExtResource( 168 ), ExtResource( 169 ), ExtResource( 171 ), ExtResource( 170 ), ExtResource( 172 ), ExtResource( 173 ), ExtResource( 174 ), ExtResource( 175 ) ],
@@ -241,10 +201,35 @@ animations = [ {
 "name": "a_jump",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 176 ), ExtResource( 165 ), ExtResource( 166 ), ExtResource( 168 ), ExtResource( 169 ), ExtResource( 171 ), ExtResource( 170 ), ExtResource( 172 ), ExtResource( 173 ), ExtResource( 174 ), ExtResource( 175 ) ],
+"frames": [ ExtResource( 67 ), ExtResource( 66 ), ExtResource( 81 ), ExtResource( 47 ), ExtResource( 163 ), ExtResource( 144 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 159 ), ExtResource( 61 ), ExtResource( 58 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 131 ), ExtResource( 135 ), ExtResource( 132 ), ExtResource( 136 ) ],
+"loop": false,
+"name": "b_stand_still_to_move",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 85 ), ExtResource( 86 ), ExtResource( 82 ), ExtResource( 123 ), ExtResource( 84 ), ExtResource( 119 ), ExtResource( 120 ), ExtResource( 121 ), ExtResource( 122 ), ExtResource( 124 ), ExtResource( 125 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 97 ), ExtResource( 98 ), ExtResource( 99 ), ExtResource( 100 ), ExtResource( 101 ), ExtResource( 102 ), ExtResource( 103 ), ExtResource( 104 ), ExtResource( 105 ), ExtResource( 106 ), ExtResource( 107 ), ExtResource( 108 ), ExtResource( 109 ), ExtResource( 110 ), ExtResource( 111 ), ExtResource( 112 ), ExtResource( 113 ), ExtResource( 114 ), ExtResource( 115 ), ExtResource( 116 ), ExtResource( 117 ), ExtResource( 118 ), ExtResource( 87 ), ExtResource( 88 ), ExtResource( 89 ), ExtResource( 90 ), ExtResource( 91 ), ExtResource( 92 ), ExtResource( 93 ), ExtResource( 94 ), ExtResource( 83 ), ExtResource( 127 ), ExtResource( 126 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 130 ) ],
 "loop": true,
-"name": "b_jump",
-"speed": 20.0
+"name": "a_crouch_move",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 53 ), ExtResource( 74 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 76 ), ExtResource( 75 ), ExtResource( 177 ), ExtResource( 62 ) ],
+"loop": false,
+"name": "a_crouch_still_to_move",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 77 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 161 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 160 ), ExtResource( 162 ), ExtResource( 158 ), ExtResource( 150 ), ExtResource( 147 ), ExtResource( 155 ), ExtResource( 149 ), ExtResource( 142 ), ExtResource( 141 ), ExtResource( 157 ), ExtResource( 143 ), ExtResource( 148 ), ExtResource( 156 ), ExtResource( 140 ), ExtResource( 151 ), ExtResource( 146 ) ],
+"loop": false,
+"name": "b_crouch_move_to_still",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 152 ), ExtResource( 64 ), ExtResource( 145 ), ExtResource( 153 ), ExtResource( 154 ), ExtResource( 20 ), ExtResource( 50 ), ExtResource( 3 ), ExtResource( 48 ), ExtResource( 7 ), ExtResource( 19 ), ExtResource( 5 ), ExtResource( 51 ), ExtResource( 6 ), ExtResource( 1 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 28 ), ExtResource( 49 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "b_stand_move_to_still",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 152 ), ExtResource( 64 ), ExtResource( 145 ), ExtResource( 153 ), ExtResource( 154 ), ExtResource( 20 ), ExtResource( 50 ), ExtResource( 3 ), ExtResource( 48 ), ExtResource( 7 ) ],
+"loop": false,
+"name": "a_stand_move_to_still",
+"speed": 30.0
 }, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 85 ), ExtResource( 86 ), ExtResource( 82 ), ExtResource( 123 ), ExtResource( 84 ), ExtResource( 119 ), ExtResource( 120 ), ExtResource( 121 ), ExtResource( 122 ), ExtResource( 124 ), ExtResource( 125 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 97 ), ExtResource( 98 ), ExtResource( 99 ), ExtResource( 100 ), ExtResource( 101 ), ExtResource( 102 ), ExtResource( 103 ), ExtResource( 104 ), ExtResource( 105 ), ExtResource( 106 ), ExtResource( 107 ), ExtResource( 108 ), ExtResource( 109 ), ExtResource( 110 ), ExtResource( 111 ), ExtResource( 112 ), ExtResource( 113 ), ExtResource( 114 ), ExtResource( 115 ), ExtResource( 116 ), ExtResource( 117 ), ExtResource( 118 ), ExtResource( 87 ), ExtResource( 88 ), ExtResource( 89 ), ExtResource( 90 ), ExtResource( 91 ), ExtResource( 92 ), ExtResource( 93 ), ExtResource( 94 ), ExtResource( 83 ), ExtResource( 127 ), ExtResource( 126 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 130 ) ],
 "loop": true,
@@ -253,12 +238,27 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 65 ), ExtResource( 139 ), ExtResource( 138 ), ExtResource( 31 ), ExtResource( 164 ), ExtResource( 167 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 78 ), ExtResource( 63 ), ExtResource( 73 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 137 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 45 ), ExtResource( 70 ), ExtResource( 69 ), ExtResource( 134 ), ExtResource( 133 ), ExtResource( 72 ), ExtResource( 71 ), ExtResource( 56 ), ExtResource( 46 ), ExtResource( 79 ), ExtResource( 57 ), ExtResource( 178 ) ],
 "loop": true,
+"name": "a_stand_move",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 65 ), ExtResource( 139 ), ExtResource( 138 ), ExtResource( 31 ), ExtResource( 164 ), ExtResource( 167 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 78 ), ExtResource( 63 ), ExtResource( 73 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 137 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 45 ), ExtResource( 70 ), ExtResource( 69 ), ExtResource( 134 ), ExtResource( 133 ), ExtResource( 72 ), ExtResource( 71 ), ExtResource( 56 ), ExtResource( 46 ), ExtResource( 79 ), ExtResource( 57 ), ExtResource( 178 ) ],
+"loop": true,
 "name": "b_stand_move",
 "speed": 30.0
 }, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 85 ), ExtResource( 86 ), ExtResource( 82 ), ExtResource( 123 ), ExtResource( 84 ), ExtResource( 119 ), ExtResource( 120 ), ExtResource( 121 ), ExtResource( 122 ), ExtResource( 124 ), ExtResource( 125 ), ExtResource( 95 ), ExtResource( 96 ), ExtResource( 97 ), ExtResource( 98 ), ExtResource( 99 ), ExtResource( 100 ), ExtResource( 101 ), ExtResource( 102 ), ExtResource( 103 ), ExtResource( 104 ), ExtResource( 105 ), ExtResource( 106 ), ExtResource( 107 ), ExtResource( 108 ), ExtResource( 109 ), ExtResource( 110 ), ExtResource( 111 ), ExtResource( 112 ), ExtResource( 113 ), ExtResource( 114 ), ExtResource( 115 ), ExtResource( 116 ), ExtResource( 117 ), ExtResource( 118 ), ExtResource( 87 ), ExtResource( 88 ), ExtResource( 89 ), ExtResource( 90 ), ExtResource( 91 ), ExtResource( 92 ), ExtResource( 93 ), ExtResource( 94 ), ExtResource( 83 ), ExtResource( 127 ), ExtResource( 126 ), ExtResource( 128 ), ExtResource( 129 ), ExtResource( 130 ) ],
+"frames": [ ExtResource( 176 ), ExtResource( 165 ), ExtResource( 166 ), ExtResource( 168 ), ExtResource( 169 ), ExtResource( 171 ), ExtResource( 170 ), ExtResource( 172 ), ExtResource( 173 ), ExtResource( 174 ), ExtResource( 175 ) ],
 "loop": true,
-"name": "a_crouch_move",
+"name": "b_jump",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 53 ), ExtResource( 74 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 76 ), ExtResource( 75 ), ExtResource( 177 ), ExtResource( 62 ) ],
+"loop": false,
+"name": "b_crouch_still_to_move",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 77 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 161 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 160 ), ExtResource( 162 ), ExtResource( 158 ), ExtResource( 150 ), ExtResource( 147 ), ExtResource( 155 ), ExtResource( 149 ), ExtResource( 142 ), ExtResource( 141 ), ExtResource( 157 ), ExtResource( 143 ), ExtResource( 148 ), ExtResource( 156 ), ExtResource( 140 ), ExtResource( 151 ), ExtResource( 146 ) ],
+"loop": false,
+"name": "a_crouch_move_to_still",
 "speed": 30.0
 }, {
 "frames": [ ExtResource( 37 ) ],
@@ -266,8 +266,8 @@ animations = [ {
 "name": "a_crouch_still",
 "speed": 30.0
 }, {
-"frames": [ ExtResource( 77 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 161 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 160 ), ExtResource( 162 ), ExtResource( 158 ), ExtResource( 150 ), ExtResource( 147 ), ExtResource( 155 ), ExtResource( 149 ), ExtResource( 142 ), ExtResource( 141 ), ExtResource( 157 ), ExtResource( 143 ), ExtResource( 148 ), ExtResource( 156 ), ExtResource( 140 ), ExtResource( 151 ), ExtResource( 146 ) ],
+"frames": [ ExtResource( 67 ), ExtResource( 66 ), ExtResource( 81 ), ExtResource( 47 ), ExtResource( 163 ), ExtResource( 144 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 159 ), ExtResource( 61 ), ExtResource( 58 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 131 ), ExtResource( 135 ), ExtResource( 132 ), ExtResource( 136 ) ],
 "loop": false,
-"name": "a_crouch_move_to_still",
+"name": "a_stand_still_to_move",
 "speed": 30.0
 } ]

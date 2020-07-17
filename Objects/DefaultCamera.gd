@@ -1,3 +1,4 @@
+class_name DefaultCamera
 extends Camera2D
 
 var default_size = OS.get_window_size()

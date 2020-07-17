@@ -9,7 +9,7 @@ extents = Vector2( 36.1421, 58.288 )
 [node name="RoomLamp00" type="StaticBody2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-light_mask = 2
+light_mask = 4
 texture = ExtResource( 2 )
 region_rect = Rect2( 100, 10, 537, 654 )
 
@@ -18,9 +18,9 @@ position = Vector2( -0.263057, 34.7769 )
 scale = Vector2( 0.371896, 0.27199 )
 texture = ExtResource( 1 )
 energy = 1.5
-mode = 2
-range_item_cull_mask = 2
+range_item_cull_mask = 4
 shadow_enabled = true
+shadow_item_cull_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

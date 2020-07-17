@@ -17,15 +17,15 @@ onready var player = $Player
 onready var camera = $Player/Camera
 
 # Triggers
-onready var trigger_point_00 = $Triggers/TriggerPoint00
-onready var trigger_point_01 = $Triggers/TriggerPoint01
+onready var loop_begin = $Triggers/LoopBegin
+onready var loop_end = $Triggers/LoopEnd
 
 var current_second = 0
 var delay = 0
 
 func _trigger_point_check(delta):
-	var left_end_position = trigger_point_00.get_global_position()
-	var right_end_position = trigger_point_01.get_global_position()
+	var left_end_position = loop_begin.get_global_position()
+	var right_end_position = loop_end.get_global_position()
 	var player_position = player.get_global_position()
 	
 	# Left end

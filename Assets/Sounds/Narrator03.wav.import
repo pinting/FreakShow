@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Narrator03.wav-5b9896a2d4fe59302005ada3eb618c58.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Narrator03.wav"
+dest_files=[ "res://.import/Narrator03.wav-5b9896a2d4fe59302005ada3eb618c58.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

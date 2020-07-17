@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "BackgroundTrain",
+"language": "GDScript",
+"path": "res://Objects/BackgroundTrain.gd"
+}, {
+"base": "Camera2D",
+"class": "DefaultCamera",
+"language": "GDScript",
+"path": "res://Objects/DefaultCamera.gd"
+}, {
 "base": "Node",
 "class": "MusicMixer",
 "language": "GDScript",
@@ -18,16 +28,24 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Objects/Player.gd"
+}, {
+"base": "Sprite",
+"class": "Selection",
+"language": "GDScript",
+"path": "res://Objects/Selection/Selection.gd"
 } ]
 _global_script_class_icons={
+"BackgroundTrain": "",
+"DefaultCamera": "",
 "MusicMixer": "",
-"Player": ""
+"Player": "",
+"Selection": ""
 }
 
 [application]
 
 config/name="FreakShow"
-run/main_scene="res://Scenes/Part01.tscn"
+run/main_scene="res://Scenes/Part00.tscn"
 config/icon="res://icon.png"
 
 [autoload]

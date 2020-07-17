@@ -33,8 +33,13 @@ The game was imagined based on a selection of music tracks - however, I do not o
 
 The following tracks were used, but they are not commited to the repository.
 
-* Part01 was imagined based on `Cluster - Grosses Wasser`. Thanks to Hans-Joachim Roedelius, Dieter Moebius, Peter Baumann and William Roper.
+* Part00 was imagined based on `Cluster & Eno - Wehrmut`
+* Part01 was imagined based on `Cluster - Grosses Wasser`
 
 ## License
 
-Copyright (c) 2020 Dénes Tornyi. Licensed under the Apache license.
+All Rights Reserved.
+
+Copyright (c) 2020 Dénes Tornyi.
+
+The project is uploaded for educational purpose, to serve as an example how a game can be built. Contribution and fair use of the scripts and assets are welcomed, however, please contact me before doing so.

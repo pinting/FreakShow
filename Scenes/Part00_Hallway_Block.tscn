@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Shaders/Glow.shader" type="Shader" id=1]
+[ext_resource path="res://Objects/Environment/StreetLight00.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Environmnent/Door02.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Environment/RoomLamp01.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/radius = 10.0
+shader_param/amount = 0.5
+
+[node name="Part00_Hallway_Block" type="Node2D"]
+
+[node name="Door" type="Sprite" parent="."]
+material = SubResource( 1 )
+scale = Vector2( 0.83, 0.83 )
+texture = ExtResource( 3 )
+
+[node name="Lamp" parent="Door" instance=ExtResource( 4 )]
+position = Vector2( -3.57446, -358.218 )
+scale = Vector2( 0.598441, 0.598441 )
+z_index = 2
+
+[node name="Light" parent="Door/Lamp" instance=ExtResource( 2 )]
+position = Vector2( -653.318, 1228.73 )
+scale = Vector2( 2.14794, 0.669221 )

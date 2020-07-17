@@ -1,0 +1,134 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Objects/Selection/Door00.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Bed00.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Environment/RoomLight00.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Environment/RoomLamp00.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Environmnent/Building08_Transparent.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Wall02.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Environmnent/Floor02.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Fridge00.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Environmnent/Chair00.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Environmnent/Table00.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Environmnent/Cupboard00.png" type="Texture" id=12]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1843.14, 10 )
+
+[node name="Part00_Flat" type="Sprite"]
+light_mask = 2
+z_as_relative = false
+texture = ExtResource( 6 )
+
+[node name="Inside" type="Node2D" parent="."]
+position = Vector2( 408.555, 0 )
+z_index = -1
+z_as_relative = false
+
+[node name="Wall" type="Sprite" parent="Inside"]
+position = Vector2( -664.621, -49.3025 )
+scale = Vector2( 0.896382, 1 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5000, 576 )
+region_filter_clip = true
+
+[node name="Floor" type="Sprite" parent="Inside/Wall"]
+position = Vector2( -1.38556, 357.831 )
+scale = Vector2( 0.999862, 1 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5000, 140 )
+
+[node name="Bed" type="Sprite" parent="Inside/Wall/Floor"]
+position = Vector2( -1263.81, -100.748 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 3 )
+
+[node name="Fridge" type="Sprite" parent="Inside/Wall/Floor"]
+position = Vector2( 1759.99, -289.52 )
+scale = Vector2( 1.00577, 0.901431 )
+texture = ExtResource( 9 )
+
+[node name="Cupboard" type="Sprite" parent="Inside/Wall/Floor"]
+position = Vector2( 1019.47, -438.105 )
+scale = Vector2( 1.11524, 0.999546 )
+texture = ExtResource( 12 )
+
+[node name="Table" type="Sprite" parent="Inside/Wall/Floor"]
+position = Vector2( 1016.4, -152.438 )
+scale = Vector2( 1.11575, 1 )
+texture = ExtResource( 11 )
+
+[node name="Chair" type="Sprite" parent="Inside/Wall/Floor"]
+position = Vector2( -318.71, -203.113 )
+scale = Vector2( 1.11575, 1 )
+texture = ExtResource( 10 )
+
+[node name="Door" parent="Inside" instance=ExtResource( 1 )]
+position = Vector2( -421.925, -23.8616 )
+scale = Vector2( 0.85, 0.85 )
+
+[node name="Light2D" type="Light2D" parent="Inside/Door"]
+position = Vector2( -8.37723, 22.2735 )
+scale = Vector2( 0.635006, 0.609941 )
+texture = ExtResource( 2 )
+energy = 0.6
+mode = 2
+
+[node name="RoomLamp00" parent="Inside" instance=ExtResource( 5 )]
+position = Vector2( -1233.72, -280.524 )
+z_index = 2
+
+[node name="Light" parent="Inside/RoomLamp00" instance=ExtResource( 4 )]
+position = Vector2( 14.9398, 10.9789 )
+scale = Vector2( 1.62313, 0.95 )
+
+[node name="RoomLamp01" parent="Inside" instance=ExtResource( 5 )]
+position = Vector2( 427.571, -282.469 )
+z_index = 2
+z_as_relative = false
+
+[node name="Light" parent="Inside/RoomLamp01" instance=ExtResource( 4 )]
+position = Vector2( 14.9396, 10.9792 )
+scale = Vector2( 1.62531, 0.95 )
+
+[node name="CollisionAll" type="StaticBody2D" parent="."]
+position = Vector2( 408.555, 0 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="Walls" type="CollisionPolygon2D" parent="CollisionAll"]
+polygon = PoolVector2Array( -2144.95, -310.92, 1278.02, -296.672, 1275.33, 335.12, -2132.85, 345.068, -2123.44, -422.492, -2372.15, -418.077, -2377.75, 518.065, 1497.67, 528.145, 1504.21, -434.131, -2143.6, -417.115 )
+
+[node name="CollisionBack" type="StaticBody2D" parent="."]
+position = Vector2( -1795.08, -1967.89 )
+scale = Vector2( 1, 0.937116 )
+z_index = 100
+
+[node name="Ground" type="CollisionShape2D" parent="CollisionBack"]
+position = Vector2( 1788.39, 2424.27 )
+shape = SubResource( 2 )
+
+[node name="CollisionCenter" type="StaticBody2D" parent="."]
+position = Vector2( -1792.25, -1978.28 )
+scale = Vector2( 1, 0.937116 )
+z_index = 100
+collision_layer = 2
+collision_mask = 2
+
+[node name="Ground" type="CollisionShape2D" parent="CollisionCenter"]
+position = Vector2( 1787.72, 2446.91 )
+shape = SubResource( 2 )
+
+[node name="CollisionFront" type="StaticBody2D" parent="."]
+position = Vector2( -1795.08, -1960.33 )
+scale = Vector2( 1, 0.937116 )
+z_index = 100
+collision_layer = 4
+collision_mask = 4
+
+[node name="Ground" type="CollisionShape2D" parent="CollisionFront"]
+position = Vector2( 1790.55, 2442.76 )
+shape = SubResource( 2 )

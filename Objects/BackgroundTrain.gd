@@ -1,3 +1,4 @@
+class_name BackgroundTrain
 extends Node2D
 
 # Start the train from X set in Editor minus this

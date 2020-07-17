@@ -97,8 +97,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Darkness" type="CanvasModulate" parent="."]
+light_mask = 0
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
+
 [node name="Player" parent="." instance=ExtResource( 28 )]
-position = Vector2( -4804.83, -385.558 )
+position = Vector2( 12525.5, -293.581 )
 scale = Vector2( 0.7, 0.7 )
 FRAMES = ExtResource( 37 )
 
@@ -116,10 +120,6 @@ material = SubResource( 3 )
 z_index = 99
 z_as_relative = false
 texture = SubResource( 4 )
-
-[node name="Darkness" type="CanvasModulate" parent="."]
-light_mask = 0
-color = Color( 0.196078, 0.196078, 0.196078, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 5 )
@@ -359,5 +359,5 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 31
+frame = 39
 playing = true

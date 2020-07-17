@@ -3,12 +3,16 @@ render_mode blend_mix;
 
 uniform float amount = 1.0;
 
-void fragment() {
-	vec2 uv = UV * 0.05;
-	float a = fract(sin(dot(UV, vec2(12.9898, 78.233))) * 438.5453);
-	vec4 col = texture(TEXTURE, UV);
+float rand(vec2 v)
+{
+	return fract(sin(dot(v, vec2(56, 78)) * 1000.0) * 1000.0);
+}
 
-	col.a *= pow(a, amount);
+void fragment()
+{
+	vec4 base = texture(TEXTURE, UV);
 
-	COLOR = col;
+	base.a *= pow(rand(UV), amount);
+
+	COLOR = base;
 }

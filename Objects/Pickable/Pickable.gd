@@ -9,9 +9,11 @@ export var KICK_FORCE = Vector2(100, 100)
 # Force max kick velocity
 export var MAX_VELOCITY = Vector2(400, 400)
 
-signal clicked
+onready var sprite = $Sprite
 
 var picked_up = false
+
+signal clicked
 
 func _input_event(viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
@@ -20,7 +22,7 @@ func _input_event(viewport, event, _shape_idx):
 
 func _physics_process(_delta):
 	if picked_up:
-		var position_diff = get_global_mouse_position() - get_global_position()
+		var position_diff = get_global_mouse_position() - global_position
 		var grab_force = position_diff.normalized() * GRAB_FORCE
 		
 		if abs(linear_velocity.x) < MAX_VELOCITY.x and abs(linear_velocity.y) < MAX_VELOCITY.y :
