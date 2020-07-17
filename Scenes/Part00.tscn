@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Part00_Hallway.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part00.gd" type="Script" id=2]
-[ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://Objects/Environment/Sky00.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Objects/Pickable/Ball00.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Objects/Sky.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=6]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=8]
@@ -55,7 +54,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( -1328.65, -10192 )
+position = Vector2( -1346.24, -73.793 )
 scale = Vector2( 0.7, 0.7 )
 FRAMES = ExtResource( 3 )
 
@@ -73,7 +72,7 @@ environment = SubResource( 3 )
 
 [node name="Sky" parent="." instance=ExtResource( 4 )]
 material = SubResource( 4 )
-position = Vector2( -19247.3, -13934.3 )
+position = Vector2( -9455.25, -59.7188 )
 scale = Vector2( 2.5, 2.5 )
 
 [node name="Fog" type="Sprite" parent="Sky"]
@@ -86,23 +85,21 @@ texture = SubResource( 6 )
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="Flat" parent="Environment" instance=ExtResource( 9 )]
-position = Vector2( 36.8008, -10133.6 )
+position = Vector2( 19.2158, -15.3926 )
 
 [node name="Hallway" parent="Environment" instance=ExtResource( 1 )]
-position = Vector2( -163.233, -263.104 )
+position = Vector2( 198.36, 8454.1 )
 
 [node name="HallwayCopy00" parent="Environment" instance=ExtResource( 1 )]
-position = Vector2( -7692.66, -263.104 )
+position = Vector2( -7331.07, 8454.1 )
 
 [node name="HallwayCopy01" parent="Environment" instance=ExtResource( 1 )]
-position = Vector2( 7366.08, -263.104 )
-
-[node name="Ball00" parent="Environment" instance=ExtResource( 5 )]
+position = Vector2( 7727.67, 8454.1 )
 
 [node name="Triggers" type="Node2D" parent="."]
 
 [node name="LoopBegin" type="Node2D" parent="Triggers"]
-position = Vector2( -3928.25, 17.9531 )
+position = Vector2( -3566.66, 8735.15 )
 
 [node name="LoopEnd" type="Node2D" parent="Triggers"]
-position = Vector2( 3600.72, 20.5606 )
+position = Vector2( 3962.31, 8737.76 )

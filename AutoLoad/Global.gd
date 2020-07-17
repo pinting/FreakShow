@@ -13,7 +13,7 @@ const DEBUG = false
 const NO_SOUNDS = true
 
 # Disable intro
-const NO_INTRO = true
+const NO_INTRO = false
 
 # Current camera object
 var current_camera = null

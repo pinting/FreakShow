@@ -1,25 +1,10 @@
 extends "res://Scenes/BaseScene.gd"
 
-# Size of a trigger point detect field
-export var DETECT_THRESHOLD = 15
-
-# Time after the black screen fades out
-export var FADE_OUT_AFTER = 2
-
-# Fade out duration
-export var FADE_OUT_DURATION = 3
-
 # Length of the intro sound effect
 export var LOW_PITCH_LENGTH = 5
 
 # Seconds to wait for the ball to be stuck
 export var BALL_IS_STUCK_TIMEOUT = 1
-
-# Delay to wait before starting the game (if intro is ON)
-export var START_DELAY = 1
-
-onready var black_screen = $BlackScreen
-onready var player = $Player
 
 # Sound
 onready var music_mixer = $Sound/MusicMixer
@@ -34,11 +19,9 @@ onready var trigger_point_01 = $Triggers/TriggerPoint01
 onready var trigger_point_02 = $Triggers/TriggerPoint02
 
 # Pickable
-onready var ball = $Pickable/Ball
+onready var ball = $Environment/Ball
 
 var ball_is_stuck_counter = BALL_IS_STUCK_TIMEOUT
-var current_second = 0
-var delay = 0
 
 var music_00
 var music_01
@@ -59,7 +42,7 @@ func _ready():
 		wind_sound.play()
 		music_mixer.play()
 
-func _trigger_point_check(delta):
+func _process_trigger_points(delta):
 	# Background train
 	if trigger_point_00.visible:
 		var trigger = trigger_point_00.get_global_position()
@@ -98,13 +81,8 @@ func _trigger_point_check(delta):
 		else:
 			ball_is_stuck_counter = BALL_IS_STUCK_TIMEOUT
 
-func _intro(delta):
+func _process_music_intro(delta):
 	if Global.NO_INTRO:
-		return
-	
-	delay += delta
-	
-	if delay < START_DELAY:
 		return
 	
 	current_second += delta
@@ -118,16 +96,7 @@ func _intro(delta):
 		# Make vinyl mix sound effect
 		music_mixer.master_player.pitch_scale = min(pitch_value, 1)
 		wind_sound.pitch_scale = min(pitch_value, 1)
-	
-	var fade_out_value = (current_second - FADE_OUT_AFTER) / FADE_OUT_DURATION
-	
-	if fade_out_value >= 1.0:
-		black_screen.modulate = Color(0, 0, 0, 0)
-		black_screen.visible = false
-	elif fade_out_value >= 0:
-		# Make the black screen fade away
-		black_screen.modulate = Color(0, 0, 0, max(1 - fade_out_value, 0))
 
 func _process(delta):
-	_intro(delta)
-	_trigger_point_check(delta)
+	_process_music_intro(delta)
+	_process_trigger_points(delta)

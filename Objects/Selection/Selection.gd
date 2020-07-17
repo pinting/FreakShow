@@ -1,17 +1,23 @@
 class_name Selection
 extends Sprite
 
-# Penetration effect when mouse is hovering
-export var SELECT_PENETRATION = 1.1
+# Primary effect name
+export var PRIMARY_KEY = "penetration_amount"
 
-# Default penetration effect value
-export var DEFAULT_PENETRATION = 1.0
+# Primary effect when mouse is hovering
+export var PRIMARY_HOVER = 1.1
 
-# Glow effect when mouse is hovering
-export var SELECT_GLOW = 0.5
+# Default primary effect value
+export var PRIMARY_DEFAULT = 1.0
 
-# Default glow effect value
-export var DEFAULT_GLOW = 0.0
+# Secondary effect name
+export var SECONDARY_KEY = "glow_amount"
+
+# Secondary effect when mouse is hovering
+export var SECONDARY_HOVER = 0.5
+
+# Default secondary effect value
+export var SECONDARY_DEFAULT = 0.0
 
 # Effect step size in one second (both glow and penetration)
 export var EFFECT_STEP = 1.0
@@ -22,19 +28,16 @@ export var LIMIT = Vector2(1, 1)
 # Center of the object
 export var CENTER = Vector2(0.5, 0.5)
 
-# Keep the size of the sprite
-export var KEEP_SIZE = true
+var _current_primary = PRIMARY_DEFAULT
+var _current_secondary = SECONDARY_DEFAULT
 
-var current_penetration = DEFAULT_PENETRATION
-var current_glow = DEFAULT_GLOW
+var held = false
 
 signal on_select
 
 func _ready():
-	assert(SELECT_PENETRATION > DEFAULT_PENETRATION)
-	assert(SELECT_GLOW > DEFAULT_GLOW)
-	
-	material.set_shader_param("keep_size", KEEP_SIZE)
+	assert(PRIMARY_HOVER >= PRIMARY_DEFAULT)
+	assert(SECONDARY_HOVER >= SECONDARY_DEFAULT)
 
 func _input_event(viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
@@ -49,17 +52,17 @@ func _physics_process(delta):
 	if sum.x >= 0.0 && sum.x <= LIMIT.x && sum.y >= 0.0 && sum.y <= LIMIT.y:
 		material.set_shader_param("offset", sum)
 		
-		current_penetration += EFFECT_STEP * delta
-		current_penetration = min(SELECT_PENETRATION, current_penetration)
+		_current_primary += EFFECT_STEP * delta
+		_current_primary = min(PRIMARY_HOVER, _current_primary)
 		
-		current_glow += EFFECT_STEP * delta
-		current_glow = min(SELECT_GLOW, current_glow)
-	else:
-		current_penetration -= EFFECT_STEP * delta
-		current_penetration = max(DEFAULT_PENETRATION, current_penetration)
+		_current_secondary += EFFECT_STEP * delta
+		_current_secondary = min(SECONDARY_HOVER, _current_secondary)
+	elif not held:
+		_current_primary -= EFFECT_STEP * delta
+		_current_primary = max(PRIMARY_DEFAULT, _current_primary)
 		
-		current_glow -= EFFECT_STEP * delta
-		current_glow = max(DEFAULT_GLOW, current_glow)
+		_current_secondary -= EFFECT_STEP * delta
+		_current_secondary = max(SECONDARY_DEFAULT, _current_secondary)
 	
-	material.set_shader_param("penetration", current_penetration)
-	material.set_shader_param("glow_amount", current_glow)
+	material.set_shader_param(PRIMARY_KEY, _current_primary)
+	material.set_shader_param(SECONDARY_KEY, _current_secondary)

@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Objects/Pickable/Pickable.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Environmnent/Ball00.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Fruit00.png" type="Texture" id=2]
 [ext_resource path="res://Shaders/Selection.shader" type="Shader" id=3]
 [ext_resource path="res://Objects/Selection/Selection.gd" type="Script" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
-bounce = 0.9
+bounce = 0.1
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
@@ -16,10 +16,7 @@ shader_param/offset = Vector2( 0.5, 0.5 )
 shader_param/penetration_amount = 1.0
 shader_param/glow_amount = 0.0
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 66.6354
-
-[node name="Ball00" type="RigidBody2D" groups=[
+[node name="Fruit00" type="RigidBody2D" groups=[
 "pickable",
 ]]
 input_pickable = true
@@ -37,6 +34,5 @@ material = SubResource( 2 )
 texture = ExtResource( 2 )
 script = ExtResource( 4 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1.04492, -0.78376 )
-shape = SubResource( 3 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -21.0241, 0.517475, -13.0579, -9.64416, 3.18816, -13.8468, 18.3679, -8.01328, 21.2533, 2.52471, 14.7925, 12.2473, 4.0036, 14.5681, -14.5633, 12.2473, -21.275, 7.16645 )

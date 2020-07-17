@@ -20,14 +20,25 @@ frames = ExtResource( 2 )
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
-position = Vector2( 72.28, 495.781 )
+position = Vector2( 72.4627, 495.781 )
 enabled = true
-cast_to = Vector2( 0, 10 )
+cast_to = Vector2( 0, 1 )
+collision_mask = 10
+collide_with_areas = true
 
 [node name="PlatformDetector01" type="RayCast2D" parent="."]
 position = Vector2( -51.2906, 496.192 )
 enabled = true
-cast_to = Vector2( 0, 10 )
+cast_to = Vector2( 0, 1 )
+collision_mask = 10
+collide_with_areas = true
+
+[node name="TopDetector" type="RayCast2D" parent="."]
+position = Vector2( 18.8954, -335.472 )
+enabled = true
+cast_to = Vector2( 0, -50 )
+collision_mask = 10
+collide_with_areas = true
 
 [node name="CrouchCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0.642532, 0 )

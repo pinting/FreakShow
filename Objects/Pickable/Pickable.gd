@@ -11,7 +11,7 @@ export var MAX_VELOCITY = Vector2(400, 400)
 
 onready var sprite = $Sprite
 
-var picked_up = false
+var held = false
 
 signal clicked
 
@@ -21,7 +21,7 @@ func _input_event(viewport, event, _shape_idx):
 			emit_signal("clicked", self)
 
 func _physics_process(_delta):
-	if picked_up:
+	if held:
 		var position_diff = get_global_mouse_position() - global_position
 		var grab_force = position_diff.normalized() * GRAB_FORCE
 		
@@ -30,15 +30,22 @@ func _physics_process(_delta):
 
 
 func pickup():
-	if picked_up:
+	if held:
 		return
 	
-	picked_up = true
+	# If sprite is a selection based one, it needs to remain lit
+	if sprite.get("held") != null:
+		sprite.held = true
+	
+	held = true
 
 func drop(impulse = Vector2.ZERO):
-	if not picked_up:
+	if not held:
 		return
 	
 	apply_central_impulse(impulse)
 	
-	picked_up = false
+	if sprite.get("held") != null:
+		sprite.held = false
+	
+	held = false

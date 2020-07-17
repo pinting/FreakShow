@@ -43,6 +43,7 @@ export var FLOOR_DETECT_DISTANCE = 20.0
 
 onready var platform_detector_00 = $PlatformDetector00
 onready var platform_detector_01 = $PlatformDetector01
+onready var top_detector = $TopDetector
 onready var animated_sprite = $AnimatedSprite
 onready var stand_collision = $StandCollision
 onready var crouch_collision = $CrouchCollision
@@ -66,7 +67,12 @@ func _ready():
 func _physics_process(delta):
 	_check_crouch()
 	
+	var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
+	var head_colliding = top_detector.is_colliding()
 	var direction = _get_direction()
+	
+	if on_platform and top_detector.is_colliding():
+		direction.y = 0
 	
 	if current_velocity.x != 0:
 		var rad = WALK_WAVE_COUNT * current_second * current_animation_speed * PI
@@ -75,7 +81,6 @@ func _physics_process(delta):
 		current_second += delta
 	
 	var snap_vector = -1 * FLOOR_NORMAL * FLOOR_DETECT_DISTANCE if direction.y == 0 else Vector2.ZERO
-	var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 	var next_velocity = _calculate_next_velocity(delta, direction)
 	
 	current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, FLOOR_NORMAL, on_platform, 4, 0.9, false)

@@ -1,10 +1,10 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
-uniform vec2 offset = vec2(0.5, 0.5);
-uniform float penetration = 1.0;
 uniform bool keep_size = true;
 uniform float glow_radius = 10.0;
+uniform vec2 offset = vec2(0.5, 0.5);
+uniform float penetration_amount = 1.0;
 uniform float glow_amount = 0.0;
 
 vec4 safe_texture(sampler2D tex, vec2 p)
@@ -21,9 +21,9 @@ void fragment()
 {
 	vec2 pixel_size = TEXTURE_PIXEL_SIZE;
 	vec4 color = safe_texture(TEXTURE, UV);
+	vec4 glow = color;
 
 	float r = glow_radius;
-	vec4 glow = color;
 
 	glow += safe_texture(TEXTURE, UV + vec2(-r, -r) * pixel_size);
 	glow += safe_texture(TEXTURE, UV + vec2(-r, 0.0) * pixel_size);
@@ -45,14 +45,14 @@ void fragment()
 	glow += safe_texture(TEXTURE, UV + vec2(r, 0.0) * pixel_size);
 	glow += safe_texture(TEXTURE, UV + vec2(r, r) * pixel_size);
 
-	glow /= 17.0; // Number of safe_texture calls
+	glow /= 17.0; // Number of texture calls
 	glow *= glow_amount;
 
 	vec2 ruv = UV - offset;
 	vec2 dir = normalize(ruv);
 	float len = length(ruv);
 
-	len = pow(len * 2.0, penetration) * 0.5;
+	len = pow(len * 2.0, penetration_amount) * 0.5;
 	ruv = len * dir;
 
 	COLOR = safe_texture(TEXTURE, ruv + offset) + glow;

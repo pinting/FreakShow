@@ -1,9 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Shaders/Glow.shader" type="Shader" id=1]
-[ext_resource path="res://Objects/Environment/StreetLight00.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Light/StreetLight00.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Environmnent/Door02.png" type="Texture" id=3]
-[ext_resource path="res://Objects/Environment/RoomLamp01.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Static/RoomLamp01.tscn" type="PackedScene" id=4]
+
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
