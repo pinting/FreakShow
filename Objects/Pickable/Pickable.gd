@@ -9,16 +9,20 @@ export var KICK_FORCE = Vector2(100, 100)
 # Force max kick velocity
 export var MAX_VELOCITY = Vector2(400, 400)
 
+# Selectable or normal sprite
 onready var sprite = $Sprite
 
 var held = false
 
-signal clicked
+signal picked
+
+func _ready():
+	assert(is_in_group("pickable"))
 
 func _input_event(viewport, event, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			emit_signal("clicked", self)
+			emit_signal("picked", self)
 
 func _physics_process(_delta):
 	if held:
@@ -33,7 +37,7 @@ func pickup():
 	if held:
 		return
 	
-	# If sprite is a selection based one, it needs to remain lit
+	# If sprite is a selectiable, it needs to remain lit
 	if sprite.get("held") != null:
 		sprite.held = true
 	

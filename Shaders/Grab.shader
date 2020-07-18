@@ -2,9 +2,9 @@ shader_type canvas_item;
 render_mode blend_mix;
 
 uniform bool keep_size = true;
-uniform float glow_radius = 10.0;
 uniform vec2 offset = vec2(0.5, 0.5);
-uniform float penetration_amount = 1.0;
+uniform float grab_amount = 1.0;
+uniform float glow_radius = 10.0;
 uniform float glow_amount = 0.0;
 
 vec4 safe_texture(sampler2D tex, vec2 p)
@@ -52,7 +52,7 @@ void fragment()
 	vec2 dir = normalize(ruv);
 	float len = length(ruv);
 
-	len = pow(len * 2.0, penetration_amount) * 0.5;
+	len = pow(len * 2.0, grab_amount) * 0.5;
 	ruv = len * dir;
 
 	COLOR = safe_texture(TEXTURE, ruv + offset) + glow;

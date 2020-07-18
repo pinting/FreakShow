@@ -96,10 +96,13 @@ position = Vector2( -7331.07, 8454.1 )
 [node name="HallwayCopy01" parent="Environment" instance=ExtResource( 1 )]
 position = Vector2( 7727.67, 8454.1 )
 
-[node name="Triggers" type="Node2D" parent="."]
+[node name="Points" type="Node2D" parent="."]
 
-[node name="LoopBegin" type="Node2D" parent="Triggers"]
+[node name="LoopBegin" type="Node2D" parent="Points"]
 position = Vector2( -3566.66, 8735.15 )
 
-[node name="LoopEnd" type="Node2D" parent="Triggers"]
+[node name="LoopEnd" type="Node2D" parent="Points"]
 position = Vector2( 3962.31, 8737.76 )
+
+[node name="HallwaySpawn" type="Node2D" parent="Points"]
+position = Vector2( 681.824, 8719.9 )

@@ -7,9 +7,9 @@ var ignore_y = false
 var ignore_x = false
 
 func _ready():
-	pass
+	connect("draw", self, "_on_draw")
 
-func _on_Camera2D_draw():
+func _on_draw():
 	var scale = (Global.RESOLUTION / OS.get_window_size()) * Global.CAMERA_ZOOM
 	var max_scale = max(scale.x, scale.y)
 	

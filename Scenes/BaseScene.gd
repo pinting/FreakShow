@@ -28,9 +28,9 @@ func _ready():
 		_intro_over = true
 	
 	for node in get_tree().get_nodes_in_group("pickable"):
-		node.connect("clicked", self, "_on_pickable_clicked")
+		node.connect("picked", self, "_on_pickable_picked")
 
-func _on_pickable_clicked(object):
+func _on_pickable_picked(object):
 	if not _held_object:
 		_held_object = object
 		_held_object.pickup()

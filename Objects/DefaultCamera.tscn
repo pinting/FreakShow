@@ -8,4 +8,3 @@ current = true
 smoothing_enabled = true
 smoothing_speed = 0.25
 script = ExtResource( 1 )
-[connection signal="draw" from="." to="." method="_on_Camera2D_draw"]

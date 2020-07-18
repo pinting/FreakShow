@@ -30,16 +30,16 @@ _global_script_classes=[ {
 "path": "res://Objects/Player.gd"
 }, {
 "base": "Sprite",
-"class": "Selection",
+"class": "Selectable",
 "language": "GDScript",
-"path": "res://Objects/Selection/Selection.gd"
+"path": "res://Objects/Selectable/Selectable.gd"
 } ]
 _global_script_class_icons={
 "BackgroundTrain": "",
 "DefaultCamera": "",
 "MusicMixer": "",
 "Player": "",
-"Selection": ""
+"Selectable": ""
 }
 
 [application]

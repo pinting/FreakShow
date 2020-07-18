@@ -13,10 +13,10 @@ onready var wind_sound = $Sound/WindSound
 # Environment
 onready var background_train = $Environment/BackgroundTrain
 
-# Triggers
-onready var trigger_point_00 = $Triggers/TriggerPoint00
-onready var trigger_point_01 = $Triggers/TriggerPoint01
-onready var trigger_point_02 = $Triggers/TriggerPoint02
+# Points
+onready var trigger_point_00 = $Points/TriggerPoint00
+onready var trigger_point_01 = $Points/TriggerPoint01
+onready var trigger_point_02 = $Points/TriggerPoint02
 
 # Pickable
 onready var ball = $Environment/Ball
