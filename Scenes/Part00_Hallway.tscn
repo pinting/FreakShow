@@ -13,21 +13,22 @@
 polygon = PoolVector2Array( -6882.82, -3575.52, -6880.36, -4990.21, 648.825, -4992.66, 647.118, -3579.69 )
 
 [sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( -6881.84, -4986.47, -6883.31, -3637.16, 648.632, -3638.02, 648.061, -4986.54 )
+polygon = PoolVector2Array( -6881.84, -4986.47, -6881.94, -3582.45, 648.009, -3582.14, 648.061, -4986.54 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 4722.81, 353.699 )
 
 [node name="Part00_Hallway" type="Sprite"]
 light_mask = 0
+position = Vector2( 0, 5.1167 )
 z_index = 3
 z_as_relative = false
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 0, 3000, 7530, 4000 )
+region_rect = Rect2( 0, -706, 7530, 3533 )
 
 [node name="Inside" type="Sprite" parent="."]
-position = Vector2( -0.127442, 229.415 )
+position = Vector2( 0, -67.071 )
 z_index = -2
 z_as_relative = false
 texture = ExtResource( 1 )
@@ -36,16 +37,30 @@ region_rect = Rect2( 0, 0, 7530, 578 )
 
 [node name="Graffiti00" type="Sprite" parent="Inside"]
 self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( -2762.52, 50.8652 )
+rotation = 0.186776
+scale = Vector2( 0.488666, 0.488666 )
+texture = ExtResource( 7 )
+
+[node name="Graffiti01" type="Sprite" parent="Inside"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 1039.89, 34.1134 )
+rotation = -0.334296
+scale = Vector2( 0.732888, 0.732888 )
+texture = ExtResource( 8 )
+
+[node name="Graffiti02" type="Sprite" parent="Inside"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
 position = Vector2( 1737.22, -108.307 )
 rotation = -0.0131194
 texture = ExtResource( 6 )
 
-[node name="Graffiti01" type="Sprite" parent="Inside"]
-self_modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( 1132.21, 105.854 )
-rotation = -0.334296
-scale = Vector2( 0.355005, 0.355005 )
-texture = ExtResource( 8 )
+[node name="Graffiti03" type="Sprite" parent="Inside"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 2965.38, -136.715 )
+rotation = 0.291425
+scale = Vector2( 0.1604, 0.1604 )
+texture = ExtResource( 4 )
 
 [node name="Door00" parent="Inside" instance=ExtResource( 5 )]
 position = Vector2( -3279.88, 32.129 )
@@ -53,25 +68,11 @@ position = Vector2( -3279.88, 32.129 )
 [node name="Door01" parent="Inside" instance=ExtResource( 5 )]
 position = Vector2( -2338.88, 32.129 )
 
-[node name="Graffiti" type="Sprite" parent="Inside/Door01"]
-self_modulate = Color( 1, 1, 1, 0.588235 )
-position = Vector2( -1.98193, 152.572 )
-rotation = 0.186776
-scale = Vector2( 0.488666, 0.488666 )
-texture = ExtResource( 7 )
-
 [node name="Door02" parent="Inside" instance=ExtResource( 5 )]
 position = Vector2( -1399.49, 30.5197 )
 
 [node name="Door03" parent="Inside" instance=ExtResource( 5 )]
 position = Vector2( -458.493, 30.5197 )
-
-[node name="Graffiti" type="Sprite" parent="Inside/Door03"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-position = Vector2( 79.2732, 120.928 )
-rotation = 0.291425
-scale = Vector2( 0.1604, 0.1604 )
-texture = ExtResource( 4 )
 
 [node name="Door04" parent="Inside" instance=ExtResource( 5 )]
 position = Vector2( 482.507, 30.5197 )
@@ -92,15 +93,15 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 7530, 140 )
 
 [node name="Top" type="LightOccluder2D" parent="."]
-position = Vector2( 3117.45, 3526.89 )
+position = Vector2( 3117.99, 3221.94 )
 occluder = SubResource( 1 )
 
 [node name="Bottom" type="LightOccluder2D" parent="."]
-position = Vector2( 3116.97, 5639.51 )
+position = Vector2( 3116.99, 5345.09 )
 occluder = SubResource( 2 )
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
-position = Vector2( -0.0117188, 582.965 )
+position = Vector2( 0.784424, 286.479 )
 collision_layer = 15
 collision_mask = 15
 

@@ -7,12 +7,10 @@
 [ext_resource path="res://Assets/Environmnent/Graffiti03.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Environmnent/Stairs00.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Environmnent/Foot01.png" type="Texture" id=7]
-[ext_resource path="res://Objects/Static/RoomLamp00.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Environmnent/Pillar00.png" type="Texture" id=9]
-[ext_resource path="res://Objects/Light/RoomLight00.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Environmnent/Graffiti00.png" type="Texture" id=11]
-
-
+[ext_resource path="res://Objects/Static/SideLamp00.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Light/SideLight00.tscn" type="PackedScene" id=13]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -753.59, 407.076, -746.624, -351.282, 711.923, -347.36, 712.603, 404.682, 848.141, 405.235, 848.574, -5232.52, -2299.02, -5235.85, -2290.62, 611.897, 846.756, 613.875, 847.565, 404.928, 713.626, 406.32 )
@@ -41,14 +39,15 @@ scale = Vector2( 0.86, 0.86 )
 z_index = 1
 texture = ExtResource( 4 )
 
-[node name="Lamp" parent="Inside" instance=ExtResource( 8 )]
-position = Vector2( -43.7984, -236.879 )
-scale = Vector2( 0.957105, 0.896919 )
-z_index = 1
+[node name="Lamp" parent="Inside" instance=ExtResource( 12 )]
+position = Vector2( -624.624, -212.788 )
+scale = Vector2( -0.957, 0.897 )
 
-[node name="Light" parent="Inside/Lamp" instance=ExtResource( 10 )]
-position = Vector2( 5.13818, 30.5811 )
-scale = Vector2( 0.999999, 1.00732 )
+[node name="Light" parent="Inside/Lamp" instance=ExtResource( 13 )]
+modulate = Color( 0, 0.203922, 1, 1 )
+self_modulate = Color( 0.662745, 0, 1, 1 )
+position = Vector2( -40.8509, 400.892 )
+scale = Vector2( 0.520881, 0.401698 )
 
 [node name="Graffiti00" type="Sprite" parent="Inside"]
 modulate = Color( 0, 0, 0, 0.823529 )

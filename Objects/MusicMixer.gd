@@ -19,6 +19,9 @@ export var MIN_VOLUME = -60
 # Parts of the music
 export var PARTS = []
 
+# Debug the music player (Global.DEBUG needs to be true)
+export var DEBUG = false
+
 const EPS = 0.05
 
 onready var player_00 = $AudioStreamPlayer00
@@ -35,8 +38,10 @@ var _playback_prev_diff = 0
 var _virtual_position = 0
 var _break_loop = false # Wait until the end
 var _break_loop_now = false # Break it ASAP
-var _forced_next = null
+var _forced_next = null # Index of the next part
 var _mixing = false
+var _kill_timeout = 0
+var _kill = false
 
 func _ready():
 	master_player = player_00
@@ -70,13 +75,17 @@ func add_part(start, end, loop, in_duration, out_duration, offset = 0):
 		"out_duration": out_duration if out_duration > EPS else EPS,
 		# Offset the start to the previous one
 		# This does not apply to the first played part
-		# Too large negative offset can break the mixer
+		# Too large offset can break the mixer
 		"offset": offset
 	}
 	
 	parts.append(new_part)
 	
 	return len(parts) - 1
+
+func kill(timeout = 5):
+	_kill = true
+	_kill_timeout = timeout
 
 func play():
 	if len(parts) == 0:
@@ -92,11 +101,15 @@ func play():
 	_break_loop = false
 	_break_loop_now = false
 	_mixing = false
+	_kill = false
+	_kill_timeout = 0
 
 func get_next():
 	var current_part = parts[_current_part_index]
 	
-	if _forced_next != null:
+	if _kill:
+		return -1
+	elif _forced_next != null:
 		assert(len(parts) > _forced_next)
 		return _forced_next
 	elif current_part.loop and not _break_loop:
@@ -137,7 +150,12 @@ func _process(delta):
 	var diff_to_start = current_part.start - _virtual_position
 	var diff_to_end = current_part.end - _virtual_position
 	
-	Global.debug_if_integer(diff_to_start, str(round(diff_to_start), " / ", round(diff_to_end)))
+	# If kill is set, start to act like diff_to_end is near
+	if _kill:
+		diff_to_end = _kill_timeout
+		_kill_timeout -= delta
+	
+	_debug_if_integer(diff_to_start, str(round(diff_to_start), " / ", round(diff_to_end)))
 	
 	var volume_diff = abs(MAX_VOLUME - MIN_VOLUME)
 	
@@ -145,18 +163,18 @@ func _process(delta):
 	if not _break_loop_now and diff_to_start < 0:
 		if abs(diff_to_start) < current_part.in_duration:
 			master_player.volume_db += volume_diff * (delta / current_part.in_duration)
-			Global.debug_if_integer(diff_to_start, str("master fade in ", master_player.volume_db))
+			_debug_if_integer(diff_to_start, str("master fade in ", master_player.volume_db))
 		elif abs(diff_to_end) > current_part.out_duration:
 			master_player.volume_db = MAX_VOLUME
-			Global.debug_if_integer(diff_to_start, "master max volume")
+			_debug_if_integer(diff_to_start, "master max volume")
 	
 	# Fade out the current part 
 	if abs(diff_to_end) < current_part.out_duration:
 		master_player.volume_db -= volume_diff * (delta / current_part.out_duration)
-		Global.debug_if_integer(diff_to_start, str("master fade out ", master_player.volume_db))
+		_debug_if_integer(diff_to_start, str("master fade out ", master_player.volume_db))
 	elif diff_to_end < 0:
 		master_player.volume_db = MIN_VOLUME
-		Global.debug_if_integer(diff_to_start, "master min volume")
+		_debug_if_integer(diff_to_start, "master min volume")
 	
 	# Determinate if the current or the next part should be played as next
 	var next_part_index = get_next()
@@ -182,18 +200,18 @@ func _process(delta):
 		if _mixing:
 			if slave_player.volume_db < MAX_VOLUME:
 				slave_player.volume_db += volume_diff * (delta / next_part.in_duration)
-				Global.debug_if_integer(diff_to_end, str("slave fade in ", slave_player.volume_db))
+				_debug_if_integer(diff_to_end, str("slave fade in ", slave_player.volume_db))
 			elif diff_to_end < 0:
 				_finish_mixing(next_part_index)
 			elif _break_loop_now:
 				if master_player.volume_db > MIN_VOLUME:
 					master_player.volume_db -= volume_diff * (delta / current_part.out_duration)
-					Global.debug_if_integer(diff_to_start, str("master fade out ", master_player.volume_db))
+					_debug_if_integer(diff_to_start, str("master fade out ", master_player.volume_db))
 				else:
 					_finish_mixing(next_part_index)
 
 func _finish_mixing(next_part_index):
-	Global.debug(str("new master index ", next_part_index))
+	_debug(str("new master index ", next_part_index))
 	
 	# Swap players
 	var temp = master_player
@@ -214,3 +232,11 @@ func _finish_mixing(next_part_index):
 	_break_loop_now = false
 	_forced_next = null
 	_mixing = false
+
+func _debug(message):
+	if DEBUG:
+		Global.debug(message)
+
+func _debug_if_integer(t, message):
+	if abs(floor(t) - t) < 0.05:
+		_debug(message)

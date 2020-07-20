@@ -124,6 +124,9 @@ z_index = 99
 z_as_relative = false
 texture = SubResource( 5 )
 
+[node name="MusicMixer" parent="." instance=ExtResource( 11 )]
+STREAM = ExtResource( 10 )
+
 [node name="Environment" type="Node2D" parent="."]
 
 [node name="Road" type="Sprite" parent="Environment"]
@@ -315,13 +318,15 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 52
+frame = 97
 playing = true
 
 [node name="Crate" parent="Environment" instance=ExtResource( 6 )]
 position = Vector2( -5407.27, -87.392 )
 z_index = 1
 z_as_relative = false
+collision_layer = 2
+collision_mask = 2
 mass = 120.0
 can_sleep = false
 
@@ -332,23 +337,20 @@ physics_material_override = SubResource( 11 )
 [node name="Points" type="Node2D" parent="."]
 position = Vector2( -59.2303, -0.734743 )
 
-[node name="TriggerPoint00" type="Node2D" parent="Points"]
+[node name="TriggerTrain" type="Node2D" parent="Points"]
 position = Vector2( 3212.52, -174.784 )
 
-[node name="TriggerPoint01" type="Node2D" parent="Points"]
+[node name="TriggerBall" type="Node2D" parent="Points"]
 position = Vector2( 14829.9, -142.29 )
 
-[node name="TriggerPoint02" type="Node2D" parent="Points"]
+[node name="TriggerHoop" type="Node2D" parent="Points"]
 position = Vector2( 16778.5, -756.826 )
 
 [node name="Sound" type="Node" parent="."]
-
-[node name="MusicMixer" parent="Sound" instance=ExtResource( 11 )]
-STREAM = ExtResource( 10 )
 
 [node name="WindSound" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource( 3 )
 volume_db = -8.0
 
-[node name="PhoneRing" type="AudioStreamPlayer2D" parent="Sound"]
+[node name="RingSound" type="AudioStreamPlayer2D" parent="Sound"]
 position = Vector2( 11530.6, -421.694 )

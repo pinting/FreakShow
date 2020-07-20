@@ -26,7 +26,7 @@ export var SECONDARY_DEFAULT = 0.0
 export var EFFECT_STEP = 1.0
 
 # Clone material
-export var CLONE_MATERIAL = false
+export var CLONE_MATERIAL = true
 
 var _current_primary = PRIMARY_DEFAULT
 var _current_secondary = SECONDARY_DEFAULT
@@ -43,36 +43,36 @@ func _ready():
 	if CLONE_MATERIAL:
 		material = material.duplicate()
 
+func is_overlap(mouse_position):
+	var tree = get_tree()
+	var selectable_group = tree.get_nodes_in_group("selectable")
+	var self_index = selectable_group.find(self)
+	
+	for i in range(0, len(selectable_group) - 1):
+		if i == self_index:
+			continue
+			
+		var node = selectable_group[i]
+		
+		var is_selected = node.get_rect().has_point(node.to_local(mouse_position))
+		var is_front = node.z_index > z_index or (node.z_index == z_index and i < self_index)
+		
+		if is_selected and is_front:
+			return true
+	
+	return false
+
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		var mouse_position = get_global_mouse_position()
-		var tree = get_tree()
 		
-		if get_rect().has_point(to_local(mouse_position)):
-			var is_overlap = false
-			var selectable_group = tree.get_nodes_in_group("selectable")
-			var self_index = selectable_group.find(self)
-			
-			for i in range(0, len(selectable_group) - 1):
-				if i == self_index:
-					continue
-					
-				var node = selectable_group[i]
-				
-				var is_selected = node.get_rect().has_point(node.to_local(mouse_position))
-				var is_front = node.z_index > z_index or (node.z_index == z_index and i < self_index)
-				
-				if is_selected and is_front:
-					is_overlap = true
-					break
-			
-			if not is_overlap:
-				emit_signal("select")
+		if get_rect().has_point(to_local(mouse_position)) and not is_overlap(mouse_position):
+			emit_signal("select")
 
 func _physics_process(delta):
 	var mouse_position = get_global_mouse_position()
 	
-	if get_rect().has_point(to_local(mouse_position)):
+	if get_rect().has_point(to_local(mouse_position)) and not is_overlap(mouse_position):
 		var offset = to_local(mouse_position) / get_rect().size
 		
 		if centered:

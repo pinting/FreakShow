@@ -10,7 +10,7 @@ const CAMERA_ZOOM = Vector2(2, 2)
 const DEBUG = false
 
 # Disable sounds
-const NO_SOUNDS = true
+const NO_SOUNDS = false
 
 # Disable intro
 const NO_INTRO = false
@@ -24,7 +24,3 @@ var player_position = Vector2(0, 0)
 func debug(message):
 	if DEBUG:
 		print(message)
-
-func debug_if_integer(t, message):
-	if abs(floor(t) - t) < 0.05:
-		debug(message)
