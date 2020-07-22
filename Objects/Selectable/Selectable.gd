@@ -28,9 +28,6 @@ export var SECONDARY_DEFAULT = 0.0
 # Effect step size in one second (both primary and secondary)
 export var EFFECT_STEP = 1.0
 
-# Focus sound effect
-export (AudioStream) var FOCUS_SOUND
-
 # Clone material
 export var CLONE_MATERIAL = false
 
@@ -50,14 +47,8 @@ func _ready():
 	
 	if CLONE_MATERIAL:
 		material = material.duplicate()
-	
-	if FOCUS_SOUND:
-		_audio_player = AudioStreamPlayer2D.new()
-		_audio_player.stream = FOCUS_SOUND
-		
-		add_child(_audio_player)
 
-func is_overlap(mouse_position):
+func _is_top(mouse_position):
 	var tree = get_tree()
 	var selectable_group = tree.get_nodes_in_group("selectable")
 	var self_index = selectable_group.find(self)
@@ -65,7 +56,7 @@ func is_overlap(mouse_position):
 	for i in range(0, len(selectable_group) - 1):
 		if i == self_index:
 			continue
-			
+		
 		var node = selectable_group[i]
 		
 		var is_selected = node.get_rect().has_point(node.to_local(mouse_position))
@@ -73,21 +64,22 @@ func is_overlap(mouse_position):
 		var is_visible = node.visible
 		
 		if is_selected and is_front and is_visible:
-			return true
+			return false
 	
-	return false
+	return true
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		var mouse_position = get_global_mouse_position()
 		
-		if get_rect().has_point(to_local(mouse_position)) and not is_overlap(mouse_position):
+		if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position):
 			emit_signal("select")
 
 func _physics_process(delta):
 	var mouse_position = get_global_mouse_position()
+	var unique = get_instance_id()
 	
-	if get_rect().has_point(to_local(mouse_position)) and not is_overlap(mouse_position):
+	if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position):
 		if len(OFFSET_KEY):
 			var offset = to_local(mouse_position) / get_rect().size
 			
@@ -107,10 +99,7 @@ func _physics_process(delta):
 			_current_secondary += EFFECT_STEP * delta
 			_current_secondary = min(SECONDARY_HOVER, _current_secondary)
 		
-		Global.describe(tr(DESCRIPTION))
-		
-		if _audio_player and not _audio_player.playing:
-			_audio_player.playing = true
+		Global.subtitle.describe(unique, tr(DESCRIPTION))
 	elif not held:
 		if len(PRIMARY_KEY):
 			_current_primary -= EFFECT_STEP * delta
@@ -120,10 +109,7 @@ func _physics_process(delta):
 			_current_secondary -= EFFECT_STEP * delta
 			_current_secondary = max(SECONDARY_DEFAULT, _current_secondary)
 		
-		Global.describe(tr(DESCRIPTION), true)
-		
-		if _audio_player and _audio_player.playing:
-			_audio_player.playing = false
+		Global.subtitle.describe_remove(unique)
 	
 	if len(PRIMARY_KEY):
 		material.set_shader_param(PRIMARY_KEY, _current_primary)

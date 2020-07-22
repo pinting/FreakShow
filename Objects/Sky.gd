@@ -1,6 +1,9 @@
 extends Sprite
 
-func _process(_delta):
+func _process(delta):
+	_process_position(delta)
+
+func _process_position(_delta):
 	var camera = Global.current_camera
 	
 	if camera == null:

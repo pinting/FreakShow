@@ -20,9 +20,37 @@ export var MAX_LOADING_TIME = 100
 
 var current_camera = null
 var player = null
-var subtitles = null
+var subtitle_display = null
+var subtitle = null
 
 var _loader = null
+
+class SubtitleManager:
+	var _subtitle_queue = []
+	
+	func say(text, speed = 2, timeout = 10):
+		if not Global.subtitle_display:
+			_subtitle_queue.push_back({
+				"text": text,
+				"speed": speed,
+				"timeout": timeout
+			})
+		else:	
+			for s in _subtitle_queue:
+				Global.subtitle_display.say(s.text, s.speed, s.timeout)
+			
+			Global.subtitle_display.say(text, speed, timeout)
+	
+	func describe(key, text):
+		if Global.subtitle_display:
+			Global.subtitle_display.describe(key, text)
+	
+	func describe_remove(key):
+		if Global.subtitle_display:
+			Global.subtitle_display.describe_remove(key)
+
+func _ready():
+	subtitle = SubtitleManager.new()
 
 func debug(message):
 	if DEBUG:
@@ -40,7 +68,7 @@ func _process_loading(delta):
 	while OS.get_ticks_msec() < now + MAX_LOADING_TIME:
 		var result = _loader.poll()
 		
-		if result == ERR_FILE_EOF: # load finished
+		if result == ERR_FILE_EOF:
 			var resource = _loader.get_resource()
 			_loader = null
 			_set_new_scene(resource)
@@ -71,15 +99,11 @@ func _set_new_scene(scene_resource):
 	root.add_child(next_scene)
 
 func load_scene(path):
+	current_camera = null
+	player = null
+	subtitle_display = null
+	
 	_loader = ResourceLoader.load_interactive(path)
 	
 	if _loader == null:
 		Global.debug("Loader failed to initialize!")
-
-func say(text, speed = 2, timeout = 10):
-	if subtitles:
-		subtitles.say(text, speed, timeout)
-
-func describe(text, remove = false):
-	if subtitles:
-		subtitles.describe(text, remove)

@@ -1,12 +1,10 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Objects/Subtitles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/DefaultCamera.gd" type="Script" id=1]
 
 [node name="DefaultCamera" type="Camera2D"]
 current = true
 zoom = Vector2( 3, 3 )
 smoothing_enabled = true
 smoothing_speed = 0.25
-
-[node name="Subtitles" parent="." instance=ExtResource( 2 )]
-position = Vector2( -2.21387, 0 )
+script = ExtResource( 1 )

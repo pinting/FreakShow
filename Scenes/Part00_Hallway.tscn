@@ -28,7 +28,7 @@ region_enabled = true
 region_rect = Rect2( 0, -706, 7530, 3533 )
 
 [node name="Inside" type="Sprite" parent="."]
-position = Vector2( 0, -67.071 )
+position = Vector2( 0, -72.071 )
 z_index = -2
 z_as_relative = false
 texture = ExtResource( 1 )
@@ -56,37 +56,37 @@ scale = Vector2( 0.1604, 0.1604 )
 texture = ExtResource( 4 )
 
 [node name="Door00" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -3279.88, 32.129 )
+position = Vector2( -3279.88, 31.129 )
 
 [node name="Door01" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -2338.88, 32.129 )
+position = Vector2( -2338.88, 31.129 )
 
 [node name="Door02" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -1399.49, 30.5197 )
+position = Vector2( -1399.49, 29.5197 )
 
 [node name="Door03" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -458.493, 30.5197 )
+position = Vector2( -458.493, 29.5197 )
 
 [node name="Door04" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 482.507, 30.5197 )
+position = Vector2( 482.507, 29.5197 )
 
 [node name="Door05" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 1420.65, 30.5197 )
+position = Vector2( 1420.65, 29.5197 )
 
 [node name="Door06" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 2361.65, 30.5197 )
+position = Vector2( 2361.65, 29.5197 )
 
 [node name="Door07" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 3302.65, 30.5197 )
+position = Vector2( 3302.65, 29.5197 )
 
 [node name="Floor" type="Sprite" parent="Inside"]
-position = Vector2( 0.115723, 357.841 )
+position = Vector2( 0.115723, 356.841 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 7530, 140 )
 
 [node name="Top" type="LightOccluder2D" parent="."]
-position = Vector2( 3117.99, 3221.94 )
+position = Vector2( 3117.79, 3217.38 )
 occluder = SubResource( 1 )
 
 [node name="Bottom" type="LightOccluder2D" parent="."]

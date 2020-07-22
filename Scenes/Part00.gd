@@ -16,6 +16,7 @@ var hallway_exit_visible = false
 var hallway_stage_00 = true
 var hallway_stage_01 = false
 var loop_index = 0
+var exiting = false
 
 var music_00
 
@@ -29,7 +30,7 @@ func _ready():
 		music_mixer.play()
 
 func _on_intro_over():
-	Global.say(tr("NARRATOR00"))
+	Global.subtitle.say(tr("NARRATOR00"))
 
 func _on_flat_exit_select():
 	fade_out(1)
@@ -39,6 +40,11 @@ func _on_flat_exit_select():
 	fade_in(1)
 
 func _on_hallway_exit_select():
+	if exiting:
+		return
+	
+	exiting = true
+	
 	music_mixer.kill(2);
 	fade_out(1)
 	yield(timer(2), "timeout")
@@ -52,7 +58,7 @@ func _process_hallway_exit(delta):
 		hallway_stage_00 = false
 		hallway_stage_01 = true
 		
-		Global.say(tr("NARRATOR01"))
+		Global.subtitle.say(tr("NARRATOR01"))
 	
 	if hallway_stage_01 and loop_index == 0:
 		hallway_exit.open()
