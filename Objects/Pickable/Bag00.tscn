@@ -1,17 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Objects/Pickable/Pickable.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Environmnent/Bag00.png" type="Texture" id=2]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=3]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=4]
-
+[ext_resource path="res://Assets/Sounds/Gravity00.wav" type="AudioStream" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/keep_size = true
-shader_param/glow_radius = 10.0
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/penetration_amount = 1.0
+shader_param/grab_amount = 1.0
+shader_param/glow_radius = 10.0
 shader_param/glow_amount = 0.0
 
 [node name="Bag00" type="RigidBody2D" groups=[
@@ -32,6 +32,15 @@ script = ExtResource( 1 )
 material = SubResource( 1 )
 texture = ExtResource( 2 )
 script = ExtResource( 4 )
+DESCRIPTION = "BAG00"
+OFFSET_KEY = "offset"
+PRIMARY_KEY = "grab_amount"
+PRIMARY_HOVER = 1.1
+PRIMARY_DEFAULT = 1.0
+SECONDARY_KEY = "glow_amount"
+SECONDARY_HOVER = 0.5
+FOCUS_SOUND = ExtResource( 5 )
+CLONE_MATERIAL = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -54.3355, -46.1579, -10.3705, -48.3169, 52.6329, -49.0038, 56.4602, -43.5082, 58.8155, 37.2579, 56.9509, 41.0852, 49.5907, 46.3845, -48.8399, 47.5622, -55.0224, 41.9684, -55.3169, 11.0555, -58.3591, 5.5599, -58.0647, -41.7417 )

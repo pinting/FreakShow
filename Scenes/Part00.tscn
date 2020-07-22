@@ -61,17 +61,16 @@ position = Vector2( -1346.24, -73.793 )
 scale = Vector2( 0.7, 0.7 )
 FRAMES = ExtResource( 3 )
 
-[node name="Camera" parent="Player" instance=ExtResource( 7 )]
-position = Vector2( 6.06445, -312.324 )
+[node name="DefaultCamera" parent="Player" instance=ExtResource( 7 )]
 smoothing_enabled = false
 smoothing_speed = 0.75
 
-[node name="Darkness" type="CanvasModulate" parent="."]
-light_mask = 0
-color = Color( 0.196078, 0.196078, 0.196078, 1 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
+
+[node name="Darkness" type="CanvasModulate" parent="."]
+light_mask = 524288
+color = Color( 0.196078, 0.196078, 0.196078, 1 )
 
 [node name="Sky" parent="." instance=ExtResource( 4 )]
 material = SubResource( 4 )
@@ -104,10 +103,10 @@ position = Vector2( 7686.12, 5220.15 )
 
 [node name="Points" type="Node2D" parent="."]
 
-[node name="LoopBegin" type="Node2D" parent="Points"]
+[node name="HallwayLoopBegin" type="Node2D" parent="Points"]
 position = Vector2( -3608.21, 5220.6 )
 
-[node name="LoopEnd" type="Node2D" parent="Points"]
+[node name="HallwayLoopEnd" type="Node2D" parent="Points"]
 position = Vector2( 3920.76, 5223.21 )
 
 [node name="HallwaySpawn" type="Node2D" parent="Points"]

@@ -12,17 +12,13 @@ As the darkness fades away and the player gains control, the narrator says:
 
 `It was already late into the night when something woke me up.`
 
-After moving into the direction of the door, the narrator speaks again:
-
-`Reality felt like a dream. The sound of music was sneaking in under the door.`
-
 ### Hallway
 
 After leaving the room by going out through the door, the protagonist finds himself standing in a hallway. It is a narrow passage with identical white doors and lights. The walls are covered with graffiti. It is infinite into both directions - after walking far into one direction, the player needs to turn around with the protagonist, in order to reach the end of it.
 
 When the protagonist is walking for too long into a direction, the narrator speaks: 
 
-`The hallway felt endless.`
+`The hallway felt like an .`
 
 After turning around, laughing can be heard and one of the closed doors opens up - and produces a sound to notify the player.
 

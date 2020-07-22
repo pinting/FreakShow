@@ -4,14 +4,14 @@
 [ext_resource path="res://Assets/Environmnent/Cup00.png" type="Texture" id=2]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=3]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=4]
-
+[ext_resource path="res://Assets/Sounds/Gravity00.wav" type="AudioStream" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/keep_size = true
-shader_param/glow_radius = 10.0
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/penetration_amount = 1.0
+shader_param/grab_amount = 1.0
+shader_param/glow_radius = 10.0
 shader_param/glow_amount = 0.0
 
 [node name="Cup00" type="RigidBody2D" groups=[
@@ -32,6 +32,15 @@ script = ExtResource( 1 )
 material = SubResource( 1 )
 texture = ExtResource( 2 )
 script = ExtResource( 4 )
+DESCRIPTION = "CUP00"
+OFFSET_KEY = "offset"
+PRIMARY_KEY = "grab_amount"
+PRIMARY_HOVER = 1.1
+PRIMARY_DEFAULT = 1.0
+SECONDARY_KEY = "glow_amount"
+SECONDARY_HOVER = 0.5
+FOCUS_SOUND = ExtResource( 5 )
+CLONE_MATERIAL = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -19.7069, -22.3776, 6.44992, -22.6912, 8.45716, -17.4222, 17.2388, -15.7286, 21.6924, -11.2123, 21.9433, -1.48976, 17.3643, 4.59467, 9.2726, 8.17006, 9.5235, 18.3944, -21.7141, 18.3317, -21.7768, -18.9904 )

@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Environmnent/Ball00.png" type="Texture" id=2]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=3]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=4]
-
+[ext_resource path="res://Assets/Sounds/Gravity00.wav" type="AudioStream" id=5]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.9
@@ -12,9 +12,9 @@ bounce = 0.9
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 shader_param/keep_size = true
-shader_param/glow_radius = 10.0
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/penetration_amount = 1.0
+shader_param/grab_amount = 1.0
+shader_param/glow_radius = 10.0
 shader_param/glow_amount = 0.0
 
 [sub_resource type="CircleShape2D" id=3]
@@ -39,6 +39,15 @@ script = ExtResource( 1 )
 material = SubResource( 2 )
 texture = ExtResource( 2 )
 script = ExtResource( 4 )
+DESCRIPTION = "BALL00"
+OFFSET_KEY = "offset"
+PRIMARY_KEY = "grab_amount"
+PRIMARY_HOVER = 1.1
+PRIMARY_DEFAULT = 1.0
+SECONDARY_KEY = "glow_amount"
+SECONDARY_HOVER = 0.5
+FOCUS_SOUND = ExtResource( 5 )
+CLONE_MATERIAL = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.04492, -0.78376 )

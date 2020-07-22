@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Narrator00.wav-9afa03c4a7cb0c76a638656c0304b3b0.sample"
+path="res://.import/Gravity00.wav-ba923222a23a64cac1d32ef83d0f551c.sample"
 
 [deps]
 
-source_file="res://Assets/Sounds/Narrator00.wav"
-dest_files=[ "res://.import/Narrator00.wav-9afa03c4a7cb0c76a638656c0304b3b0.sample" ]
+source_file="res://Assets/Sounds/Gravity00.wav"
+dest_files=[ "res://.import/Gravity00.wav-ba923222a23a64cac1d32ef83d0f551c.sample" ]
 
 [params]
 

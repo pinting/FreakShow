@@ -62,7 +62,7 @@ var moving_x = false
 
 func _ready():
 	animated_sprite.frames = FRAMES
-	Global.player_position = get_global_position()
+	Global.player = self
 
 func _physics_process(delta):
 	_check_crouch()
@@ -111,8 +111,6 @@ func _physics_process(delta):
 		animated_sprite.speed_scale = current_animation_speed
 	
 	_set_animation(next_animation.name)
-	
-	Global.player_position = get_global_position()
 
 func _check_crouch():
 	if Input.is_action_just_pressed("crouch"):

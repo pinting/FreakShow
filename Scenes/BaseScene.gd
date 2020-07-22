@@ -9,9 +9,6 @@ export var FADE_IN_AFTER = 2
 # Fade out duration
 export var FADE_IN_DURATION = 3
 
-# Max loading time per tick (in msec)
-export var MAX_LOADING_TIME = 100
-
 onready var black_screen = $BlackScreen
 onready var player = $Player
 onready var music_mixer = $MusicMixer
@@ -20,17 +17,24 @@ var _held_object = null
 var _fade_current = 1
 var _fade_duration = 1
 var _fade_direction = 0
+var _intro_started = false
 var _intro_over = false
-var _loader = null
 
 var current_second = 0
+
+signal fade_out_done
+signal fade_in_done
+signal intro_over
 
 func _ready():
 	black_screen.visible = true
 		
 	if Global.NO_INTRO:
 		_fade_current = 0
+		_intro_started = true
 		_intro_over = true
+		
+		emit_signal("intro_over")
 	
 	for node in get_tree().get_nodes_in_group("pickable"):
 		node.connect("picked", self, "_on_pickable_picked")
@@ -51,60 +55,14 @@ func _process(delta):
 	
 	_process_intro(delta)
 	_process_fade(delta)
-	_process_loading(delta)
 
 func _process_intro(delta):
-	if _intro_over:
+	if _intro_started:
 		return
 	
 	if current_second > FADE_IN_AFTER:
 		fade_in(FADE_IN_DURATION)
-		_intro_over = true
-
-func _process_loading(delta):
-	if not _loader:
-		return
-	
-	var now = OS.get_ticks_msec()
-	
-	while OS.get_ticks_msec() < now + MAX_LOADING_TIME:
-		var result = _loader.poll()
-		
-		if result == ERR_FILE_EOF: # load finished
-			var resource = _loader.get_resource()
-			_loader = null
-			_set_new_scene(resource)
-			break
-		elif result == OK:
-			var current = _loader.get_stage()
-			var count = _loader.get_stage_count()
-			
-			Global.debug(str("Loader progress: ", current, "/", count))
-		else:
-			Global.debug("Error during loading!")
-			_loader = null
-			break
-
-func _set_new_scene(scene_resource):
-	var root = get_tree().get_root()
-	var current_scene = root.get_child(root.get_child_count() - 1)
-	var next_scene = scene_resource.instance()
-	
-	# This is needed to workaround canvas modulate glitches 
-	for child in current_scene.get_children():
-		if child.get("visible") != null:
-			child.visible = false
-		
-		child.queue_free()
-	
-	current_scene.queue_free()
-	root.add_child(next_scene)
-
-func load_scene(path):
-	_loader = ResourceLoader.load_interactive(path)
-	
-	if _loader == null:
-		Global.debug("Loader failed to initialize!")
+		_intro_started = true
 
 func _process_fade(delta):
 	if _fade_direction == 0:
@@ -120,6 +78,16 @@ func _process_fade(delta):
 		black_screen.visible = false
 	else:
 		black_screen.visible = true
+	
+	if _fade_current == 1.0:
+		emit_signal("fade_out_done")
+	elif _fade_current == 0.0:
+		emit_signal("fade_in_done")
+		
+		if(not _intro_over):
+			_intro_over = true
+			
+			emit_signal("intro_over")
 	
 	black_screen.modulate = Color(0, 0, 0, _fade_current)
 

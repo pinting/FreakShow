@@ -32,8 +32,8 @@
 [ext_resource path="res://Assets/Environmnent/Graffiti05.png" type="Texture" id=30]
 [ext_resource path="res://Assets/Environmnent/Graffiti04.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Environmnent/Graffiti06.png" type="Texture" id=32]
-[ext_resource path="res://Assets/Environmnent/Sign01.png" type="Texture" id=33]
-[ext_resource path="res://Assets/Environmnent/Graffiti07.png" type="Texture" id=34]
+[ext_resource path="res://Objects/Selectable/Sign00.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Objects/Selectable/Graffiti00.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Assets/Environmnent/Bench00.png" type="Texture" id=35]
 [ext_resource path="res://Animations/Stranger01.tres" type="SpriteFrames" id=36]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=37]
@@ -102,7 +102,7 @@ position = Vector2( -4797.1, -349.489 )
 scale = Vector2( 0.7, 0.7 )
 FRAMES = ExtResource( 37 )
 
-[node name="Camera2D" parent="Player" instance=ExtResource( 23 )]
+[node name="DefaultCamera" parent="Player" instance=ExtResource( 23 )]
 position = Vector2( 6.06445, -312.324 )
 smoothing_speed = 0.35
 
@@ -114,7 +114,7 @@ color = Color( 0.196078, 0.196078, 0.196078, 1 )
 environment = SubResource( 3 )
 
 [node name="Sky" parent="." instance=ExtResource( 9 )]
-position = Vector2( -19247.3, -13934.3 )
+position = Vector2( -15465.3, -3661.7 )
 scale = Vector2( 2.5, 2.5 )
 
 [node name="Fog" type="Sprite" parent="Sky"]
@@ -227,11 +227,10 @@ position = Vector2( -5508.19, -2427.62 )
 position = Vector2( 1122.5, -2508.43 )
 z_index = -2
 
-[node name="Graffiti" type="Sprite" parent="Environment/Building01"]
-self_modulate = Color( 1, 1, 1, 0.823529 )
-position = Vector2( -760.556, 1980.98 )
-scale = Vector2( 0.449461, 0.449461 )
-texture = ExtResource( 34 )
+[node name="Graffiti" parent="Environment/Building01" instance=ExtResource( 34 )]
+position = Vector2( -829.86, 1970.03 )
+rotation = -0.146264
+scale = Vector2( 0.359845, 0.384425 )
 
 [node name="Lamp00" parent="Environment/Building01" instance=ExtResource( 4 )]
 position = Vector2( -1181.73, 1797.7 )
@@ -296,12 +295,7 @@ collision_mask = 8
 position = Vector2( 3714.87, -1087.35 )
 shape = SubResource( 10 )
 
-[node name="Sign" type="Sprite" parent="Environment/Building03"]
-modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
-position = Vector2( 81.4851, -458.677 )
-rotation = 0.00594584
-scale = Vector2( 0.848142, 0.848142 )
-texture = ExtResource( 33 )
+[node name="Sign" parent="Environment/Building03" instance=ExtResource( 33 )]
 
 [node name="Phone" type="Sprite" parent="Environment"]
 position = Vector2( 11476.8, -329.819 )
@@ -318,7 +312,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 97
+frame = 59
 playing = true
 
 [node name="Crate" parent="Environment" instance=ExtResource( 6 )]

@@ -40,14 +40,14 @@ z_index = 1
 texture = ExtResource( 4 )
 
 [node name="Lamp" parent="Inside" instance=ExtResource( 12 )]
-position = Vector2( -624.624, -212.788 )
-scale = Vector2( -0.957, 0.897 )
+position = Vector2( -647.537, -227.215 )
+scale = Vector2( -0.737473, 0.702059 )
 
 [node name="Light" parent="Inside/Lamp" instance=ExtResource( 13 )]
 modulate = Color( 0, 0.203922, 1, 1 )
 self_modulate = Color( 0.662745, 0, 1, 1 )
-position = Vector2( -40.8509, 400.892 )
-scale = Vector2( 0.520881, 0.401698 )
+position = Vector2( -84.0808, 532.757 )
+scale = Vector2( 0.675934, 0.513238 )
 
 [node name="Graffiti00" type="Sprite" parent="Inside"]
 modulate = Color( 0, 0, 0, 0.823529 )

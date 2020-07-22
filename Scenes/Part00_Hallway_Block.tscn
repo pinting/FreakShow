@@ -29,6 +29,9 @@ position = Vector2( 0, 1.38705 )
 scale = Vector2( 0.83, 0.83 )
 texture = ExtResource( 3 )
 script = ExtResource( 5 )
+OFFSET_KEY = "offset"
+PRIMARY_KEY = "grab_amount"
+SECONDARY_KEY = "glow_amount"
 
 [node name="DoorUnlocked" type="Sprite" parent="." groups=[
 "selectable",
@@ -38,6 +41,9 @@ material = SubResource( 1 )
 scale = Vector2( 0.83, 0.83 )
 texture = ExtResource( 8 )
 script = ExtResource( 5 )
+OFFSET_KEY = "offset"
+PRIMARY_KEY = "grab_amount"
+SECONDARY_KEY = "glow_amount"
 
 [node name="Lamp" parent="." instance=ExtResource( 4 )]
 position = Vector2( -2.9668, -295.24 )

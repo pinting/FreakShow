@@ -5,9 +5,9 @@
 [ext_resource path="res://Assets/Environmnent/Floor01.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Environmnent/Graffiti40.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Part00_Hallway_Block.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Environmnent/Graffiti32.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Environmnent/Graffiti41.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Environmnent/Graffiti38.png" type="Texture" id=8]
+[ext_resource path="res://Objects/Selectable/Graffiti03.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Selectable/Graffiti02.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Selectable/Graffiti01.tscn" type="PackedScene" id=8]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -6882.82, -3575.52, -6880.36, -4990.21, 648.825, -4992.66, 647.118, -3579.69 )
@@ -35,25 +35,18 @@ texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 7530, 578 )
 
-[node name="Graffiti00" type="Sprite" parent="Inside"]
-self_modulate = Color( 1, 1, 1, 0.588235 )
-position = Vector2( -2762.52, 50.8652 )
-rotation = 0.186776
-scale = Vector2( 0.488666, 0.488666 )
-texture = ExtResource( 7 )
+[node name="Graffiti00" parent="Inside" instance=ExtResource( 7 )]
+position = Vector2( -1847.07, -29.7145 )
+rotation = 0.00896583
+scale = Vector2( 0.506171, 0.510359 )
 
-[node name="Graffiti01" type="Sprite" parent="Inside"]
-self_modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( 1039.89, 34.1134 )
-rotation = -0.334296
-scale = Vector2( 0.732888, 0.732888 )
-texture = ExtResource( 8 )
+[node name="Graffiti01" parent="Inside" instance=ExtResource( 8 )]
+rotation = 0.144954
+scale = Vector2( 0.861026, 0.848049 )
 
-[node name="Graffiti02" type="Sprite" parent="Inside"]
-self_modulate = Color( 1, 1, 1, 0.588235 )
-position = Vector2( 1737.22, -108.307 )
-rotation = -0.0131194
-texture = ExtResource( 6 )
+[node name="Graffiti02" parent="Inside" instance=ExtResource( 6 )]
+position = Vector2( 1765.52, 160.611 )
+rotation = -0.147355
 
 [node name="Graffiti03" type="Sprite" parent="Inside"]
 self_modulate = Color( 1, 1, 1, 0.392157 )

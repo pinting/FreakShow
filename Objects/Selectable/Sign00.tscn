@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Sign01.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=2]
+
+[node name="Sign00" type="Sprite" groups=[
+"selectable",
+]]
+modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+position = Vector2( 81.4851, -458.677 )
+rotation = 0.00594584
+scale = Vector2( 0.848142, 0.848142 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+DESCRIPTION = "SIGN00"

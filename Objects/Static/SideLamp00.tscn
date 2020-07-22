@@ -9,6 +9,7 @@ extents = Vector2( 119.642, 78.3322 )
 [node name="SideLamp00" type="StaticBody2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = 5
 texture = ExtResource( 2 )
 
 [node name="GlowLight" type="Light2D" parent="Sprite"]
@@ -17,8 +18,10 @@ rotation = -0.453002
 scale = Vector2( 0.0420529, 0.0645723 )
 z_as_relative = false
 texture = ExtResource( 1 )
-energy = 2.5
+energy = 3.7
+range_item_cull_mask = 4
 shadow_color = Color( 1, 1, 1, 1 )
+shadow_item_cull_mask = 4
 
 [node name="AreaLight" type="Light2D" parent="Sprite"]
 position = Vector2( -65.8141, -5.08027 )
