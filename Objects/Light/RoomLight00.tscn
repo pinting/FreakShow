@@ -9,7 +9,6 @@
 position = Vector2( -1.0293, 24.1156 )
 scale = Vector2( 0.371896, 0.281587 )
 texture = ExtResource( 2 )
-mode = 2
 range_item_cull_mask = 2
 shadow_enabled = true
 
@@ -17,4 +16,3 @@ shadow_enabled = true
 position = Vector2( -30.416, 321.667 )
 scale = Vector2( 0.871093, 0.491437 )
 texture = ExtResource( 1 )
-mode = 2

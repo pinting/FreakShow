@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Objects/Static/Building00.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part01_Start.tscn" type="PackedScene" id=2]
@@ -38,42 +38,40 @@
 [ext_resource path="res://Animations/Stranger01.tres" type="SpriteFrames" id=36]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=37]
 [ext_resource path="res://Objects/SubtitleDisplay.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Objects/BlackScreen.tscn" type="PackedScene" id=39]
+[ext_resource path="res://Objects/Viewable/Paper03.tscn" type="PackedScene" id=40]
+[ext_resource path="res://Objects/Viewable/Paper02.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Objects/Viewable/Paper06.tscn" type="PackedScene" id=43]
 
-[sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=1]
 background_mode = 4
 glow_enabled = true
 glow_intensity = 1.0
 glow_strength = 1.4
 glow_hdr_threshold = 0.4
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 21 )
 shader_param/color = Vector3( 0.5, 0.4, 0.2 )
 shader_param/OCTAVES = 4
 
-[sub_resource type="ImageTexture" id=5]
+[sub_resource type="ImageTexture" id=3]
 size = Vector2( 4000, 2125 )
 
-[sub_resource type="CanvasItemMaterial" id=6]
+[sub_resource type="CanvasItemMaterial" id=4]
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 30000, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 30000, 10 )
+
+[sub_resource type="CanvasItemMaterial" id=7]
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 30000, 10 )
-
-[sub_resource type="CanvasItemMaterial" id=9]
-
-[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 74.0137, 2552.49 )
 
-[sub_resource type="PhysicsMaterial" id=11]
+[sub_resource type="PhysicsMaterial" id=9]
 bounce = 0.9
 
 [node name="Part01" type="Node2D"]
@@ -84,23 +82,7 @@ script = ExtResource( 8 )
 z_index = 101
 z_as_relative = false
 
-[node name="BlackScreen" type="Node2D" parent="."]
-visible = false
-z_index = 100
-z_as_relative = false
-
-[node name="TextureRect" type="TextureRect" parent="BlackScreen"]
-light_mask = 0
-margin_left = -100000.0
-margin_top = -100000.0
-margin_right = -97952.0
-margin_bottom = -97952.0
-rect_scale = Vector2( 100, 100 )
-texture = SubResource( 2 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="BlackScreen" parent="." instance=ExtResource( 39 )]
 
 [node name="Player" parent="." instance=ExtResource( 28 )]
 position = Vector2( -4797.1, -349.489 )
@@ -116,7 +98,7 @@ light_mask = 0
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 3 )
+environment = SubResource( 1 )
 
 [node name="Sky" parent="." instance=ExtResource( 9 )]
 position = Vector2( -15465.3, -3661.7 )
@@ -124,10 +106,10 @@ scale = Vector2( 2.5, 2.5 )
 
 [node name="Fog" type="Sprite" parent="Sky"]
 show_behind_parent = true
-material = SubResource( 4 )
+material = SubResource( 2 )
 z_index = 99
 z_as_relative = false
-texture = SubResource( 5 )
+texture = SubResource( 3 )
 
 [node name="MusicMixer" parent="." instance=ExtResource( 11 )]
 STREAM = ExtResource( 10 )
@@ -136,7 +118,7 @@ STREAM = ExtResource( 10 )
 
 [node name="Road" type="Sprite" parent="Environment"]
 light_mask = 3
-material = SubResource( 6 )
+material = SubResource( 4 )
 position = Vector2( 0, 92.625 )
 scale = Vector2( 1, 0.943857 )
 z_index = -2
@@ -151,7 +133,7 @@ z_as_relative = false
 
 [node name="Ground" type="CollisionShape2D" parent="Environment/Road/CollisionBack"]
 position = Vector2( 54.6492, -1826.41 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="CollisionCenter" type="StaticBody2D" parent="Environment/Road"]
 position = Vector2( 2.20044, 1944.34 )
@@ -162,7 +144,7 @@ collision_mask = 2
 
 [node name="Ground" type="CollisionShape2D" parent="Environment/Road/CollisionCenter"]
 position = Vector2( 65.524, -1918.86 )
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="CollisionFront" type="StaticBody2D" parent="Environment/Road"]
 position = Vector2( 1.10022, 1911.12 )
@@ -173,7 +155,7 @@ collision_mask = 4
 
 [node name="Ground" type="CollisionShape2D" parent="Environment/Road/CollisionFront"]
 position = Vector2( 81.0552, -1820.58 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="Dirt" type="Sprite" parent="Environment"]
 light_mask = 0
@@ -246,6 +228,9 @@ z_index = 1
 position = Vector2( -1184.55, 913.627 )
 scale = Vector2( 3.67457, 1.10197 )
 
+[node name="Paper" parent="Environment/Building01/Lamp00" instance=ExtResource( 40 )]
+position = Vector2( -2.48569, 509.773 )
+
 [node name="Lamp01" parent="Environment/Building01" instance=ExtResource( 4 )]
 position = Vector2( 1268.27, 1797.7 )
 scale = Vector2( 0.9, 0.9 )
@@ -255,8 +240,17 @@ z_index = 1
 position = Vector2( -1182.14, 913.627 )
 scale = Vector2( 3.67457, 1.10197 )
 
+[node name="Paper00" parent="Environment/Building01/Lamp01" instance=ExtResource( 42 )]
+position = Vector2( -2.95312, 533.16 )
+scale = Vector2( 0.0412927, 0.0412927 )
+
+[node name="Paper01" parent="Environment/Building01/Lamp01" instance=ExtResource( 43 )]
+position = Vector2( -1.72656, 473.98 )
+rotation = -0.220333
+scale = Vector2( 0.044165, 0.044165 )
+
 [node name="Car" type="Sprite" parent="Environment/Building01"]
-material = SubResource( 9 )
+material = SubResource( 7 )
 position = Vector2( 324.13, 2353.96 )
 scale = Vector2( 0.8997, 0.8997 )
 z_index = 1
@@ -298,7 +292,7 @@ collision_mask = 8
 
 [node name="Wall" type="CollisionShape2D" parent="Environment/Building03/HiddenWall00"]
 position = Vector2( 3714.87, -1087.35 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="HiddenWall01" type="StaticBody2D" parent="Environment/Building03"]
 position = Vector2( -4570.94, -2048.3 )
@@ -307,7 +301,7 @@ collision_mask = 7
 
 [node name="Wall" type="CollisionShape2D" parent="Environment/Building03/HiddenWall01"]
 position = Vector2( 3714.87, -1087.35 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="Sign" parent="Environment/Building03" instance=ExtResource( 33 )]
 
@@ -326,7 +320,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 68
+frame = 23
 playing = true
 
 [node name="Crate" parent="Environment" instance=ExtResource( 6 )]
@@ -340,7 +334,7 @@ can_sleep = false
 
 [node name="Ball" parent="Environment" instance=ExtResource( 14 )]
 position = Vector2( 12959.3, 36.504 )
-physics_material_override = SubResource( 11 )
+physics_material_override = SubResource( 9 )
 
 [node name="Points" type="Node2D" parent="."]
 position = Vector2( -59.2303, -0.734743 )

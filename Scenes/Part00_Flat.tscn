@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Objects/Selectable/Door00.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://Objects/Pickable/Fruit00.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Objects/Pickable/Bag00.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Objects/Pickable/Pot00.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Objects/Viewable/Paper00.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Objects/Viewable/Paper05.tscn" type="PackedScene" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1843.14, 10 )
@@ -59,6 +61,10 @@ texture = ExtResource( 15 )
 
 [node name="Fridge" parent="Inside/Wall/Floor" instance=ExtResource( 3 )]
 position = Vector2( 1759.16, -276.88 )
+
+[node name="Paper00" parent="Inside/Wall/Floor/Fridge" instance=ExtResource( 21 )]
+position = Vector2( 33.9775, -141.211 )
+rotation = -0.0778485
 
 [node name="Cupboard" parent="Inside/Wall/Floor" instance=ExtResource( 9 )]
 collision_layer = 0
@@ -102,6 +108,10 @@ collision_mask = 1
 position = Vector2( 1147.5, -265.745 )
 collision_layer = 1
 collision_mask = 1
+
+[node name="Paper" parent="Inside/Wall" instance=ExtResource( 22 )]
+position = Vector2( -1248.61, -80.8674 )
+scale = Vector2( 0.271982, 0.271982 )
 
 [node name="Door" parent="Inside" instance=ExtResource( 1 )]
 position = Vector2( -421.925, -23.8616 )

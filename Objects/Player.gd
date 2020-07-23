@@ -48,17 +48,17 @@ onready var animated_sprite = $AnimatedSprite
 onready var stand_collision = $StandCollision
 onready var crouch_collision = $CrouchCollision
 
-# Set the default side
-var animation_prefix = SIDE_A_PREFIX
-
 var current_second = 0
-var current_velocity = Vector2(0, 0)
-var current_max_speed = MAX_SPEED
-var current_acceleration = ACCELERATION
-var current_animation_speed = ANIMATION_SPEED
-var crouching = false
-var transition = false
-var moving_x = false
+var freeze = false
+
+var _animation_prefix = SIDE_A_PREFIX
+var _current_velocity = Vector2(0, 0)
+var _current_max_speed = MAX_SPEED
+var _current_acceleration = ACCELERATION
+var _current_animation_speed = ANIMATION_SPEED
+var _crouching = false
+var _transition = false
+var _moving_x = false
 
 func _ready():
 	animated_sprite.frames = FRAMES
@@ -74,16 +74,16 @@ func _physics_process(delta):
 	if on_platform and top_detector.is_colliding():
 		direction.y = 0
 	
-	if current_velocity.x != 0:
-		var rad = WALK_WAVE_COUNT * current_second * current_animation_speed * PI
+	if _current_velocity.x != 0:
+		var rad = WALK_WAVE_COUNT * current_second * _current_animation_speed * PI
 		
-		current_acceleration = ACCELERATION * abs(sin(rad + WALK_WAVE_OFFSET))
+		_current_acceleration = ACCELERATION * abs(sin(rad + WALK_WAVE_OFFSET))
 		current_second += delta
 	
 	var snap_vector = -1 * FLOOR_NORMAL * FLOOR_DETECT_DISTANCE if direction.y == 0 else Vector2.ZERO
 	var next_velocity = _calculate_next_velocity(delta, direction)
 	
-	current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, FLOOR_NORMAL, on_platform, 4, 0.9, false)
+	_current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, FLOOR_NORMAL, on_platform, 4, 0.9, false)
 	
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
@@ -101,25 +101,28 @@ func _physics_process(delta):
 		crouch_collision.scale.x = abs(crouch_collision.scale.x) * m
 		stand_collision.scale.x = abs(stand_collision.scale.x) * m
 		
-		animation_prefix = SIDE_A_PREFIX if direction.x > 0 else SIDE_B_PREFIX
+		_animation_prefix = SIDE_A_PREFIX if direction.x > 0 else SIDE_B_PREFIX
 	
 	var next_animation = _get_next_animation(direction)
 	
 	if next_animation.freeze:
 		animated_sprite.speed_scale = 0
 	else:
-		animated_sprite.speed_scale = current_animation_speed
+		animated_sprite.speed_scale = _current_animation_speed
 	
 	_set_animation(next_animation.name)
 
 func _check_crouch():
 	if Input.is_action_just_pressed("crouch"):
-		crouching = not crouching
+		_crouching = not _crouching
 		
-	stand_collision.disabled = crouching
-	crouch_collision.disabled = not crouching
+	stand_collision.disabled = _crouching
+	crouch_collision.disabled = not _crouching
 
 func _get_direction():
+	if freeze:
+		return Vector2(0, 0)
+	
 	var right = Input.get_action_strength("move_right")
 	var left = Input.get_action_strength("move_left")
 	var jump = Input.is_action_just_pressed("jump")
@@ -127,17 +130,17 @@ func _get_direction():
 	
 	var on_floor = is_on_floor()
 	var x = right - left
-	var y = -1 if on_floor and jump and not crouching else 0
+	var y = -1 if on_floor and jump and not _crouching else 0
 	var speed_mod = SPRINT_SCALE if sprint and on_floor else 1
 	
-	current_max_speed = speed_mod * MAX_SPEED
-	current_acceleration = speed_mod * ACCELERATION
-	current_animation_speed = speed_mod * ANIMATION_SPEED
+	_current_max_speed = speed_mod * MAX_SPEED
+	_current_acceleration = speed_mod * ACCELERATION
+	_current_animation_speed = speed_mod * ANIMATION_SPEED
 	
 	return Vector2(x, y)
 
 func _calculate_next_velocity(delta, direction):
-	var next_velocity = current_velocity
+	var next_velocity = _current_velocity
 	
 	if is_on_floor():
 		next_velocity.x *= pow(FRICTION, delta)
@@ -147,10 +150,10 @@ func _calculate_next_velocity(delta, direction):
 	else:
 		next_velocity.y += GRAVITY * delta
 	
-	if abs(next_velocity.x) > current_max_speed:
-		next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * current_max_speed
+	if abs(next_velocity.x) > _current_max_speed:
+		next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * _current_max_speed
 	elif direction.x != 0:
-		next_velocity.x += direction.x * current_acceleration * delta
+		next_velocity.x += direction.x * _current_acceleration * delta
 	
 	return next_velocity
 
@@ -164,35 +167,35 @@ func _get_next_animation(direction):
 	
 	if is_on_floor():
 		if direction.x:
-			if not moving_x:
-				moving_x = true
-				transition = true
+			if not _moving_x:
+				_moving_x = true
+				_transition = true
 			elif not animation_looped and animated_sprite.frame == last_frame:
-				transition = false
+				_transition = false
 				
-			if transition:
+			if _transition:
 				next_animation = "still_to_move"
 			else:
 				next_animation = "move"
 		else:
-			if moving_x:
-				moving_x = false
-				transition = true
+			if _moving_x:
+				_moving_x = false
+				_transition = true
 			elif not animation_looped and animated_sprite.frame == last_frame:
-				transition = false
+				_transition = false
 				
-			if transition:
+			if _transition:
 				next_animation = "move_to_still"
 			else:
 				next_animation = "still"
 				
-		next_animation = ("crouch" if crouching else "stand") + "_" + next_animation
+		next_animation = ("crouch" if _crouching else "stand") + "_" + next_animation
 	else:
-		if abs(current_velocity.x) > 0:
-			moving_x = true
-			transition = false
+		if abs(_current_velocity.x) > 0:
+			_moving_x = true
+			_transition = false
 		
-		if current_velocity.y > 0:
+		if _current_velocity.y > 0:
 			# When falling, freeze the current frame of the jump animation
 			next_animation = "jump"
 			freeze = true
@@ -205,7 +208,7 @@ func _get_next_animation(direction):
 	}
 
 func _set_animation(name):
-	animated_sprite.animation = animation_prefix + "_" + name
+	animated_sprite.animation = _animation_prefix + "_" + name
 
 func get_animation():
 	return animated_sprite.animation.substr(animated_sprite.animation.find("_") + 1)

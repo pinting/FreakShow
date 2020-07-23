@@ -38,7 +38,7 @@ var _audio_player
 
 var held = false
 
-signal select
+signal selected
 
 func _ready():
 	assert(PRIMARY_HOVER >= PRIMARY_DEFAULT)
@@ -73,11 +73,16 @@ func _input(event):
 		var mouse_position = get_global_mouse_position()
 		
 		if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position):
-			emit_signal("select")
+			emit_signal("selected")
+
+func show_description():
+	Global.subtitle.describe(get_instance_id(), tr(DESCRIPTION))
+
+func remove_description():
+	Global.subtitle.describe_remove(get_instance_id())
 
 func _physics_process(delta):
 	var mouse_position = get_global_mouse_position()
-	var unique = get_instance_id()
 	
 	if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position):
 		if len(OFFSET_KEY):
@@ -99,7 +104,7 @@ func _physics_process(delta):
 			_current_secondary += EFFECT_STEP * delta
 			_current_secondary = min(SECONDARY_HOVER, _current_secondary)
 		
-		Global.subtitle.describe(unique, tr(DESCRIPTION))
+		show_description()
 	elif not held:
 		if len(PRIMARY_KEY):
 			_current_primary -= EFFECT_STEP * delta
@@ -109,7 +114,7 @@ func _physics_process(delta):
 			_current_secondary -= EFFECT_STEP * delta
 			_current_secondary = max(SECONDARY_DEFAULT, _current_secondary)
 		
-		Global.subtitle.describe_remove(unique)
+		remove_description()
 	
 	if len(PRIMARY_KEY):
 		material.set_shader_param(PRIMARY_KEY, _current_primary)

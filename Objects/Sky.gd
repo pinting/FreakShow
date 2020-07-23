@@ -6,7 +6,7 @@ func _process(delta):
 func _process_position(_delta):
 	var camera = Global.current_camera
 	
-	if camera == null:
+	if not camera:
 		return
 	
 	position = camera.get_camera_screen_center()

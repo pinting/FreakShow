@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Floor01.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Building05_Transparent.png" type="Texture" id=2]
@@ -7,12 +7,24 @@
 [ext_resource path="res://Assets/Environmnent/Graffiti03.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Environmnent/Stairs00.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Environmnent/Foot01.png" type="Texture" id=7]
+[ext_resource path="res://Objects/Viewable/Paper01.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Environmnent/Pillar00.png" type="Texture" id=9]
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=10]
 [ext_resource path="res://Assets/Environmnent/Graffiti00.png" type="Texture" id=11]
 [ext_resource path="res://Objects/Static/SideLamp00.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Objects/Light/SideLight00.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Objects/Viewable/Viewable.gd" type="Script" id=14]
+[ext_resource path="res://Assets/Environmnent/Paper05.png" type="Texture" id=15]
 
-[sub_resource type="OccluderPolygon2D" id=1]
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 10 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/grab_amount = 1.0
+shader_param/glow_radius = 10.0
+shader_param/glow_amount = 0.0
+
+[sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -753.59, 407.076, -746.624, -351.282, 711.923, -347.36, 712.603, 404.682, 848.141, 405.235, 848.574, -5232.52, -2299.02, -5235.85, -2290.62, 611.897, 846.756, 613.875, 847.565, 404.928, 713.626, 406.32 )
 
 [node name="House00" type="Sprite"]
@@ -38,6 +50,24 @@ position = Vector2( -41.9587, 22.1015 )
 scale = Vector2( 0.86, 0.86 )
 z_index = 1
 texture = ExtResource( 4 )
+
+[node name="Paper" type="Sprite" parent="Inside/Door" groups=[
+"selectable",
+] instance=ExtResource( 8 )]
+material = SubResource( 1 )
+position = Vector2( 100.528, -123.067 )
+rotation = 0.0379762
+scale = Vector2( 0.157046, 0.157046 )
+texture = ExtResource( 15 )
+script = ExtResource( 14 )
+DESCRIPTION = "PAPER01"
+OFFSET_KEY = "offset"
+PRIMARY_KEY = "grab_amount"
+PRIMARY_HOVER = 1.1
+PRIMARY_DEFAULT = 1.0
+SECONDARY_KEY = "glow_amount"
+SECONDARY_HOVER = 0.5
+CLONE_MATERIAL = true
 
 [node name="Lamp" parent="Inside" instance=ExtResource( 12 )]
 position = Vector2( -647.537, -227.215 )
@@ -88,7 +118,7 @@ region_rect = Rect2( 0, 0, 3143, 195 )
 [node name="LightOccluder" type="LightOccluder2D" parent="."]
 position = Vector2( 721.075, 2098.67 )
 scale = Vector2( 1, 0.878186 )
-occluder = SubResource( 1 )
+occluder = SubResource( 2 )
 
 [node name="CollisionBack" type="StaticBody2D" parent="."]
 position = Vector2( 0.435974, 119.932 )

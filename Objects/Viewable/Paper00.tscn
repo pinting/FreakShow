@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Objects/Viewable/Viewable.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=2]
+[ext_resource path="res://Assets/Environmnent/Paper06.png" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/grab_amount = 1.0
+shader_param/glow_radius = 10.0
+shader_param/glow_amount = 0.0
+
+[node name="Paper00" type="Sprite" groups=[
+"selectable",
+]]
+material = SubResource( 1 )
+scale = Vector2( 0.13506, 0.13506 )
+texture = ExtResource( 3 )
+script = ExtResource( 1 )
+DESCRIPTION = "PAPER00"
+OFFSET_KEY = "offset"
+PRIMARY_KEY = "grab_amount"
+PRIMARY_HOVER = 1.1
+PRIMARY_DEFAULT = 1.0
+SECONDARY_KEY = "glow_amount"
+SECONDARY_HOVER = 0.5
+CLONE_MATERIAL = true

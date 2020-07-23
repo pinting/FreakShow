@@ -1,21 +1,28 @@
-keys;en
-DOOR00;Exit door
-BAG00;Old bag
-BALL00;Beach ball
-CLOTHES00;Pile of clothes
-CRATE00;Dumb crate
-CUP00;Beer jug
-FRUIT00;Unripe mango
-PILLOW00;Dusty pillow
-POT00;Stupid coffee pot
-SPRINKLER00;Cute yellow sprinkler
-SIGN00;Food
-GRAFFITI00;Son of a bitch
-GRAFFITI01;Foreskin!
-GRAFFITI02;You whore
-GRAFFITI03;I've been stealing
-NARRATOR00;It was already late into the night when something woke me up.
-NARRATOR01;The hallway felt endless.
-NARRATOR02;The city smelled like piss and sweat.
-NARRATOR03;People were ready to sell their junk. You just had to name your price.
-NARRATOR04;Would you mind picking up the phone, mister? Maybe they are ringing for you.
+keys;en;hu
+DOOR00;Exit door;Lakásajtó
+BAG00;Old bag;Régi táska
+BALL00;Beach ball;Strandlabda
+CLOTHES00;Pile of clothes;Halom ruha
+CRATE00;Dumb crate;Buta láda
+CUP00;Beer jug;Söröskorsó
+FRUIT00;Unripe mango;Éretlen mangó
+PILLOW00;Dusty pillow;Poros párna
+POT00;Wretched coffee pot;Nyomorult kotyogó
+SPRINKLER00;Cute yellow sprinkler;Aranyos sárga locsoló
+PAPER00;Sex and the Bible;Szex és a Biblia
+PAPER01;CAUTION! FIRESTARTER!;VIGYÁZAT! GYÚJTOGATÓ!
+PAPER02;Looking for a serious relationship;Komoly kapcsolatot keresek
+PAPER03; ; 
+PAPER04;Understanding and love will guide you;Egyetértés szeretet vezéreljen tégedet
+PAPER05;White dove flies over the village, carrying my sorrowful soul;Fehér galamb száll a falu felett, viszi az én bánatos lelkemet
+PAPER06; ; 
+SIGN00;Food;Élelmiszer
+GRAFFITI00;Son of a bitch;Anyád
+GRAFFITI01;Foreskin!;Fityma!
+GRAFFITI02;You whore;Te kurva
+GRAFFITI03;I've been stealing;Lopni járok
+NARRATOR00;It was already late into the night when something woke me up.;
+NARRATOR01;The hallway felt endless.;
+NARRATOR02;The city smelled like piss and sweat.;
+NARRATOR03;People were ready to sell their junk. You just had to name your price.;
+NARRATOR04;Would you mind picking up the phone, mister? Maybe they are ringing for you.;

@@ -8,17 +8,17 @@ onready var open_sound = $OpenSound
 
 var locked = true
 
-signal select
+signal selected
 
 func _ready():
-	door_locked.connect("select", self, "_on_door_select")
-	door_unlocked.connect("select", self, "_on_door_select")
+	door_locked.connect("selected", self, "_on_door_select")
+	door_unlocked.connect("selected", self, "_on_door_select")
 
 func _on_door_select():
 	if locked:
 		knock_sound.play()
 	else:
-		emit_signal("select")
+		emit_signal("selected")
 
 func open():
 	open_sound.play()

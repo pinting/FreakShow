@@ -23,7 +23,7 @@ var music_00
 func _ready():
 	music_00 = music_mixer.add_part(0, 5 * 60, true, 5, 5, -5)
 	
-	flat_exit_door.connect("select", self, "_on_flat_exit_select")
+	flat_exit_door.connect("selected", self, "_on_flat_exit_select")
 	connect("intro_over", self, "_on_intro_over")
 	
 	if not Global.NO_SOUNDS:
@@ -62,7 +62,7 @@ func _process_hallway_exit(delta):
 	
 	if hallway_stage_01 and loop_index == 0:
 		hallway_exit.open()
-		hallway_exit.connect("select", self, "_on_hallway_exit_select")
+		hallway_exit.connect("selected", self, "_on_hallway_exit_select")
 		
 		hallway_exit_visible = true
 

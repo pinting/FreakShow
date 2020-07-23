@@ -80,6 +80,7 @@ position = Vector2( 2361.65, 29.5197 )
 position = Vector2( 3302.65, 29.5197 )
 
 [node name="Floor" type="Sprite" parent="Inside"]
+light_mask = 3
 position = Vector2( 0.115723, 356.841 )
 texture = ExtResource( 3 )
 region_enabled = true
