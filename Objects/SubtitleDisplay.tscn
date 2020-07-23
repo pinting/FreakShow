@@ -15,21 +15,20 @@ use_filter = true
 font_data = SubResource( 1 )
 
 [node name="SubtitleDisplay" type="Node2D"]
-z_index = 90
+z_index = 101
 script = ExtResource( 2 )
 
 [node name="Bottom" type="Label" parent="."]
 light_mask = 786432
 margin_left = -1435.31
-margin_top = 528.228
-margin_right = 1437.69
-margin_bottom = 871.224
+margin_top = 641.351
+margin_right = 1300.0
+margin_bottom = 981.351
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 align = 1
-valign = 1
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -37,24 +36,22 @@ __meta__ = {
 
 [node name="Top" type="Label" parent="."]
 light_mask = 786432
-margin_left = -1436.39
-margin_top = -865.49
-margin_right = 1436.61
-margin_bottom = -522.49
+margin_left = -1435.0
+margin_top = -760.0
+margin_right = 1300.0
+margin_bottom = -590.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 align = 1
-valign = 1
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( -7.55707, 2.56137 )
-scale = Vector2( 5.78452, 3.63436 )
+scale = Vector2( 300, 300 )
 texture = ExtResource( 1 )
 energy = 2.0
 range_item_cull_mask = 262144

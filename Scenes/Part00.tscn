@@ -33,6 +33,8 @@ size = Vector2( 4000, 2125 )
 
 [node name="Part00" type="Node2D"]
 script = ExtResource( 2 )
+FADE_IN_AFTER = 6
+FADE_IN_DURATION = 2
 
 [node name="SubtitleDisplay" parent="." instance=ExtResource( 12 )]
 position = Vector2( -1348.35, -86.0649 )

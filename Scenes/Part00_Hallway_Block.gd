@@ -16,12 +16,17 @@ func _ready():
 
 func _on_door_select():
 	if locked:
-		knock_sound.play()
+		if not Global.NO_SOUNDS:
+			knock_sound.play()
+		
+		Global.subtitle.say("KNOCK00")
 	else:
 		emit_signal("selected")
 
 func open():
-	open_sound.play()
+	if not Global.NO_SOUNDS:
+		open_sound.play()
+	
 	door_locked.visible = false
 	door_unlocked.visible = true
 	locked = false

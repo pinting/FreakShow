@@ -79,7 +79,6 @@ position = Vector2( 59.2303, 0.734743 )
 script = ExtResource( 8 )
 
 [node name="SubtitleDisplay" parent="." instance=ExtResource( 38 )]
-z_index = 101
 z_as_relative = false
 
 [node name="BlackScreen" parent="." instance=ExtResource( 39 )]
@@ -320,7 +319,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 23
+frame = 25
 playing = true
 
 [node name="Crate" parent="Environment" instance=ExtResource( 6 )]
@@ -345,8 +344,11 @@ position = Vector2( 3212.52, -174.784 )
 [node name="TriggerBall" type="Node2D" parent="Points"]
 position = Vector2( 14829.9, -142.29 )
 
-[node name="TriggerHoop" type="Node2D" parent="Points"]
+[node name="InsideHoop" type="Node2D" parent="Points"]
 position = Vector2( 16778.5, -756.826 )
+
+[node name="CommentPeople" type="Node2D" parent="Points"]
+position = Vector2( 1139.3, -33.0197 )
 
 [node name="Sound" type="Node" parent="."]
 

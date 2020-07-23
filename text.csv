@@ -1,5 +1,5 @@
 keys;en;hu
-DOOR00;Exit door;Lakásajtó
+DOOR00;Door of the flat;Lakásajtó
 BAG00;Old bag;Régi táska
 BALL00;Beach ball;Strandlabda
 CLOTHES00;Pile of clothes;Halom ruha
@@ -9,20 +9,21 @@ FRUIT00;Unripe mango;Éretlen mangó
 PILLOW00;Dusty pillow;Poros párna
 POT00;Wretched coffee pot;Nyomorult kotyogó
 SPRINKLER00;Cute yellow sprinkler;Aranyos sárga locsoló
+KNOCK00;* knock, knock, knock*;* ko-pog, ko-pog *
 PAPER00;Sex and the Bible;Szex és a Biblia
 PAPER01;CAUTION! FIRESTARTER!;VIGYÁZAT! GYÚJTOGATÓ!
 PAPER02;Looking for a serious relationship;Komoly kapcsolatot keresek
 PAPER03; ; 
-PAPER04;Understanding and love will guide you;Egyetértés szeretet vezéreljen tégedet
+PAPER04;Understanding and love will guide you;Egyetértés, szeretet vezéreljen tégedet
 PAPER05;White dove flies over the village, carrying my sorrowful soul;Fehér galamb száll a falu felett, viszi az én bánatos lelkemet
-PAPER06; ; 
+PAPER06;Want to move as soon as possible!;Sürgősen költöznék!
 SIGN00;Food;Élelmiszer
 GRAFFITI00;Son of a bitch;Anyád
 GRAFFITI01;Foreskin!;Fityma!
 GRAFFITI02;You whore;Te kurva
 GRAFFITI03;I've been stealing;Lopni járok
-NARRATOR00;It was already late into the night when something woke me up.;
-NARRATOR01;The hallway felt endless.;
-NARRATOR02;The city smelled like piss and sweat.;
-NARRATOR03;People were ready to sell their junk. You just had to name your price.;
-NARRATOR04;Would you mind picking up the phone, mister? Maybe they are ringing for you.;
+NARRATOR00;It was near dawn when something woke me up.;Már majdnem hajnalodott, amikor valami felébresztett.
+NARRATOR01;The corridor felt endless...;A folyosó végtelennek érződött...
+NARRATOR02;I finally reached the light. The wind blew the smell of piss and sweat into my nose.;Végül kiértem a fényre. A szél húgy- és izzadságszaggal mászott be az orromba.
+NARRATOR03;People were crazy to sell their junk - you just had to name your price!;Az emberek mindenáron elakarták adni magukat - csak ki kellett találnod az árad.
+NARRATOR04;Would you mind picking up the phone, mister? Maybe they are ringing for you!;Uram, felvenné a telefont? Lehet magát keresik!

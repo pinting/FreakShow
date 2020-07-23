@@ -34,8 +34,6 @@ export var CLONE_MATERIAL = false
 var _current_primary = PRIMARY_DEFAULT
 var _current_secondary = SECONDARY_DEFAULT
 
-var _audio_player
-
 var held = false
 
 signal selected

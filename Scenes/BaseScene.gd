@@ -1,13 +1,13 @@
 extends Node2D
 
-# Size of a trigger point detect field
-export var DETECT_THRESHOLD = 15
-
 # Time after the game fades in
 export var FADE_IN_AFTER = 2
 
 # Fade out duration
 export var FADE_IN_DURATION = 3
+
+# Size of a trigger point detect field
+export var DETECT_THRESHOLD = 15
 
 onready var black_screen = $BlackScreen
 onready var player = $Player
@@ -22,6 +22,7 @@ var _intro_over = false
 
 var current_second = 0
 
+signal scene_started
 signal fade_out_done
 signal fade_in_done
 signal intro_over
@@ -51,6 +52,9 @@ func _unhandled_input(event):
 			_held_object = null
 
 func _process(delta):
+	if current_second == 0:
+		emit_signal("scene_started")
+	
 	current_second += delta
 	
 	_process_intro(delta)
