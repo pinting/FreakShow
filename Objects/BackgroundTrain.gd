@@ -36,7 +36,7 @@ func _ready():
 	visible = false
 
 func start():
-	_base_position = get_global_position()
+	_base_position = global_position
 	
 	position.x -= START_FROM
 	visible = true
@@ -48,7 +48,7 @@ func start():
 		audio_stream_02.play()
 
 func _process(delta):
-	var self_position = get_global_position()
+	var self_position = global_position
 	
 	if not _started:
 		return

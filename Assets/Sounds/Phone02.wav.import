@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Phone02.wav-2684c325bda06d933a8b12238d7cd53b.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Phone02.wav"
+dest_files=[ "res://.import/Phone02.wav-2684c325bda06d933a8b12238d7cd53b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

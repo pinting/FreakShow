@@ -9,6 +9,12 @@ void fragment()
 	vec2 pixel_size = TEXTURE_PIXEL_SIZE;
 	vec4 color = texture(TEXTURE, UV);
 	
+	if(color.a == 0.0)
+	{
+		COLOR = color;
+		return;
+	}
+	
 	float r = radius;
 	vec4 glow = color;
 

@@ -10,7 +10,7 @@ bounce = 0.9
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
-shader_param/keep_size = true
+shader_param/keep_size = false
 shader_param/offset = Vector2( 0.5, 0.5 )
 shader_param/grab_amount = 1.0
 shader_param/glow_radius = 10.0

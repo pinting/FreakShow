@@ -21,8 +21,14 @@ void fragment()
 {
 	vec2 pixel_size = TEXTURE_PIXEL_SIZE;
 	vec4 color = safe_texture(TEXTURE, UV);
+	
+	if(color.a == 0.0)
+	{
+		COLOR = color;
+		return;
+	}
+	
 	vec4 glow = color;
-
 	float r = glow_radius;
 
 	glow += safe_texture(TEXTURE, UV + vec2(-r, -r) * pixel_size);

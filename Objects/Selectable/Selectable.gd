@@ -51,6 +51,8 @@ func _is_top(mouse_position):
 	var selectable_group = tree.get_nodes_in_group("selectable")
 	var self_index = selectable_group.find(self)
 	
+	assert(self_index >= 0)
+	
 	for i in range(0, len(selectable_group) - 1):
 		if i == self_index:
 			continue

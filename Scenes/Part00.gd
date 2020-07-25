@@ -43,9 +43,7 @@ func _on_flat_exit_select():
 	
 	fade_out(1)
 	yield(timer(1.5), "timeout")
-	
 	player.position = hallway_spawn.position
-	
 	fade_in(1)
 
 func _on_hallway_exit_select():
@@ -78,9 +76,9 @@ func _process_hallway_exit(delta):
 		hallway_exit_visible = true
 
 func _process_hallway_loop(delta):
-	var left_end_position = hallway_loop_begin.get_global_position()
-	var right_end_position = hallway_loop_end.get_global_position()
-	var player_position = player.get_global_position()
+	var left_end_position = hallway_loop_begin.global_position
+	var right_end_position = hallway_loop_end.global_position
+	var player_position = player.global_position
 	
 	# Left end
 	if left_end_position.x > player_position.x:

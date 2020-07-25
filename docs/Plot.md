@@ -1,16 +1,16 @@
 # Plot of FreakShow
 
-The narrative of the protagonist takes place after the events of the game.
-
 ## Part00
+
+_Music Part00 is playing in one loop_
 
 ### Room
 
-The protagonist wakes up in the middle of the night. The location is an Eastern European block of flats. He stands next to an old rotten mattress - at the left side of the apartment. Two lights are hovering over the wretched room and lightning up the parquet which covers the whole floor. At the right side, an old fridge stands companied by an old table and a cupboard. Every surface is filled with empty bottles and trash. In the middle of the flat, a door is present, which leads into the hallway.
+The protagonist wakes up in the middle of the night. The location is an Eastern European block of flats. He stands next to an old rotten mattress - on the left side of the apartment. Two lights are hovering over the wretched room and lightning up the parquet which covers the whole floor. On the right side, an old fridge stands companied by an old table and a cupboard. Every surface is filled with empty bottles and trash. In the middle of the flat, a door is present, which leads into the hallway.
 
 As the darkness fades away and the player gains control, the narrator says:
 
-`It was already late into the night when something woke me up.`
+`It was near dawn when something woke me up.`
 
 ### Hallway
 
@@ -18,7 +18,7 @@ After leaving the room by going out through the door, the protagonist finds hims
 
 When the protagonist is walking for too long into a direction, the narrator speaks: 
 
-`The hallway felt like an .`
+`The corridor felt endless...`
 
 After turning around, laughing can be heard and one of the closed doors opens up - and produces a sound to notify the player.
 
@@ -26,20 +26,38 @@ After turning around, laughing can be heard and one of the closed doors opens up
 
 ### Until the ball
 
+_Music Part01 is looping at a calm part, at the first third of it_
+
 When the protagonist reaches the city, the narrator speaks:
 
-`The city smelled like piss and sweat.`
+`I finally reached the light. The wind blew the smell of piss and sweat into my nose.`
 
-When looking at the first paper which advertises goods, the narrator speaks again:
+The protagonist stands again in an Eastern European blockhouse, however not high anymore, on the ground level. There is a staircase to the street. The outside environment is asphalt accompanied by a concrete wall with barbed wire on top. Heavy fog is mixing in the air. The sky is gray and the moon shines in strong yellow, nearly blinding the player. There are three buildings on the map. The FIRST, in which the protagonist stands inside. The SECOND, which stands close to the FIRST. The protagonist walks in front of it, does not go or see the inside of it. There are two lamps and an old auto in front of this building. The auto has a sign duct-taped on it which says "FOR SALE". When looking at it, the narrator speaks again:
 
 `People were ready to sell their junk. You just had to name your price.`
 
+After passing the vehicle, the noise of a train can be heard from far away. It gets louder and louder - the protagonist walks in front of the barbed wire fence, in complete darkness, accompanied by rookie graffiti experiments. As he walks, a train passes by.
+
 ### Reaching the ball
 
-A ball can be found along the way to the right side of the scene.
+_Music Part01 is looping at an anxious part, at the second third of it_
 
-Sounds of a little girl wheeping can be heard.
+A ball can be found along the way, in front of a phone box - on the right side of the scene. The protagonist reaches them not long after the train passes him. As he walks up to the ball, he kicks into it and it starts moving. While kicking the ball, another house can be seen behind. The concrete wall ends behind this house which is from a different era. It is really old and used up. Dirty. It could have been built in the 30s. The style resembles the 30s architecture of Budapest (or Vienna). After the house, only the asphalt ground and the sky are present, no building blocks the view from the player. The further way in the right direction is blocked by another old building, more like a warehouse. It has a lamp that shines up the empty space. Also has a sign, which says "CONVENIENCE STORE". Between the two buildings, in the empty area, the basketball hoop stands. Next to the hoop, a woman is rocking back and forth on a bench. She is crazy.
 
-After completing the ball game, the little girl stops wheeping and speaks: 
+_Music Part01 is looping at a proud part, which feels like closure, at the last third of it_
+
+After putting the ball into the hoop, it gets stuck. The sound of a ringing phone can be heard from the distance. The woman speaks up:
 
 `Would you mind picking up the phone, mister? Maybe they are ringing for you.`
+
+The phone in the phone box is ringing. When the player picks it up, the screen fades out.
+
+## Part02
+
+As the screen fades back in, the sound of "connecting a call" can be heard. The protagonist stands in the strange world built up from thick white lines. These lines are from cocaine. As the player guides the protagonist into the only possible direction, the calling sound stops and the camera zooms out.
+
+_Music Part01 starts to play in one loop_
+
+A Pac-Man like figure, but visualized as a gaping human face, starts to chase the player. The player should guide the protagonist out of the maze. However, there is no way out - only by sniffing the drug. If the protagonist use too much, he dies. If the monster reaches the protagonist, he dies. In the case of death, the scene starts from the beginning. The way out - that the player needs to find - is down. After sniffing up the most bottom line, the protagonist falls onto a parquet floor with a mattress. Similar to the first room of the game. He turns towards the player and starts to jack off.
+
+The screen fades out and fades back in at the beginning of the game.

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Shaders/Disintegrate.shader" type="Shader" id=1]
+[ext_resource path="res://Assets/Environmnent/Light02.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Part02_Line.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/amount = 1.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 637.895, 105.122 )
+
+[node name="Line" type="Sprite" groups=[
+"selectable",
+]]
+light_mask = 4
+material = SubResource( 1 )
+scale = Vector2( 0.526002, 0.0244225 )
+z_index = -1
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+CLONE_MATERIAL = true
+MAX = 50
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+range_item_cull_mask = 4
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2( 1, 1 )
+z_index = 100
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -0.0829657, 0 )
+z_index = 100
+shape = SubResource( 2 )

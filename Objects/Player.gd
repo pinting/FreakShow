@@ -90,7 +90,7 @@ func _physics_process(delta):
 		var body = collision.collider
 		
 		if body.is_in_group("pickable"):
-			var position_diff = body.get_global_position() - get_global_position()
+			var position_diff = body.global_position - global_position
 			
 			body.apply_central_impulse(position_diff.normalized() * body.KICK_FORCE)
 	

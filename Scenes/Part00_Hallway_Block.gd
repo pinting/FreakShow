@@ -19,7 +19,7 @@ func _on_door_select():
 		if not Global.NO_SOUNDS:
 			knock_sound.play()
 		
-		Global.subtitle.say("KNOCK00")
+		Global.subtitle.say(tr("KNOCK00"))
 	else:
 		emit_signal("selected")
 

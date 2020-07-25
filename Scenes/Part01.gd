@@ -6,16 +6,22 @@ export var LOW_PITCH_LENGTH = 10
 # Seconds to wait for the ball to be stuck
 export var BALL_IS_STUCK_TIMEOUT = 1
 
+# Teleport player to the end
+export var TELEPORT_PLAYER_TO_END = false
+
 onready var background_train = $Environment/BackgroundTrain
 onready var ball = $Environment/Ball
+onready var phone = $Environment/PhoneBox/Phone
 
+onready var trigger_comment = $Points/TriggerComment
 onready var trigger_train = $Points/TriggerTrain
-onready var trigger_ball = $Points/TriggerBall
-onready var trigger_hoop = $Points/InsideHoop
-onready var trigger_comment = $Points/CommentPeople
+onready var reaching_hoop = $Points/ReachingHoop
+onready var inside_hoop = $Points/InsideHoop
+onready var teleport_player = $Points/TeleportPlayer
 
 onready var wind_sound = $Sound/WindSound
 onready var ring_sound = $Sound/RingSound
+onready var pick_up_sound = $Sound/PickUpSound
 
 var music_00
 var music_01
@@ -30,6 +36,7 @@ func _ready():
 	
 	connect("scene_started", self, "_on_scene_started")
 	connect("intro_over", self, "_on_intro_over")
+	phone.connect("selected", self, "_on_phone_selected")
 	
 	if not Global.NO_INTRO:
 		music_mixer.master_player.pitch_scale = 0.001
@@ -37,6 +44,9 @@ func _ready():
 	
 	if not Global.NO_SOUNDS:
 		wind_sound.play()
+	
+	if TELEPORT_PLAYER_TO_END:
+		player.position = teleport_player.position
 
 func _on_intro_over():
 	if not Global.NO_SOUNDS:
@@ -45,12 +55,21 @@ func _on_intro_over():
 func _on_scene_started():
 	Global.subtitle.say(tr("NARRATOR02"), 6)
 
+func _on_phone_selected():
+	music_mixer.kill(2);
+	fade_out(2)
+	yield(timer(3), "timeout")
+	ring_sound.stop()
+	yield(timer(0.5), "timeout")
+	pick_up_sound.play()
+	yield(timer(2), "timeout")
+
 func _process_trigger_comment(delta):
 	if not trigger_comment.visible:
 		return
 	
-	var trigger = trigger_comment.get_global_position()
-	var object = player.get_global_position()
+	var trigger = trigger_comment.global_position
+	var object = player.global_position
 	
 	if abs(trigger.x - object.x) < DETECT_THRESHOLD:
 		trigger_comment.visible = false
@@ -60,30 +79,30 @@ func _process_train(delta):
 	if not trigger_train.visible:
 		return
 	
-	var trigger = trigger_train.get_global_position()
-	var object = player.get_global_position()
+	var trigger = trigger_train.global_position
+	var object = player.global_position
 	
 	if abs(trigger.x - object.x) < DETECT_THRESHOLD:
 		trigger_train.visible = false
 		background_train.start()
 
 func _process_hoop_scene(delta):
-	if not trigger_ball.visible:
+	if not reaching_hoop.visible:
 		return
 	
-	var trigger = trigger_ball.get_global_position()
-	var object = player.get_global_position()
+	var trigger = reaching_hoop.global_position
+	var object = player.global_position
 	
 	if abs(trigger.x - object.x) < DETECT_THRESHOLD:
-		trigger_ball.visible = false
+		reaching_hoop.visible = false
 		music_mixer.force_next(music_01)
 
 func _process_ball_in_hoop(delta):
-	if not trigger_hoop.visible:
+	if not inside_hoop.visible:
 		return
 	
-	var trigger = trigger_hoop.get_global_position()
-	var object = ball.get_global_position()
+	var trigger = inside_hoop.global_position
+	var object = ball.global_position
 	
 	var xd = abs(trigger.x - object.x)
 	var yd = abs(trigger.y - object.y)
@@ -93,12 +112,16 @@ func _process_ball_in_hoop(delta):
 		
 		if ball_is_stuck_counter < 0:
 			# Turn off previous trigger point too
-			trigger_ball.visible = false
-			trigger_hoop.visible = false
+			reaching_hoop.visible = false
+			inside_hoop.visible = false
 			ball.mode = RigidBody2D.MODE_STATIC
 			
+			ring_sound.play()
 			music_mixer.force_next(music_02)
-			Global.subtitle.say(tr("NARRATOR04"))
+			phone.visible = true
+			
+			yield(timer(10), "timeout")
+			Global.subtitle.say(tr("NARRATOR04"), 6, 12)
 	else:
 		ball_is_stuck_counter = BALL_IS_STUCK_TIMEOUT
 
