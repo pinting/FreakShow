@@ -14,7 +14,7 @@ The game was imagined based on a selection of music tracks - however, I do not o
 
 * Clone or download the repository.
 * _(optional)_ Place [the required proprietary music tracks](docs/Music.md) into the `Assets/Music` folder.
-* _(alternative)_ Skip this step, by renaming the `*.ogg.sample` silent tracks to `*.ogg` inside the `Assets/Music` folder.
+* _(alternative)_ Skip the previous step, by renaming the `.ogg.sample` silent tracks to `.ogg` inside the `Assets/Music` folder.
 * Open the project file with [Godot Editor](https://godotengine.org/) `3.2.x`. Importing the assets will take a couple of minutes.
 * Select `Project` -> `Export`.
 * Click on `Export All`.
