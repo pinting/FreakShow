@@ -12,12 +12,13 @@ Watch a [recording](https://youtu.be/lFruJy84yJ8) about the latest demo.
 
 The game was imagined based on a selection of music tracks - however, I do not own the rights to include them with the assets thus it is the duty of the end user to provide the necessary files to the engine. They can be purchased for personal usage through popular 3rd party services.
 
-* Clone the repository
-* *(optional)* Place [the required proprietary music tracks](docs/Music.md) into `Assets/Music`
-* Open the project file with [Godot Editor](https://godotengine.org/) 3.2.x
-* Select `Project` -> `Export`
-* Click on `Export All`
-* The DMG and EXE application files will be placed into the `out` directory
+* Clone or download the repository.
+* _(optional)_ Place [the required proprietary music tracks](docs/Music.md) into the `Assets/Music` folder.
+* _(alternative)_ Skip this step, by renaming the `*.ogg.sample` silent tracks to `*.ogg` inside the `Assets/Music` folder.
+* Open the project file with [Godot Editor](https://godotengine.org/) `3.2.x`. Importing the assets will take a couple of minutes.
+* Select `Project` -> `Export`.
+* Click on `Export All`.
+* The DMG and EXE application files will be placed into the `out` directory.
 
 ## Plot
 
