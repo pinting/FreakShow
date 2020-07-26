@@ -80,7 +80,6 @@ bounce = 0.9
 [node name="Part01" type="Node2D"]
 position = Vector2( 59.2303, 0.734743 )
 script = ExtResource( 8 )
-TELEPORT_PLAYER_TO_END = true
 
 [node name="SubtitleDisplay" parent="." instance=ExtResource( 38 )]
 z_as_relative = false
@@ -327,7 +326,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 60
+frame = 62
 playing = true
 
 [node name="Crate" parent="Environment" instance=ExtResource( 6 )]
@@ -372,7 +371,6 @@ position = Vector2( 11530.6, -421.694 )
 stream = ExtResource( 41 )
 volume_db = 10.0
 max_distance = 6000.0
-attenuation = 1.0
 
 [node name="PickUpSound" type="AudioStreamPlayer2D" parent="Sound"]
 position = Vector2( 11530.6, -421.694 )

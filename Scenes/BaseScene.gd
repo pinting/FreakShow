@@ -9,6 +9,9 @@ export var FADE_IN_DURATION = 3
 # Size of a trigger point detect field
 export var DETECT_THRESHOLD = 15
 
+# Delay
+export var DELAY = 0
+
 onready var black_screen = $BlackScreen
 onready var player = $Player
 onready var music_mixer = $MusicMixer
@@ -19,6 +22,7 @@ var _fade_duration = 1
 var _fade_direction = 0
 var _intro_started = false
 var _intro_over = false
+var _delay = 0
 
 var current_second = 0
 
@@ -52,6 +56,10 @@ func _unhandled_input(event):
 			_held_object = null
 
 func _process(delta):
+	if _delay < DELAY:
+		_delay += delta
+		return
+	
 	if current_second == 0:
 		emit_signal("scene_started")
 	

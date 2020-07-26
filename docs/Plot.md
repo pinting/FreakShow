@@ -26,7 +26,7 @@ After turning around, laughing can be heard and one of the closed doors opens up
 
 ### Until the ball
 
-_Music Part01 is looping at a calm part, at the first third of it_
+_Music Part01 is looping at a "calm" part, at the first third of it_
 
 When the protagonist reaches the city, the narrator speaks:
 
@@ -40,11 +40,11 @@ After passing the vehicle, the noise of a train can be heard from far away. It g
 
 ### Reaching the ball
 
-_Music Part01 is looping at an anxious part, at the second third of it_
+_Music Part01 is looping at an "anxious" part, at the second third of it_
 
-A ball can be found along the way, in front of a phone box - on the right side of the scene. The protagonist reaches them not long after the train passes him. As he walks up to the ball, he kicks into it and it starts moving. While kicking the ball, another house can be seen behind. The concrete wall ends behind this house which is from a different era. It is really old and used up. Dirty. It could have been built in the 30s. The style resembles the 30s architecture of Budapest (or Vienna). After the house, only the asphalt ground and the sky are present, no building blocks the view from the player. The further way in the right direction is blocked by another old building, more like a warehouse. It has a lamp that shines up the empty space. Also has a sign, which says "CONVENIENCE STORE". Between the two buildings, in the empty area, the basketball hoop stands. Next to the hoop, a woman is rocking back and forth on a bench. She is crazy.
+A ball can be found along the way, in front of a phone box - on the right side of the scene. The protagonist reaches them not long after the train passes him. As he walks up to the ball, he kicks a it and it starts moving. While kicking the ball, another house can be seen behind. The concrete wall ends behind this house, a building from a different era. It is really old and run-down. The front is dirty. It could have been built in the 30s. The style resembles the 30s architecture of Budapest (or Vienna). After the house, only the asphalt ground and the sky are present, no buildings are blocking the view of the player. The passage in the right direction is blocked by another old building, one like a warehouse. It has a lamp that lights up the empty space. Also has a sign, which says "CONVENIENCE STORE". Between the two buildings, in the empty area, a basketball hoop stands. Next to the hoop, a woman is rocking back and forth on a bench. She is crazy.
 
-_Music Part01 is looping at a proud part, which feels like closure, at the last third of it_
+_Music Part01 is looping at a "proud" part, which feels like closure, at the last third of it_
 
 After putting the ball into the hoop, it gets stuck. The sound of a ringing phone can be heard from the distance. The woman speaks up:
 
@@ -58,6 +58,6 @@ As the screen fades back in, the sound of "connecting a call" can be heard. The 
 
 _Music Part01 starts to play in one loop_
 
-A Pac-Man like figure, but visualized as a gaping human face, starts to chase the player. The player should guide the protagonist out of the maze. However, there is no way out - only by sniffing the drug. If the protagonist use too much, he dies. If the monster reaches the protagonist, he dies. In the case of death, the scene starts from the beginning. The way out - that the player needs to find - is down. After sniffing up the most bottom line, the protagonist falls onto a parquet floor with a mattress. Similar to the first room of the game. He turns towards the player and starts to jack off.
+A Pac-Man like gaping human face starts to chase the protagonist. The player should guide the protagonist out of the maze which surrounds him. However, there is no way out - only by snorting the drug. If the protagonist uses too much, he dies. If the monster reaches the protagonist, he dies. In the case of death, the scene starts from the beginning. The way out - that the player needs to find - is down below. After sniffing up the most down below line, the protagonist falls for long, onto a wooden floor with a mattress. Similar to the first room of the game. He turns towards the player and starts to jack off.
 
 The screen fades out and fades back in at the beginning of the game.
