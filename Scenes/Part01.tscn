@@ -326,7 +326,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 62
+frame = 22
 playing = true
 
 [node name="Crate" parent="Environment" instance=ExtResource( 6 )]

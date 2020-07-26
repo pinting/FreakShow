@@ -7,11 +7,12 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/amount = 1.0
+shader_param/pi = 3.14159
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 637.895, 105.122 )
 
-[node name="Line" type="Sprite" groups=[
+[node name="Part02_Line" type="Sprite" groups=[
 "selectable",
 ]]
 light_mask = 4
@@ -21,14 +22,12 @@ z_index = -1
 texture = ExtResource( 2 )
 script = ExtResource( 3 )
 CLONE_MATERIAL = true
-MAX = 50
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 2 )
 range_item_cull_mask = 4
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-scale = Vector2( 1, 1 )
 z_index = 100
 collision_layer = 15
 collision_mask = 15
