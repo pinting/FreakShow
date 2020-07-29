@@ -10,7 +10,7 @@ shader_param/amount = 0.0
 shader_param/pi = 3.14159
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 287.8, 6.35226 )
+extents = Vector2( 320.876, 11.58 )
 
 [node name="Part02_RemovableLine" type="Sprite" groups=[
 "selectable",
@@ -27,6 +27,6 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -1.00862, -14.3478 )
+position = Vector2( -7.15843, -4.27239 )
 z_index = 100
 shape = SubResource( 2 )
