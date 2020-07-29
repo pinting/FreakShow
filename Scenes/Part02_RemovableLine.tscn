@@ -1,31 +1,25 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Shaders/Disintegrate.shader" type="Shader" id=1]
-[ext_resource path="res://Assets/Environmnent/Light02.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Part02_Line.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Part02_RemovableLine.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Environmnent/Lines00_H00.png" type="Texture" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/amount = 1.0
+shader_param/amount = 0.0
 shader_param/pi = 3.14159
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 637.895, 105.122 )
+extents = Vector2( 287.8, 6.35226 )
 
-[node name="Part02_Line" type="Sprite" groups=[
+[node name="Part02_RemovableLine" type="Sprite" groups=[
 "selectable",
 ]]
-light_mask = 4
 material = SubResource( 1 )
-scale = Vector2( 0.526002, 0.0244225 )
 z_index = -1
-texture = ExtResource( 2 )
+texture = ExtResource( 4 )
 script = ExtResource( 3 )
 CLONE_MATERIAL = true
-
-[node name="Light2D" type="Light2D" parent="."]
-texture = ExtResource( 2 )
-range_item_cull_mask = 4
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = 100
@@ -33,6 +27,6 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -0.0829657, 0 )
+position = Vector2( -1.00862, -14.3478 )
 z_index = 100
 shape = SubResource( 2 )

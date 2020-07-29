@@ -28,7 +28,8 @@ void fragment()
 	vec4 base = texture(TEXTURE, UV);
 
 	base.a *= pow(rand(UV), amount);
-	base.a *= gradiant(UV);
+	
+	// base.a *= gradiant(UV);
 
 	COLOR = base;
 }

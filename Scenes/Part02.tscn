@@ -1,11 +1,12 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Sounds/Phone02.wav" type="AudioStream" id=2]
 [ext_resource path="res://Assets/Environmnent/Light02.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/Part02_Line.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Part02_RemovableLine.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Part02.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=6]
+[ext_resource path="res://Objects/TileSet/Lines00.tres" type="TileSet" id=7]
 [ext_resource path="res://Objects/Sky.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
@@ -41,12 +42,13 @@ z_as_relative = false
 [node name="BlackScreen" parent="." instance=ExtResource( 39 )]
 
 [node name="Player" parent="." instance=ExtResource( 28 )]
-position = Vector2( 704.488, 222.504 )
+position = Vector2( 4489.02, 170.011 )
 scale = Vector2( 0.7, 0.7 )
 FRAMES = ExtResource( 37 )
 
 [node name="DefaultCamera" parent="Player" instance=ExtResource( 23 )]
 position = Vector2( 6.06445, -312.324 )
+zoom = Vector2( 3, 3 )
 smoothing_enabled = false
 
 [node name="Light2D" type="Light2D" parent="Player"]
@@ -80,463 +82,24 @@ STREAM = ExtResource( 1 )
 
 [node name="Background" type="Sprite" parent="Environment"]
 self_modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 419.081, 3274.59 )
+position = Vector2( 374.174, 3670.13 )
 scale = Vector2( 30, 30 )
 z_index = -1
 texture = ExtResource( 3 )
 
 [node name="Line00" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 661.792, 689.881 )
-
-[node name="Line01" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1001.6, 1023.43 )
+position = Vector2( 3762.2, 374.764 )
 rotation = -1.56975
 
-[node name="Line02" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1339.07, 1356.97 )
-
-[node name="Line03" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1671.4, 1690.05 )
-rotation = -1.56975
-
-[node name="Line07" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2004.17, 2023.09 )
-
-[node name="Line06" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2343.98, 2356.64 )
-rotation = -1.56975
-
-[node name="Line05" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2681.45, 2690.18 )
-
-[node name="Line25" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 944.33, 6792.55 )
-
-[node name="Line28" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1639.76, 6796.34 )
-
-[node name="Line57" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1780.3, 6781.33 )
-
-[node name="Line56" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1097.55, 6795.06 )
-
-[node name="Line55" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -402.117, 6798.85 )
-
-[node name="Line72" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3815.96, 6764.61 )
-
-[node name="Line71" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3133.21, 6778.34 )
-
-[node name="Line70" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2437.78, 6782.13 )
-
-[node name="Line31" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2335.06, 6796.34 )
-
-[node name="Line96" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 258.8, 7455.64 )
-
-[node name="Line95" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 944.33, 7466.59 )
-
-[node name="Line94" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1639.76, 7470.38 )
-
-[node name="Line93" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1780.3, 7455.36 )
-
-[node name="Line92" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1097.55, 7469.09 )
-
-[node name="Line91" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -402.117, 7472.89 )
-
-[node name="Line90" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3815.96, 7438.65 )
-
-[node name="Line89" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3133.21, 7452.38 )
-
-[node name="Line88" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2437.78, 7456.17 )
-
-[node name="Line87" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2335.06, 7470.38 )
-
-[node name="Line115" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 258.8, 8158.16 )
-
-[node name="Line114" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 944.33, 8169.11 )
-
-[node name="Line113" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1639.76, 8172.9 )
-
-[node name="Line112" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1780.3, 8157.88 )
-
-[node name="Line111" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1097.55, 8171.61 )
-
-[node name="Line110" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -402.117, 8175.4 )
-
-[node name="Line109" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3815.96, 8141.17 )
-
-[node name="Line107" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2437.78, 8158.69 )
-
-[node name="Line106" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2335.06, 8172.9 )
-
-[node name="Line133" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 944.33, 8846.66 )
-
-[node name="Line132" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1639.76, 8850.45 )
-
-[node name="Line131" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1780.3, 8835.44 )
-
-[node name="Line130" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1097.55, 8849.17 )
-
-[node name="Line128" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3815.96, 8818.72 )
-
-[node name="Line127" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3133.21, 8832.45 )
-
-[node name="Line126" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2437.78, 8836.24 )
-
-[node name="Line125" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2335.06, 8850.45 )
-
-[node name="Line35" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 941.463, 5429.37 )
-
-[node name="Line38" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 265.931, 5431.19 )
-
-[node name="Line41" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1648.03, 5431.74 )
-
-[node name="Line54" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1103.19, 5429.1 )
-
-[node name="Line53" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1107.33, 6103.12 )
-
-[node name="Line52" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1778.73, 5430.92 )
-
-[node name="Line50" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -396.627, 5431.47 )
-
-[node name="Line49" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -400.757, 6105.49 )
-
-[node name="Line69" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3141.64, 5412.38 )
-
-[node name="Line68" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3145.77, 6086.4 )
-
-[node name="Line67" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3817.17, 5414.2 )
-
-[node name="Line66" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3821.3, 6088.23 )
-
-[node name="Line65" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2435.07, 5414.75 )
-
-[node name="Line64" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2439.2, 6088.77 )
-
-[node name="Line44" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2327.15, 5431.73 )
-
-[node name="Line43" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2334.31, 6105.76 )
-
-[node name="Line21" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -62.5596, 6466.2 )
-rotation = 1.5708
-
-[node name="Line22" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 578.38, 6458.66 )
-rotation = 1.5708
-
-[node name="Line32" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2101.66, 6465.92 )
-rotation = 1.5708
-
-[node name="Line29" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1460.72, 6461.17 )
-rotation = 1.5708
-
-[node name="Line26" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -777.961, 6474.91 )
-rotation = 1.5708
-
-[node name="Line62" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3496.38, 6444.45 )
-rotation = 1.5708
-
-[node name="Line61" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2813.62, 6458.19 )
-rotation = 1.5708
-
-[node name="Line27" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1961.66, 6478.51 )
-rotation = 1.5708
-
-[node name="Line86" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -62.5596, 7140.23 )
-rotation = 1.5708
-
-[node name="Line85" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 578.38, 7132.7 )
-rotation = 1.5708
-
-[node name="Line84" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1266.7, 7146.44 )
-rotation = 1.5708
-
-[node name="Line82" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1460.72, 7135.2 )
-rotation = 1.5708
-
-[node name="Line81" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -777.961, 7148.95 )
-rotation = 1.5708
-
-[node name="Line80" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3496.38, 7118.49 )
-rotation = 1.5708
-
-[node name="Line79" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2813.62, 7132.23 )
-rotation = 1.5708
-
-[node name="Line78" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1961.66, 7152.54 )
-rotation = 1.5708
-
-[node name="Line105" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -62.5596, 7842.75 )
-rotation = 1.5708
-
-[node name="Line104" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 578.38, 7835.21 )
-rotation = 1.5708
-
-[node name="Line103" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1266.7, 7848.96 )
-rotation = 1.5708
-
-[node name="Line102" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2101.66, 7842.48 )
-rotation = 1.5708
-
-[node name="Line101" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1460.72, 7837.72 )
-rotation = 1.5708
-
-[node name="Line100" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -777.961, 7851.46 )
-rotation = 1.5708
-
-[node name="Line99" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3496.38, 7821 )
-rotation = 1.5708
-
-[node name="Line98" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2813.62, 7834.75 )
-rotation = 1.5708
-
-[node name="Line97" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1961.66, 7855.06 )
-rotation = 1.5708
-
-[node name="Line123" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 578.38, 8512.77 )
-rotation = 1.5708
-
-[node name="Line122" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1266.7, 8526.51 )
-rotation = 1.5708
-
-[node name="Line121" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2101.66, 8520.03 )
-rotation = 1.5708
-
-[node name="Line120" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1460.72, 8515.28 )
-rotation = 1.5708
-
-[node name="Line119" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -777.961, 8529.02 )
-rotation = 1.5708
-
-[node name="Line118" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3496.38, 8498.56 )
-rotation = 1.5708
-
-[node name="Line117" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2813.62, 8512.3 )
-rotation = 1.5708
-
-[node name="Line116" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1961.66, 8532.62 )
-rotation = 1.5708
-
-[node name="Line36" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 581.377, 5785.06 )
-rotation = 1.5708
-
-[node name="Line48" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -787.747, 5785.34 )
-rotation = 1.5708
-
-[node name="Line47" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1463.28, 5784.79 )
-rotation = 1.5708
-
-[node name="Line60" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2826.19, 5768.62 )
-rotation = 1.5708
-
-[node name="Line59" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3501.72, 5768.07 )
-rotation = 1.5708
-
-[node name="Line39" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1963.48, 5785.6 )
-rotation = 1.5708
-
-[node name="Line45" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -57.8427, 5775.96 )
-rotation = 1.5708
-
-[node name="Line46" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2102.5, 5775.69 )
-rotation = 1.5708
-
-[node name="Line04" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 3013.78, 3023.25 )
-rotation = -1.56975
-
-[node name="Line15" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -75.506, 1981.66 )
-scale = Vector2( 1.14525, 0.0244225 )
-STEP = 0.1
-
-[node name="Line14" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 683.817, 2320.76 )
-rotation = -1.56975
-
-[node name="Line13" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1021.29, 2654.29 )
-
-[node name="Line12" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1353.62, 2987.37 )
-rotation = -1.56975
-
-[node name="Line10" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2026.09, 3753.94 )
-rotation = -1.56975
-scale = Vector2( 0.675563, 0.0244225 )
-STEP = 0.2
-
-[node name="Line11" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1686.38, 3320.41 )
-
-[node name="Line08" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 4683.4, 4229.57 )
-scale = Vector2( 5.78459, 0.0560503 )
-STEP = 0.05
-
-[node name="Line73" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 1589.05, -1859.68 )
-scale = Vector2( 5.78459, 0.0560503 )
-STEP = 0.05
-
-[node name="Line74" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 3770.72, -3037.78 )
-scale = Vector2( 5.78459, 0.0560503 )
-STEP = 0.05
-
-[node name="Line75" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 5188.8, -790.669 )
-scale = Vector2( 5.78459, 0.0560503 )
-STEP = 0.05
-
-[node name="Line76" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2434.58, 11915.7 )
-scale = Vector2( 5.78459, 0.0560503 )
-STEP = 0.05
-
-[node name="Line77" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -152.01, 13160 )
-scale = Vector2( 5.78459, 0.0560503 )
-STEP = 0.05
-
-[node name="Line09" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -365.73, 10725.4 )
-scale = Vector2( 5.89603, 0.0560503 )
-STEP = 0.05
-
-[node name="Line16" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -769.914, 2078.54 )
-rotation = -1.56975
-scale = Vector2( 2.91021, 0.0624771 )
-
-[node name="Line17" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -4166.28, 8129.67 )
-rotation = -1.56975
-scale = Vector2( 4.11806, 0.0624771 )
-
-[node name="Line18" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 3674.81, 7997.76 )
-rotation = -1.56975
-scale = Vector2( 2.91021, 0.0624771 )
-
-[node name="Line20" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 4773.99, 6836.4 )
-rotation = -1.56975
-scale = Vector2( 2.91021, 0.0624771 )
-
-[node name="Line30" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 5795.33, 8426.79 )
-rotation = -1.56975
-scale = Vector2( 2.91021, 0.0624771 )
-
-[node name="Line42" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -1485.42, 985.538 )
-rotation = -1.56975
-scale = Vector2( 2.91021, 0.0624771 )
-
-[node name="Line58" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -2346.27, 2284.11 )
-rotation = -1.56975
-scale = Vector2( 2.91021, 0.0624771 )
-
-[node name="Line63" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( -3513.52, 533.227 )
-rotation = -1.56975
-scale = Vector2( 2.91021, 0.0624771 )
-
-[node name="Line19" parent="Environment" instance=ExtResource( 4 )]
-position = Vector2( 2702.85, 6198.38 )
-rotation = -1.56975
-scale = Vector2( 2.91021, 0.0624771 )
+[node name="Lines01" type="TileMap" parent="Environment"]
+position = Vector2( -232.918, -836.454 )
+z_index = -1
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 600, 600 )
+collision_layer = 15
+collision_mask = 15
+format = 1
+tile_data = PoolIntArray( 9, 12, 0, 65545, 11, 0, 131078, 1, 0, 131079, 6, 0, 131080, 6, 0, 131081, 5, 0, 131082, 3, 0, 196617, 11, 0, 262153, 10, 0, 524298, 5, 0, 524299, 17, 0, 589835, 14, 0, 589836, 17, 0 )
 
 [node name="Points" type="Node2D" parent="."]
 position = Vector2( -59.2303, -0.734743 )
