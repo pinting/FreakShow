@@ -2,79 +2,104 @@ class_name Player
 extends KinematicBody2D
 
 # Animation
-export (SpriteFrames) var FRAMES
+export (SpriteFrames) var ANIMATION_FRAMES
 
 # Max velocity
-export var MAX_SPEED = 280
+export var MAX_SPEED: float = 280.0
 
 # Max acceleration
-export var ACCELERATION = 6000
+export var ACCELERATION: float = 6000.0
 
 # Jump force
-export var JUMP_FORCE = 400
+export var JUMP_FORCE: float = 400.0
 
 # Friction on the platform (only X axis)
-export var FRICTION = 0.001
+export var FRICTION: float = 0.001
 
 # Gravity (only Y axis)
-export var GRAVITY = 300
+export var GRAVITY: float = 300.0
 
 # Sprint speed
-export var SPRINT_SCALE = 1.35
+export var SPRINT_SCALE: float = 1.35
 
 # Speed of the animation (sprint modifies it)
-export var ANIMATION_SPEED = 1
+export var ANIMATION_SPEED: float = 1.0
 
 # Defines how many waves (100% to 0% to 100% in walk acceleration) happen in a second 
-export var WALK_WAVE_COUNT = 1.25
-export var WALK_WAVE_OFFSET = PI / 2
-
-# Prefix of the front side
-export var SIDE_A_PREFIX = "a"
-
-# Prefix of the rear side
-export var SIDE_B_PREFIX = "b"
+export var WALK_WAVE_COUNT: float = 1.25
+export var WALK_WAVE_OFFSET: float = PI / 2
 
 # In which direction does the floor pushes the player
-export var FLOOR_NORMAL = Vector2.UP
+export var FLOOR_NORMAL: Vector2 = Vector2.UP
 
 # Floor detect distance
-export var FLOOR_DETECT_DISTANCE = 20.0
+export var FLOOR_DETECT_DISTANCE: float = 20.0
 
 onready var platform_detector_00 = $PlatformDetector00
 onready var platform_detector_01 = $PlatformDetector01
 onready var top_detector = $TopDetector
-onready var animated_sprite = $AnimatedSprite
+
 onready var stand_collision = $StandCollision
 onready var crouch_collision = $CrouchCollision
+onready var avatar_collision = $AvatarCollision
 
-var current_second = 0
-var freeze = false
+onready var animated_sprite = $AnimatedSprite
 
-var _animation_prefix = SIDE_A_PREFIX
-var _current_velocity = Vector2(0, 0)
-var _current_max_speed = MAX_SPEED
-var _current_acceleration = ACCELERATION
-var _current_animation_speed = ANIMATION_SPEED
-var _crouching = false
-var _transition = false
-var _moving_x = false
+var current_second: float = 0.0
+var freeze: bool = false
+var avatar_mode: bool = false
+
+var _animation_prefix: String = "a"
+var _current_velocity: Vector2 = Vector2(0, 0)
+var _current_max_speed: int = MAX_SPEED
+var _current_acceleration: int = ACCELERATION
+var _current_animation_speed: float = ANIMATION_SPEED
+var _crouching: bool = false
+var _transition: bool = false
+var _moving_x: bool = false
 
 func _ready():
-	animated_sprite.frames = FRAMES
+	var frames = ANIMATION_FRAMES
+	
+	assert(frames.has_animation("a_stand_still"))
+	assert(frames.has_animation("a_stand_still_to_move"))
+	assert(frames.has_animation("a_stand_move"))
+	assert(frames.has_animation("a_stand_move_to_still"))
+	assert(frames.has_animation("a_crouch_still"))
+	assert(frames.has_animation("a_crouch_still_to_move"))
+	assert(frames.has_animation("a_crouch_move"))
+	assert(frames.has_animation("a_crouch_move_to_still"))
+	assert(frames.has_animation("a_jump"))
+	
+	assert(frames.has_animation("b_stand_still"))
+	assert(frames.has_animation("b_stand_still_to_move"))
+	assert(frames.has_animation("b_stand_move"))
+	assert(frames.has_animation("b_stand_move_to_still"))
+	assert(frames.has_animation("b_crouch_still"))
+	assert(frames.has_animation("b_crouch_still_to_move"))
+	assert(frames.has_animation("b_crouch_move"))
+	assert(frames.has_animation("b_crouch_move_to_still"))
+	assert(frames.has_animation("b_jump"))
+	
+	assert(frames.has_animation("avatar_move"))
+	assert(frames.has_animation("avatar_still"))
+	
+	animated_sprite.frames = frames
 	Global.player = self
 
-func _physics_process(delta):
-	_check_crouch()
+func _physics_process(delta: float):
+	_crouching = Input.is_action_pressed("crouch")
+	
+	stand_collision.disabled = _crouching
+	crouch_collision.disabled = not _crouching
 	
 	var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 	var head_colliding = top_detector.is_colliding()
 	var direction = _get_direction()
 	
-	if on_platform and top_detector.is_colliding():
-		direction.y = 0
+	direction.y = 0.0
 	
-	if _current_velocity.x != 0:
+	if _current_velocity.x != 0.0:
 		var rad = WALK_WAVE_COUNT * current_second * _current_animation_speed * PI
 		
 		_current_acceleration = ACCELERATION * abs(sin(rad + WALK_WAVE_OFFSET))
@@ -94,28 +119,27 @@ func _physics_process(delta):
 			
 			body.apply_central_impulse(position_diff.normalized() * body.KICK_FORCE)
 	
-	if is_on_floor() and direction.x != 0:
-		var m = 1 if direction.x > 0 else -1
+	if is_on_floor() and direction.x != 0.0:
+		var m = 1.0 if direction.x > 0.0 else -1.0
 		
 		animated_sprite.scale.x = abs(animated_sprite.scale.x) * m
 		crouch_collision.scale.x = abs(crouch_collision.scale.x) * m
 		stand_collision.scale.x = abs(stand_collision.scale.x) * m
+		avatar_collision.scale.x = abs(avatar_collision.scale.x) * m
 		
-		_animation_prefix = SIDE_A_PREFIX if direction.x > 0 else SIDE_B_PREFIX
+		_animation_prefix = "a" if direction.x > 0.0 else "b"
 	
 	var next_animation = _get_next_animation(direction)
 	
 	if next_animation.freeze:
-		animated_sprite.speed_scale = 0
+		animated_sprite.speed_scale = 0.0
 	else:
 		animated_sprite.speed_scale = _current_animation_speed
 	
 	_set_animation(next_animation.name)
 
 func _check_crouch():
-	if Input.is_action_just_pressed("crouch"):
-		_crouching = not _crouching
-		
+	_crouching = Input.is_action_pressed("crouch")
 	stand_collision.disabled = _crouching
 	crouch_collision.disabled = not _crouching
 
@@ -123,15 +147,19 @@ func _get_direction():
 	if freeze:
 		return Vector2(0, 0)
 	
-	var right = Input.get_action_strength("move_right")
-	var left = Input.get_action_strength("move_left")
-	var jump = Input.is_action_just_pressed("jump")
-	var sprint = Input.is_action_pressed("sprint")
+	var right_strength = Input.get_action_strength("move_right")
+	var left_strength = Input.get_action_strength("move_left")
+	var up_strength = Input.get_action_strength("move_up")
+	var down_strength = Input.get_action_strength("move_down")
+	var sprint_pressed = Input.is_action_pressed("sprint")
 	
-	var on_floor = is_on_floor()
-	var x = right - left
-	var y = -1 if on_floor and jump and not _crouching else 0
-	var speed_mod = SPRINT_SCALE if sprint and on_floor else 1
+	var can_go_up = avatar_mode or (is_on_floor() and not _crouching)
+	var can_go_down = avatar_mode
+	
+	var x = right_strength - left_strength
+	var y = (down_strength if can_go_down else 0.0) - (up_strength if can_go_up else 0.0)
+	
+	var speed_mod = SPRINT_SCALE if not avatar_mode and sprint_pressed and can_go_up else 1.0
 	
 	_current_max_speed = speed_mod * MAX_SPEED
 	_current_acceleration = speed_mod * ACCELERATION
@@ -139,25 +167,25 @@ func _get_direction():
 	
 	return Vector2(x, y)
 
-func _calculate_next_velocity(delta, direction):
+func _calculate_next_velocity(delta: float, direction: Vector2):
 	var next_velocity = _current_velocity
 	
 	if is_on_floor():
 		next_velocity.x *= pow(FRICTION, delta)
 		
-		if direction.y != 0:
+		if direction.y < 0.0:
 			next_velocity.y += direction.y * JUMP_FORCE
 	else:
 		next_velocity.y += GRAVITY * delta
 	
 	if abs(next_velocity.x) > _current_max_speed:
 		next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * _current_max_speed
-	elif direction.x != 0:
+	elif direction.x != 0.0:
 		next_velocity.x += direction.x * _current_acceleration * delta
 	
 	return next_velocity
 
-func _get_next_animation(direction):
+func _get_next_animation(direction: Vector2):
 	var next_animation = "stand_still"
 	var freeze = false
 	
@@ -191,11 +219,11 @@ func _get_next_animation(direction):
 				
 		next_animation = ("crouch" if _crouching else "stand") + "_" + next_animation
 	else:
-		if abs(_current_velocity.x) > 0:
+		if abs(_current_velocity.x) > 0.0:
 			_moving_x = true
 			_transition = false
 		
-		if _current_velocity.y > 0:
+		if _current_velocity.y > 0.0:
 			# When falling, freeze the current frame of the jump animation
 			next_animation = "jump"
 			freeze = true
@@ -207,7 +235,7 @@ func _get_next_animation(direction):
 		"freeze": freeze
 	}
 
-func _set_animation(name):
+func _set_animation(name: String):
 	animated_sprite.animation = _animation_prefix + "_" + name
 
 func get_animation():

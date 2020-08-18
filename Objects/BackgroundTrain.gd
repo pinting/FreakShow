@@ -2,22 +2,22 @@ class_name BackgroundTrain
 extends Node2D
 
 # Start the train from X set in Editor minus this
-export var START_FROM = 15000
+export var START_FROM: float = 15000.0
 
 # Speed to move on the X axis
-export var SPEED = 25
+export var SPEED: float = 25.0
 
 # Destory the train from X set in Editor plus this
-export var STOP_AFTER = 50000
+export var STOP_AFTER: float = 50000.0
 
 # Amplitude of the shake (Y axis)
-export var SHAKE_AMP = 0.1
+export var SHAKE_AMP: float = 0.1
 
 # Number of shakes (X axis)
-export var SHAKE_COUNT = 15
+export var SHAKE_COUNT: float = 15.0
 
 # Difference in rhythem per train
-export var RHYTHM_DIFF = 0.33
+export var RHYTHM_DIFF: float = 0.33
 
 onready var train_00 = $Train00
 onready var audio_stream_00 = $Train00/AudioStreamPlayer2D
@@ -28,9 +28,9 @@ onready var audio_stream_01 = $Train01/AudioStreamPlayer2D
 onready var train_02 = $Train02
 onready var audio_stream_02 = $Train02/AudioStreamPlayer2D
 
-var _started = false
-var _current_second = 0
-var _base_position = Vector2(0, 0)
+var _started: bool = false
+var _current_second: float = 0.0
+var _base_position: Vector2 = Vector2(0.0, 0.0)
 
 func _ready():
 	visible = false
@@ -59,9 +59,9 @@ func _process(delta):
 	var m = SHAKE_AMP
 	var c = SHAKE_COUNT
 	
-	train_00.position.y += m * sin(c * s + 0 * RHYTHM_DIFF) * randf()
-	train_01.position.y += m * sin(c * s + 1 * RHYTHM_DIFF) * randf()
-	train_02.position.y += m * sin(c * s + 2 * RHYTHM_DIFF) * randf()
+	train_00.position.y += m * sin(c * s + 0.0 * RHYTHM_DIFF) * randf()
+	train_01.position.y += m * sin(c * s + 1.0 * RHYTHM_DIFF) * randf()
+	train_02.position.y += m * sin(c * s + 2.0 * RHYTHM_DIFF) * randf()
 	
 	position.x += SPEED
 

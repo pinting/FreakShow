@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Part00_Hallway.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part00.gd" type="Script" id=2]
-[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Objects/Sky.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Music/Part00.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=6]
@@ -33,9 +32,6 @@ size = Vector2( 4000, 2125 )
 
 [node name="Part00" type="Node2D"]
 script = ExtResource( 2 )
-FADE_IN_AFTER = 6
-FADE_IN_DURATION = 2
-DELAY = 2
 
 [node name="SubtitleDisplay" parent="." instance=ExtResource( 12 )]
 position = Vector2( -1348.35, -86.0649 )
@@ -46,7 +42,6 @@ light_mask = 0
 [node name="Player" parent="." instance=ExtResource( 8 )]
 position = Vector2( -1346.24, -73.793 )
 scale = Vector2( 0.7, 0.7 )
-FRAMES = ExtResource( 3 )
 
 [node name="DefaultCamera" parent="Player" instance=ExtResource( 7 )]
 smoothing_enabled = false

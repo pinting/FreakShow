@@ -2,37 +2,37 @@ class_name Selectable
 extends Sprite
 
 # Description of the selectable
-export var DESCRIPTION = ""
+export var DESCRIPTION: String = ""
 
 # Mouse offset key
-export var OFFSET_KEY = ""
+export var OFFSET_KEY: String = ""
 
 # Primary effect name
-export var PRIMARY_KEY = ""
+export var PRIMARY_KEY: String = ""
 
 # Primary effect when mouse is hovering
-export var PRIMARY_HOVER = 0.0
+export var PRIMARY_HOVER: float = 0.0
 
 # Default primary effect value
-export var PRIMARY_DEFAULT = 0.0
+export var PRIMARY_DEFAULT: float = 0.0
 
 # Secondary effect name
-export var SECONDARY_KEY = ""
+export var SECONDARY_KEY: String = ""
 
 # Secondary effect when mouse is hovering
-export var SECONDARY_HOVER = 0.0
+export var SECONDARY_HOVER: float = 0.0
 
 # Default secondary effect value
-export var SECONDARY_DEFAULT = 0.0
+export var SECONDARY_DEFAULT: float = 0.0
 
 # Effect step size in one second (both primary and secondary)
-export var EFFECT_STEP = 1.0
+export var EFFECT_STEP: float = 1.0
 
 # Clone material
-export var CLONE_MATERIAL = false
+export var CLONE_MATERIAL: bool = false
 
-var _current_primary = PRIMARY_DEFAULT
-var _current_secondary = SECONDARY_DEFAULT
+var _current_primary: float = PRIMARY_DEFAULT
+var _current_secondary: float = SECONDARY_DEFAULT
 
 var held = false
 
@@ -46,7 +46,7 @@ func _ready():
 	if CLONE_MATERIAL:
 		material = material.duplicate()
 
-func _is_top(mouse_position):
+func _is_top(mouse_position: Vector2):
 	var tree = get_tree()
 	var selectable_group = tree.get_nodes_in_group("selectable")
 	var self_index = selectable_group.find(self)
@@ -68,7 +68,7 @@ func _is_top(mouse_position):
 	
 	return true
 
-func _input(event):
+func _input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
 		var mouse_position = get_global_mouse_position()
 		
@@ -81,7 +81,7 @@ func show_description():
 func remove_description():
 	Global.subtitle.describe_remove(get_instance_id())
 
-func _physics_process(delta):
+func _physics_process(delta: float):
 	var mouse_position = get_global_mouse_position()
 	
 	if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position):

@@ -1,34 +1,28 @@
 extends Node
 
-# Resolution to reach (on large screens up-scale, on small screens down-scale)
-const RESOLUTION = Vector2(1920, 1080)
-
-# Default zoom for the non scaled resolution
-const CAMERA_ZOOM = Vector2(2, 2)
-
 # Enable debug messages
-const DEBUG = false
+const DEBUG: bool = true
 
 # Disable sounds
-const NO_SOUNDS = false
+const NO_SOUNDS: bool = true
 
 # Disable intro
-const NO_INTRO = false
+const NO_INTRO: bool = true
 
 # Max loading time per tick (in msec)
-export var MAX_LOADING_TIME = 100
+export var MAX_LOADING_TIME: int = 100
 
-var current_camera = null
-var player = null
-var subtitle_display = null
-var subtitle = null
+var current_camera: Camera2D = null
+var player: Player = null
+var subtitle_display: SubtitleDisplay = null
+var subtitle: SubtitleManager = null
 
 var _loader = null
 
 class SubtitleManager:
 	var _subtitle_queue = []
 	
-	func say(text, speed = 2, timeout = 10):
+	func say(text: String, speed: float = 2.0, timeout: float = 10.0):
 		if not Global.subtitle_display:
 			_subtitle_queue.push_back({
 				"text": text,
@@ -41,11 +35,11 @@ class SubtitleManager:
 			
 			Global.subtitle_display.say(text, speed, timeout)
 	
-	func describe(key, text):
+	func describe(key: int, text: String):
 		if Global.subtitle_display:
 			Global.subtitle_display.describe(key, text)
 	
-	func describe_remove(key):
+	func describe_remove(key: int):
 		if Global.subtitle_display:
 			Global.subtitle_display.describe_remove(key)
 

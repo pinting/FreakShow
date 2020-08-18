@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Animations/Monster00.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Objects/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=3]
+
+[node name="Enemy" type="KinematicBody2D"]
+position = Vector2( -954.289, 6097.17 )
+scale = Vector2( 0.275, 0.275 )
+collision_layer = 15
+collision_mask = 15
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -493.689, 519.875, 135.318, 382.208, 443.867, 18.72, 535.074, -393.054, 352.66, -504.389, -11.4785 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "avatar_still"
+
+[node name="Light2D" type="Light2D" parent="AnimatedSprite"]
+texture = ExtResource( 3 )
+color = Color( 1, 0, 0, 1 )
+energy = 0.66

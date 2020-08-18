@@ -1,15 +1,19 @@
 extends "res://Objects/Selectable/Selectable.gd"
 
-export var ZOOM = 0.4
+# Zoom of the enlarged sprite
+export var ENLARGED_ZOOM = 0.4
+
+# Z-Index of the enlarged sprite
+export var ENLARGED_Z_INDEX = 99
 
 const selectable = preload("res://Objects/Selectable/Selectable.gd")
 
-var enlarged_sprite
+var enlarged_sprite: Sprite
 
 func _ready():
 	connect("selected", self, "_on_selected")
 
-func _process(_delta):
+func _process(_delta: float):
 	if not enlarged_sprite:
 		return
 	
@@ -37,7 +41,7 @@ func _on_selected():
 	var sprite = Sprite.new()
 	var screen_size = OS.get_screen_size() * camera.zoom
 	var texture_size = texture.get_size()
-	var real_scale = (screen_size / texture_size) * ZOOM
+	var real_scale = (screen_size / texture_size) * ENLARGED_ZOOM
 	var min_scale = min(real_scale.x, real_scale.y)
 	
 	sprite.texture = texture.duplicate()
@@ -46,7 +50,7 @@ func _on_selected():
 	sprite.position = camera.get_camera_screen_center()
 	sprite.rotation_degrees = 0
 	sprite.z_as_relative = false
-	sprite.z_index = 99
+	sprite.z_index = ENLARGED_Z_INDEX
 	sprite.light_mask = pow(2, 19)
 	
 	sprite.add_to_group("selectable")

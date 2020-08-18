@@ -1,15 +1,15 @@
 extends "res://Objects/Selectable/Selectable.gd"
 
 # After how large value the line should disappear
-export var LIMIT = 10
+export var LIMIT: int = 10
 
 # Size of one step
-export var STEP = 1
+export var STEP: int = 1
 
 # Initial value
-export var START = 0
+export var START: int = 0
 
-var current = START
+var current: int = START
 
 func _ready():
 	assert(STEP > 0)

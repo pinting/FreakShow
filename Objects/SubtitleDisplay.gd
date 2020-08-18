@@ -1,3 +1,4 @@
+class_name SubtitleDisplay
 extends Node2D
 
 onready var top = $Top
@@ -9,7 +10,7 @@ var lines = []
 func _ready():
 	Global.subtitle_display = self
 
-func _process_text(delta):
+func _process_text(delta: float):
 	var text = ""
 	var marked = []
 	var i = 0
@@ -23,7 +24,7 @@ func _process_text(delta):
 		line.show_percentage = min(1, line.show_percentage)
 		line.timeout -= delta
 		
-		if line.timeout <= 0:
+		if line.timeout <= 0.0:
 			marked.push_front(i)
 		
 		i += 1
@@ -33,17 +34,17 @@ func _process_text(delta):
 	
 	bottom.text = text
 
-func _process_position(_delta):
+func _process_position(_delta: float):
 	var camera = Global.current_camera
 	
 	if camera != null:
 		position = camera.get_camera_screen_center()
 
-func _process(delta):
+func _process(delta: float):
 	_process_text(delta)
 	_process_position(delta)
 	
-func say(text, speed = 2, timeout = 10):
+func say(text: String, speed: int = 2.0, timeout: int = 10.0):
 	lines.push_back({
 		"text": text,
 		"speed": speed,
@@ -51,11 +52,11 @@ func say(text, speed = 2, timeout = 10):
 		"show_percentage": 0 if speed > 0 else 100
 	})
 
-func describe(key, text):
+func describe(key: int, text: String):
 	top.text = text
 	current_describe_key = key
 
-func describe_remove(key):
+func describe_remove(key: int):
 	if current_describe_key == key:
 		top.text = ""
 		current_describe_key = null

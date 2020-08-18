@@ -2,46 +2,46 @@ class_name MusicMixer
 extends Node
 
 # Playback stream
-export (AudioStream) var STREAM
+export var STREAM: AudioStream
 
 # Should the whole thing repeat
-export var LOOP = false
+export var LOOP: bool = false
 
 # If auto play
-export var AUTOPLAY = false
+export var AUTOPLAY: bool = false
 
 # Playing volume in DB
-export var MAX_VOLUME = 0
+export var MAX_VOLUME: int = 0
 
 # Muting volume in DB
-export var MIN_VOLUME = -60
+export var MIN_VOLUME: int = -60
 
 # Parts of the music
-export var PARTS = []
+export var PARTS: Array = []
 
 # Debug the music player (Global.DEBUG needs to be true)
-export var DEBUG = false
+export var DEBUG: bool = false
 
-const EPS = 0.05
+const EPS: float = 0.05
 
 onready var player_00 = $AudioStreamPlayer00
 onready var player_01 = $AudioStreamPlayer01
 
-var master_player = null
-var slave_player = null
-var stopped = true
-var parts = PARTS
+var master_player: AudioStreamPlayer = null
+var slave_player: AudioStreamPlayer = null
+var stopped: bool = true
+var parts: Array = PARTS
 
-var _current_part_index = 0
-var _playback_prev_position = 0
-var _playback_prev_diff = 0
-var _virtual_position = 0
-var _break_loop = false # Wait until the end
-var _break_loop_now = false # Break it ASAP
-var _forced_next = null # Index of the next part
-var _mixing = false
-var _kill_timeout = 0
-var _kill = false
+var _current_part_index: int = 0.0
+var _playback_prev_position: float = 0.0
+var _playback_prev_diff: float = 0.0
+var _virtual_position: float = 0.0
+var _break_loop: bool = false # Wait until the end
+var _break_loop_now: bool = false # Break it ASAP
+var _forced_next: int = -1 # Index of the next part
+var _mixing: bool = false
+var _kill_timeout: int = 0.0
+var _kill: bool = false
 
 func _ready():
 	master_player = player_00
@@ -55,12 +55,12 @@ func _ready():
 	if AUTOPLAY:
 		play()
 
-func add_part(start, end, loop, in_duration, out_duration, offset = 0):
+func add_part(start: float, end: float, loop: bool, in_duration: float, out_duration: float, offset: float = 0.0):
 	# A part needs to start earlier than end
 	assert(start < end)
 	
 	# The N + 1 part can only start fading out after the N ended
-	assert(end - start - out_duration + offset > 0)
+	assert(end - start - out_duration + offset > 0.0)
 	
 	var new_part = {
 		# At start the fade in will start
@@ -83,7 +83,7 @@ func add_part(start, end, loop, in_duration, out_duration, offset = 0):
 	
 	return len(parts) - 1
 
-func kill(timeout = 5):
+func kill(timeout: float = 5.0):
 	_kill = true
 	_kill_timeout = timeout
 
@@ -102,14 +102,14 @@ func play():
 	_break_loop_now = false
 	_mixing = false
 	_kill = false
-	_kill_timeout = 0
+	_kill_timeout = 0.0
 
 func get_next():
 	var current_part = parts[_current_part_index]
 	
 	if _kill:
 		return -1
-	elif _forced_next != null:
+	elif _forced_next >= 0:
 		assert(len(parts) > _forced_next)
 		return _forced_next
 	elif current_part.loop and not _break_loop:
@@ -121,15 +121,15 @@ func get_next():
 	else:
 		return -1
 
-func force_next(value):
+func force_next(index: int):
 	if _mixing:
 		_finish_mixing(get_next())
 		
-	_forced_next = value
+	_forced_next = index
 	_break_loop_now = true
 	_break_loop = true
 
-func _process(delta):
+func _process(delta: float):
 	if stopped:
 		return
 	
@@ -138,7 +138,7 @@ func _process(delta):
 	
 	_playback_prev_position = playback_position_now
 	
-	if position_diff > 0:
+	if position_diff > 0.0:
 		position_diff = _playback_prev_diff
 	else:
 		_playback_prev_diff = position_diff
@@ -210,7 +210,7 @@ func _process(delta):
 				else:
 					_finish_mixing(next_part_index)
 
-func _finish_mixing(next_part_index):
+func _finish_mixing(next_part_index: int):
 	_debug(str("new master index ", next_part_index))
 	
 	# Swap players
@@ -230,13 +230,13 @@ func _finish_mixing(next_part_index):
 	_playback_prev_position = _virtual_position
 	_break_loop = false
 	_break_loop_now = false
-	_forced_next = null
+	_forced_next = -1
 	_mixing = false
 
-func _debug(message):
+func _debug(message: String):
 	if DEBUG:
 		Global.debug(message)
 
-func _debug_if_integer(t, message):
+func _debug_if_integer(t: float, message: String):
 	if abs(floor(t) - t) < 0.05:
 		_debug(message)

@@ -1,10 +1,10 @@
 extends "res://Scenes/BaseScene.gd"
 
 # Next scene
-export var NEXT_SCENE = "res://Scenes/Part01.tscn"
+export var NEXT_SCENE: String = "res://Scenes/Part01.tscn"
 
 # Help player after this amount of loops into one direction
-export var HELP_AFTER_INDEX = 3
+export var HELP_AFTER_INDEX: int = 3
 
 onready var flat_exit_door = $Environment/Flat/Inside/Door
 onready var hallway_exit = $Environment/Hallway/Inside/Door04
@@ -15,14 +15,14 @@ onready var hallway_loop_end = $Points/HallwayLoopEnd
 
 onready var door_sound = $Sounds/DoorSound
 
-var hallway_exit_visible = false
-var hallway_stage_00 = true
-var hallway_stage_01 = false
-var loop_direction = 0
-var loop_index = 0
-var exiting = false
+var hallway_exit_visible: bool = false
+var hallway_stage_00: bool = true
+var hallway_stage_01: bool = false
+var loop_direction: int = 0
+var loop_index: int = 0
+var exiting: bool = false
 
-var music_00
+var music_00: int
 
 func _ready():
 	music_00 = music_mixer.add_part(2, 5 * 60, true, 5, 5, -5)
@@ -41,10 +41,10 @@ func _on_flat_exit_select():
 	if not Global.NO_SOUNDS:
 		door_sound.play()
 	
-	fade_out(1)
+	fade_out(1.0)
 	yield(timer(1.5), "timeout")
 	player.position = hallway_spawn.position
-	fade_in(1)
+	fade_in(1.0)
 
 func _on_hallway_exit_select():
 	if exiting:
@@ -52,13 +52,13 @@ func _on_hallway_exit_select():
 	
 	exiting = true
 	
-	music_mixer.kill(2);
-	fade_out(1)
-	yield(timer(2), "timeout")
+	music_mixer.kill(2.0);
+	fade_out(1.0)
+	yield(timer(2.0), "timeout")
 	
 	Global.load_scene(NEXT_SCENE)
 
-func _process_hallway_exit(delta):
+func _process_hallway_exit(delta: float):
 	if hallway_exit_visible:
 		return
 	
@@ -75,7 +75,7 @@ func _process_hallway_exit(delta):
 		
 		hallway_exit_visible = true
 
-func _process_hallway_loop(delta):
+func _process_hallway_loop(delta: float):
 	var left_end_position = hallway_loop_begin.global_position
 	var right_end_position = hallway_loop_end.global_position
 	var player_position = player.global_position
@@ -98,6 +98,6 @@ func _process_hallway_loop(delta):
 		loop_direction += 1
 		loop_direction = min(loop_direction, 1)
 
-func _process(delta):
+func _process(delta: float):
 	_process_hallway_loop(delta)
 	_process_hallway_exit(delta)

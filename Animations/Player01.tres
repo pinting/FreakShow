@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=174 format=2]
+[gd_resource type="SpriteFrames" load_steps=175 format=2]
 
 [ext_resource path="res://Assets/Characters/Player01/B/Stand_MoveToStill/Player01_B_Stand_MoveToStill14.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Characters/Player01/B/Stand_StillToMove/Player01_B_Stand_StillToMove16.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/Characters/Player01/B/Stand_MoveToStill/Player01_B_Stand_MoveToStill11.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Characters/Player01/B/Stand_MoveToStill/Player01_B_Stand_MoveToStill13.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Characters/Player01/B/Stand_MoveToStill/Player01_B_Stand_MoveToStill09.png" type="Texture" id=7]
+[ext_resource path="res://icon.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Characters/Player01/B/Stand_MoveToStill/Player01_B_Stand_MoveToStill19.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Characters/Player01/B/Stand_MoveToStill/Player01_B_Stand_MoveToStill20.png" type="Texture" id=10]
 [ext_resource path="res://Assets/Characters/Player01/B/Crouch_MoveToStill/Player01_B_Crouch_MoveToStill03.png" type="Texture" id=12]
@@ -181,14 +182,24 @@ animations = [ {
 "name": "default",
 "speed": 30.0
 }, {
-"frames": [ ExtResource( 67 ), ExtResource( 66 ), ExtResource( 81 ), ExtResource( 47 ), ExtResource( 163 ), ExtResource( 144 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 159 ), ExtResource( 61 ), ExtResource( 58 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 131 ), ExtResource( 135 ), ExtResource( 132 ), ExtResource( 136 ) ],
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "avatar_move",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 8 ) ],
 "loop": false,
-"name": "b_stand_still_to_move",
+"name": "avatar_still",
 "speed": 30.0
 }, {
 "frames": [ ExtResource( 60 ) ],
 "loop": false,
 "name": "b_stand_still",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 67 ), ExtResource( 66 ), ExtResource( 81 ), ExtResource( 47 ), ExtResource( 163 ), ExtResource( 144 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 159 ), ExtResource( 61 ), ExtResource( 58 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 131 ), ExtResource( 135 ), ExtResource( 132 ), ExtResource( 136 ) ],
+"loop": false,
+"name": "b_stand_still_to_move",
 "speed": 30.0
 }, {
 "frames": [ ExtResource( 77 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 161 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 160 ), ExtResource( 162 ), ExtResource( 158 ), ExtResource( 150 ), ExtResource( 147 ), ExtResource( 155 ), ExtResource( 149 ), ExtResource( 142 ), ExtResource( 141 ), ExtResource( 157 ), ExtResource( 143 ), ExtResource( 148 ), ExtResource( 156 ), ExtResource( 140 ), ExtResource( 151 ), ExtResource( 146 ) ],

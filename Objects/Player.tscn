@@ -46,3 +46,7 @@ polygon = PoolVector2Array( 72.1871, 496.019, -51.9472, 495.985, -73.2801, 466.7
 
 [node name="StandCollision" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -51.7286, 496.019, 73.0905, 495.758, 59.7819, -170.704, 83.5267, -312.183, 18.2286, -336.917, -35.197, -305.257, -39.9453, -199.198, -96.1416, -156.062 )
+
+[node name="AvatarCollision" type="CollisionPolygon2D" parent="."]
+position = Vector2( -2.57443, -2.57445 )
+polygon = PoolVector2Array( -34.9943, -0.767136, -27.2709, -33.5912, 30.3321, -31.9822, 34.8373, -2.37616, 29.6885, 33.9877, -26.6273, 37.5276 )
