@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Monster00_Avatar_Still00.png-492898f7df7b523190e620980c0f52bd.stex"
+path="res://.import/Enemy00_Default01.png-22969c6c60c1848f52f5fd083b33399b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characters/Monster00/Avatar/Still/Monster00_Avatar_Still00.png"
-dest_files=[ "res://.import/Monster00_Avatar_Still00.png-492898f7df7b523190e620980c0f52bd.stex" ]
+source_file="res://Assets/Characters/Enemy00/Default/Enemy00_Default01.png"
+dest_files=[ "res://.import/Enemy00_Default01.png-22969c6c60c1848f52f5fd083b33399b.stex" ]
 
 [params]
 

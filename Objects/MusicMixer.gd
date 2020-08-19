@@ -40,7 +40,7 @@ var _break_loop: bool = false # Wait until the end
 var _break_loop_now: bool = false # Break it ASAP
 var _forced_next: int = -1 # Index of the next part
 var _mixing: bool = false
-var _kill_timeout: int = 0.0
+var _kill_timeout: float = 0.0
 var _kill: bool = false
 
 func _ready():

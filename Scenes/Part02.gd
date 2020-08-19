@@ -26,9 +26,8 @@ func _process(delta: float):
 	find_path_tick += delta
 	
 	if find_path_tick > 1.0:
-		var raw_path = navigation.get_simple_path(enemy.global_position, player.global_position)
-		#var path = enemy.smooth_path(raw_path)
+		var path = navigation.get_simple_path(enemy.global_position, player.global_position)
 		
-		enemy.path = raw_path
-		debug_line.points = raw_path
+		enemy.path = path
+		debug_line.points = path
 		find_path_tick = 0.0

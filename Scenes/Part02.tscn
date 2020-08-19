@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Sounds/Phone02.wav" type="AudioStream" id=2]
@@ -7,14 +7,15 @@
 [ext_resource path="res://Scenes/Part02.gd" type="Script" id=5]
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=6]
 [ext_resource path="res://Objects/TileSet/Lines00.tres" type="TileSet" id=7]
-[ext_resource path="res://Objects/Enemy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/Actor/Enemy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Objects/Sky.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Environmnent/DirectionSign01.png" type="Texture" id=10]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Environmnent/Door03.png" type="Texture" id=12]
+[ext_resource path="res://Animations/Enemy00.tres" type="SpriteFrames" id=13]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=21]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Objects/Actor/Player.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=37]
 [ext_resource path="res://Objects/SubtitleDisplay.tscn" type="PackedScene" id=38]
 [ext_resource path="res://Objects/BlackScreen.tscn" type="PackedScene" id=39]
@@ -104,6 +105,7 @@ z_index = 100
 z_as_relative = false
 
 [node name="Enemy" parent="Environment" instance=ExtResource( 8 )]
+ANIMATION_FRAMES = ExtResource( 13 )
 
 [node name="FallToDeath" type="Area2D" parent="Environment"]
 position = Vector2( 1117.5, 9761.04 )
