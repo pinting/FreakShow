@@ -68,7 +68,7 @@ func _process(delta: float):
 	_process_intro(delta)
 	_process_fade(delta)
 
-func _process_intro(delta: float):
+func _process_intro(_delta: float):
 	if _intro_started:
 		return
 	

@@ -58,7 +58,7 @@ func _on_hallway_exit_select():
 	
 	Global.load_scene(NEXT_SCENE)
 
-func _process_hallway_exit(delta: float):
+func _process_hallway_exit(_delta: float):
 	if hallway_exit_visible:
 		return
 	
@@ -75,7 +75,7 @@ func _process_hallway_exit(delta: float):
 		
 		hallway_exit_visible = true
 
-func _process_hallway_loop(delta: float):
+func _process_hallway_loop(_delta: float):
 	var left_end_position = hallway_loop_begin.global_position
 	var right_end_position = hallway_loop_end.global_position
 	var player_position = player.global_position

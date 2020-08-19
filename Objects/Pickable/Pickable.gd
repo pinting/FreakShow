@@ -19,7 +19,7 @@ signal picked
 func _ready():
 	assert(is_in_group("pickable"))
 
-func _input_event(viewport: Object, event: InputEvent, _shape_idx: int):
+func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			emit_signal("picked", self)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Objects/Actor/Player.gd" type="Script" id=1]
+[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -14,7 +15,8 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
-position = Vector2( -0.811218, -2.95939 )
+position = Vector2( -0.811218, -3.40119 )
+frames = ExtResource( 2 )
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
@@ -46,5 +48,5 @@ polygon = PoolVector2Array( 72.1871, 496.019, -51.9472, 495.985, -73.2801, 466.7
 polygon = PoolVector2Array( -51.7286, 496.019, 73.0905, 495.758, 59.7819, -170.704, 83.5267, -312.183, 18.2286, -336.917, -35.197, -305.257, -39.9453, -199.198, -96.1416, -156.062 )
 
 [node name="AvatarCollision" type="CollisionPolygon2D" parent="."]
-position = Vector2( -2.57443, -2.57445 )
-polygon = PoolVector2Array( -34.9943, -0.767136, -27.2709, -33.5912, 30.3321, -31.9822, 34.8373, -2.37616, 29.6885, 33.9877, -26.6273, 37.5276 )
+position = Vector2( -2.35354, -2.57445 )
+polygon = PoolVector2Array( -93.9984, 7.82037, -57.7712, -63.9714, 22.8566, -76.5626, 96.8574, -52.2639, 77.8602, -18.0247, 34.5642, -38.5682, 48.0389, 16.2145, -9.83632, 69.4509, -45.18, 37.8625 )

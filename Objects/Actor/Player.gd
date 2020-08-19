@@ -56,8 +56,8 @@ var avatar_mode: bool = true
 
 var _animation_prefix: String = ""
 var _current_velocity: Vector2 = Vector2(0, 0)
-var _current_max_speed: int = MAX_SPEED
-var _current_acceleration: int = ACCELERATION
+var _current_max_speed: float = MAX_SPEED
+var _current_acceleration: float = ACCELERATION
 var _current_animation_speed: float = ANIMATION_SPEED
 var _crouching: bool = false
 var _transition: bool = false
@@ -90,6 +90,13 @@ func _ready():
 	
 	animated_sprite.frames = ANIMATION_FRAMES
 	Global.player = self
+	
+	_animation_prefix = "" if avatar_mode else "a"
+	
+func _process(_delta: float):
+	stand_collision.disabled = _crouching or avatar_mode
+	crouch_collision.disabled = not _crouching or avatar_mode
+	avatar_collision.disabled = not avatar_mode
 
 func _physics_process(delta: float):
 	current_second += delta
@@ -106,7 +113,7 @@ func _physics_process(delta: float):
 
 func _process_velocity(delta: float, direction: Vector2):
 	if avatar_mode:
-		var next_velocity = calculate_next_velocity(delta, direction, ACCELERATION)
+		var next_velocity = _calculate_next_velocity(delta, direction, ACCELERATION)
 		
 		_current_velocity = move_and_slide(next_velocity)
 	else:
@@ -133,10 +140,10 @@ func _process_pickable_kick():
 			body.apply_central_impulse(position_diff.normalized() * body.KICK_FORCE)
 
 func _process_crouch():
-	var crouch_pressed = Input.is_action_pressed("crouch")
+	var crouch_pressed = Input.is_action_just_pressed("crouch")
 	
-	stand_collision.disabled = crouch_pressed
-	crouch_collision.disabled = not crouch_pressed
+	if crouch_pressed:
+		_crouching = not _crouching
 
 func _process_sprint():
 	var sprint_pressed = Input.is_action_pressed("sprint")
@@ -151,8 +158,8 @@ func _process_sprint():
 func _process_animation(direction: Vector2):
 	if avatar_mode:
 		_animation_prefix = ""
-	else:
-		_animation_prefix = "a_" if direction.x > 0.0 else "b_"
+	elif direction.x != 0.0:
+		_animation_prefix = "a" if direction.x > 0.0 else "b"
 	
 	var next_animation = _get_next_animation(direction)
 	
@@ -161,10 +168,12 @@ func _process_animation(direction: Vector2):
 	else:
 		animated_sprite.speed_scale = _current_animation_speed
 	
-	animated_sprite.animation = _animation_prefix + next_animation.name
+	var d = "_" if len(_animation_prefix) > 0 else ""
+	
+	animated_sprite.animation = _animation_prefix + d + next_animation.name
 
 func _process_facing(direction: Vector2):
-	if not is_on_floor() and not avatar_mode:
+	if (not is_on_floor() and not avatar_mode) or direction.x == 0.0:
 		return
 	
 	var m = 1.0 if direction.x > 0.0 else -1.0
@@ -202,7 +211,7 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 			
 		if abs(next_velocity.y) > _current_max_speed:
 			next_velocity.y = (next_velocity.y / abs(next_velocity.y)) * _current_max_speed
-		elif direction.x != 0.0:
+		elif direction.y != 0.0:
 			next_velocity.y += direction.y * acceleration * delta
 	else:
 		if is_on_floor():
@@ -228,7 +237,10 @@ func _get_next_animation(direction: Vector2):
 	var last_frame = animated_sprite.frames.get_frame_count(current_animation) - 1
 	var animation_looped = animated_sprite.frames.get_animation_loop(current_animation)
 	
-	if not avatar_mode:
+	if avatar_mode:
+		if direction.x == 0.0 and direction.y == 0.0:
+			freeze = true
+	else:
 		if is_on_floor():
 			if direction.x:
 				if not _moving_x:
