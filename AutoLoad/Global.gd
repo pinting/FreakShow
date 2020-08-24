@@ -4,10 +4,10 @@ extends Node
 const DEBUG: bool = true
 
 # Disable sounds
-const NO_SOUNDS: bool = true
+const NO_SOUNDS: bool = false
 
 # Disable intro
-const NO_INTRO: bool = true
+const NO_INTRO: bool = false
 
 # Max loading time per tick (in msec)
 export var MAX_LOADING_TIME: int = 100

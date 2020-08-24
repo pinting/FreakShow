@@ -14,8 +14,8 @@ use_mipmaps = true
 use_filter = true
 font_data = SubResource( 1 )
 
-[node name="SubtitleDisplay" type="Node2D"]
-z_index = 101
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 2
 script = ExtResource( 2 )
 
 [node name="Bottom" type="Label" parent="."]
@@ -50,7 +50,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Light2D" type="Light2D" parent="."]
+[node name="SubtitleDisplay" type="Node2D" parent="."]
+visible = false
+z_index = 101
+
+[node name="Light2D" type="Light2D" parent="SubtitleDisplay"]
 scale = Vector2( 300, 300 )
 texture = ExtResource( 1 )
 energy = 2.0

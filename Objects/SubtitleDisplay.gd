@@ -1,5 +1,5 @@
 class_name SubtitleDisplay
-extends Node2D
+extends CanvasLayer
 
 onready var top = $Top
 onready var bottom = $Bottom
@@ -10,7 +10,7 @@ var lines = []
 func _ready():
 	Global.subtitle_display = self
 
-func _process_text(delta: float):
+func _process(delta: float):
 	var text = ""
 	var marked = []
 	var i = 0
@@ -29,20 +29,10 @@ func _process_text(delta: float):
 		
 		i += 1
 	
-	for i in marked:
-		lines.remove(i)
+	for n in marked:
+		lines.remove(n)
 	
 	bottom.text = text
-
-func _process_position(_delta: float):
-	var camera = Global.current_camera
-	
-	if camera != null:
-		position = camera.get_camera_screen_center()
-
-func _process(delta: float):
-	_process_text(delta)
-	_process_position(delta)
 	
 func say(text: String, speed: int = 2.0, timeout: int = 10.0):
 	lines.push_back({

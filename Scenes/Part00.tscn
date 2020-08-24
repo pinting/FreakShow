@@ -14,28 +14,55 @@
 [ext_resource path="res://Objects/SubtitleDisplay.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Objects/BlackScreen.tscn" type="PackedScene" id=16]
 
-[sub_resource type="Environment" id=1]
-background_mode = 4
-glow_enabled = true
-glow_intensity = 1.0
-glow_strength = 1.4
-glow_hdr_threshold = 0.4
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+shader_param/color = Vector3( 0.5, 0.4, 0.2 )
+shader_param/OCTAVES = 4
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="ImageTexture" id=2]
+size = Vector2( 4000, 2125 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 6 )
 shader_param/color = Vector3( 0.5, 0.4, 0.2 )
 shader_param/OCTAVES = 4
 
-[sub_resource type="ImageTexture" id=4]
-size = Vector2( 4000, 2125 )
+[sub_resource type="Environment" id=4]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 1.4
+glow_hdr_threshold = 0.4
 
 [node name="Part00" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="SubtitleDisplay" parent="." instance=ExtResource( 12 )]
-position = Vector2( -1348.35, -86.0649 )
+
+[node name="Sky" parent="." instance=ExtResource( 4 )]
+layer = -1
+scale = Vector2( 2.5, 2.5 )
+transform = Transform2D( 2.5, 0, 0, 2.5, 0, 0 )
+
+[node name="Fog" type="Sprite" parent="Sky"]
+visible = false
+show_behind_parent = true
+material = SubResource( 1 )
+z_index = -99
+z_as_relative = false
+texture = SubResource( 2 )
+
+[node name="Fog" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Fog"]
+visible = false
+material = SubResource( 3 )
+margin_right = 4000.0
+margin_bottom = 2040.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BlackScreen" parent="." instance=ExtResource( 16 )]
 light_mask = 0
@@ -50,23 +77,11 @@ smoothing_enabled = false
 smoothing_speed = 0.75
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 1 )
+environment = SubResource( 4 )
 
 [node name="Darkness" type="CanvasModulate" parent="."]
 light_mask = 524288
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
-
-[node name="Sky" parent="." instance=ExtResource( 4 )]
-material = SubResource( 2 )
-position = Vector2( -9455.25, -59.7188 )
-scale = Vector2( 2.5, 2.5 )
-
-[node name="Fog" type="Sprite" parent="Sky"]
-show_behind_parent = true
-material = SubResource( 3 )
-z_index = -99
-z_as_relative = false
-texture = SubResource( 4 )
 
 [node name="MusicMixer" parent="." instance=ExtResource( 11 )]
 STREAM = ExtResource( 5 )

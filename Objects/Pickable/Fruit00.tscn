@@ -4,7 +4,6 @@
 [ext_resource path="res://Assets/Environmnent/Fruit00.png" type="Texture" id=2]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=3]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=4]
-[ext_resource path="res://Assets/Sounds/Gravity00.wav" type="AudioStream" id=5]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.1
@@ -43,7 +42,6 @@ PRIMARY_HOVER = 1.1
 PRIMARY_DEFAULT = 1.0
 SECONDARY_KEY = "glow_amount"
 SECONDARY_HOVER = 0.5
-FOCUS_SOUND = ExtResource( 5 )
 CLONE_MATERIAL = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

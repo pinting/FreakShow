@@ -25,7 +25,7 @@ func _ready():
 	
 	animated_sprite.frames = ANIMATION_FRAMES
 
-func _process(delta: float):
+func _physics_process(delta: float):
 	if path.size() == 0:
 		return
 	
@@ -38,7 +38,7 @@ func _process(delta: float):
 	_current_velocity = move_and_slide(direction * SPEED)
 	_rotation_dest = 180 * (direction.angle() / PI)
 	
-	animated_sprite.playing = _current_velocity.x > EPS and _current_velocity.y > EPS 
+	animated_sprite.playing = abs(_current_velocity.x) > EPS and abs(_current_velocity.y) > EPS 
 	
 	var rotation_diff = _rotation_dest - rotation_degrees
 	

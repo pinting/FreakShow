@@ -82,7 +82,6 @@ position = Vector2( 59.2303, 0.734743 )
 script = ExtResource( 8 )
 
 [node name="SubtitleDisplay" parent="." instance=ExtResource( 38 )]
-z_as_relative = false
 
 [node name="BlackScreen" parent="." instance=ExtResource( 39 )]
 
@@ -103,10 +102,11 @@ color = Color( 0.196078, 0.196078, 0.196078, 1 )
 environment = SubResource( 1 )
 
 [node name="Sky" parent="." instance=ExtResource( 9 )]
-position = Vector2( -15465.3, -3661.7 )
 scale = Vector2( 2.5, 2.5 )
+transform = Transform2D( 2.5, 0, 0, 2.5, 0, 0 )
 
 [node name="Fog" type="Sprite" parent="Sky"]
+visible = false
 show_behind_parent = true
 material = SubResource( 2 )
 z_index = 99
@@ -326,7 +326,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 41
+frame = 77
 playing = true
 
 [node name="Crate" parent="Environment" instance=ExtResource( 6 )]

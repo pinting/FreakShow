@@ -48,12 +48,14 @@ onready var stand_collision = $StandCollision
 onready var crouch_collision = $CrouchCollision
 onready var avatar_collision = $AvatarCollision
 
+onready var transform_effect = $TransformEffect
+
 onready var animated_sprite = $AnimatedSprite
 
 var current_second: float = 0.0
 var freeze: bool = false
-var avatar_mode: bool = true
 
+var _avatar_mode: bool = true
 var _animation_prefix: String = ""
 var _current_velocity: Vector2 = Vector2(0, 0)
 var _current_max_speed: float = MAX_SPEED
@@ -62,6 +64,9 @@ var _current_animation_speed: float = ANIMATION_SPEED
 var _crouching: bool = false
 var _transition: bool = false
 var _moving_x: bool = false
+var _transforming_seconds: float = 0.0
+var _transforming: bool = false
+var _transform_done: bool = false
 
 func _ready():
 	assert(ANIMATION_FRAMES != null)
@@ -91,12 +96,44 @@ func _ready():
 	animated_sprite.frames = ANIMATION_FRAMES
 	Global.player = self
 	
-	_animation_prefix = "" if avatar_mode else "a"
+	_animation_prefix = "" if _avatar_mode else "a"
 	
-func _process(_delta: float):
-	stand_collision.disabled = _crouching or avatar_mode
-	crouch_collision.disabled = not _crouching or avatar_mode
-	avatar_collision.disabled = not avatar_mode
+func _process_transforming_effect(delta: float):
+	if not _transforming:
+		return
+	
+	_transforming_seconds += delta
+	
+	var t = _transforming_seconds
+	
+	if t >= 0.0 and t < 1.0:
+		transform_effect.self_modulate.a = t
+		freeze = true
+		_transform_done = false
+	elif t >= 1.0 and t < 2.0:
+		if not _transform_done:
+			_avatar_mode = not _avatar_mode
+			_transform_done = true
+		
+		transform_effect.self_modulate.a = 1.0 - (t - 1.0)
+	elif t >= 2.0:
+		transform_effect.self_modulate.a = 0.0
+		freeze = false
+		_transforming = false
+		_transforming_seconds = 0.0
+
+func _process_collision_shapes():
+	stand_collision.disabled = _crouching or _avatar_mode
+	crouch_collision.disabled = not _crouching or _avatar_mode
+	avatar_collision.disabled = not _avatar_mode
+
+func toggle_avatar_mode():
+	if not freeze:
+		_transforming = not _transforming
+
+func _process(delta: float):
+	_process_transforming_effect(delta)
+	_process_collision_shapes()
 
 func _physics_process(delta: float):
 	current_second += delta
@@ -109,10 +146,9 @@ func _physics_process(delta: float):
 	_process_facing(direction)
 	_process_animation(direction)
 	_process_pickable_kick()
-	
 
 func _process_velocity(delta: float, direction: Vector2):
-	if avatar_mode:
+	if _avatar_mode:
 		var next_velocity = _calculate_next_velocity(delta, direction, ACCELERATION)
 		
 		_current_velocity = move_and_slide(next_velocity)
@@ -148,19 +184,18 @@ func _process_crouch():
 func _process_sprint():
 	var sprint_pressed = Input.is_action_pressed("sprint")
 	
-	var can_go_up = avatar_mode or (is_on_floor() and not _crouching)
-	var speed_mod = SPRINT_SCALE if not avatar_mode and sprint_pressed and can_go_up else 1.0
+	if Global.DEBUG:
+		if Input.is_action_just_pressed("avatar"):
+			toggle_avatar_mode()
+	
+	var can_go_up = _avatar_mode or (is_on_floor() and not _crouching)
+	var speed_mod = SPRINT_SCALE if not _avatar_mode and sprint_pressed and can_go_up else 1.0
 	
 	_current_max_speed = speed_mod * MAX_SPEED
 	_current_acceleration = speed_mod * ACCELERATION
 	_current_animation_speed = speed_mod * ANIMATION_SPEED
 
 func _process_animation(direction: Vector2):
-	if avatar_mode:
-		_animation_prefix = ""
-	elif direction.x != 0.0:
-		_animation_prefix = "a" if direction.x > 0.0 else "b"
-	
 	var next_animation = _get_next_animation(direction)
 	
 	if next_animation.freeze:
@@ -173,7 +208,12 @@ func _process_animation(direction: Vector2):
 	animated_sprite.animation = _animation_prefix + d + next_animation.name
 
 func _process_facing(direction: Vector2):
-	if (not is_on_floor() and not avatar_mode) or direction.x == 0.0:
+	if _avatar_mode:
+		_animation_prefix = ""
+	elif len(_animation_prefix) == 0:
+		_animation_prefix = "a"
+	
+	if (GRAVITY > EPS and not is_on_floor() and not _avatar_mode) or direction.x == 0.0:
 		return
 	
 	var m = 1.0 if direction.x > 0.0 else -1.0
@@ -182,6 +222,9 @@ func _process_facing(direction: Vector2):
 	crouch_collision.scale.x = abs(crouch_collision.scale.x) * m
 	stand_collision.scale.x = abs(stand_collision.scale.x) * m
 	avatar_collision.scale.x = abs(avatar_collision.scale.x) * m
+	
+	if not _avatar_mode and direction.x != 0.0:
+		_animation_prefix = "a" if direction.x > 0.0 else "b"
 
 func _get_direction():
 	if freeze:
@@ -194,8 +237,8 @@ func _get_direction():
 	var up_strength = Input.get_action_strength("move_up")
 	var down_strength = Input.get_action_strength("move_down")
 	
-	var can_go_up = avatar_mode or (is_on_floor() and not _crouching and not top_colliding)
-	var can_go_down = avatar_mode
+	var can_go_up = _avatar_mode or (is_on_floor() and not _crouching and not top_colliding) or GRAVITY < EPS
+	var can_go_down = _avatar_mode or (not is_on_floor() and not _crouching)
 	
 	var x = right_strength - left_strength
 	var y = (down_strength if can_go_down else 0.0) - (up_strength if can_go_up else 0.0)
@@ -205,7 +248,8 @@ func _get_direction():
 func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: float):
 	var next_velocity = _current_velocity
 	
-	if avatar_mode:
+	if _avatar_mode or GRAVITY < EPS:
+		# Slowing needs to be added, otherwise it would be more real, but hard to control
 		next_velocity.x *= pow(FRICTION, delta)
 		next_velocity.y *= pow(FRICTION, delta)
 			
@@ -237,7 +281,7 @@ func _get_next_animation(direction: Vector2):
 	var last_frame = animated_sprite.frames.get_frame_count(current_animation) - 1
 	var animation_looped = animated_sprite.frames.get_animation_loop(current_animation)
 	
-	if avatar_mode:
+	if _avatar_mode:
 		if direction.x == 0.0 and direction.y == 0.0:
 			freeze = true
 	else:
@@ -271,12 +315,11 @@ func _get_next_animation(direction: Vector2):
 				_moving_x = true
 				_transition = false
 			
-			if _current_velocity.y > 0.0:
-				# When falling, freeze the current frame of the jump animation
-				next_animation = "jump"
+			next_animation = "jump"
+			
+			# When falling, freeze the current frame of the jump animation
+			if _current_velocity.y > 0.0 and GRAVITY > EPS:
 				freeze = true
-			else: 
-				next_animation = "jump"
 	
 	return {
 		"name": next_animation,

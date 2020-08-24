@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Actor/Enemy.gd" type="Script" id=2]
 
 [node name="Enemy" type="KinematicBody2D"]
@@ -15,8 +14,3 @@ polygon = PoolVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -49
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 playing = true
-
-[node name="Light2D" type="Light2D" parent="AnimatedSprite"]
-texture = ExtResource( 1 )
-color = Color( 1, 0, 0, 1 )
-energy = 0.66

@@ -32,14 +32,14 @@ signal fade_in_done
 signal intro_over
 
 func _ready():
-	black_screen.visible = true
-		
 	if Global.NO_INTRO:
 		_fade_current = 0.0
 		_intro_started = true
 		_intro_over = true
 		
 		emit_signal("intro_over")
+	else:
+		black_screen.visible = true
 	
 	for node in get_tree().get_nodes_in_group("pickable"):
 		node.connect("picked", self, "_on_pickable_picked")

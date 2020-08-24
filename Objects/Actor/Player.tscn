@@ -1,9 +1,29 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Objects/Actor/Player.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Environmnent/Smoke00.png" type="Texture" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="ParticlesMaterial" id=3]
+lifetime_randomness = 1.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 50.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+angular_velocity = 50.0
+orbit_velocity = 100.0
+orbit_velocity_random = 1.0
+angle = 300.0
+angle_random = 1.0
+scale = 14.0
+hue_variation = 0.5
+hue_variation_random = 1.0
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -17,6 +37,7 @@ script = ExtResource( 1 )
 material = SubResource( 1 )
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
+frame = 3
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
@@ -50,3 +71,15 @@ polygon = PoolVector2Array( -51.7286, 496.019, 73.0905, 495.758, 59.7819, -170.7
 [node name="AvatarCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2( -2.35354, -2.57445 )
 polygon = PoolVector2Array( -93.9984, 7.82037, -57.7712, -63.9714, 22.8566, -76.5626, 96.8574, -52.2639, 77.8602, -18.0247, 34.5642, -38.5682, 48.0389, 16.2145, -9.83632, 69.4509, -45.18, 37.8625 )
+
+[node name="TransformEffect" type="Particles2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+show_behind_parent = true
+material = SubResource( 2 )
+position = Vector2( 4.66537, 49.5136 )
+z_index = 1
+amount = 10
+randomness = 1.0
+local_coords = false
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
