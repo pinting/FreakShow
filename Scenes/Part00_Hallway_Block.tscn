@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=1]
 [ext_resource path="res://Objects/Light/StreetLight00.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://Scenes/Part00_Hallway_Block.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Sounds/Knock00.wav" type="AudioStream" id=7]
 [ext_resource path="res://Assets/Environmnent/Door02_OpenBlack.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -64,6 +63,3 @@ scale = Vector2( 2.14794, 0.669221 )
 
 [node name="KnockSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-
-[node name="OpenSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 9 )

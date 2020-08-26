@@ -1,3 +1,4 @@
+class_name BaseScene
 extends Node2D
 
 # Time after the game fades in
@@ -12,9 +13,7 @@ export var DETECT_THRESHOLD: float = 15.0
 # Delay
 export var DELAY: float = 0.0
 
-onready var black_screen = $BlackScreen
-onready var player = $Player
-onready var music_mixer = $MusicMixer
+onready var black_screen = $BlackScreen/ColorRect
 
 var _held_object: Object = null
 var _fade_current: float = 1.0

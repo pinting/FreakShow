@@ -9,6 +9,9 @@ var lines = []
 
 func _ready():
 	Global.subtitle_display = self
+	
+	top.text = ""
+	bottom.text = ""
 
 func _process(delta: float):
 	var text = ""

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Objects/Actor/Player.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Player.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Assets/Environmnent/Smoke00.png" type="Texture" id=3]
 
@@ -32,12 +32,24 @@ position = Vector2( -1.66553, -111.588 )
 collision_layer = 10
 collision_mask = 10
 script = ExtResource( 1 )
+MAX_SPEED = null
+ACCELERATION = null
+JUMP_FORCE = null
+FRICTION = null
+GRAVITY = null
+SPRINT_SCALE = null
+ANIMATION_SPEED = null
+WALK_WAVE_COUNT = null
+WALK_WAVE_OFFSET = null
+FLOOR_NORMAL = null
+FLOOR_DETECT_DISTANCE = null
+ZERO = null
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-frame = 3
+frame = 6
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]

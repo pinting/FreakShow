@@ -42,10 +42,9 @@ func start():
 	visible = true
 	_started = true
 	
-	if not Global.NO_SOUNDS:
-		audio_stream_00.play()
-		audio_stream_01.play()
-		audio_stream_02.play()
+	audio_stream_00.play()
+	audio_stream_01.play()
+	audio_stream_02.play()
 
 func _process(delta):
 	var self_position = global_position

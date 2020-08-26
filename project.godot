@@ -14,15 +14,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Objects/BackgroundTrain.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "BaseActor",
+"base": "Node2D",
+"class": "BaseScene",
 "language": "GDScript",
-"path": "res://Objects/Actor/BaseActor.gd"
+"path": "res://Scenes/BaseScene.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://Objects/Actor/Enemy.gd"
+"path": "res://Objects/Enemy.gd"
 }, {
 "base": "Node",
 "class": "MusicMixer",
@@ -32,7 +32,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://Objects/Actor/Player.gd"
+"path": "res://Objects/Player.gd"
 }, {
 "base": "Sprite",
 "class": "Selectable",
@@ -43,15 +43,21 @@ _global_script_classes=[ {
 "class": "SubtitleDisplay",
 "language": "GDScript",
 "path": "res://Objects/SubtitleDisplay.gd"
+}, {
+"base": "Node2D",
+"class": "Utils",
+"language": "GDScript",
+"path": "res://Objects/Utils.gd"
 } ]
 _global_script_class_icons={
 "BackgroundTrain": "",
-"BaseActor": "",
+"BaseScene": "",
 "Enemy": "",
 "MusicMixer": "",
 "Player": "",
 "Selectable": "",
-"SubtitleDisplay": ""
+"SubtitleDisplay": "",
+"Utils": ""
 }
 
 [application]

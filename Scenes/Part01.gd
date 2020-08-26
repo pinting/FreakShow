@@ -1,5 +1,8 @@
 extends "res://Scenes/BaseScene.gd"
 
+# Next scene
+export var NEXT_SCENE: String = "res://Scenes/Part02.tscn"
+
 # Length of the intro sound effect
 export var LOW_PITCH_LENGTH: float = 10.0
 
@@ -9,15 +12,18 @@ export var BALL_IS_STUCK_TIMEOUT: float = 1.0
 # Teleport player to the end
 export var TELEPORT_PLAYER_TO_END: bool = false
 
+onready var player = $Player
+onready var music_mixer = $MusicMixer
+
 onready var background_train = $Environment/BackgroundTrain
 onready var ball = $Environment/Ball
 onready var phone = $Environment/PhoneBox/Phone
 
-onready var trigger_comment = $Points/TriggerComment
-onready var trigger_train = $Points/TriggerTrain
-onready var reaching_hoop = $Points/ReachingHoop
-onready var inside_hoop = $Points/InsideHoop
-onready var teleport_player = $Points/TeleportPlayer
+onready var trigger_comment = $Trigger/TriggerComment
+onready var trigger_train = $Trigger/TriggerTrain
+onready var reaching_hoop = $Trigger/ReachingHoop
+onready var inside_hoop = $Trigger/InsideHoop
+onready var teleport_player = $Trigger/TeleportPlayer
 
 onready var wind_sound = $Sound/WindSound
 onready var ring_sound = $Sound/RingSound
@@ -38,19 +44,16 @@ func _ready():
 	connect("intro_over", self, "_on_intro_over")
 	phone.connect("selected", self, "_on_phone_selected")
 	
-	if not Global.NO_INTRO:
-		music_mixer.master_player.pitch_scale = 0.001
-		wind_sound.pitch_scale = 0.001
+	music_mixer.master_player.pitch_scale = 0.001
+	wind_sound.pitch_scale = 0.001
 	
-	if not Global.NO_SOUNDS:
-		wind_sound.play()
+	wind_sound.play()
 	
 	if TELEPORT_PLAYER_TO_END:
 		player.position = teleport_player.position
 
 func _on_intro_over():
-	if not Global.NO_SOUNDS:
-		music_mixer.play()
+	music_mixer.play()
 
 func _on_scene_started():
 	Global.subtitle.say(tr("NARRATOR02"), 6.0)
@@ -64,7 +67,7 @@ func _on_phone_selected():
 	pick_up_sound.play()
 	yield(timer(2.0), "timeout")
 
-func _process_trigger_comment(delta: float):
+func _process_trigger_comment(_delta: float):
 	if not trigger_comment.visible:
 		return
 	
@@ -75,7 +78,7 @@ func _process_trigger_comment(delta: float):
 		trigger_comment.visible = false
 		Global.subtitle.say(tr("NARRATOR03"), 6)
 
-func _process_train(delta: float):
+func _process_train(_delta: float):
 	if not trigger_train.visible:
 		return
 	
@@ -86,7 +89,7 @@ func _process_train(delta: float):
 		trigger_train.visible = false
 		background_train.start()
 
-func _process_hoop_scene(delta: float):
+func _process_hoop_scene(_delta: float):
 	if not reaching_hoop.visible:
 		return
 	
@@ -125,7 +128,7 @@ func _process_ball_in_hoop(delta: float):
 	else:
 		ball_is_stuck_counter = BALL_IS_STUCK_TIMEOUT
 
-func _process_wind_intro(delta):
+func _process_wind_intro(_delta):
 	if Global.NO_INTRO:
 		return
 	

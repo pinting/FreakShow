@@ -1,5 +1,5 @@
 class_name Player
-extends "res://Objects/Actor/BaseActor.gd"
+extends KinematicBody2D
 
 # Animation
 export (SpriteFrames) var ANIMATION_FRAMES
@@ -38,7 +38,7 @@ export var FLOOR_NORMAL: Vector2 = Vector2.UP
 export var FLOOR_DETECT_DISTANCE: float = 20.0
 
 # Zero value
-export var EPS: float = 1.0
+export var ZERO: float = 1.0
 
 onready var platform_detector_00 = $PlatformDetector00
 onready var platform_detector_01 = $PlatformDetector01
@@ -55,7 +55,7 @@ onready var animated_sprite = $AnimatedSprite
 var current_second: float = 0.0
 var freeze: bool = false
 
-var _avatar_mode: bool = true
+var _avatar_mode: bool = false
 var _animation_prefix: String = ""
 var _current_velocity: Vector2 = Vector2(0, 0)
 var _current_max_speed: float = MAX_SPEED
@@ -131,6 +131,14 @@ func toggle_avatar_mode():
 	if not freeze:
 		_transforming = not _transforming
 
+func enable_avatar_mode():
+	if not _avatar_mode:
+		toggle_avatar_mode()
+
+func disable_avatar_mode():
+	if _avatar_mode:
+		toggle_avatar_mode()
+
 func _process(delta: float):
 	_process_transforming_effect(delta)
 	_process_collision_shapes()
@@ -148,7 +156,9 @@ func _physics_process(delta: float):
 	_process_pickable_kick()
 
 func _process_velocity(delta: float, direction: Vector2):
-	if _avatar_mode:
+	if freeze:
+		_current_velocity = Vector2.ZERO
+	elif _avatar_mode:
 		var next_velocity = _calculate_next_velocity(delta, direction, ACCELERATION)
 		
 		_current_velocity = move_and_slide(next_velocity)
@@ -156,7 +166,7 @@ func _process_velocity(delta: float, direction: Vector2):
 		var next_velocity = _calculate_next_velocity(delta, direction, _current_acceleration)
 		var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 		
-		if abs(_current_velocity.x) > EPS:
+		if abs(_current_velocity.x) > ZERO:
 			var rad = WALK_WAVE_COUNT * current_second * _current_animation_speed * PI
 			
 			_current_acceleration = ACCELERATION * abs(sin(rad + WALK_WAVE_OFFSET * PI))	
@@ -213,7 +223,7 @@ func _process_facing(direction: Vector2):
 	elif len(_animation_prefix) == 0:
 		_animation_prefix = "a"
 	
-	if (GRAVITY > EPS and not is_on_floor() and not _avatar_mode) or direction.x == 0.0:
+	if (GRAVITY > ZERO and not is_on_floor() and not _avatar_mode) or direction.x == 0.0:
 		return
 	
 	var m = 1.0 if direction.x > 0.0 else -1.0
@@ -237,7 +247,7 @@ func _get_direction():
 	var up_strength = Input.get_action_strength("move_up")
 	var down_strength = Input.get_action_strength("move_down")
 	
-	var can_go_up = _avatar_mode or (is_on_floor() and not _crouching and not top_colliding) or GRAVITY < EPS
+	var can_go_up = _avatar_mode or (is_on_floor() and not _crouching and not top_colliding) or GRAVITY < ZERO
 	var can_go_down = _avatar_mode or (not is_on_floor() and not _crouching)
 	
 	var x = right_strength - left_strength
@@ -248,7 +258,7 @@ func _get_direction():
 func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: float):
 	var next_velocity = _current_velocity
 	
-	if _avatar_mode or GRAVITY < EPS:
+	if _avatar_mode or GRAVITY < ZERO:
 		# Slowing needs to be added, otherwise it would be more real, but hard to control
 		next_velocity.x *= pow(FRICTION, delta)
 		next_velocity.y *= pow(FRICTION, delta)
@@ -318,7 +328,7 @@ func _get_next_animation(direction: Vector2):
 			next_animation = "jump"
 			
 			# When falling, freeze the current frame of the jump animation
-			if _current_velocity.y > 0.0 and GRAVITY > EPS:
+			if _current_velocity.y > 0.0 and GRAVITY > ZERO:
 				freeze = true
 	
 	return {
