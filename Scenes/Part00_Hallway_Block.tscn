@@ -28,13 +28,13 @@ position = Vector2( 0, 1.38705 )
 scale = Vector2( 0.83, 0.83 )
 texture = ExtResource( 3 )
 script = ExtResource( 5 )
-OFFSET_KEY = "offset"
-PRIMARY_KEY = "grab_amount"
-PRIMARY_HOVER = 1.1
-PRIMARY_DEFAULT = 1.0
-SECONDARY_KEY = "glow_amount"
-SECONDARY_HOVER = 0.5
-CLONE_MATERIAL = true
+offset_key = "offset"
+primary_key = "grab_amount"
+primary_hover = 1.1
+primary_default = 1.0
+secondary_key = "glow_amount"
+secondary_hover = 0.5
+clone_material = true
 
 [node name="DoorUnlocked" type="Sprite" parent="." groups=[
 "selectable",
@@ -44,13 +44,13 @@ material = SubResource( 1 )
 scale = Vector2( 0.83, 0.83 )
 texture = ExtResource( 8 )
 script = ExtResource( 5 )
-OFFSET_KEY = "offset"
-PRIMARY_KEY = "grab_amount"
-PRIMARY_HOVER = 1.1
-PRIMARY_DEFAULT = 1.0
-SECONDARY_KEY = "glow_amount"
-SECONDARY_HOVER = 0.5
-CLONE_MATERIAL = true
+offset_key = "offset"
+primary_key = "grab_amount"
+primary_hover = 1.1
+primary_default = 1.0
+secondary_key = "glow_amount"
+secondary_hover = 0.5
+clone_material = true
 
 [node name="Lamp" parent="." instance=ExtResource( 4 )]
 position = Vector2( -2.9668, -295.24 )

@@ -1,10 +1,10 @@
 extends "res://Objects/Selectable/Selectable.gd"
 
 # Zoom of the enlarged sprite
-export var ENLARGED_ZOOM = 0.4
+export var enlarged_zoom = 0.4
 
 # Z-Index of the enlarged sprite
-export var ENLARGED_Z_INDEX = 99
+export var enlarged_z_index = 99
 
 const selectable = preload("res://Objects/Selectable/Selectable.gd")
 
@@ -36,12 +36,12 @@ func _on_selected():
 	var player = Global.player
 	
 	if player:
-		player.freeze = true
+		player.freeze()
 	
 	var sprite = Sprite.new()
 	var screen_size = OS.get_screen_size() * camera.zoom
 	var texture_size = texture.get_size()
-	var real_scale = (screen_size / texture_size) * ENLARGED_ZOOM
+	var real_scale = (screen_size / texture_size) * enlarged_zoom
 	var min_scale = min(real_scale.x, real_scale.y)
 	
 	sprite.texture = texture.duplicate()
@@ -50,12 +50,12 @@ func _on_selected():
 	sprite.position = camera.get_camera_screen_center()
 	sprite.rotation_degrees = 0
 	sprite.z_as_relative = false
-	sprite.z_index = ENLARGED_Z_INDEX
+	sprite.z_index = enlarged_z_index
 	sprite.light_mask = pow(2, 19)
 	
 	sprite.add_to_group("selectable")
 	sprite.set_script(selectable)
-	sprite.set("DESCRIPTION", get("DESCRIPTION"))
+	sprite.set("description", get("description"))
 	sprite.connect("selected", self, "_on_enlarged_sprite_selected")
 	
 	get_viewport().add_child(sprite)
@@ -69,7 +69,7 @@ func _on_enlarged_sprite_selected():
 	var player = Global.player
 	
 	if player:
-		player.freeze = false
+		player.unfreeze()
 	
 	enlarged_sprite.remove_description()
 	get_viewport().remove_child(enlarged_sprite)

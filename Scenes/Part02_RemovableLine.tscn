@@ -19,7 +19,7 @@ material = SubResource( 1 )
 z_index = -1
 texture = ExtResource( 4 )
 script = ExtResource( 3 )
-CLONE_MATERIAL = true
+clone_material = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = 100

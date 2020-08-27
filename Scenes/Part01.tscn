@@ -76,19 +76,7 @@ script = ExtResource( 8 )
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -4797.1, -349.489 )
 scale = Vector2( 0.7, 0.7 )
-ANIMATION_FRAMES = ExtResource( 37 )
-MAX_SPEED = 280.0
-ACCELERATION = 6000.0
-JUMP_FORCE = 400.0
-FRICTION = 0.001
-GRAVITY = 300.0
-SPRINT_SCALE = 1.35
-ANIMATION_SPEED = 1.0
-WALK_WAVE_COUNT = 1.25
-WALK_WAVE_OFFSET = 0.5
-FLOOR_NORMAL = Vector2( 0, -1 )
-FLOOR_DETECT_DISTANCE = 20.0
-ZERO = 1.0
+animation_frames = ExtResource( 37 )
 
 [node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 23 )]
 position = Vector2( 6.06445, -312.324 )
@@ -105,7 +93,7 @@ color = Color( 0.196078, 0.196078, 0.196078, 1 )
 position = Vector2( -10802.6, -2482.4 )
 
 [node name="MusicMixer" parent="BaseScene" instance=ExtResource( 11 )]
-STREAM = ExtResource( 10 )
+stream = ExtResource( 10 )
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
@@ -317,7 +305,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 13
+frame = 57
 playing = true
 
 [node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 6 )]

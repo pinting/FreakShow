@@ -24,23 +24,15 @@ glow_hdr_threshold = 0.4
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
+fade_in_after = 2.0
+fade_in_duration = 3.0
+delay = 0.0
+detect_threshold = 15.0
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 8 )]
 position = Vector2( -1346.24, -73.793 )
 scale = Vector2( 0.7, 0.7 )
-ANIMATION_FRAMES = ExtResource( 3 )
-MAX_SPEED = 280.0
-ACCELERATION = 6000.0
-JUMP_FORCE = 400.0
-FRICTION = 0.001
-GRAVITY = 300.0
-SPRINT_SCALE = 1.35
-ANIMATION_SPEED = 1.0
-WALK_WAVE_COUNT = 1.25
-WALK_WAVE_OFFSET = 0.5
-FLOOR_NORMAL = Vector2( 0, -1 )
-FLOOR_DETECT_DISTANCE = 20.0
-ZERO = 1.0
+animation_frames = ExtResource( 3 )
 
 [node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 7 )]
 smoothing_enabled = false
@@ -57,7 +49,7 @@ color = Color( 0.196078, 0.196078, 0.196078, 1 )
 position = Vector2( -7301.35, -2556.84 )
 
 [node name="MusicMixer" parent="BaseScene" instance=ExtResource( 11 )]
-STREAM = ExtResource( 5 )
+stream = ExtResource( 5 )
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
@@ -87,10 +79,10 @@ position = Vector2( 640.271, 5205.35 )
 [node name="FlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( 3.07458, -25.8766 )
 
-[node name="Sounds" type="Node" parent="BaseScene"]
+[node name="Sound" type="Node" parent="BaseScene"]
 
-[node name="DoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sounds"]
+[node name="DoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 10 )
 
-[node name="SilentDoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sounds"]
+[node name="SilentDoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 13 )

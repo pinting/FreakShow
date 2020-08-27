@@ -2,28 +2,26 @@
 
 [ext_resource path="res://Objects/Player.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Assets/Environmnent/Smoke00.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Effect/TransformEffect.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Effect/DeathEffect.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="Animation" id=1]
+resource_name = "transform_to_avatar"
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransformEffect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="CanvasItemMaterial" id=2]
-blend_mode = 1
-
-[sub_resource type="ParticlesMaterial" id=3]
-lifetime_randomness = 1.0
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
-spread = 50.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 100.0
-angular_velocity = 50.0
-orbit_velocity = 100.0
-orbit_velocity_random = 1.0
-angle = 300.0
-angle_random = 1.0
-scale = 14.0
-hue_variation = 0.5
-hue_variation_random = 1.0
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -32,24 +30,14 @@ position = Vector2( -1.66553, -111.588 )
 collision_layer = 10
 collision_mask = 10
 script = ExtResource( 1 )
-MAX_SPEED = null
-ACCELERATION = null
-JUMP_FORCE = null
-FRICTION = null
-GRAVITY = null
-SPRINT_SCALE = null
-ANIMATION_SPEED = null
-WALK_WAVE_COUNT = null
-WALK_WAVE_OFFSET = null
-FLOOR_NORMAL = null
-FLOOR_DETECT_DISTANCE = null
-ZERO = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/transform_to_avatar = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 1 )
+material = SubResource( 2 )
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-frame = 6
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
@@ -82,16 +70,8 @@ polygon = PoolVector2Array( -51.7286, 496.019, 73.0905, 495.758, 59.7819, -170.7
 
 [node name="AvatarCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2( -2.35354, -2.57445 )
-polygon = PoolVector2Array( -93.9984, 7.82037, -57.7712, -63.9714, 22.8566, -76.5626, 96.8574, -52.2639, 77.8602, -18.0247, 34.5642, -38.5682, 48.0389, 16.2145, -9.83632, 69.4509, -45.18, 37.8625 )
+polygon = PoolVector2Array( -170.678, 19.3284, -101.962, -116.479, 65.2265, -139.203, 176.686, -83.4738, 160.454, -55.3385, 63.0623, -74.8168, 92.8208, 20.9516, -24.0491, 136.198, -93.8465, 68.0243 )
 
-[node name="TransformEffect" type="Particles2D" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
-show_behind_parent = true
-material = SubResource( 2 )
-position = Vector2( 4.66537, 49.5136 )
-z_index = 1
-amount = 10
-randomness = 1.0
-local_coords = false
-process_material = SubResource( 3 )
-texture = ExtResource( 3 )
+[node name="TransformEffect" parent="." instance=ExtResource( 3 )]
+
+[node name="DeathEffect" parent="." instance=ExtResource( 4 )]

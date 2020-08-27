@@ -1,16 +1,19 @@
 extends "res://Scenes/BaseScene.gd"
 
 # Next scene
-export var NEXT_SCENE: String = "res://Scenes/Part02.tscn"
+export var next_scene: String = "res://Scenes/Part02.tscn"
 
 # Length of the intro sound effect
-export var LOW_PITCH_LENGTH: float = 10.0
+export var low_pitch_length: float = 10.0
 
 # Seconds to wait for the ball to be stuck
-export var BALL_IS_STUCK_TIMEOUT: float = 1.0
+export var ball_is_stuck_timeout: float = 1.0
 
 # Teleport player to the end
-export var TELEPORT_PLAYER_TO_END: bool = false
+export var teleport_player_to_end: bool = false
+
+# Size of a trigger point detect field
+export var detect_threshold: float = 15.0
 
 onready var player = $Player
 onready var music_mixer = $MusicMixer
@@ -18,6 +21,7 @@ onready var music_mixer = $MusicMixer
 onready var background_train = $Environment/BackgroundTrain
 onready var ball = $Environment/Ball
 onready var phone = $Environment/PhoneBox/Phone
+onready var crate = $Environment/Crate
 
 onready var trigger_comment = $Trigger/TriggerComment
 onready var trigger_train = $Trigger/TriggerTrain
@@ -33,7 +37,7 @@ var music_00: int
 var music_01: int
 var music_02: int
 
-var ball_is_stuck_counter = BALL_IS_STUCK_TIMEOUT
+var ball_is_stuck_counter = ball_is_stuck_timeout
 
 func _ready():
 	music_00 = music_mixer.add_part(0, 3 * 60 + 20, true, 0, 10, -40)
@@ -42,14 +46,13 @@ func _ready():
 	
 	connect("scene_started", self, "_on_scene_started")
 	connect("intro_over", self, "_on_intro_over")
-	phone.connect("selected", self, "_on_phone_selected")
 	
 	music_mixer.master_player.pitch_scale = 0.001
 	wind_sound.pitch_scale = 0.001
 	
 	wind_sound.play()
 	
-	if TELEPORT_PLAYER_TO_END:
+	if teleport_player_to_end:
 		player.position = teleport_player.position
 
 func _on_intro_over():
@@ -66,6 +69,7 @@ func _on_phone_selected():
 	yield(timer(0.5), "timeout")
 	pick_up_sound.play()
 	yield(timer(2.0), "timeout")
+	Global.load_scene(next_scene)
 
 func _process_trigger_comment(_delta: float):
 	if not trigger_comment.visible:
@@ -74,7 +78,7 @@ func _process_trigger_comment(_delta: float):
 	var trigger = trigger_comment.global_position
 	var object = player.global_position
 	
-	if abs(trigger.x - object.x) < DETECT_THRESHOLD:
+	if abs(trigger.x - object.x) < detect_threshold:
 		trigger_comment.visible = false
 		Global.subtitle.say(tr("NARRATOR03"), 6)
 
@@ -85,7 +89,7 @@ func _process_train(_delta: float):
 	var trigger = trigger_train.global_position
 	var object = player.global_position
 	
-	if abs(trigger.x - object.x) < DETECT_THRESHOLD:
+	if abs(trigger.x - object.x) < detect_threshold:
 		trigger_train.visible = false
 		background_train.start()
 
@@ -96,7 +100,7 @@ func _process_hoop_scene(_delta: float):
 	var trigger = reaching_hoop.global_position
 	var object = player.global_position
 	
-	if abs(trigger.x - object.x) < DETECT_THRESHOLD:
+	if abs(trigger.x - object.x) < detect_threshold:
 		reaching_hoop.visible = false
 		music_mixer.force_next(music_01)
 
@@ -110,7 +114,7 @@ func _process_ball_in_hoop(delta: float):
 	var xd = abs(trigger.x - object.x)
 	var yd = abs(trigger.y - object.y)
 	
-	if xd < DETECT_THRESHOLD and yd < DETECT_THRESHOLD:
+	if xd < detect_threshold and yd < detect_threshold:
 		ball_is_stuck_counter -= delta
 		
 		if ball_is_stuck_counter < 0.0:
@@ -123,17 +127,18 @@ func _process_ball_in_hoop(delta: float):
 			music_mixer.force_next(music_02)
 			phone.visible = true
 			
-			yield(timer(10.0), "timeout")
+			yield(timer(2.0), "timeout")
 			Global.subtitle.say(tr("NARRATOR04"), 6.0, 12.0)
+			phone.connect("selected", self, "_on_phone_selected")
 	else:
-		ball_is_stuck_counter = BALL_IS_STUCK_TIMEOUT
+		ball_is_stuck_counter = ball_is_stuck_timeout
 
 func _process_wind_intro(_delta):
 	if Global.NO_INTRO:
 		return
 	
 	# Make vinyl sound effect
-	var pitch_value = current_second / LOW_PITCH_LENGTH
+	var pitch_value = current_second / low_pitch_length
 	
 	if pitch_value >= 1.0:
 		wind_sound.pitch_scale = 1.0

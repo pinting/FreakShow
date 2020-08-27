@@ -2,24 +2,22 @@ class_name Enemy
 extends KinematicBody2D
 
 # Speed of the enemy
-export var SPEED: float = 250.0
+export var speed: float = 250.0
 
 # Rotation speed of the enemy
-export var ROTATION_SPEED: float = 10.0
+export var rotation_speed: float = 10.0
 
 # Zero value
 export var ZERO: float = 1.0
 
-onready var animated_sprite = $AnimatedSprite
-
 var path : = PoolVector2Array()
-var current_speed = SPEED
+var current_speed = speed
 
-var _rotation_dest = 0
-var _current_velocity = 0
+var rotation_dest = 0
+var current_velocity = 0
 
 func _ready():
-	assert(animated_sprite)
+	pass
 
 func _physics_process(delta: float):
 	if path.size() == 0:
@@ -31,15 +29,13 @@ func _physics_process(delta: float):
 	if distance < current_speed * delta:
 		path.remove(0)
 	
-	_current_velocity = move_and_slide(direction * current_speed)
-	_rotation_dest = 180 * (direction.angle() / PI)
+	current_velocity = move_and_slide(direction * current_speed)
+	rotation_dest = 180 * (direction.angle() / PI)
 	
-	animated_sprite.playing = abs(_current_velocity.x) > ZERO and abs(_current_velocity.y) > ZERO 
-	
-	var rotation_diff = _rotation_dest - rotation_degrees
+	var rotation_diff = rotation_dest - rotation_degrees
 	
 	if abs(rotation_diff) > 0:
-		var rotation_step = rotation_diff / abs(rotation_diff) * ROTATION_SPEED
+		var rotation_step = rotation_diff / abs(rotation_diff) * rotation_speed
 		
 		if abs(rotation_diff) >= abs(rotation_step):
 			rotation_degrees += rotation_step

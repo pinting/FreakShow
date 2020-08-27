@@ -14,15 +14,15 @@ onready var hallway_door = $Environment/Hallway/Inside/Door04
 
 onready var flat_spawn = $Trigger/FlatSpawn
 onready var hallway_spawn = $Trigger/HallwaySpawn
-onready var hallway_loop_begin = $Trigger/HallwayLoopBegin
-onready var hallway_loop_end = $Trigger/HallwayLoopEnd
+onready var hallway_begin = $Trigger/HallwayLoopBegin
+onready var hallway_end = $Trigger/HallwayLoopEnd
 
-onready var door_open_sound = $Sounds/DoorOpenSound
-onready var silent_door_open_sound = $Sounds/SilentDoorOpenSound
+onready var door_open_sound = $Sound/DoorOpenSound
+onready var silent_door_open_sound = $Sound/SilentDoorOpenSound
 
 var hallway_stage_00: bool = true
 var hallway_stage_01: bool = false
-var loop_direction: int = 0
+var loop_direction: float = 0.0
 var loop_index: int = 0
 var exiting: bool = false
 
@@ -32,7 +32,7 @@ func _ready():
 	music_00 = music_mixer.add_part(2, 5 * 60, true, 5, 5, -5)
 	
 	flat_door.connect("selected", self, "_on_flat_exit_select")
-	hallway_door.connect("selected", self, "_on_hallway_door_select")
+	hallway_door.connect("selected", self, "_on__hallway_door_select")
 	connect("scene_started", self, "_on_scene_started")
 	
 	music_mixer.play()
@@ -53,7 +53,7 @@ func _on_scene_started():
 func _on_flat_exit_select():
 	_open_door(hallway_spawn.position)
 
-func _on_hallway_door_select():
+func _on__hallway_door_select():
 	if hallway_door.locked and not hallway_door.knocking:
 		_open_door(flat_spawn.position)
 	elif not hallway_door.locked and not exiting:
@@ -65,7 +65,7 @@ func _on_hallway_door_select():
 		
 		Global.load_scene(NEXT_SCENE)
 
-func _process_hallway_door(_delta: float):
+func _process__hallway_door(_delta: float):
 	if not hallway_door.locked:
 		return
 	
@@ -81,8 +81,8 @@ func _process_hallway_door(_delta: float):
 		hallway_door.open()
 
 func _process_hallway_loop(_delta: float):
-	var left_end_position = hallway_loop_begin.global_position
-	var right_end_position = hallway_loop_end.global_position
+	var left_end_position = hallway_begin.global_position
+	var right_end_position = hallway_end.global_position
 	var player_position = player.global_position
 	
 	# Left end
@@ -107,4 +107,4 @@ func _process_hallway_loop(_delta: float):
 
 func _process(delta: float):
 	_process_hallway_loop(delta)
-	_process_hallway_door(delta)
+	_process__hallway_door(delta)

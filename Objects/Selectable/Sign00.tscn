@@ -12,4 +12,4 @@ rotation = 0.00594584
 scale = Vector2( 0.848142, 0.848142 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-DESCRIPTION = "SIGN00"
+description = "SIGN00"
