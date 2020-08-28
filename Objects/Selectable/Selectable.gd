@@ -70,7 +70,7 @@ func _is_top(mouse_position: Vector2):
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		var mouse_position = Global.get_scene_mouse_position()
+		var mouse_position = Global.get_world_mouse_position()
 		
 		if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position):
 			emit_signal("selected")
@@ -82,7 +82,7 @@ func remove_description():
 	Global.subtitle.describe_remove(get_instance_id())
 
 func _physics_process(delta: float):
-	var mouse_position = Global.get_scene_mouse_position()
+	var mouse_position = Global.get_world_mouse_position()
 	
 	if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position):
 		if len(offset_key):

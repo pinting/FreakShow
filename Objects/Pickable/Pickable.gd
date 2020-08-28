@@ -28,7 +28,7 @@ func _physics_process(_delta: float):
 	if not held:
 		return
 	
-	var position_diff = Global.get_scene_mouse_position() - global_position
+	var position_diff = Global.get_world_mouse_position() - global_position
 	var grab_force = position_diff.normalized() * GRAB_FORCE
 	
 	if abs(linear_velocity.x) < MAX_VELOCITY.x and abs(linear_velocity.y) < MAX_VELOCITY.y :
