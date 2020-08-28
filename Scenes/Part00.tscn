@@ -24,10 +24,6 @@ glow_hdr_threshold = 0.4
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
-fade_in_after = 2.0
-fade_in_duration = 3.0
-delay = 0.0
-detect_threshold = 15.0
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 8 )]
 position = Vector2( -1346.24, -73.793 )

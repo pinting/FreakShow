@@ -137,7 +137,7 @@ virtual_mouse_right={
  ]
 }
 virtual_mouse_up={
-"deadzone": 0.5,
+"deadzone": 0.9,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":3,"axis_value":-1.0,"script":null)
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":5,"axis_value":-1.0,"script":null)
  ]
