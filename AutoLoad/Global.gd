@@ -7,7 +7,7 @@ const DEBUG: bool = true
 const NO_SOUNDS: bool = true
 
 # Disable intro
-const NO_INTRO: bool = false
+const NO_INTRO: bool = true
 
 # Virtual mouse speed
 const VIRTUAL_MOUSE_SPEED: Vector2 = Vector2(3, 3)
@@ -58,34 +58,38 @@ class SubtitleManager:
 func _ready():
 	subtitle = SubtitleManager.new()
 	
-	_set_virtual_mouse_position(get_viewport().size / 2)
-	
 	if NO_SOUNDS:
-		AudioServer.global_rate_scale = 0.0
+		for i in range(0, AudioServer.bus_count):
+			AudioServer.set_bus_volume_db(i, -60)
 
 func debug(message: String):
 	if DEBUG:
 		print(message)
 
 func _mouse_viewport_to_window_position(viewport_position):
-	var window_size = OS.window_size
 	var viewport_size = get_viewport().size
+	var window_size = OS.window_size
 	var ratio = window_size / viewport_size
 	
-	print(ratio)
+	var project_width = ProjectSettings.get_setting("display/window/size/width")
+	var project_height = ProjectSettings.get_setting("display/window/size/height")
+	var project_size = Vector2(project_width, project_height)
 	
-	if ratio.x > ratio.y:
-		return viewport_position * ratio.y + Vector2(0.0, (window_size.y - viewport_size.y * ratio.y) / 2)
-	if ratio.y > ratio.x:
-		return viewport_position * ratio.x + Vector2((window_size.x - viewport_size.x * ratio.x) / 2, 0.0)
-	else:
-		return viewport_position * ratio
+	var base = (viewport_position / project_size) * viewport_size
+	
+	if ProjectSettings.get_setting("display/window/stretch/aspect") == "keep":
+		if ratio.x > ratio.y:
+			return base + Vector2((window_size.x - viewport_size.x * ratio.y) / 2.0, 0.0)
+		elif ratio.y > ratio.x:
+			return base + Vector2(0.0, (window_size.y - viewport_size.y * ratio.x) / 2.0)
+	 
+	return base
 
 func _set_virtual_mouse_position(viewport_position: Vector2, wrap_mouse_position: bool = true):
 	virtual_mouse_position = viewport_position
 	
 	if wrap_mouse_position:
-		Input.warp_mouse_position(_mouse_viewport_to_window_position(viewport_position))
+		get_viewport().warp_mouse(viewport_position)
 
 func get_world_mouse_position():
 	if not current_camera:
@@ -94,15 +98,18 @@ func get_world_mouse_position():
 	if not using_virtual:
 		return current_camera.get_global_mouse_position()
 	
+	var project_width = ProjectSettings.get_setting("display/window/size/width")
+	var project_height = ProjectSettings.get_setting("display/window/size/height")
+	var project_size = Vector2(project_width, project_height)
+	
 	# The virtual_mouse_position goes from (0, 0) to get_viewport().size
-	var viewport = get_viewport()
-	var p = virtual_mouse_position / viewport.size
+	var p = virtual_mouse_position / project_size
 	
 	# Cut if it is outside of the window and move the center to the origo
 	p.x = max(0.0, min(1.0, p.x)) - 0.5
 	p.y = max(0.0, min(1.0, p.y)) - 0.5
 	
-	return current_camera.get_camera_screen_center() + viewport.size * current_camera.zoom * p
+	return current_camera.get_camera_screen_center() + project_size * current_camera.zoom * p
 
 func _create_click_event(viewport_position: Vector2, button_index: int, pressed: bool):
 	var event = InputEventMouseButton.new()
@@ -129,11 +136,11 @@ func _create_move_event(viewport_position: Vector2, relative: Vector2, pressure:
 func _input(event: InputEvent):
 	if event is InputEventMouseMotion:
 		using_virtual = event.pressure == pressure_virtual
+		
+		if not using_virtual:
+			_set_virtual_mouse_position(event.position, false)
 
 func _process_virtual_input(delta: float):
-	if not using_virtual:
-		_set_virtual_mouse_position(get_viewport().get_mouse_position(), false)
-	
 	var virtual_mouse_right = Input.get_action_strength("virtual_mouse_right")
 	var virtual_mouse_left = Input.get_action_strength("virtual_mouse_left")
 	var virtual_mouse_up = Input.get_action_strength("virtual_mouse_up")
