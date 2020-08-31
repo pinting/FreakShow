@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player00_B_Crouch_Move15.png-fa35753239e2d613521545955a2a878a.stex"
+path.s3tc="res://.import/Player00_B_Crouch_Move15.png-fa35753239e2d613521545955a2a878a.s3tc.stex"
+path.etc="res://.import/Player00_B_Crouch_Move15.png-fa35753239e2d613521545955a2a878a.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player00/B/Crouch_Move/Player00_B_Crouch_Move15.png"
-dest_files=[ "res://.import/Player00_B_Crouch_Move15.png-fa35753239e2d613521545955a2a878a.stex" ]
+dest_files=[ "res://.import/Player00_B_Crouch_Move15.png-fa35753239e2d613521545955a2a878a.s3tc.stex", "res://.import/Player00_B_Crouch_Move15.png-fa35753239e2d613521545955a2a878a.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

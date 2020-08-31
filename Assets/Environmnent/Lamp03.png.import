@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lamp03.png-4cecf115a2e3c48907d211ac338d9862.stex"
+path.s3tc="res://.import/Lamp03.png-4cecf115a2e3c48907d211ac338d9862.s3tc.stex"
+path.etc="res://.import/Lamp03.png-4cecf115a2e3c48907d211ac338d9862.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Lamp03.png"
-dest_files=[ "res://.import/Lamp03.png-4cecf115a2e3c48907d211ac338d9862.stex" ]
+dest_files=[ "res://.import/Lamp03.png-4cecf115a2e3c48907d211ac338d9862.s3tc.stex", "res://.import/Lamp03.png-4cecf115a2e3c48907d211ac338d9862.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

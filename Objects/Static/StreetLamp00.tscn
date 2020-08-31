@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Lamp00.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Lamp00_Glow.png" type="Texture" id=3]
@@ -6,7 +6,11 @@
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
 
 [node name="StreetLamp00" type="StaticBody2D"]
 
@@ -21,14 +25,13 @@ material = SubResource( 2 )
 position = Vector2( 2.15933, -763.063 )
 texture = ExtResource( 3 )
 
-[node name="GlowLight" type="Light2D" parent="Sprite/Glow"]
-position = Vector2( -3.69528, 9.87988 )
-scale = Vector2( 0.236523, 0.272367 )
-z_as_relative = false
+[node name="Light" type="Sprite" parent="Sprite/Glow"]
+self_modulate = Color( 1, 1, 1, 0.27451 )
+material = SubResource( 3 )
+position = Vector2( -1.04822, 0.652361 )
+scale = Vector2( 0.496183, 0.496183 )
+z_index = 1
 texture = ExtResource( 4 )
-energy = 1.5
-mode = 2
-range_item_cull_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -1.52588e-05, 0.192993 )

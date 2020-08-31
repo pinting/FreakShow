@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player01_B_Jump03.png-a752fc861cda7a2412e33f569475d012.stex"
+path.s3tc="res://.import/Player01_B_Jump03.png-a752fc861cda7a2412e33f569475d012.s3tc.stex"
+path.etc="res://.import/Player01_B_Jump03.png-a752fc861cda7a2412e33f569475d012.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player01/B/Jump/Player01_B_Jump03.png"
-dest_files=[ "res://.import/Player01_B_Jump03.png-a752fc861cda7a2412e33f569475d012.stex" ]
+dest_files=[ "res://.import/Player01_B_Jump03.png-a752fc861cda7a2412e33f569475d012.s3tc.stex", "res://.import/Player01_B_Jump03.png-a752fc861cda7a2412e33f569475d012.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

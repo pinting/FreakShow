@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Lamp03.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 119.642, 78.3322 )
@@ -12,25 +18,19 @@ extents = Vector2( 119.642, 78.3322 )
 light_mask = 5
 texture = ExtResource( 2 )
 
-[node name="GlowLight" type="Light2D" parent="Sprite"]
-position = Vector2( -70.9707, -8.36951 )
-rotation = -0.453002
-scale = Vector2( 0.0420529, 0.0645723 )
-z_as_relative = false
+[node name="Glow" type="Sprite" parent="Sprite"]
+material = SubResource( 3 )
+position = Vector2( -73.5869, -6.50587 )
+rotation = -0.451205
+scale = Vector2( 0.119008, 0.278995 )
 texture = ExtResource( 1 )
-energy = 3.7
-range_item_cull_mask = 4
-shadow_color = Color( 1, 1, 1, 1 )
-shadow_item_cull_mask = 4
 
-[node name="AreaLight" type="Light2D" parent="Sprite"]
-position = Vector2( -65.8141, -5.08027 )
-rotation = -0.453002
-scale = Vector2( 0.388813, 0.422555 )
-z_as_relative = false
+[node name="Light" type="Sprite" parent="Sprite"]
+self_modulate = Color( 1, 1, 1, 0.0392157 )
+material = SubResource( 2 )
+position = Vector2( -69.4252, -4.58951 )
+scale = Vector2( 0.516856, 0.516856 )
 texture = ExtResource( 1 )
-energy = 0.5
-shadow_color = Color( 1, 1, 1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

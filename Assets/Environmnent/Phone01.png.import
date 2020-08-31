@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Phone01.png-63a820dc2f1cce5ff87f603e61a7606f.stex"
+path.s3tc="res://.import/Phone01.png-63a820dc2f1cce5ff87f603e61a7606f.s3tc.stex"
+path.etc="res://.import/Phone01.png-63a820dc2f1cce5ff87f603e61a7606f.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Phone01.png"
-dest_files=[ "res://.import/Phone01.png-63a820dc2f1cce5ff87f603e61a7606f.stex" ]
+dest_files=[ "res://.import/Phone01.png-63a820dc2f1cce5ff87f603e61a7606f.s3tc.stex", "res://.import/Phone01.png-63a820dc2f1cce5ff87f603e61a7606f.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

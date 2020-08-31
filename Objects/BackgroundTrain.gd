@@ -5,7 +5,7 @@ extends Node2D
 export var start_from: float = 15000.0
 
 # Speed to move on the X axis
-export var speed: float = 25.0
+export var speed: float = 1600.0
 
 # Destory the train from X set in Editor plus this
 export var stop_after: float = 50000.0
@@ -62,7 +62,7 @@ func _process(delta):
 	train_01.position.y += m * sin(c * s + 1.0 * rhythm_diff) * randf()
 	train_02.position.y += m * sin(c * s + 2.0 * rhythm_diff) * randf()
 	
-	position.x += speed
+	position.x += speed * delta
 
 	if abs(base_position.x - self_position.x) > stop_after:
 		started = false

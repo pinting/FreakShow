@@ -1,24 +1,29 @@
 extends Node
 
 # Enable debug messages
-const DEBUG: bool = true
+const DEBUG: bool = false
 
 # Disable sounds
-const NO_SOUNDS: bool = true
+const NO_SOUNDS: bool = false
 
 # Disable intro
-const NO_INTRO: bool = true
+const NO_INTRO: bool = false
+
+# Low performance mode
+const LOW_PERFORMANCE: bool = true
 
 # Virtual mouse speed
 const VIRTUAL_MOUSE_SPEED: Vector2 = Vector2(3, 3)
 
 # Max loading time per tick (in msec)
-const MAX_LOADING_TIME: int = 100
+const LOADING_TIME_PER_TICK: int = 100
+
 
 var current_camera: Camera2D = null
 var player: Player = null
 var subtitle_display: SubtitleDisplay = null
 var subtitle: SubtitleManager = null
+var viewable_display: CanvasLayer = null
 
 # Position on the viewport
 var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
@@ -47,13 +52,13 @@ class SubtitleManager:
 			
 			Global.subtitle_display.say(text, speed, timeout)
 	
-	func describe(key: int, text: String):
+	func describe(key: int, text: String, keep: bool = false):
 		if Global.subtitle_display:
-			Global.subtitle_display.describe(key, text)
+			Global.subtitle_display.describe(key, text, keep)
 	
-	func describe_remove(key: int):
+	func describe_remove(key: int, force: bool = false):
 		if Global.subtitle_display:
-			Global.subtitle_display.describe_remove(key)
+			Global.subtitle_display.describe_remove(key, force)
 
 func _ready():
 	subtitle = SubtitleManager.new()
@@ -161,10 +166,14 @@ func _process_virtual_input(delta: float):
 	
 	if (last_virtual_click_left and not virtual_click_left) or (not last_virtual_click_left and virtual_click_left):
 		last_virtual_click_left = virtual_click_left
+		using_virtual = true
+		
 		_create_click_event(virtual_mouse_position, BUTTON_LEFT, virtual_click_left)
 	
 	if (last_virtual_click_right and not virtual_click_right) or (not last_virtual_click_right and virtual_click_right):
 		last_virtual_click_right = virtual_click_right
+		using_virtual = true
+		
 		_create_click_event(virtual_mouse_position, BUTTON_RIGHT, virtual_click_right)
 
 func _process(delta: float):
@@ -177,7 +186,7 @@ func _process_loading(delta):
 	
 	var now = OS.get_ticks_msec()
 	
-	while OS.get_ticks_msec() < now + MAX_LOADING_TIME:
+	while OS.get_ticks_msec() < now + LOADING_TIME_PER_TICK:
 		var result = loader.poll()
 		
 		if result == ERR_FILE_EOF:

@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Road00.png-f530ca5f9ea4407971d8f7a723699f67.stex"
+path.s3tc="res://.import/Road00.png-f530ca5f9ea4407971d8f7a723699f67.s3tc.stex"
+path.etc="res://.import/Road00.png-f530ca5f9ea4407971d8f7a723699f67.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Road00.png"
-dest_files=[ "res://.import/Road00.png-f530ca5f9ea4407971d8f7a723699f67.stex" ]
+dest_files=[ "res://.import/Road00.png-f530ca5f9ea4407971d8f7a723699f67.s3tc.stex", "res://.import/Road00.png-f530ca5f9ea4407971d8f7a723699f67.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

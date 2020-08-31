@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.stex"
+path.s3tc="res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.s3tc.stex"
+path.etc="res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/LightTilted00.png"
-dest_files=[ "res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.stex" ]
+dest_files=[ "res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.s3tc.stex", "res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Shaders/Fog.shader" type="Shader" id=1]
+[ext_resource path="res://Animations/Fog00.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Objects/Fog.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/offset = 0.0
+shader_param/width = 1.0
+shader_param/color = Color( 0, 0, 0, 0.392157 )
+shader_param/noise_scale = 20.0
+shader_param/alpha_power = 1.0
+shader_param/octaves = 4
+
+[node name="Fog" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="FakeFog" type="AnimatedSprite" parent="."]
+visible = false
+self_modulate = Color( 0, 0, 0, 0.392157 )
+scale = Vector2( 1.25, 1.25 )
+frames = ExtResource( 2 )
+frame = 71
+playing = true
+centered = false
+
+[node name="DynamicFog" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 2 )
+margin_right = 960.0
+margin_bottom = 540.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

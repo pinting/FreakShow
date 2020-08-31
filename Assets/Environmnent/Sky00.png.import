@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sky00.png-ede3e294c0867db9086efbf5925da4d0.stex"
+path.s3tc="res://.import/Sky00.png-ede3e294c0867db9086efbf5925da4d0.s3tc.stex"
+path.etc="res://.import/Sky00.png-ede3e294c0867db9086efbf5925da4d0.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Sky00.png"
-dest_files=[ "res://.import/Sky00.png-ede3e294c0867db9086efbf5925da4d0.stex" ]
+dest_files=[ "res://.import/Sky00.png-ede3e294c0867db9086efbf5925da4d0.s3tc.stex", "res://.import/Sky00.png-ede3e294c0867db9086efbf5925da4d0.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

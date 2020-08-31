@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Sign05.png-d82f99070817811e0399be9011916f2d.stex"
+path.s3tc="res://.import/Sign05.png-d82f99070817811e0399be9011916f2d.s3tc.stex"
+path.etc="res://.import/Sign05.png-d82f99070817811e0399be9011916f2d.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Sign05.png"
-dest_files=[ "res://.import/Sign05.png-d82f99070817811e0399be9011916f2d.stex" ]
+dest_files=[ "res://.import/Sign05.png-d82f99070817811e0399be9011916f2d.s3tc.stex", "res://.import/Sign05.png-d82f99070817811e0399be9011916f2d.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

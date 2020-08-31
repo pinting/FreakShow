@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Salami00.png-87b910b1bf067c509ed03ac60c98cea1.stex"
+path.s3tc="res://.import/Salami00.png-87b910b1bf067c509ed03ac60c98cea1.s3tc.stex"
+path.etc="res://.import/Salami00.png-87b910b1bf067c509ed03ac60c98cea1.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Salami00.png"
-dest_files=[ "res://.import/Salami00.png-87b910b1bf067c509ed03ac60c98cea1.stex" ]
+dest_files=[ "res://.import/Salami00.png-87b910b1bf067c509ed03ac60c98cea1.s3tc.stex", "res://.import/Salami00.png-87b910b1bf067c509ed03ac60c98cea1.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

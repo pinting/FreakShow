@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lines00_L03.png-bb1a95e60e0f69febb171b3d4edc60b4.stex"
+path.s3tc="res://.import/Lines00_L03.png-bb1a95e60e0f69febb171b3d4edc60b4.s3tc.stex"
+path.etc="res://.import/Lines00_L03.png-bb1a95e60e0f69febb171b3d4edc60b4.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Lines00_L03.png"
-dest_files=[ "res://.import/Lines00_L03.png-bb1a95e60e0f69febb171b3d4edc60b4.stex" ]
+dest_files=[ "res://.import/Lines00_L03.png-bb1a95e60e0f69febb171b3d4edc60b4.s3tc.stex", "res://.import/Lines00_L03.png-bb1a95e60e0f69febb171b3d4edc60b4.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -1,32 +1,56 @@
 shader_type canvas_item;
 
-uniform vec3 color = vec3(0.5, 0.4, 0.2);
-uniform int OCTAVES = 4;
+uniform float offset = 0.0;
+uniform float width = 1;
+uniform vec4 color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float noise_scale = 20.0;
+uniform float alpha_power = 2.0;
+uniform int octaves = 4;
 
-float rand(vec2 v)
+float rand(vec2 coord)
 {
-	return fract(sin(dot(v, vec2(56, 78)) * 1000.0) * 1000.0);
+	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
 }
 
-float noise(vec2 v) 
+float noise(vec2 coord)
 {
-	vec2 d = vec2(0.0, 1.0);
-	vec2 b = floor(v);
-	vec2 f = smoothstep(vec2(0.0), vec2(1.0), fract(v));
+	vec2 i = floor(coord);
+	vec2 f = fract(coord);
 
-	return mix(mix(rand(b), rand(b + d.yx), f.x), mix(rand(b + d.xy), rand(b + d.yy), f.x), f.y);
+	// 4 corners of a rectangle surrounding our point
+	float a = rand(i);
+	float b = rand(i + vec2(1.0, 0.0));
+	float c = rand(i + vec2(0.0, 1.0));
+	float d = rand(i + vec2(1.0, 1.0));
+
+	vec2 cubic = f * f * (3.0 - 2.0 * f);
+
+	return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
 }
 
-float fbm(vec2 v) 
+float fbm(vec2 coord)
 {
-	return noise(v) * 0.5 + noise(v * 2.0) * 0.25 + noise(v * 4.0) * 0.125 + noise(v * 8.0) * 0.065;
-}
+	float value = 0.0;
+	float scale = 0.5;
 
-void fragment() 
-{
-	vec2 coord = UV * 20.0;
-	vec2 motion = vec2(fbm(coord + vec2(TIME * -0.5, TIME * 0.5)));
-	float final = fbm(coord + motion);
+	for(int i = 0; i < octaves; i++)
+	{
+		value += noise(coord) * scale;
+		coord *= 2.0;
+		scale *= 0.5;
+	}
 	
-	COLOR = vec4(color, final * 0.5);
+	return value;
+}
+
+void fragment()
+{
+	float time = TIME;
+	vec2 partial_uv = (UV / width) + offset;
+	vec2 scaled_uv = partial_uv * noise_scale;
+	vec2 motion = vec2(fbm(scaled_uv + vec2(time * -0.5, time * 0.5)) );
+	
+	float result = fbm(scaled_uv + motion);
+	
+	COLOR = vec4(color.rgb, pow(result, alpha_power) * color.a);
 }

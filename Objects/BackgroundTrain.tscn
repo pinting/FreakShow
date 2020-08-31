@@ -12,7 +12,7 @@ script = ExtResource( 3 )
 
 [node name="Train00" type="Sprite" parent="."]
 position = Vector2( 159.952, 0 )
-scale = Vector2( 0.045, 0.06 )
+scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 1 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Train00"]
@@ -24,7 +24,7 @@ attenuation = 0.999999
 
 [node name="Train01" type="Sprite" parent="."]
 position = Vector2( 372.403, 0 )
-scale = Vector2( 0.045, 0.06 )
+scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 1 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Train01"]
@@ -36,7 +36,7 @@ attenuation = 0.999999
 
 [node name="Train02" type="Sprite" parent="."]
 position = Vector2( 585.009, 0 )
-scale = Vector2( 0.045, 0.06 )
+scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 1 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Train02"]

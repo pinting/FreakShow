@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hoop00.png-707900e0639d05d1a133c434da181937.stex"
+path.s3tc="res://.import/Hoop00.png-707900e0639d05d1a133c434da181937.s3tc.stex"
+path.etc="res://.import/Hoop00.png-707900e0639d05d1a133c434da181937.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Hoop00.png"
-dest_files=[ "res://.import/Hoop00.png-707900e0639d05d1a133c434da181937.stex" ]
+dest_files=[ "res://.import/Hoop00.png-707900e0639d05d1a133c434da181937.s3tc.stex", "res://.import/Hoop00.png-707900e0639d05d1a133c434da181937.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

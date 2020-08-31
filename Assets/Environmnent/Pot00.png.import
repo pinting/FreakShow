@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pot00.png-4bc57fbd3913920092d517b32b75b88a.stex"
+path.s3tc="res://.import/Pot00.png-4bc57fbd3913920092d517b32b75b88a.s3tc.stex"
+path.etc="res://.import/Pot00.png-4bc57fbd3913920092d517b32b75b88a.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Pot00.png"
-dest_files=[ "res://.import/Pot00.png-4bc57fbd3913920092d517b32b75b88a.stex" ]
+dest_files=[ "res://.import/Pot00.png-4bc57fbd3913920092d517b32b75b88a.s3tc.stex", "res://.import/Pot00.png-4bc57fbd3913920092d517b32b75b88a.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

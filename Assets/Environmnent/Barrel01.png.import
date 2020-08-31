@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Barrel01.png-5d82038c644864fdce0d32a91e742798.stex"
+path.s3tc="res://.import/Barrel01.png-5d82038c644864fdce0d32a91e742798.s3tc.stex"
+path.etc="res://.import/Barrel01.png-5d82038c644864fdce0d32a91e742798.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Barrel01.png"
-dest_files=[ "res://.import/Barrel01.png-5d82038c644864fdce0d32a91e742798.stex" ]
+dest_files=[ "res://.import/Barrel01.png-5d82038c644864fdce0d32a91e742798.s3tc.stex", "res://.import/Barrel01.png-5d82038c644864fdce0d32a91e742798.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

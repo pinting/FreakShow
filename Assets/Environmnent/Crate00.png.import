@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.stex"
+path.s3tc="res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.s3tc.stex"
+path.etc="res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Crate00.png"
-dest_files=[ "res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.stex" ]
+dest_files=[ "res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.s3tc.stex", "res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

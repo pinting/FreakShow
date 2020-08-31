@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Train00.png-38d9aa7d0a8289b289b7f918e691f686.stex"
+path.s3tc="res://.import/Train00.png-38d9aa7d0a8289b289b7f918e691f686.s3tc.stex"
+path.etc="res://.import/Train00.png-38d9aa7d0a8289b289b7f918e691f686.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Train00.png"
-dest_files=[ "res://.import/Train00.png-38d9aa7d0a8289b289b7f918e691f686.stex" ]
+dest_files=[ "res://.import/Train00.png-38d9aa7d0a8289b289b7f918e691f686.s3tc.stex", "res://.import/Train00.png-38d9aa7d0a8289b289b7f918e691f686.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

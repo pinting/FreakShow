@@ -8,7 +8,7 @@ position = Vector2( -512.736, 456.635 )
 
 [node name="AreaLight" type="Light2D" parent="."]
 position = Vector2( -955.363, 658.551 )
-scale = Vector2( 2.5377, 1.73037 )
+scale = Vector2( 10, 7 )
 z_as_relative = false
 texture = ExtResource( 1 )
 energy = 1.2
@@ -16,6 +16,6 @@ shadow_color = Color( 1, 1, 1, 1 )
 
 [node name="GroundLight" type="Light2D" parent="."]
 position = Vector2( -877.064, 472.738 )
-scale = Vector2( 2.00458, 0.253213 )
+scale = Vector2( 8, 1 )
 texture = ExtResource( 2 )
 energy = 0.8

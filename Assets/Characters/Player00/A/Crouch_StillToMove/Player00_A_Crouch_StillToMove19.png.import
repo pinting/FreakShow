@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player00_A_Crouch_StillToMove19.png-d8c0b253219a08b47da7cfc98ecae722.stex"
+path.s3tc="res://.import/Player00_A_Crouch_StillToMove19.png-d8c0b253219a08b47da7cfc98ecae722.s3tc.stex"
+path.etc="res://.import/Player00_A_Crouch_StillToMove19.png-d8c0b253219a08b47da7cfc98ecae722.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player00/A/Crouch_StillToMove/Player00_A_Crouch_StillToMove19.png"
-dest_files=[ "res://.import/Player00_A_Crouch_StillToMove19.png-d8c0b253219a08b47da7cfc98ecae722.stex" ]
+dest_files=[ "res://.import/Player00_A_Crouch_StillToMove19.png-d8c0b253219a08b47da7cfc98ecae722.s3tc.stex", "res://.import/Player00_A_Crouch_StillToMove19.png-d8c0b253219a08b47da7cfc98ecae722.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

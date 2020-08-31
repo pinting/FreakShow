@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player00_A_Stand_StillToMove22.png-96eca370e6d3783bfb481d5975b093d7.stex"
+path.s3tc="res://.import/Player00_A_Stand_StillToMove22.png-96eca370e6d3783bfb481d5975b093d7.s3tc.stex"
+path.etc="res://.import/Player00_A_Stand_StillToMove22.png-96eca370e6d3783bfb481d5975b093d7.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player00/A/Stand_StillToMove/Player00_A_Stand_StillToMove22.png"
-dest_files=[ "res://.import/Player00_A_Stand_StillToMove22.png-96eca370e6d3783bfb481d5975b093d7.stex" ]
+dest_files=[ "res://.import/Player00_A_Stand_StillToMove22.png-96eca370e6d3783bfb481d5975b093d7.s3tc.stex", "res://.import/Player00_A_Stand_StillToMove22.png-96eca370e6d3783bfb481d5975b093d7.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

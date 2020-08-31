@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Stranger01_Default_63.png-e36131e75c33c7e99ba7b4f0a58a7cec.stex"
+path.s3tc="res://.import/Stranger01_Default_63.png-e36131e75c33c7e99ba7b4f0a58a7cec.s3tc.stex"
+path.etc="res://.import/Stranger01_Default_63.png-e36131e75c33c7e99ba7b4f0a58a7cec.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Stranger01/Default/Stranger01_Default_63.png"
-dest_files=[ "res://.import/Stranger01_Default_63.png-e36131e75c33c7e99ba7b4f0a58a7cec.stex" ]
+dest_files=[ "res://.import/Stranger01_Default_63.png-e36131e75c33c7e99ba7b4f0a58a7cec.s3tc.stex", "res://.import/Stranger01_Default_63.png-e36131e75c33c7e99ba7b4f0a58a7cec.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

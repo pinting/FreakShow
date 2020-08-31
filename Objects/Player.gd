@@ -119,6 +119,7 @@ func _process_transforming_effect(delta: float):
 	var t = transforming_seconds
 	
 	if t >= 0.0 and t < 1.0:
+		transform_effect.emitting = true
 		transform_effect.self_modulate.a = t
 		freeze = true
 		transforming_done = false
@@ -130,6 +131,7 @@ func _process_transforming_effect(delta: float):
 		transform_effect.self_modulate.a = 1.0 - (t - 1.0)
 	elif t >= 2.0:
 		transform_effect.self_modulate.a = 0.0
+		transform_effect.emitting = false
 		freeze = false
 		transforming = false
 		transforming_seconds = 0.0

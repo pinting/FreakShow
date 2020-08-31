@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Graffiti36.png-13b2d28261cc4f010c0286cfe9568800.stex"
+path.s3tc="res://.import/Graffiti36.png-13b2d28261cc4f010c0286cfe9568800.s3tc.stex"
+path.etc="res://.import/Graffiti36.png-13b2d28261cc4f010c0286cfe9568800.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Graffiti36.png"
-dest_files=[ "res://.import/Graffiti36.png-13b2d28261cc4f010c0286cfe9568800.stex" ]
+dest_files=[ "res://.import/Graffiti36.png-13b2d28261cc4f010c0286cfe9568800.s3tc.stex", "res://.import/Graffiti36.png-13b2d28261cc4f010c0286cfe9568800.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
