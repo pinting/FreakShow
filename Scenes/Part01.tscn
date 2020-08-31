@@ -203,6 +203,19 @@ position = Vector2( -829.86, 1970.03 )
 rotation = -0.146264
 scale = Vector2( 0.359845, 0.384425 )
 
+[node name="Paper00" parent="BaseScene/Environment/Building01" instance=ExtResource( 40 )]
+position = Vector2( -1377.33, 2204.62 )
+scale = Vector2( 0.196675, 0.196675 )
+
+[node name="Paper01" parent="BaseScene/Environment/Building01" instance=ExtResource( 42 )]
+position = Vector2( 1103.56, 2185.85 )
+scale = Vector2( 0.0971474, 0.0971474 )
+
+[node name="Paper02" parent="BaseScene/Environment/Building01" instance=ExtResource( 43 )]
+position = Vector2( 1352.07, 2230.44 )
+rotation = -0.220333
+scale = Vector2( 0.0609779, 0.0609779 )
+
 [node name="Lamp00" parent="BaseScene/Environment/Building01" instance=ExtResource( 4 )]
 position = Vector2( -1181.73, 1797.7 )
 scale = Vector2( 0.9, 0.9 )
@@ -212,9 +225,6 @@ z_index = 1
 position = Vector2( -1184.55, 913.627 )
 scale = Vector2( 3.67457, 1.10197 )
 
-[node name="Paper" parent="BaseScene/Environment/Building01/Lamp00" instance=ExtResource( 40 )]
-position = Vector2( -2.48569, 509.773 )
-
 [node name="Lamp01" parent="BaseScene/Environment/Building01" instance=ExtResource( 4 )]
 position = Vector2( 1268.27, 1797.7 )
 scale = Vector2( 0.9, 0.9 )
@@ -223,15 +233,6 @@ z_index = 1
 [node name="Light" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource( 7 )]
 position = Vector2( -1182.14, 913.627 )
 scale = Vector2( 3.67457, 1.10197 )
-
-[node name="Paper00" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource( 42 )]
-position = Vector2( -2.95312, 533.16 )
-scale = Vector2( 0.0412927, 0.0412927 )
-
-[node name="Paper01" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource( 43 )]
-position = Vector2( -1.72656, 473.98 )
-rotation = -0.220333
-scale = Vector2( 0.044165, 0.044165 )
 
 [node name="Car" type="Sprite" parent="BaseScene/Environment/Building01"]
 material = SubResource( 5 )
@@ -309,7 +310,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 74
+frame = 76
 playing = true
 
 [node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 6 )]

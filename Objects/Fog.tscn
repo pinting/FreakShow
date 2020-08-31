@@ -4,7 +4,7 @@
 [ext_resource path="res://Animations/Fog00.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Objects/Fog.gd" type="Script" id=3]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/offset = 0.0
 shader_param/width = 1.0
@@ -21,13 +21,13 @@ visible = false
 self_modulate = Color( 0, 0, 0, 0.392157 )
 scale = Vector2( 1.25, 1.25 )
 frames = ExtResource( 2 )
-frame = 71
+frame = 7
 playing = true
 centered = false
 
 [node name="DynamicFog" type="ColorRect" parent="."]
 visible = false
-material = SubResource( 2 )
+material = SubResource( 1 )
 margin_right = 960.0
 margin_bottom = 540.0
 mouse_filter = 2
