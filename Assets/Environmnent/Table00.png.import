@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Table00.png-90a16d53b100a23557906ba9001f7f44.s3tc.stex"
+path.etc2="res://.import/Table00.png-90a16d53b100a23557906ba9001f7f44.etc2.stex"
 path.etc="res://.import/Table00.png-90a16d53b100a23557906ba9001f7f44.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Table00.png"
-dest_files=[ "res://.import/Table00.png-90a16d53b100a23557906ba9001f7f44.s3tc.stex", "res://.import/Table00.png-90a16d53b100a23557906ba9001f7f44.etc.stex" ]
+dest_files=[ "res://.import/Table00.png-90a16d53b100a23557906ba9001f7f44.s3tc.stex", "res://.import/Table00.png-90a16d53b100a23557906ba9001f7f44.etc2.stex", "res://.import/Table00.png-90a16d53b100a23557906ba9001f7f44.etc.stex" ]
 
 [params]
 

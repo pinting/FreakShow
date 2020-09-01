@@ -5,8 +5,6 @@
 [ext_resource path="res://Objects/Effect/DeathEffect00.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Effect/TransformEffect00.tscn" type="PackedScene" id=6]
 
-
-
 [sub_resource type="Animation" id=1]
 resource_name = "transform_to_avatar"
 step = 1.0
@@ -28,7 +26,7 @@ anims/transform_to_avatar = SubResource( 1 )
 material = SubResource( 2 )
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]

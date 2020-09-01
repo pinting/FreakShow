@@ -300,6 +300,11 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 		elif direction.x != 0.0:
 			next_velocity.x += direction.x * acceleration * delta
 	
+	var d = direction.length()
+	
+	if d > 1.0:
+		next_velocity /= sqrt(d)
+	
 	return next_velocity
 
 func freeze():

@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Car00.png-d294f5a750a5a7c7cd2ab9148efe74ce.s3tc.stex"
+path.etc2="res://.import/Car00.png-d294f5a750a5a7c7cd2ab9148efe74ce.etc2.stex"
 path.etc="res://.import/Car00.png-d294f5a750a5a7c7cd2ab9148efe74ce.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Car00.png"
-dest_files=[ "res://.import/Car00.png-d294f5a750a5a7c7cd2ab9148efe74ce.s3tc.stex", "res://.import/Car00.png-d294f5a750a5a7c7cd2ab9148efe74ce.etc.stex" ]
+dest_files=[ "res://.import/Car00.png-d294f5a750a5a7c7cd2ab9148efe74ce.s3tc.stex", "res://.import/Car00.png-d294f5a750a5a7c7cd2ab9148efe74ce.etc2.stex", "res://.import/Car00.png-d294f5a750a5a7c7cd2ab9148efe74ce.etc.stex" ]
 
 [params]
 

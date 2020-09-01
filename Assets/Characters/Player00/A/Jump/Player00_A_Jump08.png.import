@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Player00_A_Jump08.png-b8165b0f9140cc47cb63b68fd5a80778.s3tc.stex"
+path.etc2="res://.import/Player00_A_Jump08.png-b8165b0f9140cc47cb63b68fd5a80778.etc2.stex"
 path.etc="res://.import/Player00_A_Jump08.png-b8165b0f9140cc47cb63b68fd5a80778.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player00/A/Jump/Player00_A_Jump08.png"
-dest_files=[ "res://.import/Player00_A_Jump08.png-b8165b0f9140cc47cb63b68fd5a80778.s3tc.stex", "res://.import/Player00_A_Jump08.png-b8165b0f9140cc47cb63b68fd5a80778.etc.stex" ]
+dest_files=[ "res://.import/Player00_A_Jump08.png-b8165b0f9140cc47cb63b68fd5a80778.s3tc.stex", "res://.import/Player00_A_Jump08.png-b8165b0f9140cc47cb63b68fd5a80778.etc2.stex", "res://.import/Player00_A_Jump08.png-b8165b0f9140cc47cb63b68fd5a80778.etc.stex" ]
 
 [params]
 

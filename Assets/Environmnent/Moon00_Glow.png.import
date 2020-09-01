@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.s3tc.stex"
+path.etc2="res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.etc2.stex"
 path.etc="res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Moon00_Glow.png"
-dest_files=[ "res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.s3tc.stex", "res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.etc.stex" ]
+dest_files=[ "res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.s3tc.stex", "res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.etc2.stex", "res://.import/Moon00_Glow.png-317804f74708b25ba4fb2a3b84a23345.etc.stex" ]
 
 [params]
 

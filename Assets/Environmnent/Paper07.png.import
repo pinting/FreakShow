@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Paper07.png-d43f72b70c590867e3a6c335f1d167a9.s3tc.stex"
+path.etc2="res://.import/Paper07.png-d43f72b70c590867e3a6c335f1d167a9.etc2.stex"
 path.etc="res://.import/Paper07.png-d43f72b70c590867e3a6c335f1d167a9.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Paper07.png"
-dest_files=[ "res://.import/Paper07.png-d43f72b70c590867e3a6c335f1d167a9.s3tc.stex", "res://.import/Paper07.png-d43f72b70c590867e3a6c335f1d167a9.etc.stex" ]
+dest_files=[ "res://.import/Paper07.png-d43f72b70c590867e3a6c335f1d167a9.s3tc.stex", "res://.import/Paper07.png-d43f72b70c590867e3a6c335f1d167a9.etc2.stex", "res://.import/Paper07.png-d43f72b70c590867e3a6c335f1d167a9.etc.stex" ]
 
 [params]
 

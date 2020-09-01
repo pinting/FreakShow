@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Door02.png-29840280c38970266753971858127fc2.s3tc.stex"
+path.etc2="res://.import/Door02.png-29840280c38970266753971858127fc2.etc2.stex"
 path.etc="res://.import/Door02.png-29840280c38970266753971858127fc2.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Door02.png"
-dest_files=[ "res://.import/Door02.png-29840280c38970266753971858127fc2.s3tc.stex", "res://.import/Door02.png-29840280c38970266753971858127fc2.etc.stex" ]
+dest_files=[ "res://.import/Door02.png-29840280c38970266753971858127fc2.s3tc.stex", "res://.import/Door02.png-29840280c38970266753971858127fc2.etc2.stex", "res://.import/Door02.png-29840280c38970266753971858127fc2.etc.stex" ]
 
 [params]
 

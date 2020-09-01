@@ -172,11 +172,11 @@ locale_filter=[ 1, [ "en" ] ]
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 vram_compression/import_etc=true
-vram_compression/import_etc2=false
 quality/directional_shadow/size=256
 quality/directional_shadow/size.mobile=256
 quality/shadow_atlas/size=256

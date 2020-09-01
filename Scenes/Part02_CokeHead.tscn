@@ -4,7 +4,6 @@
 [ext_resource path="res://Animations/Enemy00.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Objects/Effect/DeathEffect00.tscn" type="PackedScene" id=3]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 205.833
 height = 621.209
@@ -14,8 +13,8 @@ scale = Vector2( 0.5, 0.5 )
 collision_layer = 15
 collision_mask = 15
 script = ExtResource( 1 )
-speed = 500.0
-rotation_speed = 20.0
+speed = 800.0
+rotation_speed = 60.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -493.689, 519.875, 135.318, 382.208, 443.867, 18.72, 535.074, -393.054, 352.66, -504.389, -11.4785 )

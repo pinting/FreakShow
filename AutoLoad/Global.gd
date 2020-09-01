@@ -12,18 +12,24 @@ const NO_INTRO: bool = false
 # Low performance mode
 const LOW_PERFORMANCE: bool = true
 
+# Only use the virtual mouse
+const ONLY_VIRTUAL_MOUSE: bool = true
+
+# Virtual cursor instead of the windows one
+const VIRTUAL_CURSOR: bool = true
+
 # Virtual mouse speed
 const VIRTUAL_MOUSE_SPEED: Vector2 = Vector2(3, 3)
 
 # Max loading time per tick (in msec)
 const LOADING_TIME_PER_TICK: int = 100
 
-
 var current_camera: Camera2D = null
 var player: Player = null
 var subtitle_display: SubtitleDisplay = null
 var subtitle: SubtitleManager = null
 var viewable_display: CanvasLayer = null
+var virtual_mouse_display: CanvasLayer = null
 
 # Position on the viewport
 var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
@@ -31,7 +37,7 @@ var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
 var last_virtual_click_left: bool = false
 var last_virtual_click_right: bool = false
 
-var using_virtual: bool = false
+var using_virtual: bool = ONLY_VIRTUAL_MOUSE
 var pressure_virtual = max(0.1, min(0.9, randf()))
 
 var loader = null
@@ -90,11 +96,17 @@ func _mouse_viewport_to_window_position(viewport_position):
 	 
 	return base
 
-func _set_virtual_mouse_position(viewport_position: Vector2, wrap_mouse_position: bool = true):
+func _set_virtual_mouse_position(viewport_position: Vector2, change_cursor_position: bool = true):
 	virtual_mouse_position = viewport_position
 	
-	if wrap_mouse_position:
-		get_viewport().warp_mouse(viewport_position)
+	if change_cursor_position:
+		set_cursor_position(viewport_position)
+
+func set_cursor_position(viewport_position):
+	get_viewport().warp_mouse(viewport_position)
+	
+	if VIRTUAL_CURSOR and virtual_mouse_display:
+		virtual_mouse_display.cursor.position = viewport_position
 
 func get_world_mouse_position():
 	if not current_camera:
@@ -139,7 +151,7 @@ func _create_move_event(viewport_position: Vector2, relative: Vector2, pressure:
 	get_tree().input_event(event)
 
 func _input(event: InputEvent):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not ONLY_VIRTUAL_MOUSE:
 		using_virtual = event.pressure == pressure_virtual
 		
 		if not using_virtual:

@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Train01.png-22917c1b8c9e633d21df81b556cea184.s3tc.stex"
+path.etc2="res://.import/Train01.png-22917c1b8c9e633d21df81b556cea184.etc2.stex"
 path.etc="res://.import/Train01.png-22917c1b8c9e633d21df81b556cea184.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Train01.png"
-dest_files=[ "res://.import/Train01.png-22917c1b8c9e633d21df81b556cea184.s3tc.stex", "res://.import/Train01.png-22917c1b8c9e633d21df81b556cea184.etc.stex" ]
+dest_files=[ "res://.import/Train01.png-22917c1b8c9e633d21df81b556cea184.s3tc.stex", "res://.import/Train01.png-22917c1b8c9e633d21df81b556cea184.etc2.stex", "res://.import/Train01.png-22917c1b8c9e633d21df81b556cea184.etc.stex" ]
 
 [params]
 

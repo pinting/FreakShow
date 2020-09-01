@@ -1,10 +1,10 @@
 extends "res://Scenes/BaseScene.gd"
 
 # Next scene
-export var NEXT_SCENE: String = "res://Scenes/Part01.tscn"
+export var next_scene: String = "res://Scenes/Part01.tscn"
 
 # Help player after this amount of loops into one direction
-export var HELP_AFTER_INDEX: int = 3
+export var help_after_index: int = 3
 
 onready var player = $Player
 onready var music_mixer = $MusicMixer
@@ -63,13 +63,13 @@ func _on__hallway_door_select():
 		fade_out(1.0)
 		yield(timer(2.0), "timeout")
 		
-		Global.load_scene(NEXT_SCENE)
+		Global.load_scene(next_scene)
 
 func _process__hallway_door(_delta: float):
 	if not hallway_door.locked:
 		return
 	
-	if abs(loop_index) > HELP_AFTER_INDEX:
+	if abs(loop_index) > help_after_index:
 		Global.subtitle.say(tr("NARRATOR01"))
 	
 	if hallway_stage_00 and abs(loop_direction) == 1:

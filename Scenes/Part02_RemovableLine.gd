@@ -1,25 +1,31 @@
 extends "res://Objects/Selectable/Selectable.gd"
 
 # After how large value the line should disappear
-export var LIMIT: int = 10
+export var limit: int = 10
 
 # Size of one step
-export var STEP: int = 1
+export var step: int = 9
 
 # Initial value
-export var START: int = 0
+export var start: int = 1
 
-var current: int = START
+var current: int = start
 
 func _ready():
-	assert(STEP > 0)
+	assert(step > 0)
 	connect("selected", self, "_on_selected")
 	material.set_shader_param("amount", current)
 
 func _on_selected():
-	current += STEP
+	if step <= 0:
+		return
+	
+	current += step
 	
 	material.set_shader_param("amount", current)
 	
-	if current >= LIMIT:
-		get_parent().remove_child(self)
+	if current >= limit:
+		remove()
+
+func remove():
+	get_parent().remove_child(self)

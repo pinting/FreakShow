@@ -35,7 +35,7 @@ func _physics_process(delta: float):
 	var rotation_diff = rotation_dest - rotation_degrees
 	
 	if abs(rotation_diff) > 0:
-		var rotation_step = rotation_diff / abs(rotation_diff) * rotation_speed
+		var rotation_step = rotation_diff / abs(rotation_diff) * rotation_speed * delta
 		
 		if abs(rotation_diff) >= abs(rotation_step):
 			rotation_degrees += rotation_step

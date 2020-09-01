@@ -24,7 +24,9 @@ func _process(delta: float):
 		
 		text += line.text.left(position) + "\r\n"
 		
-		line.show_percentage += delta / line.speed
+		var speed = line.speed if line.speed > 0 else 0.001
+		
+		line.show_percentage += delta / speed
 		line.show_percentage = min(1, line.show_percentage)
 		line.timeout -= delta
 		

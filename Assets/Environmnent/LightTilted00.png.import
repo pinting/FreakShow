@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.s3tc.stex"
+path.etc2="res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.etc2.stex"
 path.etc="res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/LightTilted00.png"
-dest_files=[ "res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.s3tc.stex", "res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.etc.stex" ]
+dest_files=[ "res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.s3tc.stex", "res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.etc2.stex", "res://.import/LightTilted00.png-79f15344d9d397fa3185390f5249c97d.etc.stex" ]
 
 [params]
 

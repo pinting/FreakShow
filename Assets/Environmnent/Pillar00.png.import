@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Pillar00.png-492d924fe19c465191a19a5aa053e440.s3tc.stex"
+path.etc2="res://.import/Pillar00.png-492d924fe19c465191a19a5aa053e440.etc2.stex"
 path.etc="res://.import/Pillar00.png-492d924fe19c465191a19a5aa053e440.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Pillar00.png"
-dest_files=[ "res://.import/Pillar00.png-492d924fe19c465191a19a5aa053e440.s3tc.stex", "res://.import/Pillar00.png-492d924fe19c465191a19a5aa053e440.etc.stex" ]
+dest_files=[ "res://.import/Pillar00.png-492d924fe19c465191a19a5aa053e440.s3tc.stex", "res://.import/Pillar00.png-492d924fe19c465191a19a5aa053e440.etc2.stex", "res://.import/Pillar00.png-492d924fe19c465191a19a5aa053e440.etc.stex" ]
 
 [params]
 

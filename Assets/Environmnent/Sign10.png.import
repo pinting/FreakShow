@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Sign10.png-bd6db08e127d8c777cfc06ac5c52e81d.s3tc.stex"
+path.etc2="res://.import/Sign10.png-bd6db08e127d8c777cfc06ac5c52e81d.etc2.stex"
 path.etc="res://.import/Sign10.png-bd6db08e127d8c777cfc06ac5c52e81d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Sign10.png"
-dest_files=[ "res://.import/Sign10.png-bd6db08e127d8c777cfc06ac5c52e81d.s3tc.stex", "res://.import/Sign10.png-bd6db08e127d8c777cfc06ac5c52e81d.etc.stex" ]
+dest_files=[ "res://.import/Sign10.png-bd6db08e127d8c777cfc06ac5c52e81d.s3tc.stex", "res://.import/Sign10.png-bd6db08e127d8c777cfc06ac5c52e81d.etc2.stex", "res://.import/Sign10.png-bd6db08e127d8c777cfc06ac5c52e81d.etc.stex" ]
 
 [params]
 

@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Building04_Top.png-9c9637bba939210c8b1c649355364aeb.s3tc.stex"
+path.etc2="res://.import/Building04_Top.png-9c9637bba939210c8b1c649355364aeb.etc2.stex"
 path.etc="res://.import/Building04_Top.png-9c9637bba939210c8b1c649355364aeb.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Building04_Top.png"
-dest_files=[ "res://.import/Building04_Top.png-9c9637bba939210c8b1c649355364aeb.s3tc.stex", "res://.import/Building04_Top.png-9c9637bba939210c8b1c649355364aeb.etc.stex" ]
+dest_files=[ "res://.import/Building04_Top.png-9c9637bba939210c8b1c649355364aeb.s3tc.stex", "res://.import/Building04_Top.png-9c9637bba939210c8b1c649355364aeb.etc2.stex", "res://.import/Building04_Top.png-9c9637bba939210c8b1c649355364aeb.etc.stex" ]
 
 [params]
 

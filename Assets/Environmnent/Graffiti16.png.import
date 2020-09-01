@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Graffiti16.png-1e385135eabc106ec8dcfac0fbac482d.s3tc.stex"
+path.etc2="res://.import/Graffiti16.png-1e385135eabc106ec8dcfac0fbac482d.etc2.stex"
 path.etc="res://.import/Graffiti16.png-1e385135eabc106ec8dcfac0fbac482d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Graffiti16.png"
-dest_files=[ "res://.import/Graffiti16.png-1e385135eabc106ec8dcfac0fbac482d.s3tc.stex", "res://.import/Graffiti16.png-1e385135eabc106ec8dcfac0fbac482d.etc.stex" ]
+dest_files=[ "res://.import/Graffiti16.png-1e385135eabc106ec8dcfac0fbac482d.s3tc.stex", "res://.import/Graffiti16.png-1e385135eabc106ec8dcfac0fbac482d.etc2.stex", "res://.import/Graffiti16.png-1e385135eabc106ec8dcfac0fbac482d.etc.stex" ]
 
 [params]
 

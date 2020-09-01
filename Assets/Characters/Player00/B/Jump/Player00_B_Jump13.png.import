@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Player00_B_Jump13.png-37d410da7dd6e6be6e77a9d7d5ff7e2a.s3tc.stex"
+path.etc2="res://.import/Player00_B_Jump13.png-37d410da7dd6e6be6e77a9d7d5ff7e2a.etc2.stex"
 path.etc="res://.import/Player00_B_Jump13.png-37d410da7dd6e6be6e77a9d7d5ff7e2a.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player00/B/Jump/Player00_B_Jump13.png"
-dest_files=[ "res://.import/Player00_B_Jump13.png-37d410da7dd6e6be6e77a9d7d5ff7e2a.s3tc.stex", "res://.import/Player00_B_Jump13.png-37d410da7dd6e6be6e77a9d7d5ff7e2a.etc.stex" ]
+dest_files=[ "res://.import/Player00_B_Jump13.png-37d410da7dd6e6be6e77a9d7d5ff7e2a.s3tc.stex", "res://.import/Player00_B_Jump13.png-37d410da7dd6e6be6e77a9d7d5ff7e2a.etc2.stex", "res://.import/Player00_B_Jump13.png-37d410da7dd6e6be6e77a9d7d5ff7e2a.etc.stex" ]
 
 [params]
 

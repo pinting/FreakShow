@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Fruit00.png-c57cb6a81d53f19a2d3d24d7ea0240d8.s3tc.stex"
+path.etc2="res://.import/Fruit00.png-c57cb6a81d53f19a2d3d24d7ea0240d8.etc2.stex"
 path.etc="res://.import/Fruit00.png-c57cb6a81d53f19a2d3d24d7ea0240d8.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Fruit00.png"
-dest_files=[ "res://.import/Fruit00.png-c57cb6a81d53f19a2d3d24d7ea0240d8.s3tc.stex", "res://.import/Fruit00.png-c57cb6a81d53f19a2d3d24d7ea0240d8.etc.stex" ]
+dest_files=[ "res://.import/Fruit00.png-c57cb6a81d53f19a2d3d24d7ea0240d8.s3tc.stex", "res://.import/Fruit00.png-c57cb6a81d53f19a2d3d24d7ea0240d8.etc2.stex", "res://.import/Fruit00.png-c57cb6a81d53f19a2d3d24d7ea0240d8.etc.stex" ]
 
 [params]
 

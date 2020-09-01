@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.s3tc.stex"
+path.etc2="res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.etc2.stex"
 path.etc="res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Crate00.png"
-dest_files=[ "res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.s3tc.stex", "res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.etc.stex" ]
+dest_files=[ "res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.s3tc.stex", "res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.etc2.stex", "res://.import/Crate00.png-fa0a3981391d7b2888d14345f40c5a2d.etc.stex" ]
 
 [params]
 

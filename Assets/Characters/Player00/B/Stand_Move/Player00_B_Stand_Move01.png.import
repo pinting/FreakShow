@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Player00_B_Stand_Move01.png-b1c3695c4af6f70afd1308e9c222d46e.s3tc.stex"
+path.etc2="res://.import/Player00_B_Stand_Move01.png-b1c3695c4af6f70afd1308e9c222d46e.etc2.stex"
 path.etc="res://.import/Player00_B_Stand_Move01.png-b1c3695c4af6f70afd1308e9c222d46e.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player00/B/Stand_Move/Player00_B_Stand_Move01.png"
-dest_files=[ "res://.import/Player00_B_Stand_Move01.png-b1c3695c4af6f70afd1308e9c222d46e.s3tc.stex", "res://.import/Player00_B_Stand_Move01.png-b1c3695c4af6f70afd1308e9c222d46e.etc.stex" ]
+dest_files=[ "res://.import/Player00_B_Stand_Move01.png-b1c3695c4af6f70afd1308e9c222d46e.s3tc.stex", "res://.import/Player00_B_Stand_Move01.png-b1c3695c4af6f70afd1308e9c222d46e.etc2.stex", "res://.import/Player00_B_Stand_Move01.png-b1c3695c4af6f70afd1308e9c222d46e.etc.stex" ]
 
 [params]
 

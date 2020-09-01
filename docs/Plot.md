@@ -58,6 +58,6 @@ As the screen fades back in, the sound of "connecting a call" can be heard. The 
 
 _Music Part01 starts to play in one loop_
 
-A Pac-Man like gaping human face starts to chase the protagonist. The player should guide the protagonist out of the maze which surrounds him. However, there is no way out - only by snorting the drug. If the protagonist uses too much, he dies. If the monster reaches the protagonist, he dies. In the case of death, the scene starts from the beginning. The way out - that the player needs to find - is down below. After sniffing up the most down below line, the protagonist falls for long, onto a wooden floor with a mattress. Similar to the first room of the game. He turns towards the player and starts to jack off.
+A Pac-Man like gaping human face starts to chase the protagonist. The player should guide the protagonist out of the maze which surrounds him. However, there is no direct way out - only by snorting the drug. If the monster reaches the protagonist, he dies. In the case of death, the scene starts from the beginning. The way out - that the player needs to find - is down below. After sniffing up the most down below line, the protagonist falls for long, onto a wooden floor with a mattress. Similar to the first room of the game. He turns towards the player and starts to jack off.
 
 The screen fades out and fades back in at the beginning of the game.

@@ -1,8 +1,8 @@
 extends "res://Objects/Enemy.gd"
 
-export var high_speed_after: float = 2000.0
+export var high_speed_after: float = 0.0
 
-export var high_speed_scale: float = 3.0
+export var high_speed_scale: float = 1.0
 
 onready var animated_sprite = $AnimatedSprite
 onready var death_effect = $DeathEffect

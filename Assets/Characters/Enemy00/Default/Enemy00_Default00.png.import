@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Enemy00_Default00.png-e0614be8e98c4f04f7c5491d1659841d.s3tc.stex"
+path.etc2="res://.import/Enemy00_Default00.png-e0614be8e98c4f04f7c5491d1659841d.etc2.stex"
 path.etc="res://.import/Enemy00_Default00.png-e0614be8e98c4f04f7c5491d1659841d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Enemy00/Default/Enemy00_Default00.png"
-dest_files=[ "res://.import/Enemy00_Default00.png-e0614be8e98c4f04f7c5491d1659841d.s3tc.stex", "res://.import/Enemy00_Default00.png-e0614be8e98c4f04f7c5491d1659841d.etc.stex" ]
+dest_files=[ "res://.import/Enemy00_Default00.png-e0614be8e98c4f04f7c5491d1659841d.s3tc.stex", "res://.import/Enemy00_Default00.png-e0614be8e98c4f04f7c5491d1659841d.etc2.stex", "res://.import/Enemy00_Default00.png-e0614be8e98c4f04f7c5491d1659841d.etc.stex" ]
 
 [params]
 
@@ -29,7 +30,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
-process/invert_color=false
+process/invert_color=true
 stream=false
 size_limit=0
 detect_3d=true

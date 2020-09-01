@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Cup00.png-848ed4fb6f389f7ac3ced4cd5980064e.s3tc.stex"
+path.etc2="res://.import/Cup00.png-848ed4fb6f389f7ac3ced4cd5980064e.etc2.stex"
 path.etc="res://.import/Cup00.png-848ed4fb6f389f7ac3ced4cd5980064e.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Cup00.png"
-dest_files=[ "res://.import/Cup00.png-848ed4fb6f389f7ac3ced4cd5980064e.s3tc.stex", "res://.import/Cup00.png-848ed4fb6f389f7ac3ced4cd5980064e.etc.stex" ]
+dest_files=[ "res://.import/Cup00.png-848ed4fb6f389f7ac3ced4cd5980064e.s3tc.stex", "res://.import/Cup00.png-848ed4fb6f389f7ac3ced4cd5980064e.etc2.stex", "res://.import/Cup00.png-848ed4fb6f389f7ac3ced4cd5980064e.etc.stex" ]
 
 [params]
 

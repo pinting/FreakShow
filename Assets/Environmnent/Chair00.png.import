@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Chair00.png-b209f4b7574600659d54b791f7cfa8dd.s3tc.stex"
+path.etc2="res://.import/Chair00.png-b209f4b7574600659d54b791f7cfa8dd.etc2.stex"
 path.etc="res://.import/Chair00.png-b209f4b7574600659d54b791f7cfa8dd.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Chair00.png"
-dest_files=[ "res://.import/Chair00.png-b209f4b7574600659d54b791f7cfa8dd.s3tc.stex", "res://.import/Chair00.png-b209f4b7574600659d54b791f7cfa8dd.etc.stex" ]
+dest_files=[ "res://.import/Chair00.png-b209f4b7574600659d54b791f7cfa8dd.s3tc.stex", "res://.import/Chair00.png-b209f4b7574600659d54b791f7cfa8dd.etc2.stex", "res://.import/Chair00.png-b209f4b7574600659d54b791f7cfa8dd.etc.stex" ]
 
 [params]
 

@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Dirt00.png-d4b5449f9bec16a1cc3091b2b6072aa7.s3tc.stex"
+path.etc2="res://.import/Dirt00.png-d4b5449f9bec16a1cc3091b2b6072aa7.etc2.stex"
 path.etc="res://.import/Dirt00.png-d4b5449f9bec16a1cc3091b2b6072aa7.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Dirt00.png"
-dest_files=[ "res://.import/Dirt00.png-d4b5449f9bec16a1cc3091b2b6072aa7.s3tc.stex", "res://.import/Dirt00.png-d4b5449f9bec16a1cc3091b2b6072aa7.etc.stex" ]
+dest_files=[ "res://.import/Dirt00.png-d4b5449f9bec16a1cc3091b2b6072aa7.s3tc.stex", "res://.import/Dirt00.png-d4b5449f9bec16a1cc3091b2b6072aa7.etc2.stex", "res://.import/Dirt00.png-d4b5449f9bec16a1cc3091b2b6072aa7.etc.stex" ]
 
 [params]
 

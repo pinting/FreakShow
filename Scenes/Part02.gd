@@ -7,7 +7,7 @@ export var next_scene: String = "res://Scenes/Part00.tscn"
 export var fail_scene: String = "res://Scenes/Part02.tscn"
 
 # How fast should the path finding update
-export var path_finding_interval: float = 1.0
+export var path_finding_interval: float = 0.5
 
 # Increase zoom by this amount
 export var camera_zoom_increase: float = 10.0
@@ -18,13 +18,17 @@ export var camera_zoom_speed: float = 1.0
 onready var player = $Player
 onready var music_mixer = $MusicMixer
 
+onready var debug_line = $Environment/DebugLine
 onready var navigation = $Environment/Navigation2D
 onready var enemy = $Environment/Enemy
 onready var enemy_mouth = $Environment/Enemy/MouthArea
-onready var debug_line = $Environment/DebugLine
 onready var wall_after_enter = $Environment/HiddenWalls/AfterEnter
 onready var wall_after_leave = $Environment/HiddenWalls/AfterLeave
-onready var exit_door = $Environment/Maze/ExitDoor
+onready var removable_line_00 = $Environment/Maze/RemovableLine00
+onready var removable_line_01 = $Environment/Maze/RemovableLine01
+onready var removable_line_02 = $Environment/Maze/RemovableLine02
+onready var removable_line_03 = $Environment/Maze/RemovableLine03
+onready var exit_door = $Environment/Maze/WallBlock/ExitDoor
 
 onready var fall_to_death = $Trigger/FallToDeath
 onready var game_begin = $Trigger/GameBegin
@@ -52,6 +56,15 @@ func _ready():
 	game_begin.connect("body_entered", self, "_start_game")
 	game_end.connect("body_entered", self, "_end_game")
 	exit_door.connect("selected", self, "_on_exit")
+	
+	var random_line = Utils.random_int(0, 2, true)
+	
+	if random_line == 0:
+		removable_line_01.remove()
+	elif random_line == 1:
+		removable_line_02.remove()
+	elif random_line == 2:
+		removable_line_03.remove()
 
 func _fail_game(body: Node):
 	if not body.is_in_group("player"):

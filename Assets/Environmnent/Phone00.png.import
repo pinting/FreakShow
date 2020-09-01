@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Phone00.png-d03e8df17b146660e43bb8c3947b0602.s3tc.stex"
+path.etc2="res://.import/Phone00.png-d03e8df17b146660e43bb8c3947b0602.etc2.stex"
 path.etc="res://.import/Phone00.png-d03e8df17b146660e43bb8c3947b0602.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Phone00.png"
-dest_files=[ "res://.import/Phone00.png-d03e8df17b146660e43bb8c3947b0602.s3tc.stex", "res://.import/Phone00.png-d03e8df17b146660e43bb8c3947b0602.etc.stex" ]
+dest_files=[ "res://.import/Phone00.png-d03e8df17b146660e43bb8c3947b0602.s3tc.stex", "res://.import/Phone00.png-d03e8df17b146660e43bb8c3947b0602.etc2.stex", "res://.import/Phone00.png-d03e8df17b146660e43bb8c3947b0602.etc.stex" ]
 
 [params]
 

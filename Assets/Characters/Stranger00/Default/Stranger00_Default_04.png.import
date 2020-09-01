@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Stranger00_Default_04.png-3d829263bc42685397faff995191a276.s3tc.stex"
+path.etc2="res://.import/Stranger00_Default_04.png-3d829263bc42685397faff995191a276.etc2.stex"
 path.etc="res://.import/Stranger00_Default_04.png-3d829263bc42685397faff995191a276.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Stranger00/Default/Stranger00_Default_04.png"
-dest_files=[ "res://.import/Stranger00_Default_04.png-3d829263bc42685397faff995191a276.s3tc.stex", "res://.import/Stranger00_Default_04.png-3d829263bc42685397faff995191a276.etc.stex" ]
+dest_files=[ "res://.import/Stranger00_Default_04.png-3d829263bc42685397faff995191a276.s3tc.stex", "res://.import/Stranger00_Default_04.png-3d829263bc42685397faff995191a276.etc2.stex", "res://.import/Stranger00_Default_04.png-3d829263bc42685397faff995191a276.etc.stex" ]
 
 [params]
 

@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Player01_B_Crouch_MoveToStill07.png-60cce56a932e8ca5d30f156572404543.s3tc.stex"
+path.etc2="res://.import/Player01_B_Crouch_MoveToStill07.png-60cce56a932e8ca5d30f156572404543.etc2.stex"
 path.etc="res://.import/Player01_B_Crouch_MoveToStill07.png-60cce56a932e8ca5d30f156572404543.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player01/B/Crouch_MoveToStill/Player01_B_Crouch_MoveToStill07.png"
-dest_files=[ "res://.import/Player01_B_Crouch_MoveToStill07.png-60cce56a932e8ca5d30f156572404543.s3tc.stex", "res://.import/Player01_B_Crouch_MoveToStill07.png-60cce56a932e8ca5d30f156572404543.etc.stex" ]
+dest_files=[ "res://.import/Player01_B_Crouch_MoveToStill07.png-60cce56a932e8ca5d30f156572404543.s3tc.stex", "res://.import/Player01_B_Crouch_MoveToStill07.png-60cce56a932e8ca5d30f156572404543.etc2.stex", "res://.import/Player01_B_Crouch_MoveToStill07.png-60cce56a932e8ca5d30f156572404543.etc.stex" ]
 
 [params]
 

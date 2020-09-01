@@ -17,11 +17,10 @@ shader_param/octaves = 4
 script = ExtResource( 3 )
 
 [node name="FakeFog" type="AnimatedSprite" parent="."]
-visible = false
 self_modulate = Color( 0, 0, 0, 0.392157 )
-scale = Vector2( 1.25, 1.25 )
+scale = Vector2( 1.26, 1.26 )
 frames = ExtResource( 2 )
-frame = 7
+frame = 42
 playing = true
 centered = false
 

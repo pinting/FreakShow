@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Clothes00.png-41311025c97db7f2efe7cfa19f2f1a15.s3tc.stex"
+path.etc2="res://.import/Clothes00.png-41311025c97db7f2efe7cfa19f2f1a15.etc2.stex"
 path.etc="res://.import/Clothes00.png-41311025c97db7f2efe7cfa19f2f1a15.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Clothes00.png"
-dest_files=[ "res://.import/Clothes00.png-41311025c97db7f2efe7cfa19f2f1a15.s3tc.stex", "res://.import/Clothes00.png-41311025c97db7f2efe7cfa19f2f1a15.etc.stex" ]
+dest_files=[ "res://.import/Clothes00.png-41311025c97db7f2efe7cfa19f2f1a15.s3tc.stex", "res://.import/Clothes00.png-41311025c97db7f2efe7cfa19f2f1a15.etc2.stex", "res://.import/Clothes00.png-41311025c97db7f2efe7cfa19f2f1a15.etc.stex" ]
 
 [params]
 

@@ -3,16 +3,17 @@
 importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Hoop00_Overlay.png-8b8d2e220f37da88c697cfec988e3b7a.s3tc.stex"
+path.etc2="res://.import/Hoop00_Overlay.png-8b8d2e220f37da88c697cfec988e3b7a.etc2.stex"
 path.etc="res://.import/Hoop00_Overlay.png-8b8d2e220f37da88c697cfec988e3b7a.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Hoop00_Overlay.png"
-dest_files=[ "res://.import/Hoop00_Overlay.png-8b8d2e220f37da88c697cfec988e3b7a.s3tc.stex", "res://.import/Hoop00_Overlay.png-8b8d2e220f37da88c697cfec988e3b7a.etc.stex" ]
+dest_files=[ "res://.import/Hoop00_Overlay.png-8b8d2e220f37da88c697cfec988e3b7a.s3tc.stex", "res://.import/Hoop00_Overlay.png-8b8d2e220f37da88c697cfec988e3b7a.etc2.stex", "res://.import/Hoop00_Overlay.png-8b8d2e220f37da88c697cfec988e3b7a.etc.stex" ]
 
 [params]
 
