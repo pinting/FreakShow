@@ -71,7 +71,7 @@ position = Vector2( 59.2303, 0.734743 )
 script = ExtResource( 5 )
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
-position = Vector2( 1688.14, 31200.4 )
+position = Vector2( -2201.43, -2502.96 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 37 )
 avatar_max_speed = 900.0

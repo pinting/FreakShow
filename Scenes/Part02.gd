@@ -1,7 +1,7 @@
 extends "res://Scenes/BaseScene.gd"
 
 # Next scene
-export var next_scene: String = "res://Scenes/Part00.tscn"
+export var next_scene: String = "res://Scenes/Credits.tscn"
 
 # Next scene after failing
 export var fail_scene: String = "res://Scenes/Part02.tscn"

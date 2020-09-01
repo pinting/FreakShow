@@ -13,10 +13,10 @@ const NO_INTRO: bool = false
 const LOW_PERFORMANCE: bool = true
 
 # Only use the virtual mouse
-const ONLY_VIRTUAL_MOUSE: bool = true
+const ONLY_VIRTUAL_MOUSE: bool = false
 
 # Virtual cursor instead of the windows one
-const VIRTUAL_CURSOR: bool = true
+const VIRTUAL_CURSOR: bool = false
 
 # Virtual mouse speed
 const VIRTUAL_MOUSE_SPEED: Vector2 = Vector2(3, 3)
@@ -29,7 +29,7 @@ var player: Player = null
 var subtitle_display: SubtitleDisplay = null
 var subtitle: SubtitleManager = null
 var viewable_display: CanvasLayer = null
-var virtual_mouse_display: CanvasLayer = null
+var virtual_cursor: CanvasLayer = null
 
 # Position on the viewport
 var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
@@ -105,8 +105,9 @@ func _set_virtual_mouse_position(viewport_position: Vector2, change_cursor_posit
 func set_cursor_position(viewport_position):
 	get_viewport().warp_mouse(viewport_position)
 	
-	if VIRTUAL_CURSOR and virtual_mouse_display:
-		virtual_mouse_display.cursor.position = viewport_position
+	if VIRTUAL_CURSOR and virtual_cursor:
+		virtual_cursor.cursor.position = viewport_position
+		virtual_cursor.visible = true
 
 func get_world_mouse_position():
 	if not current_camera:

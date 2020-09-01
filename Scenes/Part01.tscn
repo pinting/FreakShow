@@ -65,10 +65,10 @@ extents = Vector2( 30000, 10 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 74.0137, 2552.49 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 19344.7, 202.138 )
 
-[sub_resource type="PhysicsMaterial" id=7]
+[sub_resource type="PhysicsMaterial" id=8]
 bounce = 0.9
 
 [node name="Part01" type="Node2D"]
@@ -299,7 +299,7 @@ collision_mask = 7
 
 [node name="Wall" type="CollisionShape2D" parent="BaseScene/Environment/Building03/HiddenWall02"]
 position = Vector2( -15019, -2297.38 )
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 
 [node name="Sign" parent="BaseScene/Environment/Building03" instance=ExtResource( 33 )]
 
@@ -322,7 +322,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 86
+frame = 43
 playing = true
 
 [node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 6 )]
@@ -337,7 +337,7 @@ can_sleep = false
 [node name="Ball" parent="BaseScene/Environment" instance=ExtResource( 14 )]
 position = Vector2( 12959.3, 36.504 )
 collision_mask = 2147483650
-physics_material_override = SubResource( 7 )
+physics_material_override = SubResource( 8 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 position = Vector2( -59.2303, -0.734743 )

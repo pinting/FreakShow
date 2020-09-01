@@ -7,7 +7,7 @@ uniform float grab_amount = 1.0;
 uniform float glow_radius = 10.0;
 uniform float glow_amount = 0.0;
 
-vec4 safe_texture(sampler2D tex, vec2 p)
+vec4 safe_texture2ddsa(sampler2D tex, vec2 p)
 {
 	if(!keep_size && (p.x < 0.0 || p.x > 1.0 || p.y < 0.0 || p.y > 1.0))
 	{
@@ -20,36 +20,30 @@ vec4 safe_texture(sampler2D tex, vec2 p)
 void fragment()
 {
 	vec2 pixel_size = TEXTURE_PIXEL_SIZE;
-	vec4 color = safe_texture(TEXTURE, UV);
-	
-	if(color.a == 0.0)
-	{
-		COLOR = color;
-		return;
-	}
+	vec4 color = texture(TEXTURE, UV);
 	
 	vec4 glow = color;
 	float r = glow_radius;
 
-	glow += safe_texture(TEXTURE, UV + vec2(-r, -r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(-r, 0.0) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(-r, r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(0.0, -r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(0.0, r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(r, -r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(r, 0.0) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(r, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, 0.0) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(0.0, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(0.0, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, 0.0) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, r) * pixel_size);
 
 	r *= 2.0;
 	
-	glow += safe_texture(TEXTURE, UV + vec2(-r, -r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(-r, 0.0) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(-r, r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(0.0, -r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(0.0, r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(r, -r) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(r, 0.0) * pixel_size);
-	glow += safe_texture(TEXTURE, UV + vec2(r, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, 0.0) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(-r, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(0.0, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(0.0, r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, -r) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, 0.0) * pixel_size);
+	glow += texture(TEXTURE, UV + vec2(r, r) * pixel_size);
 
 	glow /= 17.0; // Number of texture calls
 	glow *= glow_amount;
@@ -60,6 +54,9 @@ void fragment()
 
 	len = pow(len * 2.0, grab_amount) * 0.5;
 	ruv = len * dir;
-
-	COLOR = safe_texture(TEXTURE, ruv + offset) + glow;
+	
+	vec4 fatty = texture(TEXTURE, ruv + offset);
+	vec3 combined = fatty.rgb + glow.rgb;
+	
+	COLOR = vec4(combined.r, combined.g, combined.b, fatty.a);
 }

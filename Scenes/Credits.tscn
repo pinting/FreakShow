@@ -1,11 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Animations/Fog00.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scenes/Credits.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Music/Part00.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -32,15 +30,13 @@ environment = SubResource( 1 )
 layer = -90
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="BaseScene/Waves"]
+self_modulate = Color( 0.219608, 0.219608, 0.219608, 1 )
 scale = Vector2( 1.26, 1.27 )
 frames = ExtResource( 1 )
-frame = 120
+frame = 16
 playing = true
 centered = false
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
 color = Color( 0.196078, 0.196078, 0.196078, 1 )
-
-[node name="MusicMixer" parent="BaseScene" instance=ExtResource( 11 )]
-stream = ExtResource( 5 )

@@ -128,7 +128,7 @@ func _process_ball_in_hoop(delta: float):
 			phone.visible = true
 			
 			yield(timer(2.0), "timeout")
-			Global.subtitle.say(tr("NARRATOR04"), 6.0, 12.0)
+			Global.subtitle.say(tr("NARRATOR04"), 2.0, 12.0)
 			phone.connect("selected", self, "_on_phone_selected")
 	else:
 		ball_is_stuck_counter = ball_is_stuck_timeout
