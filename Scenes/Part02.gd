@@ -3,14 +3,14 @@ extends "res://Scenes/BaseScene.gd"
 # Next scene
 export var next_scene: String = "res://Scenes/Credits.tscn"
 
-# Next scene after failing
-export var fail_scene: String = "res://Scenes/Part02.tscn"
-
 # How fast should the path finding update
 export var path_finding_interval: float = 0.5
 
+# Default camera zoom
+export var camera_zoom_base: float = 6.0
+
 # Increase zoom by this amount
-export var camera_zoom_increase: float = 10.0
+export var camera_zoom_game: float = 10.0
 
 # Speed of zoom
 export var camera_zoom_speed: float = 1.0
@@ -65,6 +65,11 @@ func _ready():
 		removable_line_02.remove()
 	elif random_line == 2:
 		removable_line_03.remove()
+	
+	var camera = Global.current_camera
+	
+	if camera:
+		camera.zoom = Vector2(camera_zoom_base, camera_zoom_base)
 
 func _fail_game(body: Node):
 	if not body.is_in_group("player"):
@@ -76,10 +81,9 @@ func _fail_game(body: Node):
 	player.kill()
 	yield(timer(3.0), "timeout")
 	
-	fade_out(1.0)
-	yield(timer(1.5), "timeout")
 	music_mixer.kill(2.0);
-	Global.load_scene(fail_scene)
+	
+	load_scene(get_parent().filename)
 
 func _start_game(body: Node):
 	if not body.is_in_group("player") or game_playing:
@@ -109,29 +113,32 @@ func _on_exit():
 	fade_out(1.0)
 	yield(timer(5.0), "timeout")
 	wind_sound.stop();
-	Global.load_scene(next_scene)
+	load_scene(next_scene)
 
 func _on_scene_started():
 	connect_sound.play()
 
 func _process(delta: float):
 	_process_enemy_path_finding(delta)
-	_process_enlarge_camera_zoom(delta)
+	_process_camera_zoom(delta)
 
-func _process_enlarge_camera_zoom(delta):
-	if not game_playing:
-		return
-	
+func _process_camera_zoom(delta):
 	var camera = Global.current_camera
 	
 	if not camera:
 		return
 	
-	if max(camera.zoom.x, camera.zoom.y) < camera_zoom_increase:
-		var step = delta / camera_zoom_speed * camera_zoom_increase
+	var step = 0
+	
+	if game_playing and max(camera.zoom.x, camera.zoom.y) < camera_zoom_game:
+		step = delta / camera_zoom_speed * (camera_zoom_game - camera_zoom_base)
+	
+	if not game_playing and max(camera.zoom.x, camera.zoom.y) > camera_zoom_base:
+		step = delta / camera_zoom_speed * (camera_zoom_base - camera_zoom_game)
 		
-		camera.zoom.x += step
-		camera.zoom.y += step
+	camera.zoom.x += step
+	camera.zoom.y += step
+
 
 func _process_enemy_path_finding(delta):
 	if not game_playing or enemy.dead:

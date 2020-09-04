@@ -7,19 +7,20 @@ export var next_scene: String = "res://Scenes/Part02.tscn"
 export var low_pitch_length: float = 10.0
 
 # Seconds to wait for the ball to be stuck
-export var ball_is_stuck_timeout: float = 1.0
+export var ball_is_stuck_timeout: float = 5.0
 
 # Teleport player to the end
 export var teleport_player_to_end: bool = false
 
-# Size of a trigger point detect field
-export var detect_threshold: float = 15.0
+# Zero value
+export var zero: float = 0.05
 
 onready var player = $Player
 onready var music_mixer = $MusicMixer
 
 onready var background_train = $Environment/BackgroundTrain
 onready var ball = $Environment/Ball
+onready var phone_lamp = $Environment/PhoneBox/Lamp
 onready var phone = $Environment/PhoneBox/Phone
 onready var crate = $Environment/Crate
 
@@ -37,7 +38,7 @@ var music_00: int
 var music_01: int
 var music_02: int
 
-var ball_is_stuck_counter = ball_is_stuck_timeout
+var flashing_phone_light: bool = false
 
 func _ready():
 	music_00 = music_mixer.add_part(0, 3 * 60 + 20, true, 0, 10, -40)
@@ -46,6 +47,11 @@ func _ready():
 	
 	connect("scene_started", self, "_on_scene_started")
 	connect("intro_over", self, "_on_intro_over")
+	
+	trigger_comment.connect("body_entered", self, "_trigger_comment")
+	trigger_train.connect("body_entered", self, "_trigger_train")
+	reaching_hoop.connect("body_entered", self, "_trigger_hoop_part")
+	inside_hoop.connect("body_entered", self, "_trigger_in_hoop")
 	
 	music_mixer.master_player.pitch_scale = 0.001
 	wind_sound.pitch_scale = 0.001
@@ -62,78 +68,71 @@ func _on_scene_started():
 	Global.subtitle.say(tr("NARRATOR02"), 6.0)
 
 func _on_phone_selected():
+	flashing_phone_light = false
+	
 	music_mixer.kill(2.0);
 	fade_out(2.0)
+	
 	yield(timer(3.0), "timeout")
 	ring_sound.stop()
+	
 	yield(timer(0.5), "timeout")
 	pick_up_sound.play()
+	
 	yield(timer(2.0), "timeout")
-	Global.load_scene(next_scene)
+	load_scene(next_scene)
 
-func _process_trigger_comment(_delta: float):
-	if not trigger_comment.visible:
+func _trigger_comment(body: Node):
+	if not body.is_in_group("player") or not trigger_comment.visible:
 		return
 	
-	var trigger = trigger_comment.global_position
-	var object = player.global_position
+	trigger_comment.visible = false
 	
-	if abs(trigger.x - object.x) < detect_threshold:
-		trigger_comment.visible = false
-		Global.subtitle.say(tr("NARRATOR03"), 6)
+	Global.subtitle.say(tr("NARRATOR03"), 6)
 
-func _process_train(_delta: float):
-	if not trigger_train.visible:
+func _trigger_train(body: Node):
+	if not body.is_in_group("player") or not trigger_train.visible:
 		return
 	
-	var trigger = trigger_train.global_position
-	var object = player.global_position
-	
-	if abs(trigger.x - object.x) < detect_threshold:
-		trigger_train.visible = false
-		background_train.start()
+	trigger_train.visible = false
+	background_train.start()
 
-func _process_hoop_scene(_delta: float):
-	if not reaching_hoop.visible:
+func _trigger_hoop_part(body: Node):
+	if not body.is_in_group("player") or not reaching_hoop.visible:
+		return
+
+	reaching_hoop.visible = false
+	music_mixer.force_next(music_01)
+
+func _trigger_in_hoop(body: Node):
+	if not body.is_in_group("ball") or not inside_hoop.visible:
 		return
 	
-	var trigger = reaching_hoop.global_position
-	var object = player.global_position
+	yield(timer(ball_is_stuck_timeout), "timeout")
 	
-	if abs(trigger.x - object.x) < detect_threshold:
-		reaching_hoop.visible = false
-		music_mixer.force_next(music_01)
-
-func _process_ball_in_hoop(delta: float):
-	if not inside_hoop.visible:
+	while ball.held:
+		yield(timer(ball_is_stuck_timeout), "timeout")
+	
+	if not inside_hoop.overlaps_body(body):
 		return
 	
-	var trigger = inside_hoop.global_position
-	var object = ball.global_position
+	# Turn off previous trigger point too
+	reaching_hoop.visible = false
+	inside_hoop.visible = false
 	
-	var xd = abs(trigger.x - object.x)
-	var yd = abs(trigger.y - object.y)
+	ball.disable()
+	ring_sound.play()
+	music_mixer.force_next(music_02)
+	phone.visible = true
 	
-	if xd < detect_threshold and yd < detect_threshold:
-		ball_is_stuck_counter -= delta
-		
-		if ball_is_stuck_counter < 0.0:
-			# Turn off previous trigger point too
-			reaching_hoop.visible = false
-			inside_hoop.visible = false
-			ball.mode = RigidBody2D.MODE_STATIC
-			
-			ring_sound.play()
-			music_mixer.force_next(music_02)
-			phone.visible = true
-			
-			yield(timer(2.0), "timeout")
-			Global.subtitle.say(tr("NARRATOR04"), 2.0, 12.0)
-			phone.connect("selected", self, "_on_phone_selected")
-	else:
-		ball_is_stuck_counter = ball_is_stuck_timeout
+	yield(timer(2.0), "timeout")
+	Global.subtitle.say(tr("NARRATOR04"), 2.0, 12.0)
+	phone.connect("selected", self, "_on_phone_selected")
+	
+	flashing_phone_light = true
+	phone_lamp.visible = true
 
-func _process_wind_intro(_delta):
+func _process_wind_intro(_delta: float):
 	if Global.NO_INTRO:
 		return
 	
@@ -147,9 +146,10 @@ func _process_wind_intro(_delta):
 		wind_sound.pitch_scale = max(min(pitch_value, 1.0), 0.001)
 		music_mixer.master_player.pitch_scale = max(min(pitch_value, 1.0), 0.001)
 
-func _process(delta):
+func _process_phone_lamp_flash(delta: float):
+	if flashing_phone_light and fmod(current_second, randf()) <= zero:
+		phone_lamp.visible = not phone_lamp.visible
+
+func _process(delta: float):
 	_process_wind_intro(delta)
-	_process_trigger_comment(delta)
-	_process_train(delta)
-	_process_hoop_scene(delta)
-	_process_ball_in_hoop(delta)
+	_process_phone_lamp_flash(delta)

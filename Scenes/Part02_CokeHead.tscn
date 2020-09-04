@@ -1,10 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Part02_CokeHead.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Enemy00.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Objects/Effect/DeathEffect00.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Shaders/ColorChanger.shader" type="Shader" id=4]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+shader_param/color_key = Color( 0, 0.509804, 0.913725, 1 )
+shader_param/replacement_color = Color( 0.352941, 0.152941, 0.152941, 1 )
+shader_param/tolerance = 0.95
+
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 205.833
 height = 621.209
 
@@ -20,6 +27,7 @@ rotation_speed = 60.0
 polygon = PoolVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -493.689, 519.875, 135.318, 382.208, 443.867, 18.72, 535.074, -393.054, 352.66, -504.389, -11.4785 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 1 )
 frames = ExtResource( 2 )
 playing = true
 
@@ -31,4 +39,4 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouthArea"]
 position = Vector2( 413.15, 59.3555 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )

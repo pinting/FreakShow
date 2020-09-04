@@ -26,7 +26,7 @@ anims/transform_to_avatar = SubResource( 1 )
 material = SubResource( 2 )
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-frame = 2
+frame = 8
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
@@ -59,7 +59,8 @@ polygon = PoolVector2Array( -51.7286, 496.019, 73.0905, 495.758, 59.7819, -170.7
 
 [node name="AvatarCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2( -2.35354, -2.57445 )
-polygon = PoolVector2Array( -170.678, 19.3284, -101.962, -116.479, 65.2265, -139.203, 176.686, -83.4738, 160.454, -55.3385, 63.0623, -74.8168, 92.8208, 20.9516, -24.0491, 136.198, -93.8465, 68.0243 )
+scale = Vector2( 1.5, 1.5 )
+polygon = PoolVector2Array( -87.1783, -24.354, -57.8614, -153.436, 65.2265, -139.203, 76.9085, -58.0464, 64.6566, 24.6533, 55.9054, 97.7266, 21.7753, 130.106, -50.8604, 107.353 )
 
 [node name="TransformEffect" parent="." instance=ExtResource( 6 )]
 

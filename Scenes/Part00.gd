@@ -4,7 +4,7 @@ extends "res://Scenes/BaseScene.gd"
 export var next_scene: String = "res://Scenes/Part01.tscn"
 
 # Help player after this amount of loops into one direction
-export var help_after_index: int = 3
+export var help_after_index: int = 2
 
 onready var player = $Player
 onready var music_mixer = $MusicMixer
@@ -20,6 +20,7 @@ onready var hallway_end = $Trigger/HallwayLoopEnd
 onready var door_open_sound = $Sound/DoorOpenSound
 onready var silent_door_open_sound = $Sound/SilentDoorOpenSound
 
+var hallway_help_complete: bool = false
 var hallway_stage_00: bool = true
 var hallway_stage_01: bool = false
 var loop_direction: float = 0.0
@@ -60,17 +61,17 @@ func _on__hallway_door_select():
 		exiting = true
 		
 		music_mixer.kill(2.0);
-		fade_out(1.0)
-		yield(timer(2.0), "timeout")
 		
-		Global.load_scene(next_scene)
+		load_scene(next_scene)
 
 func _process__hallway_door(_delta: float):
 	if not hallway_door.locked:
 		return
 	
-	if abs(loop_index) > help_after_index:
+	if abs(loop_index) > help_after_index and not hallway_help_complete:
 		Global.subtitle.say(tr("NARRATOR01"))
+		
+		hallway_help_complete = true
 	
 	if hallway_stage_00 and abs(loop_direction) == 1:
 		hallway_stage_00 = false

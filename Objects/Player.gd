@@ -78,6 +78,7 @@ var moving_x: bool = false
 var transforming_seconds: float = 0.0
 var transforming: bool = false
 var transforming_done: bool = true
+var fast_walking: bool = false
 
 func _ready():
 	assert(animation_frames != null)
@@ -206,14 +207,13 @@ func _process_crouch():
 		crouching = not crouching
 
 func _process_sprint():
-	var sprint_pressed = Input.is_action_pressed("sprint")
+	var fast_walk_pressed = Input.is_action_just_pressed("fast_walk")
 	
-	if Global.DEBUG:
-		if Input.is_action_just_pressed("avatar"):
-			toggle_avatar_mode()
+	if fast_walk_pressed:
+		fast_walking = not fast_walking
 	
 	var can_go_up = avatar_mode or (is_on_floor() and not crouching)
-	var speed_mod = sprint_scale if not avatar_mode and sprint_pressed and can_go_up else 1.0
+	var speed_mod = sprint_scale if not avatar_mode and fast_walking and can_go_up else 1.0
 	
 	current_max_speed = speed_mod * max_speed
 	current_acceleration = speed_mod * acceleration

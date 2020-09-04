@@ -34,6 +34,7 @@ export var clone_material: bool = false
 var current_primary: float = primary_default
 var current_secondary: float = secondary_default
 
+var disabled = false
 var held = false
 
 signal selected
@@ -69,10 +70,10 @@ func _is_top(mouse_position: Vector2):
 	return true
 
 func _input(event: InputEvent):
-	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
+	if event is InputEventMouseButton and event.pressed:
 		var mouse_position = Global.get_world_mouse_position()
 		
-		if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position):
+		if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position) and visible and not disabled:
 			emit_signal("selected")
 
 func show_description():
@@ -84,7 +85,7 @@ func remove_description():
 func _physics_process(delta: float):
 	var mouse_position = Global.get_world_mouse_position()
 	
-	if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position):
+	if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position) and visible and not disabled:
 		if len(offset_key):
 			var offset = to_local(mouse_position) / get_rect().size
 			

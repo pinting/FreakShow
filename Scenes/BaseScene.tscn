@@ -5,11 +5,10 @@
 [ext_resource path="res://Objects/SubtitleDisplay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/BaseScene.gd" type="Script" id=11]
 
-
 [node name="BaseScene" type="Node2D"]
 script = ExtResource( 11 )
 
-[node name="VirtualMouseDisplay" parent="." instance=ExtResource( 2 )]
+[node name="VirtualCursorDisplay" parent="." instance=ExtResource( 2 )]
 
 [node name="SubtitleDisplay" parent="." instance=ExtResource( 8 )]
 layer = 101

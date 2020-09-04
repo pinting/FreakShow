@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="FreakShow"
-run/main_scene="res://Scenes/Part00.tscn"
+run/main_scene="res://Scenes/GameBegin.tscn"
 boot_splash/fullsize=false
 config/icon="res://icon.png"
 
@@ -122,7 +122,7 @@ crouch={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-sprint={
+fast_walk={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
@@ -167,6 +167,18 @@ virtual_click_right={
 "events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":5,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+restart_game={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":11,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+restart_scene={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777220,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
 
 [locale]
 
@@ -181,7 +193,6 @@ locale_filter=[ 1, [ "en" ] ]
 [rendering]
 
 quality/driver/fallback_to_gles2=true
-quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 vram_compression/import_etc=true
@@ -203,3 +214,4 @@ environment/default_clear_color=Color( 0, 0, 0, 1 )
 quality/reflections/atlas_size=512
 quality/reflections/atlas_subdiv=1
 quality/depth/hdr=false
+quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
