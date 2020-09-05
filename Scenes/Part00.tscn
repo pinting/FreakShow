@@ -47,7 +47,7 @@ layer = -99
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
-color = Color( 0.196078, 0.196078, 0.196078, 1 )
+color = Color( 0.372549, 0.372549, 0.372549, 1 )
 
 [node name="MusicMixer" parent="BaseScene" instance=ExtResource( 11 )]
 stream = ExtResource( 5 )

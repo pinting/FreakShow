@@ -7,7 +7,7 @@ export var next_scene: String = "res://Scenes/Part02.tscn"
 export var low_pitch_length: float = 10.0
 
 # Seconds to wait for the ball to be stuck
-export var ball_is_stuck_timeout: float = 5.0
+export var ball_is_stuck_timeout: float = 6.0
 
 # Teleport player to the end
 export var teleport_player_to_end: bool = false
