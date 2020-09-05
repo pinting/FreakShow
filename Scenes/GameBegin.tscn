@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Animations/Fog00.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scenes/GameBegin.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Environmnent/Help00.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Help01.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=7]
 
@@ -16,7 +18,7 @@ glow_hdr_threshold = 0.4
 font_path = "res://font.ttf"
 
 [sub_resource type="DynamicFont" id=3]
-size = 24
+size = 18
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
@@ -37,19 +39,18 @@ smoothing_speed = 0.75
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )
 
-[node name="Waves" type="CanvasLayer" parent="BaseScene"]
+[node name="Background" type="CanvasLayer" parent="BaseScene"]
 layer = -90
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="BaseScene/Waves"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="BaseScene/Background"]
 self_modulate = Color( 0.219608, 0.219608, 0.219608, 1 )
 scale = Vector2( 1.26, 1.27 )
 frames = ExtResource( 1 )
-frame = 159
+frame = 25
 playing = true
 centered = false
 
 [node name="TextCanvas" type="CanvasLayer" parent="BaseScene"]
-layer = 0
 
 [node name="Continue" type="Label" parent="BaseScene/TextCanvas"]
 light_mask = 786432
@@ -61,11 +62,26 @@ custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Press any key to begin"
 align = 1
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Help" type="Node2D" parent="BaseScene/TextCanvas"]
+modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 179.673, 0 )
+
+[node name="Help00" type="Sprite" parent="BaseScene/TextCanvas/Help"]
+position = Vector2( 301.099, 105.862 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Help01" type="Sprite" parent="BaseScene/TextCanvas/Help"]
+position = Vector2( 313.08, 409.526 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
