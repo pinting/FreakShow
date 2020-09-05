@@ -146,7 +146,7 @@ position = Vector2( 1117.5, 9761.04 )
 scale = Vector2( 1.1, 1.1 )
 
 [node name="RemovableLine00" parent="BaseScene/Environment/Maze" instance=ExtResource( 4 )]
-position = Vector2( 700.135, -8321.59 )
+position = Vector2( 700.135, -8324.32 )
 scale = Vector2( 3.2, 2 )
 step = 3
 

@@ -47,8 +47,8 @@ var path_finder_fire: float = 0.0
 var game_playing: bool = false
 
 func _ready():
-	music_00 = music_mixer.add_part(0, 4 * 60 + 10, false, 0, 20, 0)
-	music_01 = music_mixer.add_part(10, 3 * 60 + 20, true, 20, 20, -5)
+	music_00 = music_mixer.add_part(0, 4 * 60 + 0.7, false, 0.01, 0, 0)
+	music_01 = music_mixer.add_part(4 * 60 + 0.7, 4 * 60 + 25, true, 0.5, 0.5, -1)
 	
 	connect("scene_started", self, "_on_scene_started")
 	fall_to_death.connect("body_entered", self, "_fail_game")

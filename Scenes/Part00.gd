@@ -28,9 +28,11 @@ var loop_index: int = 0
 var exiting: bool = false
 
 var music_00: int
+var music_01: int
 
 func _ready():
-	music_00 = music_mixer.add_part(2, 5 * 60, true, 5, 5, -5)
+	music_00 = music_mixer.add_part(2, 5 * 60, false, 5, 5, -5)
+	music_01 = music_mixer.add_part(30, 5 * 60, true, 5, 5, -5)
 	
 	flat_door.connect("selected", self, "_on_flat_exit_select")
 	hallway_door.connect("selected", self, "_on__hallway_door_select")
