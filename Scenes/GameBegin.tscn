@@ -46,7 +46,7 @@ layer = -90
 self_modulate = Color( 0.219608, 0.219608, 0.219608, 1 )
 scale = Vector2( 1.26, 1.27 )
 frames = ExtResource( 1 )
-frame = 43
+frame = 106
 playing = true
 centered = false
 
@@ -79,7 +79,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
 [node name="Help01" type="Sprite" parent="BaseScene/TextCanvas/Help"]
-position = Vector2( 313.08, 409.526 )
+position = Vector2( 288.531, 409.526 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
