@@ -195,7 +195,7 @@ func _process_pickable_kick():
 		var collision = get_slide_collision(i)
 		var body = collision.collider
 		
-		if body and body.is_in_group("pickable"):
+		if body and body.is_in_group("pickable") and body.get("disabled") == false:
 			var position_diff = body.global_position - global_position
 			
 			body.apply_central_impulse(position_diff.normalized() * body.KICK_FORCE)

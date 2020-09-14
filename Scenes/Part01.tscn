@@ -80,7 +80,7 @@ bounce = 0.9
 extents = Vector2( 227.945, 2041.4 )
 
 [sub_resource type="CapsuleShape2D" id=11]
-radius = 59.6484
+radius = 20.625
 height = 0.0
 
 [node name="Part01" type="Node2D"]
@@ -159,10 +159,11 @@ shape = SubResource( 3 )
 [node name="Dirt" type="Sprite" parent="BaseScene/Environment"]
 light_mask = 0
 position = Vector2( 0, 573.105 )
+scale = Vector2( 2, 2 )
 z_index = -2
 texture = ExtResource( 26 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 50000, 730 )
+region_rect = Rect2( 0, 0, 50000, 365 )
 
 [node name="Fence" type="Sprite" parent="BaseScene/Environment"]
 position = Vector2( 4206.57, -404.366 )
@@ -327,6 +328,7 @@ z_index = -2
 texture = ExtResource( 18 )
 
 [node name="Phone" parent="BaseScene/Environment/PhoneBox" instance=ExtResource( 44 )]
+visible = false
 position = Vector2( -1.2998, -42.096 )
 primary_key = "grab_amount"
 primary_hover = 1.25
@@ -351,7 +353,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 17
+frame = 48
 playing = true
 
 [node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 6 )]
@@ -403,7 +405,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/InsideHoop"]
-position = Vector2( -2.67383, -39.1473 )
+position = Vector2( -1.04688, -25.6003 )
 shape = SubResource( 11 )
 
 [node name="TeleportPlayer" type="Node2D" parent="BaseScene/Trigger"]

@@ -19,6 +19,19 @@ var current_velocity = 0
 func _ready():
 	pass
 
+func path_distance():
+	if not path:
+		return 0
+	
+	var previous = global_position
+	var sum = 0
+	
+	for i in range(path.size()):
+		sum += previous.distance_to(path[i])
+		previous = path[i]
+	
+	return sum
+
 func _physics_process(delta: float):
 	if path.size() == 0:
 		return

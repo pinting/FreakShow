@@ -123,6 +123,7 @@ func _trigger_in_hoop(body: Node):
 	ball.disable()
 	ring_sound.play()
 	music_mixer.force_next(music_02)
+	
 	phone.visible = true
 	
 	yield(timer(2.0), "timeout")
@@ -131,6 +132,9 @@ func _trigger_in_hoop(body: Node):
 	
 	flashing_phone_light = true
 	phone_lamp.visible = true
+	
+	ball.global_position = inside_hoop.global_position
+	ball.mode = RigidBody2D.MODE_STATIC
 
 func _process_wind_intro(_delta: float):
 	if Global.NO_INTRO:

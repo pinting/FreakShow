@@ -22,7 +22,7 @@ export var parts: Array = []
 # Debug the music player (Global.debug needs to be true)
 export var debug: bool = false
 
-const EPS: float = 0.05
+const zero: float = 0.05
 
 onready var player_00 = $AudioStreamPlayer00
 onready var player_01 = $AudioStreamPlayer01
@@ -69,9 +69,9 @@ func add_part(start: float, end: float, loop: bool, in_duration: float, out_dura
 		# If the part is looped, so the next is the current
 		"loop": loop,
 		# Duration of the fade in effect
-		"in_duration": in_duration if in_duration > EPS else EPS,
+		"in_duration": in_duration,
 		# Duration of the fade out effect
-		"out_duration": out_duration if out_duration > EPS else EPS,
+		"out_duration": out_duration,
 		# Offset the start to the previous one
 		# This does not apply to the first played part
 		# Too large offset can break the mixer
@@ -85,6 +85,10 @@ func add_part(start: float, end: float, loop: bool, in_duration: float, out_dura
 func kill(timeout: float = 5.0):
 	kill = true
 	kill_timeout = timeout
+	
+	var current_part = parts[current_part_index]
+	
+	current_part.out_duration = timeout
 
 func play():
 	if len(parts) == 0:
@@ -122,7 +126,7 @@ func get_next():
 
 func force_next(index: int):
 	if mixing:
-		_finishmixing(get_next())
+		_finish_mixing(get_next())
 		
 	forced_next = index
 	break_loop_now = true
@@ -159,19 +163,19 @@ func _process(delta: float):
 	var volume_diff = abs(max_volume - min_volume)
 	
 	# Fade in the current part 
-	if not break_loop_now and diff_to_start < 0:
-		if abs(diff_to_start) < current_part.in_duration:
+	if not break_loop_now:
+		if diff_to_start > 0 and abs(diff_to_start) < current_part.in_duration and current_part.in_duration > 0:
 			master_player.volume_db += volume_diff * (delta / current_part.in_duration)
 			_debug_if_integer(diff_to_start, str("master fade in ", master_player.volume_db))
-		elif abs(diff_to_end) > current_part.out_duration:
+		if diff_to_start <= 0 and diff_to_end > 0 and abs(diff_to_end) > current_part.out_duration:
 			master_player.volume_db = max_volume
 			_debug_if_integer(diff_to_start, "master max volume")
 	
 	# Fade out the current part 
-	if abs(diff_to_end) < current_part.out_duration:
+	if diff_to_end > 0 and abs(diff_to_end) < current_part.out_duration and current_part.out_duration > 0:
 		master_player.volume_db -= volume_diff * (delta / current_part.out_duration)
 		_debug_if_integer(diff_to_start, str("master fade out ", master_player.volume_db))
-	elif diff_to_end < 0:
+	elif diff_to_end <= 0:
 		master_player.volume_db = min_volume
 		_debug_if_integer(diff_to_start, "master min volume")
 	
@@ -198,18 +202,26 @@ func _process(delta: float):
 		
 		if mixing:
 			if slave_player.volume_db < max_volume:
-				slave_player.volume_db += volume_diff * (delta / next_part.in_duration)
+				if next_part.in_duration > 0:
+					slave_player.volume_db += volume_diff * (delta / next_part.in_duration)
+				else:
+					slave_player.volume_db += volume_diff
+				
 				_debug_if_integer(diff_to_end, str("slave fade in ", slave_player.volume_db))
 			elif diff_to_end < 0:
-				_finishmixing(next_part_index)
+				_finish_mixing(next_part_index)
 			elif break_loop_now:
 				if master_player.volume_db > min_volume:
-					master_player.volume_db -= volume_diff * (delta / current_part.out_duration)
+					if current_part.out_duration > 0:
+						master_player.volume_db -= volume_diff * (delta / current_part.out_duration)
+					else:
+						master_player.volume_db -= volume_diff
+					
 					_debug_if_integer(diff_to_start, str("master fade out ", master_player.volume_db))
 				else:
-					_finishmixing(next_part_index)
+					_finish_mixing(next_part_index)
 
-func _finishmixing(next_part_index: int):
+func _finish_mixing(next_part_index: int):
 	_debug(str("new master index ", next_part_index))
 	
 	# Swap players

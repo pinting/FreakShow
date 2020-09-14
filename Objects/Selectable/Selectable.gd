@@ -28,6 +28,9 @@ export var secondary_default: float = 0.0
 # Effect step size in one second (both primary and secondary)
 export var effect_step: float = 1.0
 
+# Selection area scale
+export var selection_area_scale: Vector2 = Vector2(1.0, 1.0)
+
 # Clone material
 export var clone_material: bool = false
 
@@ -69,11 +72,23 @@ func _is_top(mouse_position: Vector2):
 	
 	return true
 
+func _on_select(mouse_position):
+	if visible and not disabled:
+		var rect = get_rect()
+		var scale = selection_area_scale
+		var offset = rect.size / -scale if max(scale.x, scale.y) > 1.0 else Vector2.ZERO
+		var large_rect = Rect2(rect.position + offset, rect.size * scale)
+		
+		if large_rect.has_point(to_local(mouse_position)) and _is_top(mouse_position):
+			return true
+	
+	return false
+
 func _input(event: InputEvent):
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed and visible and not disabled:
 		var mouse_position = Global.get_world_mouse_position()
 		
-		if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position) and visible and not disabled:
+		if _on_select(mouse_position):
 			emit_signal("selected")
 
 func show_description():
@@ -85,7 +100,7 @@ func remove_description():
 func _physics_process(delta: float):
 	var mouse_position = Global.get_world_mouse_position()
 	
-	if get_rect().has_point(to_local(mouse_position)) and _is_top(mouse_position) and visible and not disabled:
+	if _on_select(mouse_position):
 		if len(offset_key):
 			var offset = to_local(mouse_position) / get_rect().size
 			

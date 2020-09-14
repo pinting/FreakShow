@@ -24,6 +24,9 @@ const VIRTUAL_MOUSE_SPEED: Vector2 = Vector2(3, 3)
 # Max loading time per tick (in msec)
 const LOADING_TIME_PER_TICK: int = 100
 
+# Use Mac based joystick buttons
+const MAC_VIRTUAL_INPUT_FIX = true
+
 var current_camera: Camera2D = null
 var player: Player = null
 var subtitle_display: SubtitleDisplay = null
@@ -159,10 +162,23 @@ func _input(event: InputEvent):
 			_set_virtual_mouse_position(event.position, false)
 
 func _process_virtual_input(delta: float):
-	var virtual_mouse_right = Input.get_action_strength("virtual_mouse_right")
-	var virtual_mouse_left = Input.get_action_strength("virtual_mouse_left")
-	var virtual_mouse_up = Input.get_action_strength("virtual_mouse_up")
-	var virtual_mouse_down = Input.get_action_strength("virtual_mouse_down")
+	var directions = {
+		"right": "virtual_mouse_right",
+		"left": "virtual_mouse_left",
+		"up": "virtual_mouse_up",
+		"down": "virtual_mouse_down"
+	}
+	
+	if MAC_VIRTUAL_INPUT_FIX:
+		directions.right = "virtual_mouse_right"
+		directions.left = "virtual_mouse_up"
+		directions.up = "virtual_mouse_down"
+		directions.down = "virtual_mouse_left"
+	
+	var virtual_mouse_right = Input.get_action_strength(directions.get("right"))
+	var virtual_mouse_left = Input.get_action_strength(directions.get("left"))
+	var virtual_mouse_up = Input.get_action_strength(directions.get("up"))
+	var virtual_mouse_down = Input.get_action_strength(directions.get("down"))
 	
 	var virtual_mouse = Vector2(virtual_mouse_right - virtual_mouse_left, virtual_mouse_down - virtual_mouse_up)
 	

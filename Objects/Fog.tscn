@@ -20,7 +20,7 @@ script = ExtResource( 3 )
 self_modulate = Color( 0, 0, 0, 0.392157 )
 scale = Vector2( 1.26, 1.26 )
 frames = ExtResource( 2 )
-frame = 42
+frame = 85
 playing = true
 centered = false
 

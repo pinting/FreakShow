@@ -28,10 +28,14 @@ Can be found [here](docs/Plot.md).
 
 * Diana Baranyi - photo assets
 * Zsofi Szabo - photo assets
+* Babett Farkas - photo assets
 * Zsofi Kenesei - character actor
-* Gergo Tornyi - character actor
 * Imre Herczeg - character actor
-* Zsuzsa Buka - experimental character actor
+* Gergo Tornyi - photo assets, character actor
+* Zsuzsa Buka - photo assets, character actor
+* Xavier Gómez Gosálbez - CRT shader
+* Nathan Lovato - fog shader
+* Denes Tornyi - scripting, custom shaders, photo assets, character actor
 * Godot Engine - engine, shaders, sprites of particles
 
 ## License

@@ -20,15 +20,24 @@ onready var music_mixer = $MusicMixer
 
 onready var debug_line = $Environment/DebugLine
 onready var navigation = $Environment/Navigation2D
+onready var exit_door = $Environment/Maze/WallBlock/ExitDoor
+
 onready var enemy = $Environment/Enemy
 onready var enemy_mouth = $Environment/Enemy/MouthArea
+
 onready var wall_after_enter = $Environment/HiddenWalls/AfterEnter
 onready var wall_after_leave = $Environment/HiddenWalls/AfterLeave
+
 onready var removable_line_00 = $Environment/Maze/RemovableLine00
-onready var removable_line_01 = $Environment/Maze/RemovableLine01
-onready var removable_line_02 = $Environment/Maze/RemovableLine02
-onready var removable_line_03 = $Environment/Maze/RemovableLine03
-onready var exit_door = $Environment/Maze/WallBlock/ExitDoor
+onready var blocking_line_00 = $Environment/Maze/BlockingLine00
+onready var blocking_line_01 = $Environment/Maze/BlockingLine01
+onready var blocking_line_02 = $Environment/Maze/BlockingLine02
+
+onready var random_line_00 = $Environment/Maze/RandomLine00
+onready var random_line_01 = $Environment/Maze/RandomLine01
+onready var random_line_02 = $Environment/Maze/RandomLine02
+onready var random_line_03 = $Environment/Maze/RandomLine03
+onready var random_line_04 = $Environment/Maze/RandomLine04
 
 onready var fall_to_death = $Trigger/FallToDeath
 onready var game_begin = $Trigger/GameBegin
@@ -47,7 +56,7 @@ var path_finder_fire: float = 0.0
 var game_playing: bool = false
 
 func _ready():
-	music_00 = music_mixer.add_part(0, 4 * 60 + 0.7, false, 0.01, 0, 0)
+	music_00 = music_mixer.add_part(0, 4 * 60 + 0.7, false, 0, 0, 0)
 	music_01 = music_mixer.add_part(4 * 60 + 0.7, 4 * 60 + 25, true, 0.5, 0.5, -1)
 	
 	connect("scene_started", self, "_on_scene_started")
@@ -57,14 +66,17 @@ func _ready():
 	game_end.connect("body_entered", self, "_end_game")
 	exit_door.connect("selected", self, "_on_exit")
 	
-	var random_line = Utils.random_int(0, 2, true)
+	var blocking_lines = [blocking_line_00, blocking_line_01, blocking_line_02]
 	
-	if random_line == 0:
-		removable_line_01.remove()
-	elif random_line == 1:
-		removable_line_02.remove()
-	elif random_line == 2:
-		removable_line_03.remove()
+	blocking_lines[Utils.random_int(0, len(blocking_lines))].remove()
+	
+	var random_lines = [random_line_00, random_line_01, random_line_02, random_line_03, random_line_04]
+	
+	for n in range(Utils.random_int(0, len(random_lines))):
+		var i = Utils.random_int(0, len(random_lines))
+		
+		random_lines[i].remove()
+		random_lines.remove(i)
 	
 	var camera = Global.current_camera
 	
@@ -89,12 +101,16 @@ func _start_game(body: Node):
 	if not body.is_in_group("player") or game_playing:
 		return
 	
-	game_playing = true
 	wall_after_enter.disabled = false
 	
 	connect_sound.stop()
 	player.enable_avatar_mode()
 	music_mixer.play()
+	
+	Global.subtitle.say(tr("NARRATOR05"), 0.5, 3.0)
+	yield(timer(1.0), "timeout")
+	
+	game_playing = true
 
 func _end_game(body: Node):
 	if not body.is_in_group("player") or not game_playing:

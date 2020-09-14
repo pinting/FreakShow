@@ -18,15 +18,12 @@ func _ready():
 	pass
 
 func _physics_process(delta: float):
-	var player = Global.player
+	var d = path_distance()
 	
-	if path and player != null:
-		var d = player.position.distance_to(position)
-		
-		if d > high_speed_after:
-			current_speed = speed * high_speed_scale
-		else:
-			current_speed = speed
+	if d > high_speed_after:
+		current_speed = speed * high_speed_scale
+	else:
+		current_speed = speed
 
 func kill():
 	if dead:

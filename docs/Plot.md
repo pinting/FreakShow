@@ -54,9 +54,9 @@ The phone in the phone box is ringing. When the player picks it up, the screen f
 
 ## Part02
 
-As the screen fades back in, the sound of "connecting a call" can be heard. The protagonist stands in the strange world built up from thick white lines. These lines are from cocaine. As the player guides the protagonist into the only possible direction, the calling sound stops and the camera zooms out.
+As the screen fades back in, the sound of "connecting a call" can be heard. The protagonist stands in the strange world built up from thick white platforms. These lines are from cocaine. They cannot be removed. As the player guides the protagonist into the right direction, the  protagonist falls from platform to platform. Once reaching the platform on the bottom, there is no where else to go. If the player moves the protagonist off from the platform, the game restarts. To continue the game, the player must use sniff up a small piece of the cocaine which looks
 
-_Music Part01 starts to play in one loop_
+_Music Part02 starts to play in one loop_
 
 A Pac-Man like gaping human face starts to chase the protagonist. The player should guide the protagonist out of the maze which surrounds him. However, there is no direct way out - only by snorting the drug. If the monster reaches the protagonist, he dies. In the case of death, the scene starts from the beginning. The way out - that the player needs to find - is down below. After sniffing up the most down below line, the protagonist falls for long, onto a wooden floor with a mattress. Similar to the first room of the game. He turns towards the player and starts to jack off.
 
