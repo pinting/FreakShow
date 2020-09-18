@@ -20,6 +20,8 @@ PAPER04,Understanding and love will guide you,"Egyetértés, szeretet vezérelje
 PAPER05,"White dove flies over the village, carrying my sorrowful soul","Fehér galamb száll a falu felett, viszi az én bánatos lelkemet"
 PAPER06,Want to move as soon as possible!,Sürgősen költöznék!
 SIGN00,Food,Élelmiszer
+SIGN01,HAPPY LTD.,BOLDOG KFT.
+SIGN02,ATTENTION! NO TRESPASSING!,ÉLETVESZÉLY! BELÉPNI TILOS!
 GRAFFITI00,Son of a bitch,Anyád
 GRAFFITI01,Foreskin!,Fityma!
 GRAFFITI02,You whore,Te kurva
@@ -30,7 +32,8 @@ NARRATOR02,I finally reached the light. The wind blew the smell of piss and swea
 NARRATOR03,People were crazy to sell their junk - you just had to name your price.,Az emberek mindenáron elakarták adni magukat - csak ki kellett találnod az árad.
 NARRATOR04,"Would you mind picking up the phone, mister? Maybe they are ringing for you.","Uram, felvenné a telefont? Lehet magát keresik."
 NARRATOR05,"Come on, get the fuck away from here!","Gyerünk, menjünk már a faszba innen!"
-NARRATOR06,"What the fuck?!","Mi a fasz?!"
+NARRATOR06,"Come a bit closer child. Let me have a look at you!","Gyere közelebb gyermekem. Hadd vegyelek szemügyre!"
+NARRATOR07,"What the fuck?!","Mi a fasz?!"
 CREDITS03_0,"Scripting","Programozta"
 CREDITS03_1,"Denes Tornyi","Tornyi Dénes"
 CREDITS02_0,"Textures","Texturák"

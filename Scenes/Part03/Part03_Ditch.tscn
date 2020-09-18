@@ -1,0 +1,181 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Wall09.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Door05.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Graffiti12.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Graffiti29.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Rails00_Dented.png" type="Texture" id=5]
+[ext_resource path="res://Objects/Selectable/Door02.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Environmnent/Graffit09.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Graffiti08.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Environmnent/Graffiti25.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Environmnent/Rails00_Dented_Hover.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Environmnent/Graffiti15.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Environmnent/Floor06.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Environmnent/Wall04.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=18]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7190.48, 76.856 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 750.744, 1372.97 )
+
+[node name="Part03_Ditch" type="Node2D"]
+
+[node name="Rails" type="Sprite" parent="."]
+light_mask = 3
+position = Vector2( 0, 176.143 )
+z_index = -2
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10000, 327 )
+
+[node name="Hover" type="Sprite" parent="Rails"]
+light_mask = 3
+position = Vector2( 0, -2.246 )
+scale = Vector2( 1, 1.1 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10000, 61 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Rails/Hover"]
+position = Vector2( 86.0234, 50.2594 )
+scale = Vector2( 1, 0.909091 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rails/Hover/StaticBody2D"]
+position = Vector2( -6.12841, 36.2482 )
+shape = SubResource( 1 )
+
+[node name="Wall" type="Sprite" parent="."]
+position = Vector2( 0, -409.093 )
+z_index = -2
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10000, 846 )
+
+[node name="Head" type="Sprite" parent="Wall"]
+position = Vector2( 0, -968.736 )
+texture = ExtResource( 18 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10000, 115 )
+
+[node name="Above" type="Sprite" parent="Wall"]
+position = Vector2( 0, -661.354 )
+z_index = -1
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 100, 10000, 500 )
+
+[node name="Graffiti00" type="Sprite" parent="Wall"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( -3986.42, 19.4437 )
+rotation = -0.107954
+scale = Vector2( 0.70307, 0.888258 )
+texture = ExtResource( 3 )
+
+[node name="Graffiti01" type="Sprite" parent="Wall"]
+self_modulate = Color( 1, 0.67451, 0.501961, 0.784314 )
+position = Vector2( -344.065, -2.55289 )
+rotation = 0.161868
+scale = Vector2( 0.536352, 0.536352 )
+texture = ExtResource( 11 )
+
+[node name="Graffiti02" type="Sprite" parent="Wall"]
+self_modulate = Color( 0, 0, 0, 0.941176 )
+position = Vector2( 2537.68, 104.157 )
+rotation = 0.151162
+scale = Vector2( 0.300686, 0.317837 )
+texture = ExtResource( 4 )
+
+[node name="Graffiti03" type="Sprite" parent="Wall"]
+self_modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 3203.54, -80.416 )
+rotation = -0.114528
+scale = Vector2( 0.575347, 0.543844 )
+texture = ExtResource( 15 )
+
+[node name="Graffiti04" type="Sprite" parent="Wall"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 3885.79, -13.8626 )
+rotation = -0.107954
+scale = Vector2( -0.953123, 0.493074 )
+texture = ExtResource( 8 )
+
+[node name="Graffiti05" type="Sprite" parent="Wall"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 4682.92, -97.184 )
+rotation = 0.353501
+scale = Vector2( 0.654372, 1.07091 )
+texture = ExtResource( 9 )
+
+[node name="Lamp00" parent="Wall" instance=ExtResource( 7 )]
+position = Vector2( -4301.72, -376.323 )
+scale = Vector2( 1, 1.25 )
+
+[node name="Lamp01" parent="Wall/Lamp00" instance=ExtResource( 7 )]
+position = Vector2( 1450, 0 )
+
+[node name="Lamp02" parent="Wall/Lamp00/Lamp01" instance=ExtResource( 7 )]
+position = Vector2( 1450, 0 )
+
+[node name="Lamp03" parent="Wall/Lamp00/Lamp01/Lamp02" instance=ExtResource( 7 )]
+position = Vector2( 1450, 0 )
+
+[node name="Lamp04" parent="Wall/Lamp00/Lamp01/Lamp02/Lamp03" instance=ExtResource( 7 )]
+position = Vector2( 1450, 0 )
+
+[node name="Lamp05" parent="Wall/Lamp00/Lamp01/Lamp02/Lamp03/Lamp04" instance=ExtResource( 7 )]
+position = Vector2( 1450, 0 )
+
+[node name="Lamp06" parent="Wall/Lamp00/Lamp01/Lamp02/Lamp03/Lamp04/Lamp05" instance=ExtResource( 7 )]
+position = Vector2( 1450, 0 )
+
+[node name="Under" type="Sprite" parent="Wall"]
+light_mask = 0
+position = Vector2( 0, 1200.23 )
+scale = Vector2( 2, 2 )
+z_index = 2
+texture = ExtResource( 17 )
+flip_v = true
+region_enabled = true
+region_rect = Rect2( 0, 0, 5000, 455 )
+
+[node name="Border" type="Sprite" parent="Wall/Under"]
+position = Vector2( 0.126282, -208.068 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 16 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10000, 85 )
+
+[node name="Door00" type="Sprite" parent="Wall"]
+position = Vector2( -1413.14, 58.4823 )
+scale = Vector2( 0.749115, 0.749115 )
+texture = ExtResource( 2 )
+
+[node name="Door01" parent="Wall" instance=ExtResource( 6 )]
+position = Vector2( 4380.31, 159.138 )
+
+[node name="WallLeft" type="StaticBody2D" parent="Wall"]
+position = Vector2( -5487.5, 175.644 )
+scale = Vector2( 0.84, 0.84 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/WallLeft"]
+position = Vector2( -0.369629, 0 )
+shape = SubResource( 2 )
+
+[node name="WallRight" type="StaticBody2D" parent="Wall"]
+position = Vector2( 5467.86, 175.644 )
+scale = Vector2( 0.84, 0.84 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/WallRight"]
+position = Vector2( -0.369629, 0 )
+shape = SubResource( 2 )

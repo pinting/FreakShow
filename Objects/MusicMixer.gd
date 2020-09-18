@@ -94,6 +94,10 @@ func play():
 	if len(parts) == 0:
 		return
 	
+	if parts[0].in_duration == 0:
+		master_player.volume_db = max_volume
+		slave_player.volume_db = min_volume
+	
 	master_player.play(parts[0].start)
 	
 	stopped = false

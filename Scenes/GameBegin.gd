@@ -1,7 +1,7 @@
 extends "res://Scenes/BaseScene.gd"
 
 # Next scene
-export var next_scene: String = "res://Scenes/Part00.tscn"
+export var next_scene: String = "res://Scenes/Part00/Part00.tscn"
 
 # Continue blink interval
 export var continue_blink_interval: float = 0.5

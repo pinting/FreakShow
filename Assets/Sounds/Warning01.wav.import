@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Warning01.wav-9cd1d0f0fc35f0b0c4089fa24b409474.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Warning01.wav"
+dest_files=[ "res://.import/Warning01.wav-9cd1d0f0fc35f0b0c4089fa24b409474.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pillar03_Repeat.png-66d46bd90ef2ed0152f19ab6fbc54daf.stex"
+path="res://.import/Tooth00.png-736d38d68cd61c24bd0d28d69cfd30a9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Environmnent/Pillar03_Repeat.png"
-dest_files=[ "res://.import/Pillar03_Repeat.png-66d46bd90ef2ed0152f19ab6fbc54daf.stex" ]
+source_file="res://Assets/Environmnent/Tooth00.png"
+dest_files=[ "res://.import/Tooth00.png-736d38d68cd61c24bd0d28d69cfd30a9.stex" ]
 
 [params]
 

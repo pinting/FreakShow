@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pillar03_Repeat.png-66d46bd90ef2ed0152f19ab6fbc54daf.stex"
+path="res://.import/TornPaper00.png-cc2a79663641a02b9cf075c332e71939.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Environmnent/Pillar03_Repeat.png"
-dest_files=[ "res://.import/Pillar03_Repeat.png-66d46bd90ef2ed0152f19ab6fbc54daf.stex" ]
+source_file="res://Assets/Environmnent/TornPaper00.png"
+dest_files=[ "res://.import/TornPaper00.png-cc2a79663641a02b9cf075c332e71939.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Environmnent/MovingEye00_BlackLayer.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/MovingEye00_Frame.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/MovingEye00_EyeBall.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/MovingEye00_EyeBack.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Part02/Part02_MovingEye.gd" type="Script" id=5]
+
+[node name="Part02_MovingEye" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="EyeBack" type="Sprite" parent="."]
+z_index = -2
+texture = ExtResource( 4 )
+
+[node name="EyeFrame" type="Sprite" parent="EyeBack"]
+z_index = 1
+texture = ExtResource( 2 )
+
+[node name="EyeBall" type="Sprite" parent="EyeBack"]
+position = Vector2( 133.307, 17.6819 )
+texture = ExtResource( 3 )
+
+[node name="BlackLayer" type="Sprite" parent="."]
+position = Vector2( 17.4745, -2.55405 )
+scale = Vector2( 0.95, 0.95 )
+texture = ExtResource( 1 )

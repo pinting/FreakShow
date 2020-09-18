@@ -74,7 +74,7 @@ func _ready():
 	
 	if NO_SOUNDS:
 		for i in range(0, AudioServer.bus_count):
-			AudioServer.set_bus_volume_db(i, -60)
+			AudioServer.set_bus_volume_db(i, -500)
 
 func debug(message: String):
 	if DEBUG:

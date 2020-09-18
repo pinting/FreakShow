@@ -65,20 +65,49 @@ onready var death_effect = $DeathEffect
 
 onready var animated_sprite = $AnimatedSprite
 
-var dead: bool = false
 var current_second: float = 0.0
+
+# Prefix of the current animation
 var animation_prefix: String = ""
+
+# Current velocity (between 0 and current_max_speed)
 var current_velocity: Vector2 = Vector2(0, 0)
+
+# Current maximum speed (the acceleration oscillates between this and zero)
 var current_max_speed: float = max_speed
+
+# Current acceleration (it oscillates)
 var current_acceleration: float = acceleration
+
+# Current animation speed
 var current_animation_speed: float = animation_speed
-var crouching: bool = false
+
+# Transition between two blocks of animation
 var transition: bool = false
+
+# Moving in X direction
 var moving_x: bool = false
-var transforming_seconds: float = 0.0
+
+# Transformation in progress
 var transforming: bool = false
+
+# Transformation effect timeout counter
+var transforming_seconds: float = 0.0
+
+# Is transforming done
 var transforming_done: bool = true
+
+# Enable crouching
+var crouching: bool = false
+
+# Enable fast walking
 var fast_walking: bool = false
+
+# Force gravity even when freezed
+var force_gravity: bool = false
+
+# Is the player dead
+var dead: bool = false
 
 func _ready():
 	assert(animation_frames != null)
@@ -172,7 +201,14 @@ func _physics_process(delta: float):
 
 func _process_velocity(delta: float, direction: Vector2):
 	if freeze:
-		current_velocity = Vector2.ZERO
+		if not avatar_mode and force_gravity:
+			var next_velocity = _calculate_next_velocity(delta, Vector2.ZERO, acceleration)
+			var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
+			var snap_vector = -1 * floor_normal * floor_detect_distance if direction.y == 0 else Vector2.ZERO
+			
+			current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, floor_normal, on_platform, 4, 0.9, false)
+		else:
+			current_velocity = Vector2.ZERO
 	elif avatar_mode:
 		var next_velocity = _calculate_next_velocity(delta, direction, avatar_acceleration)
 		
@@ -198,7 +234,7 @@ func _process_pickable_kick():
 		if body and body.is_in_group("pickable") and body.get("disabled") == false:
 			var position_diff = body.global_position - global_position
 			
-			body.apply_central_impulse(position_diff.normalized() * body.KICK_FORCE)
+			body._apply_force(position_diff.normalized() * body.KICK_FORCE)
 
 func _process_crouch():
 	var crouch_pressed = Input.is_action_just_pressed("crouch")
@@ -307,7 +343,8 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 	
 	return next_velocity
 
-func freeze():
+func freeze(with_gravity: bool = false):
+	force_gravity = with_gravity
 	freeze = true
 
 func unfreeze():

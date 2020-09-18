@@ -9,6 +9,9 @@ export var KICK_FORCE = Vector2(100.0, 100.0)
 # Force max kick velocity
 export var MAX_VELOCITY = Vector2(400.0, 400.0)
 
+# Max force
+export var MAX_FORCE = Vector2(120.0, 120.0)
+
 # Selectable or normal sprite
 onready var sprite = $Sprite
 
@@ -32,7 +35,11 @@ func _physics_process(_delta: float):
 	var grab_force = position_diff.normalized() * GRAB_FORCE
 	
 	if abs(linear_velocity.x) < MAX_VELOCITY.x and abs(linear_velocity.y) < MAX_VELOCITY.y :
-		apply_central_impulse(grab_force)
+		_apply_force(grab_force)
+
+func _apply_force(force: Vector2):
+	if force < MAX_FORCE and linear_velocity < MAX_VELOCITY:
+		apply_central_impulse(force)
 
 func pickup():
 	if held or disabled:
@@ -48,7 +55,7 @@ func drop(impulse: Vector2 = Vector2.ZERO):
 	if not held:
 		return
 	
-	apply_central_impulse(impulse)
+	_apply_force(impulse)
 	
 	# Only true of selectable
 	if sprite.get("held"):
