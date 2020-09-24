@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Train00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Train/Train00.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sounds/Train00.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Objects/BackgroundTrain.gd" type="Script" id=3]
+
 
 [node name="BackgroundTrain" type="Node2D"]
 position = Vector2( -4100.59, -816.511 )

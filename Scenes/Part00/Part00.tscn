@@ -11,8 +11,8 @@
 [ext_resource path="res://Scenes/Part00/Part00_Flat.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sounds/Door01.wav" type="AudioStream" id=10]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Objects/Fog.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Sounds/Knock00.wav" type="AudioStream" id=14]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -42,9 +42,6 @@ environment = SubResource( 1 )
 
 [node name="Sky" parent="BaseScene" instance=ExtResource( 4 )]
 
-[node name="Fog" parent="BaseScene" instance=ExtResource( 12 )]
-layer = -99
-
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
 color = Color( 0.372549, 0.372549, 0.372549, 1 )
@@ -55,15 +52,19 @@ stream = ExtResource( 5 )
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
 [node name="Flat" parent="BaseScene/Environment" instance=ExtResource( 9 )]
-position = Vector2( 16.7204, -12.8971 )
+position = Vector2( 16.72, -12.897 )
 
-[node name="Hallway" parent="BaseScene/Environment" instance=ExtResource( 1 )]
-position = Vector2( 156.807, 5220.15 )
+[node name="RandomFlatContainer" type="Node2D" parent="BaseScene/Environment"]
+position = Vector2( 16.72, 10201.3 )
+scale = Vector2( 0.896382, 1 )
 
-[node name="HallwayCopy00" parent="BaseScene/Environment" instance=ExtResource( 1 )]
+[node name="Hallway00" parent="BaseScene/Environment" instance=ExtResource( 1 )]
 position = Vector2( -7372.62, 5220.15 )
 
-[node name="HallwayCopy01" parent="BaseScene/Environment" instance=ExtResource( 1 )]
+[node name="Hallway01" parent="BaseScene/Environment" instance=ExtResource( 1 )]
+position = Vector2( 156.807, 5220.15 )
+
+[node name="Hallway02" parent="BaseScene/Environment" instance=ExtResource( 1 )]
 position = Vector2( 7686.12, 5220.15 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
@@ -80,7 +81,13 @@ position = Vector2( 640.271, 5205.35 )
 [node name="FlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( 3.07458, -25.8766 )
 
+[node name="RandomFlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
+position = Vector2( -487.468, 10169.4 )
+
 [node name="Sound" type="Node" parent="BaseScene"]
+
+[node name="KnockSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
+stream = ExtResource( 14 )
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 10 )

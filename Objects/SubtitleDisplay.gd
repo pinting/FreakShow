@@ -1,8 +1,8 @@
 class_name SubtitleDisplay
-extends CanvasLayer
+extends Node2D
 
-onready var top = $Top
-onready var bottom = $Bottom
+onready var top = $Top/Top
+onready var bottom = $Bottom/Bottom
 
 var current_describe_key = null
 var keep_describe = false
@@ -40,7 +40,7 @@ func _process(delta: float):
 	
 	bottom.text = text
 	
-func say(text: String, speed: int = 2.0, timeout: int = 10.0):
+func say(text: String, speed: float = 2.0, timeout: float = 10.0):
 	lines.push_back({
 		"text": text,
 		"speed": speed,
@@ -57,7 +57,7 @@ func describe(key: int, text: String, keep: bool = false):
 	keep_describe = keep
 
 func describe_remove(key: int, force: bool = false):
-	if current_describe_key == key:
+	if current_describe_key == key or force:
 		top.text = ""
 		current_describe_key = null
 		keep_describe = false

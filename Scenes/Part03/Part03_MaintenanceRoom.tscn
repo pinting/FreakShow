@@ -1,22 +1,26 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Misc05.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Wall11.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Environmnent/Misc09.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Train04.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Environmnent/Misc00.png" type="Texture" id=5]
-[ext_resource path="res://Objects/Static/SideLamp00.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Environmnent/Floor05.png" type="Texture" id=7]
-[ext_resource path="res://Objects/Selectable/Door02.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=9]
-[ext_resource path="res://Objects/Light/SideLight00.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Environmnent/Misc/Misc05.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall11.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Misc/Misc09.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Train/Train02.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Misc/Misc00.png" type="Texture" id=5]
+[ext_resource path="res://Objects/Static/Static_SideLamp00.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Environmnent/Floor/Floor05.png" type="Texture" id=7]
+[ext_resource path="res://Objects/Selectable/Selectable_IronDoor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Environmnent/Pillar/Pillar07.png" type="Texture" id=9]
+[ext_resource path="res://Objects/Light/Light_Side.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti37.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Environmnent/Misc10.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Environmnent/Misc/Misc10.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti28.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti30.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti31.png" type="Texture" id=16]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 750.744, 1372.97 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 5661.64, 61.6787 )
 
 [node name="MaintenanceRoom" type="Node2D"]
@@ -30,7 +34,7 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
 position = Vector2( -0.369629, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="Wall" type="Sprite" parent="."]
 position = Vector2( 0, 1000.26 )
@@ -66,12 +70,12 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/FloorCollision"]
 position = Vector2( -620.556, -23.3623 )
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="Misc00" type="Sprite" parent="."]
-position = Vector2( -4537.83, 1354.21 )
+position = Vector2( 2853.01, 1234 )
 scale = Vector2( 0.66627, 0.66627 )
-z_index = -1
+z_index = -2
 texture = ExtResource( 3 )
 
 [node name="Misc01" type="Sprite" parent="."]
@@ -81,37 +85,61 @@ z_index = -2
 texture = ExtResource( 13 )
 
 [node name="SideLamp" parent="Misc01" instance=ExtResource( 6 )]
-position = Vector2( -2060.45, -660.888 )
+position = Vector2( -2489.53, -654.185 )
 rotation = 3.34453
 scale = Vector2( 0.808409, -1.01072 )
 
 [node name="SideLight" parent="Misc01/SideLamp" instance=ExtResource( 10 )]
-position = Vector2( -528.592, 580.218 )
+position = Vector2( -853.839, 458.33 )
 rotation = 0.16312
 scale = Vector2( 2.73768, 1.39242 )
 
 [node name="Train" type="Sprite" parent="Misc01"]
-position = Vector2( 98.5193, -538.478 )
-scale = Vector2( 1.5, 1.5 )
+position = Vector2( 77.8602, -648.381 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
+[node name="Graffiti00" type="Sprite" parent="Misc01/Train"]
+self_modulate = Color( 0, 0, 0, 0.784314 )
+position = Vector2( 574.172, 83.4537 )
+rotation = 0.0227588
+scale = Vector2( 0.332382, 0.227218 )
+texture = ExtResource( 11 )
+
+[node name="Graffiti01" type="Sprite" parent="Misc01/Train"]
+self_modulate = Color( 0, 0, 0, 0.784314 )
+position = Vector2( -971.563, 70.5612 )
+rotation = -0.156192
+scale = Vector2( 0.179311, 0.189965 )
+texture = ExtResource( 14 )
+
+[node name="Graffiti02" type="Sprite" parent="Misc01/Train"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( -600.869, 108.381 )
+scale = Vector2( 0.353869, 0.353869 )
+texture = ExtResource( 15 )
+
+[node name="Graffiti03" type="Sprite" parent="Misc01/Train"]
+position = Vector2( 137.005, 119.878 )
+scale = Vector2( 0.573644, 0.573644 )
+texture = ExtResource( 16 )
+
 [node name="Misc02" type="Sprite" parent="."]
-position = Vector2( 1546.95, 1332.52 )
-scale = Vector2( 0.628149, 0.628149 )
+position = Vector2( 1638.05, 1276.01 )
+scale = Vector2( 0.850627, 0.850627 )
 z_index = -1
 texture = ExtResource( 1 )
 
 [node name="Lamp00" parent="." instance=ExtResource( 12 )]
-position = Vector2( -4773.74, 833.567 )
+position = Vector2( -4145.89, 833.567 )
+z_index = -1
 
 [node name="Lamp01" parent="Lamp00" instance=ExtResource( 12 )]
 position = Vector2( 1250, 0 )
 
-[node name="Lamp02" parent="Lamp00/Lamp01" instance=ExtResource( 12 )]
-position = Vector2( 1250, 0 )
-
 [node name="Lamp03" parent="." instance=ExtResource( 12 )]
-position = Vector2( 1934.89, 822.871 )
+position = Vector2( 1979.11, 822.871 )
+z_index = -1
 
 [node name="Lamp04" parent="Lamp03" instance=ExtResource( 12 )]
 position = Vector2( 1250, 0 )
@@ -131,4 +159,4 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
 position = Vector2( -0.369629, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )

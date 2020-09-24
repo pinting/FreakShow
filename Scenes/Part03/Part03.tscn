@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
+[ext_resource path="res://Objects/DynamicFog.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part03/Part03_Ditch.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=4]
@@ -10,7 +11,7 @@
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=10]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Environmnent/Wall08.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall08.png" type="Texture" id=14]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -27,11 +28,12 @@ script = ExtResource( 7 )
 fade_in_duration = 1.0
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 12 )]
-position = Vector2( -2603.81, -6695.09 )
+position = Vector2( -1607.49, -8714.99 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
 [node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 9 )]
+smoothing_enabled = false
 smoothing_speed = 0.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
@@ -41,6 +43,12 @@ environment = SubResource( 1 )
 light_mask = 524288
 color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
 
+[node name="DynamicFog" parent="BaseScene" instance=ExtResource( 1 )]
+margin_left = -4344.0
+margin_top = -1261.0
+margin_right = 5582.0
+margin_bottom = 1906.0
+
 [node name="MusicMixer" parent="BaseScene" instance=ExtResource( 4 )]
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
@@ -48,7 +56,7 @@ color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
 [node name="Background" type="Sprite" parent="BaseScene/Environment"]
 light_mask = 0
 scale = Vector2( 0.885024, 1 )
-z_index = -4
+z_index = -10
 texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 18000, 18000 )
@@ -56,6 +64,7 @@ region_rect = Rect2( 0, 0, 18000, 18000 )
 [node name="Ditch" parent="BaseScene/Environment" instance=ExtResource( 2 )]
 position = Vector2( 619.608, -430.808 )
 scale = Vector2( 0.993, 1 )
+z_index = -2
 
 [node name="MaintenanceRoom" parent="BaseScene/Environment" instance=ExtResource( 6 )]
 position = Vector2( 615.555, 169.822 )

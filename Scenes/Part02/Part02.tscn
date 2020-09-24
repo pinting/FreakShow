@@ -5,8 +5,8 @@
 [ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Part02/Part02_RemovableLine.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Part02/Part02.gd" type="Script" id=5]
-[ext_resource path="res://Objects/Light/SideLight00.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/TileSet/Lines00.tres" type="TileSet" id=7]
+[ext_resource path="res://Objects/Light/Light_Side.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/TileSet/WhiteLines.tres" type="TileSet" id=7]
 [ext_resource path="res://Scenes/Part02/Part02_Boss.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Environmnent/DirectionSign01.png" type="Texture" id=10]
@@ -14,25 +14,25 @@
 [ext_resource path="res://Scenes/Part02/Part02_MovingEye.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Sounds/Wind00.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Shaders/CRT.shader" type="Shader" id=14]
-[ext_resource path="res://Objects/Selectable/Door01.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Objects/Static/SideLamp00.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Assets/Environmnent/Lines00_H00_Thin.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Environmnent/Floor06.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Environmnent/Wall08.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Environmnent/Wall16.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Environmnent/Pillar06.png" type="Texture" id=22]
+[ext_resource path="res://Objects/Selectable/Selectable_CrazyDoor.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Objects/Static/Static_SideLamp00.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Environmnent/Lines/Lines00_H00_Thin.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Environmnent/Pillar/Pillar07.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Environmnent/Floor/Floor06.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall08.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall16.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Environmnent/Pillar/Pillar06.png" type="Texture" id=22]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Environmnent/TornPaper00.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Environmnent/TornPaper01.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Environmnent/DirectionSign00.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Environmnent/Ball00.png" type="Texture" id=27]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=28]
-[ext_resource path="res://Assets/Environmnent/Pillar03_Repeat.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Environmnent/Pillar/Pillar03_Repeat.png" type="Texture" id=29]
 [ext_resource path="res://Assets/Environmnent/Clock00.png" type="Texture" id=30]
-[ext_resource path="res://Objects/Selectable/Sign02.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Objects/Selectable/Selectable_NoTrespassingSign.tscn" type="PackedScene" id=31]
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=32]
-[ext_resource path="res://Objects/Selectable/Sign01.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Objects/Selectable/Selectable_HappyCompanySign.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Scenes/Part02/Part02_LevitatingSprite.gd" type="Script" id=34]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=35]
 [ext_resource path="res://Scenes/Part02/Part02_EndTube.tscn" type="PackedScene" id=36]
@@ -112,13 +112,13 @@ extents = Vector2( 1377.92, 30.0264 )
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 22.7039, 1269.16 )
 
-[sub_resource type="RectangleShape2D" id=20]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 175.377, 366.502 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 9143.91, 199.684 )
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 9145.29, 196.454 )
 
 [sub_resource type="RectangleShape2D" id=18]
@@ -485,7 +485,7 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/EndDoorArea"]
 position = Vector2( -462.391, 1494.64 )
-shape = SubResource( 20 )
+shape = SubResource( 15 )
 
 [node name="FallToDeath" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 1176.73, 9761.77 )
@@ -495,11 +495,11 @@ collision_mask = 8
 
 [node name="LeftFallDeath" type="CollisionShape2D" parent="BaseScene/Trigger/FallToDeath"]
 position = Vector2( -9102.25, -5591.52 )
-shape = SubResource( 15 )
+shape = SubResource( 16 )
 
 [node name="RightFallDeath" type="CollisionShape2D" parent="BaseScene/Trigger/FallToDeath"]
 position = Vector2( 10438, -5601.17 )
-shape = SubResource( 16 )
+shape = SubResource( 17 )
 
 [node name="GameBegin" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 59.2303, -505.015 )

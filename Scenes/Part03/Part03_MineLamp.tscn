@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Objects/Static/MineLamp.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Objects/Light/StreetLight00.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Static/Static_MineLamp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Light/Light_Street.tscn" type="PackedScene" id=3]
+
+
 
 [node name="Part03_MineLamp" type="Node2D"]
 

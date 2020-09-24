@@ -13,11 +13,13 @@ use_mipmaps = true
 use_filter = true
 font_data = SubResource( 1 )
 
-[node name="SubtitleDisplay" type="CanvasLayer"]
-layer = 2
+[node name="SubtitleDisplay" type="Node2D"]
+z_as_relative = false
 script = ExtResource( 2 )
 
-[node name="Top" type="Label" parent="."]
+[node name="Top" type="CanvasLayer" parent="."]
+
+[node name="Top" type="Label" parent="Top"]
 light_mask = 786432
 margin_left = 10.0
 margin_top = 10.0
@@ -34,7 +36,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bottom" type="Label" parent="."]
+[node name="Bottom" type="CanvasLayer" parent="."]
+layer = 101
+
+[node name="Bottom" type="Label" parent="Bottom"]
 light_mask = 786432
 margin_left = 10.0
 margin_top = 485.0

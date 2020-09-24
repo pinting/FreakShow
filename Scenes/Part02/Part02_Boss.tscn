@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Scenes/Part02/Part02_Boss.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Enemy00.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Objects/Effect/DeathEffect00.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Effect/Effect_SalamiDeath.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Shaders/ColorChanger.shader" type="Shader" id=4]
+
 
 
 

@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
-"path": "res://Objects/Enemy.gd"
+"path": "res://Objects/PathFindingEnemy.gd"
 }, {
 "base": "Node",
 "class": "MusicMixer",
@@ -39,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Objects/Selectable/Selectable.gd"
 }, {
-"base": "CanvasLayer",
+"base": "Node2D",
 "class": "SubtitleDisplay",
 "language": "GDScript",
 "path": "res://Objects/SubtitleDisplay.gd"
@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="FreakShow"
-run/main_scene="res://Scenes/GameBegin.tscn"
+run/main_scene="res://Scenes/Part00/Part00.tscn"
 boot_splash/fullsize=false
 config/icon="res://icon.png"
 
@@ -75,7 +75,6 @@ Global="*res://AutoLoad/Global.gd"
 
 window/size/width=960
 window/size/height=540
-window/size/fullscreen=true
 mouse_cursor/custom_image="res://Assets/Environmnent/Cursor00.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

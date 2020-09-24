@@ -1,15 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Objects/Player.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Objects/Effect/DeathEffect00.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Objects/Effect/TransformEffect00.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Effect/Effect_SalamiDeath.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Effect/Effect_Transforming.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Animation" id=1]
-resource_name = "transform_to_avatar"
-step = 1.0
-
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=1]
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -19,14 +15,11 @@ collision_layer = 10
 collision_mask = 10
 script = ExtResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/transform_to_avatar = SubResource( 1 )
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-frame = 8
+frame = 22
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]

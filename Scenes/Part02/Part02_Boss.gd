@@ -1,4 +1,4 @@
-extends "res://Objects/Enemy.gd"
+extends "res://Objects/PathFindingEnemy.gd"
 
 export var high_speed_after: float = 0.0
 

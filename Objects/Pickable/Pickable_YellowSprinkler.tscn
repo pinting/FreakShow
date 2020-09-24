@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=2]
+[ext_resource path="res://Objects/Pickable/Pickable.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Environmnent/Sprinkler00.png" type="Texture" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.2
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/grab_amount = 1.0
+shader_param/glow_radius = 10.0
+shader_param/glow_amount = 0.0
+
+[node name="Pickable_YellowSprinkler" type="RigidBody2D" groups=[
+"pickable",
+]]
+input_pickable = true
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource( 1 )
+gravity_scale = 2.0
+contacts_reported = 3
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="." groups=[
+"selectable",
+]]
+material = SubResource( 2 )
+texture = ExtResource( 4 )
+script = ExtResource( 1 )
+description = "SPRINKLER00"
+offset_key = "offset"
+primary_key = "grab_amount"
+primary_hover = 1.1
+primary_default = 1.0
+secondary_key = "glow_amount"
+secondary_hover = 0.5
+clone_material = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -25.7997, 36.487, 16.9583, 36.487, 17.806, 29.4931, 36.6577, -15.3525, 32.6839, -18.0547, 16.047, 13.1529, 13.0799, -12.6503, 26.6438, -9.15338, 28.0213, -11.3257, 12.3381, -15.9883, 9.41339, -26.0658, -0.176701, -33.4306, -11.1974, -36.3447, -22.5359, -35.285, -36.0468, -25.7373, -36.7886, -12.9682, -30.8544, -3.96095, -24.6553, 0.0658264, -27.7813, 32.4708 )

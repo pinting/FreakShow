@@ -1,15 +1,24 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Wall00.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Building05_Bottom.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Environmnent/Floor01.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Graffiti40.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/Part00/Part00_Hallway_Block.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Objects/Selectable/Graffiti03.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Selectable/Graffiti02.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/Selectable/Graffiti01.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Environmnent/Building05_Top.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Environmnent/Graffiti16.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Building/Building05_Bottom.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Floor/Floor01.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti40.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Part00/Part00_Door_Block.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Selectable/Selectable_BeenStealingGraffiti.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Selectable/Selectable_YouWhoreGraffiti.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Selectable/Selectable_ForeskinGraffiti.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Environmnent/Building/Building05_Top.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti16.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/Part00/Part00_Hallway.gd" type="Script" id=11]
+
+
+
+
+
+
+
+
 
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -22,6 +31,7 @@ polygon = PoolVector2Array( -6882.82, -3575.52, -6880.36, -4990.21, 648.825, -49
 polygon = PoolVector2Array( -6881.84, -4986.47, -6881.94, -3582.45, 648.009, -3582.14, 648.061, -4986.54 )
 
 [node name="Part00_Hallway" type="Node2D"]
+script = ExtResource( 11 )
 
 [node name="Inside" type="Sprite" parent="."]
 position = Vector2( 0, -72.071 )

@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Lamp04.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Light/Light00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Lamp/Lamp04.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Meat00.png" type="Texture" id=3]
 [ext_resource path="res://Shaders/Waves.shader" type="Shader" id=4]
-[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=5]
-[ext_resource path="res://Objects/Static/MineLamp.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Environmnent/Pillar06.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Environmnent/Light/Light01.png" type="Texture" id=5]
+[ext_resource path="res://Objects/Static/Static_MineLamp.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Environmnent/Pillar/Pillar06.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Part02/Part02_EndTube.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Environmnent/Tooth00.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Environmnent/Tooth01.png" type="Texture" id=10]
@@ -21,7 +21,7 @@ shader_param/texture_offset_height = 0.04
 shader_param/texture_offset_time_scale = 0.03
 shader_param/sine_time_scale = 3.0
 shader_param/sine_offset_scale = Vector2( 0.4, 1.4 )
-shader_param/sine_wave_size = 0.025
+shader_param/sine_wave_size = 0.06
 shader_param/wave_scale = Vector2( 0, 1 )
 
 [sub_resource type="Gradient" id=2]
@@ -55,6 +55,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 250, 4000 )
 
 [node name="Tooth00" type="Sprite" parent="Meat"]
+visible = false
 position = Vector2( -51.7041, 0 )
 scale = Vector2( 2.3, 1 )
 z_index = 1
@@ -63,6 +64,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 64, 4000 )
 
 [node name="Tooth01" type="Sprite" parent="Meat"]
+visible = false
 position = Vector2( 53.2733, 0 )
 scale = Vector2( 2.2, 1 )
 z_index = 1

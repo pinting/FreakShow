@@ -1,21 +1,22 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Wall09.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Door05.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Environmnent/Graffiti12.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Graffiti29.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall09.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Door/Door05.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti12.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti29.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Environmnent/Rails00_Dented.png" type="Texture" id=5]
-[ext_resource path="res://Objects/Selectable/Door02.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Selectable/Selectable_IronDoor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Environmnent/Graffit09.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Environmnent/Graffiti08.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Environmnent/Graffiti25.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti09.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti08.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti39.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti25.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Environmnent/Rails00_Dented_Hover.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Environmnent/Graffiti15.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Environmnent/Floor06.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Environmnent/Wall04.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti15.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Environmnent/Floor/Floor06.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall04.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Environmnent/Pillar/Pillar07.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7190.48, 76.856 )
@@ -156,6 +157,11 @@ region_rect = Rect2( 0, 0, 10000, 85 )
 position = Vector2( -1413.14, 58.4823 )
 scale = Vector2( 0.749115, 0.749115 )
 texture = ExtResource( 2 )
+
+[node name="Graffiti" type="Sprite" parent="Wall/Door00"]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+position = Vector2( 37.1666, -20.9838 )
+texture = ExtResource( 10 )
 
 [node name="Door01" parent="Wall" instance=ExtResource( 6 )]
 position = Vector2( 4380.31, 159.138 )

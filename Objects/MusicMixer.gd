@@ -22,8 +22,6 @@ export var parts: Array = []
 # Debug the music player (Global.debug needs to be true)
 export var debug: bool = false
 
-const zero: float = 0.05
-
 onready var player_00 = $AudioStreamPlayer00
 onready var player_01 = $AudioStreamPlayer01
 
@@ -94,7 +92,7 @@ func play():
 	if len(parts) == 0:
 		return
 	
-	if parts[0].in_duration == 0:
+	if parts[0].in_duration == 0.0:
 		master_player.volume_db = max_volume
 		slave_player.volume_db = min_volume
 	
@@ -167,11 +165,11 @@ func _process(delta: float):
 	var volume_diff = abs(max_volume - min_volume)
 	
 	# Fade in the current part 
-	if not break_loop_now:
-		if diff_to_start > 0 and abs(diff_to_start) < current_part.in_duration and current_part.in_duration > 0:
+	if not break_loop_now and diff_to_start < 0:
+		if abs(diff_to_start) < current_part.in_duration and current_part.in_duration > 0:
 			master_player.volume_db += volume_diff * (delta / current_part.in_duration)
 			_debug_if_integer(diff_to_start, str("master fade in ", master_player.volume_db))
-		if diff_to_start <= 0 and diff_to_end > 0 and abs(diff_to_end) > current_part.out_duration:
+		elif abs(diff_to_end) > current_part.out_duration:
 			master_player.volume_db = max_volume
 			_debug_if_integer(diff_to_start, "master max volume")
 	

@@ -10,7 +10,7 @@ const NO_SOUNDS: bool = false
 const NO_INTRO: bool = false
 
 # Low performance mode
-const LOW_PERFORMANCE: bool = true
+const LOW_PERFORMANCE: bool = false
 
 # Only use the virtual mouse
 const ONLY_VIRTUAL_MOUSE: bool = false
@@ -33,6 +33,7 @@ var subtitle_display: SubtitleDisplay = null
 var subtitle: SubtitleManager = null
 var viewable_display: CanvasLayer = null
 var virtual_cursor: CanvasLayer = null
+var random_generator: RandomNumberGenerator = null
 
 # Position on the viewport
 var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
@@ -70,10 +71,13 @@ class SubtitleManager:
 			Global.subtitle_display.describe_remove(key, force)
 
 func _ready():
+	random_generator = RandomNumberGenerator.new()
 	subtitle = SubtitleManager.new()
 	
+	random_generator.randomize()
+	
 	if NO_SOUNDS:
-		for i in range(0, AudioServer.bus_count):
+		for i in range(AudioServer.bus_count):
 			AudioServer.set_bus_volume_db(i, -500)
 
 func debug(message: String):
