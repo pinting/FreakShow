@@ -36,7 +36,7 @@ var loop_direction: float = 0.0
 var loop_index: int = 0
 var hallway_exit_open: bool = false
 var hallway_exiting: bool = false
-var opening: bool = false
+var old_player = null
 
 var music_00: int
 var music_01: int
@@ -54,36 +54,25 @@ func _ready():
 	hallway_02.connect("door_selected", self, "_on_hallway_door_select")
 	
 	music_mixer.play()
-
-func _open_door(next_position):
-	if opening:
-		return
 	
-	opening = true
+	var camera = Global.current_camera
 	
-	door_open_sound.play()
-	fade_out(1.0)
-	yield(timer(1.5), "timeout")
-	player.position = next_position
-	fade_in(1.0)
-	
-	opening = false
+	if camera:
+		camera.smoothing_enabled = false
 
 func _on_scene_started():
 	yield(timer(1.5), "timeout")
 	Global.subtitle.say(tr("NARRATOR00"))
 
 func _on_flat_exit_select():
-	_open_door(hallway_spawn.position)
+	move_with_fade(player, hallway_spawn.position, door_open_sound)
 
 func _on_hallway_door_select(door, index):
-	if door.locked:
-		knock_sound.play()
-	elif index == home_index:
+	if index == home_index:
 		if not hallway_exit_open:
 			hallway_spawn.global_position = door.global_position
 			
-			_open_door(flat_spawn.position)
+			move_with_fade(player, flat_spawn.position, door_open_sound)
 		elif hallway_exit_open and not hallway_exiting:
 			hallway_exiting = true
 			
@@ -101,12 +90,7 @@ func _on_hallway_door_select(door, index):
 		
 		hallway_spawn.global_position = door.global_position
 		
-		# Lock the door in the real hallway and in the copies too
-		hallway_00.doors[index].locked = true
-		hallway_01.doors[index].locked = true
-		hallway_02.doors[index].locked = true
-		
-		_open_door(random_flat_spawn.position)
+		move_with_fade(player, random_flat_spawn.position, door_open_sound)
 
 func _process_hallway_door(_delta: float):
 	if hallway_exit_open:
@@ -126,6 +110,22 @@ func _process_hallway_door(_delta: float):
 		hallway_01.open_exit(home_index)
 		hallway_exit_open = true
 
+func _dupe_player():
+	var clone = player.duplicate()
+	
+	var duplicate_camera = null
+	
+	for n in clone.get_children():
+		if n.name == "DefaultCamera":
+			duplicate_camera = n
+			break
+	
+	clone.remove_child(duplicate_camera)
+	duplicate_camera.queue_free()
+	add_child(clone)
+	
+	return clone
+
 func _process_hallway_loop(_delta: float):
 	var left_end_position = hallway_begin.global_position
 	var right_end_position = hallway_end.global_position
@@ -133,22 +133,30 @@ func _process_hallway_loop(_delta: float):
 	
 	# Left end
 	if left_end_position.x > player_position.x:
+		old_player = _dupe_player()
+		
 		var diff = left_end_position.x - player_position.x
 		
-		player.position = Vector2(right_end_position.x - diff, player_position.y)
+		player.global_position = Vector2(right_end_position.x - diff, player_position.y)
 		loop_index -= 1
 		loop_direction -= 1
 		loop_direction = max(loop_direction, -1)
 	
 	# Right end
-	if right_end_position.x < player_position.x:
+	if right_end_position.x < player_position.x:		
+		old_player = _dupe_player()
+		
 		var diff = player_position.x - right_end_position.x
 		
-		player.position = Vector2(left_end_position.x + diff, player_position.y)
+		player.global_position = Vector2(left_end_position.x + diff, player_position.y)
 		loop_index += 1
 		loop_direction += 1
 		loop_direction = min(loop_direction, 1)
 
 func _process(delta: float):
+	if old_player:
+		remove_child(old_player)
+		old_player.queue_free()
+	
 	_process_hallway_loop(delta)
 	_process_hallway_door(delta)

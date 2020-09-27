@@ -19,9 +19,9 @@ func _on_selected():
 	if display.current.visible:
 		return
 	
-	var player = Global.player
+	var players = Global.players
 	
-	if player:
+	for player in players:
 		player.freeze()
 	
 	var project_width = ProjectSettings.get_setting("display/window/size/width")

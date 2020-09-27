@@ -4,10 +4,10 @@ extends Node
 const DEBUG: bool = false
 
 # Disable sounds
-const NO_SOUNDS: bool = false
+const NO_SOUNDS: bool = true
 
 # Disable intro
-const NO_INTRO: bool = false
+const NO_INTRO: bool = true
 
 # Low performance mode
 const LOW_PERFORMANCE: bool = false
@@ -28,7 +28,7 @@ const LOADING_TIME_PER_TICK: int = 100
 const MAC_VIRTUAL_INPUT_FIX = true
 
 var current_camera: Camera2D = null
-var player: Player = null
+var players: Array = []
 var subtitle_display: SubtitleDisplay = null
 var subtitle: SubtitleManager = null
 var viewable_display: CanvasLayer = null
@@ -254,7 +254,7 @@ func _set_new_scene(scene_resource):
 
 func load_scene(path):
 	current_camera = null
-	player = null
+	players = []
 	Global.subtitle_display = null
 	
 	loader = ResourceLoader.load_interactive(path)

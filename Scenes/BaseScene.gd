@@ -26,6 +26,7 @@ var current_second: float = 0.0
 var disable_auto_restart: bool = false
 var restart_counter: float = 0.0
 var restart_button_counter: float = 0.0
+var move_in_progress: bool = false
 
 signal scene_started
 signal fade_out_done
@@ -129,26 +130,57 @@ func _process_fade(delta: float):
 	
 	black_screen.modulate = Color(0.0, 0.0, 0.0, fade_current)
 
-func fade_out(duration = 1.0):
+func fade_out(duration: float = 1.0):
 	assert(duration > 0.0)
 	
 	fade_duration = duration
 	fade_direction = 1.0
 
-func fade_in(duration = 1.0):
+func fade_in(duration: float = 1.0):
 	assert(duration > 0.0)
 	
 	fade_duration = duration
 	fade_direction = -1.0
 
-func timer(duration = 1.0):
+func timer(duration: float = 1.0):
 	return get_tree().create_timer(duration)
 
 func load_scene(path: String):
-	if Global.player:
-		Global.player.freeze()
+	var players = Global.players
+
+	for player in players:
+		player.freeze()
 		
 	fade_out(2.0)
 	yield(timer(2.0), "timeout")
 	
 	Global.load_scene(path)
+
+func move_with_fade(player: Player, next_position: Vector2, sound: AudioStreamPlayer = null):
+	if move_in_progress:
+		return
+	
+	move_in_progress = true
+	
+	var camera = Global.current_camera
+	var smoothing_enabled = camera.smoothing_enabled
+	
+	if sound:
+		sound.play()
+	
+	fade_out(0.9)
+	yield(timer(0.9), "timeout")
+		
+	if camera and smoothing_enabled:
+		camera.smoothing_enabled = false
+	
+	player.position = next_position
+	yield(timer(0.2), "timeout")
+	
+	if camera and smoothing_enabled:
+		camera.smoothing_enabled = smoothing_enabled
+	
+	yield(timer(0.9), "timeout")
+	fade_in(0.9)
+	
+	move_in_progress = false

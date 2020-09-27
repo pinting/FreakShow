@@ -29,13 +29,11 @@ fade_in_after = 3.0
 delay = 1.0
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 8 )]
-position = Vector2( -1270.34, -60.2246 )
+position = Vector2( -1270.34, -60.225 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
 [node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 7 )]
-smoothing_enabled = false
-smoothing_speed = 0.75
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )

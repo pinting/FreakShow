@@ -36,14 +36,12 @@ func _input(event):
 	if visible_since < REGISTER_INPUT_AFTER:
 		return
 	
-	var player = Global.player
+	var players = Global.players
 	
-	if not player:
-		return
-	
-	if player:
-		player.unfreeze()
-	
-	current.visible = false
-	
-	Global.subtitle.describe_remove(current.get_instance_id())
+	for player in players:
+		if player:
+			player.unfreeze()
+		
+		current.visible = false
+		
+		Global.subtitle.describe_remove(current.get_instance_id())

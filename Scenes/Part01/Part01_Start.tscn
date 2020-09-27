@@ -15,15 +15,6 @@
 [ext_resource path="res://Objects/Light/Light_Side.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Environmnent/Building/Building00_1x2.png" type="Texture" id=14]
 
-
-
-
-
-
-
-
-
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
 shader_param/keep_size = true

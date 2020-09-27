@@ -49,6 +49,9 @@ export var freeze: bool = false
 # Enable or disable avatar mode
 export var avatar_mode: bool = false
 
+# Scale velocity
+export var scale_velocity: Vector2 = Vector2(1, 1)
+
 # Zero value
 export var ZERO: float = 1.0
 
@@ -71,7 +74,7 @@ var current_second: float = 0.0
 var animation_prefix: String = ""
 
 # Current velocity (between 0 and current_max_speed)
-var current_velocity: Vector2 = Vector2(0, 0)
+var current_velocity: Vector2 = Vector2.ZERO
 
 # Current maximum speed (the acceleration oscillates between this and zero)
 var current_max_speed: float = max_speed
@@ -110,35 +113,39 @@ var force_gravity: bool = false
 var dead: bool = false
 
 func _ready():
-	assert(animation_frames != null)
-	
-	assert(animation_frames.has_animation("a_stand_still"))
-	assert(animation_frames.has_animation("a_stand_still_to_move"))
-	assert(animation_frames.has_animation("a_stand_move"))
-	assert(animation_frames.has_animation("a_stand_move_to_still"))
-	assert(animation_frames.has_animation("a_crouch_still"))
-	assert(animation_frames.has_animation("a_crouch_still_to_move"))
-	assert(animation_frames.has_animation("a_crouch_move"))
-	assert(animation_frames.has_animation("a_crouch_move_to_still"))
-	assert(animation_frames.has_animation("a_jump"))
-	
-	assert(animation_frames.has_animation("b_stand_still"))
-	assert(animation_frames.has_animation("b_stand_still_to_move"))
-	assert(animation_frames.has_animation("b_stand_move"))
-	assert(animation_frames.has_animation("b_stand_move_to_still"))
-	assert(animation_frames.has_animation("b_crouch_still"))
-	assert(animation_frames.has_animation("b_crouch_still_to_move"))
-	assert(animation_frames.has_animation("b_crouch_move"))
-	assert(animation_frames.has_animation("b_crouch_move_to_still"))
-	assert(animation_frames.has_animation("b_jump"))
-	
-	assert(animation_frames.has_animation("default"))
-	
-	animated_sprite.frames = animation_frames
-	Global.player = self
+	set_animation_frames(animation_frames)
 	
 	animation_prefix = "" if avatar_mode else "a"
 	
+	Global.players.push_back(self)
+
+func set_animation_frames(frames):
+	assert(frames != null)
+	
+	assert(frames.has_animation("a_stand_still"))
+	assert(frames.has_animation("a_stand_still_to_move"))
+	assert(frames.has_animation("a_stand_move"))
+	assert(frames.has_animation("a_stand_move_to_still"))
+	assert(frames.has_animation("a_crouch_still"))
+	assert(frames.has_animation("a_crouch_still_to_move"))
+	assert(frames.has_animation("a_crouch_move"))
+	assert(frames.has_animation("a_crouch_move_to_still"))
+	assert(frames.has_animation("a_jump"))
+	
+	assert(frames.has_animation("b_stand_still"))
+	assert(frames.has_animation("b_stand_still_to_move"))
+	assert(frames.has_animation("b_stand_move"))
+	assert(frames.has_animation("b_stand_move_to_still"))
+	assert(frames.has_animation("b_crouch_still"))
+	assert(frames.has_animation("b_crouch_still_to_move"))
+	assert(frames.has_animation("b_crouch_move"))
+	assert(frames.has_animation("b_crouch_move_to_still"))
+	assert(frames.has_animation("b_jump"))
+	
+	assert(frames.has_animation("default"))
+	
+	animated_sprite.frames = frames
+
 func _process_transforming_effect(delta: float):
 	if not transforming:
 		transform_effect.self_modulate.a = 0.0
@@ -307,39 +314,66 @@ func _get_direction():
 
 func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: float):
 	var next_velocity = current_velocity
+	var players = Global.players
 	
-	if avatar_mode or gravity < ZERO:
-		# Slowing needs to be added, otherwise it would be more real, but hard to control
+	# In case of avatar mode is enabled
+	if avatar_mode or abs(gravity) < ZERO:
+		# Apply friction on X and Y
 		next_velocity.x *= pow(friction, delta)
 		next_velocity.y *= pow(friction, delta)
 			
+		# Apply acceleration on Y
 		if abs(next_velocity.y) > avatar_max_speed:
 			next_velocity.y = (next_velocity.y / abs(next_velocity.y)) * avatar_max_speed
 		elif direction.y != 0.0:
-			next_velocity.y += direction.y * acceleration * delta
+			next_velocity.y += scale_velocity.y * direction.y * acceleration * delta
 		
+		# Apply acceleration on X
 		if abs(next_velocity.x) > avatar_max_speed:
 			next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * avatar_max_speed
 		elif direction.x != 0.0:
-			next_velocity.x += direction.x * acceleration * delta
+			next_velocity.x += scale_velocity.x * direction.x * acceleration * delta
 	else:
 		if is_on_floor():
+			# Apply friction on X
 			next_velocity.x *= pow(friction, delta)
 			
+			# Apply jump force on Y
 			if direction.y < 0.0:
-				next_velocity.y += direction.y * jump_force
+				next_velocity.y += scale_velocity.y * direction.y * jump_force
 		else:
-			next_velocity.y += gravity * delta
-
+			# Apply gravity on Y
+			next_velocity.y += scale_velocity.y * gravity * delta
+		
+		# Apply acceleration on X
 		if abs(next_velocity.x) > current_max_speed:
 			next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * current_max_speed
 		elif direction.x != 0.0:
-			next_velocity.x += direction.x * acceleration * delta
+			next_velocity.x += scale_velocity.x * direction.x * acceleration * delta
 	
 	var d = direction.length()
 	
-	if d > 1.0:
-		next_velocity /= sqrt(d)
+	if(next_velocity.x == NAN or next_velocity.y == NAN):
+		return Vector2.ZERO
+	
+	# Makes n * 45 degree directions take the same distance over time
+	next_velocity /= sqrt(d) if d > 1.0 else 1.0
+	
+	# Sync X velocity of players
+	if current_second > 2.0:
+		var min_v_x = next_velocity.x
+		
+		for player in players:
+			if player != self and abs(player.current_velocity.x) < min_v_x:
+					min_v_x = abs(player.current_velocity.x)
+		
+		if next_velocity.x > min_v_x:
+			var scaled_min_v_x = min_v_x
+			
+			if next_velocity.x > 0.0:
+				scaled_min_v_x *= next_velocity.x / abs(next_velocity.x)
+			
+			next_velocity.x = scaled_min_v_x
 	
 	return next_velocity
 
@@ -374,7 +408,7 @@ func _get_next_animation(direction: Vector2):
 			freeze = true
 	else:
 		if is_on_floor():
-			if direction.x:
+			if direction.x and abs(current_velocity.x) > 1.0:
 				if not moving_x:
 					moving_x = true
 					transition = true

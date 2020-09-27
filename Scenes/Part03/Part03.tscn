@@ -9,7 +9,7 @@
 [ext_resource path="res://Scenes/Part03/Part03.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Sounds/Door01.wav" type="AudioStream" id=8]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Music/Part03.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Environmnent/Wall/Wall08.png" type="Texture" id=14]
 
@@ -28,13 +28,11 @@ script = ExtResource( 7 )
 fade_in_duration = 1.0
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 12 )]
-position = Vector2( -1607.49, -8714.99 )
+position = Vector2( -1607.49, -602.965 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
 [node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 9 )]
-smoothing_enabled = false
-smoothing_speed = 0.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )
@@ -50,6 +48,7 @@ margin_right = 5582.0
 margin_bottom = 1906.0
 
 [node name="MusicMixer" parent="BaseScene" instance=ExtResource( 4 )]
+stream = ExtResource( 11 )
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
@@ -71,6 +70,10 @@ position = Vector2( 615.555, 169.822 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 
+[node name="TopSpawn" type="Node2D" parent="BaseScene/Trigger"]
+position = Vector2( -1607.49, -8678 )
+scale = Vector2( 0.7, 0.7 )
+
 [node name="DitchSpawn" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( 4980.86, -575.879 )
 
@@ -81,6 +84,3 @@ position = Vector2( 5006.62, 1466.32 )
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 8 )
-
-[node name="SilentDoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
-stream = ExtResource( 10 )
