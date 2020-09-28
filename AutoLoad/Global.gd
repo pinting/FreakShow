@@ -4,10 +4,10 @@ extends Node
 const DEBUG: bool = false
 
 # Disable sounds
-const NO_SOUNDS: bool = true
+const NO_SOUNDS: bool = false
 
 # Disable intro
-const NO_INTRO: bool = true
+const NO_INTRO: bool = false
 
 # Low performance mode
 const LOW_PERFORMANCE: bool = false
@@ -79,6 +79,9 @@ func _ready():
 	if NO_SOUNDS:
 		for i in range(AudioServer.bus_count):
 			AudioServer.set_bus_volume_db(i, -500)
+
+func timer(duration: float = 1.0):
+	return get_tree().create_timer(duration)
 
 func debug(message: String):
 	if DEBUG:

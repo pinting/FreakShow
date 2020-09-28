@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Door03_Moving.ogg-ba0275aac70a5d57713f9c2500485f11.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Door03_Moving.ogg"
+dest_files=[ "res://.import/Door03_Moving.ogg-ba0275aac70a5d57713f9c2500485f11.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

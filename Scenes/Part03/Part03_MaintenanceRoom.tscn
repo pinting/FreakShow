@@ -10,17 +10,17 @@
 [ext_resource path="res://Objects/Selectable/Selectable_IronDoor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Environmnent/Pillar/Pillar07.png" type="Texture" id=9]
 [ext_resource path="res://Objects/Light/Light_Side.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti37.png" type="Texture" id=11]
+[ext_resource path="res://Objects/Selectable/Selectable_WelcomeAssholesGraffiti.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Environmnent/Misc/Misc10.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti28.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti30.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti31.png" type="Texture" id=16]
+[ext_resource path="res://Objects/Selectable/Selectable_StupidRussiansGraffiti.tscn" type="PackedScene" id=16]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 750.744, 1372.97 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5661.64, 61.6787 )
 
 [node name="MaintenanceRoom" type="Node2D"]
@@ -34,7 +34,7 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
 position = Vector2( -0.369629, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="Wall" type="Sprite" parent="."]
 position = Vector2( 0, 1000.26 )
@@ -70,7 +70,7 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/FloorCollision"]
 position = Vector2( -620.556, -23.3623 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="Misc00" type="Sprite" parent="."]
 position = Vector2( 2853.01, 1234 )
@@ -99,12 +99,7 @@ position = Vector2( 77.8602, -648.381 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
 
-[node name="Graffiti00" type="Sprite" parent="Misc01/Train"]
-self_modulate = Color( 0, 0, 0, 0.784314 )
-position = Vector2( 574.172, 83.4537 )
-rotation = 0.0227588
-scale = Vector2( 0.332382, 0.227218 )
-texture = ExtResource( 11 )
+[node name="Graffiti00" parent="Misc01/Train" instance=ExtResource( 11 )]
 
 [node name="Graffiti01" type="Sprite" parent="Misc01/Train"]
 self_modulate = Color( 0, 0, 0, 0.784314 )
@@ -119,10 +114,7 @@ position = Vector2( -600.869, 108.381 )
 scale = Vector2( 0.353869, 0.353869 )
 texture = ExtResource( 15 )
 
-[node name="Graffiti03" type="Sprite" parent="Misc01/Train"]
-position = Vector2( 137.005, 119.878 )
-scale = Vector2( 0.573644, 0.573644 )
-texture = ExtResource( 16 )
+[node name="Graffiti03" parent="Misc01/Train" instance=ExtResource( 16 )]
 
 [node name="Misc02" type="Sprite" parent="."]
 position = Vector2( 1638.05, 1276.01 )
@@ -159,4 +151,4 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
 position = Vector2( -0.369629, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )

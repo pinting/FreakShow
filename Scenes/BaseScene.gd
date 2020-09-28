@@ -143,7 +143,7 @@ func fade_in(duration: float = 1.0):
 	fade_direction = -1.0
 
 func timer(duration: float = 1.0):
-	return get_tree().create_timer(duration)
+	return Global.timer(duration)
 
 func load_scene(path: String):
 	var players = Global.players

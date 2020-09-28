@@ -8,12 +8,12 @@
 [ext_resource path="res://Objects/Selectable/Selectable_IronDoor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti09.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti08.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti39.png" type="Texture" id=10]
+[ext_resource path="res://Objects/Selectable/Selectable_WouldFuckYouGraffiti.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/Selectable/Selectable_VeganLiberalScum.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti25.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Environmnent/Rails00_Dented_Hover.png" type="Texture" id=12]
+[ext_resource path="res://Objects/Selectable/Selectable_CopsAreFagsGraffiti.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti15.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Environmnent/Floor/Floor06.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Environmnent/Wall/Wall04.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Environmnent/Pillar/Pillar07.png" type="Texture" id=18]
@@ -93,12 +93,8 @@ rotation = 0.151162
 scale = Vector2( 0.300686, 0.317837 )
 texture = ExtResource( 4 )
 
-[node name="Graffiti03" type="Sprite" parent="Wall"]
-self_modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 3203.54, -80.416 )
-rotation = -0.114528
-scale = Vector2( 0.575347, 0.543844 )
-texture = ExtResource( 15 )
+[node name="Graffiti03" parent="Wall" instance=ExtResource( 13 )]
+description = "GRAFFITI04"
 
 [node name="Graffiti04" type="Sprite" parent="Wall"]
 self_modulate = Color( 1, 1, 1, 0.784314 )
@@ -107,12 +103,7 @@ rotation = -0.107954
 scale = Vector2( -0.953123, 0.493074 )
 texture = ExtResource( 8 )
 
-[node name="Graffiti05" type="Sprite" parent="Wall"]
-self_modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( 4682.92, -97.184 )
-rotation = 0.353501
-scale = Vector2( 0.654372, 1.07091 )
-texture = ExtResource( 9 )
+[node name="Graffiti05" parent="Wall" instance=ExtResource( 9 )]
 
 [node name="Lamp00" parent="Wall" instance=ExtResource( 7 )]
 position = Vector2( -4301.72, -376.323 )
@@ -158,10 +149,7 @@ position = Vector2( -1413.14, 58.4823 )
 scale = Vector2( 0.749115, 0.749115 )
 texture = ExtResource( 2 )
 
-[node name="Graffiti" type="Sprite" parent="Wall/Door00"]
-self_modulate = Color( 1, 1, 1, 0.764706 )
-position = Vector2( 37.1666, -20.9838 )
-texture = ExtResource( 10 )
+[node name="Graffiti" parent="Wall/Door00" instance=ExtResource( 10 )]
 
 [node name="Door01" parent="Wall" instance=ExtResource( 6 )]
 position = Vector2( 4380.31, 159.138 )

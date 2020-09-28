@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti31.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=2]
+
+[node name="Selectable_StupidRussiansGraffiti" type="Sprite" groups=[
+"selectable",
+]]
+position = Vector2( 137.005, 119.878 )
+scale = Vector2( 0.573644, 0.573644 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+description = "GRAFFITI07"

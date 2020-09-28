@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti08.png" type="Texture" id=2]
+
+[node name="Selectable_WouldFuckYouGraffiti" type="Sprite" groups=[
+"selectable",
+]]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 4682.92, -97.184 )
+rotation = 0.353501
+scale = Vector2( 0.654372, 1.07091 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+description = "GRAFFITI05"

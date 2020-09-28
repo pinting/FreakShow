@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti39.png" type="Texture" id=2]
+
+[node name="Selectable_VeganLiberalScum" type="Sprite" groups=[
+"selectable",
+]]
+self_modulate = Color( 1, 1, 1, 0.764706 )
+position = Vector2( 37.1666, -20.9838 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+description = "GRAFFITI06"

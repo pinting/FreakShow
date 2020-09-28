@@ -11,12 +11,12 @@ script = ExtResource( 11 )
 [node name="VirtualCursorDisplay" parent="." instance=ExtResource( 2 )]
 
 [node name="SubtitleDisplay" parent="." instance=ExtResource( 8 )]
-layer = 101
 
 [node name="BlackScreen" type="CanvasLayer" parent="."]
 layer = 100
 
 [node name="ColorRect" type="ColorRect" parent="BlackScreen"]
+visible = false
 self_modulate = Color( 0, 0, 0, 1 )
 margin_right = 960.0
 margin_bottom = 540.0
