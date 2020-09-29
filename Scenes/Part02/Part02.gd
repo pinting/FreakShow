@@ -67,7 +67,7 @@ var game_started: bool = false
 var game_playing: bool = false
 var not_close_enough_help: bool = true
 
-func _ready():
+func _ready() -> void:
 	music_00 = main_music.add_part(0, 4 * 60 + 0.7, false, 0, 0, 0)
 	music_01 = main_music.add_part(4 * 60 + 0.7, 4 * 60 + 25, true, 0.5, 0.5, -1)
 	
@@ -96,7 +96,7 @@ func _ready():
 	if camera:
 		camera.zoom = Vector2(camera_zoom_base, camera_zoom_base)
 
-func _fail_game(body: Node):
+func _fail_game(body: Node) -> void:
 	if not body.is_in_group("player"):
 		return
 	
@@ -110,7 +110,7 @@ func _fail_game(body: Node):
 	
 	load_scene(get_parent().filename)
 
-func _start_game(body: Node):
+func _start_game(body: Node) -> void:
 	if not body.is_in_group("player") or game_playing:
 		return
 	
@@ -128,7 +128,7 @@ func _start_game(body: Node):
 	game_playing = true
 	game_started = true
 
-func _end_game(body: Node):
+func _end_game(body: Node) -> void:
 	if not body.is_in_group("player") or not game_playing:
 		return
 	
@@ -139,7 +139,7 @@ func _end_game(body: Node):
 	main_music.kill(2.0);
 	wind_sound.play()
 
-func _on_exit():
+func _on_exit() -> void:
 	if not end_door_area.visible:
 		return false
 	
@@ -174,7 +174,7 @@ func _on_exit():
 	
 	load_scene(next_scene)
 
-func _on_scene_started():
+func _on_scene_started() -> void:
 	if teleport_player_to_end:
 		_start_game(player)
 		_end_game(player)
@@ -183,11 +183,11 @@ func _on_scene_started():
 	else:
 		connect_sound.play()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	_process_enemy_path_finding(delta)
 	_process_camera_zoom(delta)
 
-func _process_camera_zoom(delta):
+func _process_camera_zoom(delta) -> void:
 	var camera = Global.current_camera
 	
 	if not camera:
@@ -204,7 +204,7 @@ func _process_camera_zoom(delta):
 	camera.zoom.x += step
 	camera.zoom.y += step
 
-func _process_enemy_path_finding(delta):
+func _process_enemy_path_finding(delta) -> void:
 	if not game_started or enemy.dead:
 		return
 	

@@ -7,14 +7,14 @@ onready var door_open = $DoorOpen
 
 signal selected
 
-func _ready():
+func _ready() -> void:
 	door_closed.connect("selected", self, "_on_door_select")
 	door_open.connect("selected", self, "_on_door_select")
 
-func _on_door_select():
+func _on_door_select() -> void:
 	emit_signal("selected")
 
-func _process(delta):
+func _process(delta) -> void:
 	if door_open.visible:
 		var next = door_open.self_modulate.a + delta / duration
 		var a = min(1.0, next)
@@ -24,5 +24,5 @@ func _process(delta):
 		
 		door_open.self_modulate.a = a
 
-func open():
+func open() -> void:
 	door_open.visible = true

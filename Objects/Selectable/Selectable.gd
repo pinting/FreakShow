@@ -42,7 +42,7 @@ var held = false
 
 signal selected
 
-func _ready():
+func _ready() -> void:
 	assert(primary_hover >= primary_default)
 	assert(secondary_hover >= secondary_default)
 	assert(is_in_group("selectable"))
@@ -50,7 +50,7 @@ func _ready():
 	if clone_material:
 		material = material.duplicate()
 
-func _is_top(mouse_position: Vector2):
+func _is_top(mouse_position: Vector2) -> bool:
 	var tree = get_tree()
 	var selectable_group = tree.get_nodes_in_group("selectable")
 	var self_index = selectable_group.find(self)
@@ -72,8 +72,8 @@ func _is_top(mouse_position: Vector2):
 	
 	return true
 
-func _on_select(mouse_position):
-	if visible and not disabled:
+func _on_select(mouse_position) -> bool:
+	if not Global.disable_selectable and not disabled and visible:
 		var rect = get_rect()
 		var scale = selection_area_scale
 		var offset = rect.size / -scale if max(scale.x, scale.y) > 1.0 else Vector2.ZERO
@@ -84,20 +84,20 @@ func _on_select(mouse_position):
 	
 	return false
 
-func _input(event: InputEvent):
-	if event is InputEventMouseButton and event.pressed and visible and not disabled:
+func _input(event: InputEvent) -> void:
+	if not Global.disable_selectable and not disabled and event is InputEventMouseButton and event.pressed and visible:
 		var mouse_position = Global.get_world_mouse_position()
 		
 		if _on_select(mouse_position):
 			emit_signal("selected")
 
-func show_description():
+func show_description() -> void:
 	Global.subtitle.describe(get_instance_id(), tr(description))
 
-func remove_description():
+func remove_description() -> void:
 	Global.subtitle.describe_remove(get_instance_id())
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	var mouse_position = Global.get_world_mouse_position()
 	
 	if _on_select(mouse_position):

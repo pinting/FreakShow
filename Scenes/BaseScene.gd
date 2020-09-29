@@ -27,13 +27,14 @@ var disable_auto_restart: bool = false
 var restart_counter: float = 0.0
 var restart_button_counter: float = 0.0
 var move_in_progress: bool = false
+var loading_in_progress: bool = false
 
 signal scene_started
 signal fade_out_done
 signal fade_in_done
 signal intro_over
 
-func _ready():
+func _ready() -> void:
 	if Global.NO_INTRO:
 		fade_current = 0.0
 		intro_started = true
@@ -46,12 +47,12 @@ func _ready():
 	for node in get_tree().get_nodes_in_group("pickable"):
 		node.connect("picked", self, "_on_pickable_picked")
 
-func _on_pickable_picked(object: Object):
+func _on_pickable_picked(object: Object) -> void:
 	if not held_object:
 		held_object = object
 		held_object.pickup()
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	restart_counter = 0.0
 	
 	if event is InputEventMouseButton:
@@ -59,7 +60,7 @@ func _input(event: InputEvent):
 			held_object.drop(Input.get_last_mouse_speed())
 			held_object = null
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if current_delay < delay:
 		current_delay += delta
 		return
@@ -79,7 +80,7 @@ func _process(delta: float):
 	_process_fade(delta)
 	_process_restart_button(delta)
 
-func _process_restart_button(delta: float):
+func _process_restart_button(delta: float) -> void:
 	var restart_game = Input.is_action_pressed("restart_game")
 	var restart_scene = Input.is_action_pressed("restart_scene")
 	
@@ -87,7 +88,6 @@ func _process_restart_button(delta: float):
 		restart_button_counter += delta
 		
 		if restart_button_counter >= 1.0:
-			
 			if restart_game:
 				load_scene(ProjectSettings.get_setting("application/run/main_scene"))
 			elif restart_scene:
@@ -95,7 +95,7 @@ func _process_restart_button(delta: float):
 	else:
 		restart_button_counter += 0
 
-func _process_intro(_delta: float):
+func _process_intro(_delta: float) -> void:
 	if intro_started:
 		return
 	
@@ -103,7 +103,7 @@ func _process_intro(_delta: float):
 		fade_in(fade_in_duration)
 		intro_started = true
 
-func _process_fade(delta: float):
+func _process_fade(delta: float) -> void:
 	if fade_current == 0.0:
 		black_screen.visible = false
 	else:
@@ -130,22 +130,27 @@ func _process_fade(delta: float):
 	
 	black_screen.modulate = Color(0.0, 0.0, 0.0, fade_current)
 
-func fade_out(duration: float = 1.0):
+func fade_out(duration: float = 1.0) -> void:
 	assert(duration > 0.0)
 	
 	fade_duration = duration
 	fade_direction = 1.0
 
-func fade_in(duration: float = 1.0):
+func fade_in(duration: float = 1.0) -> void:
 	assert(duration > 0.0)
 	
 	fade_duration = duration
 	fade_direction = -1.0
 
-func timer(duration: float = 1.0):
+func timer(duration: float = 1.0) -> SceneTreeTimer:
 	return Global.timer(duration)
 
-func load_scene(path: String):
+func load_scene(path: String) -> void:
+	if loading_in_progress:
+		return
+	
+	loading_in_progress = true
+	
 	var players = Global.players
 
 	for player in players:
@@ -156,7 +161,7 @@ func load_scene(path: String):
 	
 	Global.load_scene(path)
 
-func move_with_fade(player: Player, next_position: Vector2, sound: AudioStreamPlayer = null):
+func move_with_fade(player: Player, next_position: Vector2, sound: AudioStreamPlayer = null) -> void:
 	if move_in_progress:
 		return
 	

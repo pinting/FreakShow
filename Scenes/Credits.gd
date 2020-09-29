@@ -13,10 +13,10 @@ onready var text_center = $TextCanvas/Center
 onready var text_bottom = $TextCanvas/Bottom
 onready var text_top = $TextCanvas/Top
 
-func _ready():
+func _ready() -> void:
 	connect("scene_started", self, "_on_scene_started")
 
-func _on_scene_started():
+func _on_scene_started() -> void:
 	yield(timer(credits_delay), "timeout")
 
 	for n in range(0, credits_count):

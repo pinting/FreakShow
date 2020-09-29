@@ -1,6 +1,6 @@
 extends Node
 
-func _ready():
+func _ready() -> void:
 	var children = get_children()
 	var count = get_child_count()
 	

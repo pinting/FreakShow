@@ -46,7 +46,7 @@ var home_index = 4
 var music_00: int
 var music_01: int
 
-func _ready():
+func _ready() -> void:
 	music_00 = main_music.add_part(2, 5 * 60, false, 5, 5, -5)
 	music_01 = main_music.add_part(30, 5 * 60, true, 5, 5, -5)
 	
@@ -67,7 +67,7 @@ func _ready():
 	if camera:
 		camera.smoothing_enabled = false
 
-func _on_scene_started():
+func _on_scene_started() -> void:
 	yield(timer(1.5), "timeout")
 	Global.subtitle.say(tr("NARRATOR00"))
 
@@ -76,7 +76,7 @@ func _on_flat_exit_select():
 	
 	move_with_fade(player, hallway_spawn.position, door_open_sound)
 
-func _on_hallway_door_select(door, index):
+func _on_hallway_door_select(door, index) -> void:
 	player_in_hallway = false
 	
 	if index == home_index:
@@ -107,7 +107,7 @@ var player_in_hallway: bool = false
 var previous_player_hallway_position: float = 0.0
 var hallway_wait_counter: float = 0.0
 
-func _process_hallway_door(delta: float):
+func _process_hallway_door(delta: float) -> void:
 	if not player_in_hallway or hallway_exit_open:
 		return
 	
@@ -147,7 +147,9 @@ func _process_hallway_door(delta: float):
 			home_index = hallway_01.get_closest_door(player.global_position)
 			hallway_exit_open = true
 			
+			hallway_00.open_exit(home_index)
 			hallway_01.open_exit(home_index)
+			hallway_02.open_exit(home_index)
 	else:
 		previous_player_hallway_position = player_position
 		hallway_wait_counter = 0.0
@@ -157,7 +159,7 @@ func _process_hallway_door(delta: float):
 		if camera:
 			camera.shake = 0.0
 
-func _dupe_player():
+func _dupe_player() -> Node2D:
 	var clone = player.duplicate()
 	
 	clone.register = false
@@ -172,7 +174,7 @@ func _dupe_player():
 	
 	return clone
 
-func _process_hallway_loop(_delta: float):
+func _process_hallway_loop(_delta: float) -> void:
 	var left_end_position = hallway_begin.global_position
 	var right_end_position = hallway_end.global_position
 	var player_position = player.global_position
@@ -187,7 +189,7 @@ func _process_hallway_loop(_delta: float):
 		loop_index -= 1
 	
 	# Right end
-	if right_end_position.x < player_position.x:		
+	if right_end_position.x < player_position.x:
 		old_player = _dupe_player()
 		
 		var diff = player_position.x - right_end_position.x
@@ -195,7 +197,7 @@ func _process_hallway_loop(_delta: float):
 		player.global_position = Vector2(left_end_position.x + diff, player_position.y)
 		loop_index += 1
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if old_player:
 		remove_child(old_player)
 		old_player.queue_free()

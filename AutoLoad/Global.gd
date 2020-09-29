@@ -1,7 +1,7 @@
 extends Node
 
 # Enable debug messages
-const DEBUG: bool = true
+const DEBUG: bool = false
 
 # Disable sounds
 const NO_SOUNDS: bool = false
@@ -35,6 +35,9 @@ var viewable_display: CanvasLayer = null
 var virtual_cursor: CanvasLayer = null
 var random_generator: RandomNumberGenerator = null
 
+# Disable every selectable object
+var disable_selectable: bool = false
+
 # Position on the viewport
 var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
 
@@ -49,7 +52,7 @@ var loader = null
 class SubtitleManager:
 	var subtitle_queue = []
 	
-	func say(text: String, speed: float = 2.0, timeout: float = 10.0):
+	func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 		if not Global.subtitle_display:
 			subtitle_queue.push_back({
 				"text": text,
@@ -62,11 +65,11 @@ class SubtitleManager:
 			
 			Global.subtitle_display.say(text, speed, timeout)
 	
-	func describe(key: int, text: String, keep: bool = false):
+	func describe(key: int, text: String, keep: bool = false) -> void:
 		if Global.subtitle_display:
 			Global.subtitle_display.describe(key, text, keep)
 	
-	func describe_remove(key: int, force: bool = false):
+	func describe_remove(key: int, force: bool = false) -> void:
 		if Global.subtitle_display:
 			Global.subtitle_display.describe_remove(key, force)
 
@@ -80,14 +83,14 @@ func _ready():
 		for i in range(AudioServer.bus_count):
 			AudioServer.set_bus_volume_db(i, -500)
 
-func timer(duration: float = 1.0):
+func timer(duration: float = 1.0) -> SceneTreeTimer:
 	return get_tree().create_timer(duration)
 
-func debug(message: String):
+func debug(message: String) -> void:
 	if DEBUG:
 		print(message)
 
-func _mouse_viewport_to_window_position(viewport_position):
+func _mouse_viewport_to_window_position(viewport_position: Vector2) -> Vector2:
 	var viewport_size = get_viewport().size
 	var window_size = OS.window_size
 	var ratio = window_size / viewport_size
@@ -106,20 +109,20 @@ func _mouse_viewport_to_window_position(viewport_position):
 	 
 	return base
 
-func _set_virtual_mouse_position(viewport_position: Vector2, change_cursor_position: bool = true):
+func _set_virtual_mouse_position(viewport_position: Vector2, change_cursor_position: bool = true) -> void:
 	virtual_mouse_position = viewport_position
 	
 	if change_cursor_position:
 		set_cursor_position(viewport_position)
 
-func set_cursor_position(viewport_position):
+func set_cursor_position(viewport_position) -> void:
 	get_viewport().warp_mouse(viewport_position)
 	
 	if VIRTUAL_CURSOR and virtual_cursor:
 		virtual_cursor.cursor.position = viewport_position
 		virtual_cursor.visible = true
 
-func get_world_mouse_position():
+func get_world_mouse_position() -> Vector2:
 	if not current_camera:
 		return Vector2.ZERO
 	
@@ -139,7 +142,7 @@ func get_world_mouse_position():
 	
 	return current_camera.get_camera_screen_center() + project_size * current_camera.zoom * p
 
-func _create_click_event(viewport_position: Vector2, button_index: int, pressed: bool):
+func _create_click_event(viewport_position: Vector2, button_index: int, pressed: bool) -> void:
 	var event = InputEventMouseButton.new()
 	
 	# Documentation says this should be viewport relative, but it only works like this
@@ -150,7 +153,7 @@ func _create_click_event(viewport_position: Vector2, button_index: int, pressed:
 	
 	get_tree().input_event(event)
 
-func _create_move_event(viewport_position: Vector2, relative: Vector2, pressure: float):
+func _create_move_event(viewport_position: Vector2, relative: Vector2, pressure: float) -> void:
 	var event = InputEventMouseMotion.new()
 	
 	event.position = _mouse_viewport_to_window_position(viewport_position)
@@ -161,14 +164,14 @@ func _create_move_event(viewport_position: Vector2, relative: Vector2, pressure:
 	
 	get_tree().input_event(event)
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and not ONLY_VIRTUAL_MOUSE:
 		using_virtual = event.pressure == pressure_virtual
 		
 		if not using_virtual:
 			_set_virtual_mouse_position(event.position, false)
 
-func _process_virtual_input(delta: float):
+func _process_virtual_input(delta: float) -> void:
 	var directions = {
 		"right": "virtual_mouse_right",
 		"left": "virtual_mouse_left",
@@ -212,11 +215,11 @@ func _process_virtual_input(delta: float):
 		
 		_create_click_event(virtual_mouse_position, BUTTON_RIGHT, virtual_click_right)
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	_process_virtual_input(delta)
 	_process_loading(delta)
 
-func _process_loading(delta):
+func _process_loading(delta) -> void:
 	if not loader:
 		return
 	
@@ -240,7 +243,11 @@ func _process_loading(delta):
 			loader = null
 			break
 
-func _set_new_scene(scene_resource):
+func _set_new_scene(scene_resource) -> void:
+	players = []
+	current_camera = null
+	subtitle_display = null
+	
 	var root = get_tree().get_root()
 	var current_scene = root.get_child(root.get_child_count() - 1)
 	var next_scene = scene_resource.instance()
@@ -255,11 +262,7 @@ func _set_new_scene(scene_resource):
 	current_scene.queue_free()
 	root.add_child(next_scene)
 
-func load_scene(path):
-	current_camera = null
-	players = []
-	Global.subtitle_display = null
-	
+func load_scene(path) -> void:
 	loader = ResourceLoader.load_interactive(path)
 	
 	if loader == null:

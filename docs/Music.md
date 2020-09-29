@@ -37,3 +37,15 @@ https://music.apple.com/us/album/acid-tracks-ep/885922990
 Required minimum length is 4 minutes and 44 seconds
 
 Copyright (c) 2000 Trax Records
+
+## Part03.ogg
+
+Neu - Sonderangebot
+
+https://www.youtube.com/watch?v=p4fmKS8Apug
+
+https://music.apple.com/us/album/sonderangebot/566610553
+
+Required minimum length is 4 minutes and 51 seconds
+
+Copyright (c) 2012 Groenland Records

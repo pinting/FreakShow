@@ -16,15 +16,15 @@ var current_speed = speed
 var rotation_dest = 0
 var current_velocity = 0
 
-func _ready():
+func _ready() -> void:
 	pass
 
-func path_distance():
+func path_distance() -> float:
 	if not path:
-		return 0
+		return 0.0
 	
 	var previous = global_position
-	var sum = 0
+	var sum = 0.0
 	
 	for i in range(path.size()):
 		sum += previous.distance_to(path[i])
@@ -32,7 +32,7 @@ func path_distance():
 	
 	return sum
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	if path.size() == 0:
 		return
 	

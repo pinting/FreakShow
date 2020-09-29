@@ -20,14 +20,14 @@ var held = false
 
 signal picked
 
-func _ready():
+func _ready() -> void:
 	assert(is_in_group("pickable"))
 
-func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int):
+func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		emit_signal("picked", self)
 
-func _physics_process(_delta: float):
+func _physics_process(_delta: float) -> void:
 	if not held or disabled:
 		return
 	
@@ -37,11 +37,11 @@ func _physics_process(_delta: float):
 	if abs(linear_velocity.x) < MAX_VELOCITY.x and abs(linear_velocity.y) < MAX_VELOCITY.y :
 		_apply_force(grab_force)
 
-func _apply_force(force: Vector2):
+func _apply_force(force: Vector2) -> void:
 	if force < MAX_FORCE and linear_velocity < MAX_VELOCITY:
 		apply_central_impulse(force)
 
-func pickup():
+func pickup() -> void:
 	if held or disabled:
 		return
 	
@@ -51,7 +51,7 @@ func pickup():
 	
 	held = true
 
-func drop(impulse: Vector2 = Vector2.ZERO):
+func drop(impulse: Vector2 = Vector2.ZERO) -> void:
 	if not held:
 		return
 	
@@ -63,7 +63,7 @@ func drop(impulse: Vector2 = Vector2.ZERO):
 	
 	held = false
 
-func disable():
+func disable() -> void:
 	disabled = true
 	held = false
 	

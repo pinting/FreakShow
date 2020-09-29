@@ -32,10 +32,10 @@ var started: bool = false
 var current_second: float = 0.0
 var base_position: Vector2 = Vector2(0.0, 0.0)
 
-func _ready():
+func _ready() -> void:
 	visible = false
 
-func start():
+func start() -> void:
 	base_position = global_position
 	
 	position.x -= start_from
@@ -46,7 +46,7 @@ func start():
 	audio_stream_01.play()
 	audio_stream_02.play()
 
-func _process(delta):
+func _process(delta) -> void:
 	var self_position = global_position
 	
 	if not started:

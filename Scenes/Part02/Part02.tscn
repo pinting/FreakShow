@@ -132,6 +132,7 @@ position = Vector2( 59.2303, 0.734743 )
 
 [node name="BaseScene" parent="." instance=ExtResource( 9 )]
 script = ExtResource( 5 )
+delay = 1.0
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -2095.17, -2417.77 )
@@ -523,7 +524,7 @@ position = Vector2( -8778.67, 17054.4 )
 position = Vector2( 17877.4, 17054.4 )
 
 [node name="TeleportPlayer" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( -2644.49, 34935.3 )
+position = Vector2( -5757.96, 34935.3 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
 

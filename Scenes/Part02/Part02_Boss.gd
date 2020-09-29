@@ -14,10 +14,10 @@ onready var mouth_area = $MouthArea/CollisionShape2D
 var dead = false
 var current: Color = Color(1.0, 0.0, 0.0)
 
-func _ready():
+func _ready() -> void:
 	pass
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	var d = path_distance()
 	
 	if d > high_speed_after:
@@ -25,7 +25,7 @@ func _physics_process(delta: float):
 	else:
 		current_speed = speed
 
-func kill():
+func kill() -> void:
 	if dead:
 		return
 	
@@ -35,7 +35,7 @@ func kill():
 	collision.disabled = true
 	mouth_area.disabled = true
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if current.r <= 1.0 and current.g < 1.0 and current.b == 0:
 		current.r -= delta * color_change_speed
 		current.g += delta * color_change_speed

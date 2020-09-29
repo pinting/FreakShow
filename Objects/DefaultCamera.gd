@@ -11,14 +11,14 @@ var noise: OpenSimplexNoise = OpenSimplexNoise.new()
 var shake: float = 0.0
 var offset_y = 0
 
-func _ready():
+func _ready() -> void:
 	Global.current_camera = self
 	
 	noise.seed = randi()
 	noise.period = 4
 	noise.octaves = 2
 
-func _process(delta):
+func _process(delta) -> void:
 	if not shake:
 		return
 	

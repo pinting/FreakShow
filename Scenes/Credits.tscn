@@ -44,7 +44,7 @@ layer = -90
 self_modulate = Color( 0.219608, 0.219608, 0.219608, 1 )
 scale = Vector2( 1.26, 1.27 )
 frames = ExtResource( 1 )
-frame = 3
+frame = 28
 playing = true
 centered = false
 

@@ -115,7 +115,7 @@ var dead: bool = false
 # Register player to players list
 var register: bool = true
 
-func _ready():
+func _ready() -> void:
 	set_animation_frames(animation_frames)
 	
 	animation_prefix = "" if avatar_mode else "a"
@@ -124,7 +124,7 @@ func _ready():
 		Global.players.push_back(self)
 		Global.debug("Player registered")
 
-func set_animation_frames(frames):
+func set_animation_frames(frames) -> void:
 	assert(frames != null)
 	
 	assert(frames.has_animation("a_stand_still"))
@@ -151,7 +151,7 @@ func set_animation_frames(frames):
 	
 	animated_sprite.frames = frames
 
-func _process_transforming_effect(delta: float):
+func _process_transforming_effect(delta: float) -> void:
 	if not transforming:
 		transform_effect.self_modulate.a = 0.0
 		return
@@ -178,28 +178,28 @@ func _process_transforming_effect(delta: float):
 		transforming = false
 		transforming_seconds = 0.0
 
-func _process_collision_shapes():
+func _process_collision_shapes() -> void:
 	stand_collision.disabled = dead or crouching or avatar_mode
 	crouch_collision.disabled = dead or not crouching or avatar_mode
 	avatar_collision.disabled = dead or not avatar_mode
 
-func toggle_avatar_mode():
+func toggle_avatar_mode() -> void:
 	if not freeze:
 		transforming = not transforming
 
-func enable_avatar_mode():
+func enable_avatar_mode() -> void:
 	if not avatar_mode:
 		toggle_avatar_mode()
 
-func disable_avatar_mode():
+func disable_avatar_mode() -> void:
 	if avatar_mode:
 		toggle_avatar_mode()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	_process_transforming_effect(delta)
 	_process_collision_shapes()
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	current_second += delta
 	
 	var direction = _get_direction()
@@ -211,7 +211,7 @@ func _physics_process(delta: float):
 	_process_animation(direction)
 	_process_pickable_kick()
 
-func _process_velocity(delta: float, direction: Vector2):
+func _process_velocity(delta: float, direction: Vector2) -> void:
 	if freeze:
 		if not avatar_mode and force_gravity:
 			var next_velocity = _calculate_next_velocity(delta, Vector2.ZERO, acceleration)
@@ -238,7 +238,7 @@ func _process_velocity(delta: float, direction: Vector2):
 		
 		current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, floor_normal, on_platform, 4, 0.9, false)
 
-func _process_pickable_kick():
+func _process_pickable_kick() -> void:
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		var body = collision.collider
@@ -248,13 +248,13 @@ func _process_pickable_kick():
 			
 			body._apply_force(position_diff.normalized() * body.KICK_FORCE)
 
-func _process_crouch():
+func _process_crouch() -> void:
 	var crouch_pressed = Input.is_action_just_pressed("crouch")
 	
 	if crouch_pressed:
 		crouching = not crouching
 
-func _process_sprint():
+func _process_sprint() -> void:
 	var fast_walk_pressed = Input.is_action_just_pressed("fast_walk")
 	
 	if fast_walk_pressed:
@@ -267,7 +267,7 @@ func _process_sprint():
 	current_acceleration = speed_mod * acceleration
 	current_animation_speed = speed_mod * animation_speed
 
-func _process_animation(direction: Vector2):
+func _process_animation(direction: Vector2) -> void:
 	var next_animation = _get_next_animation(direction)
 	
 	if next_animation.freeze:
@@ -279,7 +279,7 @@ func _process_animation(direction: Vector2):
 	
 	animated_sprite.animation = animation_prefix + d + next_animation.name
 
-func _process_facing(direction: Vector2):
+func _process_facing(direction: Vector2) -> void:
 	if avatar_mode:
 		animation_prefix = ""
 	elif len(animation_prefix) == 0:
@@ -298,7 +298,7 @@ func _process_facing(direction: Vector2):
 	if not avatar_mode and direction.x != 0.0:
 		animation_prefix = "a" if direction.x > 0.0 else "b"
 
-func _get_direction():
+func _get_direction() -> Vector2:
 	if freeze:
 		return Vector2(0, 0)
 	
@@ -317,7 +317,7 @@ func _get_direction():
 	
 	return Vector2(x, y)
 
-func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: float):
+func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: float) -> Vector2:
 	var next_velocity = current_velocity
 	var players = Global.players
 	
@@ -382,25 +382,25 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 	
 	return next_velocity
 
-func freeze(with_gravity: bool = false):
+func freeze(with_gravity: bool = false) -> void:
 	force_gravity = with_gravity
 	freeze = true
 
-func unfreeze():
+func unfreeze() -> void:
 	if not transforming:
 		freeze = false
 
-func kill():
+func kill() -> void:
 	dead = true
 	freeze = true
 	transforming = false
 	animated_sprite.visible = false
 	death_effect.emitting = true
 
-func is_dead():
+func is_dead() -> bool:
 	return dead
 
-func _get_next_animation(direction: Vector2):
+func _get_next_animation(direction: Vector2) -> Dictionary:
 	var next_animation = "default"
 	var freeze = false
 	
@@ -413,7 +413,7 @@ func _get_next_animation(direction: Vector2):
 			freeze = true
 	else:
 		if is_on_floor():
-			if direction.x and abs(current_velocity.x) > 1.0:
+			if direction.x and abs(current_velocity.x) > 0.0:
 				if not moving_x:
 					moving_x = true
 					transition = true

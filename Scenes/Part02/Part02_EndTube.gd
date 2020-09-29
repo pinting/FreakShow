@@ -10,13 +10,13 @@ onready var tooth_right = $Meat/Tooth01
 var open_mouth: bool = false
 var between: float = 0
 
-func _ready():
+func _ready() -> void:
 	if Global.LOW_PERFORMANCE:
 		meat.material = null
 	
 	between = (tooth_left.position.x + tooth_right.position.x) / 2
 
-func _process(delta):
+func _process(delta) -> void:
 	if not open_mouth:
 		return
 	

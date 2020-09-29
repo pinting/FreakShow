@@ -13,7 +13,7 @@ signal door_selected
 
 var doors
 
-func _ready():
+func _ready() -> void:
 	doors = [
 		hallway_door_00,
 		hallway_door_01,
@@ -28,10 +28,10 @@ func _ready():
 	for i in range(len(doors)):
 		doors[i].connect("selected", self, "_on_hallway_door_select", [doors[i], i])
 
-func _on_hallway_door_select(door: Node2D, index: int):
+func _on_hallway_door_select(door: Node2D, index: int) -> void:
 	emit_signal("door_selected", door, index)
 
-func open_exit(index: int):
+func open_exit(index: int) -> void:
 	doors[index].open()
 
 func get_closest_door(target: Vector2) -> int:

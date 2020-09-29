@@ -11,15 +11,15 @@ export var start: int = 1
 
 var current: int = 0
 
-func _ready():
+func _ready() -> void:
 	connect("selected", self, "_on_selected")
 	
 	current = start
 
-func _process(delta):
+func _process(delta) -> void:
 	material.set_shader_param("amount", current)
 
-func _on_selected():
+func _on_selected() -> void:
 	if step <= 0:
 		return
 	
@@ -28,6 +28,6 @@ func _on_selected():
 	if current >= limit:
 		remove()
 
-func remove():
+func remove() -> void:
 	get_parent().remove_child(self)
 	remove_description()

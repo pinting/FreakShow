@@ -20,23 +20,18 @@ The game was imagined based on a selection of music tracks - however, I do not o
 * Click on `Export All`.
 * The DMG and EXE application files will be placed into the `out` directory.
 
-## Plot
-
-Can be found [here](docs/Plot.md).
-
 ## Credits
 
 * Diana Baranyi - photo assets
 * Zsofi Szabo - photo assets
 * Babett Farkas - photo assets
-* Zsofi Kenesei - character actor
-* Imre Herczeg - character actor
 * Gergo Tornyi - photo assets, character actor
-* Zsuzsa Buka - photo assets, character actor
+* Zsuzsa Buka - photo assets, drawings
+* Jozsef Koller - animation interpolation
 * Xavier Gómez Gosálbez - CRT shader
 * Nathan Lovato - fog shader
-* Denes Tornyi - scripting, custom shaders, photo assets, character actor
 * Godot Engine - engine, shaders, sprites of particles
+* Denes Tornyi - scripting, custom shaders, photo assets, character actor
 
 ## License
 

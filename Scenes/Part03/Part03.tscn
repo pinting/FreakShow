@@ -28,7 +28,7 @@ script = ExtResource( 7 )
 fade_in_duration = 1.0
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 12 )]
-position = Vector2( -1607.49, -602.965 )
+position = Vector2( -1607.49, -8018.65 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
@@ -66,10 +66,6 @@ z_index = -2
 position = Vector2( 615.555, 169.822 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
-
-[node name="TopSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( -1607.49, -8678 )
-scale = Vector2( 0.7, 0.7 )
 
 [node name="DitchSpawn" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( 4980.86, -575.879 )

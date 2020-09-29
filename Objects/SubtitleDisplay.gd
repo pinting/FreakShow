@@ -8,13 +8,13 @@ var current_describe_key = null
 var keep_describe = false
 var lines = []
 
-func _ready():
+func _ready() -> void:
 	Global.subtitle_display = self
 	
 	top.text = ""
 	bottom.text = ""
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	var text = ""
 	var marked = []
 	var i = 0
@@ -40,7 +40,7 @@ func _process(delta: float):
 	
 	bottom.text = text
 	
-func say(text: String, speed: float = 2.0, timeout: float = 10.0):
+func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 	lines.push_back({
 		"text": text,
 		"speed": speed,
@@ -48,7 +48,7 @@ func say(text: String, speed: float = 2.0, timeout: float = 10.0):
 		"show_percentage": 0 if speed > 0 else 100
 	})
 
-func describe(key: int, text: String, keep: bool = false):
+func describe(key: int, text: String, keep: bool = false) -> void:
 	if keep_describe:
 		return
 	
@@ -56,7 +56,7 @@ func describe(key: int, text: String, keep: bool = false):
 	current_describe_key = key
 	keep_describe = keep
 
-func describe_remove(key: int, force: bool = false):
+func describe_remove(key: int, force: bool = false) -> void:
 	if current_describe_key == key or force:
 		top.text = ""
 		current_describe_key = null

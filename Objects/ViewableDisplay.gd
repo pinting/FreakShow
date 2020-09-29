@@ -23,13 +23,14 @@ func add(texture: Texture, description: String, child_scale: float = 1.0):
 	current.centered = true
 	current.visible = true
 	
+	Global.disable_selectable = true
 	Global.subtitle.describe(current.get_instance_id(), description, true)
 
-func _process(delta):
+func _process(delta) -> void:
 	if current.visible:
 		visible_since += delta
 
-func _input(event):
+func _input(event) -> void:
 	if not current.visible or not (event is InputEventMouseButton) or not event.pressed:
 		return
 	
@@ -44,4 +45,5 @@ func _input(event):
 		
 		current.visible = false
 		
+		Global.disable_selectable = false
 		Global.subtitle.describe_remove(current.get_instance_id())

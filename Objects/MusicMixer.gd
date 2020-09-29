@@ -39,7 +39,7 @@ var mixing: bool = false
 var kill_timeout: float = 0.0
 var kill: bool = false
 
-func _ready():
+func _ready() -> void:
 	master_player = player_00
 	master_player.stream = stream
 	master_player.volume_db = min_volume
@@ -51,7 +51,7 @@ func _ready():
 	if autoplay:
 		play()
 
-func add_part(start: float, end: float, loop: bool, in_duration: float, out_duration: float, offset: float = 0.0):
+func add_part(start: float, end: float, loop: bool, in_duration: float, out_duration: float, offset: float = 0.0) -> int:
 	# A part needs to start earlier than end
 	assert(start < end)
 	
@@ -79,11 +79,11 @@ func add_part(start: float, end: float, loop: bool, in_duration: float, out_dura
 	
 	return len(parts) - 1
 
-func kill(timeout: float = 5.0):
+func kill(timeout: float = 5.0) -> void:
 	kill = true
 	kill_timeout = timeout
 
-func play():
+func play() -> void:
 	if len(parts) == 0:
 		return
 	
@@ -105,7 +105,7 @@ func play():
 	kill = false
 	kill_timeout = 0.0
 
-func pause():
+func pause() -> void:
 	if stopped:
 		return
 	
@@ -113,7 +113,7 @@ func pause():
 	master_player.stream_paused = true
 	slave_player.stream_paused = true
 
-func resume():
+func resume() -> void:
 	if stopped:
 		return
 	
@@ -121,7 +121,7 @@ func resume():
 	master_player.stream_paused = false
 	slave_player.stream_paused = false
 
-func get_next():
+func get_next() -> int:
 	var current_part = parts[current_part_index]
 	
 	if kill:
@@ -138,7 +138,7 @@ func get_next():
 	else:
 		return -1
 
-func force_next(index: int):
+func force_next(index: int) -> void:
 	if mixing:
 		_finish_mixing(get_next())
 		
@@ -146,7 +146,7 @@ func force_next(index: int):
 	break_loop_now = true
 	break_loop = true
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if stopped or paused:
 		return
 	
@@ -235,7 +235,7 @@ func _process(delta: float):
 				else:
 					_finish_mixing(next_part_index)
 
-func _finish_mixing(next_part_index: int):
+func _finish_mixing(next_part_index: int) -> void:
 	_debug(str("new master index ", next_part_index))
 	
 	# Swap players
@@ -258,10 +258,10 @@ func _finish_mixing(next_part_index: int):
 	forced_next = -1
 	mixing = false
 
-func _debug(message: String):
+func _debug(message: String) -> void:
 	if debug:
 		Global.debug(message)
 
-func _debug_if_integer(t: float, message: String):
+func _debug_if_integer(t: float, message: String) -> void:
 	if abs(floor(t) - t) < 0.05:
 		_debug(message)
