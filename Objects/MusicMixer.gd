@@ -16,9 +16,6 @@ export var max_volume: int = 0
 # Muting volume in DB
 export var min_volume: int = -60
 
-# Parts of the music
-export var parts: Array = []
-
 # Debug the music player (Global.debug needs to be true)
 export var debug: bool = false
 
@@ -28,6 +25,8 @@ onready var player_01 = $AudioStreamPlayer01
 var master_player: AudioStreamPlayer = null
 var slave_player: AudioStreamPlayer = null
 var stopped: bool = true
+var paused: bool = false
+var parts: Array = []
 
 var current_part_index: int = 0.0
 var playback_prev_position: float = 0.0
@@ -83,10 +82,6 @@ func add_part(start: float, end: float, loop: bool, in_duration: float, out_dura
 func kill(timeout: float = 5.0):
 	kill = true
 	kill_timeout = timeout
-	
-	var current_part = parts[current_part_index]
-	
-	current_part.out_duration = timeout
 
 func play():
 	if len(parts) == 0:
@@ -99,6 +94,7 @@ func play():
 	master_player.play(parts[0].start)
 	
 	stopped = false
+	paused = false
 	current_part_index = 0
 	
 	playback_prev_position = parts[0].start
@@ -108,6 +104,22 @@ func play():
 	mixing = false
 	kill = false
 	kill_timeout = 0.0
+
+func pause():
+	if stopped:
+		return
+	
+	paused = true
+	master_player.stream_paused = true
+	slave_player.stream_paused = true
+
+func resume():
+	if stopped:
+		return
+	
+	paused = false
+	master_player.stream_paused = false
+	slave_player.stream_paused = false
 
 func get_next():
 	var current_part = parts[current_part_index]
@@ -135,7 +147,7 @@ func force_next(index: int):
 	break_loop = true
 
 func _process(delta: float):
-	if stopped:
+	if stopped or paused:
 		return
 	
 	var playback_position_now = master_player.get_playback_position()
@@ -184,7 +196,7 @@ func _process(delta: float):
 	# Determinate if the current or the next part should be played as next
 	var next_part_index = get_next()
 	
-	# If no next part is present and we are close to the end, stop
+	# If no next part is present and we are close enough to the end, stop
 	if next_part_index == -1:
 		if diff_to_end < 0:
 			master_player.stop()

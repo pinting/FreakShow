@@ -19,7 +19,6 @@ export var camera_zoom_speed: float = 1.0
 export var teleport_player_to_end: bool = false
 
 onready var player = $Player
-onready var music_mixer = $MusicMixer
 
 onready var debug_line = $Environment/DebugLine
 onready var navigation = $Environment/Navigation2D
@@ -52,6 +51,8 @@ onready var boss_go_back_01 = $Trigger/BossGoBack01
 onready var end_door_area = $Trigger/EndDoorArea
 onready var teleport_player = $Trigger/TeleportPlayer
 
+onready var main_music = $Sound/MainMusic
+
 onready var connect_sound = $Sound/ConnectSound
 onready var wind_sound = $Sound/WindSound
 onready var door_locked_sound = $Sound/DoorLockedSound
@@ -67,8 +68,8 @@ var game_playing: bool = false
 var not_close_enough_help: bool = true
 
 func _ready():
-	music_00 = music_mixer.add_part(0, 4 * 60 + 0.7, false, 0, 0, 0)
-	music_01 = music_mixer.add_part(4 * 60 + 0.7, 4 * 60 + 25, true, 0.5, 0.5, -1)
+	music_00 = main_music.add_part(0, 4 * 60 + 0.7, false, 0, 0, 0)
+	music_01 = main_music.add_part(4 * 60 + 0.7, 4 * 60 + 25, true, 0.5, 0.5, -1)
 	
 	connect("scene_started", self, "_on_scene_started")
 	
@@ -105,7 +106,7 @@ func _fail_game(body: Node):
 	player.kill()
 	yield(timer(3.0), "timeout")
 	
-	music_mixer.kill(2.0);
+	main_music.kill(2.0);
 	
 	load_scene(get_parent().filename)
 
@@ -119,7 +120,7 @@ func _start_game(body: Node):
 		player.enable_avatar_mode()
 	
 		connect_sound.stop()
-		music_mixer.play()
+		main_music.play()
 		
 		Global.subtitle.say(tr("NARRATOR05"), 0.5, 3.0)
 		yield(timer(2.0), "timeout")
@@ -135,7 +136,7 @@ func _end_game(body: Node):
 	game_playing = false
 	wall_after_leave.disabled = false
 	
-	music_mixer.kill(2.0);
+	main_music.kill(2.0);
 	wind_sound.play()
 
 func _on_exit():

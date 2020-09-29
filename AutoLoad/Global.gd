@@ -1,7 +1,7 @@
 extends Node
 
 # Enable debug messages
-const DEBUG: bool = false
+const DEBUG: bool = true
 
 # Disable sounds
 const NO_SOUNDS: bool = false

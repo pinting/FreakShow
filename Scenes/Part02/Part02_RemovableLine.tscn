@@ -4,8 +4,6 @@
 [ext_resource path="res://Scenes/Part02/Part02_RemovableLine.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Environmnent/Lines/Lines00_H00.png" type="Texture" id=4]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/amount = 0.0
@@ -25,8 +23,8 @@ clone_material = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = 100
-collision_layer = 15
-collision_mask = 15
+collision_layer = 8
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -7.15843, 10.1711 )

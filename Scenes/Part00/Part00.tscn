@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Part00/Part00_Hallway.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part00/Part00.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Part00/Part00_Flat.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Sounds/Door01.wav" type="AudioStream" id=10]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Music/Part01.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=13]
 [ext_resource path="res://Assets/Sounds/Knock00.wav" type="AudioStream" id=14]
 
@@ -29,7 +30,7 @@ fade_in_after = 3.0
 delay = 1.0
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 8 )]
-position = Vector2( -1270.34, -60.225 )
+position = Vector2( -1270.34, -49.9356 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
@@ -43,9 +44,6 @@ environment = SubResource( 1 )
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
 color = Color( 0.372549, 0.372549, 0.372549, 1 )
-
-[node name="MusicMixer" parent="BaseScene" instance=ExtResource( 11 )]
-stream = ExtResource( 5 )
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
@@ -84,6 +82,12 @@ position = Vector2( -487.468, 10169.4 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
 
+[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource( 11 )]
+stream = ExtResource( 5 )
+
+[node name="WaitingMusic" parent="BaseScene/Sound" instance=ExtResource( 11 )]
+stream = ExtResource( 12 )
+
 [node name="KnockSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 14 )
 
@@ -92,4 +96,3 @@ stream = ExtResource( 10 )
 
 [node name="SilentDoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 13 )
-volume_db = 20.0

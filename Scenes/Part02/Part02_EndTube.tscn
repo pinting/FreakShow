@@ -55,7 +55,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 250, 4000 )
 
 [node name="Tooth00" type="Sprite" parent="Meat"]
-visible = false
 position = Vector2( -51.7041, 0 )
 scale = Vector2( 2.3, 1 )
 z_index = 1
@@ -64,7 +63,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 64, 4000 )
 
 [node name="Tooth01" type="Sprite" parent="Meat"]
-visible = false
 position = Vector2( 53.2733, 0 )
 scale = Vector2( 2.2, 1 )
 z_index = 1

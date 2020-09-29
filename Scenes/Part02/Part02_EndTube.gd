@@ -7,7 +7,7 @@ onready var meat = $Meat
 onready var tooth_left = $Meat/Tooth00
 onready var tooth_right = $Meat/Tooth01
 
-var open_mouth: bool = true
+var open_mouth: bool = false
 var between: float = 0
 
 func _ready():

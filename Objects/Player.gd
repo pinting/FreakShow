@@ -112,12 +112,17 @@ var force_gravity: bool = false
 # Is the player dead
 var dead: bool = false
 
+# Register player to players list
+var register: bool = true
+
 func _ready():
 	set_animation_frames(animation_frames)
 	
 	animation_prefix = "" if avatar_mode else "a"
 	
-	Global.players.push_back(self)
+	if register:
+		Global.players.push_back(self)
+		Global.debug("Player registered")
 
 func set_animation_frames(frames):
 	assert(frames != null)

@@ -6,8 +6,13 @@ export var next_scene: String = "res://Scenes/Part01/Part01.tscn"
 # Help player after this amount of loops into one direction
 export var help_after_index: int = 2
 
+# Open hallway door after this amount of seconds
+export var open_hallway_door_after: float = 30
+
+# Max position diff to wait
+export var max_position_diff_to_wait: float = 100
+
 onready var player = $Player
-onready var music_mixer = $MusicMixer
 
 onready var flat_door = $Environment/Flat/Inside/Door
 onready var random_flat_container = $Environment/RandomFlatContainer
@@ -22,28 +27,30 @@ onready var hallway_spawn = $Trigger/HallwaySpawn
 onready var hallway_begin = $Trigger/HallwayLoopBegin
 onready var hallway_end = $Trigger/HallwayLoopEnd
 
+onready var main_music = $Sound/MainMusic
+onready var waiting_music  = $Sound/WaitingMusic
+
 onready var knock_sound = $Sound/KnockSound
 onready var door_open_sound = $Sound/DoorOpenSound
 onready var silent_door_open_sound = $Sound/SilentDoorOpenSound
 
 const random_flat_scene = preload("res://Scenes/Part00/Part00_RandomFlat.tscn")
-const home_index = 4
 
 var hallway_help_complete: bool = false
-var hallway_stage_00: bool = true
-var hallway_stage_01: bool = false
-var loop_direction: float = 0.0
-var loop_index: int = 0
 var hallway_exit_open: bool = false
 var hallway_exiting: bool = false
-var old_player = null
+var loop_index: int = 0
+var old_player: Player = null
+var home_index = 4
 
 var music_00: int
 var music_01: int
 
 func _ready():
-	music_00 = music_mixer.add_part(2, 5 * 60, false, 5, 5, -5)
-	music_01 = music_mixer.add_part(30, 5 * 60, true, 5, 5, -5)
+	music_00 = main_music.add_part(2, 5 * 60, false, 5, 5, -5)
+	music_01 = main_music.add_part(30, 5 * 60, true, 5, 5, -5)
+	
+	waiting_music.add_part(13 * 60 + 35, 15 * 60 + 10, true, 5, 5, 0)
 	
 	connect("scene_started", self, "_on_scene_started")
 	
@@ -53,7 +60,7 @@ func _ready():
 	hallway_01.connect("door_selected", self, "_on_hallway_door_select")
 	hallway_02.connect("door_selected", self, "_on_hallway_door_select")
 	
-	music_mixer.play()
+	main_music.play()
 	
 	var camera = Global.current_camera
 	
@@ -65,9 +72,13 @@ func _on_scene_started():
 	Global.subtitle.say(tr("NARRATOR00"))
 
 func _on_flat_exit_select():
+	player_in_hallway = true
+	
 	move_with_fade(player, hallway_spawn.position, door_open_sound)
 
 func _on_hallway_door_select(door, index):
+	player_in_hallway = false
+	
 	if index == home_index:
 		if not hallway_exit_open:
 			hallway_spawn.global_position = door.global_position
@@ -76,7 +87,7 @@ func _on_hallway_door_select(door, index):
 		elif hallway_exit_open and not hallway_exiting:
 			hallway_exiting = true
 			
-			music_mixer.kill(2.0);
+			main_music.kill(2.0);
 			load_scene(next_scene)
 	else:
 		for child in random_flat_container.get_children():
@@ -92,8 +103,12 @@ func _on_hallway_door_select(door, index):
 		
 		move_with_fade(player, random_flat_spawn.position, door_open_sound)
 
-func _process_hallway_door(_delta: float):
-	if hallway_exit_open:
+var player_in_hallway: bool = false
+var previous_player_hallway_position: float = 0.0
+var hallway_wait_counter: float = 0.0
+
+func _process_hallway_door(delta: float):
+	if not player_in_hallway or hallway_exit_open:
 		return
 	
 	if abs(loop_index) > help_after_index and not hallway_help_complete:
@@ -101,27 +116,58 @@ func _process_hallway_door(_delta: float):
 		
 		hallway_help_complete = true
 	
-	if hallway_stage_00 and abs(loop_direction) == 1:
-		hallway_stage_00 = false
-		hallway_stage_01 = true
+	var camera = Global.current_camera
 	
-	if hallway_stage_01 and loop_direction == 0:
-		silent_door_open_sound.play()
-		hallway_01.open_exit(home_index)
-		hallway_exit_open = true
+	var player_position = player.global_position.x
+	var previous_position = previous_player_hallway_position
+	var position_x_diff = abs(player_position - previous_position)
+	
+	if position_x_diff < max_position_diff_to_wait:
+		hallway_wait_counter += delta
+		
+		# Starts to play effects if the player stands long enough at one place
+		if hallway_wait_counter > open_hallway_door_after - 20.0:
+			# Play the waiting music sequence
+			if waiting_music.stopped:
+				waiting_music.play()
+			
+			# Start to shake the camera more and more
+			var d = (open_hallway_door_after - hallway_wait_counter) / 20.0
+			
+			camera.shake = pow(d + 1.0, 2.0)
+		
+		# Open the door
+		if hallway_wait_counter > open_hallway_door_after:
+			if camera:
+				camera.shake = 0.0
+			
+			main_music.kill(5.0)
+			silent_door_open_sound.play()
+			
+			home_index = hallway_01.get_closest_door(player.global_position)
+			hallway_exit_open = true
+			
+			hallway_01.open_exit(home_index)
+	else:
+		previous_player_hallway_position = player_position
+		hallway_wait_counter = 0.0
+		
+		waiting_music.kill(0.5)
+		
+		if camera:
+			camera.shake = 0.0
 
 func _dupe_player():
 	var clone = player.duplicate()
 	
-	var duplicate_camera = null
+	clone.register = false
 	
 	for n in clone.get_children():
 		if n.name == "DefaultCamera":
-			duplicate_camera = n
+			clone.remove_child(n)
+			n.queue_free()
 			break
 	
-	clone.remove_child(duplicate_camera)
-	duplicate_camera.queue_free()
 	add_child(clone)
 	
 	return clone
@@ -139,8 +185,6 @@ func _process_hallway_loop(_delta: float):
 		
 		player.global_position = Vector2(right_end_position.x - diff, player_position.y)
 		loop_index -= 1
-		loop_direction -= 1
-		loop_direction = max(loop_direction, -1)
 	
 	# Right end
 	if right_end_position.x < player_position.x:		
@@ -150,8 +194,6 @@ func _process_hallway_loop(_delta: float):
 		
 		player.global_position = Vector2(left_end_position.x + diff, player_position.y)
 		loop_index += 1
-		loop_direction += 1
-		loop_direction = min(loop_direction, 1)
 
 func _process(delta: float):
 	if old_player:

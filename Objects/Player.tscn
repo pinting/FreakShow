@@ -19,8 +19,7 @@ script = ExtResource( 1 )
 material = SubResource( 1 )
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-animation = "a_crouch_still_to_move"
-frame = 42
+frame = 38
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]

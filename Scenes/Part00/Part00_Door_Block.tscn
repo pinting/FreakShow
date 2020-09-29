@@ -39,6 +39,7 @@ clone_material = true
 "selectable",
 ]]
 visible = false
+self_modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 1 )
 scale = Vector2( 0.83, 0.83 )
 texture = ExtResource( 8 )
@@ -57,5 +58,5 @@ scale = Vector2( 0.496706, 0.496706 )
 z_index = 2
 
 [node name="Light" parent="Lamp" instance=ExtResource( 2 )]
-position = Vector2( -653.318, 1228.73 )
+position = Vector2( -617.671, 1183.84 )
 scale = Vector2( 2.14794, 0.669221 )

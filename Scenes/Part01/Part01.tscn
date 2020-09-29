@@ -36,7 +36,7 @@
 [ext_resource path="res://Objects/Selectable/Selectable_SonOfBitchGraffiti.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Assets/Environmnent/Bench00.png" type="Texture" id=35]
 [ext_resource path="res://Animations/Stranger01.tres" type="SpriteFrames" id=36]
-[ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=37]
+[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=37]
 [ext_resource path="res://Objects/DynamicFog.tscn" type="PackedScene" id=38]
 [ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti27.png" type="Texture" id=39]
 [ext_resource path="res://Objects/Viewable/Viewable_KidPaper.tscn" type="PackedScene" id=40]
@@ -92,7 +92,6 @@ position = Vector2( 59.2303, 0.734743 )
 
 [node name="BaseScene" parent="." instance=ExtResource( 46 )]
 script = ExtResource( 8 )
-teleport_player_to_end = true
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -4797.1, -349.489 )
@@ -116,9 +115,6 @@ margin_bottom = 206.603
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 0
 color = Color( 0.294118, 0.294118, 0.294118, 1 )
-
-[node name="MusicMixer" parent="BaseScene" instance=ExtResource( 11 )]
-stream = ExtResource( 10 )
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
@@ -374,7 +370,7 @@ texture = ExtResource( 35 )
 position = Vector2( -18.1079, -135.532 )
 scale = Vector2( 0.751973, 0.751973 )
 frames = ExtResource( 36 )
-frame = 59
+frame = 94
 playing = true
 
 [node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 6 )]
@@ -441,6 +437,9 @@ shape = SubResource( 12 )
 position = Vector2( 10363.7, -184.486 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
+
+[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource( 11 )]
+stream = ExtResource( 10 )
 
 [node name="WindSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 3 )

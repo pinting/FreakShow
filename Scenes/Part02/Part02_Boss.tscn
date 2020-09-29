@@ -5,9 +5,6 @@
 [ext_resource path="res://Objects/Effect/Effect_SalamiDeath.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Shaders/ColorChanger.shader" type="Shader" id=4]
 
-
-
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
 shader_param/color_key = Color( 0, 0.509804, 0.913725, 1 )
@@ -20,8 +17,8 @@ height = 621.209
 
 [node name="Part02_CokeHead" type="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
-collision_layer = 15
-collision_mask = 15
+collision_layer = 7
+collision_mask = 7
 script = ExtResource( 1 )
 speed = 800.0
 rotation_speed = 60.0
@@ -32,6 +29,7 @@ polygon = PoolVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -49
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
 frames = ExtResource( 2 )
+frame = 1
 playing = true
 
 [node name="DeathEffect" parent="." instance=ExtResource( 3 )]

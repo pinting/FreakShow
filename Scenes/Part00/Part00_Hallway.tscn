@@ -12,15 +12,6 @@
 [ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti16.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Part00/Part00_Hallway.gd" type="Script" id=11]
 
-
-
-
-
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4722.81, 353.699 )
 

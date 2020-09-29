@@ -47,9 +47,6 @@ margin_top = -1261.0
 margin_right = 5582.0
 margin_bottom = 1906.0
 
-[node name="MusicMixer" parent="BaseScene" instance=ExtResource( 4 )]
-stream = ExtResource( 11 )
-
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
 [node name="Background" type="Sprite" parent="BaseScene/Environment"]
@@ -81,6 +78,9 @@ position = Vector2( 4980.86, -575.879 )
 position = Vector2( 5006.62, 1466.32 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
+
+[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource( 4 )]
+stream = ExtResource( 11 )
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 8 )

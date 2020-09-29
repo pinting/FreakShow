@@ -4,7 +4,6 @@ extends "res://Scenes/BaseScene.gd"
 export var next_scene: String = "res://Scenes/Credits.tscn"
 
 onready var player = $Player
-onready var music_mixer = $MusicMixer
 
 func _ready():
 	connect("scene_started", self, "_on_scene_started")

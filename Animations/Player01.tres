@@ -448,6 +448,11 @@ animations = [ {
 "name": "default",
 "speed": 30.0
 }, {
+"frames": [ ExtResource( 187 ) ],
+"loop": false,
+"name": "a_stand_still",
+"speed": 60.0
+}, {
 "frames": [ ExtResource( 434 ) ],
 "loop": false,
 "name": "a_crouch_still",
@@ -461,11 +466,6 @@ animations = [ {
 "frames": [ ExtResource( 205 ), ExtResource( 268 ), ExtResource( 392 ), ExtResource( 249 ), ExtResource( 250 ), ExtResource( 257 ), ExtResource( 263 ), ExtResource( 143 ), ExtResource( 251 ), ExtResource( 406 ), ExtResource( 252 ), ExtResource( 365 ), ExtResource( 171 ), ExtResource( 201 ), ExtResource( 204 ), ExtResource( 209 ), ExtResource( 172 ), ExtResource( 173 ), ExtResource( 202 ), ExtResource( 415 ), ExtResource( 429 ), ExtResource( 387 ), ExtResource( 411 ), ExtResource( 398 ), ExtResource( 430 ), ExtResource( 109 ), ExtResource( 108 ), ExtResource( 203 ), ExtResource( 115 ), ExtResource( 103 ), ExtResource( 102 ), ExtResource( 100 ), ExtResource( 107 ), ExtResource( 104 ), ExtResource( 448 ), ExtResource( 210 ), ExtResource( 166 ), ExtResource( 377 ), ExtResource( 132 ), ExtResource( 122 ) ],
 "loop": false,
 "name": "b_stand_still_to_move",
-"speed": 60.0
-}, {
-"frames": [ ExtResource( 187 ) ],
-"loop": false,
-"name": "a_stand_still",
 "speed": 60.0
 }, {
 "frames": [ ExtResource( 326 ), ExtResource( 193 ), ExtResource( 219 ), ExtResource( 312 ), ExtResource( 313 ), ExtResource( 324 ), ExtResource( 325 ), ExtResource( 315 ), ExtResource( 357 ), ExtResource( 220 ), ExtResource( 358 ), ExtResource( 356 ), ExtResource( 444 ), ExtResource( 355 ), ExtResource( 447 ), ExtResource( 314 ), ExtResource( 179 ), ExtResource( 359 ), ExtResource( 436 ), ExtResource( 191 ), ExtResource( 239 ), ExtResource( 240 ), ExtResource( 183 ), ExtResource( 241 ), ExtResource( 242 ), ExtResource( 243 ), ExtResource( 441 ), ExtResource( 227 ), ExtResource( 120 ), ExtResource( 228 ), ExtResource( 229 ), ExtResource( 230 ), ExtResource( 231 ), ExtResource( 232 ), ExtResource( 233 ), ExtResource( 234 ), ExtResource( 235 ), ExtResource( 244 ), ExtResource( 247 ), ExtResource( 226 ), ExtResource( 224 ), ExtResource( 254 ), ExtResource( 255 ), ExtResource( 256 ), ExtResource( 248 ), ExtResource( 236 ), ExtResource( 269 ), ExtResource( 264 ), ExtResource( 265 ), ExtResource( 253 ), ExtResource( 442 ), ExtResource( 178 ), ExtResource( 116 ), ExtResource( 266 ), ExtResource( 446 ), ExtResource( 117 ), ExtResource( 267 ), ExtResource( 184 ), ExtResource( 237 ), ExtResource( 262 ), ExtResource( 261 ), ExtResource( 259 ), ExtResource( 121 ), ExtResource( 260 ), ExtResource( 124 ), ExtResource( 218 ), ExtResource( 238 ), ExtResource( 413 ), ExtResource( 409 ), ExtResource( 443 ), ExtResource( 180 ), ExtResource( 222 ), ExtResource( 391 ), ExtResource( 380 ), ExtResource( 175 ), ExtResource( 385 ), ExtResource( 388 ), ExtResource( 401 ), ExtResource( 399 ), ExtResource( 194 ), ExtResource( 400 ), ExtResource( 402 ), ExtResource( 403 ), ExtResource( 118 ), ExtResource( 404 ), ExtResource( 445 ), ExtResource( 375 ), ExtResource( 195 ), ExtResource( 405 ), ExtResource( 376 ), ExtResource( 223 ), ExtResource( 414 ), ExtResource( 221 ), ExtResource( 192 ), ExtResource( 394 ), ExtResource( 389 ), ExtResource( 393 ), ExtResource( 396 ), ExtResource( 395 ), ExtResource( 397 ), ExtResource( 410 ), ExtResource( 412 ) ],
