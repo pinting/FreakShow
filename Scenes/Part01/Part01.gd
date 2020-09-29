@@ -43,6 +43,7 @@ var music_01: int
 var music_02: int
 
 var flashing_phone_light: bool = false
+var phone_selected: bool = false
 
 func _ready() -> void:
 	music_00 = main_music.add_part(0, 3 * 60 + 20, true, 0, 10, -40)
@@ -73,7 +74,11 @@ func _on_scene_started() -> void:
 	Global.subtitle.say(tr("NARRATOR02"), 6.0)
 
 func _on_phone_selected() -> void:
+	if phone_selected:
+		return
+	
 	flashing_phone_light = false
+	phone_selected = true
 	
 	main_music.kill(2.0);
 	fade_out(2.0)

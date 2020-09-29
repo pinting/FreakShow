@@ -10,6 +10,4 @@ func _ready() -> void:
 
 func _on_scene_started() -> void:
 	yield(timer(2.0), "timeout")
-	var door = $Environment/Bottom/Door
-	
-	door.open()
+	$Environment/Bottom/Door.open()
