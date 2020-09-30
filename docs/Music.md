@@ -51,16 +51,3 @@ https://music.apple.com/us/album/sonderangebot/566610553
 Required minimum length is 4 minutes and 51 seconds
 
 Copyright (c) 2012 Groenland Records
-
-# Prepare files
-
-Copy each music file into `Assets/Music` and run the following command in the same folder to prepare them for the game engine.
-
-```
-ffmpeg -i *Wehrmut* Part00.ogg
-ffmpeg -i  *Grosses\ Wasser* Part01.ogg
-ffmpeg -i  *Your\ Only\ Friend* Part02.ogg
-ffmpeg -i  *Sonderangebot* Part03.ogg
-```
-
-The directory where FFmpeg is installed needs to be present in the PATH variable.

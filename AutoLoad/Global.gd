@@ -25,7 +25,7 @@ const VIRTUAL_MOUSE_SPEED: Vector2 = Vector2(3, 3)
 const LOADING_TIME_PER_TICK: int = 100
 
 # Use Mac based joystick buttons
-const MAC_VIRTUAL_INPUT_FIX = true
+const MAC_VIRTUAL_INPUT_FIX = false
 
 var current_camera: Camera2D = null
 var players: Array = []

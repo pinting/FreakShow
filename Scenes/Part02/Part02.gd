@@ -1,7 +1,7 @@
 extends "res://Scenes/BaseScene.gd"
 
 # Next scene
-export var next_scene: String = "res://Scenes/Part03/Part03.tscn"
+export var next_scene: String = "res://Scenes/Credits.tscn"
 
 # How fast should the path finding update
 export var path_finding_interval: float = 0.5

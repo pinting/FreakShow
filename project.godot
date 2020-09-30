@@ -189,6 +189,7 @@ locale_filter=[ 1, [ "en" ] ]
 [rendering]
 
 quality/driver/fallback_to_gles2=true
+quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 vram_compression/import_etc=true
@@ -210,4 +211,3 @@ environment/default_clear_color=Color( 0, 0, 0, 1 )
 quality/reflections/atlas_size=512
 quality/reflections/atlas_subdiv=1
 quality/depth/hdr=false
-quality/2d/gles2_use_nvidia_rect_flicker_workaround=true

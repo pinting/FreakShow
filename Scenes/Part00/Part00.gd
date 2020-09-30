@@ -201,6 +201,7 @@ func _process(delta: float) -> void:
 	if old_player:
 		remove_child(old_player)
 		old_player.queue_free()
+		old_player = null
 	
 	_process_hallway_loop(delta)
 	_process_hallway_door(delta)

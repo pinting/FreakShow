@@ -536,7 +536,7 @@ stream = ExtResource( 13 )
 
 [node name="ConnectSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 2 )
-volume_db = 1.0
+volume_db = -10.0
 
 [node name="DoorLockedSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 38 )

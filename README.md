@@ -13,8 +13,8 @@ Watch a [recording](https://youtu.be/SdWDLyBJdVU) about the latest gameplay elem
 The game was imagined based on a selection of music tracks - however, I do not own the rights to include them with the assets thus it is the duty of the end user to provide the necessary files to the engine. They can be purchased for personal usage through popular 3rd party services.
 
 * Clone or download the repository.
-* _(optional)_ Place [the missing proprietary music tracks](docs/Music.md) into the `Assets/Music` folder.
-* _(alternative)_ Skip the previous step, by renaming the `.ogg.sample` silent tracks to `.ogg` inside the `Assets/Music` folder.
+* _(optional)_ Place [the missing proprietary music tracks](docs/Music.md) into the project folder.
+* Run `./setup.sh` to prepare the project. This command will convert and move all the proprietary music tracks into the `Assets/Music` directory. If they are not present, the attached sample (`.ogg.sample`) tracks will be used.
 * Open the project file with [Godot Editor](https://godotengine.org/) `3.2.x`. Importing the assets will take a couple of minutes.
 * Select `Project` -> `Export`.
 * Click on `Export All`.
@@ -32,6 +32,13 @@ The game was imagined based on a selection of music tracks - however, I do not o
 * Nathan Lovato - fog shader
 * Godot Engine - engine, shaders, sprites of particles
 * Denes Tornyi - scripting, custom shaders, photo assets, character actor
+
+Thank you for the musical inspiration to...
+
+* Part00 - Cluster & Eno
+* Part01 - Cluster
+* Part02 - Phuture
+* Part03 - Neu
 
 ## License
 
