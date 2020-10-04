@@ -87,6 +87,7 @@ stream = ExtResource( 5 )
 
 [node name="WaitingMusic" parent="BaseScene/Sound" instance=ExtResource( 11 )]
 stream = ExtResource( 12 )
+max_volume = 5
 
 [node name="KnockSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 14 )

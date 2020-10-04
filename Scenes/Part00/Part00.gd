@@ -7,7 +7,13 @@ export var next_scene: String = "res://Scenes/Part01/Part01.tscn"
 export var help_after_index: int = 2
 
 # Open hallway door after this amount of seconds
-export var open_hallway_door_after: float = 30
+export var hallway_open_exit_after: float = 20.0
+
+# Start to play hallway music after
+export var hallway_waiting_music_after: float = 5.0
+
+# Shake camera in hallway after after
+export var hallway_camera_shake_after: float = 10.0
 
 # Max position diff to wait
 export var max_position_diff_to_wait: float = 100
@@ -37,6 +43,7 @@ onready var silent_door_open_sound = $Sound/SilentDoorOpenSound
 const random_flat_scene = preload("res://Scenes/Part00/Part00_RandomFlat.tscn")
 
 var hallway_help_complete: bool = false
+var hallway_exit_enabled: bool = false
 var hallway_exit_open: bool = false
 var hallway_exiting: bool = false
 var loop_index: int = 0
@@ -102,13 +109,29 @@ func _on_hallway_door_select(door, index) -> void:
 		hallway_spawn.global_position = door.global_position
 		
 		move_with_fade(player, random_flat_spawn.position, door_open_sound)
+		
+		# Can only exit the hallway after looked into another room
+		hallway_exit_enabled = true
 
 var player_in_hallway: bool = false
 var previous_player_hallway_position: float = 0.0
 var hallway_wait_counter: float = 0.0
 
-func _process_hallway_door(delta: float) -> void:
-	if not player_in_hallway or hallway_exit_open:
+func _reset_hallway_wait() -> void:
+	if not waiting_music.stopped:
+		waiting_music.kill(0.5)
+	
+	var camera = Global.current_camera
+		
+	if camera:
+		camera.shake = 0.0
+
+func _process_hallway_wait(delta: float) -> void:
+	if hallway_exit_open or not hallway_exit_enabled:
+		return
+	
+	if not player_in_hallway:
+		_reset_hallway_wait()
 		return
 	
 	if abs(loop_index) > help_after_index and not hallway_help_complete:
@@ -125,19 +148,22 @@ func _process_hallway_door(delta: float) -> void:
 	if position_x_diff < max_position_diff_to_wait:
 		hallway_wait_counter += delta
 		
-		# Starts to play effects if the player stands long enough at one place
-		if hallway_wait_counter > open_hallway_door_after - 20.0:
-			# Play the waiting music sequence
+		var d = hallway_wait_counter / hallway_open_exit_after
+		
+		# Play the waiting music sequence
+		if hallway_wait_counter > hallway_waiting_music_after:
 			if waiting_music.stopped:
 				waiting_music.play()
 			
+			waiting_music.global_level = d + 0.33
+		
+		# Starts to play effects if the player stands long enough at one place
+		if hallway_wait_counter > hallway_camera_shake_after:
 			# Start to shake the camera more and more
-			var d = (open_hallway_door_after - hallway_wait_counter) / 20.0
-			
 			camera.shake = pow(d + 1.0, 2.0)
 		
 		# Open the door
-		if hallway_wait_counter > open_hallway_door_after:
+		if hallway_wait_counter > hallway_open_exit_after:
 			if camera:
 				camera.shake = 0.0
 			
@@ -154,10 +180,7 @@ func _process_hallway_door(delta: float) -> void:
 		previous_player_hallway_position = player_position
 		hallway_wait_counter = 0.0
 		
-		waiting_music.kill(0.5)
-		
-		if camera:
-			camera.shake = 0.0
+		_reset_hallway_wait()
 
 func _dupe_player() -> Node2D:
 	var clone = player.duplicate()
@@ -204,4 +227,4 @@ func _process(delta: float) -> void:
 		old_player = null
 	
 	_process_hallway_loop(delta)
-	_process_hallway_door(delta)
+	_process_hallway_wait(delta)

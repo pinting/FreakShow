@@ -46,7 +46,7 @@ func pickup() -> void:
 		return
 	
 	# If sprite is a selectiable, it needs to remain lit
-	if sprite.get("held"):
+	if sprite and sprite.get("held"):
 		sprite.held = true
 	
 	held = true
@@ -58,7 +58,7 @@ func drop(impulse: Vector2 = Vector2.ZERO) -> void:
 	_apply_force(impulse)
 	
 	# Only true of selectable
-	if sprite.get("held"):
+	if sprite and sprite.get("held"):
 		sprite.held = false
 	
 	held = false

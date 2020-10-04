@@ -49,6 +49,9 @@ export var freeze: bool = false
 # Enable or disable avatar mode
 export var avatar_mode: bool = false
 
+# The player dies after taking this amount of a hit
+export var hit_to_die: Vector2 = Vector2(20.0, 50.0)
+
 # Scale velocity
 export var scale_velocity: Vector2 = Vector2(1, 1)
 
@@ -114,6 +117,9 @@ var dead: bool = false
 
 # Register player to players list
 var register: bool = true
+
+# Disable max speed
+var no_max_speed: bool = false
 
 func _ready() -> void:
 	set_animation_frames(animation_frames)
@@ -210,6 +216,19 @@ func _physics_process(delta: float) -> void:
 	_process_facing(direction)
 	_process_animation(direction)
 	_process_pickable_kick()
+	_process_fall_damage()
+
+func _process_fall_damage():
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		
+		if not collision:
+			continue
+		
+		var hit = collision.travel - collision.remainder
+		
+		if hit.abs() > hit_to_die:
+			pass
 
 func _process_velocity(delta: float, direction: Vector2) -> void:
 	if freeze:
@@ -328,13 +347,13 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 		next_velocity.y *= pow(friction, delta)
 			
 		# Apply acceleration on Y
-		if abs(next_velocity.y) > avatar_max_speed:
+		if abs(next_velocity.y) > avatar_max_speed and not no_max_speed:
 			next_velocity.y = (next_velocity.y / abs(next_velocity.y)) * avatar_max_speed
 		elif direction.y != 0.0:
 			next_velocity.y += scale_velocity.y * direction.y * acceleration * delta
 		
 		# Apply acceleration on X
-		if abs(next_velocity.x) > avatar_max_speed:
+		if abs(next_velocity.x) > avatar_max_speed and not no_max_speed:
 			next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * avatar_max_speed
 		elif direction.x != 0.0:
 			next_velocity.x += scale_velocity.x * direction.x * acceleration * delta
@@ -351,7 +370,7 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 			next_velocity.y += scale_velocity.y * gravity * delta
 		
 		# Apply acceleration on X
-		if abs(next_velocity.x) > current_max_speed:
+		if abs(next_velocity.x) > current_max_speed and not no_max_speed:
 			next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * current_max_speed
 		elif direction.x != 0.0:
 			next_velocity.x += scale_velocity.x * direction.x * acceleration * delta

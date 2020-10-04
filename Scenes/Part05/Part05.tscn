@@ -1,0 +1,219 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti36.png" type="Texture" id=2]
+[ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall01.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/Part05/Part05_MechanicDoor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Part05/Part05.gd" type="Script" id=9]
+[ext_resource path="res://Objects/Pickable/Pickable_Crate.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/Light/Light_Room.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/Static/Static_RoomLamp00.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall11.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Environmnent/Floor/Floor05.png" type="Texture" id=18]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 0.1
+glow_strength = 0.9
+glow_blend_mode = 0
+glow_hdr_threshold = 0.1
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1792.48, 40.5972 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 135.184, 496.48 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 135.184, 496.48 )
+
+[node name="Part05" type="Node2D"]
+
+[node name="BaseScene" parent="." instance=ExtResource( 5 )]
+script = ExtResource( 9 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
+environment = SubResource( 1 )
+
+[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
+light_mask = 524288
+color = Color( 0.235294, 0.235294, 0.235294, 1 )
+
+[node name="DefaultCamera" parent="BaseScene" instance=ExtResource( 3 )]
+position = Vector2( 1950.07, 1764.38 )
+scale = Vector2( 0.7, -0.7 )
+zoom = Vector2( 4, 4 )
+limit_left = -4870
+limit_right = 4870
+smoothing_enabled = false
+
+[node name="Environment" type="Node2D" parent="BaseScene"]
+position = Vector2( 2224.27, 2283.48 )
+scale = Vector2( 0.95, 0.95 )
+
+[node name="Top" type="Node2D" parent="BaseScene/Environment"]
+position = Vector2( 0, -1035.37 )
+
+[node name="Player" parent="BaseScene/Environment/Top" instance=ExtResource( 4 )]
+position = Vector2( -1807.58, 87.4639 )
+scale = Vector2( 0.7, 0.7 )
+animation_frames = ExtResource( 13 )
+
+[node name="Inside" type="Sprite" parent="BaseScene/Environment/Top"]
+position = Vector2( -256.277, -39.5439 )
+scale = Vector2( 1, 1.3 )
+z_index = -2
+texture = ExtResource( 17 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3580, 700 )
+region_filter_clip = true
+
+[node name="Graffiti36" type="Sprite" parent="BaseScene/Environment/Top/Inside"]
+position = Vector2( 1478.61, -33.0547 )
+scale = Vector2( -1.18709, 1 )
+texture = ExtResource( 2 )
+
+[node name="Floor" type="Sprite" parent="BaseScene/Environment/Top/Inside"]
+position = Vector2( 0, 352.612 )
+scale = Vector2( 0.896258, 0.769231 )
+z_index = 1
+texture = ExtResource( 18 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 4000, 140 )
+
+[node name="RoomLamp00" parent="BaseScene/Environment/Top/Inside" instance=ExtResource( 12 )]
+position = Vector2( -783.937, -302.779 )
+scale = Vector2( 1, 0.769231 )
+z_index = 2
+z_as_relative = false
+
+[node name="Light" parent="BaseScene/Environment/Top/Inside/RoomLamp00" instance=ExtResource( 11 )]
+position = Vector2( 14.9398, 10.9789 )
+scale = Vector2( 1.62313, 1.3 )
+
+[node name="RoomLamp01" parent="BaseScene/Environment/Top/Inside" instance=ExtResource( 12 )]
+position = Vector2( 877.349, -304.276 )
+scale = Vector2( 1, 0.769231 )
+z_index = 2
+z_as_relative = false
+
+[node name="Light" parent="BaseScene/Environment/Top/Inside/RoomLamp01" instance=ExtResource( 11 )]
+position = Vector2( 14.9396, 12.9938 )
+scale = Vector2( 1.62531, 1.3 )
+
+[node name="CollisionAll" type="StaticBody2D" parent="BaseScene/Environment/Top"]
+position = Vector2( 190.244, 40.8778 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="Top" type="CollisionShape2D" parent="BaseScene/Environment/Top/CollisionAll"]
+position = Vector2( -446.483, -555.699 )
+shape = SubResource( 2 )
+
+[node name="Bottom" type="CollisionShape2D" parent="BaseScene/Environment/Top/CollisionAll"]
+position = Vector2( -448.465, 451.058 )
+shape = SubResource( 2 )
+
+[node name="CollisionPlayer" type="StaticBody2D" parent="BaseScene/Environment/Top"]
+position = Vector2( 190.244, 40.8778 )
+collision_layer = 8
+collision_mask = 8
+
+[node name="Left" type="CollisionShape2D" parent="BaseScene/Environment/Top/CollisionPlayer"]
+position = Vector2( -2316.92, -47.1997 )
+shape = SubResource( 3 )
+
+[node name="Right" type="CollisionShape2D" parent="BaseScene/Environment/Top/CollisionPlayer"]
+position = Vector2( 1385.34, -47.1997 )
+shape = SubResource( 4 )
+
+[node name="Bottom" type="Node2D" parent="BaseScene/Environment"]
+
+[node name="InvertPlayer" type="Node2D" parent="BaseScene/Environment/Bottom"]
+position = Vector2( 1284.74, 88.8462 )
+scale = Vector2( -1, 1 )
+
+[node name="Player" parent="BaseScene/Environment/Bottom/InvertPlayer" instance=ExtResource( 4 )]
+position = Vector2( 0, 0 )
+scale = Vector2( 0.7, 0.7 )
+animation_frames = ExtResource( 1 )
+scale_velocity = Vector2( -1, 1 )
+
+[node name="Inside" type="Sprite" parent="BaseScene/Environment/Bottom"]
+position = Vector2( -256.277, -39.5439 )
+z_index = -2
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3580, 910 )
+region_filter_clip = true
+
+[node name="Floor" type="Sprite" parent="BaseScene/Environment/Bottom/Inside"]
+position = Vector2( 2, 455.396 )
+z_index = 1
+texture = ExtResource( 18 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3584, 140 )
+
+[node name="Crate" parent="BaseScene/Environment/Bottom/Inside/Floor" instance=ExtResource( 10 )]
+position = Vector2( -1468.35, -76.4854 )
+mass = 1.0
+GRAB_FORCE = Vector2( 5, 5 )
+
+[node name="RoomLamp00" parent="BaseScene/Environment/Bottom/Inside" instance=ExtResource( 12 )]
+position = Vector2( -783.937, -393.613 )
+z_index = 2
+z_as_relative = false
+
+[node name="Light" parent="BaseScene/Environment/Bottom/Inside/RoomLamp00" instance=ExtResource( 11 )]
+position = Vector2( 14.9398, 10.9789 )
+scale = Vector2( 1.62313, 1.3 )
+
+[node name="RoomLamp01" parent="BaseScene/Environment/Bottom/Inside" instance=ExtResource( 12 )]
+position = Vector2( 877.35, -395.558 )
+z_index = 2
+z_as_relative = false
+
+[node name="Light" parent="BaseScene/Environment/Bottom/Inside/RoomLamp01" instance=ExtResource( 11 )]
+position = Vector2( 18.2086, 14.0834 )
+scale = Vector2( 1.62531, 1.3 )
+
+[node name="CollisionAll" type="StaticBody2D" parent="BaseScene/Environment/Bottom"]
+position = Vector2( 190.244, 40.8777 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="Top" type="CollisionShape2D" parent="BaseScene/Environment/Bottom/CollisionAll"]
+position = Vector2( -449.482, -572.526 )
+shape = SubResource( 2 )
+
+[node name="Bottom" type="CollisionShape2D" parent="BaseScene/Environment/Bottom/CollisionAll"]
+position = Vector2( -444.34, 448.629 )
+shape = SubResource( 2 )
+
+[node name="CollisionPlayer" type="StaticBody2D" parent="BaseScene/Environment/Bottom"]
+position = Vector2( 190.244, 40.8777 )
+collision_layer = 8
+collision_mask = 8
+
+[node name="Left" type="CollisionShape2D" parent="BaseScene/Environment/Bottom/CollisionPlayer"]
+position = Vector2( -2316.92, -47.1997 )
+shape = SubResource( 3 )
+
+[node name="Right" type="CollisionShape2D" parent="BaseScene/Environment/Bottom/CollisionPlayer"]
+position = Vector2( 1385.34, -47.1997 )
+shape = SubResource( 4 )
+
+[node name="Door" parent="BaseScene/Environment/Bottom" instance=ExtResource( 7 )]
+position = Vector2( -253.55, 30.8801 )
+stop_after = Vector2( 1000, 0 )
+velocity = Vector2( 100, 0 )
+
+[node name="Trigger" type="Node2D" parent="BaseScene"]
+position = Vector2( 2224.27, 2283.48 )
+
+[node name="Sound" type="Node" parent="BaseScene"]

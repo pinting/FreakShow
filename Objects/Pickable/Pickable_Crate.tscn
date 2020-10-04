@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Crate00.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=2]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=3]
 [ext_resource path="res://Objects/Pickable/Pickable.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Environmnent/Crate02.png" type="Texture" id=5]
+[ext_resource path="res://Objects/RandomChild.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Environmnent/Crate01.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Environmnent/Crate04.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Crate03.png" type="Texture" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -26,7 +31,9 @@ contact_monitor = true
 script = ExtResource( 4 )
 GRAB_FORCE = Vector2( 500, 500 )
 
-[node name="Sprite" type="Sprite" parent="." groups=[
+[node name="RandomChild" parent="." instance=ExtResource( 6 )]
+
+[node name="Sprite00" type="Sprite" parent="RandomChild" groups=[
 "selectable",
 ]]
 material = SubResource( 1 )
@@ -41,6 +48,42 @@ secondary_key = "glow_amount"
 secondary_hover = 0.5
 clone_material = true
 
+[node name="Sprite01" type="Sprite" parent="RandomChild" groups=[
+"selectable",
+]]
+material = SubResource( 1 )
+texture = ExtResource( 7 )
+script = ExtResource( 2 )
+description = "CRATE00"
+offset_key = "offset"
+primary_key = "grab_amount"
+primary_hover = 1.1
+primary_default = 1.0
+secondary_key = "glow_amount"
+secondary_hover = 0.5
+clone_material = true
+
+[node name="Sprite02" type="Sprite" parent="RandomChild" groups=[
+"selectable",
+]]
+material = SubResource( 1 )
+texture = ExtResource( 5 )
+script = ExtResource( 2 )
+description = "CRATE00"
+offset_key = "offset"
+primary_key = "grab_amount"
+primary_hover = 1.1
+primary_default = 1.0
+secondary_key = "glow_amount"
+secondary_hover = 0.5
+clone_material = true
+
+[node name="Sprite03" type="Sprite" parent="RandomChild"]
+texture = ExtResource( 9 )
+
+[node name="Sprite04" type="Sprite" parent="RandomChild"]
+texture = ExtResource( 8 )
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -9.52716, -8.16613 )
-polygon = PoolVector2Array( -101.373, -87.9381, 120.344, -88.1381, 119.528, 104.583, -100.413, 105.399 )
+polygon = PoolVector2Array( -101.373, -87.9381, 120.344, -88.1381, 120.015, 104.698, -100.969, 104.613 )

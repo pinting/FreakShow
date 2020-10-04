@@ -5,7 +5,7 @@ DOOR01,Way out,Kijárat
 BAG00,Old bag,Régi táska
 BALL00,Beach ball,Strandlabda
 CLOTHES00,Pile of clothes,Halom ruha
-CRATE00,Dumb crate,Buta láda
+CRATE00,Crate,Láda
 CUP00,Beer jug,Söröskorsó
 FRUIT00,Unripe mango,Éretlen mangó
 PILLOW00,Dusty pillow,Poros párna
@@ -19,6 +19,16 @@ PAPER03," "," "
 PAPER04,Understanding and love will guide you,"Egyetértés, szeretet vezéreljen tégedet"
 PAPER05,"White dove flies over the village, carrying my sorrowful soul","Fehér galamb száll a falu felett, viszi az én bánatos lelkemet"
 PAPER06,Want to move as soon as possible!,Sürgősen költöznék!
+PAPER07,DANGEROUS CRIMINAL,VESZÉLYES BŰNÖZŐ
+PAPER08,STANDS,HELYT ÁLL
+LETTER00,"No need for a screeching halt, you can stop gracefully.","Nem kell megtorpanni, elég méltósággal megállni."
+LETTER01,"The red light is there to help you reach your destination.","Azért kapsz pirost, hogy célba érj."
+LETTER02,"I hold onto my cigarette break.","A cigiszünet tart."
+LETTER03,"He would have slapped me but the red light forced him to stay.","Megpofozott volna, de megfogta a lámpa, így – maradt."
+LETTER04,"A lonely dot in the center of four corners; time keeps passing but you remain still.","Egy pont négy sarok között; az idő halad, te meg maradsz."
+CAN00,Coffee,Kávé
+MISC00,Mask from Dieng,Maszk Diengből
+MISC01,Rug from the Bantul night market,Szőnyeg a bantuli piacról
 SIGN00,Food,Élelmiszer
 SIGN01,HAPPY COMPANY,BOLDOG KFT.
 SIGN02,ATTENTION! NO TRESPASSING!,ÉLETVESZÉLY! BELÉPNI TILOS!

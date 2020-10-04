@@ -43,6 +43,6 @@ texture = ExtResource( 1 )
 self_modulate = Color( 0.74902, 0.701961, 0.270588, 0.392157 )
 scale = Vector2( 1.26, 1.26 )
 frames = ExtResource( 5 )
-frame = 145
+frame = 44
 playing = true
 centered = false

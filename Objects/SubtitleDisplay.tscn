@@ -18,6 +18,7 @@ z_as_relative = false
 script = ExtResource( 2 )
 
 [node name="Top" type="CanvasLayer" parent="."]
+layer = 51
 
 [node name="Top" type="Label" parent="Top"]
 light_mask = 786432

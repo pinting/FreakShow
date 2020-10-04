@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Wall/Wall00.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Building/Building05_Bottom.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Assets/Environmnent/Building/Building05_Top.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti16.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Part00/Part00_Hallway.gd" type="Script" id=11]
+[ext_resource path="res://Objects/Viewable/Viewable_StandCommunistPaper.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4722.81, 353.699 )
@@ -57,6 +58,9 @@ self_modulate = Color( 1, 0.956863, 0.32549, 0.862745 )
 position = Vector2( -2797.77, -19.994 )
 scale = Vector2( 0.437502, 0.437502 )
 texture = ExtResource( 10 )
+
+[node name="Paper00" parent="Inside" instance=ExtResource( 12 )]
+position = Vector2( -951.909, -80.6403 )
 
 [node name="Door00" parent="Inside" instance=ExtResource( 5 )]
 position = Vector2( -3279.88, 31.129 )

@@ -133,7 +133,7 @@ func _physics_process(delta: float) -> void:
 		remove_description()
 	
 	if len(primary_key):
-		material.set_shader_param(primary_key, current_primary)
+		material.set_shader_param(primary_keyl, current_primary)
 	
 	if len(secondary_key):
 		material.set_shader_param(secondary_key, current_secondary)

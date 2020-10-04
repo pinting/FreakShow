@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Shelf01.png" type="Texture" id=1]
+
+[node name="Static_Shelf01" type="StaticBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 14.4094, 49.5411 )
+scale = Vector2( 0.986335, 1.1005 )
+polygon = PoolVector2Array( 878.587, -360.363, 887.569, -351.381, 895.91, -361.326, 1142.92, -360.363, 1148.7, -351.702, 1156.08, -358.438, 1162.81, -370.949, 1159.18, -398.378, 1166.02, -420.032, 1173.4, -429.014, 1166.34, -441.204, 1160.25, -466.227, 1163.78, -493.174, 1174.68, -511.78, 1168.59, -520.762, 875.379, -518.838, 865.503, -513.425, 865.957, -508.659, 873.446, -507.07, 881.474, -473.926, 877.532, -447.382, 864.792, -429.656, 871.631, -422.871, 880.936, -401.764, 875.943, -372.26 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1019.47, -438.105 )
+scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 1 )

@@ -19,7 +19,7 @@ onready var player = $Player
 
 onready var background_train = $Environment/BackgroundTrain
 onready var road_block_collision = $Environment/RoadBlock/CollisionShape2D
-onready var road_block = $Environment/RoadBlock/Sprite
+onready var road_block_sprite = $Environment/RoadBlock/Sprite
 onready var phone_lamp = $Environment/PhoneBox/Lamp
 onready var phone = $Environment/PhoneBox/Phone
 onready var crate = $Environment/Crate
@@ -66,6 +66,9 @@ func _ready() -> void:
 	
 	if teleport_player_to_end:
 		player.position = teleport_player.position
+	
+	road_block_collision.disabled = true
+	road_block_sprite.visible = false
 
 func _on_intro_over() -> void:
 	main_music.play()
@@ -108,11 +111,11 @@ func _trigger_train(body: Node) -> void:
 	background_train.start()
 
 func _reaching_phone_box(body: Node) -> void:
-	if not body.is_in_group("player") or road_block.visible:
+	if not body.is_in_group("player") or road_block_sprite.visible:
 		return
 	
-	road_block.visible = true
 	road_block_collision.disabled = false
+	road_block_sprite.visible = true
 
 func _trigger_hoop_part(body: Node) -> void:
 	if not body.is_in_group("player") or not reaching_hoop.visible:

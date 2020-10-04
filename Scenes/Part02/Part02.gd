@@ -104,9 +104,9 @@ func _fail_game(body: Node) -> void:
 		return
 	
 	player.kill()
-	yield(timer(3.0), "timeout")
 	
-	main_music.kill(2.0);
+	main_music.kill(3.0);
+	yield(timer(3.0), "timeout")
 	
 	load_scene(get_parent().filename)
 
@@ -136,7 +136,7 @@ func _end_game(body: Node) -> void:
 	game_playing = false
 	wall_after_leave.disabled = false
 	
-	main_music.kill(2.0);
+	main_music.kill(5.0);
 	wind_sound.play()
 
 func _on_exit() -> void:

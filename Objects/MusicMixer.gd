@@ -22,9 +22,13 @@ export var debug: bool = false
 onready var player_00 = $AudioStreamPlayer00
 onready var player_01 = $AudioStreamPlayer01
 
+var global_level: float = 1.0
 var master_player: AudioStreamPlayer = null
+var master_volume: float = 0
 var slave_player: AudioStreamPlayer = null
+var slave_volume: float = 0
 var stopped: bool = true
+var pause_level: float = 1.0
 var paused: bool = false
 var parts: Array = []
 
@@ -43,10 +47,12 @@ func _ready() -> void:
 	master_player = player_00
 	master_player.stream = stream
 	master_player.volume_db = min_volume
+	master_volume = min_volume
 	
 	slave_player = player_01
 	slave_player.stream = stream
-	slave_player.volume_db = min_volume
+	master_player.volume_db = min_volume
+	slave_volume = min_volume
 	
 	if autoplay:
 		play()
@@ -88,8 +94,8 @@ func play() -> void:
 		return
 	
 	if parts[0].in_duration == 0.0:
-		master_player.volume_db = max_volume
-		slave_player.volume_db = min_volume
+		master_volume = max_volume
+		slave_volume = min_volume
 	
 	master_player.play(parts[0].start)
 	
@@ -110,16 +116,12 @@ func pause() -> void:
 		return
 	
 	paused = true
-	master_player.stream_paused = true
-	slave_player.stream_paused = true
 
 func resume() -> void:
 	if stopped:
 		return
 	
 	paused = false
-	master_player.stream_paused = false
-	slave_player.stream_paused = false
 
 func get_next() -> int:
 	var current_part = parts[current_part_index]
@@ -147,8 +149,16 @@ func force_next(index: int) -> void:
 	break_loop = true
 
 func _process(delta: float) -> void:
-	if stopped or paused:
+	if stopped:
 		return
+	
+	if paused:
+		if pause_level == 0.0:
+			return
+		
+		pause_level = max(0.0, pause_level - delta)
+	else:
+		pause_level = min(1.0, pause_level + delta)
 	
 	var playback_position_now = master_player.get_playback_position()
 	var position_diff = playback_prev_position - playback_position_now
@@ -179,18 +189,18 @@ func _process(delta: float) -> void:
 	# Fade in the current part 
 	if not break_loop_now and diff_to_start < 0:
 		if abs(diff_to_start) < current_part.in_duration and current_part.in_duration > 0:
-			master_player.volume_db += volume_diff * (delta / current_part.in_duration)
-			_debug_if_integer(diff_to_start, str("master fade in ", master_player.volume_db))
+			master_volume += volume_diff * (delta / current_part.in_duration)
+			_debug_if_integer(diff_to_start, str("master fade in ", master_volume))
 		elif abs(diff_to_end) > current_part.out_duration:
-			master_player.volume_db = max_volume
+			master_volume = max_volume
 			_debug_if_integer(diff_to_start, "master max volume")
 	
 	# Fade out the current part 
 	if diff_to_end > 0 and abs(diff_to_end) < current_part.out_duration and current_part.out_duration > 0:
-		master_player.volume_db -= volume_diff * (delta / current_part.out_duration)
-		_debug_if_integer(diff_to_start, str("master fade out ", master_player.volume_db))
+		master_volume -= volume_diff * (delta / current_part.out_duration)
+		_debug_if_integer(diff_to_start, str("master fade out ", master_volume))
 	elif diff_to_end <= 0:
-		master_player.volume_db = min_volume
+		master_volume = min_volume
 		_debug_if_integer(diff_to_start, "master min volume")
 	
 	# Determinate if the current or the next part should be played as next
@@ -202,38 +212,39 @@ func _process(delta: float) -> void:
 			master_player.stop()
 			slave_player.stop()
 			stopped = true
+	else:
+		var next_part = parts[next_part_index]
 		
-		return
-	
-	var next_part = parts[next_part_index]
-	
-	# Start mix in slave if end + offset is reached
-	if break_loop_now or diff_to_end + next_part.offset < 0:
-		if not mixing:
-			slave_player.play(next_part.start)
-			slave_player.volume_db = min_volume
-			mixing = true
-		
-		if mixing:
-			if slave_player.volume_db < max_volume:
-				if next_part.in_duration > 0:
-					slave_player.volume_db += volume_diff * (delta / next_part.in_duration)
-				else:
-					slave_player.volume_db += volume_diff
-				
-				_debug_if_integer(diff_to_end, str("slave fade in ", slave_player.volume_db))
-			elif diff_to_end < 0:
-				_finish_mixing(next_part_index)
-			elif break_loop_now:
-				if master_player.volume_db > min_volume:
-					if current_part.out_duration > 0:
-						master_player.volume_db -= volume_diff * (delta / current_part.out_duration)
+		# Start mix in slave if end + offset is reached
+		if break_loop_now or diff_to_end + next_part.offset < 0:
+			if not mixing:
+				slave_player.play(next_part.start)
+				slave_volume = min_volume
+				mixing = true
+			
+			if mixing:
+				if slave_volume < max_volume:
+					if next_part.in_duration > 0:
+						slave_volume += volume_diff * (delta / next_part.in_duration)
 					else:
-						master_player.volume_db -= volume_diff
+						slave_volume += volume_diff
 					
-					_debug_if_integer(diff_to_start, str("master fade out ", master_player.volume_db))
-				else:
+					_debug_if_integer(diff_to_end, str("slave fade in ", slave_volume))
+				elif diff_to_end < 0:
 					_finish_mixing(next_part_index)
+				elif break_loop_now:
+					if master_volume > min_volume:
+						if current_part.out_duration > 0:
+							master_volume -= volume_diff * (delta / current_part.out_duration)
+						else:
+							master_volume -= volume_diff
+						
+						_debug_if_integer(diff_to_start, str("master fade out ", master_volume))
+					else:
+						_finish_mixing(next_part_index)
+	
+	master_player.volume_db = master_volume * pause_level * global_level
+	slave_player.volume_db = slave_volume * pause_level * global_level
 
 func _finish_mixing(next_part_index: int) -> void:
 	_debug(str("new master index ", next_part_index))
@@ -245,8 +256,8 @@ func _finish_mixing(next_part_index: int) -> void:
 	slave_player = temp
 	
 	# Fix volumes
-	master_player.volume_db = max_volume
-	slave_player.volume_db = min_volume
+	master_volume = max_volume
+	slave_volume = min_volume
 	
 	# Set the next part as current and stop mixing
 	current_part_index = next_part_index

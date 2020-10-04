@@ -1,19 +1,27 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Objects/Selectable/Selectable_WoodenDoor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objects/RandomChild.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Objects/Static/Static_Fridge00.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Static/Static_WashingMachine00.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Objects/Light/Light_Room.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/Static/Static_RoomLamp00.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Environmnent/Building/Building00_1x7_Bottom.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Environmnent/Wall/Wall02.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Environmnent/Floor/Floor02.png" type="Texture" id=8]
-[ext_resource path="res://Objects/Static/Static_Cupboard00.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/Static/Static_Shelf00.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Static/Static_Table00.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Environmnent/Misc/Misc15.png" type="Texture" id=11]
 [ext_resource path="res://Objects/Static/Static_Chair00.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Environmnent/Floor/Floor00.png" type="Texture" id=13]
 [ext_resource path="res://Assets/Environmnent/Door/Door02.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Part00/Part00_RandomFlat.gd" type="Script" id=15]
+[ext_resource path="res://Assets/Environmnent/Misc/Misc12.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Environmnent/Misc/Misc11.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Environmnent/Misc/Misc14.png" type="Texture" id=18]
+[ext_resource path="res://Objects/Viewable/Viewable_Letter02.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Objects/Viewable/Viewable_Letter03.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Objects/Viewable/Viewable_Letter01.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Objects/Viewable/Viewable_Letter04.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Assets/Environmnent/Building/Building00_1x1_Right.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Environmnent/Building/Building00_1x1_Left.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Environmnent/Building/Building00_1x7_Top.png" type="Texture" id=25]
@@ -25,13 +33,13 @@
 [ext_resource path="res://Assets/Environmnent/Floor/Floor08.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Environmnent/Wall/Wall17.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Environmnent/Wall/Wall16.png" type="Texture" id=33]
+[ext_resource path="res://Objects/Viewable/Viewable_Letter00.tscn" type="PackedScene" id=34]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1843.14, 10 )
 
 [node name="Part00_RandomFlat" type="Node2D"]
 position = Vector2( -664.621, -49.3025 )
-scale = Vector2( 0.896382, 1 )
 script = ExtResource( 15 )
 
 [node name="Inside" type="Node2D" parent="."]
@@ -44,41 +52,34 @@ position = Vector2( 296.889, 66.9067 )
 z_index = 1
 
 [node name="Cupboard00" parent="Inside/Cupboard" instance=ExtResource( 9 )]
-position = Vector2( -695.005, 259.226 )
-scale = Vector2( 0.896382, 1 )
+position = Vector2( -797.292, 259.226 )
 z_index = 1
 collision_layer = 0
 collision_mask = 0
 
 [node name="Cupboard01" parent="Inside/Cupboard" instance=ExtResource( 9 )]
-position = Vector2( -2184.91, 259.226 )
-scale = Vector2( 0.896382, 1 )
-z_index = 1
-collision_layer = 0
-collision_mask = 0
-
-[node name="Cupboard02" parent="Inside/Cupboard" instance=ExtResource( 9 )]
-position = Vector2( -134.517, 259.226 )
-scale = Vector2( 0.896382, 1 )
+position = Vector2( -2984.77, 240.657 )
 z_index = 1
 collision_layer = 0
 collision_mask = 0
 
 [node name="Empty00" type="Node2D" parent="Inside/Cupboard"]
+position = Vector2( -2767.89, 0 )
 
 [node name="Empty01" type="Node2D" parent="Inside/Cupboard"]
+position = Vector2( -2767.89, 0 )
 
 [node name="Chair" parent="Inside" instance=ExtResource( 2 )]
 position = Vector2( 296.889, 66.9067 )
 z_index = 1
 
 [node name="Chair00" parent="Inside/Chair" instance=ExtResource( 12 )]
-position = Vector2( -1921.36, 274.827 )
+position = Vector2( -2010.36, 284.799 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
 [node name="Chair01" parent="Inside/Chair" instance=ExtResource( 12 )]
-position = Vector2( -1362.24, 272.606 )
+position = Vector2( -1288.07, 283.686 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
@@ -102,20 +103,19 @@ position = Vector2( 941.508, 274.827 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
-[node name="Fridge" parent="Inside" instance=ExtResource( 2 )]
+[node name="WashingMachine" parent="Inside" instance=ExtResource( 2 )]
 position = Vector2( -2471, 66.9067 )
 z_index = 1
 
-[node name="Fridge00" parent="Inside/Fridge" instance=ExtResource( 3 )]
-position = Vector2( 816.336, -6.32108 )
-scale = Vector2( 0.896382, 1 )
+[node name="WashingMachine00" parent="Inside/WashingMachine" instance=ExtResource( 3 )]
+position = Vector2( 826.078, 100.553 )
 z_index = 1
 
-[node name="Empty00" type="Node2D" parent="Inside/Fridge"]
+[node name="Empty00" type="Node2D" parent="Inside/WashingMachine"]
 
-[node name="Empty01" type="Node2D" parent="Inside/Fridge"]
+[node name="Empty01" type="Node2D" parent="Inside/WashingMachine"]
 
-[node name="Empty02" type="Node2D" parent="Inside/Fridge"]
+[node name="Empty02" type="Node2D" parent="Inside/WashingMachine"]
 
 [node name="Table" parent="Inside" instance=ExtResource( 2 )]
 position = Vector2( 296.889, 66.9067 )
@@ -136,6 +136,30 @@ position = Vector2( -3.05176e-05, 0 )
 
 [node name="Empty01" type="Node2D" parent="Inside/Table"]
 position = Vector2( -3.05176e-05, 0 )
+
+[node name="Decoration" parent="Inside" instance=ExtResource( 2 )]
+z_index = 1
+
+[node name="Decoration00" type="Sprite" parent="Inside/Decoration"]
+position = Vector2( -943.748, -101.133 )
+rotation = 1.5708
+scale = Vector2( 0.888186, 0.888186 )
+texture = ExtResource( 11 )
+
+[node name="Decoration01" type="Sprite" parent="Inside/Decoration"]
+position = Vector2( 1167.21, -62.4365 )
+scale = Vector2( 0.44387, 0.44387 )
+texture = ExtResource( 17 )
+
+[node name="Decoration02" type="Sprite" parent="Inside/Decoration"]
+position = Vector2( 118.875, -150.971 )
+scale = Vector2( 0.124458, 0.115656 )
+texture = ExtResource( 16 )
+
+[node name="Decoration03" type="Sprite" parent="Inside/Decoration"]
+position = Vector2( -554.698, -120.43 )
+scale = Vector2( 0.29442, 0.29442 )
+texture = ExtResource( 18 )
 
 [node name="Floor" parent="Inside" instance=ExtResource( 2 )]
 
@@ -229,6 +253,19 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 722 )
 region_filter_clip = true
 
+[node name="RandomChild" parent="Inside" instance=ExtResource( 2 )]
+position = Vector2( -553.376, -112.468 )
+
+[node name="Letter00" parent="Inside/RandomChild" instance=ExtResource( 34 )]
+
+[node name="Letter01" parent="Inside/RandomChild" instance=ExtResource( 21 )]
+
+[node name="Letter02" parent="Inside/RandomChild" instance=ExtResource( 19 )]
+
+[node name="Letter03" parent="Inside/RandomChild" instance=ExtResource( 20 )]
+
+[node name="Letter04" parent="Inside/RandomChild" instance=ExtResource( 22 )]
+
 [node name="Door" parent="Inside" instance=ExtResource( 1 )]
 position = Vector2( -189.387, 11.2935 )
 scale = Vector2( 0.85, 0.85 )
@@ -240,7 +277,7 @@ z_index = 2
 z_as_relative = false
 
 [node name="Light" parent="Inside/RoomLamp00" instance=ExtResource( 4 )]
-position = Vector2( 3.71729, 18.5236 )
+position = Vector2( 1.22949, 18.5236 )
 scale = Vector2( 1.62313, 0.95 )
 
 [node name="RoomLamp01" parent="Inside" instance=ExtResource( 5 )]
