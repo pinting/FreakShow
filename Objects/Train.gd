@@ -1,11 +1,11 @@
 class_name Train
 extends StaticBody2D
 
-# Start the train from this point
-export var start_from: Vector2 = Vector2(-15000.0, 0.0)
+# Start the train using this X offset
+export var start_from: float = -15000.0
 
 # Speed and direction to move on the X axis
-export var speed: Vector2 = Vector2(1600.0, 0.0)
+export var speed: float = 1600.0
 
 # Destory the train after this offset
 export var stop_after: float = 50000.0
@@ -39,6 +39,8 @@ var started: bool = false
 var current_second: float = 0.0
 var last_position_diff: Vector2 = Vector2.ZERO
 var base_position: Vector2 = Vector2(0.0, 0.0)
+var bodies_on_top = []
+var bodies_on_top_speed_scale = []
 
 func _ready() -> void:
 	on_top.connect("body_exited", self, "_on_body_exited")
@@ -51,18 +53,29 @@ func _on_body_entered(body: Node):
 	if not body.is_in_group("player"):
 		return
 	
-	body.no_max_speed = true
-	body.friction = 1.0
+	if bodies_on_top.find(body) == -1:
+		bodies_on_top.push_back(body)
+		bodies_on_top_speed_scale.push_back(0.0)
 
 func _on_body_exited(body: Node):
 	if not body.is_in_group("player"):
 		return
 	
-	body.no_max_speed = false
-	body.friction = 0.001
+	yield(Global.timer(0.1), "timeout")
+	
+	if on_top.overlaps_body(body):
+		return
+	
+	body.current_velocity.x = speed
+	
+	var index = bodies_on_top.find(body)
+	
+	if index >= 0:
+		bodies_on_top.remove(index)
+		bodies_on_top_speed_scale.remove(index)
 
 func start() -> void:
-	position = base_position + start_from
+	position.x = base_position.x + start_from
 	visible = true
 	
 	audio_stream_00.pitch_scale = _generate_pitch_scale()
@@ -113,13 +126,16 @@ func _process(delta) -> void:
 	train_02.position.y += m * sin(c * s + 2.0 * rhythm_diff) * randf()
 	
 	var position_diff = speed * delta
-	var bodies_on_top = on_top.get_overlapping_bodies()
 	
-	position += position_diff
+	position.x += position_diff
 	
-	for body in bodies_on_top:
-		if body.is_in_group("player"):
-			body.current_velocity += position_diff
+	for index in range(len(bodies_on_top)):
+		var body = bodies_on_top[index]
+		var speed_scale = bodies_on_top_speed_scale[index]
+		
+		body.position.x += position_diff * speed_scale
+		
+		bodies_on_top_speed_scale[index] = min(1.0, speed_scale + delta)
 	
 	if base_position.distance_to(self_position) > stop_after:
 		stop()

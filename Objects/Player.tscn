@@ -19,7 +19,7 @@ script = ExtResource( 1 )
 material = SubResource( 1 )
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-frame = 96
+frame = 4
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
@@ -45,15 +45,16 @@ collide_with_areas = true
 
 [node name="CrouchCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0.642532, 0 )
-polygon = PoolVector2Array( 72.1871, 496.019, -51.9472, 495.985, -73.2801, 466.725, -116.13, 407.475, -164.8, 277.866, -57.4096, 145.083, 95.3698, 70.2806, 160.968, 97.2604, 122.35, 206.238, 112.298, 281.358, 117.589, 317.86, 50.9325, 362.297, 74.2092, 425.779 )
+polygon = PoolVector2Array( 113.359, 496.24, -51.9472, 495.985, -116.13, 407.475, -164.8, 277.866, -57.4096, 145.083, 95.3698, 70.2806, 160.968, 97.2604, 122.35, 206.238, 112.298, 281.358 )
 
 [node name="StandCollision" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.869019, 0 )
 polygon = PoolVector2Array( -51.7286, 496.019, 73.0905, 495.758, 59.7819, -170.704, 83.5267, -312.183, 18.2286, -336.917, -35.197, -305.257, -39.9453, -199.198, -96.1416, -156.062 )
 
 [node name="AvatarCollision" type="CollisionPolygon2D" parent="."]
-position = Vector2( -2.35354, -2.57445 )
+position = Vector2( -2.35354, -1.70543 )
 scale = Vector2( 1.5, 1.5 )
-polygon = PoolVector2Array( -87.1783, -24.354, -57.8614, -153.436, 65.2265, -139.203, 76.9085, -58.0464, 64.6566, 24.6533, 55.9054, 97.7266, 21.7753, 130.106, -50.8604, 107.353 )
+polygon = PoolVector2Array( -93.7505, -23.063, -51.4589, -134.875, 42.3937, -135.454, 84.106, -28.8563, 64.4085, 85.8524, 1.91668, 141.315, -57.2523, 87.5904 )
 
 [node name="TransformEffect" parent="." instance=ExtResource( 6 )]
 

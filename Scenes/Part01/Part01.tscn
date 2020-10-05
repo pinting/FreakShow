@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Objects/Static/Static_Building00.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part01/Part01_Start.tscn" type="PackedScene" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=46]
 [ext_resource path="res://Assets/Environmnent/Board00.png" type="Texture" id=47]
 [ext_resource path="res://Assets/Environmnent/Fence02_B.png" type="Texture" id=48]
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=49]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -73,13 +74,21 @@ extents = Vector2( 19446.7, 941.674 )
 [sub_resource type="CanvasItemMaterial" id=7]
 blend_mode = 1
 
-[sub_resource type="PhysicsMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 49 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/grab_amount = 1.0
+shader_param/glow_radius = 10.0
+shader_param/glow_amount = 0.0
+
+[sub_resource type="PhysicsMaterial" id=9]
 bounce = 0.9
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 227.945, 2041.4 )
 
-[sub_resource type="CapsuleShape2D" id=10]
+[sub_resource type="CapsuleShape2D" id=11]
 radius = 20.625
 height = 0.0
 
@@ -354,6 +363,7 @@ z_index = -1
 texture = ExtResource( 47 )
 
 [node name="Paper" parent="BaseScene/Environment/Board" instance=ExtResource( 35 )]
+material = SubResource( 8 )
 position = Vector2( 25.296, -136.393 )
 scale = Vector2( -0.0759768, 0.0759768 )
 
@@ -370,7 +380,7 @@ can_sleep = false
 ] instance=ExtResource( 14 )]
 position = Vector2( 12442.2, 41.3428 )
 collision_mask = 2147483650
-physics_material_override = SubResource( 8 )
+physics_material_override = SubResource( 9 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 position = Vector2( -59.2303, -0.734743 )
@@ -381,7 +391,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerComment"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="TriggerTrain" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 3308.45, -25.9426 )
@@ -389,7 +399,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerTrain"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="ReachingHoop" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 15696.3, -72.9816 )
@@ -397,7 +407,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingHoop"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="ReachingPhoneBox" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 11534.7, -72.9816 )
@@ -405,7 +415,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingPhoneBox"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="InsideHoop" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 16778.5, -756.826 )
@@ -414,7 +424,7 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/InsideHoop"]
 position = Vector2( -1.04688, -25.6003 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="TeleportPlayer" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( 10363.7, -184.486 )

@@ -5,10 +5,13 @@ extends KinematicBody2D
 export (SpriteFrames) var animation_frames
 
 # Max velocity
-export var max_speed: float = 280.0
+export var max_speed: float = 320.0
 
 # Max acceleration
-export var acceleration: float = 6000.0
+export var acceleration: float = 800.0
+
+# Friction on the platform (only X axis)
+export var friction: float = 0.001
 
 # Defines how many waves (0% to 100% to 0% in walk acceleration) happen in a second 
 export var walk_wave_count: float = 1.25
@@ -17,22 +20,19 @@ export var walk_wave_count: float = 1.25
 export var walk_wave_offset: float = 0.5
 
 # Avatar max speed
-export var avatar_max_speed: float = 450.0
+export var avatar_max_speed: float = 900.0
 
 # Avatar acceleration
-export var avatar_acceleration: float = 8000.0
+export var avatar_acceleration: float = 1800.0
 
 # Jump force
 export var jump_force: float = 800.0
 
-# Friction on the platform (only X axis)
-export var friction: float = 0.001
-
 # Gravity (only Y axis)
-export var gravity: float = 800.0
+export var gravity: float = 1000.0
 
 # Sprint speed
-export var sprint_scale: float = 1.35
+export var fast_walk_scale: float = 1.35
 
 # Speed of the animation (sprint modifies it)
 export var animation_speed: float = 1.0
@@ -82,9 +82,6 @@ var current_velocity: Vector2 = Vector2.ZERO
 # Current maximum speed (the acceleration oscillates between this and zero)
 var current_max_speed: float = max_speed
 
-# Current acceleration (it oscillates)
-var current_acceleration: float = acceleration
-
 # Current animation speed
 var current_animation_speed: float = animation_speed
 
@@ -117,9 +114,6 @@ var dead: bool = false
 
 # Register player to players list
 var register: bool = true
-
-# Disable max speed
-var no_max_speed: bool = false
 
 func _ready() -> void:
 	set_animation_frames(animation_frames)
@@ -211,7 +205,7 @@ func _physics_process(delta: float) -> void:
 	var direction = _get_direction()
 	
 	_process_crouch()
-	_process_sprint()
+	_process_fast_walk()
 	_process_velocity(delta, direction)
 	_process_facing(direction)
 	_process_animation(direction)
@@ -245,13 +239,13 @@ func _process_velocity(delta: float, direction: Vector2) -> void:
 		
 		current_velocity = move_and_slide(next_velocity)
 	else:
-		var next_velocity = _calculate_next_velocity(delta, direction, current_acceleration)
+		var next_velocity = _calculate_next_velocity(delta, direction, acceleration)
 		var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 		
 		if abs(current_velocity.x) > ZERO:
 			var rad = walk_wave_count * current_second * current_animation_speed * PI
 			
-			current_acceleration = acceleration * abs(sin(rad + walk_wave_offset * PI))	
+			current_max_speed = max_speed * abs(sin(rad + walk_wave_offset * PI))	
 		
 		var snap_vector = -1 * floor_normal * floor_detect_distance if direction.y == 0 else Vector2.ZERO
 		
@@ -273,17 +267,17 @@ func _process_crouch() -> void:
 	if crouch_pressed:
 		crouching = not crouching
 
-func _process_sprint() -> void:
+func _process_fast_walk() -> void:
 	var fast_walk_pressed = Input.is_action_just_pressed("fast_walk")
 	
 	if fast_walk_pressed:
 		fast_walking = not fast_walking
 	
 	var can_go_up = avatar_mode or (is_on_floor() and not crouching)
-	var speed_mod = sprint_scale if not avatar_mode and fast_walking and can_go_up else 1.0
+	var can_fast_walk = not avatar_mode and fast_walking and can_go_up
+	var speed_mod = fast_walk_scale if can_fast_walk else 1.0
 	
 	current_max_speed = speed_mod * max_speed
-	current_acceleration = speed_mod * acceleration
 	current_animation_speed = speed_mod * animation_speed
 
 func _process_animation(direction: Vector2) -> void:
@@ -342,46 +336,37 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 	
 	# In case of avatar mode is enabled
 	if avatar_mode or abs(gravity) < ZERO:
-		# Apply friction on X and Y
-		next_velocity.x *= pow(friction, delta)
-		next_velocity.y *= pow(friction, delta)
-			
-		# Apply acceleration on Y
-		if abs(next_velocity.y) > avatar_max_speed and not no_max_speed:
-			next_velocity.y = (next_velocity.y / abs(next_velocity.y)) * avatar_max_speed
-		elif direction.y != 0.0:
+		if direction.y != 0.0 and abs(next_velocity.y) < avatar_max_speed:
+			# Apply acceleration on Y
 			next_velocity.y += scale_velocity.y * direction.y * acceleration * delta
 		
+		if direction.y == 0.0 or direction.y * next_velocity.y < 0.0:
+			# Apply friction on Y
+			next_velocity.y *= pow(friction, delta)
+		
 		# Apply acceleration on X
-		if abs(next_velocity.x) > avatar_max_speed and not no_max_speed:
-			next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * avatar_max_speed
-		elif direction.x != 0.0:
+		if direction.x != 0.0 and abs(next_velocity.x) < avatar_max_speed:
 			next_velocity.x += scale_velocity.x * direction.x * acceleration * delta
-	else:
-		if is_on_floor():
+			
+		if direction.x == 0.0 or direction.x * next_velocity.x < 0.0:
 			# Apply friction on X
 			next_velocity.x *= pow(friction, delta)
-			
+	else:
+		if is_on_floor():
 			# Apply jump force on Y
 			if direction.y < 0.0:
 				next_velocity.y += scale_velocity.y * direction.y * jump_force
+		
+			if direction.x == 0.0 or direction.x * next_velocity.x < 0.0:
+				# Apply friction on X
+				next_velocity.x *= pow(friction, delta)
 		else:
 			# Apply gravity on Y
 			next_velocity.y += scale_velocity.y * gravity * delta
 		
-		# Apply acceleration on X
-		if abs(next_velocity.x) > current_max_speed and not no_max_speed:
-			next_velocity.x = (next_velocity.x / abs(next_velocity.x)) * current_max_speed
-		elif direction.x != 0.0:
+		if direction.x != 0.0 and abs(next_velocity.x) < current_max_speed:
+			# Apply acceleration on X
 			next_velocity.x += scale_velocity.x * direction.x * acceleration * delta
-	
-	var d = direction.length()
-	
-	if(next_velocity.x == NAN or next_velocity.y == NAN):
-		return Vector2.ZERO
-	
-	# Makes n * 45 degree directions take the same distance over time
-	next_velocity /= sqrt(d) if d > 1.0 else 1.0
 	
 	# Sync X velocity of players
 	if current_second > 2.0:

@@ -134,10 +134,10 @@ position = Vector2( 3291.62, -688.453 )
 shape = SubResource( 1 )
 
 [node name="OnTop" type="Area2D" parent="."]
-position = Vector2( 0, -2.2229 )
+position = Vector2( 0, 26.8505 )
 collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OnTop"]
-position = Vector2( 3315.09, -1212.05 )
+position = Vector2( 3314.69, -1219.18 )
 shape = SubResource( 2 )

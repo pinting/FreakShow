@@ -10,7 +10,6 @@ extents = Vector2( 445.966, 14848.9 )
 
 [node name="Part04_Platform" type="Sprite"]
 position = Vector2( 613.466, 1755.06 )
-scale = Vector2( 0.851445, 0.95 )
 z_index = -1
 texture = ExtResource( 1 )
 region_enabled = true
@@ -19,7 +18,7 @@ script = ExtResource( 4 )
 
 [node name="Wall" type="Sprite" parent="."]
 light_mask = 0
-position = Vector2( 0, 15038.7 )
+position = Vector2( 0, 15035 )
 scale = Vector2( 0.8, 1 )
 texture = ExtResource( 2 )
 region_enabled = true
