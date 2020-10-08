@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Part04/Part04_WarningLamp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Part04/Part04_Pillar.tscn" type="PackedScene" id=3]
+
+[node name="Part04_DoublePillar" type="Node2D"]
+
+[node name="PlatformTop" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -1209.05 )
+scale = Vector2( 1, -1 )
+
+[node name="Lamp" parent="." instance=ExtResource( 2 )]
+position = Vector2( 12.5156, -616.716 )
+scale = Vector2( 0.851445, -1 )
+z_index = -10
+
+[node name="PlatformBottom" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -18.5 )

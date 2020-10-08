@@ -1,18 +1,9 @@
 extends "res://Scenes/BaseScene.gd"
 
-# Next scene
 export var next_scene: String = "res://Scenes/Part02/Part02.tscn"
-
-# Length of the intro sound effect
-export var low_pitch_length: float = 10.0
-
-# Seconds to wait for the ball to be stuck
+export var low_pitch_intro_length: float = 10.0
 export var ball_is_stuck_timeout: float = 6.0
-
-# Teleport player to the end
 export var teleport_player_to_end: bool = false
-
-# Zero value
 export var zero: float = 0.05
 
 onready var player = $Player
@@ -157,7 +148,7 @@ func _process_wind_intro(_delta: float) -> void:
 		return
 	
 	# Make vinyl sound effect
-	var pitch_value = current_second / low_pitch_length
+	var pitch_value = current_second / low_pitch_intro_length
 	
 	if pitch_value >= 1.0:
 		wind_sound.pitch_scale = 1.0

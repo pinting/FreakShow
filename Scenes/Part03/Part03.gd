@@ -1,6 +1,5 @@
 extends "res://Scenes/BaseScene.gd"
 
-# Next scene
 export var next_scene: String = "res://Scenes/Part04.tscn"
 
 onready var player = $Player

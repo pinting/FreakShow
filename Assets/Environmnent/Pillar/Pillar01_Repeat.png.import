@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Trees.png-30bb896e4fbc3be361c79ea1e8df183d.stex"
+path="res://.import/Pillar01_Repeat.png-3897c3f7a55ad0e5feaf13ea419317e1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Environmnent/Trees.png"
-dest_files=[ "res://.import/Trees.png-30bb896e4fbc3be361c79ea1e8df183d.stex" ]
+source_file="res://Assets/Environmnent/Pillar/Pillar01_Repeat.png"
+dest_files=[ "res://.import/Pillar01_Repeat.png-3897c3f7a55ad0e5feaf13ea419317e1.stex" ]
 
 [params]
 
@@ -24,7 +24,7 @@ flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

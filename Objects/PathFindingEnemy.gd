@@ -7,9 +7,6 @@ export var speed: float = 250.0
 # Rotation speed of the enemy
 export var rotation_speed: float = 10.0
 
-# Zero value
-export var ZERO: float = 1.0
-
 var path : = PoolVector2Array()
 var current_speed = speed
 

@@ -1,16 +1,9 @@
 extends Sprite
 
-# Speed of the levitation effect
-export var TIME_SCALE: float = 1.0
-
-# How far will the sprite levitate out
-export var DIFF_SCALE: float = 0.5
-
-# Offset key of the shader
-export var OFFSET_KEY: String = ""
-
-# Duplicate the material
-export var DUPLICATE_MATERIAL: bool = true
+export var time_scale: float = 1.0
+export var diff_scale: float = 0.5
+export var offset_key: String = ""
+export var duplicate_material: bool = true
 
 var current_second = 0
 var generation_base = Vector2(rand_range(50, 100), rand_range(50, 100))
@@ -27,13 +20,13 @@ func _generate_offset(v: Vector2):
 	return r3
 
 func _process(delta: float):
-	current_second += delta * TIME_SCALE
+	current_second += delta * time_scale
 	
 	var diff = Vector2(sin(current_second), cos(current_second))
 	
-	position += diff * DIFF_SCALE
+	position += diff * diff_scale
 	
-	if material and OFFSET_KEY and fmod(current_second, 0.025 * TIME_SCALE) < 0.01:
+	if material and offset_key and fmod(current_second, 0.025 * time_scale) < 0.01:
 		var offset = _generate_offset(diff)
 		
-		material.set_shader_param(OFFSET_KEY, offset)
+		material.set_shader_param(offset_key, offset)

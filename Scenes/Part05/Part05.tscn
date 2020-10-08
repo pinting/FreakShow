@@ -60,7 +60,7 @@ scale = Vector2( 0.95, 0.95 )
 position = Vector2( 0, -1035.37 )
 
 [node name="Player" parent="BaseScene/Environment/Top" instance=ExtResource( 4 )]
-position = Vector2( -1807.58, 87.4639 )
+position = Vector2( -1803.65, 87.4639 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 13 )
 
@@ -134,15 +134,16 @@ shape = SubResource( 4 )
 
 [node name="Bottom" type="Node2D" parent="BaseScene/Environment"]
 
+[node name="Player" parent="BaseScene/Environment/Bottom" instance=ExtResource( 4 )]
+position = Vector2( -1803.65, 88.846 )
+rotation = 3.14159
+scale = Vector2( -0.7, -0.7 )
+animation_frames = ExtResource( 1 )
+sync_player = false
+
 [node name="InvertPlayer" type="Node2D" parent="BaseScene/Environment/Bottom"]
 position = Vector2( 1284.74, 88.8462 )
 scale = Vector2( -1, 1 )
-
-[node name="Player" parent="BaseScene/Environment/Bottom/InvertPlayer" instance=ExtResource( 4 )]
-position = Vector2( 0, 0 )
-scale = Vector2( 0.7, 0.7 )
-animation_frames = ExtResource( 1 )
-scale_velocity = Vector2( -1, 1 )
 
 [node name="Inside" type="Sprite" parent="BaseScene/Environment/Bottom"]
 position = Vector2( -256.277, -39.5439 )
@@ -160,7 +161,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 3584, 140 )
 
 [node name="Crate" parent="BaseScene/Environment/Bottom/Inside/Floor" instance=ExtResource( 10 )]
-position = Vector2( -1468.35, -76.4854 )
+position = Vector2( -380.37, -76.4854 )
 mass = 1.0
 GRAB_FORCE = Vector2( 5, 5 )
 
@@ -211,7 +212,6 @@ shape = SubResource( 4 )
 [node name="Door" parent="BaseScene/Environment/Bottom" instance=ExtResource( 7 )]
 position = Vector2( -253.55, 30.8801 )
 stop_after = Vector2( 1000, 0 )
-velocity = Vector2( 100, 0 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 position = Vector2( 2224.27, 2283.48 )

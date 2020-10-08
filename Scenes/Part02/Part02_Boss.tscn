@@ -29,7 +29,6 @@ polygon = PoolVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -49
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
 frames = ExtResource( 2 )
-frame = 1
 playing = true
 
 [node name="DeathEffect" parent="." instance=ExtResource( 3 )]

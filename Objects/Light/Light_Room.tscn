@@ -15,7 +15,7 @@ texture = ExtResource( 1 )
 range_z_min = -128
 range_z_max = 128
 
-[node name="AreaLight" type="Sprite" parent="."]
+[node name="FakeLight" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.117647 )
 material = SubResource( 1 )
 position = Vector2( -3.84644, 254.876 )

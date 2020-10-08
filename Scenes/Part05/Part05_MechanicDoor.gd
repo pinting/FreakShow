@@ -1,10 +1,7 @@
 extends Node2D
 
-# Stop after this amount
 export var stop_after: Vector2 = Vector2(0, 1000)
-
-# Velocity of the door
-export var velocity: Vector2 = Vector2(0, -100)
+export var speed: Vector2 = Vector2(0, -100)
 
 onready var door_start = $DoorStart
 onready var door_move = $DoorMove
@@ -24,7 +21,7 @@ func _process(delta: float):
 	if not moving:
 		return
 	
-	sprite.position += direction * velocity * delta
+	sprite.position += direction * speed * delta
 	
 	var diff = (sprite.position - base_position).abs()
 	

@@ -55,6 +55,15 @@ export var hit_to_die: Vector2 = Vector2(20.0, 50.0)
 # Scale velocity
 export var scale_velocity: Vector2 = Vector2(1, 1)
 
+# Sync player movement with others
+export var sync_player: bool = false
+
+# Since player after this amount of seconds passed
+export var sync_player_delay: float = 2.0
+
+# Register player to the store
+export var register_player: bool = true
+
 # Zero value
 export var ZERO: float = 1.0
 
@@ -70,6 +79,8 @@ onready var transform_effect = $TransformEffect
 onready var death_effect = $DeathEffect
 
 onready var animated_sprite = $AnimatedSprite
+
+signal death
 
 var current_second: float = 0.0
 
@@ -113,7 +124,10 @@ var force_gravity: bool = false
 var dead: bool = false
 
 # Register player to players list
-var register: bool = true
+var register: bool = register_player
+
+# Skip the (local) velocity process
+var skip_next_velocity_process: bool = false
 
 func _ready() -> void:
 	set_animation_frames(animation_frames)
@@ -196,10 +210,16 @@ func disable_avatar_mode() -> void:
 		toggle_avatar_mode()
 
 func _process(delta: float) -> void:
+	if dead:
+		return
+	
 	_process_transforming_effect(delta)
 	_process_collision_shapes()
 
 func _physics_process(delta: float) -> void:
+	if dead:
+		return
+	
 	current_second += delta
 	
 	var direction = _get_direction()
@@ -224,10 +244,19 @@ func _process_fall_damage():
 		if hit.abs() > hit_to_die:
 			pass
 
-func _process_velocity(delta: float, direction: Vector2) -> void:
+func manual_process_velocity(delta: float, direction: Vector2):
+	_process_velocity(delta, direction, true)
+	
+	skip_next_velocity_process = true
+
+func _process_velocity(delta: float, direction: Vector2, skip_sync: bool = false) -> void:
+	if skip_next_velocity_process:
+		skip_next_velocity_process = false
+		return
+	
 	if freeze:
 		if not avatar_mode and force_gravity:
-			var next_velocity = _calculate_next_velocity(delta, Vector2.ZERO, acceleration)
+			var next_velocity = _calculate_next_velocity(delta, Vector2.ZERO, acceleration, skip_sync)
 			var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 			var snap_vector = -1 * floor_normal * floor_detect_distance if direction.y == 0 else Vector2.ZERO
 			
@@ -235,11 +264,11 @@ func _process_velocity(delta: float, direction: Vector2) -> void:
 		else:
 			current_velocity = Vector2.ZERO
 	elif avatar_mode:
-		var next_velocity = _calculate_next_velocity(delta, direction, avatar_acceleration)
+		var next_velocity = _calculate_next_velocity(delta, direction, avatar_acceleration, skip_sync)
 		
 		current_velocity = move_and_slide(next_velocity)
 	else:
-		var next_velocity = _calculate_next_velocity(delta, direction, acceleration)
+		var next_velocity = _calculate_next_velocity(delta, direction, acceleration, skip_sync)
 		var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 		
 		if abs(current_velocity.x) > ZERO:
@@ -330,7 +359,7 @@ func _get_direction() -> Vector2:
 	
 	return Vector2(x, y)
 
-func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: float) -> Vector2:
+func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: float, skip_sync: bool) -> Vector2:
 	var next_velocity = current_velocity
 	var players = Global.players
 	
@@ -369,17 +398,22 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 			next_velocity.x += scale_velocity.x * direction.x * acceleration * delta
 	
 	# Sync X velocity of players
-	if current_second > 2.0:
-		var min_v_x = next_velocity.x
+	if not skip_sync and sync_player and current_second > sync_player_delay:
+		var selected_v_x = abs(next_velocity.x)
 		
 		for player in players:
-			if player != self and abs(player.current_velocity.x) < min_v_x:
-					min_v_x = abs(player.current_velocity.x)
-		
-		if next_velocity.x > min_v_x:
-			var scaled_min_v_x = min_v_x
+			if player == self:
+				continue
 			
-			if next_velocity.x > 0.0:
+			player.manual_process_velocity(delta, direction)
+			
+			if abs(player.current_velocity.x) < selected_v_x:
+				selected_v_x = abs(player.current_velocity.x)
+		
+		if abs(next_velocity.x) > selected_v_x:
+			var scaled_min_v_x = selected_v_x
+			
+			if next_velocity.x != 0.0:
 				scaled_min_v_x *= next_velocity.x / abs(next_velocity.x)
 			
 			next_velocity.x = scaled_min_v_x
@@ -395,11 +429,16 @@ func unfreeze() -> void:
 		freeze = false
 
 func kill() -> void:
+	if dead:
+		return
+	
 	dead = true
 	freeze = true
 	transforming = false
 	animated_sprite.visible = false
 	death_effect.emitting = true
+	
+	emit_signal("death")
 
 func is_dead() -> bool:
 	return dead

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Trees.png-30bb896e4fbc3be361c79ea1e8df183d.stex"
+path="res://.import/Building07_Glow.png-6b07a0e0a4df5d962faeed79ba9bf70f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Environmnent/Trees.png"
-dest_files=[ "res://.import/Trees.png-30bb896e4fbc3be361c79ea1e8df183d.stex" ]
+source_file="res://Assets/Environmnent/Building/Building07_Glow.png"
+dest_files=[ "res://.import/Building07_Glow.png-6b07a0e0a4df5d962faeed79ba9bf70f.stex" ]
 
 [params]
 
@@ -19,12 +19,12 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

@@ -1,18 +1,32 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Wall/Wall13.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Part04/Part04_Platform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Environmnent/Floor/Floor04.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti22.png" type="Texture" id=6]
 [ext_resource path="res://Objects/Sky.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Part04/Part04.gd" type="Script" id=9]
-[ext_resource path="res://Objects/Train.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Part04/Part04_Platform.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/Environmnent/Trees.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Music/Part04.ogg" type="AudioStream" id=12]
-[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall10.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Environmnent/Building/Building07.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Environmnent/Floor/Floor05.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall09.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Environmnent/Door/Door05.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall04.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Environmnent/Pillar/Pillar07.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=20]
+[ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Assets/Environmnent/Floor/Floor06.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Environmnent/Wall/Wall08.png" type="Texture" id=23]
+[ext_resource path="res://Objects/Selectable/Selectable_HappyCompanySign.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti17.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Environmnent/Building/Building07_Glow.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Environmnent/Light/Light01.png" type="Texture" id=27]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -22,16 +36,28 @@ glow_strength = 0.9
 glow_blend_mode = 0
 glow_hdr_threshold = 0.1
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2105.38, 76.7567 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 750.744, 1372.97 )
+
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.362319, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0.637681, 0.296875, 0.0261056, 0.0261056, 0 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 width = 250
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 42132.5, 2296.39 )
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 214485, 2296.39 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 5.57422, 633.178 )
 
 [node name="Part04" type="Node2D"]
 
@@ -48,116 +74,258 @@ color = Color( 0.137255, 0.137255, 0.137255, 1 )
 [node name="Sky" parent="BaseScene" instance=ExtResource( 7 )]
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 4 )]
-position = Vector2( 1621.2, 1274.78 )
+position = Vector2( 45596.5, 2000.47 )
 scale = Vector2( 0.665, 0.665 )
-animation_frames = ExtResource( 13 )
+animation_frames = ExtResource( 2 )
 
 [node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 3 )]
 scale = Vector2( 1.05263, -1.05263 )
-zoom = Vector2( 5, 5 )
+zoom = Vector2( 3, 3 )
 smoothing_enabled = false
+zoom_action = Vector2( 5, 5 )
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
-[node name="Train" parent="BaseScene/Environment" instance=ExtResource( 10 )]
-position = Vector2( 2877.09, 4216.31 )
-scale = Vector2( 0.851445, 0.95 )
-z_index = -10
-collision_layer = 0
-collision_mask = 0
+[node name="Building" type="Node2D" parent="BaseScene/Environment"]
+position = Vector2( -28859, 1421 )
+
+[node name="Background" type="Sprite" parent="BaseScene/Environment/Building"]
+position = Vector2( -2040.09, -2035.65 )
+scale = Vector2( 0.8, 1 )
+z_index = -4
+texture = ExtResource( 23 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10330, 10000 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BaseScene/Environment/Building"]
+position = Vector2( 85.625, 249.283 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/Building/StaticBody2D"]
+position = Vector2( -6.12841, -44.2373 )
+z_index = 100
+shape = SubResource( 2 )
+
+[node name="Floor" type="Sprite" parent="BaseScene/Environment/Building"]
+light_mask = 3
+position = Vector2( -0.391, 114 )
+z_index = -2
+texture = ExtResource( 15 )
+region_enabled = true
+region_rect = Rect2( 50, 0, 3985, 200 )
+
+[node name="Wall" type="Sprite" parent="BaseScene/Environment/Building"]
+position = Vector2( 0, -409.093 )
+z_index = -3
+texture = ExtResource( 20 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3985, 846 )
+
+[node name="Head" type="Sprite" parent="BaseScene/Environment/Building/Wall"]
+position = Vector2( 0, -968.736 )
+texture = ExtResource( 19 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3985, 115 )
+
+[node name="Above" type="Sprite" parent="BaseScene/Environment/Building/Wall"]
+position = Vector2( 0, -661.354 )
+z_index = -1
+texture = ExtResource( 16 )
+region_enabled = true
+region_rect = Rect2( 0, 100, 3985, 500 )
+
+[node name="Border" type="Sprite" parent="BaseScene/Environment/Building/Wall"]
+position = Vector2( 0.25, 645.335 )
+z_index = 3
+texture = ExtResource( 22 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3986, 85 )
+
+[node name="Under" type="Sprite" parent="BaseScene/Environment/Building/Wall"]
+light_mask = 0
+position = Vector2( 0, 1164.24 )
+scale = Vector2( 2, 2.25 )
+z_index = 2
+texture = ExtResource( 18 )
+flip_v = true
+region_enabled = true
+region_rect = Rect2( 0, 0, 1992, 455 )
+
+[node name="Door" type="Sprite" parent="BaseScene/Environment/Building/Wall"]
+position = Vector2( -984.164, 58.4823 )
+scale = Vector2( 0.749115, 0.749115 )
+texture = ExtResource( 17 )
+
+[node name="Lamp" parent="BaseScene/Environment/Building/Wall/Door" instance=ExtResource( 21 )]
+position = Vector2( 62.9219, -580.425 )
+scale = Vector2( 1.33491, 1.66864 )
+
+[node name="WallLeft" type="StaticBody2D" parent="BaseScene/Environment/Building/Wall"]
+position = Vector2( -2568.51, 175.644 )
+scale = Vector2( 0.84, 0.84 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/Building/Wall/WallLeft"]
+position = Vector2( -0.369629, 0 )
+z_index = 100
+shape = SubResource( 3 )
+
+[node name="Graffiti00" type="Sprite" parent="BaseScene/Environment/Building/Wall"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( -1647.36, 13.5718 )
+texture = ExtResource( 25 )
+
+[node name="CompanySign" parent="BaseScene/Environment/Building/Wall" instance=ExtResource( 24 )]
+position = Vector2( -363.094, -228.85 )
+scale = Vector2( 0.412863, 0.412863 )
+
+[node name="Graffiti01" type="Sprite" parent="BaseScene/Environment/Building/Wall"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 1070.59, 50.3036 )
+texture = ExtResource( 6 )
 
 [node name="BehindWall" type="Sprite" parent="BaseScene/Environment"]
 modulate = Color( 0.4, 0.4, 0.4, 1 )
-position = Vector2( 23477.7, 17934.7 )
+position = Vector2( 0, 18630.9 )
 scale = Vector2( 0.851445, 0.95 )
 z_index = -11
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 10, 60000, 33800 )
+region_rect = Rect2( 0, 10, 500000, 33800 )
 
 [node name="Top" type="Sprite" parent="BaseScene/Environment/BehindWall"]
-position = Vector2( 0, -17138.6 )
+position = Vector2( 0, -16922.5 )
 z_index = -3
-texture = ExtResource( 6 )
+texture = ExtResource( 16 )
 flip_v = true
 region_enabled = true
-region_rect = Rect2( 0, 0, 60000, 500 )
+region_rect = Rect2( 0, 0, 500000, 500 )
 
-[node name="Trees" type="Sprite" parent="BaseScene/Environment/BehindWall/Top"]
-position = Vector2( 0, -626.75 )
+[node name="Line" type="Sprite" parent="BaseScene/Environment/BehindWall/Top"]
+light_mask = 0
+position = Vector2( 0, 50.7146 )
+z_index = -3
+texture = ExtResource( 13 )
+region_enabled = true
+region_rect = Rect2( 1800, 1, 500000, 932 )
+region_filter_clip = true
+
+[node name="Trees" type="Sprite" parent="BaseScene/Environment/BehindWall/Top/Line"]
+light_mask = 0
+position = Vector2( 0, -677.465 )
 scale = Vector2( 2, 2 )
 z_index = -3
 texture = ExtResource( 11 )
 region_enabled = true
-region_rect = Rect2( 1800, 0, 30000, 1200 )
+region_rect = Rect2( 1800, 1, 250000, 932 )
 region_filter_clip = true
 
 [node name="Gradient" type="Sprite" parent="BaseScene/Environment/BehindWall"]
-position = Vector2( 259.234, -15100.6 )
+position = Vector2( 0.405499, -15850.8 )
 rotation = -1.5708
-scale = Vector2( 3.2256, 300 )
+scale = Vector2( 2.38267, 2000 )
 z_index = 3
-texture = SubResource( 3 )
+texture = SubResource( 5 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 300, 250 )
 
 [node name="ColorRect" type="ColorRect" parent="BaseScene/Environment/BehindWall/Gradient"]
+anchor_left = 0.0166667
+anchor_top = -95.0835
+anchor_right = 0.0201067
+anchor_bottom = -95.0835
 margin_left = -27491.0
 margin_top = -559.084
-margin_right = -145.02
+margin_right = -145.032
 margin_bottom = 23895.9
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Platform00" parent="BaseScene/Environment" instance=ExtResource( 2 )]
-position = Vector2( 1602.78, 1660.61 )
-scale = Vector2( 0.851445, 1 )
-lamp_above_platform = false
+[node name="PlatformBegin" parent="BaseScene/Environment" instance=ExtResource( 10 )]
+position = Vector2( -26367, 1658 )
 
-[node name="Platform" parent="BaseScene/Environment/Platform00" instance=ExtResource( 2 )]
-position = Vector2( 902.051, 174.758 )
-lamp_above_platform = false
+[node name="Platform" parent="BaseScene/Environment/PlatformBegin" instance=ExtResource( 10 )]
+position = Vector2( 905.236, 400 )
 
-[node name="Platform" parent="BaseScene/Environment/Platform00/Platform" instance=ExtResource( 2 )]
-position = Vector2( 903.689, 1058.54 )
+[node name="Platform" parent="BaseScene/Environment/PlatformBegin/Platform" instance=ExtResource( 10 )]
+position = Vector2( 900.504, 400 )
 
-[node name="Platform01" parent="BaseScene/Environment" instance=ExtResource( 2 )]
-position = Vector2( 8853.94, 2823.36 )
-scale = Vector2( 0.851445, 1 )
+[node name="Platform" parent="BaseScene/Environment/PlatformBegin/Platform/Platform" instance=ExtResource( 10 )]
+position = Vector2( 903.707, 400 )
 
-[node name="Platform04" parent="BaseScene/Environment" instance=ExtResource( 2 )]
-position = Vector2( 16619.2, 2767.36 )
-scale = Vector2( 1, -1 )
+[node name="PlatformEnd" parent="BaseScene/Environment" instance=ExtResource( 10 )]
+position = Vector2( 43110, 2922.32 )
 
-[node name="Platform02" parent="BaseScene/Environment" instance=ExtResource( 2 )]
-position = Vector2( 24778.2, 2823.36 )
-scale = Vector2( 0.851445, 1 )
-
-[node name="Platform" parent="BaseScene/Environment/Platform02" instance=ExtResource( 2 )]
+[node name="Platform" parent="BaseScene/Environment/PlatformEnd" instance=ExtResource( 10 )]
 position = Vector2( 901.625, -190.001 )
 
-[node name="Platform" parent="BaseScene/Environment/Platform02/Platform" instance=ExtResource( 2 )]
+[node name="Platform00" parent="BaseScene/Environment/PlatformEnd/Platform" instance=ExtResource( 10 )]
 position = Vector2( 903.961, -188.069 )
 z_index = 0
 
-[node name="Platform03" parent="BaseScene/Environment" instance=ExtResource( 2 )]
-position = Vector2( 35216.2, 1845.74 )
-scale = Vector2( 0.851445, 1 )
-lamp_above_platform = false
+[node name="Platform01" parent="BaseScene/Environment/PlatformEnd/Platform" instance=ExtResource( 10 )]
+position = Vector2( 1755.13, -188.069 )
+z_index = 0
+
+[node name="Platform02" parent="BaseScene/Environment/PlatformEnd/Platform" instance=ExtResource( 10 )]
+position = Vector2( 2612.05, -188.069 )
+z_index = 0
+
+[node name="Building" type="Sprite" parent="BaseScene/Environment/PlatformEnd/Platform"]
+position = Vector2( 1844.4, -842.343 )
+scale = Vector2( 1.25, 1.25 )
+texture = ExtResource( 14 )
+
+[node name="Glow" type="Sprite" parent="BaseScene/Environment/PlatformEnd/Platform/Building"]
+modulate = Color( 1, 0.72549, 0.72549, 0.894118 )
+material = SubResource( 8 )
+position = Vector2( -17.7617, 24.6454 )
+texture = ExtResource( 26 )
+
+[node name="Light00" type="Light2D" parent="BaseScene/Environment/PlatformEnd/Platform/Building/Glow"]
+position = Vector2( -513.059, -7.72974 )
+scale = Vector2( 1.55519, 1.54877 )
+texture = ExtResource( 27 )
+color = Color( 1, 0.337255, 0.337255, 1 )
+
+[node name="Light01" type="Light2D" parent="BaseScene/Environment/PlatformEnd/Platform/Building/Glow"]
+position = Vector2( 236.564, -6.9342 )
+scale = Vector2( 1.12294, 1.76766 )
+texture = ExtResource( 27 )
+color = Color( 1, 0.337255, 0.337255, 1 )
+
+[node name="Light02" type="Light2D" parent="BaseScene/Environment/PlatformEnd/Platform/Building/Glow"]
+position = Vector2( 553.826, 7.9187 )
+scale = Vector2( 0.647479, 0.644804 )
+texture = ExtResource( 27 )
+color = Color( 1, 0.337255, 0.337255, 1 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
-position = Vector2( 2224.27, 2283.48 )
 
 [node name="FallToDeath" type="Area2D" parent="BaseScene/Trigger"]
-position = Vector2( -2224.27, -15300 )
+position = Vector2( 0, -13016.5 )
 collision_layer = 15
 collision_mask = 15
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/FallToDeath"]
-position = Vector2( 22425.2, 20160.2 )
-shape = SubResource( 4 )
+[node name="Bottom" type="CollisionShape2D" parent="BaseScene/Trigger/FallToDeath"]
+position = Vector2( 22425.2, 20183.7 )
+shape = SubResource( 6 )
+
+[node name="End" type="CollisionShape2D" parent="BaseScene/Trigger/FallToDeath"]
+position = Vector2( 42595.7, 16566.6 )
+shape = SubResource( 7 )
+
+[node name="TrainSpawn" type="Node2D" parent="BaseScene/Trigger"]
+position = Vector2( -32234, 4216.31 )
+scale = Vector2( 0.851445, 0.95 )
+z_index = -10
+
+[node name="PillarSpawn" type="Node2D" parent="BaseScene/Trigger"]
+position = Vector2( -19066, 3387.52 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
 

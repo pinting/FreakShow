@@ -1,21 +1,7 @@
 extends "res://Scenes/BaseScene.gd"
 
-# Next scene
 export var next_scene: String = "res://Scenes/Credits.tscn"
-
-# How fast should the path finding update
 export var path_finding_interval: float = 0.5
-
-# Default camera zoom
-export var camera_zoom_base: float = 6.0
-
-# Increase zoom by this amount
-export var camera_zoom_game: float = 10.0
-
-# Speed of zoom
-export var camera_zoom_speed: float = 1.0
-
-# Teleport player to the end
 export var teleport_player_to_end: bool = false
 
 onready var player = $Player
@@ -73,11 +59,12 @@ func _ready() -> void:
 	
 	connect("scene_started", self, "_on_scene_started")
 	
-	fall_to_death.connect("body_entered", self, "_fail_game")
-	enemy_mouth.connect("body_entered", self, "_fail_game")
+	fall_to_death.connect("body_entered", self, "_kill_player")
+	enemy_mouth.connect("body_entered", self, "_kill_player")
 	game_begin.connect("body_entered", self, "_start_game")
 	game_end.connect("body_entered", self, "_end_game")
 	exit_door.connect("selected", self, "_on_exit")
+	player.connect("death", self, "_on_player_die")
 	
 	var blocking_lines = [blocking_line_00, blocking_line_01, blocking_line_02]
 	
@@ -90,24 +77,16 @@ func _ready() -> void:
 		
 		random_lines[i].remove()
 		random_lines.remove(i)
-	
-	var camera = Global.current_camera
-	
-	if camera:
-		camera.zoom = Vector2(camera_zoom_base, camera_zoom_base)
 
-func _fail_game(body: Node) -> void:
+func _kill_player(body: Node) -> void:
 	if not body.is_in_group("player"):
 		return
 	
-	if player.dead:
-		return
-	
-	player.kill()
-	
+	body.kill()
+
+func _on_player_die() -> void:
 	main_music.kill(3.0);
 	yield(timer(3.0), "timeout")
-	
 	load_scene(get_parent().filename)
 
 func _start_game(body: Node) -> void:
@@ -116,7 +95,9 @@ func _start_game(body: Node) -> void:
 	
 	wall_after_enter.disabled = false
 	
+	# If the actual game is turned off, for debug purposes
 	if not teleport_player_to_end:
+		camera.zoom_action()
 		player.enable_avatar_mode()
 	
 		connect_sound.stop()
@@ -132,11 +113,15 @@ func _end_game(body: Node) -> void:
 	if not body.is_in_group("player") or not game_playing:
 		return
 	
-	player.disable_avatar_mode()
-	game_playing = false
-	wall_after_leave.disabled = false
+	if not teleport_player_to_end:
+		camera.zoom_base()
+		player.disable_avatar_mode()
+		
+		game_playing = false
+		wall_after_leave.disabled = false
 	
-	main_music.kill(5.0);
+		main_music.kill(5.0);
+	
 	wind_sound.play()
 
 func _on_exit() -> void:
@@ -185,24 +170,6 @@ func _on_scene_started() -> void:
 
 func _process(delta: float) -> void:
 	_process_enemy_path_finding(delta)
-	_process_camera_zoom(delta)
-
-func _process_camera_zoom(delta) -> void:
-	var camera = Global.current_camera
-	
-	if not camera:
-		return
-	
-	var step = 0
-	
-	if game_playing and max(camera.zoom.x, camera.zoom.y) < camera_zoom_game:
-		step = delta / camera_zoom_speed * (camera_zoom_game - camera_zoom_base)
-	
-	if not game_playing and max(camera.zoom.x, camera.zoom.y) > camera_zoom_base:
-		step = delta / camera_zoom_speed * (camera_zoom_base - camera_zoom_game)
-		
-	camera.zoom.x += step
-	camera.zoom.y += step
 
 func _process_enemy_path_finding(delta) -> void:
 	if not game_started or enemy.dead:

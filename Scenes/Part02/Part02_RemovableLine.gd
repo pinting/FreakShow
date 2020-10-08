@@ -1,12 +1,7 @@
 extends "res://Objects/Selectable/Selectable.gd"
 
-# After how large value the line should disappear
 export var limit: int = 10
-
-# Size of one step
 export var step: int = 9
-
-# Initial value
 export var start: int = 1
 
 var current: int = 0

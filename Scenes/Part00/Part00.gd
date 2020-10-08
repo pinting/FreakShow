@@ -1,22 +1,11 @@
 extends "res://Scenes/BaseScene.gd"
 
-# Next scene
 export var next_scene: String = "res://Scenes/Part01/Part01.tscn"
-
-# Help player after this amount of loops into one direction
 export var help_after_index: int = 2
-
-# Open hallway door after this amount of seconds
 export var hallway_open_exit_after: float = 20.0
-
-# Start to play hallway music after
 export var hallway_waiting_music_after: float = 5.0
-
-# Shake camera in hallway after after
 export var hallway_camera_shake_after: float = 10.0
-
-# Max position diff to wait
-export var max_position_diff_to_wait: float = 100
+export var max_position_diff_to_wait: float = 100.0
 
 onready var player = $Player
 
@@ -69,10 +58,7 @@ func _ready() -> void:
 	
 	main_music.play()
 	
-	var camera = Global.current_camera
-	
-	if camera:
-		camera.smoothing_enabled = false
+	camera.smoothing_enabled = false
 
 func _on_scene_started() -> void:
 	yield(timer(1.5), "timeout")
@@ -82,6 +68,21 @@ func _on_flat_exit_select():
 	player_in_hallway = true
 	
 	move_with_fade(player, hallway_spawn.position, door_open_sound)
+
+func _dupe_player() -> Node2D:
+	var clone = player.duplicate()
+	
+	clone.register = false
+	
+	for n in clone.get_children():
+		if n.name == "DefaultCamera":
+			clone.remove_child(n)
+			n.queue_free()
+			break
+	
+	add_child(clone)
+	
+	return clone
 
 func _on_hallway_door_select(door, index) -> void:
 	player_in_hallway = false
@@ -121,10 +122,7 @@ func _reset_hallway_wait() -> void:
 	if not waiting_music.stopped:
 		waiting_music.kill(0.5)
 	
-	var camera = Global.current_camera
-		
-	if camera:
-		camera.shake = 0.0
+	camera.shake = 0.0
 
 func _process_hallway_wait(delta: float) -> void:
 	if hallway_exit_open or not hallway_exit_enabled:
@@ -138,8 +136,6 @@ func _process_hallway_wait(delta: float) -> void:
 		Global.subtitle.say(tr("NARRATOR01"))
 		
 		hallway_help_complete = true
-	
-	var camera = Global.current_camera
 	
 	var player_position = player.global_position.x
 	var previous_position = previous_player_hallway_position
@@ -164,8 +160,7 @@ func _process_hallway_wait(delta: float) -> void:
 		
 		# Open the door
 		if hallway_wait_counter > hallway_open_exit_after:
-			if camera:
-				camera.shake = 0.0
+			camera.shake = 0.0
 			
 			main_music.kill(5.0)
 			silent_door_open_sound.play()
@@ -181,21 +176,6 @@ func _process_hallway_wait(delta: float) -> void:
 		hallway_wait_counter = 0.0
 		
 		_reset_hallway_wait()
-
-func _dupe_player() -> Node2D:
-	var clone = player.duplicate()
-	
-	clone.register = false
-	
-	for n in clone.get_children():
-		if n.name == "DefaultCamera":
-			clone.remove_child(n)
-			n.queue_free()
-			break
-	
-	add_child(clone)
-	
-	return clone
 
 func _process_hallway_loop(_delta: float) -> void:
 	var left_end_position = hallway_begin.global_position

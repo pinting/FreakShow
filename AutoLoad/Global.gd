@@ -244,25 +244,45 @@ func _process_loading(delta) -> void:
 			break
 
 func _set_new_scene(scene_resource) -> void:
+	for player in players:
+		player.get_parent().remove_child(player)
+		player.queue_free()
+	
 	players = []
+	
+	if current_camera:
+		current_camera.get_parent().remove_child(current_camera)
+		current_camera.queue_free()
+	
 	current_camera = null
+	
+	if subtitle_display:
+		subtitle_display.get_parent().remove_child(subtitle_display)
+		subtitle_display.queue_free()
+	
 	subtitle_display = null
 	
 	var root = get_tree().get_root()
 	var current_scene = root.get_child(root.get_child_count() - 1)
-	var next_scene = scene_resource.instance()
 	
 	# This is needed to workaround canvas modulate glitches 
 	for child in current_scene.get_children():
 		if child.get("visible") != null:
 			child.visible = false
 		
+		current_scene.remove_child(child)
 		child.queue_free()
 	
 	current_scene.queue_free()
+	
+	var next_scene = scene_resource.instance()
+	
 	root.add_child(next_scene)
 
 func load_scene(path) -> void:
+	if loader:
+		return
+	
 	loader = ResourceLoader.load_interactive(path)
 	
 	if loader == null:

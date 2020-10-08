@@ -1,9 +1,7 @@
 extends "res://Objects/PathFindingEnemy.gd"
 
 export var high_speed_after: float = 0.0
-
 export var high_speed_scale: float = 1.0
-
 export var color_change_speed: float = 0.5
 
 onready var animated_sprite = $AnimatedSprite
