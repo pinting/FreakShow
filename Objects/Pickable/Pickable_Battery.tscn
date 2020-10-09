@@ -1,9 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Misc/Misc16_Front.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Misc16_Front.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=2]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=3]
 [ext_resource path="res://Objects/Pickable/Pickable.gd" type="Script" id=4]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )

@@ -11,7 +11,7 @@
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Music/Part03.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Environmnent/Wall/Wall08.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=14]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -42,10 +42,8 @@ light_mask = 524288
 color = Color( 0.0980392, 0.0980392, 0.0980392, 1 )
 
 [node name="DynamicFog" parent="BaseScene" instance=ExtResource( 1 )]
-margin_left = -3350.0
-margin_top = -1261.0
-margin_right = 4578.0
-margin_bottom = 1907.0
+visible = false
+position = Vector2( -49200.2, -19798.8 )
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 

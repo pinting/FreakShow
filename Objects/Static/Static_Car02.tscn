@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Car/Car02.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Car02.png" type="Texture" id=1]
+
 
 
 [node name="Static_Car02" type="StaticBody2D"]

@@ -1,15 +1,18 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Light/Light00.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Lamp/Lamp04.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Lamp04.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Meat00.png" type="Texture" id=3]
 [ext_resource path="res://Shaders/Waves.shader" type="Shader" id=4]
-[ext_resource path="res://Assets/Environmnent/Light/Light01.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=5]
 [ext_resource path="res://Objects/Static/Static_MineLamp.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Environmnent/Pillar/Pillar06.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Environmnent/Pillar06.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Part02/Part02_EndTube.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Environmnent/Tooth00.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Environmnent/Tooth01.png" type="Texture" id=10]
+
+
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )

@@ -1,17 +1,23 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Wall/Wall00.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Building/Building05_Bottom.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Environmnent/Floor/Floor01.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti40.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Building05_Bottom.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor01.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti40.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Part00/Part00_Door_Block.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Selectable/Selectable_BeenStealingGraffiti.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/Selectable/Selectable_YouWhoreGraffiti.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/Selectable/Selectable_ForeskinGraffiti.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Environmnent/Building/Building05_Top.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti16.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Environmnent/Building05_Top.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti16.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Part00/Part00_Hallway.gd" type="Script" id=11]
 [ext_resource path="res://Objects/Viewable/Viewable_StandCommunistPaper.tscn" type="PackedScene" id=12]
+
+
+
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4722.81, 353.699 )

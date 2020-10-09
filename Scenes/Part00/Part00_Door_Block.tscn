@@ -2,11 +2,12 @@
 
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=1]
 [ext_resource path="res://Objects/Light/Light_Street.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Environmnent/Door/Door02.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Door02.png" type="Texture" id=3]
 [ext_resource path="res://Objects/Static/Static_RoomLamp01.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Part00/Part00_Door_Block.gd" type="Script" id=6]
-[ext_resource path="res://Assets/Environmnent/Door/Door02_OpenBlack.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Door02_OpenBlack.png" type="Texture" id=8]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )

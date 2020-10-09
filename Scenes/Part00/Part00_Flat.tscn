@@ -5,9 +5,9 @@
 [ext_resource path="res://Objects/Static/Static_Fridge00.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Objects/Light/Light_Room.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Objects/Static/Static_RoomLamp00.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Environmnent/Building/Building00_1x7_Bottom.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Environmnent/Wall/Wall02.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Environmnent/Floor/Floor02.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Building00_1x7_Bottom.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall02.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor02.png" type="Texture" id=8]
 [ext_resource path="res://Objects/Static/Static_Shelf01.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Static/Static_Table00.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Objects/Static/Static_Chair01.tscn" type="PackedScene" id=11]
@@ -22,12 +22,17 @@
 [ext_resource path="res://Objects/Pickable/Pickable_CoffeePot.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Objects/Viewable/Viewable_SexAndBiblePaper.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Objects/Viewable/Viewable_Blessing01.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Assets/Environmnent/Building/Building00_1x1_Right.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Environmnent/Building/Building00_1x1_Left.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Environmnent/Building/Building00_1x7_Top.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Environmnent/Building00_1x1_Right.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Environmnent/Building00_1x1_Left.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Environmnent/Building00_1x7_Top.png" type="Texture" id=25]
 [ext_resource path="res://Objects/Viewable/Viewable_HorseHead.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Assets/Environmnent/Misc/Misc18.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Environmnent/Misc18.png" type="Texture" id=27]
 [ext_resource path="res://Objects/Pickable/Pickable_CanOfCoffee.tscn" type="PackedScene" id=28]
+
+
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1843.14, 10 )

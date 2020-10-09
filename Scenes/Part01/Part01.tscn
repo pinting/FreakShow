@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Objects/Static/Static_Building00.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part01/Part01_Start.tscn" type="PackedScene" id=2]
@@ -12,7 +12,7 @@
 [ext_resource path="res://Assets/Music/Part01.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Objects/Static/Static_BallHoop.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Environmnent/Building/Building01.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Environmnent/Building01.png" type="Texture" id=13]
 [ext_resource path="res://Objects/Pickable/Pickable_BeachBall.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/Train.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Objects/Static/Static_Building01.tscn" type="PackedScene" id=16]
@@ -23,22 +23,20 @@
 [ext_resource path="res://Assets/Environmnent/Phone00_Glow.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti01.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti02.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti01.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Environmnent/Dirt00.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=27]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=28]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti03.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti05.png" type="Texture" id=30]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti04.png" type="Texture" id=31]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti06.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti05.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti04.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti06.png" type="Texture" id=32]
 [ext_resource path="res://Objects/Selectable/Selectable_FoodSign.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Objects/Selectable/Selectable_SonOfBitchGraffiti.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Objects/Viewable/Viewable_DangerousCriminal.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Objects/Static/Static_Car01.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=37]
 [ext_resource path="res://Objects/DynamicFog.tscn" type="PackedScene" id=38]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti27.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti27.png" type="Texture" id=39]
 [ext_resource path="res://Objects/Viewable/Viewable_KidPaper.tscn" type="PackedScene" id=40]
 [ext_resource path="res://Assets/Sounds/Phone00.ogg" type="AudioStream" id=41]
 [ext_resource path="res://Objects/Viewable/Viewable_RomanticPartnerPaper.tscn" type="PackedScene" id=42]
@@ -50,6 +48,11 @@
 [ext_resource path="res://Assets/Environmnent/Fence02_B.png" type="Texture" id=48]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=49]
 [ext_resource path="res://Assets/Sounds/Train00.ogg" type="AudioStream" id=50]
+[ext_resource path="res://Assets/Environmnent/Door00.png" type="Texture" id=51]
+
+
+
+
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -196,20 +199,10 @@ texture = ExtResource( 24 )
 
 [node name="Graffiti02" type="Sprite" parent="BaseScene/Environment/Fence00"]
 modulate = Color( 0, 0, 0, 0.823529 )
-position = Vector2( 2696.42, 60.4556 )
-texture = ExtResource( 25 )
-
-[node name="Graffiti03" type="Sprite" parent="BaseScene/Environment/Fence00"]
-modulate = Color( 0, 0, 0, 0.823529 )
-position = Vector2( 1372.08, 93.497 )
-texture = ExtResource( 29 )
-
-[node name="Graffiti04" type="Sprite" parent="BaseScene/Environment/Fence00"]
-modulate = Color( 0, 0, 0, 0.823529 )
-position = Vector2( 5569, 56.2399 )
+position = Vector2( 4483.89, 56.2399 )
 texture = ExtResource( 30 )
 
-[node name="Graffiti05" type="Sprite" parent="BaseScene/Environment/Fence00"]
+[node name="Graffiti03" type="Sprite" parent="BaseScene/Environment/Fence00"]
 modulate = Color( 0, 0, 0, 0.823529 )
 position = Vector2( 7645.45, 53.3038 )
 texture = ExtResource( 31 )
@@ -226,9 +219,9 @@ position = Vector2( 1122.5, -2508.43 )
 z_index = -2
 
 [node name="Graffiti" parent="BaseScene/Environment/Building01" instance=ExtResource( 34 )]
-position = Vector2( -829.86, 1970.03 )
+position = Vector2( -871.656, 1977.12 )
 rotation = -0.146264
-scale = Vector2( 0.359845, 0.384425 )
+scale = Vector2( 0.336574, 0.359564 )
 
 [node name="Paper00" parent="BaseScene/Environment/Building01" instance=ExtResource( 40 )]
 position = Vector2( -1377.33, 2204.62 )
@@ -262,6 +255,11 @@ position = Vector2( -1182.14, 913.627 )
 scale = Vector2( 3.67457, 1.10197 )
 
 [node name="Car00" parent="BaseScene/Environment/Building01" instance=ExtResource( 20 )]
+
+[node name="Door00" type="Sprite" parent="BaseScene/Environment/Building01"]
+position = Vector2( -415.959, 2255.03 )
+scale = Vector2( 0.85, 0.85 )
+texture = ExtResource( 51 )
 
 [node name="Building02" type="Sprite" parent="BaseScene/Environment"]
 position = Vector2( 14766.4, -1311.51 )

@@ -50,21 +50,38 @@ func _ready() -> void:
 	if clone_material:
 		material = material.duplicate()
 
+func _get_absolute_z_index(target: Node2D) -> int:
+	var node = target
+	var z_index = 0
+
+	while node and node.is_class("Node2D"):
+		z_index += node.z_index
+
+		if !node.z_as_relative:
+			break
+
+		node = node.get_parent()
+	
+	return z_index
+
 func _is_top(mouse_position: Vector2) -> bool:
 	var tree = get_tree()
 	var selectable_group = tree.get_nodes_in_group("selectable")
 	var self_index = selectable_group.find(self)
 	
 	assert(self_index >= 0)
+
+	var self_z_index = _get_absolute_z_index(self)
 	
 	for i in range(0, len(selectable_group) - 1):
 		if i == self_index:
 			continue
 		
 		var node = selectable_group[i]
+		var node_z_index = _get_absolute_z_index(node)
 		
 		var is_selected = node.get_rect().has_point(node.to_local(mouse_position))
-		var is_front = node.z_index > z_index or (node.z_index == z_index and i < self_index)
+		var is_front = node_z_index > self_z_index or (node_z_index == self_z_index and i < self_index)
 		var is_visible = node.visible
 		
 		if is_selected and is_front and is_visible:

@@ -13,7 +13,26 @@ var current: Color = Color(1.0, 0.0, 0.0)
 var current_second = 0
 
 func _ready():
-	pass
+	var r = 1.0
+	var g = 0.0
+	var b = 0.0
+	
+	var state = Global.random_generator.randi_range(0, 2)
+	
+	if state == 0:
+		r = Global.random_generator.randf_range(0.5, 1.0)
+		g = 1.0 - r
+		b = 0.0
+	elif state == 1:
+		g = Global.random_generator.randf_range(0.5, 1.0)
+		b = 1.0 - g
+		r = 0.0
+	else:
+		b = Global.random_generator.randf_range(0.5, 1.0)
+		r = 1.0 - b
+		g = 0.0
+	
+	current = Color(r, g, b)
 
 func _process(delta):
 	current_second += delta

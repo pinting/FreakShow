@@ -2,9 +2,10 @@
 
 [ext_resource path="res://Scenes/Part05/Part05_MechanicDoor.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sounds/Door03_Stop.wav" type="AudioStream" id=2]
-[ext_resource path="res://Assets/Environmnent/Misc/Misc00.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Misc00.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Sounds/Door03_Start.wav" type="AudioStream" id=4]
 [ext_resource path="res://Assets/Sounds/Door03_Moving.ogg" type="AudioStream" id=5]
+
 
 
 

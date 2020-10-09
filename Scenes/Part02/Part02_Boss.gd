@@ -5,7 +5,7 @@ export var high_speed_scale: float = 1.0
 export var color_change_speed: float = 0.5
 
 onready var animated_sprite = $AnimatedSprite
-onready var death_effect = $DeathEffect
+onready var died_effect = $DeathEffect
 onready var collision = $CollisionPolygon2D
 onready var mouth_area = $MouthArea/CollisionShape2D
 
@@ -29,7 +29,7 @@ func kill() -> void:
 	
 	dead = true
 	animated_sprite.visible = false
-	death_effect.emitting = true
+	died_effect.emitting = true
 	collision.disabled = true
 	mouth_area.disabled = true
 

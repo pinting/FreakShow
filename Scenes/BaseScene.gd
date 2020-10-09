@@ -181,6 +181,7 @@ func move_with_fade(player: Player, next_position: Vector2, sound: AudioStreamPl
 	
 	player.position = next_position
 	yield(timer(0.2), "timeout")
+	player.reset()
 	
 	if camera and smoothing_enabled:
 		camera.smoothing_enabled = smoothing_enabled

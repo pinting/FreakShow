@@ -86,37 +86,37 @@ func _on_phone_selected() -> void:
 	yield(timer(2.0), "timeout")
 	load_scene(next_scene)
 
-func _trigger_comment(body: Node) -> void:
-	if not body.is_in_group("player") or not trigger_comment.visible:
+func _trigger_comment(player: Node) -> void:
+	if not player.is_in_group("player") or not trigger_comment.visible:
 		return
 	
 	trigger_comment.visible = false
 	
 	Global.subtitle.say(tr("NARRATOR03"), 6)
 
-func _trigger_train(body: Node) -> void:
-	if not body.is_in_group("player") or not trigger_train.visible:
+func _trigger_train(player: Node) -> void:
+	if not player.is_in_group("player") or not trigger_train.visible:
 		return
 	
 	trigger_train.visible = false
 	background_train.start()
 
-func _reaching_phone_box(body: Node) -> void:
-	if not body.is_in_group("player") or road_block_sprite.visible:
+func _reaching_phone_box(player: Node) -> void:
+	if not player.is_in_group("player") or road_block_sprite.visible:
 		return
 	
 	road_block_collision.disabled = false
 	road_block_sprite.visible = true
 
-func _trigger_hoop_part(body: Node) -> void:
-	if not body.is_in_group("player") or not reaching_hoop.visible:
+func _trigger_hoop_part(player: Node) -> void:
+	if not player.is_in_group("player") or not reaching_hoop.visible:
 		return
 
 	reaching_hoop.visible = false
 	main_music.force_next(music_01)
 
-func _trigger_in_hoop(body: Node) -> void:
-	if not body.is_in_group("ball") or not inside_hoop.visible:
+func _trigger_in_hoop(player: Node) -> void:
+	if not player.is_in_group("ball") or not inside_hoop.visible:
 		return
 	
 	yield(timer(ball_is_stuck_timeout), "timeout")
@@ -124,7 +124,7 @@ func _trigger_in_hoop(body: Node) -> void:
 	while ball.held:
 		yield(timer(ball_is_stuck_timeout), "timeout")
 	
-	if not inside_hoop.overlaps_body(body):
+	if not inside_hoop.overlaps_body(player):
 		return
 	
 	# Turn off previous trigger point too

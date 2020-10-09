@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Light/Light00.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Light/Light01.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=2]
+
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1

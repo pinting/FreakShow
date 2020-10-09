@@ -1,0 +1,195 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti23.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall04.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti21.png" type="Texture" id=3]
+[ext_resource path="res://Objects/Selectable/Selectable_LevelFirstSign.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Selectable/Selectable_CarSaleSign.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Environmnent/Door00.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti44.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Part04/Part04_Club.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti26.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti02.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Environmnent/Dirt00.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall09.png" type="Texture" id=19]
+[ext_resource path="res://Objects/Static/Static_Car03.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti03.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=24]
+[ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=25]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7816.12, 76.7567 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+[node name="Part04_BuildingEnd" type="Node2D"]
+position = Vector2( 46415.1, 2308 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 6.92578, -2039.56 )
+scale = Vector2( 0.925, 1 )
+z_index = -4
+texture = ExtResource( 23 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2390, 10000 )
+
+[node name="GroundBody" type="StaticBody2D" parent="."]
+position = Vector2( 85.625, 249 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape" type="CollisionShape2D" parent="GroundBody"]
+position = Vector2( 6434, -45.1 )
+z_index = 100
+shape = SubResource( 1 )
+
+[node name="Floor" type="Sprite" parent="."]
+light_mask = 3
+position = Vector2( -0.391, 112 )
+z_index = -2
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( -95, 0, 2000, 200 )
+
+[node name="Wall" type="Sprite" parent="."]
+position = Vector2( 0, -409.093 )
+z_index = -3
+texture = ExtResource( 18 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2000, 846 )
+
+[node name="Head" type="Sprite" parent="Wall"]
+position = Vector2( 0, -968.736 )
+texture = ExtResource( 16 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2000, 115 )
+
+[node name="Above" type="Sprite" parent="Wall"]
+position = Vector2( 0, -661.354 )
+z_index = -1
+texture = ExtResource( 19 )
+region_enabled = true
+region_rect = Rect2( 0, 100, 2000, 500 )
+
+[node name="Border" type="Sprite" parent="Wall"]
+position = Vector2( 0.25, 645.335 )
+z_index = 3
+texture = ExtResource( 24 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2000, 85 )
+
+[node name="Under" type="Sprite" parent="Wall"]
+light_mask = 0
+position = Vector2( 0, 1164.24 )
+scale = Vector2( 2, 2.25 )
+z_index = 2
+texture = ExtResource( 2 )
+flip_v = true
+region_enabled = true
+region_rect = Rect2( 0, 0, 1000, 455 )
+
+[node name="RightPillar" type="Sprite" parent="Wall"]
+light_mask = 0
+position = Vector2( 1054.57, -4.71094 )
+rotation = 1.5708
+scale = Vector2( 1, 0.95 )
+z_index = 10
+texture = ExtResource( 16 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 6000, 115 )
+
+[node name="Graffiti" type="Sprite" parent="Wall"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( -410.121, 105.797 )
+scale = Vector2( 0.85, 0.785673 )
+texture = ExtResource( 1 )
+
+[node name="Door" type="Sprite" parent="Wall"]
+position = Vector2( 294.145, 158.142 )
+scale = Vector2( 0.85, 0.85 )
+texture = ExtResource( 6 )
+
+[node name="LevelFirstSign" parent="Wall/Door" instance=ExtResource( 4 )]
+
+[node name="CarSaleSign" parent="Wall/Door" instance=ExtResource( 5 )]
+
+[node name="Lamp" parent="Wall" instance=ExtResource( 25 )]
+position = Vector2( 306.906, -281.747 )
+
+[node name="Dirt" type="Sprite" parent="."]
+light_mask = 0
+position = Vector2( 6109.87, 555.771 )
+scale = Vector2( 2, 2 )
+z_index = -2
+texture = ExtResource( 13 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5000, 365 )
+
+[node name="Road" type="Sprite" parent="Dirt"]
+light_mask = 3
+material = SubResource( 2 )
+position = Vector2( 0.251953, -226.8 )
+scale = Vector2( 0.5, 0.368406 )
+z_index = -2
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10000, 250 )
+
+[node name="Club" parent="Dirt/Road" instance=ExtResource( 9 )]
+position = Vector2( -187.343, -672.08 )
+scale = Vector2( 1.25267, 1.75186 )
+
+[node name="Fence" type="Sprite" parent="Dirt/Road"]
+position = Vector2( -191.672, -647.065 )
+scale = Vector2( 1, 1.3572 )
+z_index = -4
+texture = ExtResource( 15 )
+region_enabled = true
+region_rect = Rect2( 0, 1, 10000, 780 )
+
+[node name="Graffiti00" type="Sprite" parent="Dirt/Road/Fence"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( -4373.53, -172.72 )
+scale = Vector2( 0.936853, 0.936853 )
+texture = ExtResource( 3 )
+
+[node name="Graffiti01" type="Sprite" parent="Dirt/Road/Fence"]
+modulate = Color( 0, 0, 0, 1 )
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( -2330.05, 23.4377 )
+rotation = 0.0364634
+scale = Vector2( 0.785921, 0.785921 )
+texture = ExtResource( 8 )
+
+[node name="Graffiti02" type="Sprite" parent="Dirt/Road/Fence"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( -3895.2, 220.146 )
+rotation = -0.0608176
+scale = Vector2( 0.581801, 0.496448 )
+texture = ExtResource( 12 )
+
+[node name="Graffiti03" type="Sprite" parent="Dirt/Road/Fence"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( -3598.12, -135.925 )
+scale = Vector2( 0.37928, 0.37928 )
+texture = ExtResource( 21 )
+
+[node name="BlockingCar" parent="." instance=ExtResource( 20 )]
+light_mask = 0
+position = Vector2( 7664.43, -210.361 )
+z_index = 1
+collision_layer = 15
+collision_mask = 2147483663
+
+[node name="Graffiti" type="Sprite" parent="BlockingCar"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 436.406, -62.2246 )
+rotation = -0.0703206
+scale = Vector2( -0.515302, 0.515302 )
+texture = ExtResource( 10 )

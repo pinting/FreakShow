@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Crate02.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Crate04.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Crate01.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Crate00.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Crate03.png" type="Texture" id=5]
+[ext_resource path="res://Objects/RandomChild.tscn" type="PackedScene" id=8]
+
+[node name="Part03_RandomCrate" type="Node2D"]
+
+[node name="RandomChild" parent="." instance=ExtResource( 8 )]
+
+[node name="Sprite00" type="Sprite" parent="RandomChild"]
+texture = ExtResource( 4 )
+
+[node name="Sprite01" type="Sprite" parent="RandomChild"]
+texture = ExtResource( 3 )
+
+[node name="Sprite02" type="Sprite" parent="RandomChild"]
+texture = ExtResource( 1 )
+
+[node name="Sprite03" type="Sprite" parent="RandomChild"]
+texture = ExtResource( 5 )
+
+[node name="Sprite04" type="Sprite" parent="RandomChild"]
+texture = ExtResource( 2 )

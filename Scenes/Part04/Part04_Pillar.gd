@@ -11,13 +11,13 @@ var base_position = Vector2.ZERO
 func _ready():
 	base_position = global_position
 	
-	hit_area.connect("body_entered", self, "_on_body_entered")
+	hit_area.connect("body_entered", self, "_on_player_enter")
 
-func _on_body_entered(body: Node) -> void:
-	if not body.is_in_group("player"):
+func _on_player_enter(player: Node) -> void:
+	if not player.is_in_group("player"):
 		return
 	
-	body.kill()
+	player.kill()
 
 func _process(delta):
 	current_second += delta

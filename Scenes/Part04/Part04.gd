@@ -1,35 +1,64 @@
 extends BaseScene
 
-export var next_scene: String = "res://Scenes/Part04.tscn"
+export var next_scene: String = "res://Scenes/Part05/Part05.tscn"
 export var tick_length_min: float = 10.0
 export var tick_length_max: float = 15.0
-export var number_of_pillars: int = 20
+export var number_of_pillars: int = 30
 export var width_between_pillars: float = 3000
 export var pillar_high_offset: float = -370
 export var pillar_low_offset: float = 335
+export var teleport_player_to_end: bool = false
 
 onready var player = $Player
+onready var camera = $Player/DefaultCamera
 
-onready var fall_to_death = $Trigger/FallToDeath
+onready var club = $Environment/BuildingEnd/Dirt/Road/Club
+
+onready var game_end = $Trigger/GameEnd
+onready var fall_to_died = $Trigger/FallToDeath
 onready var train_spawn = $Trigger/TrainSpawn
 onready var pillar_spawn = $Trigger/PillarSpawn
+onready var teleport_player = $Trigger/TeleportPlayer
+onready var player_respawn = $Trigger/PlayerRespawn
 
 onready var main_music = $Sound/MainMusic
+onready var door_sound = $Sound/DoorSound
 
 const train_scene = preload("res://Objects/Train.tscn")
 const pillar_scene = preload("res://Scenes/Part04/Part04_DoublePillar.tscn")
 
-var music_switched_to_action: bool = false
-var wait_time: float = 0.0
+var first_on_top_called: bool = false
+var wait_time: float = INF
+var reached_end: bool = false
 var counter: float = 0.0
 
 var music_00
 var music_01
+var music_02
+var music_03
 
 func _ready() -> void:
 	music_00 = main_music.add_part(0, 19.3, true, 2, 2, -5)
 	music_01 = main_music.add_part(42, 5 * 38, true, 0, 0, 0)
+	music_02 = main_music.add_part(30.8, 41.9, false, 0, 2, 0)
+	music_03 = main_music.add_part(0, 19.3, true, 2, 2, -5)
 	
+	fall_to_died.connect("body_entered", self, "_kill_player")
+	player.connect("died", self, "_on_player_die")
+	game_end.connect("body_entered", self, "_on_player_reach_game_end")
+	club.connect("door_selected", self, "_on_exit_selected")
+	connect("scene_started", self, "_on_scene_started")
+	
+	main_music.play()
+
+func _shift_end_content():
+	var offset = width_between_pillars * (number_of_pillars + 1)
+	var nodes = get_tree().get_nodes_in_group("shift")
+	
+	for node in nodes:
+		node.global_position.x += offset
+
+func _generate_pillars():
 	var pillars_y = []
 	var zero_count = Global.random_generator.randi_range(1, 3)
 	
@@ -47,23 +76,18 @@ func _ready() -> void:
 		for n in range(end_zero_count):
 			pillars_y[number_of_pillars - (1 + n)] = 0
 	
-	create_pillars(pillars_y)
-	
-	fall_to_death.connect("body_entered", self, "_kill_player")
-	player.connect("death", self, "_on_player_die")
-	connect("scene_started", self, "_on_scene_started")
-	
-	_generate_wait_time()
-	
-	main_music.play()
+	return pillars_y
 
-func create_pillars(pillars_y: Array) -> void:
+func _create_pillars(pillars_y: Array) -> void:
 	for child in pillar_spawn.get_children():
 		pillar_spawn.remove_child(child)
 		child.queue_free()
 	
+	var pillar
+	
 	for i in range(number_of_pillars):
-		var pillar = pillar_scene.instance()
+		pillar = pillar_scene.instance()
+		
 		var x_offset = i * width_between_pillars
 		var y_offset = 0
 		
@@ -80,43 +104,71 @@ func create_pillars(pillars_y: Array) -> void:
 		
 		pillar_spawn.add_child(pillar)
 
-func _kill_player(body: Node) -> void:
-	if not body.is_in_group("player"):
+func _kill_player(player: Node) -> void:
+	if not player.is_in_group("player"):
 		return
 	
-	body.kill()
+	player.kill()
 
 func _on_scene_started() -> void:
-	_generate_train()
+	_shift_end_content()
+	_create_pillars(_generate_pillars())
+	
+	if teleport_player_to_end:
+		player.global_position = teleport_player.global_position
+	else:
+		_create_train()
 
-func _on_body_on_top() -> void:
-	if music_switched_to_action:
+func _on_player_on_train_top() -> void:
+	if first_on_top_called:
 		return
 	
 	main_music.force_next(music_01)
+	camera.zoom_action()
 	
-	var camera = Global.current_camera
+	first_on_top_called = true
+
+func _on_player_reach_game_end(player: Node) -> void:
+	if not player.is_in_group("player") or reached_end:
+		return
 	
-	if camera:
-		camera.zoom_action()
+	main_music.force_next(music_02)
+	camera.zoom_base()
 	
-	music_switched_to_action = true
+	reached_end = true
+
+func _clean_trains():
+	var trains = get_tree().get_nodes_in_group("train")
+	
+	for train in trains:
+		train.stop()
+		remove_child(train)
+		train.queue_free()
+
+func _on_exit_selected() -> void:
+	door_sound.play()
+	main_music.kill(2.0)
+	
+	fade_out(0.5)
+	yield(timer(0.5), "timeout")
+	
+	club.bass_sound.volume_db = 10
+	yield(timer(1.0), "timeout")
+	
+	_clean_trains()
+	yield(timer(0.5), "timeout")
+	
+	load_scene(next_scene)
 
 func _on_player_die() -> void:
-	fade_out(3.0)
-	yield(timer(3.0), "timeout")
-	load_scene(get_parent().filename)
-
-func _generate_wait_time() -> void:
-	wait_time = Global.random_generator.randf_range(tick_length_min, tick_length_max)
-
-func _remove_train(train: Train) -> void:
-	remove_child(train)
-	train.queue_free()
-
-func _generate_train() -> void:
-	_generate_wait_time()
+	yield(timer(2.0), "timeout")
 	
+	main_music.force_next(music_00)
+	move_with_fade(player, player_respawn.global_position)
+	
+	first_on_top_called = false
+
+func _create_train() -> void:
 	var new_train = train_scene.instance()
 	
 	new_train.z_index = train_spawn.z_index
@@ -124,16 +176,19 @@ func _generate_train() -> void:
 	new_train.collision_layer = 8
 	new_train.collision_mask = 8
 	
-	new_train.connect("stopped", self, "_remove_train", [new_train])
-	new_train.connect("body_on_top", self, "_on_body_on_top")
+	new_train.connect("player_on_top", self, "_on_player_on_train_top")
 	
 	add_child(new_train)
 	new_train.start()
 	
+	wait_time = Global.random_generator.randf_range(tick_length_min, tick_length_max)
 	counter = 0.0
 
 func _process(delta: float) -> void:
+	if first_on_top_called or reached_end or player.dead or Global.loader:
+		return
+	
 	counter += delta
 	
 	if counter >= wait_time:
-		_generate_train()
+		_create_train()

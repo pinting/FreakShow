@@ -26,7 +26,9 @@ glow_hdr_threshold = 0.4
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
+game_restart_after = 120.0
 fade_in_after = 3.0
+fade_in_duration = 3.0
 delay = 1.0
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 8 )]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Decoration/Sign13.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=2]
+
+
+
+[node name="Selectable_LevelTwoSign" type="Sprite" groups=[
+"selectable",
+]]
+position = Vector2( -360.143, -123.347 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+description = "SIGN02"

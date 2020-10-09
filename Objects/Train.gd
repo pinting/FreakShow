@@ -10,8 +10,8 @@ export var start_from: float = -15000.0
 # Speed and direction to move on the X axis
 export var speed: float = 1600.0
 
-# Destory the train after this offset
-export var stop_after: float = 150000.0
+# Stop the train after this dinstance to the player
+export var stop_after_player_diff: float = 25000.0
 
 # Amplitude of the shake (Y axis)
 export var shake_amp: float = 2.0
@@ -49,19 +49,21 @@ onready var collision_02 = $CollisionShape02
 onready var on_top_collision_02 = $OnTop/CollisionShape02
 
 signal stopped
-signal body_on_top
+signal player_on_top
 
 var started: bool = false
 var enable_sound: bool = true
 var current_second: float = 0.0
 var last_position_diff: Vector2 = Vector2.ZERO
 var base_position: Vector2 = Vector2(0.0, 0.0)
-var players_on_top = []
-var players_on_top_speed_scale = []
+var exit_list_player = []
+var exit_list_skip_stick = []
+var enter_list_player = []
+var enter_list_speed_scale = []
 
 func _ready() -> void:
-	on_top.connect("body_exited", self, "_top_on_body_exited")
-	on_top.connect("body_entered", self, "_top_on_body_entered")
+	on_top.connect("body_exited", self, "_player_exited_top")
+	on_top.connect("body_entered", self, "_player_entered_top")
 	
 	visible = false
 	base_position = global_position
@@ -71,32 +73,21 @@ func _ready() -> void:
 		audio_stream_01.stream = train_sound
 		audio_stream_02.stream = train_sound
 
-func _top_on_body_entered(body: Node):
-	if not body.is_in_group("player"):
+func _player_entered_top(player: Node):
+	if not player.is_in_group("player") or enter_list_player.find(player) >= 0:
 		return
 	
-	emit_signal("body_on_top")
+	emit_signal("player_on_top")
 	
-	if players_on_top.find(body) == -1:
-		players_on_top.push_back(body)
-		players_on_top_speed_scale.push_back(0.0)
+	enter_list_player.push_back(player)
+	enter_list_speed_scale.push_back(0.0)
 
-func _top_on_body_exited(body: Node):
-	if not body.is_in_group("player"):
+func _player_exited_top(player: Node):
+	if not player.is_in_group("player") or exit_list_player.find(player) >= 0:
 		return
 	
-	yield(Global.timer(0.1), "timeout")
-	
-	if on_top.overlaps_body(body):
-		return
-	
-	body.current_velocity.x = speed
-	
-	var index = players_on_top.find(body)
-	
-	if index >= 0:
-		players_on_top.remove(index)
-		players_on_top_speed_scale.remove(index)
+	exit_list_player.push_back(player)
+	exit_list_skip_stick.push_back(true)
 
 func start() -> void:
 	position.x = base_position.x + start_from
@@ -139,21 +130,35 @@ func stop():
 	
 	visible = false
 
-func _process(delta) -> void:
-	if not started or Global.loader:
-		return
+func _process_exit_list() -> void:
+	var new_list_player = []
+	var new_list_skipped_tick = []
 	
-	current_second += delta
-	
-	if enable_sound:
-		var d = delta * fade_in_volume_per_s
+	while len(exit_list_player) > 0:
+		var player = exit_list_player.pop_back()
+		var skip_tick = exit_list_skip_stick.pop_back()
 		
-		audio_stream_00.volume_db = min(0, audio_stream_00.volume_db + d)
-		audio_stream_01.volume_db = min(0, audio_stream_01.volume_db + d)
-		audio_stream_02.volume_db = min(0, audio_stream_02.volume_db + d)
+		if skip_tick:
+			new_list_player.push_back(player)
+			new_list_skipped_tick.push_back(false)
+			continue
+		
+		if on_top.overlaps_body(player):
+			continue
+		
+		if started:
+			player.current_velocity.x = speed
+		
+		var index = enter_list_player.find(player)
+		
+		if index >= 0:
+			enter_list_player.remove(index)
+			enter_list_speed_scale.remove(index)
 	
-	var self_position = global_position
+	exit_list_player = new_list_player
+	exit_list_skip_stick = new_list_skipped_tick
 
+func _process_train_movement(delta: float) -> void:
 	var s = current_second
 	var m = shake_amp
 	var c = shake_count
@@ -177,21 +182,55 @@ func _process(delta) -> void:
 	var position_diff = speed * delta
 	
 	position.x += position_diff
-	
-	for index in range(len(players_on_top)):
-		var player = players_on_top[index]
 
-		if not player or player.dead:
+func _process_player_on_top(delta: float) -> void:
+	var position_diff = speed * delta
+	
+	for index in range(len(enter_list_player)):
+		var player = enter_list_player[index]
+		var speed_scale = enter_list_speed_scale[index]
+
+		if not player or player.dead or Global.loader:
+			exit_list_player.push_back(player)
+			exit_list_skip_stick.push_back(false)
 			continue
 		
-		var speed_scale = players_on_top_speed_scale[index]
-		
 		player.position.x += position_diff * speed_scale
-		players_on_top_speed_scale[index] = min(1.0, speed_scale + delta * speed_scale_m)
+		enter_list_speed_scale[index] = min(1.0, speed_scale + delta * speed_scale_m)
 		
 		if player.current_velocity.x > player.current_max_speed:
 			player.current_velocity.x -= player.current_max_speed * delta
+
+func _process_fade_in(delta: float) -> void:
+	if not enable_sound:
+		return
 	
-	if base_position.distance_to(self_position) > stop_after:
+	var d = delta * fade_in_volume_per_s
+	
+	audio_stream_00.volume_db = min(0, audio_stream_00.volume_db + d)
+	audio_stream_01.volume_db = min(0, audio_stream_01.volume_db + d)
+	audio_stream_02.volume_db = min(0, audio_stream_02.volume_db + d)
+
+func _process_recycle() -> void:
+	var source_position = base_position
+	
+	for player in Global.players:
+		source_position = player.global_position
+		break
+	
+	if source_position.distance_to(global_position) > stop_after_player_diff:
 		stop()
-		emit_signal("stopped")
+		get_parent().remove_child(self)
+		queue_free()
+
+func _process(delta) -> void:
+	if not started or Global.loader:
+		return
+	
+	current_second += delta
+	
+	_process_fade_in(delta)
+	_process_exit_list()
+	_process_train_movement(delta)
+	_process_player_on_top(delta)
+	_process_recycle()

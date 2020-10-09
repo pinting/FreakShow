@@ -5,14 +5,15 @@ export var path_finding_interval: float = 0.5
 export var teleport_player_to_end: bool = false
 
 onready var player = $Player
+onready var camera = $Player/DefaultCamera
 
 onready var debug_line = $Environment/DebugLine
 onready var navigation = $Environment/Navigation2D
 onready var exit_door = $Environment/Maze/SteelBlock/WallBlock/ExitDoor
 onready var end_tube = $Environment/Maze/EndTube
 
-onready var enemy = $Environment/Enemy
-onready var enemy_mouth = $Environment/Enemy/MouthArea
+onready var boss = $Environment/Boss
+onready var boss_mouth = $Environment/Boss/MouthArea
 
 onready var wall_after_enter = $Environment/HiddenWalls/AfterEnter
 onready var wall_after_leave = $Environment/HiddenWalls/AfterLeave
@@ -29,13 +30,13 @@ onready var random_line_02 = $Environment/Maze/RandomLine02
 onready var random_line_03 = $Environment/Maze/RandomLine03
 onready var random_line_04 = $Environment/Maze/RandomLine04
 
-onready var fall_to_death = $Trigger/FallToDeath
+onready var fall_to_died = $Trigger/FallToDeath
 onready var game_begin = $Trigger/GameBegin
 onready var game_end = $Trigger/GameEnd
-onready var boss_go_back_00 = $Trigger/BossGoBack00
-onready var boss_go_back_01 = $Trigger/BossGoBack01
 onready var end_door_area = $Trigger/EndDoorArea
-onready var teleport_player = $Trigger/TeleportPlayer
+onready var player_respawn_00 = $Trigger/PlayerRespawn00
+onready var player_respawn_01 = $Trigger/PlayerRespawn01
+onready var player_respawn_02 = $Trigger/PlayerRespawn02
 
 onready var main_music = $Sound/MainMusic
 
@@ -52,6 +53,8 @@ var path_finder_fire: float = 0.0
 var game_started: bool = false
 var game_playing: bool = false
 var not_close_enough_help: bool = true
+var boss_base_position: Vector2
+var boss_base_rotation: float
 
 func _ready() -> void:
 	music_00 = main_music.add_part(0, 4 * 60 + 0.7, false, 0, 0, 0)
@@ -59,12 +62,13 @@ func _ready() -> void:
 	
 	connect("scene_started", self, "_on_scene_started")
 	
-	fall_to_death.connect("body_entered", self, "_kill_player")
-	enemy_mouth.connect("body_entered", self, "_kill_player")
+	fall_to_died.connect("body_entered", self, "_kill_player")
+	boss_mouth.connect("body_entered", self, "_kill_player")
 	game_begin.connect("body_entered", self, "_start_game")
 	game_end.connect("body_entered", self, "_end_game")
 	exit_door.connect("selected", self, "_on_exit")
-	player.connect("death", self, "_on_player_die")
+	player.connect("died", self, "_reset_game")
+	player.connect("reseted", self, "_on_player_reset")
 	
 	var blocking_lines = [blocking_line_00, blocking_line_01, blocking_line_02]
 	
@@ -77,20 +81,18 @@ func _ready() -> void:
 		
 		random_lines[i].remove()
 		random_lines.remove(i)
+	
+	boss_base_position = boss.global_position
+	boss_base_rotation = boss.rotation_degrees
 
-func _kill_player(body: Node) -> void:
-	if not body.is_in_group("player"):
+func _kill_player(player: Node) -> void:
+	if not player.is_in_group("player"):
 		return
 	
-	body.kill()
+	player.kill()
 
-func _on_player_die() -> void:
-	main_music.kill(3.0);
-	yield(timer(3.0), "timeout")
-	load_scene(get_parent().filename)
-
-func _start_game(body: Node) -> void:
-	if not body.is_in_group("player") or game_playing:
+func _start_game(player: Node) -> void:
+	if not player.is_in_group("player") or game_playing:
 		return
 	
 	wall_after_enter.disabled = false
@@ -109,14 +111,38 @@ func _start_game(body: Node) -> void:
 	game_playing = true
 	game_started = true
 
-func _end_game(body: Node) -> void:
-	if not body.is_in_group("player") or not game_playing:
+func _on_player_reset() -> void:
+	boss.path = []
+	boss.global_position = boss_base_position
+	boss.rotation_degrees = boss_base_rotation
+
+func _reset_game() -> void:
+	# Small fix so the player does not show death animation before entering the game
+	if not game_playing and not game_started:
+		player.reset()
+	else:
+		yield(timer(2.0), "timeout")
+	
+	main_music.kill(0.5)
+	
+	if game_playing and game_started:
+		game_playing = false
+		game_started = false
+		
+		move_with_fade(player, player_respawn_01.global_position)
+	elif not game_playing and not game_started:
+		move_with_fade(player, player_respawn_00.global_position)
+	elif not game_playing and game_started:
+		move_with_fade(player, player_respawn_02.global_position)
+
+func _end_game(player: Node) -> void:
+	if not player.is_in_group("player") or not game_playing:
 		return
 	
 	if not teleport_player_to_end:
 		camera.zoom_base()
 		player.disable_avatar_mode()
-		
+
 		game_playing = false
 		wall_after_leave.disabled = false
 	
@@ -164,7 +190,7 @@ func _on_scene_started() -> void:
 		_start_game(player)
 		_end_game(player)
 		
-		player.position = teleport_player.position
+		player.position = player_respawn_02.position
 	else:
 		connect_sound.play()
 
@@ -172,7 +198,7 @@ func _process(delta: float) -> void:
 	_process_enemy_path_finding(delta)
 
 func _process_enemy_path_finding(delta) -> void:
-	if not game_started or enemy.dead:
+	if not game_started or boss.dead:
 		return
 	
 	path_finder_fire += delta
@@ -183,16 +209,10 @@ func _process_enemy_path_finding(delta) -> void:
 	var dest = player.global_position
 	
 	if player.dead or not game_playing:
-		var d_00 = player.global_position.distance_to(boss_go_back_00.global_position)
-		var d_01 = player.global_position.distance_to(boss_go_back_01.global_position) 
-		
-		if d_00 > d_01:
-			dest = boss_go_back_00.global_position
-		else:
-			dest = boss_go_back_01.global_position
+		dest = boss_base_position
 	
-	var path = navigation.get_simple_path(enemy.global_position, dest)
+	var path = navigation.get_simple_path(boss.global_position, dest)
 	
-	enemy.path = path
+	boss.path = path
 	debug_line.points = path
 	path_finder_fire = 0.0

@@ -64,4 +64,4 @@ func zoom_action() -> void:
 	is_action_zoom_on = true
 
 func zoom_base() -> void:
-	is_action_zoom_on = true
+	is_action_zoom_on = false

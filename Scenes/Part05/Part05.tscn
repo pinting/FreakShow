@@ -1,19 +1,21 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://Assets/Environmnent/Graffiti/Graffiti36.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti36.png" type="Texture" id=2]
 [ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Environmnent/Wall/Wall01.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall01.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/Part05/Part05_MechanicDoor.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Part05/Part05.gd" type="Script" id=9]
 [ext_resource path="res://Objects/Pickable/Pickable_Crate.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Objects/Light/Light_Room.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Objects/Static/Static_RoomLamp00.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=13]
-[ext_resource path="res://Assets/Environmnent/Wall/Wall11.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Environmnent/Floor/Floor05.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall11.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture" id=18]
+
+
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -63,6 +65,7 @@ position = Vector2( 0, -1035.37 )
 position = Vector2( -1803.65, 87.4639 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 13 )
+sync_player = true
 
 [node name="Inside" type="Sprite" parent="BaseScene/Environment/Top"]
 position = Vector2( -256.277, -39.5439 )
@@ -139,7 +142,6 @@ position = Vector2( -1803.65, 88.846 )
 rotation = 3.14159
 scale = Vector2( -0.7, -0.7 )
 animation_frames = ExtResource( 1 )
-sync_player = false
 
 [node name="InvertPlayer" type="Node2D" parent="BaseScene/Environment/Bottom"]
 position = Vector2( 1284.74, 88.8462 )

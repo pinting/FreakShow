@@ -8,7 +8,7 @@ export (SpriteFrames) var animation_frames
 export var max_speed: float = 320.0
 
 # Max acceleration
-export var acceleration: float = 800.0
+export var normal_acceleration: float = 800.0
 
 # Friction on the platform (only X axis)
 export var friction: float = 0.001
@@ -44,7 +44,7 @@ export var floor_normal: Vector2 = Vector2.UP
 export var floor_detect_distance: float = 20.0
 
 # Freeze the player in place
-export var freeze: bool = false
+export var frozen: bool = false
 
 # Enable or disable avatar mode
 export var avatar_mode: bool = false
@@ -80,7 +80,8 @@ onready var death_effect = $DeathEffect
 
 onready var animated_sprite = $AnimatedSprite
 
-signal death
+signal reseted
+signal died
 
 var current_second: float = 0.0
 
@@ -117,7 +118,7 @@ var crouching: bool = false
 # Enable fast walking
 var fast_walking: bool = false
 
-# Force gravity even when freezed
+# Force gravity even when frozen
 var force_gravity: bool = false
 
 # Is the player dead
@@ -177,7 +178,7 @@ func _process_transforming_effect(delta: float) -> void:
 	if t >= 0.0 and t < 1.0:
 		transform_effect.emitting = true
 		transform_effect.self_modulate.a = t
-		freeze = true
+		frozen = true
 		transforming_done = false
 	elif t >= 1.0 and t < 2.0:
 		if not transforming_done:
@@ -188,7 +189,7 @@ func _process_transforming_effect(delta: float) -> void:
 	elif t >= 2.0:
 		transform_effect.self_modulate.a = 0.0
 		transform_effect.emitting = false
-		freeze = false
+		frozen = false
 		transforming = false
 		transforming_seconds = 0.0
 
@@ -198,7 +199,7 @@ func _process_collision_shapes() -> void:
 	avatar_collision.disabled = dead or not avatar_mode
 
 func toggle_avatar_mode() -> void:
-	if not freeze:
+	if not frozen:
 		transforming = not transforming
 
 func enable_avatar_mode() -> void:
@@ -210,14 +211,14 @@ func disable_avatar_mode() -> void:
 		toggle_avatar_mode()
 
 func _process(delta: float) -> void:
-	if dead:
+	if dead or Global.loader:
 		return
 	
 	_process_transforming_effect(delta)
 	_process_collision_shapes()
 
 func _physics_process(delta: float) -> void:
-	if dead:
+	if dead or Global.loader:
 		return
 	
 	current_second += delta
@@ -254,9 +255,9 @@ func _process_velocity(delta: float, direction: Vector2, skip_sync: bool = false
 		skip_next_velocity_process = false
 		return
 	
-	if freeze:
+	if frozen:
 		if not avatar_mode and force_gravity:
-			var next_velocity = _calculate_next_velocity(delta, Vector2.ZERO, acceleration, skip_sync)
+			var next_velocity = _calculate_next_velocity(delta, Vector2.ZERO, normal_acceleration, skip_sync)
 			var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 			var snap_vector = -1 * floor_normal * floor_detect_distance if direction.y == 0 else Vector2.ZERO
 			
@@ -268,7 +269,7 @@ func _process_velocity(delta: float, direction: Vector2, skip_sync: bool = false
 		
 		current_velocity = move_and_slide(next_velocity)
 	else:
-		var next_velocity = _calculate_next_velocity(delta, direction, acceleration, skip_sync)
+		var next_velocity = _calculate_next_velocity(delta, direction, normal_acceleration, skip_sync)
 		var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 		
 		if abs(current_velocity.x) > ZERO:
@@ -312,7 +313,7 @@ func _process_fast_walk() -> void:
 func _process_animation(direction: Vector2) -> void:
 	var next_animation = _get_next_animation(direction)
 	
-	if next_animation.freeze:
+	if next_animation.pause:
 		animated_sprite.speed_scale = 0.0
 	else:
 		animated_sprite.speed_scale = current_animation_speed
@@ -341,7 +342,7 @@ func _process_facing(direction: Vector2) -> void:
 		animation_prefix = "a" if direction.x > 0.0 else "b"
 
 func _get_direction() -> Vector2:
-	if freeze:
+	if frozen:
 		return Vector2(0, 0)
 	
 	var top_colliding = top_detector.is_colliding()
@@ -400,7 +401,7 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 	# Sync X velocity of players
 	if not skip_sync and sync_player and current_second > sync_player_delay:
 		var selected_v_x = abs(next_velocity.x)
-		
+
 		for player in players:
 			if player == self:
 				continue
@@ -422,30 +423,41 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 
 func freeze(with_gravity: bool = false) -> void:
 	force_gravity = with_gravity
-	freeze = true
+	frozen = true
 
 func unfreeze() -> void:
 	if not transforming:
-		freeze = false
+		frozen = false
 
 func kill() -> void:
 	if dead:
 		return
 	
 	dead = true
-	freeze = true
+	frozen = true
 	transforming = false
 	animated_sprite.visible = false
 	death_effect.emitting = true
 	
-	emit_signal("death")
+	emit_signal("died")
 
 func is_dead() -> bool:
 	return dead
 
+func reset(start_in_avatar_mode: bool = false) -> void:
+	current_velocity = Vector2.ZERO
+	dead = false
+	avatar_mode = start_in_avatar_mode
+	frozen = false
+	transforming = false
+	animated_sprite.visible = true
+	death_effect.emitting = false
+	
+	emit_signal("reseted")
+
 func _get_next_animation(direction: Vector2) -> Dictionary:
 	var next_animation = "default"
-	var freeze = false
+	var pause = false
 	
 	var current_animation = animated_sprite.animation
 	var last_frame = animated_sprite.frames.get_frame_count(current_animation) - 1
@@ -453,7 +465,7 @@ func _get_next_animation(direction: Vector2) -> Dictionary:
 	
 	if avatar_mode:
 		if direction.x == 0.0 and direction.y == 0.0:
-			freeze = true
+			pause = true
 	else:
 		if is_on_floor():
 			if direction.x and abs(current_velocity.x) > 0.0:
@@ -487,11 +499,11 @@ func _get_next_animation(direction: Vector2) -> Dictionary:
 			
 			next_animation = "jump"
 			
-			# When falling, freeze the current frame of the jump animation
+			# When falling, pause the current frame of the jump animation
 			if current_velocity.y > 0.0 and gravity > ZERO:
-				freeze = true
+				pause = true
 	
 	return {
 		"name": next_animation,
-		"freeze": freeze
+		"pause": pause
 	}

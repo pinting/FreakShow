@@ -7,7 +7,7 @@ const DEBUG: bool = true
 const NO_SOUNDS: bool = false
 
 # Disable intro
-const NO_INTRO: bool = false
+const NO_INTRO: bool = true
 
 # Low performance mode
 const LOW_PERFORMANCE: bool = false
@@ -171,7 +171,7 @@ func _input(event: InputEvent) -> void:
 		if not using_virtual:
 			_set_virtual_mouse_position(event.position, false)
 
-func _process_virtual_input(delta: float) -> void:
+func _process_virtual_input(_delta: float) -> void:
 	var directions = {
 		"right": "virtual_mouse_right",
 		"left": "virtual_mouse_left",
@@ -219,7 +219,7 @@ func _process(delta: float) -> void:
 	_process_virtual_input(delta)
 	_process_loading(delta)
 
-func _process_loading(delta) -> void:
+func _process_loading(_delta: float) -> void:
 	if not loader:
 		return
 	
@@ -229,15 +229,13 @@ func _process_loading(delta) -> void:
 		var result = loader.poll()
 		
 		if result == ERR_FILE_EOF:
-			var resource = loader.get_resource()
-			loader = null
-			_set_new_scene(resource)
+			_set_new_scene(loader.get_resource())
 			break
 		elif result == OK:
 			var current = loader.get_stage()
 			var count = loader.get_stage_count()
 			
-			debug(str("Loader progress: ", current, "/", count))
+			debug(str("Loader progress: ", current + 1, "/", count))
 		else:
 			debug("Error during loading!")
 			loader = null
@@ -278,6 +276,8 @@ func _set_new_scene(scene_resource) -> void:
 	var next_scene = scene_resource.instance()
 	
 	root.add_child(next_scene)
+	
+	loader = null
 
 func load_scene(path) -> void:
 	if loader:

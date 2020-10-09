@@ -1,4 +1,4 @@
-extends ColorRect
+extends Node
 
 func _ready() -> void:
 	if Global.LOW_PERFORMANCE:
