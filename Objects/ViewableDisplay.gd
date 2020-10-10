@@ -1,11 +1,13 @@
 extends CanvasLayer
 
 # Process user input after this amount of seconds
-export var REGISTER_INPUT_AFTER = 0.25
+export var INPUT_DELAY = 0.2
 
 onready var current: Sprite = $Current
 
 var visible_since: float = 0.0
+var queue_remove: bool = false
+var remove_after: float = 0.0
 
 func _ready():
 	Global.viewable_display = self
@@ -29,21 +31,28 @@ func add(texture: Texture, description: String, child_scale: float = 1.0):
 func _process(delta) -> void:
 	if current.visible:
 		visible_since += delta
+	
+	if queue_remove:
+		remove_after += delta
+		
+		if remove_after > INPUT_DELAY:
+			var players = Global.players
+			
+			for player in players:
+				if player:
+					player.unfreeze()
+			
+			current.visible = false
+			
+			Global.disable_selectable = false
+			Global.subtitle.describe_remove(current.get_instance_id())
+	
+			queue_remove = false
+			remove_after = 0.0
 
 func _input(event) -> void:
 	if not current.visible or not (event is InputEventMouseButton) or not event.pressed:
 		return
 	
-	if visible_since < REGISTER_INPUT_AFTER:
-		return
-	
-	var players = Global.players
-	
-	for player in players:
-		if player:
-			player.unfreeze()
-		
-		current.visible = false
-		
-		Global.disable_selectable = false
-		Global.subtitle.describe_remove(current.get_instance_id())
+	if visible_since > INPUT_DELAY:
+		queue_remove = true

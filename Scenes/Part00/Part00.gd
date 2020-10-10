@@ -202,6 +202,9 @@ func _process_hallway_loop(_delta: float) -> void:
 		loop_index += 1
 
 func _process(delta: float) -> void:
+	if Global.loader:
+		return
+	
 	if old_player:
 		remove_child(old_player)
 		old_player.queue_free()

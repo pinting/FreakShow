@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Decoration/Paper14.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Viewable/Viewable.gd" type="Script" id=2]
+
+[node name="Viewable_Ad03" type="Sprite" groups=[
+"selectable",
+]]
+position = Vector2( -113.714, -195.655 )
+rotation = -0.0319893
+scale = Vector2( 0.06, 0.06 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+description = "PAPER13"

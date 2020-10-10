@@ -7,6 +7,7 @@ BAG00,Old bag,Régi táska
 BALL00,Beach ball,Strandlabda
 CLOTHES00,Pile of clothes,Halom ruha
 CRATE00,Crate,Láda
+BATTERY00,Battery,Akkumulátor
 CUP00,Beer jug,Söröskorsó
 FRUIT00,Unripe mango,Éretlen mangó
 PILLOW00,Dusty pillow,Poros párna
@@ -22,6 +23,14 @@ PAPER05,"White dove flies over the village, carrying my sorrowful soul","Fehér 
 PAPER06,Want to move as soon as possible!,Sürgősen költöznék!
 PAPER07,DANGEROUS CRIMINAL,VESZÉLYES BŰNÖZŐ
 PAPER08,STANDS,HELYT ÁLL
+PAPER09,FOOD FOR SALE,TŰZIFA ELADÓ
+PAPER10,Nutmeat is available for purchase!,Dióbél van eladó!
+PAPER11,Buying wrecked cars,Roncs autók felvásárlása
+PAPER12,English lessons,Angol órák
+PAPER13,Man for electrical installation,Villanyszerelést vállalok
+PAPER14,W201 swimsuit,W201 fürdőruha
+PAPER15,"NŐI-FÉRFI RUHÁZATI ADÁS-VÉTEL","SALE AND PURCHASE OF WOMEN'S AND MEN'S CLOTHING"
+PAPER16,The code for the door,A kód az ajtóhoz
 LETTER00,"No need for a screeching halt, you can stop gracefully.","Nem kell megtorpanni, elég méltósággal megállni."
 LETTER01,"The red light is there to help you reach your destination.","Azért kapsz pirost, hogy célba érj."
 LETTER02,"I hold onto my cigarette break.","A cigiszünet tart."

@@ -81,7 +81,7 @@ func _is_top(mouse_position: Vector2) -> bool:
 		var node_z_index = _get_absolute_z_index(node)
 		
 		var is_selected = node.get_rect().has_point(node.to_local(mouse_position))
-		var is_front = node_z_index > self_z_index or (node_z_index == self_z_index and i < self_index)
+		var is_front = node_z_index > self_z_index
 		var is_visible = node.visible
 		
 		if is_selected and is_front and is_visible:
@@ -102,10 +102,15 @@ func _on_select(mouse_position) -> bool:
 	return false
 
 func _input(event: InputEvent) -> void:
-	if not Global.disable_selectable and not disabled and event is InputEventMouseButton and event.pressed and visible:
+	if not Global.disable_selectable and not disabled and event is InputEventMouseButton:
+		if held and not event.pressed:
+			held = event.pressed
+
 		var mouse_position = Global.get_world_mouse_position()
 		
 		if _on_select(mouse_position):
+			held = event.pressed
+			
 			emit_signal("selected")
 
 func show_description() -> void:
@@ -154,3 +159,8 @@ func _physics_process(delta: float) -> void:
 	
 	if len(secondary_key):
 		material.set_shader_param(secondary_key, current_secondary)
+
+func disable():
+	remove_description()
+	
+	disabled = true

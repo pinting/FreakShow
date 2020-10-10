@@ -4,7 +4,6 @@
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=2]
 [ext_resource path="res://Objects/Viewable/Viewable.gd" type="Script" id=3]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
 shader_param/keep_size = true

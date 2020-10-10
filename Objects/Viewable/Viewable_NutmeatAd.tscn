@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Decoration/Paper17.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Viewable/Viewable.gd" type="Script" id=2]
+
+[node name="Viewable_NutmeatAd" type="Sprite" groups=[
+"selectable",
+]]
+position = Vector2( -228.737, 108.441 )
+scale = Vector2( 0.147352, 0.147352 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+description = "PAPER10"

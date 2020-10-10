@@ -1,9 +1,9 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Scenes/Part01/Part01_Building01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part01/Part01_Building00.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sounds/Wind00.ogg" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti34.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti02.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Environmnent/Fence02_A.png" type="Texture" id=5]
 [ext_resource path="res://Objects/Pickable/Pickable_Crate.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/Light/Light_Street.tscn" type="PackedScene" id=7]
@@ -33,12 +33,15 @@
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti04.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti06.png" type="Texture" id=32]
 [ext_resource path="res://Objects/Selectable/Selectable_FoodSign.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Objects/Viewable/Viewable_Ad03.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Objects/Viewable/Viewable_DangerousCriminal.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Objects/Static/Static_Car01.tscn" type="PackedScene" id=36]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=37]
-[ext_resource path="res://Objects/DynamicFog.tscn" type="PackedScene" id=38]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti27.png" type="Texture" id=39]
+[ext_resource path="res://Objects/Viewable/Viewable_Ad04.tscn" type="PackedScene" id=40]
 [ext_resource path="res://Assets/Sounds/Phone00.ogg" type="AudioStream" id=41]
+[ext_resource path="res://Objects/Viewable/Viewable_Ad05.tscn" type="PackedScene" id=42]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti11.png" type="Texture" id=43]
 [ext_resource path="res://Objects/Selectable/Selectable_BluePhone.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Assets/Sounds/Phone01.wav" type="AudioStream" id=45]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=46]
@@ -117,10 +120,6 @@ position = Vector2( 6.06445, -312.324 )
 environment = SubResource( 1 )
 
 [node name="Sky" parent="BaseScene" instance=ExtResource( 9 )]
-
-[node name="DynamicFog" parent="BaseScene" instance=ExtResource( 38 )]
-visible = false
-position = Vector2( -94208, -33024 )
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 0
@@ -202,18 +201,25 @@ texture = ExtResource( 24 )
 
 [node name="Graffiti02" type="Sprite" parent="BaseScene/Environment/Fence00"]
 modulate = Color( 0, 0, 0, 0.823529 )
-position = Vector2( 2414.73, 56.2399 )
+position = Vector2( 2422.68, 56.2399 )
 texture = ExtResource( 30 )
 
 [node name="Graffiti03" type="Sprite" parent="BaseScene/Environment/Fence00"]
 modulate = Color( 0, 0, 0, 0.823529 )
-position = Vector2( 7645.45, 53.3038 )
-texture = ExtResource( 31 )
+position = Vector2( 4110.46, 57.2399 )
+texture = ExtResource( 4 )
 
 [node name="Graffiti04" type="Sprite" parent="BaseScene/Environment/Fence00"]
-self_modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( 6282.82, 64.8936 )
-texture = ExtResource( 4 )
+modulate = Color( 0, 0, 0, 0.823529 )
+position = Vector2( 7944.49, 53.3038 )
+texture = ExtResource( 31 )
+
+[node name="Graffiti05" type="Sprite" parent="BaseScene/Environment/Fence00"]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 9337.09, 259.565 )
+rotation = -0.0761728
+scale = Vector2( 0.866326, 0.866326 )
+texture = ExtResource( 43 )
 
 [node name="BackgroundTrain" parent="BaseScene/Environment" instance=ExtResource( 15 )]
 z_index = -5
@@ -256,6 +262,8 @@ modulate = Color( 0.447059, 0.447059, 0.447059, 0.666667 )
 position = Vector2( -204.007, 291.77 )
 scale = Vector2( 0.396585, 0.396585 )
 texture = ExtResource( 39 )
+
+[node name="Paper" parent="BaseScene/Environment/Building02" instance=ExtResource( 42 )]
 
 [node name="Fence01" type="Sprite" parent="BaseScene/Environment"]
 position = Vector2( 16064.8, -261.023 )
@@ -317,6 +325,7 @@ shape = SubResource( 7 )
 [node name="Sign" parent="BaseScene/Environment/Building03" instance=ExtResource( 33 )]
 
 [node name="RoadBlock" parent="BaseScene/Environment" instance=ExtResource( 36 )]
+visible = false
 
 [node name="PhoneBox" type="Sprite" parent="BaseScene/Environment"]
 position = Vector2( 11476.8, -329.819 )
@@ -342,14 +351,18 @@ scale = Vector2( 1.03047, 0.376077 )
 [node name="Board" type="Sprite" parent="BaseScene/Environment"]
 position = Vector2( 13810.4, -238.892 )
 rotation = 3.14159
-scale = Vector2( 1, -1 )
+scale = Vector2( -1, -1 )
 z_index = -1
 texture = ExtResource( 47 )
 
-[node name="Paper" parent="BaseScene/Environment/Board" instance=ExtResource( 35 )]
+[node name="Paper00" parent="BaseScene/Environment/Board" instance=ExtResource( 35 )]
 material = SubResource( 9 )
 position = Vector2( 25.296, -136.393 )
-scale = Vector2( -0.0759768, 0.0759768 )
+scale = Vector2( 0.076, 0.076 )
+
+[node name="Paper01" parent="BaseScene/Environment/Board" instance=ExtResource( 34 )]
+
+[node name="Paper02" parent="BaseScene/Environment/Board" instance=ExtResource( 40 )]
 
 [node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 6 )]
 position = Vector2( -5407.27, -87.392 )
@@ -359,9 +372,7 @@ collision_layer = 2
 collision_mask = 2
 can_sleep = false
 
-[node name="Ball" parent="BaseScene/Environment" groups=[
-"ball",
-] instance=ExtResource( 14 )]
+[node name="Ball" parent="BaseScene/Environment" instance=ExtResource( 14 )]
 position = Vector2( 12442.2, 41.3428 )
 collision_mask = 2147483650
 physics_material_override = SubResource( 10 )

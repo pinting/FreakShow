@@ -1,18 +1,15 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scenes/Part05/Part05_MechanicDoor.gd" type="Script" id=1]
+[ext_resource path="res://Objects/MechanicDoor.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sounds/Door03_Stop.wav" type="AudioStream" id=2]
 [ext_resource path="res://Assets/Environmnent/Misc00.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Sounds/Door03_Start.wav" type="AudioStream" id=4]
 [ext_resource path="res://Assets/Sounds/Door03_Moving.ogg" type="AudioStream" id=5]
 
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 506.776, 110.062 )
 
-[node name="Door" type="Node2D"]
+[node name="Part05_MechanicDoor" type="Node2D"]
 rotation = 1.5708
 script = ExtResource( 1 )
 
@@ -44,14 +41,17 @@ collision_mask = 2147483663
 position = Vector2( -16.8192, -0.0741072 )
 shape = SubResource( 1 )
 
-[node name="DoorStart" type="AudioStreamPlayer2D" parent="."]
+[node name="StartSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+max_distance = 10000.0
 attenuation = 0.000396608
 
-[node name="DoorMove" type="AudioStreamPlayer2D" parent="."]
+[node name="MoveSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+max_distance = 10000.0
 attenuation = 0.000396608
 
-[node name="DoorStop" type="AudioStreamPlayer2D" parent="."]
+[node name="StopSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
+max_distance = 10000.0
 attenuation = 9.98168e-10

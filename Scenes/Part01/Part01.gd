@@ -14,7 +14,6 @@ onready var road_block_sprite = $Environment/RoadBlock/Sprite
 onready var phone_lamp = $Environment/PhoneBox/Lamp
 onready var phone = $Environment/PhoneBox/Phone
 onready var crate = $Environment/Crate
-onready var ball = $Environment/Ball
 onready var shed_door = $Environment/Shed/Door
 onready var exhibition_door = $Environment/ExhibitionRoom/Door
 
@@ -121,15 +120,15 @@ func _reaching_phone_box(player: Node) -> void:
 	road_block_collision.disabled = false
 	road_block_sprite.visible = true
 
-func _trigger_hoop_part(player: Node) -> void:
-	if not player.is_in_group("player") or not reaching_hoop.visible:
+func _trigger_hoop_part(ball: Node) -> void:
+	if not ball.is_in_group("ball") or not reaching_hoop.visible:
 		return
 
 	reaching_hoop.visible = false
 	main_music.force_next(music_01)
 
-func _trigger_in_hoop(player: Node) -> void:
-	if not player.is_in_group("ball") or not inside_hoop.visible:
+func _trigger_in_hoop(ball: Node) -> void:
+	if not ball.is_in_group("ball") or not inside_hoop.visible:
 		return
 	
 	yield(timer(ball_is_stuck_timeout), "timeout")
@@ -137,12 +136,14 @@ func _trigger_in_hoop(player: Node) -> void:
 	while ball.held:
 		yield(timer(ball_is_stuck_timeout), "timeout")
 	
-	if not inside_hoop.overlaps_body(player):
+	if not inside_hoop.overlaps_body(ball):
 		return
 	
-	# Turn off previous trigger point too
-	reaching_hoop.visible = false
 	inside_hoop.visible = false
+	
+	ball.mode = RigidBody2D.MODE_STATIC
+	ball.sleeping = true
+	ball.global_position = inside_hoop.global_position
 	
 	ball.disable()
 	ring_sound.play()
@@ -152,9 +153,6 @@ func _trigger_in_hoop(player: Node) -> void:
 	phone.visible = true
 	phone_lamp.visible = true
 	flashing_phone_light = true
-	
-	ball.global_position = inside_hoop.global_position
-	ball.mode = RigidBody2D.MODE_STATIC
 
 func _process_wind_intro(_delta: float) -> void:
 	if Global.NO_INTRO:
@@ -175,5 +173,8 @@ func _process_phone_lamp_flash(delta: float) -> void:
 		phone_lamp.visible = not phone_lamp.visible
 
 func _process(delta: float) -> void:
+	if Global.loader:
+		return
+	
 	_process_wind_intro(delta)
 	_process_phone_lamp_flash(delta)

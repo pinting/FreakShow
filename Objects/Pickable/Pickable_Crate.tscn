@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Crate00.png" type="Texture" id=1]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=2]
@@ -9,11 +9,8 @@
 [ext_resource path="res://Assets/Environmnent/Crate01.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Environmnent/Crate04.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Environmnent/Crate03.png" type="Texture" id=9]
-[ext_resource path="res://Objects/RandomChild.gd" type="Script" id=10]
 
-[sub_resource type="PhysicsMaterial" id=2]
-
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/keep_size = false
 shader_param/offset = Vector2( 0.5, 0.5 )
@@ -27,19 +24,19 @@ shader_param/glow_amount = 0.0
 input_pickable = true
 collision_layer = 4
 collision_mask = 4
-physics_material_override = SubResource( 2 )
 gravity_scale = 2.0
 contacts_reported = 3
 contact_monitor = true
 script = ExtResource( 4 )
 
-[node name="RandomChild" type="Node2D" parent="." instance=ExtResource( 6 )]
-script = ExtResource( 10 )
+[node name="Sprite" parent="." groups=[
+"random_child",
+] instance=ExtResource( 6 )]
 
-[node name="Sprite00" type="Sprite" parent="RandomChild" groups=[
+[node name="Sprite00" type="Sprite" parent="Sprite" groups=[
 "selectable",
 ]]
-material = SubResource( 3 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 description = "CRATE00"
@@ -51,10 +48,10 @@ secondary_key = "glow_amount"
 secondary_hover = 0.5
 clone_material = true
 
-[node name="Sprite01" type="Sprite" parent="RandomChild" groups=[
+[node name="Sprite01" type="Sprite" parent="Sprite" groups=[
 "selectable",
 ]]
-material = SubResource( 3 )
+material = SubResource( 1 )
 texture = ExtResource( 7 )
 script = ExtResource( 2 )
 description = "CRATE00"
@@ -66,10 +63,10 @@ secondary_key = "glow_amount"
 secondary_hover = 0.5
 clone_material = true
 
-[node name="Sprite02" type="Sprite" parent="RandomChild" groups=[
+[node name="Sprite02" type="Sprite" parent="Sprite" groups=[
 "selectable",
 ]]
-material = SubResource( 3 )
+material = SubResource( 1 )
 texture = ExtResource( 5 )
 script = ExtResource( 2 )
 description = "CRATE00"
@@ -81,10 +78,10 @@ secondary_key = "glow_amount"
 secondary_hover = 0.5
 clone_material = true
 
-[node name="Sprite03" type="Sprite" parent="RandomChild" groups=[
+[node name="Sprite03" type="Sprite" parent="Sprite" groups=[
 "selectable",
 ]]
-material = SubResource( 3 )
+material = SubResource( 1 )
 texture = ExtResource( 9 )
 script = ExtResource( 2 )
 description = "CRATE00"
@@ -96,10 +93,10 @@ secondary_key = "glow_amount"
 secondary_hover = 0.5
 clone_material = true
 
-[node name="Sprite04" type="Sprite" parent="RandomChild" groups=[
+[node name="Sprite04" type="Sprite" parent="Sprite" groups=[
 "selectable",
 ]]
-material = SubResource( 3 )
+material = SubResource( 1 )
 texture = ExtResource( 8 )
 script = ExtResource( 2 )
 description = "CRATE00"

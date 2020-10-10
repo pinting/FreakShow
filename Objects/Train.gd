@@ -33,17 +33,17 @@ export var fade_in_volume_per_s: float = 80
 
 onready var on_top = $OnTop
 
-onready var train_00 = $RandomChild00
+onready var train_00 = $Train00
 onready var audio_stream_00 = $Noise00
 onready var collision_00 = $CollisionShape00
 onready var on_top_collision_00 = $OnTop/CollisionShape00
 
-onready var train_01 = $RandomChild01
+onready var train_01 = $Train01
 onready var audio_stream_01 = $Noise01
 onready var collision_01 = $CollisionShape01
 onready var on_top_collision_01 = $OnTop/CollisionShape01
 
-onready var train_02 = $RandomChild02
+onready var train_02 = $Train02
 onready var audio_stream_02 = $Noise02
 onready var collision_02 = $CollisionShape02
 onready var on_top_collision_02 = $OnTop/CollisionShape02

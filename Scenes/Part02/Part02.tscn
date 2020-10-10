@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Sounds/Phone02.wav" type="AudioStream" id=2]
@@ -40,6 +40,7 @@
 [ext_resource path="res://Assets/Sounds/Door02.wav" type="AudioStream" id=38]
 [ext_resource path="res://Assets/Sounds/Warning02.wav" type="AudioStream" id=39]
 [ext_resource path="res://Assets/Sounds/Warning04.wav" type="AudioStream" id=40]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti20.png" type="Texture" id=41]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -52,8 +53,8 @@ glow_hdr_threshold = 0.4
 shader = ExtResource( 14 )
 shader_param/screen_width = 1920.0
 shader_param/screen_height = 1080.0
-shader_param/barrel_power = 1.1
-shader_param/color_bleeding = 1.2
+shader_param/barrel_power = 1.0
+shader_param/color_bleeding = 1.0
 shader_param/bleeding_range_x = 3.0
 shader_param/bleeding_range_y = 3.0
 shader_param/lines_distance = 4.0
@@ -401,6 +402,11 @@ z_index = 3
 texture = ExtResource( 29 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 203, 1000 )
+
+[node name="Graffiti" type="Sprite" parent="BaseScene/Environment/Maze/SteelBlock/WallBlock"]
+self_modulate = Color( 1, 1, 1, 0.960784 )
+position = Vector2( 2306.15, 49.5547 )
+texture = ExtResource( 41 )
 
 [node name="LevitatingCar" type="Sprite" parent="BaseScene/Environment/Maze"]
 material = SubResource( 5 )

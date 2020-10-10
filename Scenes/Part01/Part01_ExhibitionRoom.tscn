@@ -11,7 +11,7 @@
 [ext_resource path="res://Assets/Environmnent/Shed00_Door.png" type="Texture" id=9]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Environmnent/Dirt00.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall11.png" type="Texture" id=12]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=13]
 [ext_resource path="res://Assets/Environmnent/Sign17.png" type="Texture" id=14]
 
@@ -46,10 +46,9 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Background"]
-visible = false
 texture = ExtResource( 12 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 7000, 5000 )
+region_rect = Rect2( 0, 0, 7000, 3000 )
 
 [node name="Wall" type="Sprite" parent="."]
 position = Vector2( -18.3118, -21.4562 )
@@ -150,14 +149,19 @@ position = Vector2( 705.319, -341.021 )
 scale = Vector2( 0.442731, 1.29191 )
 
 [node name="Lamp03" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1393.47, -341.021 )
+position = Vector2( 1393.47, -340.021 )
 scale = Vector2( 0.442731, 1.29191 )
+
+[node name="DoorBackground" type="Sprite" parent="."]
+position = Vector2( 0, 113.428 )
+scale = Vector2( 1.25, 1 )
+texture = ExtResource( 9 )
 
 [node name="Door" type="Sprite" parent="." groups=[
 "selectable",
 ]]
 material = SubResource( 3 )
-position = Vector2( -1.77258, 115.175 )
+position = Vector2( 0, 113.428 )
 scale = Vector2( 1.25, 1 )
 texture = ExtResource( 9 )
 script = ExtResource( 10 )

@@ -195,6 +195,9 @@ func _on_scene_started() -> void:
 		connect_sound.play()
 
 func _process(delta: float) -> void:
+	if Global.loader:
+		return
+	
 	_process_enemy_path_finding(delta)
 
 func _process_enemy_path_finding(delta) -> void:

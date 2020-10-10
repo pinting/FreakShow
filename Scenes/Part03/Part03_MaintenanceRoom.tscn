@@ -1,33 +1,31 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Misc05.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall11.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Misc09.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Train04.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Part03/Part03_Platform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=5]
 [ext_resource path="res://Objects/Static/Static_SideLamp00.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture" id=7]
 [ext_resource path="res://Objects/Selectable/Selectable_IronDoor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=9]
 [ext_resource path="res://Objects/Light/Light_Side.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Objects/Selectable/Selectable_WelcomeAssholesGraffiti.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/Viewable/Viewable_Ad02.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Environmnent/Misc10.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti28.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti30.png" type="Texture" id=15]
-[ext_resource path="res://Objects/Selectable/Selectable_StupidRussiansGraffiti.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Objects/Viewable/Viewable_NutmeatAd.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/Environmnent/Decoration/Paper13.png" type="Texture" id=14]
+[ext_resource path="res://Objects/Viewable/Viewable_CodeForTheDoor.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Objects/Viewable/Viewable_FoodForSale.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Objects/Pickable/Pickable_Crate.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti13.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti43.png" type="Texture" id=19]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti42.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti46.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti10.png" type="Texture" id=22]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti45.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti03.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti18.png" type="Texture" id=25]
+[ext_resource path="res://Objects/Viewable/Viewable_Ad01.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Assets/Environmnent/Misc16.png" type="Texture" id=26]
-[ext_resource path="res://Assets/Environmnent/Misc16_Back.png" type="Texture" id=27]
+[ext_resource path="res://Scenes/Part03/Part03_EmptyBatteryStation.tscn" type="PackedScene" id=27]
 [ext_resource path="res://Scenes/Part03/Part03_RandomCrate.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Objects/Pickable/Pickable_Battery.tscn" type="PackedScene" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5661.64, 61.6787 )
@@ -45,31 +43,58 @@ texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 8000, 722 )
 
-[node name="Graffiti13" type="Sprite" parent="Wall"]
+[node name="Graffiti00" type="Sprite" parent="Wall"]
 self_modulate = Color( 1, 1, 1, 0.784314 )
 position = Vector2( -3438.94, -91.4048 )
 scale = Vector2( 1.02686, 1.02686 )
 texture = ExtResource( 18 )
 
-[node name="Graffiti43" type="Sprite" parent="Wall"]
+[node name="Graffiti01" type="Sprite" parent="Wall"]
 self_modulate = Color( 0, 0, 0, 0.784314 )
 position = Vector2( 2996.53, 48.1815 )
 rotation = -0.0891102
 scale = Vector2( 0.514186, 0.514185 )
 texture = ExtResource( 19 )
 
-[node name="Graffiti46" type="Sprite" parent="Wall"]
+[node name="Graffiti02" type="Sprite" parent="Wall"]
 self_modulate = Color( 1, 1, 1, 0.784314 )
 position = Vector2( -1441.26, 47.0723 )
 rotation = -0.029391
 scale = Vector2( 0.514186, 0.514185 )
 texture = ExtResource( 21 )
 
-[node name="Graffiti42" type="Sprite" parent="Wall"]
+[node name="Graffiti03" type="Sprite" parent="Wall"]
 self_modulate = Color( 0, 0, 0, 0.784314 )
 position = Vector2( 3783.73, -47.4074 )
 scale = Vector2( 0.514186, 0.514186 )
 texture = ExtResource( 20 )
+
+[node name="HidePapers" type="Node2D" parent="Wall"]
+
+[node name="Paper00" type="Sprite" parent="Wall/HidePapers"]
+position = Vector2( 209.858, 74.1201 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 14 )
+
+[node name="Paper01" parent="Wall/HidePapers" instance=ExtResource( 16 )]
+position = Vector2( -495.613, 121.809 )
+scale = Vector2( 0.133378, 0.133378 )
+
+[node name="Paper02" parent="Wall/HidePapers" instance=ExtResource( 13 )]
+position = Vector2( -228.737, 108.441 )
+scale = Vector2( 0.147352, 0.147352 )
+
+[node name="Paper03" parent="Wall/HidePapers" instance=ExtResource( 22 )]
+position = Vector2( 610.433, 132.843 )
+scale = Vector2( 0.162329, 0.162329 )
+
+[node name="Paper04" parent="Wall/HidePapers" instance=ExtResource( 11 )]
+position = Vector2( -103.104, 243.946 )
+scale = Vector2( 0.17063, 0.17063 )
+
+[node name="PaperWithCode" parent="Wall/HidePapers" instance=ExtResource( 15 )]
+position = Vector2( 211.247, 81.3408 )
+scale = Vector2( 0.17063, 0.17063 )
 
 [node name="Floor" type="Sprite" parent="."]
 light_mask = 3
@@ -139,80 +164,29 @@ position = Vector2( -853.839, 458.33 )
 rotation = 0.16312
 scale = Vector2( 2.73768, 1.39242 )
 
-[node name="Platform" type="Sprite" parent="."]
-self_modulate = Color( 1, 0.960784, 0, 1 )
-position = Vector2( 115.938, 1249.44 )
-scale = Vector2( 0.774057, 0.730645 )
-z_index = -2
-texture = ExtResource( 13 )
+[node name="Platform" parent="." instance=ExtResource( 4 )]
+position = Vector2( 115.938, -0.848175 )
 
-[node name="Train" type="Sprite" parent="Platform"]
-self_modulate = Color( 0.831373, 0.662745, 0.137255, 1 )
-position = Vector2( 77.8602, -648.381 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
-
-[node name="Graffiti00" parent="Platform/Train" instance=ExtResource( 11 )]
-
-[node name="Graffiti01" type="Sprite" parent="Platform/Train"]
-self_modulate = Color( 0, 0, 0, 0.784314 )
-position = Vector2( -971.563, 70.5612 )
-rotation = -0.156192
-scale = Vector2( 0.179311, 0.189965 )
-texture = ExtResource( 14 )
-
-[node name="Graffiti02" type="Sprite" parent="Platform/Train"]
-self_modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( -600.869, 108.381 )
-scale = Vector2( 0.353869, 0.353869 )
-texture = ExtResource( 15 )
-
-[node name="Graffiti03" parent="Platform/Train" instance=ExtResource( 16 )]
-
-[node name="Graffiti00" type="Sprite" parent="Platform"]
-self_modulate = Color( 0, 0, 0, 0.431373 )
-position = Vector2( -1543.25, -17.2944 )
-rotation = 2.86224
-scale = Vector2( 0.278318, -0.292534 )
-texture = ExtResource( 25 )
-
-[node name="Graffiti01" type="Sprite" parent="Platform"]
-self_modulate = Color( 0, 0, 0, 0.431373 )
-position = Vector2( 1728.91, -9.75696 )
-rotation = -0.0175861
-scale = Vector2( 0.112268, 0.118934 )
-texture = ExtResource( 23 )
-
-[node name="Graffiti02" type="Sprite" parent="Platform"]
-self_modulate = Color( 0, 0, 0, 0.431373 )
-position = Vector2( -871.583, 19.5571 )
-rotation = -0.279355
-scale = Vector2( 0.278033, 0.292235 )
-texture = ExtResource( 24 )
-
-[node name="Graffiti03" type="Sprite" parent="Platform"]
-self_modulate = Color( 0, 0, 0, 0.431373 )
-position = Vector2( 1307.75, 14.7142 )
-rotation = -0.240155
-scale = Vector2( 0.405354, 0.426926 )
-texture = ExtResource( 22 )
-
-[node name="Battery00" type="Sprite" parent="."]
+[node name="BatteryStation00" type="Sprite" parent="."]
 position = Vector2( -2608.93, 1140.92 )
 scale = Vector2( 0.7, 0.7 )
-z_index = -2
+z_index = -1
 texture = ExtResource( 26 )
 
-[node name="Battery01" type="Sprite" parent="Battery00"]
-position = Vector2( 300, 0 )
+[node name="BatteryStation01" type="Sprite" parent="."]
+position = Vector2( -2398.93, 1140.92 )
+scale = Vector2( 0.7, 0.7 )
+z_index = -1
 texture = ExtResource( 26 )
 
-[node name="Battery02" type="Sprite" parent="Battery00/Battery01"]
-position = Vector2( 300, 0 )
-texture = ExtResource( 27 )
+[node name="EmptyBatteryStation" parent="." instance=ExtResource( 27 )]
+position = Vector2( -2188.93, 1140.92 )
+z_index = -1
 
-[node name="Battery03" type="Sprite" parent="Battery00/Battery01/Battery02"]
-position = Vector2( 300, 0 )
+[node name="BatteryStation03" type="Sprite" parent="."]
+position = Vector2( -1978.93, 1140.92 )
+scale = Vector2( 0.7, 0.7 )
+z_index = -1
 texture = ExtResource( 26 )
 
 [node name="Lamp00" parent="." instance=ExtResource( 12 )]
@@ -234,8 +208,11 @@ position = Vector2( 3417.54, 1195.3 )
 z_index = -1
 
 [node name="CratesBehind" type="Node2D" parent="."]
-position = Vector2( -3305.29, 1120.82 )
+position = Vector2( -3303.79, 1153.03 )
 z_index = -1
+
+[node name="Battery" parent="CratesBehind" instance=ExtResource( 29 )]
+position = Vector2( -590.652, 139.931 )
 
 [node name="Crate00" parent="CratesBehind" instance=ExtResource( 28 )]
 position = Vector2( -579.606, 305.074 )
@@ -246,8 +223,16 @@ position = Vector2( -357.823, 305.074 )
 [node name="Crate02" parent="CratesBehind" instance=ExtResource( 28 )]
 position = Vector2( -385.413, 111.715 )
 
+[node name="StaticBody2D" type="StaticBody2D" parent="CratesBehind"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CratesBehind/StaticBody2D"]
+position = Vector2( 0, 0.495483 )
+polygon = PoolVector2Array( -689.339, 209.258, -496.049, 208.768, -495.417, 15.7799, -274.652, 16.9877, -276.518, 210.026, -248.359, 209.611, -247.892, 400.472, -688.207, 401.076 )
+
 [node name="CratesCenter" type="Node2D" parent="."]
-position = Vector2( -3305.29, 1120.82 )
+position = Vector2( -3305.29, 1157.09 )
 z_index = -1
 
 [node name="Crate00" parent="CratesCenter" instance=ExtResource( 17 )]
@@ -270,23 +255,8 @@ position = Vector2( -581.491, 149.393 )
 collision_layer = 2
 collision_mask = 2
 
-[node name="Crate04" parent="CratesCenter" instance=ExtResource( 17 )]
-position = Vector2( -581.491, -45.0123 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="Crate05" parent="CratesCenter" instance=ExtResource( 17 )]
-position = Vector2( -139.992, 342.8 )
-collision_layer = 2
-collision_mask = 2
-
 [node name="Crate06" parent="CratesCenter" instance=ExtResource( 17 )]
-position = Vector2( -137.425, 150.876 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="Crate07" parent="CratesCenter" instance=ExtResource( 17 )]
-position = Vector2( -358.443, -41.5568 )
+position = Vector2( -139.992, 342.8 )
 collision_layer = 2
 collision_mask = 2
 
