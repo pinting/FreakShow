@@ -15,6 +15,8 @@ onready var phone_lamp = $Environment/PhoneBox/Lamp
 onready var phone = $Environment/PhoneBox/Phone
 onready var crate = $Environment/Crate
 onready var ball = $Environment/Ball
+onready var shed_door = $Environment/Shed/Door
+onready var exhibition_door = $Environment/ExhibitionRoom/Door
 
 onready var trigger_comment = $Trigger/TriggerComment
 onready var trigger_train = $Trigger/TriggerTrain
@@ -22,9 +24,12 @@ onready var reaching_phone_box = $Trigger/ReachingPhoneBox
 onready var reaching_hoop = $Trigger/ReachingHoop
 onready var inside_hoop = $Trigger/InsideHoop
 onready var teleport_player = $Trigger/TeleportPlayer
+onready var shed_spawn = $Trigger/ShedSpawn
+onready var exhibition_spawn = $Trigger/ExhibitationSpawn
 
 onready var main_music = $Sound/MainMusic
 
+onready var door_sound = $Sound/DoorSound
 onready var wind_sound = $Sound/WindSound
 onready var ring_sound = $Sound/RingSound
 onready var pick_up_sound = $Sound/PickUpSound
@@ -49,6 +54,8 @@ func _ready() -> void:
 	reaching_hoop.connect("body_entered", self, "_trigger_hoop_part")
 	inside_hoop.connect("body_entered", self, "_trigger_in_hoop")
 	reaching_phone_box.connect("body_entered", self, "_reaching_phone_box")
+	shed_door.connect("selected", self, "_on_shed_door_selected")
+	exhibition_door.connect("selected", self, "_on_exhibition_door_selected")
 	
 	main_music.master_player.pitch_scale = 0.001
 	wind_sound.pitch_scale = 0.001
@@ -66,6 +73,12 @@ func _on_intro_over() -> void:
 
 func _on_scene_started() -> void:
 	Global.subtitle.say(tr("NARRATOR02"), 6.0)
+
+func _on_shed_door_selected() -> void:
+	move_with_fade(player, exhibition_spawn.global_position, door_sound)
+
+func _on_exhibition_door_selected() -> void:
+	move_with_fade(player, shed_spawn.global_position, door_sound)
 
 func _on_phone_selected() -> void:
 	if phone_selected:

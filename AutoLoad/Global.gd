@@ -1,13 +1,13 @@
 extends Node
 
 # Enable debug messages
-const DEBUG: bool = true
+const DEBUG: bool = false
 
 # Disable sounds
 const NO_SOUNDS: bool = false
 
 # Disable intro
-const NO_INTRO: bool = true
+const NO_INTRO: bool = false
 
 # Low performance mode
 const LOW_PERFORMANCE: bool = false

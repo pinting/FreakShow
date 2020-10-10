@@ -15,14 +15,6 @@
 [ext_resource path="res://Objects/Light/Light_Side.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Environmnent/Building00_1x2.png" type="Texture" id=14]
 
-
-
-
-
-
-
-
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
 shader_param/keep_size = true
@@ -34,7 +26,7 @@ shader_param/glow_amount = 0.0
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -753.59, 407.076, -746.624, -351.282, 711.923, -347.36, 712.603, 404.682, 848.141, 405.235, 848.574, -5232.52, -2299.02, -5235.85, -2290.62, 611.897, 846.756, 613.875, 847.565, 404.928, 713.626, 406.32 )
 
-[node name="House00" type="Node2D"]
+[node name="Part01_Building00" type="Node2D"]
 
 [node name="Inside" type="Sprite" parent="."]
 position = Vector2( 768.466, 2092.99 )

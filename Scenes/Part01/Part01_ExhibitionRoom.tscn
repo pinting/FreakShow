@@ -1,0 +1,175 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor08.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Misc00.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall02.png" type="Texture" id=4]
+[ext_resource path="res://Objects/Viewable/Viewable_Buka02.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Viewable/Viewable_Buka03.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Viewable/Viewable_Buka00.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Viewable/Viewable_Buka01.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Environmnent/Shed00_Door.png" type="Texture" id=9]
+[ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Part03/Part03_MineLamp.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/Environmnent/Dirt00.png" type="Texture" id=12]
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=13]
+[ext_resource path="res://Assets/Environmnent/Sign17.png" type="Texture" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 2035.97, 143.66 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 138.698, 1091.44 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 13 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/grab_amount = 1.0
+shader_param/glow_radius = 10.0
+shader_param/glow_amount = 0.0
+
+[node name="Part01_ExhibitionRoom" type="Node2D"]
+z_index = -1
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+margin_left = -6797.0
+margin_top = -2941.0
+margin_right = 6995.0
+margin_bottom = 3159.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Background"]
+visible = false
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 7000, 5000 )
+
+[node name="Wall" type="Sprite" parent="."]
+position = Vector2( -18.3118, -21.4562 )
+scale = Vector2( 1, 1.5 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3960, 576 )
+
+[node name="Floor" type="Sprite" parent="Wall"]
+position = Vector2( -1.92896, 420.239 )
+scale = Vector2( 1, 0.666667 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3960, 400 )
+
+[node name="Pillar00" type="Sprite" parent="Wall/Floor"]
+position = Vector2( -1654.94, -430.192 )
+rotation = 1.5708
+z_index = 2
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar00"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar00/Pillar"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Pillar01" type="Sprite" parent="Wall/Floor"]
+position = Vector2( 401.902, -430.192 )
+rotation = 1.5708
+z_index = 2
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar01"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar01/Pillar"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Top" type="Sprite" parent="Wall"]
+position = Vector2( 0, -310.345 )
+scale = Vector2( 1, 0.666667 )
+z_index = -1
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3960, 400 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape00" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -27.3647, 775.771 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape01" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 2020.71, -222.314 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape02" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -2064.19, -222.314 )
+shape = SubResource( 2 )
+
+[node name="Buka00" parent="." instance=ExtResource( 7 )]
+
+[node name="Buka01" parent="." instance=ExtResource( 8 )]
+
+[node name="Buka02" parent="." instance=ExtResource( 5 )]
+
+[node name="Buka03" parent="." instance=ExtResource( 6 )]
+
+[node name="Lamp00" parent="." instance=ExtResource( 11 )]
+position = Vector2( -1345.68, -341.021 )
+scale = Vector2( 0.442731, 1.29191 )
+
+[node name="Lamp01" parent="." instance=ExtResource( 11 )]
+position = Vector2( -669.305, -341.021 )
+scale = Vector2( 0.442731, 1.29191 )
+
+[node name="Lamp02" parent="." instance=ExtResource( 11 )]
+position = Vector2( 705.319, -341.021 )
+scale = Vector2( 0.442731, 1.29191 )
+
+[node name="Lamp03" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1393.47, -341.021 )
+scale = Vector2( 0.442731, 1.29191 )
+
+[node name="Door" type="Sprite" parent="." groups=[
+"selectable",
+]]
+material = SubResource( 3 )
+position = Vector2( -1.77258, 115.175 )
+scale = Vector2( 1.25, 1 )
+texture = ExtResource( 9 )
+script = ExtResource( 10 )
+offset_key = "offset"
+primary_key = "grab_amount"
+primary_hover = 1.05
+primary_default = 1.0
+secondary_key = "glow_amount"
+secondary_hover = 0.5
+clone_material = true
+
+[node name="Sign" type="Sprite" parent="."]
+position = Vector2( 2.04898, -298.371 )
+scale = Vector2( 0.33, 0.33 )
+texture = ExtResource( 14 )

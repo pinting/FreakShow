@@ -13,12 +13,6 @@
 [ext_resource path="res://Scenes/Part00/Part00_Hallway.gd" type="Script" id=11]
 [ext_resource path="res://Objects/Viewable/Viewable_StandCommunistPaper.tscn" type="PackedScene" id=12]
 
-
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4722.81, 353.699 )
 
@@ -67,6 +61,7 @@ texture = ExtResource( 10 )
 
 [node name="Paper00" parent="Inside" instance=ExtResource( 12 )]
 position = Vector2( -951.909, -80.6403 )
+rotation = 0.0285267
 
 [node name="Door00" parent="Inside" instance=ExtResource( 5 )]
 position = Vector2( -3279.88, 31.129 )

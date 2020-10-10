@@ -4,9 +4,6 @@
 [ext_resource path="res://Assets/Environmnent/Decoration/Sign03.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Building05.png" type="Texture" id=3]
 
-
-
-
 [node name="Static_Building00" type="StaticBody2D"]
 
 [node name="Sprite" type="Sprite" parent="."]

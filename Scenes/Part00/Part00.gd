@@ -8,6 +8,7 @@ export var hallway_camera_shake_after: float = 10.0
 export var max_position_diff_to_wait: float = 100.0
 
 onready var player = $Player
+onready var camera = $Player/DefaultCamera
 
 onready var flat_door = $Environment/Flat/Inside/Door
 onready var random_flat_container = $Environment/RandomFlatContainer
