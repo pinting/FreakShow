@@ -134,7 +134,6 @@ position = Vector2( 59.2303, 0.734743 )
 [node name="BaseScene" parent="." instance=ExtResource( 9 )]
 script = ExtResource( 5 )
 delay = 1.0
-teleport_player_to_end = true
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -2151.06, -2417.77 )
