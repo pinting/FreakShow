@@ -1,6 +1,6 @@
 # Missing proprietary music files
 
-Should be placed into `Assets/Music`.
+Should be placed into `Assets/Music`. Use `setup.sh` to process the files!
 
 Playlist: https://www.youtube.com/playlist?list=PLfecV2b5DItOgrSQ3Dy-3OY3Oc9zsDb73
 
@@ -53,3 +53,13 @@ https://music.apple.com/us/album/movements/1448710972
 Required minimum length is 5 minutes and 51 seconds
 
 Copyright (c) 2012 Kammermeier & Merziger GbR
+
+## Pye Corner Audio - Sleep Games
+
+https://www.youtube.com/watch?v=YHtA23tt26U
+
+https://ghostbox.greedbag.com/buy/sleep-games
+
+Required minimum length is 5 minutes and 5 seconds
+
+Copyright (c) 2012 Ghost Box

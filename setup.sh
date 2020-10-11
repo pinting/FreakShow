@@ -35,4 +35,11 @@ if [ ! -f Assets/Music/Part04.ogg ]; then
     cp Assets/Music/Part04.ogg.sample Assets/Music/Part04.ogg
 fi
 
+ffmpeg -y -i  *Sleep\ Games* Assets/Music/Part05.ogg > /dev/null 2>&1
+rm *Pong\ Pang* > /dev/null 2>&1
+
+if [ ! -f Assets/Music/Part05.ogg ]; then
+    cp Assets/Music/Part05.ogg.sample Assets/Music/Part05.ogg
+fi
+
 echo "Setup complete!"

@@ -33,12 +33,14 @@ The game was imagined based on a selection of music tracks - however, I do not o
 * Godot Engine - engine, shaders, sprites of particles
 * Denes Tornyi - scripting, custom shaders, photo assets, character actor
 
-Thank you for the musical inspiration to...
+Thank you for the musical inspiration to the following artists (or group of artists).
 
 * Part00 - Cluster & Eno
 * Part01 - Cluster
 * Part02 - Phuture
 * Part03 - Neu
+* Part04 - Booka Shade
+* Part05 - Pye Corner Audio
 
 ## License
 

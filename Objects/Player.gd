@@ -364,11 +364,13 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 	var next_velocity = current_velocity
 	var players = Global.players
 	
+	direction *= scale_velocity
+	
 	# In case of avatar mode is enabled
 	if avatar_mode or abs(gravity) < ZERO:
 		if direction.y != 0.0 and abs(next_velocity.y) < avatar_max_speed:
 			# Apply acceleration on Y
-			next_velocity.y += scale_velocity.y * direction.y * acceleration * delta
+			next_velocity.y += direction.y * acceleration * delta
 		
 		if direction.y == 0.0 or direction.y * next_velocity.y < 0.0:
 			# Apply friction on Y
@@ -376,7 +378,7 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 		
 		# Apply acceleration on X
 		if direction.x != 0.0 and abs(next_velocity.x) < avatar_max_speed:
-			next_velocity.x += scale_velocity.x * direction.x * acceleration * delta
+			next_velocity.x += direction.x * acceleration * delta
 			
 		if direction.x == 0.0 or direction.x * next_velocity.x < 0.0:
 			# Apply friction on X
@@ -385,22 +387,22 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 		if is_on_floor():
 			# Apply jump force on Y
 			if direction.y < 0.0:
-				next_velocity.y += scale_velocity.y * direction.y * jump_force
+				next_velocity.y += direction.y * jump_force
 		
 			if direction.x == 0.0 or direction.x * next_velocity.x < 0.0:
 				# Apply friction on X
 				next_velocity.x *= pow(friction, delta)
 		else:
 			# Apply gravity on Y
-			next_velocity.y += scale_velocity.y * gravity * delta
+			next_velocity.y += gravity * delta
 		
 		if direction.x != 0.0 and abs(next_velocity.x) < current_max_speed:
 			# Apply acceleration on X
-			next_velocity.x += scale_velocity.x * direction.x * acceleration * delta
+			next_velocity.x += direction.x * acceleration * delta
 	
 	# Sync X velocity of players
 	if not skip_sync and sync_player and current_second > sync_player_delay:
-		var selected_v_x = abs(next_velocity.x)
+		var selected_abs_v_x = abs(next_velocity.x)
 
 		for player in players:
 			if player == self:
@@ -408,11 +410,11 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 			
 			player.manual_process_velocity(delta, direction)
 			
-			if abs(player.current_velocity.x) < selected_v_x:
-				selected_v_x = abs(player.current_velocity.x)
+			if abs(player.current_velocity.x) < selected_abs_v_x:
+				selected_abs_v_x = abs(player.current_velocity.x)
 		
-		if abs(next_velocity.x) > selected_v_x:
-			var scaled_min_v_x = selected_v_x
+		if abs(next_velocity.x) > selected_abs_v_x:
+			var scaled_min_v_x = selected_abs_v_x
 			
 			if next_velocity.x != 0.0:
 				scaled_min_v_x *= next_velocity.x / abs(next_velocity.x)

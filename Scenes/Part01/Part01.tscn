@@ -325,7 +325,6 @@ shape = SubResource( 7 )
 [node name="Sign" parent="BaseScene/Environment/Building03" instance=ExtResource( 33 )]
 
 [node name="RoadBlock" parent="BaseScene/Environment" instance=ExtResource( 36 )]
-visible = false
 
 [node name="PhoneBox" type="Sprite" parent="BaseScene/Environment"]
 position = Vector2( 11476.8, -329.819 )

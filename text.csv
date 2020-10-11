@@ -13,6 +13,7 @@ FRUIT00,Unripe mango,Éretlen mangó
 PILLOW00,Dusty pillow,Poros párna
 POT00,Wretched coffee pot,Nyomorult kotyogó
 SPRINKLER00,Cute yellow sprinkler,Aranyos sárga locsoló
+BUTTON00,Red button,Piros gomb
 KNOCK00,"Knock, knock, knock...",Kop-kop-kop...
 PAPER00,Sex and the Bible,Szex és a Biblia
 PAPER01,CAUTION! FIRESTARTER!,VIGYÁZAT! GYÚJTOGATÓ!
@@ -36,7 +37,7 @@ LETTER01,"The red light is there to help you reach your destination.","Azért ka
 LETTER02,"I hold onto my cigarette break.","A cigiszünet tart."
 LETTER03,"He would have slapped me but the red light forced him to stay.","Megpofozott volna, de megfogta a lámpa, így – maradt."
 LETTER04,"A lonely dot in the center of four corners; time keeps passing but you remain still.","Egy pont négy sarok között; az idő halad, te meg maradsz."
-CAN00,Coffee,Kávé
+CAN00,Turkish coffee,Török kávé
 MISC00,Mask from Dieng,Maszk Diengből
 MISC01,Rug from the Bantul night market,Szőnyeg a bantuli piacról
 SIGN00,Food,Élelmiszer
@@ -55,6 +56,8 @@ GRAFFITI05,WOULD FUCK YOU,MEGDUGNÁLAK
 GRAFFITI06,VEGAN LIBERAL SCUM,VEGÁN LIBSI GECIK
 GRAFFITI07,STUPID RUSSIANS,HÜLYE OROSZOK
 GRAFFITI08,WELCOME ASSHOLES!,ÜDV GECZIK!
+GRAFFITI09,"DROG, SEX, HELL","DROG, SZEX, POKOL"
+GRAFFITI10,WHERE AM I,HOL VAGYOK
 NARRATOR00,It was near dawn when something woke me up.,"Már majdnem hajnalodott, amikor valami felébresztett."
 NARRATOR01,The corridor felt endless...,A folyosó végtelennek érződött...
 NARRATOR02,I finally reached the light. The wind blew the smell of piss and sweat into my nose.,Végül kiértem a fényre. A szél húgy- és izzadságszaggal mászott be az orromba.
@@ -63,11 +66,11 @@ NARRATOR04,"Would you mind picking up the phone, mister? Maybe they are ringing 
 NARRATOR05,"Come on, get the fuck away from here!","Gyerünk, menjünk már a faszba innen!"
 NARRATOR06,"Come a bit closer child. Let me have a look at you!","Gyere közelebb gyermekem. Hadd vegyelek szemügyre!"
 NARRATOR07,"What the fuck?!","Mi a fasz?!"
-CREDITS03_0,"Scripting","Programozta"
+CREDITS03_0,"Programming","Programozta"
 CREDITS03_1,"Denes Tornyi","Tornyi Dénes"
 CREDITS02_0,"Textures","Texturák"
 CREDITS02_1,"Diana Baranyi, Zsofi Szabo, Babett Farkas, \nZsuzsa Buka, Denes Tornyi","Baranyi Diana, Szabó Zsófi, Farkas Babett, \nBuka Zsuzsa, Tornyi Dénes"
 CREDITS01_0,"Characters","Karakterek"
 CREDITS01_1,"Denes Tornyi, Gergo Tornyi","Tornyi Gergő, Tornyi Dénes"
 CREDITS00_0,"Music","Zene"
-CREDITS00_1,"Brian Eno, Cluster, Phuture, Neu","Brian Eno, Cluster, Phuture, Neu"
+CREDITS00_1,"Brian Eno, Cluster, Phuture, Neu, \nBooka Shade, Pye Corner Audio","Brian Eno, Cluster, Phuture, Neu, \nBooka Shade, Pye Corner Audio"

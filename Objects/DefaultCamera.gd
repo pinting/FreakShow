@@ -54,9 +54,9 @@ func _process_zoom(delta) -> void:
 	var step = Vector2.ZERO
 	
 	if is_action_zoom_on and camera.zoom < zoom_action:
-		step = delta / zoom_speed * (zoom_action - zoom_base)
+		step = delta * zoom_speed * (zoom_action - zoom_base)
 	elif not is_action_zoom_on and camera.zoom > zoom_base:
-		step = delta / zoom_speed * (zoom_base - zoom_action)
+		step = delta * zoom_speed * (zoom_base - zoom_action)
 	
 	camera.zoom += step
 

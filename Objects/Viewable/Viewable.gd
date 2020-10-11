@@ -22,7 +22,7 @@ func _on_selected():
 	var players = Global.players
 	
 	for player in players:
-		player.freeze()
+		player.freeze(true)
 	
 	var project_width = ProjectSettings.get_setting("display/window/size/width")
 	var project_height = ProjectSettings.get_setting("display/window/size/height")

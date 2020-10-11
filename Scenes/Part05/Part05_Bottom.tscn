@@ -1,0 +1,170 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti36.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor08.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Misc22.png" type="Texture" id=8]
+[ext_resource path="res://Shaders/Club.shader" type="Shader" id=9]
+[ext_resource path="res://Objects/Viewable/Viewable_Pajtas13.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Part05/Part05_MechanicDoor.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Part05/Part05_Hand.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Viewable/Viewable_Pajtas10.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Objects/Viewable/Viewable_Pajtas11.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Objects/Viewable/Viewable_Pajtas08.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Objects/Viewable/Viewable_Pajtas09.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Objects/Viewable/Viewable_Pajtas12.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Objects/Pickable/Pickable_Battery.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Objects/Static/Static_Chair01.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Objects/Selectable/Selectable_Button.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=25]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall01.png" type="Texture" id=28]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 25 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/grab_amount = 1.0
+shader_param/glow_radius = 10.0
+shader_param/glow_amount = 0.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1792.48, 40.5972 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1792.48, 40.5972 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 38.8239, 496.48 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 46.1909, 496.48 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 9 )
+shader_param/time_offset = 150000.0
+
+[node name="Part05_Bottom" type="Node2D"]
+
+[node name="Inside" type="Sprite" parent="."]
+light_mask = 2
+position = Vector2( -256.277, -39.5439 )
+z_index = -2
+texture = ExtResource( 28 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3580, 910 )
+region_filter_clip = true
+
+[node name="Floor" type="Sprite" parent="Inside"]
+light_mask = 2
+position = Vector2( 2, 455.396 )
+z_index = 1
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3584, 140 )
+
+[node name="Static_Chair01" parent="Inside/Floor" instance=ExtResource( 23 )]
+position = Vector2( -1232.42, 24.3865 )
+collision_layer = 4
+collision_mask = 4
+
+[node name="Battery" parent="Inside/Floor" instance=ExtResource( 22 )]
+position = Vector2( -1552.44, -234.585 )
+
+[node name="Speaker00" type="Sprite" parent="Inside"]
+light_mask = 2
+position = Vector2( -1545.19, -182.647 )
+rotation = -0.0846504
+texture = ExtResource( 8 )
+
+[node name="Speaker01" type="Sprite" parent="Inside"]
+light_mask = 2
+position = Vector2( 1519.92, -178.58 )
+rotation = 0.0585922
+texture = ExtResource( 8 )
+
+[node name="Pajtas00" parent="Inside" instance=ExtResource( 15 )]
+
+[node name="Pajtas01" parent="Inside" instance=ExtResource( 16 )]
+
+[node name="Pajtas02" parent="Inside" instance=ExtResource( 13 )]
+
+[node name="Pajtas03" parent="Inside" instance=ExtResource( 14 )]
+
+[node name="Pajtas04" parent="Inside" instance=ExtResource( 17 )]
+
+[node name="Pajtas05" parent="Inside" instance=ExtResource( 10 )]
+
+[node name="Graffiti" type="Sprite" parent="Inside"]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+light_mask = 2
+position = Vector2( 916.275, 1.34961 )
+rotation = 3.14159
+scale = Vector2( 1.18709, -1 )
+texture = ExtResource( 5 )
+
+[node name="Button" parent="Inside" instance=ExtResource( 24 )]
+light_mask = 2
+material = SubResource( 1 )
+position = Vector2( -876.211, 45.6472 )
+
+[node name="CollisionBack" type="StaticBody2D" parent="."]
+position = Vector2( 190.244, 40.8774 )
+collision_layer = 4
+collision_mask = 4
+
+[node name="Bottom" type="CollisionShape2D" parent="CollisionBack"]
+position = Vector2( -444.34, 385.087 )
+shape = SubResource( 2 )
+
+[node name="CollisionAll" type="StaticBody2D" parent="."]
+position = Vector2( 190.244, 40.8777 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="Top" type="CollisionShape2D" parent="CollisionAll"]
+position = Vector2( -449.482, -572.526 )
+shape = SubResource( 3 )
+
+[node name="Bottom" type="CollisionShape2D" parent="CollisionAll"]
+position = Vector2( -444.34, 448.629 )
+shape = SubResource( 3 )
+
+[node name="CollisionPlayer" type="StaticBody2D" parent="."]
+position = Vector2( 190.244, 40.8777 )
+collision_layer = 8
+collision_mask = 8
+
+[node name="Left" type="CollisionShape2D" parent="CollisionPlayer"]
+position = Vector2( -2197.72, -47.1997 )
+shape = SubResource( 4 )
+
+[node name="Right" type="CollisionShape2D" parent="CollisionPlayer"]
+position = Vector2( 1296.81, -48.0117 )
+shape = SubResource( 5 )
+
+[node name="Door" parent="." instance=ExtResource( 11 )]
+light_mask = 2
+position = Vector2( -253.55, 30.8801 )
+stop_after = Vector2( 1000, 0 )
+speed = Vector2( 300, 0 )
+
+[node name="Hand" parent="." instance=ExtResource( 12 )]
+position = Vector2( -2872.19, 583.162 )
+z_index = 1
+start_with_offset = Vector2( -1500, 0 )
+stop_after = Vector2( 1500, 0 )
+speed = Vector2( 750, 0 )
+
+[node name="Effect" type="ColorRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+light_mask = 2
+material = SubResource( 6 )
+margin_left = 1534.0
+margin_top = -503.0
+margin_right = 5114.0
+margin_bottom = 486.0
+rect_scale = Vector2( -1, 1 )
+mouse_filter = 2
+color = Color( 0.972549, 0.972549, 0.972549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

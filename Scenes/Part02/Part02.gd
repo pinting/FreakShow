@@ -1,6 +1,6 @@
 extends "res://Scenes/BaseScene.gd"
 
-export var next_scene: String = "res://Scenes/Credits.tscn"
+export var next_scene: String = "res://Scenes/Part03/Part03.tscn"
 export var path_finding_interval: float = 0.5
 export var teleport_player_to_end: bool = false
 
@@ -30,7 +30,7 @@ onready var random_line_02 = $Environment/Maze/RandomLine02
 onready var random_line_03 = $Environment/Maze/RandomLine03
 onready var random_line_04 = $Environment/Maze/RandomLine04
 
-onready var fall_to_died = $Trigger/FallToDeath
+onready var fall_to_death = $Trigger/FallToDeath
 onready var game_begin = $Trigger/GameBegin
 onready var game_end = $Trigger/GameEnd
 onready var end_door_area = $Trigger/EndDoorArea
@@ -62,7 +62,7 @@ func _ready() -> void:
 	
 	connect("scene_started", self, "_on_scene_started")
 	
-	fall_to_died.connect("body_entered", self, "_kill_player")
+	fall_to_death.connect("body_entered", self, "_kill_player")
 	boss_mouth.connect("body_entered", self, "_kill_player")
 	game_begin.connect("body_entered", self, "_start_game")
 	game_end.connect("body_entered", self, "_end_game")

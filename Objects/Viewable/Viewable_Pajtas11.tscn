@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Decoration/Pajtas09.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Viewable/Viewable.gd" type="Script" id=2]
+
+[node name="Viewable_Pajtas11" type="Sprite" groups=[
+"selectable",
+]]
+light_mask = 2
+position = Vector2( 286.499, -220.005 )
+rotation = -0.0686027
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
