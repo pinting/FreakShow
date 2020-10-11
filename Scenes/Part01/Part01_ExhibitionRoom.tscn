@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Surface/Floor08.png" type="Texture" id=2]
@@ -14,9 +14,15 @@
 [ext_resource path="res://Assets/Environmnent/Surface/Wall11.png" type="Texture" id=12]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=13]
 [ext_resource path="res://Assets/Environmnent/Sign17.png" type="Texture" id=14]
+[ext_resource path="res://Objects/Viewable/Viewable_Buka04.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Objects/Viewable/Viewable_Buka08.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Part01/Part01_ExhibitionRoom.gd" type="Script" id=17]
+[ext_resource path="res://Objects/Viewable/Viewable_Buka07.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Objects/Viewable/Viewable_Buka06.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Objects/Viewable/Viewable_Buka05.tscn" type="PackedScene" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2035.97, 143.66 )
+extents = Vector2( 3976.28, 143.66 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 138.698, 1091.44 )
@@ -31,41 +37,32 @@ shader_param/glow_amount = 0.0
 
 [node name="Part01_ExhibitionRoom" type="Node2D"]
 z_index = -1
+script = ExtResource( 17 )
 
 [node name="Background" type="Node2D" parent="."]
 z_index = -1
 
-[node name="ColorRect" type="ColorRect" parent="Background"]
-margin_left = -6797.0
-margin_top = -2941.0
-margin_right = 6995.0
-margin_bottom = 3159.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Sprite" type="Sprite" parent="Background"]
 texture = ExtResource( 12 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 7000, 3000 )
+region_rect = Rect2( 0, 0, 12000, 3000 )
 
 [node name="Wall" type="Sprite" parent="."]
 position = Vector2( -18.3118, -21.4562 )
 scale = Vector2( 1, 1.5 )
 texture = ExtResource( 4 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 3960, 576 )
+region_rect = Rect2( 0, 0, 7940, 576 )
 
 [node name="Floor" type="Sprite" parent="Wall"]
 position = Vector2( -1.92896, 420.239 )
 scale = Vector2( 1, 0.666667 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 3960, 400 )
+region_rect = Rect2( 0, 0, 7940, 400 )
 
 [node name="Pillar00" type="Sprite" parent="Wall/Floor"]
-position = Vector2( -1654.94, -430.192 )
+position = Vector2( -3635.56, -430.183 )
 rotation = 1.5708
 z_index = 2
 texture = ExtResource( 1 )
@@ -84,8 +81,26 @@ texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1260, 120 )
 
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar00/Pillar/Pillar"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar00/Pillar/Pillar/Pillar"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar00/Pillar/Pillar/Pillar/Pillar"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
 [node name="Pillar01" type="Sprite" parent="Wall/Floor"]
-position = Vector2( 401.902, -430.192 )
+position = Vector2( 463.863, -427.375 )
 rotation = 1.5708
 z_index = 2
 texture = ExtResource( 1 )
@@ -104,53 +119,109 @@ texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1260, 120 )
 
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar01/Pillar/Pillar"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar01/Pillar/Pillar/Pillar"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
+[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar01/Pillar/Pillar/Pillar/Pillar"]
+position = Vector2( 0, -640 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1260, 120 )
+
 [node name="Top" type="Sprite" parent="Wall"]
 position = Vector2( 0, -310.345 )
 scale = Vector2( 1, 0.666667 )
 z_index = -1
 texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 3960, 400 )
+region_rect = Rect2( 0, 0, 7940, 400 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 15
 collision_mask = 15
 
-[node name="CollisionShape00" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShapeUnder" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -27.3647, 775.771 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape01" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 2020.71, -222.314 )
+[node name="CollisionShapeLeft" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -3995.3, -222.314 )
 shape = SubResource( 2 )
 
-[node name="CollisionShape02" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -2064.19, -222.314 )
+[node name="CollisionShapeRight" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 3976.36, -222.314 )
 shape = SubResource( 2 )
 
 [node name="Buka00" parent="." instance=ExtResource( 7 )]
+position = Vector2( -2686, -4.1868 )
 
 [node name="Buka01" parent="." instance=ExtResource( 8 )]
+position = Vector2( -2028.45, -4.1868 )
 
 [node name="Buka02" parent="." instance=ExtResource( 5 )]
+position = Vector2( -1386.98, 0.673454 )
 
 [node name="Buka03" parent="." instance=ExtResource( 6 )]
+position = Vector2( -772.929, 0.673454 )
+
+[node name="Buka04" parent="." instance=ExtResource( 15 )]
+
+[node name="Buka05" parent="." instance=ExtResource( 20 )]
+
+[node name="Buka06" parent="." instance=ExtResource( 19 )]
+
+[node name="Buka07" parent="." instance=ExtResource( 18 )]
+
+[node name="Buka08" parent="." instance=ExtResource( 16 )]
+
+[node name="LampBroken" parent="." instance=ExtResource( 11 )]
+position = Vector2( -3326.16, -341.021 )
+scale = Vector2( 0.4, 1.3 )
 
 [node name="Lamp00" parent="." instance=ExtResource( 11 )]
-position = Vector2( -1345.68, -341.021 )
-scale = Vector2( 0.442731, 1.29191 )
+position = Vector2( -2678.72, -341.021 )
+scale = Vector2( 0.4, 1.3 )
 
 [node name="Lamp01" parent="." instance=ExtResource( 11 )]
-position = Vector2( -669.305, -341.021 )
-scale = Vector2( 0.442731, 1.29191 )
+position = Vector2( -2019.66, -341.021 )
+scale = Vector2( 0.4, 1.3 )
 
 [node name="Lamp02" parent="." instance=ExtResource( 11 )]
-position = Vector2( 705.319, -341.021 )
-scale = Vector2( 0.442731, 1.29191 )
+position = Vector2( -1378.86, -341.021 )
+scale = Vector2( 0.4, 1.3 )
 
 [node name="Lamp03" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1393.47, -340.021 )
-scale = Vector2( 0.442731, 1.29191 )
+position = Vector2( -765.523, -341.021 )
+scale = Vector2( 0.4, 1.3 )
+
+[node name="Lamp04" parent="." instance=ExtResource( 11 )]
+position = Vector2( 767.556, -341.021 )
+scale = Vector2( 0.4, 1.3 )
+
+[node name="Lamp05" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1428.97, -340.021 )
+scale = Vector2( 0.4, 1.3 )
+
+[node name="Lamp06" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2069.46, -341.021 )
+scale = Vector2( 0.4, 1.3 )
+
+[node name="Lamp07" parent="." instance=ExtResource( 11 )]
+position = Vector2( 2682.01, -340.021 )
+scale = Vector2( 0.4, 1.3 )
+
+[node name="Lamp08" parent="." instance=ExtResource( 11 )]
+position = Vector2( 3361.39, -340.021 )
+scale = Vector2( 0.4, 1.3 )
 
 [node name="DoorBackground" type="Sprite" parent="."]
 position = Vector2( 0, 113.428 )

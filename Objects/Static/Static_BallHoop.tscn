@@ -33,5 +33,5 @@ scale = Vector2( 1.15769, 1.03912 )
 z_index = 100
 polygon = PoolVector2Array( -83.5967, -319.037, -79.2837, -314.852, -99.0415, -279.355 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( 16593, -1014.24, 17051, -1011.04, 17051, -734.774, 16838.5, -735.893, 16831.8, 17.96, 16806.1, 17.96, 16806.1, -737.011, 16593.6, -738.13 )

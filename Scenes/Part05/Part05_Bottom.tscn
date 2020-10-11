@@ -45,7 +45,7 @@ shader_param/time_offset = 150000.0
 [node name="Part05_Bottom" type="Node2D"]
 
 [node name="Inside" type="Sprite" parent="."]
-light_mask = 2
+light_mask = 1024
 position = Vector2( -256.277, -39.5439 )
 z_index = -2
 texture = ExtResource( 28 )
@@ -54,7 +54,7 @@ region_rect = Rect2( 0, 0, 3580, 910 )
 region_filter_clip = true
 
 [node name="Floor" type="Sprite" parent="Inside"]
-light_mask = 2
+light_mask = 1024
 position = Vector2( 2, 455.396 )
 z_index = 1
 texture = ExtResource( 6 )
@@ -70,39 +70,45 @@ collision_mask = 4
 position = Vector2( -1552.44, -234.585 )
 
 [node name="Speaker00" type="Sprite" parent="Inside"]
-light_mask = 2
+light_mask = 1024
 position = Vector2( -1545.19, -182.647 )
 rotation = -0.0846504
 texture = ExtResource( 8 )
 
 [node name="Speaker01" type="Sprite" parent="Inside"]
-light_mask = 2
+light_mask = 1024
 position = Vector2( 1519.92, -178.58 )
 rotation = 0.0585922
 texture = ExtResource( 8 )
 
 [node name="Pajtas00" parent="Inside" instance=ExtResource( 15 )]
+light_mask = 1024
 
 [node name="Pajtas01" parent="Inside" instance=ExtResource( 16 )]
+light_mask = 1024
 
 [node name="Pajtas02" parent="Inside" instance=ExtResource( 13 )]
+light_mask = 1024
 
 [node name="Pajtas03" parent="Inside" instance=ExtResource( 14 )]
+light_mask = 1024
 
 [node name="Pajtas04" parent="Inside" instance=ExtResource( 17 )]
+light_mask = 1024
 
 [node name="Pajtas05" parent="Inside" instance=ExtResource( 10 )]
+light_mask = 1024
 
 [node name="Graffiti" type="Sprite" parent="Inside"]
 self_modulate = Color( 1, 1, 1, 0.784314 )
-light_mask = 2
+light_mask = 1024
 position = Vector2( 916.275, 1.34961 )
 rotation = 3.14159
 scale = Vector2( 1.18709, -1 )
 texture = ExtResource( 5 )
 
 [node name="Button" parent="Inside" instance=ExtResource( 24 )]
-light_mask = 2
+light_mask = 1024
 material = SubResource( 1 )
 position = Vector2( -876.211, 45.6472 )
 
@@ -153,7 +159,7 @@ z_index = 1
 
 [node name="Effect" type="ColorRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.588235 )
-light_mask = 2
+light_mask = 1024
 material = SubResource( 6 )
 margin_left = 1534.0
 margin_top = -503.0

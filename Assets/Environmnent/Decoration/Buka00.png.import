@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Buka01.png-e31d371adeb19552d35eef5f1f76f9a8.stex"
+path="res://.import/Buka00.png-3b52db59f4037cc538461f70286f6694.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Environmnent/Buka01.png"
-dest_files=[ "res://.import/Buka01.png-e31d371adeb19552d35eef5f1f76f9a8.stex" ]
+source_file="res://Assets/Environmnent/Decoration/Buka00.png"
+dest_files=[ "res://.import/Buka00.png-3b52db59f4037cc538461f70286f6694.stex" ]
 
 [params]
 

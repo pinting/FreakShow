@@ -69,7 +69,7 @@ scale_velocity = Vector2( -1, 1 )
 [node name="AroundLight" type="Light2D" parent="BaseScene/PlayerBottom"]
 scale = Vector2( 4, 4 )
 texture = ExtResource( 11 )
-range_item_cull_mask = 2
+range_item_cull_mask = 1024
 
 [node name="ScreenEffect" type="CanvasLayer" parent="BaseScene"]
 

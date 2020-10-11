@@ -28,7 +28,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-light_mask = -2147483645
+light_mask = -2147482623
 position = Vector2( -34.5477, -0.564781 )
 scale = Vector2( 0.959281, 1.00982 )
 z_index = -1

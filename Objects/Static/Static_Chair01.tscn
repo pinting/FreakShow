@@ -5,6 +5,7 @@
 [node name="Static_Chair01" type="StaticBody2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = 1025
 position = Vector2( -318.71, -202.744 )
 scale = Vector2( 1.11575, 1 )
 texture = ExtResource( 1 )
