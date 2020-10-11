@@ -25,7 +25,6 @@ onready var hallway_end = $Trigger/HallwayLoopEnd
 
 onready var main_music = $Sound/MainMusic
 onready var waiting_music  = $Sound/WaitingMusic
-
 onready var knock_sound = $Sound/KnockSound
 onready var door_open_sound = $Sound/DoorOpenSound
 onready var silent_door_open_sound = $Sound/SilentDoorOpenSound

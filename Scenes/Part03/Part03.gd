@@ -15,15 +15,13 @@ onready var train_platform = $Environment/MaintenanceRoom/Platform
 onready var hide_papers = $Environment/MaintenanceRoom/Wall/HidePapers
 onready var paper_with_code = $Environment/MaintenanceRoom/Wall/HidePapers/PaperWithCode
 
-onready var fall_spawn = $Trigger/FallSpawn
 onready var ditch_spawn = $Trigger/DitchSpawn
 onready var maintenance_room_spawn = $Trigger/MaintenanceRoomSpawn
 onready var next_level_trigger = $Trigger/NextLevelTrigger
 
 onready var main_music = $Sound/MainMusic
-
+onready var next_level_music = $Sound/NextLevelMusic
 onready var door_open_sound = $Sound/DoorOpenSound
-onready var silent_door_open_sound = $Sound/SilentDoorOpenSound
 
 var player_animation_frames_base: SpriteFrames
 var ending_open: bool = false
@@ -43,6 +41,8 @@ func _ready() -> void:
 	music_00 = main_music.add_part(5, 60 + 13, false, 5, 0.1, 0)
 	music_01 = main_music.add_part(60 + 14, 3 * 60, false, 0.1, 1, -0.2)
 	music_02 = main_music.add_part(3 * 60, 4 * 60, true, 0.5, 0.5, -1)
+	
+	next_level_music.add_part(7 * 60 + 5, 8 * 60, true, 5, 2, 0)
 	
 	player_animation_frames_base = player.animation_frames
 	
@@ -65,13 +65,20 @@ func _next_level_triggered(player: Node) -> void:
 	if not ending_open or not player.is_in_group("player"):
 		return
 	
+	next_level_music.play()
+	
+	Global.disable_selectable = true
 	enable_next_level_effect = true
 	
 	yield(timer(5.0), "timeout")
 	
+	main_music.kill(2.0)
+	next_level_music.kill(2.0)
+	
 	fade_out(2.0)
 	yield(timer(2.0), "timeout")
 	
+	Global.disable_selectable = false
 	load_scene(next_scene)
 
 func _process_next_level_effect(delta: float) -> void:
@@ -110,8 +117,12 @@ func _hide_papers_visibility(visible: bool) -> void:
 func _on_scene_started() -> void:
 	if not disable_movement_delay:
 		yield(timer(4.5), "timeout")
+		
 		player.visible = true
+		
+		Global.subtitle.say(tr("NARRATOR06"))
 		yield(timer(4.5), "timeout")
+		
 		player.unfreeze()
 
 func _on_ditch_door_select() -> void:
@@ -121,8 +132,10 @@ func _on_maintenance_room_door_select() -> void:
 	move_with_fade(player, ditch_spawn.position, door_open_sound)
 
 func _on_battery_in_place() -> void:
-	train_platform.open()
 	_hide_papers_visibility(true)
+	train_platform.open()
 
 func _unlock_ending() -> void:
+	Global.subtitle.say(tr("NARRATOR07"))
+
 	ending_open = true

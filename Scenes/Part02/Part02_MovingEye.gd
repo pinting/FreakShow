@@ -7,10 +7,10 @@ onready var eye_ball = $EyeBack/EyeBall
 
 var eye_position = 0
 
-func _ready():
+func _ready() -> void:
 	pass
 
-func _process(delta):
+func _process(delta: float) -> void:
 	var p = eye_position - floor(eye_position)
 	
 	eye_ball.position.x = 110 - p * 220

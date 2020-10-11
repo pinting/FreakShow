@@ -12,7 +12,7 @@ var current: Color = Color(1.0, 0.0, 0.0)
 
 var current_second = 0
 
-func _ready():
+func _ready() -> void:
 	var r = 1.0
 	var g = 0.0
 	var b = 0.0
@@ -34,7 +34,7 @@ func _ready():
 	
 	current = Color(r, g, b)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	current_second += delta
 	
 	var diff = angular_velocity * delta

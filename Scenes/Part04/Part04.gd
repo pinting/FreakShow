@@ -12,13 +12,14 @@ export var teleport_player_to_end: bool = false
 onready var player = $Player
 onready var camera = $Player/DefaultCamera
 
-onready var club = $Environment/BuildingEnd/Dirt/Road/Club
+onready var club = $Dynamic/Environment/BuildingEnd/Dirt/Road/Club
 
-onready var game_end = $Trigger/GameEnd
-onready var fall_to_died = $Trigger/FallToDeath
+onready var dynamic = $Dynamic
+onready var game_end = $Dynamic/Trigger/GameEnd
+onready var fall_to_died = $Dynamic/Trigger/FallToDeath
 onready var train_spawn = $Trigger/TrainSpawn
 onready var pillar_spawn = $Trigger/PillarSpawn
-onready var teleport_player = $Trigger/TeleportPlayer
+onready var teleport_player = $Dynamic/Trigger/TeleportPlayer
 onready var player_respawn = $Trigger/PlayerRespawn
 
 onready var main_music = $Sound/MainMusic
@@ -38,6 +39,8 @@ var music_02
 var music_03
 
 func _ready() -> void:
+	dynamic.position.x += width_between_pillars * (number_of_pillars + 1)
+	
 	music_00 = main_music.add_part(0, 19.3, true, 2, 2, -5)
 	music_01 = main_music.add_part(42, 5 * 38, true, 0, 0, 0)
 	music_02 = main_music.add_part(30.8, 41.9, false, 0, 2, 0)
@@ -50,13 +53,6 @@ func _ready() -> void:
 	connect("scene_started", self, "_on_scene_started")
 	
 	main_music.play()
-
-func _shift_end_content():
-	var offset = width_between_pillars * (number_of_pillars + 1)
-	var nodes = get_tree().get_nodes_in_group("shift")
-	
-	for node in nodes:
-		node.global_position.x += offset
 
 func _generate_pillars():
 	var pillars_y = []
@@ -111,7 +107,6 @@ func _kill_player(player: Node) -> void:
 	player.kill()
 
 func _on_scene_started() -> void:
-	_shift_end_content()
 	_create_pillars(_generate_pillars())
 	
 	if teleport_player_to_end:
@@ -125,6 +120,7 @@ func _on_player_on_train_top() -> void:
 	
 	main_music.force_next(music_01)
 	camera.zoom_action()
+	Global.subtitle.say(tr("NARRATOR08"))
 	
 	first_on_top_called = true
 

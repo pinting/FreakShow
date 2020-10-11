@@ -6,7 +6,7 @@ export var enlarged_zoom = 0.75
 # Z-Index of the enlarged sprite
 export var enlarged_z_index = 99
 
-func _ready():
+func _ready() -> void:
 	connect("selected", self, "_on_selected")
 
 func _on_selected():

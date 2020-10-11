@@ -29,11 +29,6 @@
 [ext_resource path="res://Assets/Environmnent/Misc18.png" type="Texture" id=27]
 [ext_resource path="res://Objects/Pickable/Pickable_CanOfCoffee.tscn" type="PackedScene" id=28]
 
-
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1843.14, 10 )
 

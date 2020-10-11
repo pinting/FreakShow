@@ -1,31 +1,31 @@
 extends Node
 
 # Enable debug messages
-const DEBUG: bool = false
+var DEBUG: bool = false
 
 # Disable sounds
-const NO_SOUNDS: bool = false
+var NO_SOUNDS: bool = false
 
 # Disable intro
-const NO_INTRO: bool = false
-
-# Low performance mode
-const LOW_PERFORMANCE: bool = false
+var NO_INTRO: bool = false
 
 # Only use the virtual mouse
-const ONLY_VIRTUAL_MOUSE: bool = false
+var ONLY_VIRTUAL_MOUSE: bool = false
 
 # Virtual cursor instead of the windows one
-const VIRTUAL_CURSOR: bool = false
+var VIRTUAL_CURSOR: bool = false
 
 # Virtual mouse speed
-const VIRTUAL_MOUSE_SPEED: Vector2 = Vector2(3, 3)
+var VIRTUAL_MOUSE_SPEED: Vector2 = Vector2(3, 3)
+
+# Use Mac based joystick buttons
+var MAC_VIRTUAL_INPUT_FIX: bool = false
+
+# Auto load this scene
+var AUTO_LOAD_SCENE = null
 
 # Max loading time per tick (in msec)
 const LOADING_TIME_PER_TICK: int = 100
-
-# Use Mac based joystick buttons
-const MAC_VIRTUAL_INPUT_FIX = false
 
 var current_camera: Camera2D = null
 var players: Array = []
@@ -73,15 +73,62 @@ class SubtitleManager:
 		if Global.subtitle_display:
 			Global.subtitle_display.describe_remove(key, force)
 
-func _ready():
+func _ready() -> void:
 	random_generator = RandomNumberGenerator.new()
 	subtitle = SubtitleManager.new()
 	
 	random_generator.randomize()
+	_read_config()
+	_save_config()
 	
 	if NO_SOUNDS:
 		for i in range(AudioServer.bus_count):
 			AudioServer.set_bus_volume_db(i, -500)
+
+func _read_config() -> void:
+	var config = ConfigFile.new()
+	var error = config.load("user://settings.cfg")
+
+	if error != OK:
+		return
+	
+	if config.has_section_key("global", "debug"):
+		DEBUG = config.get_value("global", "debug")
+	
+	if config.has_section_key("global", "no_sounds"):
+		NO_SOUNDS = config.get_value("global", "no_sounds")
+	
+	if config.has_section_key("global", "no_intro"):
+		NO_INTRO = config.get_value("global", "no_intro")
+		
+	if config.has_section_key("global", "virtual_cursor"):
+		VIRTUAL_CURSOR = config.get_value("global", "virtual_cursor")
+	
+	if config.has_section_key("global", "only_virtual_mouse"):
+		ONLY_VIRTUAL_MOUSE = config.get_value("global", "only_virtual_mouse")
+	
+	if config.has_section_key("global", "virtual_mouse_speed"):
+		VIRTUAL_MOUSE_SPEED = config.get_value("global", "virtual_mouse_speed")
+
+	if config.has_section_key("global", "mac_virtual_input_fix"):
+		MAC_VIRTUAL_INPUT_FIX = config.get_value("global", "mac_virtual_input_fix")
+	
+	if config.has_section_key("global", "auto_load_scene"):
+		AUTO_LOAD_SCENE = config.get_value("global", "auto_load_scene")
+
+func _save_config() -> void:
+	var config = ConfigFile.new()
+
+	config.set_value("global", "debug", DEBUG)
+	config.set_value("global", "no_sounds", NO_SOUNDS)
+	config.set_value("global", "no_intro", NO_INTRO)
+	config.set_value("global", "virtual_cursor", VIRTUAL_CURSOR)
+	config.set_value("global", "only_virtual_mouse", ONLY_VIRTUAL_MOUSE)
+	config.set_value("global", "virtual_mouse_speed", VIRTUAL_MOUSE_SPEED)
+	config.set_value("global", "mac_virtual_input_fix", MAC_VIRTUAL_INPUT_FIX)
+	config.set_value("global", "auto_load_scene", AUTO_LOAD_SCENE)
+
+	config.save("user://settings.cfg")
 
 func timer(duration: float = 1.0) -> SceneTreeTimer:
 	return get_tree().create_timer(duration)
@@ -276,12 +323,16 @@ func _set_new_scene(scene_resource) -> void:
 	var next_scene = scene_resource.instance()
 	
 	root.add_child(next_scene)
-	
+
 	loader = null
 
 func load_scene(path) -> void:
 	if loader:
 		return
+	
+	AUTO_LOAD_SCENE = path
+	
+	_save_config()
 	
 	loader = ResourceLoader.load_interactive(path)
 	

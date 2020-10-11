@@ -8,7 +8,7 @@ export var duplicate_material: bool = true
 var current_second = 0
 var generation_base = Vector2(rand_range(50, 100), rand_range(50, 100))
 
-func _ready():
+func _ready() -> void:
 	if material:
 		material = material.duplicate()
 

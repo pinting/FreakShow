@@ -39,7 +39,6 @@ onready var player_respawn_01 = $Trigger/PlayerRespawn01
 onready var player_respawn_02 = $Trigger/PlayerRespawn02
 
 onready var main_music = $Sound/MainMusic
-
 onready var connect_sound = $Sound/ConnectSound
 onready var wind_sound = $Sound/WindSound
 onready var door_locked_sound = $Sound/DoorLockedSound
@@ -105,7 +104,7 @@ func _start_game(player: Node) -> void:
 		connect_sound.stop()
 		main_music.play()
 		
-		Global.subtitle.say(tr("NARRATOR05"), 0.5, 3.0)
+		Global.subtitle.say(tr("NARRATOR04"), 0.5, 3.0)
 		yield(timer(2.0), "timeout")
 	
 	game_playing = true
@@ -156,7 +155,7 @@ func _on_exit() -> void:
 	
 	if not end_door_area.overlaps_body(player):
 		if not_close_enough_help:
-			Global.subtitle.say(tr("NARRATOR06"))
+			Global.subtitle.say(tr("NARRATOR05"))
 			
 			not_close_enough_help = false
 		
@@ -179,7 +178,6 @@ func _on_exit() -> void:
 	wall_ending_bottom.disabled = true
 	
 	yield(timer(1.0), "timeout")
-	Global.subtitle.say(tr("NARRATOR07"))
 	fade_out(2.0)
 	yield(timer(5.0), "timeout")
 	

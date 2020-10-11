@@ -130,6 +130,20 @@ func stop():
 	
 	visible = false
 
+func destroy():
+	# This might reduce the number of crashes
+	on_top_collision_00.disabled = true
+	collision_00.disabled = true
+	
+	on_top_collision_01.disabled = true
+	collision_01.disabled = true
+	
+	on_top_collision_02.disabled = true
+	collision_02.disabled = true
+	
+	get_parent().remove_child(self)
+	queue_free()
+
 func _process_exit_list() -> void:
 	var new_list_player = []
 	var new_list_skipped_tick = []
@@ -220,10 +234,9 @@ func _process_recycle() -> void:
 	
 	if source_position.distance_to(global_position) > stop_after_player_diff:
 		stop()
-		get_parent().remove_child(self)
-		queue_free()
+		destroy()
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	if not started or Global.loader:
 		return
 	

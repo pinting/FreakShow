@@ -9,7 +9,7 @@ var visible_since: float = 0.0
 var queue_remove: bool = false
 var remove_after: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	Global.viewable_display = self
 
 func add(texture: Texture, description: String, child_scale: float = 1.0):	
@@ -28,7 +28,7 @@ func add(texture: Texture, description: String, child_scale: float = 1.0):
 	Global.disable_selectable = true
 	Global.subtitle.describe(current.get_instance_id(), description, true)
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	if current.visible:
 		visible_since += delta
 	
@@ -50,7 +50,7 @@ func _process(delta) -> void:
 			queue_remove = false
 			remove_after = 0.0
 
-func _input(event) -> void:
+func _input(event: InputEvent) -> void:
 	if not current.visible or not (event is InputEventMouseButton) or not event.pressed:
 		return
 	

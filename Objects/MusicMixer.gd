@@ -41,6 +41,7 @@ var break_loop_now: bool = false # Break it ASAP
 var forced_next: int = -1 # Index of the next part
 var mixing: bool = false
 var kill_timeout: float = 0.0
+var kill_counter: float = 0.0
 var kill: bool = false
 
 func _ready() -> void:
@@ -88,6 +89,7 @@ func add_part(start: float, end: float, loop: bool, in_duration: float, out_dura
 func kill(timeout: float = 5.0) -> void:
 	kill = true
 	kill_timeout = timeout
+	kill_counter = timeout
 
 func play() -> void:
 	if len(parts) == 0:
@@ -108,8 +110,10 @@ func play() -> void:
 	break_loop = false
 	break_loop_now = false
 	mixing = false
-	kill = false
+
 	kill_timeout = 0.0
+	kill_counter = 0.0
+	kill = false
 
 func pause() -> void:
 	if stopped:
@@ -179,8 +183,21 @@ func _process(delta: float) -> void:
 	
 	# If kill is set, start to act like diff_to_end is near
 	if kill:
-		diff_to_end = kill_timeout
-		kill_timeout -= delta
+		diff_to_end = kill_counter
+
+		# To everything work correctly, a fake current part is needed
+		current_part = {
+			"start": current_part.start,
+			"end": current_part.end,
+			"loop": current_part.loop,
+			"in_duration": current_part.in_duration,
+			"offset": current_part.offset,
+			
+			# Only need to fake the out duration
+			"out_duration": kill_timeout
+		}
+
+		kill_counter -= delta
 	
 	_debug_if_integer(diff_to_start, str(round(diff_to_start), " / ", round(diff_to_end)))
 	

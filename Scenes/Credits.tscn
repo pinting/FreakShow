@@ -29,7 +29,6 @@ font_data = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="DefaultCamera" parent="BaseScene" instance=ExtResource( 7 )]
-position = Vector2( -1270.34, -60.2246 )
 scale = Vector2( 0.7, 0.7 )
 smoothing_enabled = false
 smoothing_speed = 0.75
@@ -44,7 +43,7 @@ layer = -90
 self_modulate = Color( 0.219608, 0.219608, 0.219608, 1 )
 scale = Vector2( 1.26, 1.27 )
 frames = ExtResource( 1 )
-frame = 14
+frame = 90
 playing = true
 centered = false
 
@@ -84,5 +83,6 @@ __meta__ = {
 }
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
+visible = false
 light_mask = 524288
 color = Color( 0.196078, 0.196078, 0.196078, 1 )

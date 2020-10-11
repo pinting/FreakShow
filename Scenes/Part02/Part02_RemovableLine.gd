@@ -11,7 +11,7 @@ func _ready() -> void:
 	
 	current = start
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	material.set_shader_param("amount", current)
 
 func _on_selected() -> void:

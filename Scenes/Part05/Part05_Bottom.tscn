@@ -150,9 +150,6 @@ speed = Vector2( 300, 0 )
 [node name="Hand" parent="." instance=ExtResource( 12 )]
 position = Vector2( -2872.19, 583.162 )
 z_index = 1
-start_with_offset = Vector2( -1500, 0 )
-stop_after = Vector2( 1500, 0 )
-speed = Vector2( 750, 0 )
 
 [node name="Effect" type="ColorRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.588235 )

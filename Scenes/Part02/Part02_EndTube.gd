@@ -11,12 +11,9 @@ var open_mouth: bool = false
 var between: float = 0
 
 func _ready() -> void:
-	if Global.LOW_PERFORMANCE:
-		meat.material = null
-	
 	between = (tooth_left.position.x + tooth_right.position.x) / 2
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	if not open_mouth:
 		return
 	

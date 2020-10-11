@@ -7,14 +7,15 @@ export var credits_timeout: float = 5.0
 export var credits_delay: float = 2.0
 
 # How many lines of credits to display
-export var credits_count: int = 4
+export var credits_count: int = 5
 
-onready var text_center = $TextCanvas/Center
 onready var text_bottom = $TextCanvas/Bottom
 onready var text_top = $TextCanvas/Top
 
 func _ready() -> void:
 	connect("scene_started", self, "_on_scene_started")
+
+	disable_auto_restart = true
 
 func _on_scene_started() -> void:
 	yield(timer(credits_delay), "timeout")

@@ -20,6 +20,7 @@ position = Vector2( 581.502, 15.9146 )
 scale = Vector2( 0.113572, 0.113572 )
 texture = ExtResource( 3 )
 script = ExtResource( 1 )
+description = "KEYPAD00"
 offset_key = "offset"
 primary_key = "grab_amount"
 primary_hover = 1.05

@@ -22,7 +22,7 @@ var direction: float = 0.0
 var counter: Vector2 = Vector2.ZERO
 var last_movement_diff: Vector2 = Vector2.ZERO
 
-func _ready():
+func _ready() -> void:
 	sprite.position += start_with_offset
 
 func _process(delta: float):

@@ -1,7 +1,7 @@
 class_name Utils
 extends Node2D
 
-func _ready():
+func _ready() -> void:
 	pass
 
 static func _quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:

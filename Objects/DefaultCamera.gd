@@ -30,11 +30,11 @@ func _ready() -> void:
 	
 	zoom_base = zoom
 
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 	_process_shake(delta)
 	_process_zoom(delta)
 
-func _process_shake(delta) -> void:
+func _process_shake(delta: float) -> void:
 	if not shake:
 		return
 	
@@ -45,7 +45,7 @@ func _process_shake(delta) -> void:
 	offset.y = max_offset.y * shake * noise.get_noise_2d(noise.seed * 3, shake_offset_y)
 
 
-func _process_zoom(delta) -> void:
+func _process_zoom(delta: float) -> void:
 	var camera = Global.current_camera
 	
 	if not camera:
