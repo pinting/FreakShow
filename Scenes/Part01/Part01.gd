@@ -9,7 +9,7 @@ export var zero: float = 0.05
 onready var player = $Player
 
 onready var background_train = $Environment/BackgroundTrain
-onready var road_block_collision = $Environment/RoadBlock/CollisionShape2D
+onready var road_block_collision_shape = $Environment/RoadBlock/CollisionShape
 onready var road_block_sprite = $Environment/RoadBlock/Sprite
 onready var phone_lamp = $Environment/PhoneBox/Lamp
 onready var phone = $Environment/PhoneBox/Phone
@@ -64,7 +64,7 @@ func _ready() -> void:
 	if teleport_player_to_end:
 		player.position = teleport_player.position
 	
-	road_block_collision.disabled = true
+	road_block_collision_shape.disabled = true
 	road_block_sprite.visible = false
 
 func _on_intro_over() -> void:
@@ -117,7 +117,7 @@ func _reaching_phone_box(player: Node) -> void:
 	if not player.is_in_group("player") or road_block_sprite.visible:
 		return
 	
-	road_block_collision.disabled = false
+	road_block_collision_shape.disabled = false
 	road_block_sprite.visible = true
 
 func _trigger_hoop_part(ball: Node) -> void:

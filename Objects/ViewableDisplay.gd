@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-# Process user input after this amount of seconds
+# Process user input after this amount of seconds, so the user cannot click through stuff
 export var INPUT_DELAY = 0.2
 
 onready var current: Sprite = $Current
@@ -11,6 +11,7 @@ var remove_after: float = 0.0
 
 func _ready() -> void:
 	Global.viewable_display = self
+	current.visible = false
 
 func add(texture: Texture, description: String, child_scale: float = 1.0):	
 	var project_width = ProjectSettings.get_setting("display/window/size/width")

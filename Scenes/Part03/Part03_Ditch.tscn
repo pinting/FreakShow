@@ -46,13 +46,13 @@ texture = ExtResource( 12 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 8000, 61 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Rails/Hover"]
+[node name="Ground" type="StaticBody2D" parent="Rails/Hover"]
 position = Vector2( 86.0234, 50.2594 )
 scale = Vector2( 1, 0.909091 )
 collision_layer = 15
 collision_mask = 15
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rails/Hover/StaticBody2D"]
+[node name="CollisionShape" type="CollisionShape2D" parent="Rails/Hover/Ground"]
 position = Vector2( -6.12841, 36.2482 )
 shape = SubResource( 1 )
 

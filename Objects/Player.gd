@@ -65,20 +65,25 @@ export var sync_player_delay: float = 2.0
 export var register_player: bool = true
 
 # Zero value
-export var ZERO: float = 1.0
+export var zero: float = 1.0
+
+const kick_y_divide = 10
 
 onready var platform_detector_00 = $PlatformDetector00
 onready var platform_detector_01 = $PlatformDetector01
 onready var top_detector = $TopDetector
 
-onready var stand_collision = $StandCollision
-onready var crouch_collision = $CrouchCollision
-onready var avatar_collision = $AvatarCollision
+onready var stand_collision_shape = $StandCollisionShape
+onready var crouch_collision_shape = $CrouchCollisionShape
+onready var avatar_collision_shape = $AvatarCollisionShape
 
 onready var transform_effect = $TransformEffect
 onready var death_effect = $DeathEffect
 
 onready var animated_sprite = $AnimatedSprite
+
+onready var kick_area = $KickArea
+onready var kick_area_collision_shape = $KickArea/CollisionShape
 
 signal reseted
 signal died
@@ -132,6 +137,8 @@ var skip_next_velocity_process: bool = false
 
 func _ready() -> void:
 	set_animation_frames(animation_frames)
+	
+	kick_area.connect("body_entered", self, "_on_body_to_kick")
 	
 	animation_prefix = "" if avatar_mode else "a"
 	
@@ -194,9 +201,10 @@ func _process_transforming_effect(delta: float) -> void:
 		transforming_seconds = 0.0
 
 func _process_collision_shapes() -> void:
-	stand_collision.disabled = dead or crouching or avatar_mode
-	crouch_collision.disabled = dead or not crouching or avatar_mode
-	avatar_collision.disabled = dead or not avatar_mode
+	stand_collision_shape.disabled = dead or crouching or avatar_mode
+	crouch_collision_shape.disabled = dead or not crouching or avatar_mode
+	avatar_collision_shape.disabled = dead or not avatar_mode
+	kick_area_collision_shape.disabled = dead or avatar_mode
 
 func toggle_avatar_mode() -> void:
 	if not frozen:
@@ -272,7 +280,7 @@ func _process_velocity(delta: float, direction: Vector2, skip_sync: bool = false
 		var next_velocity = _calculate_next_velocity(delta, direction, normal_acceleration, skip_sync)
 		var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 		
-		if abs(current_velocity.x) > ZERO:
+		if abs(current_velocity.x) > zero:
 			var rad = walk_wave_count * current_second * current_animation_speed * PI
 			
 			current_max_speed = max_speed * abs(sin(rad + walk_wave_offset * PI))	
@@ -281,15 +289,27 @@ func _process_velocity(delta: float, direction: Vector2, skip_sync: bool = false
 		
 		current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, floor_normal, on_platform, 4, 0.9, false)
 
+func _apply_kick_force(body: Node) -> void:
+	var position_diff = body.global_position - global_position
+	var direction = position_diff.normalized()
+	
+	direction.y /= kick_y_divide
+	
+	body.apply_force(direction * body.KICK_FORCE)
+
 func _process_pickable_kick() -> void:
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		var body = collision.collider
 		
 		if body and body.is_in_group("pickable") and body.get("disabled") == false:
-			var position_diff = body.global_position - global_position
-			
-			body._apply_force(position_diff.normalized() * body.KICK_FORCE)
+			_apply_kick_force(body)
+
+func _on_body_to_kick(body: Node) -> void:
+	if not body.is_in_group("pickable") or body.get("disabled"):
+		return
+	
+	_apply_kick_force(body)
 
 func _process_crouch() -> void:
 	var crouch_pressed = Input.is_action_just_pressed("crouch")
@@ -328,15 +348,15 @@ func _process_facing(direction: Vector2) -> void:
 	elif len(animation_prefix) == 0:
 		animation_prefix = "a"
 	
-	if (gravity > ZERO and not is_on_floor() and not avatar_mode) or direction.x == 0.0:
+	if (gravity > zero and not is_on_floor() and not avatar_mode) or direction.x == 0.0:
 		return
 	
 	var m = 1.0 if direction.x > 0.0 else -1.0
 	
 	animated_sprite.scale.x = abs(animated_sprite.scale.x) * m
-	crouch_collision.scale.x = abs(crouch_collision.scale.x) * m
-	stand_collision.scale.x = abs(stand_collision.scale.x) * m
-	avatar_collision.scale.x = abs(avatar_collision.scale.x) * m
+	crouch_collision_shape.scale.x = abs(crouch_collision_shape.scale.x) * m
+	stand_collision_shape.scale.x = abs(stand_collision_shape.scale.x) * m
+	avatar_collision_shape.scale.x = abs(avatar_collision_shape.scale.x) * m
 	
 	if not avatar_mode and direction.x != 0.0:
 		animation_prefix = "a" if direction.x > 0.0 else "b"
@@ -352,7 +372,7 @@ func _get_direction() -> Vector2:
 	var up_strength = Input.get_action_strength("move_up")
 	var down_strength = Input.get_action_strength("move_down")
 	
-	var can_go_up = avatar_mode or (is_on_floor() and not crouching and not top_colliding) or gravity < ZERO
+	var can_go_up = avatar_mode or (is_on_floor() and not crouching and not top_colliding) or gravity < zero
 	var can_go_down = avatar_mode or (not is_on_floor() and not crouching)
 	
 	var x = right_strength - left_strength
@@ -367,7 +387,7 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 	direction *= scale_velocity
 	
 	# In case of avatar mode is enabled
-	if avatar_mode or abs(gravity) < ZERO:
+	if avatar_mode or abs(gravity) < zero:
 		if direction.y != 0.0 and abs(next_velocity.y) < avatar_max_speed:
 			# Apply acceleration on Y
 			next_velocity.y += direction.y * acceleration * delta
@@ -441,6 +461,7 @@ func kill() -> void:
 	animated_sprite.visible = false
 	death_effect.emitting = true
 	
+	_process_collision_shapes()
 	emit_signal("died")
 
 func is_dead() -> bool:
@@ -502,7 +523,7 @@ func _get_next_animation(direction: Vector2) -> Dictionary:
 			next_animation = "jump"
 			
 			# When falling, pause the current frame of the jump animation
-			if current_velocity.y > 0.0 and gravity > ZERO:
+			if current_velocity.y > 0.0 and gravity > zero:
 				pause = true
 	
 	return {

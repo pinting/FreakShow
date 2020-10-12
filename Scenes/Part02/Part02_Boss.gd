@@ -6,8 +6,8 @@ export var color_change_speed: float = 0.5
 
 onready var animated_sprite = $AnimatedSprite
 onready var died_effect = $DeathEffect
-onready var collision = $CollisionPolygon2D
-onready var mouth_area = $MouthArea/CollisionShape2D
+onready var collision_shape = $CollisionShape
+onready var mouth_collision_shape = $MouthArea/CollisionShape
 
 var dead = false
 var current: Color = Color(1.0, 0.0, 0.0)
@@ -30,8 +30,8 @@ func kill() -> void:
 	dead = true
 	animated_sprite.visible = false
 	died_effect.emitting = true
-	collision.disabled = true
-	mouth_area.disabled = true
+	collision_shape.disabled = true
+	mouth_collision_shape.disabled = true
 
 func _process(delta: float) -> void:
 	if current.r <= 1.0 and current.g < 1.0 and current.b == 0:

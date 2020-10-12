@@ -384,7 +384,7 @@ position = Vector2( 1139.3, -33.0197 )
 collision_layer = 7
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerComment"]
+[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerComment"]
 shape = SubResource( 11 )
 
 [node name="TriggerTrain" type="Area2D" parent="BaseScene/Trigger"]
@@ -392,7 +392,7 @@ position = Vector2( 3308.45, -25.9426 )
 collision_layer = 7
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerTrain"]
+[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerTrain"]
 shape = SubResource( 11 )
 
 [node name="ReachingHoop" type="Area2D" parent="BaseScene/Trigger"]
@@ -400,7 +400,7 @@ position = Vector2( 15696.3, -72.9816 )
 collision_layer = 7
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingHoop"]
+[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingHoop"]
 shape = SubResource( 11 )
 
 [node name="ReachingPhoneBox" type="Area2D" parent="BaseScene/Trigger"]
@@ -408,7 +408,7 @@ position = Vector2( 11534.7, -72.9816 )
 collision_layer = 7
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingPhoneBox"]
+[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingPhoneBox"]
 shape = SubResource( 11 )
 
 [node name="InsideHoop" type="Area2D" parent="BaseScene/Trigger"]
@@ -416,7 +416,7 @@ position = Vector2( 16778.5, -756.826 )
 collision_layer = 7
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/InsideHoop"]
+[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/InsideHoop"]
 position = Vector2( -1.04688, -25.6003 )
 shape = SubResource( 12 )
 

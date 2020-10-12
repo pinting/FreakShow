@@ -12,18 +12,20 @@ shader_param/replacement_color = Color( 0.352941, 0.152941, 0.152941, 1 )
 shader_param/tolerance = 0.95
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 205.833
-height = 621.209
+radius = 169.863
+height = 328.573
 
-[node name="Part02_Boss" type="KinematicBody2D"]
+[node name="Part02_Boss" type="KinematicBody2D" groups=[
+"boss",
+]]
 scale = Vector2( 0.5, 0.5 )
-collision_layer = 7
-collision_mask = 7
+collision_layer = 31
+collision_mask = 31
 script = ExtResource( 1 )
 speed = 800.0
 rotation_speed = 60.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionShape" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -493.689, 519.875, 135.318, 382.208, 443.867, 18.72, 535.074, -393.054, 352.66, -504.389, -11.4785 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -38,6 +40,6 @@ playing = true
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MouthArea"]
-position = Vector2( 413.15, 59.3555 )
+[node name="CollisionShape" type="CollisionShape2D" parent="MouthArea"]
+position = Vector2( 434.308, 143.989 )
 shape = SubResource( 2 )

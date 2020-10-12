@@ -61,7 +61,7 @@ texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3584, 140 )
 
-[node name="Static_Chair01" parent="Inside/Floor" instance=ExtResource( 23 )]
+[node name="Chair" parent="Inside/Floor" instance=ExtResource( 23 )]
 position = Vector2( -1232.42, 24.3865 )
 collision_layer = 4
 collision_mask = 4

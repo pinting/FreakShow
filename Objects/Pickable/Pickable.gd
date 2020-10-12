@@ -37,9 +37,9 @@ func _physics_process(_delta: float) -> void:
 	var grab_force = position_diff.normalized() * GRAB_FORCE
 	
 	if abs(linear_velocity.x) < MAX_VELOCITY.x and abs(linear_velocity.y) < MAX_VELOCITY.y :
-		_apply_force(grab_force)
+		apply_force(grab_force)
 
-func _apply_force(force: Vector2) -> void:
+func apply_force(force: Vector2) -> void:
 	if force < MAX_FORCE and linear_velocity < MAX_VELOCITY:
 		apply_central_impulse(force)
 
@@ -53,7 +53,7 @@ func drop(impulse: Vector2 = Vector2.ZERO) -> void:
 	if not held:
 		return
 	
-	_apply_force(impulse)
+	apply_force(impulse)
 	
 	held = false
 

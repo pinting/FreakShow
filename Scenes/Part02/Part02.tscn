@@ -148,7 +148,6 @@ zoom = Vector2( 5, 5 )
 smoothing_enabled = false
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
-visible = false
 light_mask = 0
 color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
@@ -478,7 +477,7 @@ scale = Vector2( 1.1, 1.1 )
 collision_layer = 15
 collision_mask = 15
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/EndDoorArea"]
+[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/EndDoorArea"]
 position = Vector2( -462.391, 1494.64 )
 shape = SubResource( 15 )
 
@@ -501,7 +500,7 @@ position = Vector2( 59.2303, -505.015 )
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/GameBegin"]
+[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/GameBegin"]
 position = Vector2( 1833.17, 6151.94 )
 shape = SubResource( 18 )
 

@@ -115,7 +115,7 @@ region_rect = Rect2( 0, 0, 8000, 115 )
 [node name="FloorFront" type="StaticBody2D" parent="Floor"]
 position = Vector2( 0, 153.565 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/FloorFront"]
+[node name="CollisionShape" type="CollisionShape2D" parent="Floor/FloorFront"]
 position = Vector2( -620.556, -23.3623 )
 shape = SubResource( 1 )
 
@@ -124,16 +124,16 @@ position = Vector2( 0, 94.0591 )
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/FloorCenter"]
+[node name="CollisionShape" type="CollisionShape2D" parent="Floor/FloorCenter"]
 position = Vector2( -620.556, -23.3623 )
 shape = SubResource( 1 )
 
-[node name="FloorCollisionBack" type="StaticBody2D" parent="Floor"]
+[node name="FloorBack" type="StaticBody2D" parent="Floor"]
 position = Vector2( 0, 47.9898 )
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/FloorCollisionBack"]
+[node name="CollisionShape" type="CollisionShape2D" parent="Floor/FloorBack"]
 position = Vector2( -620.556, -23.3623 )
 shape = SubResource( 1 )
 
@@ -219,11 +219,11 @@ position = Vector2( -357.823, 305.074 )
 [node name="Crate02" parent="CratesBehind" instance=ExtResource( 28 )]
 position = Vector2( -385.413, 111.715 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="CratesBehind"]
+[node name="SpriteCratesBody" type="StaticBody2D" parent="CratesBehind"]
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CratesBehind/StaticBody2D"]
+[node name="CollisionShape" type="CollisionPolygon2D" parent="CratesBehind/SpriteCratesBody"]
 position = Vector2( 0, 0.495483 )
 polygon = PoolVector2Array( -689.339, 209.258, -496.049, 208.768, -495.417, 15.7799, -274.652, 16.9877, -276.518, 210.026, -248.359, 209.611, -247.892, 400.472, -688.207, 401.076 )
 
@@ -262,17 +262,7 @@ scale = Vector2( 0.84, 0.84 )
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeftPlayer"]
-position = Vector2( -0.369629, 0 )
-shape = SubResource( 2 )
-
-[node name="WallLeftAll" type="StaticBody2D" parent="."]
-position = Vector2( -4629.39, 988.495 )
-scale = Vector2( 0.84, 0.84 )
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeftAll"]
+[node name="CollisionShape" type="CollisionShape2D" parent="WallLeftPlayer"]
 position = Vector2( -0.369629, 0 )
 shape = SubResource( 2 )
 
@@ -282,7 +272,17 @@ scale = Vector2( 0.84, 0.84 )
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRightPlayer"]
+[node name="CollisionShape" type="CollisionShape2D" parent="WallRightPlayer"]
+position = Vector2( -0.369629, 0 )
+shape = SubResource( 2 )
+
+[node name="WallLeftAll" type="StaticBody2D" parent="."]
+position = Vector2( -4629.39, 988.495 )
+scale = Vector2( 0.84, 0.84 )
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape" type="CollisionShape2D" parent="WallLeftAll"]
 position = Vector2( -0.369629, 0 )
 shape = SubResource( 2 )
 
@@ -292,6 +292,6 @@ scale = Vector2( 0.84, 0.84 )
 collision_layer = 7
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRightAll"]
+[node name="CollisionShape" type="CollisionShape2D" parent="WallRightAll"]
 position = Vector2( -0.369629, 0 )
 shape = SubResource( 2 )

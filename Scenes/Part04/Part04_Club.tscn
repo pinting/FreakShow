@@ -10,10 +10,6 @@
 [ext_resource path="res://Assets/Environmnent/Building07_Door.png" type="Texture" id=8]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=9]
 
-
-
-
-
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 

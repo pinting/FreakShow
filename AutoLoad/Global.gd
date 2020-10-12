@@ -1,5 +1,8 @@
 extends Node
 
+# Max loading time per tick (in msec)
+const LOADING_TIME_PER_TICK: int = 100
+
 # Enable debug messages
 var DEBUG: bool = false
 
@@ -24,9 +27,6 @@ var MAC_VIRTUAL_INPUT_FIX: bool = false
 # Auto load this scene
 var AUTO_LOAD_SCENE = null
 
-# Max loading time per tick (in msec)
-const LOADING_TIME_PER_TICK: int = 100
-
 var current_camera: Camera2D = null
 var players: Array = []
 var subtitle_display: SubtitleDisplay = null
@@ -45,6 +45,8 @@ var last_virtual_click_left: bool = false
 var last_virtual_click_right: bool = false
 
 var using_virtual: bool = ONLY_VIRTUAL_MOUSE
+
+# Actual mouse clicks and virtual ones are distinguished by their pressure value
 var pressure_virtual = max(0.1, min(0.9, randf()))
 
 var loader = null

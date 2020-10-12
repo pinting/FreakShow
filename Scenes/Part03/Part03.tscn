@@ -104,7 +104,7 @@ position = Vector2( -970.773, -551.698 )
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/NextLevelTrigger"]
+[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/NextLevelTrigger"]
 position = Vector2( -1.3833, 66.4032 )
 shape = SubResource( 3 )
 

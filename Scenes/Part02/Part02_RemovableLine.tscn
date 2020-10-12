@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Shaders/Disintegrate.shader" type="Shader" id=1]
 [ext_resource path="res://Scenes/Part02/Part02_RemovableLine.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Environmnent/Lines00_H00.png" type="Texture" id=4]
-
-
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -13,6 +11,9 @@ shader_param/pi = 3.14159
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 168.256, 11.3797 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 177.542, 18.2939 )
 
 [node name="Part02_RemovableLine" type="Sprite" groups=[
 "selectable",
@@ -23,12 +24,20 @@ texture = ExtResource( 4 )
 script = ExtResource( 3 )
 clone_material = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Body" type="StaticBody2D" parent="."]
 z_index = 100
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 position = Vector2( -7.15843, 10.1711 )
 z_index = 100
 shape = SubResource( 2 )
+
+[node name="BossDetector" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape2D" parent="BossDetector"]
+position = Vector2( -4.7776, 9.55521 )
+shape = SubResource( 3 )
