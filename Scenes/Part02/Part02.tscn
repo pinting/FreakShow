@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Sounds/Phone02.wav" type="AudioStream" id=2]
@@ -41,6 +41,7 @@
 [ext_resource path="res://Assets/Sounds/Warning02.wav" type="AudioStream" id=39]
 [ext_resource path="res://Assets/Sounds/Warning04.wav" type="AudioStream" id=40]
 [ext_resource path="res://Objects/Selectable/Selectable_DrugSexHellGraffiti.tscn" type="PackedScene" id=41]
+[ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=42]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -268,11 +269,15 @@ scale = Vector2( 3.93594, 2 )
 step = 0
 start = 0
 
-[node name="SignDown" type="Sprite" parent="BaseScene/Environment/Maze"]
+[node name="SignDown" type="Sprite" parent="BaseScene/Environment/Maze" groups=[
+"selectable",
+]]
 position = Vector2( 1263.74, -8691.79 )
 scale = Vector2( 1.3909, 1.3909 )
 z_index = 2
 texture = ExtResource( 10 )
+script = ExtResource( 42 )
+description = "HELP00"
 
 [node name="SignLeft" type="Sprite" parent="BaseScene/Environment/Maze"]
 position = Vector2( 2748.04, 23220.6 )
