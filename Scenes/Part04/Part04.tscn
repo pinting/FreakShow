@@ -55,7 +55,7 @@ environment = SubResource( 1 )
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
-color = Color( 0.196078, 0.196078, 0.196078, 1 )
+color = Color( 0.294118, 0.294118, 0.294118, 1 )
 
 [node name="Sky" parent="BaseScene" instance=ExtResource( 7 )]
 

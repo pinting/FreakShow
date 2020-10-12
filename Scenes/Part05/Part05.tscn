@@ -35,7 +35,7 @@ environment = SubResource( 1 )
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
-color = Color( 0.235294, 0.235294, 0.235294, 1 )
+color = Color( 0.352941, 0.352941, 0.352941, 1 )
 
 [node name="DefaultCamera" parent="BaseScene" instance=ExtResource( 3 )]
 position = Vector2( 1950.07, 1764.38 )

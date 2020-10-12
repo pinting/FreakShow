@@ -44,10 +44,10 @@ environment = SubResource( 1 )
 layer = -90
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="BaseScene/Background"]
-self_modulate = Color( 0.219608, 0.219608, 0.219608, 1 )
+self_modulate = Color( 1, 1, 1, 0.784314 )
 scale = Vector2( 1.26, 1.27 )
 frames = ExtResource( 1 )
-frame = 18
+frame = 185
 playing = true
 centered = false
 
@@ -86,4 +86,3 @@ texture = ExtResource( 4 )
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
-color = Color( 0.196078, 0.196078, 0.196078, 1 )

@@ -8,6 +8,7 @@ layer = 50
 script = ExtResource( 1 )
 
 [node name="Current" type="Sprite" parent="."]
+visible = false
 
 [node name="Light" type="Sprite" parent="Current"]
 show_behind_parent = true
