@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Phone00_Glow.png-0609edc05b8ffd88a937d47df3a412df.stex"
+path.s3tc="res://.import/Phone00_Glow.png-0609edc05b8ffd88a937d47df3a412df.s3tc.stex"
+path.etc2="res://.import/Phone00_Glow.png-0609edc05b8ffd88a937d47df3a412df.etc2.stex"
+path.etc="res://.import/Phone00_Glow.png-0609edc05b8ffd88a937d47df3a412df.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Phone00_Glow.png"
-dest_files=[ "res://.import/Phone00_Glow.png-0609edc05b8ffd88a937d47df3a412df.stex" ]
+dest_files=[ "res://.import/Phone00_Glow.png-0609edc05b8ffd88a937d47df3a412df.s3tc.stex", "res://.import/Phone00_Glow.png-0609edc05b8ffd88a937d47df3a412df.etc2.stex", "res://.import/Phone00_Glow.png-0609edc05b8ffd88a937d47df3a412df.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

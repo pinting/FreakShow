@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Shed00_DoorWithSign.png-8f2eddd504ce6bdfaa3d59705c494823.stex"
+path.s3tc="res://.import/Shed00_DoorWithSign.png-8f2eddd504ce6bdfaa3d59705c494823.s3tc.stex"
+path.etc2="res://.import/Shed00_DoorWithSign.png-8f2eddd504ce6bdfaa3d59705c494823.etc2.stex"
+path.etc="res://.import/Shed00_DoorWithSign.png-8f2eddd504ce6bdfaa3d59705c494823.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Shed00_DoorWithSign.png"
-dest_files=[ "res://.import/Shed00_DoorWithSign.png-8f2eddd504ce6bdfaa3d59705c494823.stex" ]
+dest_files=[ "res://.import/Shed00_DoorWithSign.png-8f2eddd504ce6bdfaa3d59705c494823.s3tc.stex", "res://.import/Shed00_DoorWithSign.png-8f2eddd504ce6bdfaa3d59705c494823.etc2.stex", "res://.import/Shed00_DoorWithSign.png-8f2eddd504ce6bdfaa3d59705c494823.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

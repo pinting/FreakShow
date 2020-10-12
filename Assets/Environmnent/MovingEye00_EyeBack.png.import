@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/MovingEye00_EyeBack.png-63f07f0a0d34eed0be6b7d568d97ac59.stex"
+path.s3tc="res://.import/MovingEye00_EyeBack.png-63f07f0a0d34eed0be6b7d568d97ac59.s3tc.stex"
+path.etc2="res://.import/MovingEye00_EyeBack.png-63f07f0a0d34eed0be6b7d568d97ac59.etc2.stex"
+path.etc="res://.import/MovingEye00_EyeBack.png-63f07f0a0d34eed0be6b7d568d97ac59.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/MovingEye00_EyeBack.png"
-dest_files=[ "res://.import/MovingEye00_EyeBack.png-63f07f0a0d34eed0be6b7d568d97ac59.stex" ]
+dest_files=[ "res://.import/MovingEye00_EyeBack.png-63f07f0a0d34eed0be6b7d568d97ac59.s3tc.stex", "res://.import/MovingEye00_EyeBack.png-63f07f0a0d34eed0be6b7d568d97ac59.etc2.stex", "res://.import/MovingEye00_EyeBack.png-63f07f0a0d34eed0be6b7d568d97ac59.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

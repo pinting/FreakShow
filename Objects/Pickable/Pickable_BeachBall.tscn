@@ -32,7 +32,7 @@ contacts_reported = 3
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 3 )
-KICK_FORCE = Vector2( 300, 300 )
+KICK_FORCE = Vector2( 200, 200 )
 
 [node name="Sprite" type="Sprite" parent="." groups=[
 "selectable",

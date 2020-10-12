@@ -113,6 +113,8 @@ func _on_scene_started() -> void:
 		player.global_position = teleport_player.global_position
 	else:
 		_create_train()
+	
+	Global.subtitle.say(tr("NARRATOR08"))
 
 func _on_player_on_train_top() -> void:
 	if first_on_top_called:
@@ -120,7 +122,7 @@ func _on_player_on_train_top() -> void:
 	
 	main_music.force_next(music_01)
 	camera.zoom_action()
-	Global.subtitle.say(tr("NARRATOR08"))
+	Global.subtitle.say(tr("NARRATOR09"))
 	
 	first_on_top_called = true
 

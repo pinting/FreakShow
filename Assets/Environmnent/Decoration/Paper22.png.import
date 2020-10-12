@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Paper22.png-63648e36c5640e58913f66b25e117d4c.stex"
+path.s3tc="res://.import/Paper22.png-63648e36c5640e58913f66b25e117d4c.s3tc.stex"
+path.etc2="res://.import/Paper22.png-63648e36c5640e58913f66b25e117d4c.etc2.stex"
+path.etc="res://.import/Paper22.png-63648e36c5640e58913f66b25e117d4c.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Decoration/Paper22.png"
-dest_files=[ "res://.import/Paper22.png-63648e36c5640e58913f66b25e117d4c.stex" ]
+dest_files=[ "res://.import/Paper22.png-63648e36c5640e58913f66b25e117d4c.s3tc.stex", "res://.import/Paper22.png-63648e36c5640e58913f66b25e117d4c.etc2.stex", "res://.import/Paper22.png-63648e36c5640e58913f66b25e117d4c.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -40,7 +40,7 @@ extents = Vector2( 46.1909, 496.48 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 9 )
-shader_param/time_offset = 150000.0
+shader_param/time_offset = 40000.0
 
 [node name="Part05_Bottom" type="Node2D"]
 

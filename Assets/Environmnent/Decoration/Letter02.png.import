@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Letter02.png-6a4264ecf3d9e6f628b5c0c59a69007a.stex"
+path.s3tc="res://.import/Letter02.png-6a4264ecf3d9e6f628b5c0c59a69007a.s3tc.stex"
+path.etc2="res://.import/Letter02.png-6a4264ecf3d9e6f628b5c0c59a69007a.etc2.stex"
+path.etc="res://.import/Letter02.png-6a4264ecf3d9e6f628b5c0c59a69007a.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Decoration/Letter02.png"
-dest_files=[ "res://.import/Letter02.png-6a4264ecf3d9e6f628b5c0c59a69007a.stex" ]
+dest_files=[ "res://.import/Letter02.png-6a4264ecf3d9e6f628b5c0c59a69007a.s3tc.stex", "res://.import/Letter02.png-6a4264ecf3d9e6f628b5c0c59a69007a.etc2.stex", "res://.import/Letter02.png-6a4264ecf3d9e6f628b5c0c59a69007a.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

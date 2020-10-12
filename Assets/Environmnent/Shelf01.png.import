@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Shelf01.png-84dfbc09277944197af1cacd03996370.stex"
+path.s3tc="res://.import/Shelf01.png-84dfbc09277944197af1cacd03996370.s3tc.stex"
+path.etc2="res://.import/Shelf01.png-84dfbc09277944197af1cacd03996370.etc2.stex"
+path.etc="res://.import/Shelf01.png-84dfbc09277944197af1cacd03996370.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Shelf01.png"
-dest_files=[ "res://.import/Shelf01.png-84dfbc09277944197af1cacd03996370.stex" ]
+dest_files=[ "res://.import/Shelf01.png-84dfbc09277944197af1cacd03996370.s3tc.stex", "res://.import/Shelf01.png-84dfbc09277944197af1cacd03996370.etc2.stex", "res://.import/Shelf01.png-84dfbc09277944197af1cacd03996370.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

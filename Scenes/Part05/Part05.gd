@@ -112,7 +112,7 @@ func _on_battery_inside() -> void:
 	yield(timer(2.0), "timeout")
 	
 	camera.zoom_action()
-	Global.subtitle.say(tr("NARRATOR09"))
+	Global.subtitle.say(tr("NARRATOR10"))
 	
 	top_player_collision_right_shape.disabled = true
 	bottom_player_collision_left_shape.disabled = true
