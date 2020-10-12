@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player00_A_Jump005.png-e5ce9eb0cb4292dd2ee2625a99504a4a.stex"
+path.s3tc="res://.import/Player00_A_Jump005.png-e5ce9eb0cb4292dd2ee2625a99504a4a.s3tc.stex"
+path.etc2="res://.import/Player00_A_Jump005.png-e5ce9eb0cb4292dd2ee2625a99504a4a.etc2.stex"
+path.etc="res://.import/Player00_A_Jump005.png-e5ce9eb0cb4292dd2ee2625a99504a4a.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player00/A/Jump/Player00_A_Jump005.png"
-dest_files=[ "res://.import/Player00_A_Jump005.png-e5ce9eb0cb4292dd2ee2625a99504a4a.stex" ]
+dest_files=[ "res://.import/Player00_A_Jump005.png-e5ce9eb0cb4292dd2ee2625a99504a4a.s3tc.stex", "res://.import/Player00_A_Jump005.png-e5ce9eb0cb4292dd2ee2625a99504a4a.etc2.stex", "res://.import/Player00_A_Jump005.png-e5ce9eb0cb4292dd2ee2625a99504a4a.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

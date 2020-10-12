@@ -29,21 +29,21 @@ shader_param/glow_amount = 0.0
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1792.48, 40.5972 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 1792.48, 40.5972 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 1792.48, 40.5972 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 38.8239, 496.48 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 46.1909, 496.48 )
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 10 )
-shader_param/time_offset = 300000.0
+shader_param/time_offset = 30000.0
 
 [node name="Part05_Top" type="Node2D"]
 position = Vector2( -0.230225, -1035.3 )
@@ -111,11 +111,11 @@ collision_mask = 15
 
 [node name="Top" type="CollisionShape2D" parent="CollisionAll"]
 position = Vector2( -446.483, -555.699 )
-shape = SubResource( 8 )
+shape = SubResource( 3 )
 
 [node name="Bottom" type="CollisionShape2D" parent="CollisionAll"]
 position = Vector2( -448.465, 451.058 )
-shape = SubResource( 9 )
+shape = SubResource( 4 )
 
 [node name="CollisionPlayer" type="StaticBody2D" parent="."]
 position = Vector2( 190.244, 40.8778 )
@@ -124,11 +124,11 @@ collision_mask = 8
 
 [node name="Left" type="CollisionShape2D" parent="CollisionPlayer"]
 position = Vector2( -2197.11, -47.1997 )
-shape = SubResource( 10 )
+shape = SubResource( 5 )
 
 [node name="Right" type="CollisionShape2D" parent="CollisionPlayer"]
 position = Vector2( 1299.97, -47.1997 )
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="Hand" parent="." instance=ExtResource( 13 )]
 position = Vector2( 2328.03, 585.586 )
@@ -138,7 +138,7 @@ z_index = 1
 
 [node name="Effect" type="ColorRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.588235 )
-material = SubResource( 6 )
+material = SubResource( 7 )
 margin_left = -2046.77
 margin_top = -494.7
 margin_right = 1536.23

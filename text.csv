@@ -31,7 +31,7 @@ PAPER11,Buying wrecked cars,Roncs autók felvásárlása
 PAPER12,English lessons,Angol órák
 PAPER13,Man for electrical installation,Villanyszerelést vállalok
 PAPER14,W201 swimsuit,W201 fürdőruha
-PAPER15,"NŐI-FÉRFI RUHÁZATI ADÁS-VÉTEL","SALE AND PURCHASE OF WOMEN'S AND MEN'S CLOTHING"
+PAPER15,"SALE AND PURCHASE OF WOMEN'S AND MEN'S CLOTHING","NŐI-FÉRFI RUHÁZATI ADÁS-VÉTEL"
 PAPER16,The code for the door,A kód az ajtóhoz
 LETTER00,"No need for a screeching halt, you can stop gracefully.","Nem kell megtorpanni, elég méltósággal megállni."
 LETTER01,"The red light is there to help you reach your destination.","Azért kapsz pirost, hogy célba érj."
@@ -67,8 +67,9 @@ NARRATOR04,"Come on, get the fuck away from here!","Gyerünk, menjünk már a fa
 NARRATOR05,"Come a bit closer child. Let me have a look at you!","Gyere közelebb gyermekem. Hadd vegyelek szemügyre!"
 NARRATOR06,"Where could I have been? It was a strange place.","Hol lehettem? Furcsa egy hely volt."
 NARRATOR07,"I found the code for the door upstairs on a piece of paper.","Megtaláltam az emeleti ajtó kódját egy darab papíron."
-NARRATOR08,"While I was on the top of the train, had to be really careful with the obstacles.","Amíg a vonat tetején voltam, nagyon vigyáznom kellett a kiálló akadályokkal."
-NARRATOR09,"A deep voice warned us. We had to choose! Only one could enter paradise!","Egy mély hang figyelmeztetett. Választunk kellett! Csak egy léphet be a paradicsomba!"
+NARRATOR08,"Who am I actually? It is hard to decide.","Ki vagyok én tulajdonképpen? Nehéz eldönteni."
+NARRATOR09,"While I was on the top of the train, had to be really careful with the obstacles.","Amíg a vonat tetején voltam, nagyon vigyáznom kellett a kiálló akadályokkal."
+NARRATOR10,"A deep voice warned us. We had to choose! Only one could enter paradise!","Egy mély hang figyelmeztetett. Választunk kellett! Csak egy léphet be a paradicsomba!"
 CREDITS04_0,"Special thanks to","Külön köszönet"
 CREDITS04_1,"Godot Engine team, Xavier Gómez Gosálbez, \nNathan Lovato, Jozsef Koller","Godot Engine csapata, Xavier Gómez Gosálbez, \nNathan Lovato, Koller József"
 CREDITS03_0,"Programming","Programozta"

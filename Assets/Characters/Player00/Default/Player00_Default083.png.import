@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player00_Default083.png-07d0e875e6d25790816812415de838eb.stex"
+path.s3tc="res://.import/Player00_Default083.png-07d0e875e6d25790816812415de838eb.s3tc.stex"
+path.etc2="res://.import/Player00_Default083.png-07d0e875e6d25790816812415de838eb.etc2.stex"
+path.etc="res://.import/Player00_Default083.png-07d0e875e6d25790816812415de838eb.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player00/Default/Player00_Default083.png"
-dest_files=[ "res://.import/Player00_Default083.png-07d0e875e6d25790816812415de838eb.stex" ]
+dest_files=[ "res://.import/Player00_Default083.png-07d0e875e6d25790816812415de838eb.s3tc.stex", "res://.import/Player00_Default083.png-07d0e875e6d25790816812415de838eb.etc2.stex", "res://.import/Player00_Default083.png-07d0e875e6d25790816812415de838eb.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

@@ -29,6 +29,7 @@ font_data = SubResource( 2 )
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
+fade_in_after = 5.0
 
 [node name="DefaultCamera" parent="BaseScene" instance=ExtResource( 7 )]
 position = Vector2( -1270.34, -60.2246 )
@@ -46,7 +47,7 @@ layer = -90
 self_modulate = Color( 0.219608, 0.219608, 0.219608, 1 )
 scale = Vector2( 1.26, 1.27 )
 frames = ExtResource( 1 )
-frame = 162
+frame = 161
 playing = true
 centered = false
 

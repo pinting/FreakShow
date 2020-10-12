@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Player00_Default077.png-0a8009e9ae52a8f039b180a490e12998.stex"
+path.s3tc="res://.import/Player00_Default077.png-0a8009e9ae52a8f039b180a490e12998.s3tc.stex"
+path.etc2="res://.import/Player00_Default077.png-0a8009e9ae52a8f039b180a490e12998.etc2.stex"
+path.etc="res://.import/Player00_Default077.png-0a8009e9ae52a8f039b180a490e12998.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Characters/Player00/Default/Player00_Default077.png"
-dest_files=[ "res://.import/Player00_Default077.png-0a8009e9ae52a8f039b180a490e12998.stex" ]
+dest_files=[ "res://.import/Player00_Default077.png-0a8009e9ae52a8f039b180a490e12998.s3tc.stex", "res://.import/Player00_Default077.png-0a8009e9ae52a8f039b180a490e12998.etc2.stex", "res://.import/Player00_Default077.png-0a8009e9ae52a8f039b180a490e12998.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

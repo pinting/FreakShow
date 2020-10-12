@@ -1,14 +1,14 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
-uniform float time_offset = 300000;
+uniform float time_offset = 0;
 
 vec2 hash(vec2 p)
 {
-	uvec2 q = uvec2(ivec2(p)) * uvec2(1500000, 4000000);
+	uvec2 q = uvec2(ivec2(p)) * uvec2(15, 40);
 	q = (q.x ^ q.y) * uvec2(1, 1);
 
-	return vec2(q) * (1.0 / float(9000000000));
+	return vec2(q) * (1.0 / float(90));
 }
 
 float worley(vec2 uv, float time)

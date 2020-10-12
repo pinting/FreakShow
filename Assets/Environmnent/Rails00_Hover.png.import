@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rails00_Hover.png-50db19518e70dbd6be9431f7fa870815.stex"
+path.s3tc="res://.import/Rails00_Hover.png-50db19518e70dbd6be9431f7fa870815.s3tc.stex"
+path.etc2="res://.import/Rails00_Hover.png-50db19518e70dbd6be9431f7fa870815.etc2.stex"
+path.etc="res://.import/Rails00_Hover.png-50db19518e70dbd6be9431f7fa870815.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Rails00_Hover.png"
-dest_files=[ "res://.import/Rails00_Hover.png-50db19518e70dbd6be9431f7fa870815.stex" ]
+dest_files=[ "res://.import/Rails00_Hover.png-50db19518e70dbd6be9431f7fa870815.s3tc.stex", "res://.import/Rails00_Hover.png-50db19518e70dbd6be9431f7fa870815.etc2.stex", "res://.import/Rails00_Hover.png-50db19518e70dbd6be9431f7fa870815.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

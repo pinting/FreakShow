@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Pajtas11.png-df89a36c106c3a3960a11719b1adaa87.stex"
+path.s3tc="res://.import/Pajtas11.png-df89a36c106c3a3960a11719b1adaa87.s3tc.stex"
+path.etc2="res://.import/Pajtas11.png-df89a36c106c3a3960a11719b1adaa87.etc2.stex"
+path.etc="res://.import/Pajtas11.png-df89a36c106c3a3960a11719b1adaa87.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Decoration/Pajtas11.png"
-dest_files=[ "res://.import/Pajtas11.png-df89a36c106c3a3960a11719b1adaa87.stex" ]
+dest_files=[ "res://.import/Pajtas11.png-df89a36c106c3a3960a11719b1adaa87.s3tc.stex", "res://.import/Pajtas11.png-df89a36c106c3a3960a11719b1adaa87.etc2.stex", "res://.import/Pajtas11.png-df89a36c106c3a3960a11719b1adaa87.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

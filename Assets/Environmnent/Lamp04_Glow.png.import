@@ -2,19 +2,22 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lamp04_Glow.png-00a02f9538e278935a54b9580bd91cf8.stex"
+path.s3tc="res://.import/Lamp04_Glow.png-00a02f9538e278935a54b9580bd91cf8.s3tc.stex"
+path.etc2="res://.import/Lamp04_Glow.png-00a02f9538e278935a54b9580bd91cf8.etc2.stex"
+path.etc="res://.import/Lamp04_Glow.png-00a02f9538e278935a54b9580bd91cf8.etc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Environmnent/Lamp04_Glow.png"
-dest_files=[ "res://.import/Lamp04_Glow.png-00a02f9538e278935a54b9580bd91cf8.stex" ]
+dest_files=[ "res://.import/Lamp04_Glow.png-00a02f9538e278935a54b9580bd91cf8.s3tc.stex", "res://.import/Lamp04_Glow.png-00a02f9538e278935a54b9580bd91cf8.etc2.stex", "res://.import/Lamp04_Glow.png-00a02f9538e278935a54b9580bd91cf8.etc.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
