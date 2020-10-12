@@ -49,7 +49,7 @@ layer = -90
 scale = Vector2( 1.26, 1.27 )
 z_index = -1
 frames = ExtResource( 1 )
-frame = 75
+frame = 106
 playing = true
 centered = false
 

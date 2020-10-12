@@ -7,7 +7,7 @@ export var credits_timeout: float = 5.0
 export var credits_delay: float = 2.0
 
 # How many lines of credits to display
-export var credits_count: int = 5
+export var credits_count: int = 6
 
 onready var text_bottom = $TextCanvas/Bottom
 onready var text_top = $TextCanvas/Top

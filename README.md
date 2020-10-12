@@ -22,16 +22,17 @@ The game was imagined based on a selection of music tracks - however, I do not o
 
 ## Credits
 
-* Diana Baranyi - photo assets
-* Zsofi Szabo - photo assets
-* Babett Farkas - photo assets
+* Denes Tornyi - scripting, custom shaders, photo assets, character actor
 * Gergo Tornyi - photo assets, character actor
 * Zsuzsa Buka - photo assets, drawings
+* Diana Baranyi - photo assets
+* Zsofi Szabo - photo assets
 * Jozsef Koller - animation interpolation
+* Babett Farkas - photo assets
+* Janos Bito - sound effects
 * Xavier Gómez Gosálbez - CRT shader
 * Nathan Lovato - fog shader
 * Godot Engine - engine, shaders, sprites of particles
-* Denes Tornyi - scripting, custom shaders, photo assets, character actor
 
 Thank you for the musical inspiration to the following artists (or group of artists).
 
