@@ -1,16 +1,12 @@
 extends Node2D
 
-export var angular_velocity: float = 300
 export var color_change_speed: float = 0.5
 
-onready var top_lamp = $TopLamp
-onready var bottom_lamp = $BottomLamp
-onready var top_light = $TopLamp/DirectionalLight
-onready var bottom_light = $BottomLamp/DirectionalLight
+export var offset: Color = Color(0.75, 0.75, 0.75)
+export var scale_color: Color = Color(0.33, 0.33, 0.33)
 
-var current: Color = Color(1.0, 0.0, 0.0)
-
-var current_second = 0
+var current: Color = Color(0.0, 0.0, 0.0)
+var current_second: float = 0
 
 func _ready() -> void:
 	var r = 1.0
@@ -37,10 +33,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	current_second += delta
 	
-	var diff = angular_velocity * delta
-	
-	rotation_degrees = fmod(rotation_degrees + diff, 360.0)
-	
 	if current.r <= 1.0 and current.g < 1.0 and current.b == 0:
 		current.r -= delta * color_change_speed
 		current.g += delta * color_change_speed
@@ -55,8 +47,7 @@ func _process(delta: float) -> void:
 	current.g = max(0.0, min(1.0, current.g))
 	current.b = max(0.0, min(1.0, current.b))
 	
-	top_light.color = current
-	top_lamp.modulate = current
-	
-	bottom_light.color = current
-	bottom_lamp.modulate = current
+	modulate = Color(
+		max(min(scale_color.r * current.r + offset.r, 1.0), 0.0), 
+		max(min(scale_color.g * current.g + offset.g, 1.0), 0.0),
+		max(min(scale_color.b * current.b + offset.b, 1.0), 0.0))

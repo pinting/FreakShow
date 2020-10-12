@@ -9,7 +9,7 @@ export var continue_blink_interval: float = 0.5
 # Zero value
 export var zero: float = 0.05
 
-onready var text_continue = $TextCanvas/Continue
+onready var text_continue = $TextCanvas/ColorChanger/Continue
 
 func _ready() -> void:
 	connect("scene_started", self, "_on_scene_started")

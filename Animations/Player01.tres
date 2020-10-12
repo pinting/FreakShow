@@ -484,6 +484,11 @@ animations = [ {
 "name": "b_crouch_still_to_move",
 "speed": 60.0
 }, {
+"frames": [ ExtResource( 434 ) ],
+"loop": false,
+"name": "b_crouch_still",
+"speed": 60.0
+}, {
 "frames": [ ExtResource( 372 ), ExtResource( 305 ), ExtResource( 299 ), ExtResource( 370 ), ExtResource( 300 ), ExtResource( 301 ), ExtResource( 302 ), ExtResource( 303 ), ExtResource( 304 ), ExtResource( 298 ), ExtResource( 213 ), ExtResource( 306 ), ExtResource( 307 ), ExtResource( 308 ), ExtResource( 309 ), ExtResource( 198 ), ExtResource( 199 ), ExtResource( 310 ), ExtResource( 424 ), ExtResource( 311 ) ],
 "loop": true,
 "name": "b_jump",
@@ -502,11 +507,6 @@ animations = [ {
 "frames": [ ExtResource( 139 ), ExtResource( 435 ), ExtResource( 417 ), ExtResource( 362 ), ExtResource( 360 ), ExtResource( 105 ), ExtResource( 366 ), ExtResource( 245 ), ExtResource( 408 ), ExtResource( 170 ), ExtResource( 106 ), ExtResource( 167 ), ExtResource( 364 ), ExtResource( 416 ), ExtResource( 101 ), ExtResource( 367 ), ExtResource( 390 ), ExtResource( 407 ), ExtResource( 246 ), ExtResource( 135 ), ExtResource( 438 ), ExtResource( 211 ), ExtResource( 136 ), ExtResource( 112 ), ExtResource( 137 ), ExtResource( 168 ), ExtResource( 169 ), ExtResource( 212 ), ExtResource( 134 ), ExtResource( 133 ), ExtResource( 113 ), ExtResource( 131 ), ExtResource( 208 ), ExtResource( 141 ), ExtResource( 140 ), ExtResource( 138 ), ExtResource( 142 ), ExtResource( 164 ), ExtResource( 114 ), ExtResource( 147 ) ],
 "loop": false,
 "name": "a_stand_move_to_still",
-"speed": 60.0
-}, {
-"frames": [ ExtResource( 434 ) ],
-"loop": false,
-"name": "b_crouch_still",
 "speed": 60.0
 }, {
 "frames": [ ExtResource( 372 ), ExtResource( 305 ), ExtResource( 299 ), ExtResource( 370 ), ExtResource( 300 ), ExtResource( 301 ), ExtResource( 302 ), ExtResource( 303 ), ExtResource( 304 ), ExtResource( 298 ), ExtResource( 213 ), ExtResource( 306 ), ExtResource( 307 ), ExtResource( 308 ), ExtResource( 309 ), ExtResource( 198 ), ExtResource( 199 ), ExtResource( 310 ), ExtResource( 424 ), ExtResource( 311 ) ],
