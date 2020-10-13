@@ -53,17 +53,6 @@ func _player_on_palm(player: Player) -> void:
 	if game_finished:
 		return
 	
-	var mark_for_removal = []
-	
-	for index in len(Global.players):
-		var other_player = Global.players[index]
-		
-		if player != other_player:
-			mark_for_removal.push_front(index)
-	
-	for index in mark_for_removal:
-		Global.players.remove(index)
-	
 	game_finished = true
 	
 	yield(timer(3.0), "timeout")
@@ -129,11 +118,17 @@ func _on_fall_to_death(body: Node) -> void:
 	if game_over:
 		return
 	
-	# To remain safe, the remaing one player can still trigger a game over
-	if game_finished and Global.players.find(body) == -1:
+	if battery_in_place and body.is_in_group("player"):
+		var store_index = Global.players.find(body)
+		
+		if store_index >= 0:
+			Global.players.remove(store_index)
+		
 		body.get_parent().remove_child(body)
 		body.queue_free()
-		return
+		
+		if len(Global.players) > 0:
+			return
 	
 	game_over = true
 	
@@ -144,7 +139,7 @@ func _on_fall_to_death(body: Node) -> void:
 	load_scene(get_parent().filename)
 
 func _process(delta):
-	if game_finished or not player_top or not player_bottom:
+	if not player_top or not player_bottom:
 		return
 	
 	var p1 = player_top.global_position

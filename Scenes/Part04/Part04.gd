@@ -117,7 +117,7 @@ func _on_scene_started() -> void:
 	Global.subtitle.say(tr("NARRATOR09"))
 
 func _on_player_on_train_top() -> void:
-	if first_on_top_called:
+	if first_on_top_called or player.dead:
 		return
 	
 	main_music.force_next(music_01)
