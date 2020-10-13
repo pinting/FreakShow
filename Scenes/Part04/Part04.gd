@@ -165,6 +165,7 @@ func _on_player_die() -> void:
 	move_with_fade(player, player_respawn.global_position)
 	
 	first_on_top_called = false
+	reached_end = false
 
 func _create_train() -> void:
 	var new_train = train_scene.instance()
