@@ -28,6 +28,7 @@ extents = Vector2( 13540.8, 1076.04 )
 [node name="Part05" type="Node2D"]
 
 [node name="BaseScene" parent="." instance=ExtResource( 5 )]
+position = Vector2( -1972.52, -1794.02 )
 script = ExtResource( 9 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
@@ -44,7 +45,7 @@ zoom = Vector2( 4.2, 4.2 )
 limit_left = -4870
 limit_right = 4870
 smoothing_enabled = false
-zoom_action = Vector2( 6, 6 )
+zoom_action = Vector2( 7.5, 7.5 )
 zoom_speed = 0.5
 
 [node name="PlayerTop" parent="BaseScene" instance=ExtResource( 4 )]

@@ -10,11 +10,13 @@ onready var top_empty_battery_station = $Environment/Top/Inside/EmptyBatteryStat
 onready var top_button = $Environment/Top/Inside/Button
 onready var top_hand = $Environment/Top/Hand
 onready var top_player_collision_right_shape = $Environment/Top/CollisionPlayer/Right
+onready var top_button_light = $Environment/Top/Inside/Button/Light
 
 onready var bottom_door = $Environment/Bottom/Door
 onready var bottom_button = $Environment/Bottom/Inside/Button
 onready var bottom_hand = $Environment/Bottom/Hand
 onready var bottom_player_collision_left_shape = $Environment/Bottom/CollisionPlayer/Left
+onready var bottom_button_light = $Environment/Bottom/Inside/Button/Light
 
 onready var end_camera = $Environment/End/Camera
 onready var end_animated_sprite = $Environment/End/AnimatedSprite
@@ -116,6 +118,8 @@ func _on_battery_inside() -> void:
 	
 	top_player_collision_right_shape.disabled = true
 	bottom_player_collision_left_shape.disabled = true
+	top_button_light.visible = true
+	bottom_button_light.visible = true
 
 func _on_scene_started() -> void:
 	pass
