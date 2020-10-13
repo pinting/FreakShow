@@ -36,7 +36,6 @@ fade_in_after = 5.0
 [node name="DefaultCamera" parent="BaseScene" instance=ExtResource( 7 )]
 position = Vector2( -1270.34, -60.2246 )
 scale = Vector2( 0.7, 0.7 )
-smoothing_enabled = false
 smoothing_speed = 0.75
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
@@ -49,7 +48,7 @@ layer = -90
 scale = Vector2( 1.26, 1.27 )
 z_index = -1
 frames = ExtResource( 1 )
-frame = 190
+frame = 172
 playing = true
 centered = false
 

@@ -9,6 +9,7 @@ BALL00,Beach ball,Strandlabda
 CLOTHES00,Pile of clothes,Halom ruha
 CRATE00,Crate,Láda
 BATTERY00,Battery,Akkumulátor
+BUKA00,Exhibition of Zsuzsa Buka,Buka Zsuzsa kiállítása
 CUP00,Beer jug,Söröskorsó
 FRUIT00,Unripe mango,Éretlen mangó
 PILLOW00,Dusty pillow,Poros párna
@@ -60,6 +61,7 @@ GRAFFITI07,STUPID RUSSIANS,HÜLYE OROSZOK
 GRAFFITI08,WELCOME ASSHOLES!,ÜDV GECZIK!
 GRAFFITI09,"DROG, SEX, HELL","DROG, SZEX, POKOL"
 GRAFFITI10,WHERE AM I,HOL VAGYOK
+GRAFFITI11,JUST STOP,CSAK ÁLLJ MEG
 NARRATOR00,It was near dawn when something woke me up.,"Már majdnem hajnalodott, amikor valami felébresztett."
 NARRATOR01,The corridor felt endless...,A folyosó végtelennek érződött...
 NARRATOR02,I finally reached the light. The wind blew the smell of piss and sweat into my nose.,Végül kiértem a fényre. A szél húgy- és izzadságszaggal mászott be az orromba.
@@ -67,10 +69,11 @@ NARRATOR03,People were crazy to sell their junk - you just had to name your pric
 NARRATOR04,"Come on, get the fuck away from here!","Gyerünk, menjünk már a faszba innen!"
 NARRATOR05,"Come a bit closer child. Let me have a look at you!","Gyere közelebb gyermekem. Hadd vegyelek szemügyre!"
 NARRATOR06,"Where could I have been? It was a strange place.","Hol lehettem? Furcsa egy hely volt."
-NARRATOR07,"I found the code for the door upstairs on a piece of paper.","Megtaláltam az emeleti ajtó kódját egy darab papíron."
-NARRATOR08,"Who I was at this point? It was hard to decide.","Ki voltam én ekkor tulajdonképpen? Nehéz volt eldönteni."
-NARRATOR09,"While I was on the top of the train, had to be really careful with the obstacles.","Amíg a vonat tetején voltam, nagyon vigyáznom kellett a kiálló akadályokkal."
-NARRATOR10,"A deep voice warned us. We had to choose! Only one could enter paradise!","Egy mély hang figyelmeztetett. Választunk kellett! Csak egy léphet be a paradicsomba!"
+NARRATOR07,"There was a large metal door asking for a code I did not know.","Volt ott egy nagy fém ajtó, mely egy kódot kérdezett, amit nem tudtam."
+NARRATOR08,"I found the code for the door on a piece of paper.","Megtaláltam az ajtó kódját egy darab papíron."
+NARRATOR09,"Who I was at this point? It was hard to decide.","Ki voltam én ekkor tulajdonképpen? Nehéz volt eldönteni."
+NARRATOR10,"While I was on the top of the train, had to be really careful with the obstacles.","Amíg a vonat tetején voltam, nagyon vigyáznom kellett a kiálló akadályokkal."
+NARRATOR11,"A deep voice warned us. We had to choose! Only one could enter paradise!","Egy mély hang figyelmeztetett. Választunk kellett! Csak egy léphet be a paradicsomba!"
 CREDITS05_0,"Special thanks to","Külön köszönet"
 CREDITS05_1,"Godot Engine team, Xavier Gómez Gosálbez, \nNathan Lovato, Jozsef Koller, Janos Bito","Godot Engine csapata, Xavier Gómez Gosálbez, \nNathan Lovato, Koller József, Bitó János"
 CREDITS04_0,"Visual contributions","Vizuális hozzájárulás"

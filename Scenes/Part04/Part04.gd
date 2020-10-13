@@ -3,7 +3,7 @@ extends BaseScene
 export var next_scene: String = "res://Scenes/Part05/Part05.tscn"
 export var tick_length_min: float = 10.0
 export var tick_length_max: float = 15.0
-export var number_of_pillars: int = 30
+export var number_of_pillars: int = 25
 export var width_between_pillars: float = 3000
 export var pillar_high_offset: float = -370
 export var pillar_low_offset: float = 335
@@ -114,7 +114,7 @@ func _on_scene_started() -> void:
 	else:
 		_create_train()
 	
-	Global.subtitle.say(tr("NARRATOR08"))
+	Global.subtitle.say(tr("NARRATOR09"))
 
 func _on_player_on_train_top() -> void:
 	if first_on_top_called:
@@ -122,7 +122,7 @@ func _on_player_on_train_top() -> void:
 	
 	main_music.force_next(music_01)
 	camera.zoom_action()
-	Global.subtitle.say(tr("NARRATOR09"))
+	Global.subtitle.say(tr("NARRATOR10"))
 	
 	first_on_top_called = true
 

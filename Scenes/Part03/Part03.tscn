@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Music/Part01.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/Part03/Part03_Ditch.tscn" type="PackedScene" id=2]
@@ -36,9 +36,6 @@ shader_param/scan_size = 2.0
 shader_param/scanline_alpha = 0.9
 shader_param/lines_velocity = 30.0
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 893.237, 301.698 )
-
 [node name="Part03" type="Node2D"]
 
 [node name="BaseScene" parent="." instance=ExtResource( 5 )]
@@ -52,6 +49,7 @@ scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
 [node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 9 )]
+smoothing_speed = 0.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )
@@ -98,15 +96,6 @@ position = Vector2( 4111.26, -575.879 )
 
 [node name="MaintenanceRoomSpawn" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( 4045.2, 1466.32 )
-
-[node name="NextLevelTrigger" type="Area2D" parent="BaseScene/Trigger"]
-position = Vector2( -970.773, -551.698 )
-collision_layer = 8
-collision_mask = 8
-
-[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/NextLevelTrigger"]
-position = Vector2( -1.3833, 66.4032 )
-shape = SubResource( 3 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
 

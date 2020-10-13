@@ -104,12 +104,12 @@ func _on_select(mouse_position) -> bool:
 func _input(event: InputEvent) -> void:
 	if not Global.disable_selectable and not disabled and event is InputEventMouseButton:
 		if held and not event.pressed:
-			held = event.pressed
+			held = false
 
 		var mouse_position = Global.get_world_mouse_position()
 		
-		if _on_select(mouse_position):
-			held = event.pressed
+		if _on_select(mouse_position) and event.pressed:
+			held = true
 			
 			emit_signal("selected")
 

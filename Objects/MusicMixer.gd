@@ -42,7 +42,7 @@ var forced_next: int = -1 # Index of the next part
 var mixing: bool = false
 var kill_timeout: float = 0.0
 var kill_counter: float = 0.0
-var kill: bool = false
+var do_kill: bool = false
 
 func _ready() -> void:
 	master_player = player_00
@@ -87,7 +87,7 @@ func add_part(start: float, end: float, loop: bool, in_duration: float, out_dura
 	return len(parts) - 1
 
 func kill(timeout: float = 5.0) -> void:
-	kill = true
+	do_kill = true
 	kill_timeout = timeout
 	kill_counter = timeout
 
@@ -113,7 +113,7 @@ func play() -> void:
 
 	kill_timeout = 0.0
 	kill_counter = 0.0
-	kill = false
+	do_kill = false
 
 func pause() -> void:
 	if stopped:
@@ -130,7 +130,7 @@ func resume() -> void:
 func get_next() -> int:
 	var current_part = parts[current_part_index]
 	
-	if kill:
+	if do_kill:
 		return -1
 	elif forced_next >= 0:
 		assert(len(parts) > forced_next)
@@ -182,7 +182,7 @@ func _process(delta: float) -> void:
 	var diff_to_end = current_part.end - virtual_position
 	
 	# If kill is set, start to act like diff_to_end is near
-	if kill:
+	if do_kill:
 		diff_to_end = kill_counter
 
 		# To everything work correctly, a fake current part is needed

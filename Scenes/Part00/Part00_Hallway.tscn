@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Surface/Wall00.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Building05_Bottom.png" type="Texture" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti16.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Part00/Part00_Hallway.gd" type="Script" id=11]
 [ext_resource path="res://Objects/Viewable/Viewable_StandCommunistPaper.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Static/Static_StopLamp.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Objects/Selectable/Selectable_JustStopGraffiti.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4722.81, 353.699 )
@@ -48,7 +50,7 @@ rotation = -0.147355
 
 [node name="Graffiti03" type="Sprite" parent="Inside"]
 self_modulate = Color( 1, 1, 1, 0.392157 )
-position = Vector2( 2965.38, -136.715 )
+position = Vector2( 3582.78, -130.193 )
 rotation = 0.291425
 scale = Vector2( 0.1604, 0.1604 )
 texture = ExtResource( 4 )
@@ -59,8 +61,10 @@ position = Vector2( -2797.77, -19.994 )
 scale = Vector2( 0.437502, 0.437502 )
 texture = ExtResource( 10 )
 
+[node name="Graffiti05" parent="Inside" instance=ExtResource( 14 )]
+
 [node name="Paper00" parent="Inside" instance=ExtResource( 12 )]
-position = Vector2( -951.909, -80.6403 )
+position = Vector2( 2061.49, -15.3505 )
 rotation = 0.0285267
 
 [node name="Door00" parent="Inside" instance=ExtResource( 5 )]
@@ -93,6 +97,25 @@ position = Vector2( 0.115723, 353.841 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 7530, 140 )
+
+[node name="StopLamp00" parent="Inside" instance=ExtResource( 13 )]
+visible = false
+position = Vector2( -3559.91, -143.054 )
+rotation = 0.000739249
+
+[node name="StopLamp01" parent="Inside" instance=ExtResource( 13 )]
+visible = false
+position = Vector2( -946.151, -143.499 )
+rotation = 0.0187291
+
+[node name="StopLamp02" parent="Inside" instance=ExtResource( 13 )]
+visible = false
+rotation = -0.0236613
+
+[node name="StopLamp03" parent="Inside" instance=ExtResource( 13 )]
+visible = false
+position = Vector2( 2638.75, -138.913 )
+rotation = 0.000739248
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
 position = Vector2( 0.784424, 219.525 )

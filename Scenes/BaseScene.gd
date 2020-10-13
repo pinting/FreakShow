@@ -2,7 +2,7 @@ class_name BaseScene
 extends Node2D
 
 # Game restart after this amount of seconds if player is idle
-export var game_restart_after: float = 120.0
+export var game_restart_after: float = 300.0
 
 # Time after the game fades in
 export var fade_in_after: float = 2.0

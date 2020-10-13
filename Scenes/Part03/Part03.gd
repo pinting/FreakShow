@@ -8,6 +8,7 @@ onready var player = $Player
 onready var camera = $Player/DefaultCamera
 onready var screen_effect = $ScreenEffect/ColorRect
 
+onready var keypad = $Environment/Ditch/Wall/Door00/Keypad
 onready var ditch_door = $Environment/Ditch/Wall/Door01
 onready var maintenance_room_door = $Environment/MaintenanceRoom/Door00
 onready var empty_battery_station = $Environment/MaintenanceRoom/EmptyBatteryStation
@@ -25,6 +26,8 @@ onready var door_open_sound = $Sound/DoorOpenSound
 
 var player_animation_frames_base: SpriteFrames
 var ending_open: bool = false
+var code_help_said: bool = false
+var ending_triggered: bool = false
 var enable_next_level_effect: bool = false
 var next_level_effect_state: bool = false
 var next_level_effect_counter: float = 0.0
@@ -51,19 +54,30 @@ func _ready() -> void:
 	maintenance_room_door.connect("selected", self, "_on_maintenance_room_door_select")
 	empty_battery_station.connect("battery_inside", self, "_on_battery_in_place")
 	paper_with_code.connect("selected", self, "_unlock_ending")
-	next_level_trigger.connect("body_entered", self, "_next_level_triggered")
+	keypad.connect("selected", self, "_keypad_selected")
 	
 	main_music.play()
 	
 	if not disable_movement_delay:
-		player.freeze(true)
+		camera.smoothing_enabled = true
 		player.visible = false
+		
+		player.freeze(true)
 	
 	_hide_papers_visibility(false)
 
-func _next_level_triggered(player: Node) -> void:
-	if not ending_open or not player.is_in_group("player"):
+func _keypad_selected() -> void:
+	if not ending_open:
+		if not code_help_said:
+			Global.subtitle.say(tr("NARRATOR07"))
+			code_help_said = true
+		
 		return
+	
+	if ending_triggered:
+		return
+	
+	ending_triggered = true
 	
 	next_level_music.play()
 	
@@ -117,11 +131,17 @@ func _hide_papers_visibility(visible: bool) -> void:
 func _on_scene_started() -> void:
 	if not disable_movement_delay:
 		yield(timer(4.5), "timeout")
+		Global.subtitle.say(tr("NARRATOR06"))
 		
 		player.visible = true
 		
-		Global.subtitle.say(tr("NARRATOR06"))
-		yield(timer(4.5), "timeout")
+		yield(timer(3.5), "timeout")
+		
+		for n in range(4):
+			camera.smoothing_speed += 0.5
+			yield(timer(0.5), "timeout")
+		
+		camera.smoothing_enabled = false
 		
 		player.unfreeze()
 
@@ -136,6 +156,6 @@ func _on_battery_in_place() -> void:
 	train_platform.open()
 
 func _unlock_ending() -> void:
-	Global.subtitle.say(tr("NARRATOR07"))
+	Global.subtitle.say(tr("NARRATOR08"))
 
 	ending_open = true

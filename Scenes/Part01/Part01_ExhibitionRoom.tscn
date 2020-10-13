@@ -61,7 +61,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 7940, 400 )
 
 [node name="Pillar00" type="Sprite" parent="Wall/Floor"]
-position = Vector2( -3635.56, -430.183 )
+position = Vector2( -2995.56, -430.181 )
 rotation = 1.5708
 z_index = 2
 texture = ExtResource( 1 )
@@ -87,12 +87,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1260, 120 )
 
 [node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar00/Pillar/Pillar/Pillar"]
-position = Vector2( 0, -640 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 1260, 120 )
-
-[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar00/Pillar/Pillar/Pillar/Pillar"]
 position = Vector2( 0, -640 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -125,12 +119,6 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1260, 120 )
 
 [node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar01/Pillar/Pillar/Pillar"]
-position = Vector2( 0, -640 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 1260, 120 )
-
-[node name="Pillar" type="Sprite" parent="Wall/Floor/Pillar01/Pillar/Pillar/Pillar/Pillar"]
 position = Vector2( 0, -640 )
 texture = ExtResource( 1 )
 region_enabled = true
@@ -181,16 +169,12 @@ position = Vector2( -772.929, 0.673454 )
 [node name="Buka07" parent="." instance=ExtResource( 16 )]
 position = Vector2( 2678.38, 0.774475 )
 
-[node name="LampBroken" parent="." instance=ExtResource( 11 )]
-position = Vector2( -3326.16, -341.021 )
-scale = Vector2( 0.4, 1.3 )
-
 [node name="Lamp00" parent="." instance=ExtResource( 11 )]
 position = Vector2( -2678.72, -341.021 )
 scale = Vector2( 0.4, 1.3 )
 
-[node name="Lamp01" parent="." instance=ExtResource( 11 )]
-position = Vector2( -2019.66, -341.021 )
+[node name="LampBroken" parent="." instance=ExtResource( 11 )]
+position = Vector2( -2024.67, -341.021 )
 scale = Vector2( 0.4, 1.3 )
 
 [node name="Lamp02" parent="." instance=ExtResource( 11 )]
@@ -217,10 +201,6 @@ scale = Vector2( 0.4, 1.3 )
 position = Vector2( 2682.01, -340.021 )
 scale = Vector2( 0.4, 1.3 )
 
-[node name="Lamp08" parent="." instance=ExtResource( 11 )]
-position = Vector2( 3361.39, -340.021 )
-scale = Vector2( 0.4, 1.3 )
-
 [node name="DoorBackground" type="Sprite" parent="."]
 position = Vector2( 0, 113.428 )
 scale = Vector2( 1.25, 1 )
@@ -242,7 +222,12 @@ secondary_key = "glow_amount"
 secondary_hover = 0.5
 clone_material = true
 
-[node name="Sign" type="Sprite" parent="."]
-position = Vector2( 2.04898, -298.371 )
-scale = Vector2( 0.33, 0.33 )
+[node name="Sign" type="Sprite" parent="." groups=[
+"selectable",
+]]
+position = Vector2( -7.23147, -322.18 )
+rotation = -0.0474959
+scale = Vector2( 0.524859, 0.524858 )
 texture = ExtResource( 14 )
+script = ExtResource( 10 )
+description = "BUKA00"

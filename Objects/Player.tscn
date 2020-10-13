@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Objects/Player.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Environmnent/FastWalkIcon.png" type="Texture" id=3]
 [ext_resource path="res://Objects/Effect/Effect_SalamiDeath.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Effect/Effect_Transforming.tscn" type="PackedScene" id=6]
 
@@ -23,7 +24,7 @@ light_mask = 1025
 material = SubResource( 1 )
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-frame = 22
+frame = 58
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
@@ -71,3 +72,11 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape2D" parent="KickArea"]
 position = Vector2( 8.37866, 322.583 )
 shape = SubResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FastWalkIcon" type="Sprite" parent="CanvasLayer"]
+visible = false
+position = Vector2( 925, 505 )
+scale = Vector2( 0.33, 0.33 )
+texture = ExtResource( 3 )

@@ -9,9 +9,15 @@ onready var hallway_door_05 = $Inside/Door05
 onready var hallway_door_06 = $Inside/Door06
 onready var hallway_door_07 = $Inside/Door07
 
+onready var hallway_lamp_00 = $Inside/StopLamp00
+onready var hallway_lamp_01 = $Inside/StopLamp01
+onready var hallway_lamp_02 = $Inside/StopLamp02
+onready var hallway_lamp_03 = $Inside/StopLamp03
+
 signal door_selected
 
 var doors
+var lamps
 
 func _ready() -> void:
 	doors = [
@@ -23,6 +29,13 @@ func _ready() -> void:
 		hallway_door_05,
 		hallway_door_06,
 		hallway_door_07
+	]
+	
+	lamps = [
+		hallway_lamp_00,
+		hallway_lamp_01,
+		hallway_lamp_02,
+		hallway_lamp_03
 	]
 	
 	for i in range(len(doors)):

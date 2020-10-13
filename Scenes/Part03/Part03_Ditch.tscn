@@ -18,14 +18,14 @@
 [ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall04.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=18]
-[ext_resource path="res://Objects/Viewable/Viewable_Keypad.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Objects/Selectable/Selectable_Keypad.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Objects/Static/Static_MineLamp.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7190.48, 76.856 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 750.744, 1372.97 )
 
 [node name="Part03_Ditch" type="Node2D"]
@@ -170,7 +170,6 @@ color = Color( 0.658824, 0.231373, 0.231373, 1 )
 range_item_cull_mask = 4
 
 [node name="Keypad" parent="Wall/Door00" instance=ExtResource( 19 )]
-light_mask = 4
 
 [node name="Graffiti" parent="Wall/Door00" instance=ExtResource( 10 )]
 
@@ -185,7 +184,7 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/WallLeft"]
 position = Vector2( -0.369629, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="WallRight" type="StaticBody2D" parent="Wall"]
 position = Vector2( 4462.98, 175.644 )
@@ -195,4 +194,4 @@ collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/WallRight"]
 position = Vector2( -0.369629, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )

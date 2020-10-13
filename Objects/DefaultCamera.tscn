@@ -5,6 +5,4 @@
 [node name="DefaultCamera" type="Camera2D"]
 current = true
 zoom = Vector2( 3, 3 )
-smoothing_enabled = true
-smoothing_speed = 0.5
 script = ExtResource( 1 )

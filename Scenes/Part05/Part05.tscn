@@ -28,7 +28,6 @@ extents = Vector2( 13540.8, 1076.04 )
 [node name="Part05" type="Node2D"]
 
 [node name="BaseScene" parent="." instance=ExtResource( 5 )]
-position = Vector2( -1972.52, -1794.02 )
 script = ExtResource( 9 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
@@ -36,20 +35,20 @@ environment = SubResource( 1 )
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
+position = Vector2( -1972.52, -1794.02 )
 color = Color( 0.352941, 0.352941, 0.352941, 1 )
 
 [node name="DefaultCamera" parent="BaseScene" instance=ExtResource( 3 )]
-position = Vector2( 1950.07, 1764.38 )
+position = Vector2( -22.4501, -29.64 )
 scale = Vector2( 0.7, -0.7 )
 zoom = Vector2( 4.2, 4.2 )
 limit_left = -4870
 limit_right = 4870
-smoothing_enabled = false
 zoom_action = Vector2( 7.5, 7.5 )
 zoom_speed = 0.5
 
 [node name="PlayerTop" parent="BaseScene" instance=ExtResource( 4 )]
-position = Vector2( 511.581, 1381.07 )
+position = Vector2( -1460, -412.95 )
 scale = Vector2( 0.665, 0.665 )
 z_index = 2
 animation_frames = ExtResource( 13 )
@@ -60,7 +59,7 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 11 )
 
 [node name="PlayerBottom" parent="BaseScene" instance=ExtResource( 4 )]
-position = Vector2( 3483.27, 2367.87 )
+position = Vector2( 1460, 573.85 )
 rotation = 3.14159
 scale = Vector2( 0.665, -0.665 )
 z_index = 2
@@ -75,7 +74,7 @@ range_item_cull_mask = 1024
 [node name="ScreenEffect" type="CanvasLayer" parent="BaseScene"]
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
-position = Vector2( 2224.27, 2283.48 )
+position = Vector2( 251.75, 489.46 )
 scale = Vector2( 0.95, 0.95 )
 
 [node name="End" parent="BaseScene/Environment" instance=ExtResource( 40 )]
@@ -85,7 +84,7 @@ scale = Vector2( 0.95, 0.95 )
 [node name="Bottom" parent="BaseScene/Environment" instance=ExtResource( 2 )]
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
-position = Vector2( 2224.27, 2283.48 )
+position = Vector2( 251.75, 489.46 )
 
 [node name="FallToDeath" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 0, 3892.17 )

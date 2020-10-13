@@ -6,6 +6,7 @@ export var hallway_open_exit_after: float = 20.0
 export var hallway_waiting_music_after: float = 5.0
 export var hallway_camera_shake_after: float = 10.0
 export var max_position_diff_to_wait: float = 100.0
+export var show_red_stop_lamps_from: int = 3
 
 onready var player = $Player
 onready var camera = $Player/DefaultCamera
@@ -31,6 +32,10 @@ onready var silent_door_open_sound = $Sound/SilentDoorOpenSound
 
 const random_flat_scene = preload("res://Scenes/Part00/Part00_RandomFlat.tscn")
 
+var number_of_hallway_enters: int = 0
+var player_in_hallway: bool = false
+var previous_player_hallway_position: float = 0.0
+var hallway_wait_counter: float = 0.0
 var hallway_help_complete: bool = false
 var hallway_exit_enabled: bool = false
 var hallway_exit_open: bool = false
@@ -66,6 +71,20 @@ func _on_scene_started() -> void:
 
 func _on_flat_exit_select():
 	player_in_hallway = true
+	number_of_hallway_enters += 1
+	
+	var lamps_to_show = len(hallway_00.lamps)
+	
+	if number_of_hallway_enters > show_red_stop_lamps_from and lamps_to_show > 0:
+		var index = Global.random_generator.randi_range(0, lamps_to_show - 1)
+		
+		hallway_00.lamps[index].visible = true
+		hallway_01.lamps[index].visible = true
+		hallway_02.lamps[index].visible = true
+		
+		hallway_00.lamps.remove(index)
+		hallway_01.lamps.remove(index)
+		hallway_02.lamps.remove(index)
 	
 	move_with_fade(player, hallway_spawn.position, door_open_sound)
 
@@ -99,7 +118,7 @@ func _on_hallway_door_select(door, index) -> void:
 			load_scene(next_scene)
 	else:
 		for child in random_flat_container.get_children():
-			remove_child(child)
+			random_flat_container.remove_child(child)
 			child.queue_free()
 		
 		var random_flat_instance = random_flat_scene.instance()
@@ -113,10 +132,6 @@ func _on_hallway_door_select(door, index) -> void:
 		
 		# Can only exit the hallway after looked into another room
 		hallway_exit_enabled = true
-
-var player_in_hallway: bool = false
-var previous_player_hallway_position: float = 0.0
-var hallway_wait_counter: float = 0.0
 
 func _reset_hallway_wait() -> void:
 	if not waiting_music.stopped:

@@ -85,6 +85,8 @@ onready var animated_sprite = $AnimatedSprite
 onready var kick_area = $KickArea
 onready var kick_area_collision_shape = $KickArea/CollisionShape
 
+onready var fast_walk_icon = $CanvasLayer/FastWalkIcon
+
 signal reseted
 signal died
 
@@ -329,6 +331,8 @@ func _process_fast_walk() -> void:
 	
 	current_max_speed = speed_mod * max_speed
 	current_animation_speed = speed_mod * animation_speed
+	
+	fast_walk_icon.visible = fast_walking
 
 func _process_animation(direction: Vector2) -> void:
 	var next_animation = _get_next_animation(direction)

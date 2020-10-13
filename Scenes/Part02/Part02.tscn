@@ -146,7 +146,6 @@ avatar_acceleration = 2000.0
 [node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 23 )]
 position = Vector2( 6.06445, -312.324 )
 zoom = Vector2( 5, 5 )
-smoothing_enabled = false
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 0

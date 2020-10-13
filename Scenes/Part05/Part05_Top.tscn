@@ -131,7 +131,7 @@ position = Vector2( 1299.97, -47.1997 )
 shape = SubResource( 5 )
 
 [node name="Hand" parent="." instance=ExtResource( 13 )]
-position = Vector2( 2328.03, 585.586 )
+position = Vector2( 2370.93, 585.586 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
 z_index = 1

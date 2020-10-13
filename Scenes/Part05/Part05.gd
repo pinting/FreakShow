@@ -1,6 +1,7 @@
 extends "res://Scenes/BaseScene.gd"
 
 export var next_scene: String = "res://Scenes/Credits.tscn"
+export var player_sync_fix_max_diff: float = 10.0
 
 onready var player_top = $PlayerTop
 onready var player_bottom = $PlayerBottom
@@ -114,7 +115,7 @@ func _on_battery_inside() -> void:
 	yield(timer(2.0), "timeout")
 	
 	camera.zoom_action()
-	Global.subtitle.say(tr("NARRATOR10"))
+	Global.subtitle.say(tr("NARRATOR11"))
 	
 	top_player_collision_right_shape.disabled = true
 	bottom_player_collision_left_shape.disabled = true
@@ -141,3 +142,18 @@ func _on_fall_to_death(body: Node) -> void:
 	yield(timer(2.0), "timeout")
 	
 	load_scene(get_parent().filename)
+
+func _process(delta):
+	if game_finished or not player_top or not player_bottom:
+		return
+	
+	var p1 = player_top.global_position
+	var p2 = player_bottom.global_position
+	
+	var diff = abs(abs(p1.x) - abs(p2.x))
+	
+	if diff > player_sync_fix_max_diff:
+		var avg = (abs(p1.x) + abs(p2.x)) / 2
+		
+		player_top.global_position.x = avg * (p1.x / abs(p1.x))
+		player_bottom.global_position.x = avg * (p2.x / abs(p2.x))
