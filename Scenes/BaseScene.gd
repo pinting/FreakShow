@@ -57,7 +57,9 @@ func _input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseButton:
 		if held_object and not event.pressed:
-			held_object.drop(Input.get_last_mouse_speed())
+			if is_instance_valid(held_object):
+				held_object.drop(Input.get_last_mouse_speed())
+			
 			held_object = null
 
 func _process(delta: float) -> void:

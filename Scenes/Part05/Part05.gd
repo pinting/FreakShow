@@ -146,7 +146,7 @@ func _on_fall_to_death(body: Node) -> void:
 	load_scene(get_parent().filename)
 
 func _process(delta):
-	if not player_top or not player_bottom:
+	if not is_instance_valid(player_top) or not is_instance_valid(player_bottom):
 		return
 	
 	var p1 = player_top.global_position
