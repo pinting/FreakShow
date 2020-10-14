@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Pussy00.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Part05/Part05_Pussy.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Environmnent/Pussy00_Filled.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 147.48
+
+[node name="Part05_Pussy" type="Sprite" groups=[
+"selectable",
+]]
+light_mask = 513
+position = Vector2( 29.5511, -169.761 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+description = "PUSSY00"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -3.50455 )
+shape = SubResource( 1 )
+disabled = true
+
+[node name="Filled" type="Sprite" parent="."]
+visible = false
+light_mask = 513
+texture = ExtResource( 3 )
+
+[node name="Light" type="Light2D" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+range_item_cull_mask = 512

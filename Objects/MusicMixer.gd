@@ -5,7 +5,7 @@ extends Node
 export var stream: AudioStream
 
 # Should the whole thing repeat
-export var loop: bool = false
+export var global_loop: bool = false
 
 # If auto play
 export var autoplay: bool = false
@@ -139,7 +139,7 @@ func get_next() -> int:
 		return current_part_index
 	elif len(parts) > current_part_index + 1:
 		return current_part_index + 1
-	elif loop:
+	elif global_loop:
 		return 0
 	else:
 		return -1

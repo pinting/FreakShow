@@ -10,6 +10,7 @@ CLOTHES00,Pile of clothes,Halom ruha
 CRATE00,Crate,Láda
 BATTERY00,Battery,Akkumulátor
 BUKA00,Exhibition of Zsuzsa Buka,Buka Zsuzsa kiállítása
+DILDO00,Purple dildo,Purple dildo
 CUP00,Beer jug,Söröskorsó
 FRUIT00,Unripe mango,Éretlen mangó
 PILLOW00,Dusty pillow,Poros párna
@@ -42,7 +43,9 @@ LETTER03,"He would have slapped me but the red light forced him to stay.","Megpo
 LETTER04,"A lonely dot in the center of four corners; time keeps passing but you remain still.","Egy pont négy sarok között; az idő halad, te meg maradsz."
 CAN00,Turkish coffee,Török kávé
 MISC00,Mask from Dieng,Maszk Diengből
-MISC01,Rug from the Bantul night market,Szőnyeg a bantuli piacról
+RUG00,Rug from the Bantul night market,Szőnyeg a bantuli piacról
+RUG01,An old rug,Egy régi szőnyeg
+PUSSY00,"Pussy to fuck","Baszni való pina"
 SIGN00,Food,Élelmiszer
 SIGN01,HAPPY COMPANY,BOLDOG KFT.
 SIGN02,ATTENTION! NO TRESPASSING!,ÉLETVESZÉLY! BELÉPNI TILOS!

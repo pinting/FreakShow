@@ -7,7 +7,8 @@ onready var player_top = $PlayerTop
 onready var player_bottom = $PlayerBottom
 onready var camera = $DefaultCamera
 
-onready var top_empty_battery_station = $Environment/Top/Inside/EmptyBatteryStation
+onready var top_rug = $Environment/Top/Inside/Rug
+onready var top_pussy = $Environment/Top/Inside/Pussy
 onready var top_button = $Environment/Top/Inside/Button
 onready var top_hand = $Environment/Top/Hand
 onready var top_player_collision_right_shape = $Environment/Top/CollisionPlayer/Right
@@ -28,7 +29,7 @@ onready var fall_to_death = $Trigger/FallToDeath
 onready var main_music = $Sound/MainMusic
 onready var not_close_enough_sound = $Sound/NotCloseEnoughSound
 
-var battery_in_place = false
+var dildo_in_place = false
 var game_over = false
 var game_finished = false
 
@@ -40,14 +41,20 @@ func _ready() -> void:
 	music_01 = main_music.add_part(15, 60 + 21, true, 0.5, 0.5, -1)
 	
 	connect("scene_started", self, "_on_scene_started")
-	top_empty_battery_station.connect("battery_inside", self, "_on_battery_inside")
+	top_pussy.connect("dildo_inside", self, "_on_dildo_inside")
 	bottom_button.connect("selected", self, "_on_bottom_button_selected")
 	top_button.connect("selected", self, "_on_top_button_selected")
 	bottom_hand.connect("player_on_palm", self, "_player_on_palm")
 	top_hand.connect("player_on_palm", self, "_player_on_palm")
 	fall_to_death.connect("body_entered", self, "_on_fall_to_death")
+	top_rug.connect("selected", self, "_remove_rug")
 	
 	main_music.play()
+
+func _remove_rug() -> void:
+	top_rug.get_parent().remove_child(top_rug)
+	top_rug.queue_free()
+	top_pussy.enable()
 
 func _player_on_palm(player: Player) -> void:
 	if game_finished:
@@ -77,7 +84,7 @@ func _player_on_palm(player: Player) -> void:
 	load_scene(next_scene)
 
 func _on_bottom_button_selected() -> void:
-	if not battery_in_place:
+	if not dildo_in_place:
 		not_close_enough_sound.play()
 		return
 	
@@ -87,7 +94,7 @@ func _on_bottom_button_selected() -> void:
 	bottom_hand.open()
 
 func _on_top_button_selected() -> void:
-	if not battery_in_place:
+	if not dildo_in_place:
 		not_close_enough_sound.play()
 		return
 	
@@ -96,8 +103,8 @@ func _on_top_button_selected() -> void:
 	
 	top_hand.open()
 
-func _on_battery_inside() -> void:
-	battery_in_place = true
+func _on_dildo_inside() -> void:
+	dildo_in_place = true
 	
 	bottom_door.open()
 	
@@ -118,7 +125,7 @@ func _on_fall_to_death(body: Node) -> void:
 	if game_over:
 		return
 	
-	if battery_in_place and body.is_in_group("player"):
+	if dildo_in_place and body.is_in_group("player"):
 		var store_index = Global.players.find(body)
 		
 		if store_index >= 0:

@@ -1,15 +1,14 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Part05/Part05_Pussy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Selectable/Selectable_BearRug.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Environmnent/Misc15.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Environmnent/Misc16.png" type="Texture" id=8]
 [ext_resource path="res://Shaders/Club.shader" type="Shader" id=10]
 [ext_resource path="res://Scenes/Part05/Part05_Hand.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Objects/Viewable/Viewable_Pajtas04.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Objects/Selectable/Selectable_Button.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall11.png" type="Texture" id=18]
-[ext_resource path="res://Scenes/Part03/Part03_EmptyBatteryStation.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Objects/Viewable/Viewable_Pajtas00.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Objects/Viewable/Viewable_Pajtas01.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Objects/Viewable/Viewable_Pajtas02.tscn" type="PackedScene" id=26]
@@ -73,14 +72,6 @@ region_rect = Rect2( 0, 0, 4000, 140 )
 
 [node name="Pajtas07" parent="Inside" instance=ExtResource( 29 )]
 
-[node name="EmptyBatteryStation" parent="Inside" instance=ExtResource( 23 )]
-position = Vector2( -114.421, 220.689 )
-
-[node name="FullBatteryStation" type="Sprite" parent="Inside"]
-position = Vector2( 130.525, 220.689 )
-scale = Vector2( 0.7, 0.7 )
-texture = ExtResource( 8 )
-
 [node name="Button" parent="Inside" instance=ExtResource( 17 )]
 light_mask = -2147483135
 
@@ -91,9 +82,12 @@ scale = Vector2( 0.383806, 0.383806 )
 texture = ExtResource( 1 )
 range_item_cull_mask = 512
 
-[node name="Rug" type="Sprite" parent="Inside"]
-position = Vector2( 10.3159, -187.351 )
-texture = ExtResource( 5 )
+[node name="Pussy" parent="Inside" instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 29.5511, -53.1812 )
+
+[node name="Rug" parent="Inside" instance=ExtResource( 3 )]
+position = Vector2( 10.3159, -70.7712 )
 
 [node name="CollisionBack" type="StaticBody2D" parent="."]
 position = Vector2( 190.474, 63.1156 )
