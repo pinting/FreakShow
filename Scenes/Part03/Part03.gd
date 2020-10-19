@@ -5,7 +5,7 @@ export var disable_movement_delay: bool = false
 export var player_animation_frames_flash: SpriteFrames
 
 onready var player = $Player
-onready var camera = $Player/DefaultCamera
+onready var camera = $Player/GameCamera
 onready var screen_effect = $ScreenEffect/ColorRect
 
 onready var keypad = $Environment/Ditch/Wall/Door00/Keypad
@@ -69,7 +69,7 @@ func _ready() -> void:
 func _keypad_selected() -> void:
 	if not ending_open:
 		if not code_help_said:
-			Global.subtitle.say(tr("NARRATOR07"))
+			Game.subtitle.say(tr("NARRATOR07"))
 			code_help_said = true
 		
 		return
@@ -81,7 +81,7 @@ func _keypad_selected() -> void:
 	
 	next_level_music.play()
 	
-	Global.disable_selectable = true
+	Game.disable_selectable = true
 	enable_next_level_effect = true
 	
 	yield(timer(5.0), "timeout")
@@ -92,7 +92,7 @@ func _keypad_selected() -> void:
 	fade_out(2.0)
 	yield(timer(2.0), "timeout")
 	
-	Global.disable_selectable = false
+	Game.disable_selectable = false
 	load_scene(next_scene)
 
 func _process_next_level_effect(delta: float) -> void:
@@ -102,7 +102,7 @@ func _process_next_level_effect(delta: float) -> void:
 	next_level_effect_counter += delta
 	
 	if next_level_effect_counter > next_level_effect_interval:
-		camera.shake = pow(2.0 * abs(sin(current_second)) + 1.0, Global.random_generator.randf_range(1.0, 2.0))
+		camera.shake = pow(2.0 * abs(sin(current_second)) + 1.0, Game.random_generator.randf_range(1.0, 2.0))
 		
 		screen_effect.modulate.a = min(1.0, screen_effect.modulate.a + delta)
 		screen_effect.material.set_shader_param("barrel_power", min(2.2, next_level_effect_barrel_power + delta))
@@ -119,7 +119,7 @@ func _process_next_level_effect(delta: float) -> void:
 		next_level_effect_interval /= 1.5
 
 func _process(delta: float) -> void:
-	if Global.loader:
+	if Game.loader:
 		return
 	
 	_process_next_level_effect(delta)
@@ -131,7 +131,7 @@ func _hide_papers_visibility(visible: bool) -> void:
 func _on_scene_started() -> void:
 	if not disable_movement_delay:
 		yield(timer(4.5), "timeout")
-		Global.subtitle.say(tr("NARRATOR06"))
+		Game.subtitle.say(tr("NARRATOR06"))
 		
 		player.visible = true
 		
@@ -156,6 +156,6 @@ func _on_battery_in_place() -> void:
 	train_platform.open()
 
 func _unlock_ending() -> void:
-	Global.subtitle.say(tr("NARRATOR08"))
+	Game.subtitle.say(tr("NARRATOR08"))
 
 	ending_open = true

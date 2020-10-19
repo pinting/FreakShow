@@ -9,9 +9,7 @@
 shader = ExtResource( 3 )
 shader_param/keep_size = true
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.0
-shader_param/glow_radius = 10.0
-shader_param/glow_amount = 0.0
+shader_param/scale = 0.0
 
 [node name="Pickable_Battery" type="RigidBody2D" groups=[
 "battery",
@@ -35,11 +33,9 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 description = "BATTERY00"
 offset_key = "offset"
-primary_key = "grab_amount"
-primary_hover = 1.1
-primary_default = 1.0
-secondary_key = "glow_amount"
-secondary_hover = 0.5
+effect_key = "scale"
+effect_hover = 1.0
+effect_default = 0.0
 clone_material = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

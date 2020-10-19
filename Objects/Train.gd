@@ -108,7 +108,7 @@ func pause() -> void:
 		audio_stream_02.stop()
 
 func _generate_pitch_scale():
-	return Global.random_generator.randf_range(1.0 - max_pitch_diff, 1.0 + max_pitch_diff)
+	return Game.random_generator.randf_range(1.0 - max_pitch_diff, 1.0 + max_pitch_diff)
 
 func resume() -> void:
 	if not visible:
@@ -204,7 +204,7 @@ func _process_player_on_top(delta: float) -> void:
 		var player = enter_list_player[index]
 		var speed_scale = enter_list_speed_scale[index]
 
-		if not player or player.dead or Global.loader:
+		if not player or player.dead or Game.loader:
 			exit_list_player.push_back(player)
 			exit_list_skip_stick.push_back(false)
 			continue
@@ -228,7 +228,7 @@ func _process_fade_in(delta: float) -> void:
 func _process_recycle() -> void:
 	var source_position = base_position
 	
-	for player in Global.players:
+	for player in Game.players:
 		source_position = player.global_position
 		break
 	
@@ -237,7 +237,7 @@ func _process_recycle() -> void:
 		destroy()
 
 func _process(delta: float) -> void:
-	if not started or Global.loader:
+	if not started or Game.loader:
 		return
 	
 	current_second += delta

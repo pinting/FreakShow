@@ -3,7 +3,8 @@
 [ext_resource path="res://Animations/Fog00.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scenes/Credits.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=7]
+
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -28,7 +29,7 @@ font_data = SubResource( 2 )
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
 
-[node name="DefaultCamera" parent="BaseScene" instance=ExtResource( 7 )]
+[node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
 scale = Vector2( 0.7, 0.7 )
 smoothing_enabled = false
 smoothing_speed = 0.75

@@ -18,19 +18,19 @@
 [ext_resource path="res://Objects/Selectable/Selectable_Button.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall01.png" type="Texture" id=28]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1792.48, 40.5972 )
+
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1792.48, 40.5972 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 1792.48, 40.5972 )
-
-[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 38.8239, 496.48 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 46.1909, 496.48 )
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 9 )
 shader_param/time_offset = 40000.0
 
@@ -100,7 +100,7 @@ texture = ExtResource( 5 )
 
 [node name="Button" parent="Inside" instance=ExtResource( 24 )]
 light_mask = 1536
-position = Vector2( -876.211, 45.6472 )
+position = Vector2( -1037.31, 45.6472 )
 
 [node name="Light" type="Light2D" parent="Inside/Button"]
 visible = false
@@ -116,7 +116,7 @@ collision_mask = 4
 
 [node name="Bottom" type="CollisionShape2D" parent="CollisionBack"]
 position = Vector2( -444.34, 385.087 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
 position = Vector2( 190.244, 40.8777 )
@@ -125,11 +125,11 @@ collision_mask = 15
 
 [node name="Top" type="CollisionShape2D" parent="CollisionAll"]
 position = Vector2( -449.482, -572.526 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Bottom" type="CollisionShape2D" parent="CollisionAll"]
 position = Vector2( -444.34, 448.629 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CollisionPlayer" type="StaticBody2D" parent="."]
 position = Vector2( 190.244, 40.8777 )
@@ -138,11 +138,11 @@ collision_mask = 8
 
 [node name="Left" type="CollisionShape2D" parent="CollisionPlayer"]
 position = Vector2( -2197.72, -47.1997 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Right" type="CollisionShape2D" parent="CollisionPlayer"]
 position = Vector2( 1296.81, -48.0117 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Door" parent="." instance=ExtResource( 11 )]
 light_mask = 2
@@ -160,7 +160,7 @@ speed = Vector2( 500, 0 )
 [node name="Effect" type="ColorRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.588235 )
 light_mask = 1024
-material = SubResource( 6 )
+material = SubResource( 5 )
 margin_left = 1534.0
 margin_top = -503.0
 margin_right = 5114.0

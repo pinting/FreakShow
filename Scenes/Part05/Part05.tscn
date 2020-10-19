@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scenes/Part05/Part05_Bottom.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Part05/Part05_Top.tscn" type="PackedScene" id=6]
@@ -30,15 +30,7 @@ extents = Vector2( 13540.8, 1076.04 )
 [node name="BaseScene" parent="." instance=ExtResource( 5 )]
 script = ExtResource( 9 )
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
-environment = SubResource( 1 )
-
-[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
-light_mask = 524288
-position = Vector2( -1972.52, -1794.02 )
-color = Color( 0.352941, 0.352941, 0.352941, 1 )
-
-[node name="DefaultCamera" parent="BaseScene" instance=ExtResource( 3 )]
+[node name="GameCamera" parent="BaseScene" instance=ExtResource( 3 )]
 position = Vector2( -22.4501, -29.64 )
 scale = Vector2( 0.7, -0.7 )
 zoom = Vector2( 4.2, 4.2 )
@@ -57,6 +49,8 @@ sync_player = true
 [node name="AroundLight" type="Light2D" parent="BaseScene/PlayerTop"]
 scale = Vector2( 4, 4 )
 texture = ExtResource( 11 )
+energy = 1.25
+mode = 2
 
 [node name="PlayerBottom" parent="BaseScene" instance=ExtResource( 4 )]
 position = Vector2( 1460, 573.85 )
@@ -69,7 +63,17 @@ scale_velocity = Vector2( -1, 1 )
 [node name="AroundLight" type="Light2D" parent="BaseScene/PlayerBottom"]
 scale = Vector2( 4, 4 )
 texture = ExtResource( 11 )
+energy = 1.25
+mode = 2
 range_item_cull_mask = 1024
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
+environment = SubResource( 1 )
+
+[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
+light_mask = 524288
+position = Vector2( -1972.52, -1794.02 )
+color = Color( 0.352941, 0.352941, 0.352941, 1 )
 
 [node name="ScreenEffect" type="CanvasLayer" parent="BaseScene"]
 

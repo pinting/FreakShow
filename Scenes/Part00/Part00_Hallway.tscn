@@ -99,21 +99,17 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 7530, 140 )
 
 [node name="StopLamp00" parent="Inside" instance=ExtResource( 13 )]
-visible = false
 position = Vector2( -3559.91, -143.054 )
 rotation = 0.000739249
 
 [node name="StopLamp01" parent="Inside" instance=ExtResource( 13 )]
-visible = false
 position = Vector2( -946.151, -143.499 )
 rotation = 0.0187291
 
 [node name="StopLamp02" parent="Inside" instance=ExtResource( 13 )]
-visible = false
 rotation = -0.0236613
 
 [node name="StopLamp03" parent="Inside" instance=ExtResource( 13 )]
-visible = false
 position = Vector2( 2638.75, -138.913 )
 rotation = 0.000739248
 

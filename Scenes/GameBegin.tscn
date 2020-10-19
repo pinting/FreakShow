@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/Environmnent/Help01.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/GameBegin_Decoration.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objects/ColorChanger.gd" type="Script" id=8]
 
 [sub_resource type="Environment" id=1]
@@ -33,7 +33,7 @@ font_data = SubResource( 2 )
 script = ExtResource( 2 )
 fade_in_after = 5.0
 
-[node name="DefaultCamera" parent="BaseScene" instance=ExtResource( 7 )]
+[node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
 position = Vector2( -1270.34, -60.2246 )
 scale = Vector2( 0.7, 0.7 )
 smoothing_speed = 0.75
@@ -48,7 +48,7 @@ layer = -90
 scale = Vector2( 1.26, 1.27 )
 z_index = -1
 frames = ExtResource( 1 )
-frame = 132
+frame = 46
 playing = true
 centered = false
 

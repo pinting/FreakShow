@@ -38,6 +38,9 @@ func _ready() -> void:
 		hallway_lamp_03
 	]
 	
+	randomize()
+	lamps.shuffle()
+	
 	for i in range(len(doors)):
 		doors[i].connect("selected", self, "_on_hallway_door_select", [doors[i], i])
 

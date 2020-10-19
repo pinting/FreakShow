@@ -11,7 +11,7 @@ func _ready() -> void:
 	if not count:
 		return
 	
-	var random_selected = Global.random_generator.randi_range(0, count - 1)
+	var random_selected = Game.random_generator.randi_range(0, count - 1)
 	
 	for i in range(0, count):
 		var child = children[i]

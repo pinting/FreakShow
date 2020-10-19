@@ -14,15 +14,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/BaseScene.gd"
 }, {
-"base": "Camera2D",
-"class": "DefaultCamera",
-"language": "GDScript",
-"path": "res://Objects/DefaultCamera.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://Objects/PathFindingEnemy.gd"
+}, {
+"base": "Camera2D",
+"class": "GameCamera",
+"language": "GDScript",
+"path": "res://Objects/GameCamera.gd"
 }, {
 "base": "Node",
 "class": "MusicMixer",
@@ -48,22 +48,16 @@ _global_script_classes=[ {
 "class": "Train",
 "language": "GDScript",
 "path": "res://Objects/Train.gd"
-}, {
-"base": "Node2D",
-"class": "Utils",
-"language": "GDScript",
-"path": "res://Objects/Utils.gd"
 } ]
 _global_script_class_icons={
 "BaseScene": "",
-"DefaultCamera": "",
 "Enemy": "",
+"GameCamera": "",
 "MusicMixer": "",
 "Player": "",
 "Selectable": "",
 "SubtitleDisplay": "",
-"Train": "",
-"Utils": ""
+"Train": ""
 }
 
 [application]
@@ -75,7 +69,10 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://AutoLoad/Global.gd"
+Config="*res://Global/Config.gd"
+Game="*res://Global/Game.gd"
+VirtualInput="*res://Global/VirtualInput.gd"
+Tools="*res://Global/Tools.gd"
 
 [display]
 
@@ -212,7 +209,6 @@ locale_filter=[ 1, [ "en" ] ]
 [rendering]
 
 quality/driver/fallback_to_gles2=true
-quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 vram_compression/import_etc=true
@@ -234,3 +230,4 @@ environment/default_clear_color=Color( 0, 0, 0, 1 )
 quality/reflections/atlas_size=512
 quality/reflections/atlas_subdiv=1
 quality/depth/hdr=false
+quality/2d/gles2_use_nvidia_rect_flicker_workaround=true

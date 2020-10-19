@@ -4,14 +4,13 @@
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=2]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=3]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/keep_size = true
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.0
+shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
-shader_param/glow_amount = 0.0
+shader_param/line_color = Color( 0.960784, 0.34902, 0.45098, 0 )
 
 [node name="Selectable_CrazyDoor" type="Sprite" groups=[
 "selectable",
@@ -20,9 +19,6 @@ material = SubResource( 1 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 offset_key = "offset"
-primary_key = "grab_amount"
-primary_hover = 1.1
-primary_default = 1.0
-secondary_key = "glow_amount"
-secondary_hover = 0.5
+effect_key = "scale"
+effect_hover = 1.0
 clone_material = true

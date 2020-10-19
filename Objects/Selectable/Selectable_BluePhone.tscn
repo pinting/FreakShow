@@ -8,9 +8,7 @@
 shader = ExtResource( 3 )
 shader_param/keep_size = true
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.0
-shader_param/glow_radius = 10.0
-shader_param/glow_amount = 0.0
+shader_param/scale = 0.0
 
 [node name="Selectable_BluePhone" type="Sprite" groups=[
 "selectable",
@@ -19,6 +17,4 @@ material = SubResource( 1 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 offset_key = "offset"
-secondary_key = "glow_amount"
-secondary_hover = 0.5
 clone_material = true

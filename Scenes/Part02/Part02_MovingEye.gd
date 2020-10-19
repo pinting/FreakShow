@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	eye_ball.position.x = 110 - p * 220
 	eye_ball.position.y = -1 *(abs(sin(p * PI)) * 30 - 15)
 	
-	var players = Global.players
+	var players = Game.players
 	
 	for player in players:
 		var diff = global_position - player.global_position

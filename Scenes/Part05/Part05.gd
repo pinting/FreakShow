@@ -5,7 +5,7 @@ export var player_sync_fix_max_diff: float = 10.0
 
 onready var player_top = $PlayerTop
 onready var player_bottom = $PlayerBottom
-onready var camera = $DefaultCamera
+onready var camera = $GameCamera
 
 onready var top_rug = $Environment/Top/Inside/Rug
 onready var top_pussy = $Environment/Top/Inside/Pussy
@@ -84,7 +84,7 @@ func _player_on_palm(player: Player) -> void:
 	load_scene(next_scene)
 
 func _on_bottom_button_selected() -> void:
-	if not dildo_in_place:
+	if not dildo_in_place or top_hand.moving or bottom_hand.moving:
 		not_close_enough_sound.play()
 		return
 	
@@ -111,7 +111,7 @@ func _on_dildo_inside() -> void:
 	yield(timer(2.0), "timeout")
 	
 	camera.zoom_action()
-	Global.subtitle.say(tr("NARRATOR11"))
+	Game.subtitle.say(tr("NARRATOR11"))
 	
 	top_player_collision_right_shape.disabled = true
 	bottom_player_collision_left_shape.disabled = true
@@ -126,15 +126,15 @@ func _on_fall_to_death(body: Node) -> void:
 		return
 	
 	if dildo_in_place and body.is_in_group("player"):
-		var store_index = Global.players.find(body)
+		var store_index = Game.players.find(body)
 		
 		if store_index >= 0:
-			Global.players.remove(store_index)
+			Game.players.remove(store_index)
 		
 		body.get_parent().remove_child(body)
 		body.queue_free()
 		
-		if len(Global.players) > 0:
+		if len(Game.players) > 0:
 			return
 	
 	game_over = true

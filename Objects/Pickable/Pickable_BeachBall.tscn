@@ -12,9 +12,9 @@ bounce = 0.9
 shader = ExtResource( 2 )
 shader_param/keep_size = false
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.0
+shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
-shader_param/glow_amount = 0.0
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 66.6354
@@ -32,7 +32,9 @@ contacts_reported = 3
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 3 )
-KICK_FORCE = Vector2( 200, 200 )
+KICK_FORCE = Vector2( 500, 200 )
+MAX_VELOCITY = Vector2( 400, 400 )
+MAX_FORCE = Vector2( 500, 120 )
 
 [node name="Sprite" type="Sprite" parent="." groups=[
 "selectable",
@@ -42,11 +44,8 @@ texture = ExtResource( 4 )
 script = ExtResource( 1 )
 description = "BALL00"
 offset_key = "offset"
-primary_key = "grab_amount"
-primary_hover = 1.1
-primary_default = 1.0
-secondary_key = "glow_amount"
-secondary_hover = 0.5
+effect_key = "scale"
+effect_hover = 1.0
 clone_material = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

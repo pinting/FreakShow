@@ -8,7 +8,7 @@
 [ext_resource path="res://Scenes/Part03/Part03_MaintenanceRoom.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Part03/Part03.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Sounds/Door01.wav" type="AudioStream" id=8]
-[ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://Assets/Music/Part03.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=12]
@@ -48,7 +48,7 @@ position = Vector2( -2156.89, -8511.4 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
-[node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 9 )]
+[node name="GameCamera" parent="BaseScene/Player" instance=ExtResource( 9 )]
 smoothing_speed = 0.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]

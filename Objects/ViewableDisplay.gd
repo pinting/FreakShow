@@ -10,7 +10,7 @@ var queue_remove: bool = false
 var remove_after: float = 0.0
 
 func _ready() -> void:
-	Global.viewable_display = self
+	Game.viewable_display = self
 	current.visible = false
 
 func add(texture: Texture, description: String, child_scale: float = 1.0):	
@@ -26,8 +26,8 @@ func add(texture: Texture, description: String, child_scale: float = 1.0):
 	current.centered = true
 	current.visible = true
 	
-	Global.disable_selectable = true
-	Global.subtitle.describe(current.get_instance_id(), description, true)
+	Game.disable_selectable = true
+	Game.subtitle.describe(current.get_instance_id(), description, true)
 
 func _process(delta: float) -> void:
 	if current.visible:
@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 		remove_after += delta
 		
 		if remove_after > INPUT_DELAY:
-			var players = Global.players
+			var players = Game.players
 			
 			for player in players:
 				if player:
@@ -45,8 +45,8 @@ func _process(delta: float) -> void:
 			
 			current.visible = false
 			
-			Global.disable_selectable = false
-			Global.subtitle.describe_remove(current.get_instance_id())
+			Game.disable_selectable = false
+			Game.subtitle.describe_remove(current.get_instance_id())
 	
 			queue_remove = false
 			remove_after = 0.0

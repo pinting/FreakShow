@@ -13,18 +13,18 @@ func _ready() -> void:
 	var g = 0.0
 	var b = 0.0
 	
-	var state = Global.random_generator.randi_range(0, 2)
+	var state = Game.random_generator.randi_range(0, 2)
 	
 	if state == 0:
-		r = Global.random_generator.randf_range(0.5, 1.0)
+		r = Game.random_generator.randf_range(0.5, 1.0)
 		g = 1.0 - r
 		b = 0.0
 	elif state == 1:
-		g = Global.random_generator.randf_range(0.5, 1.0)
+		g = Game.random_generator.randf_range(0.5, 1.0)
 		b = 1.0 - g
 		r = 0.0
 	else:
-		b = Global.random_generator.randf_range(0.5, 1.0)
+		b = Game.random_generator.randf_range(0.5, 1.0)
 		r = 1.0 - b
 		g = 0.0
 	

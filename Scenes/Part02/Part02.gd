@@ -5,7 +5,7 @@ export var path_finding_interval: float = 0.5
 export var teleport_player_to_end: bool = false
 
 onready var player = $Player
-onready var camera = $Player/DefaultCamera
+onready var camera = $Player/GameCamera
 
 onready var debug_line = $Environment/DebugLine
 onready var navigation = $Environment/Navigation2D
@@ -71,12 +71,12 @@ func _ready() -> void:
 	
 	var blocking_lines = [blocking_line_00, blocking_line_01, blocking_line_02]
 	
-	blocking_lines[Utils.random_int(0, len(blocking_lines))].remove()
+	blocking_lines[Tools.random_int(0, len(blocking_lines))].remove()
 	
 	var random_lines = [random_line_00, random_line_01, random_line_02, random_line_03, random_line_04]
 	
-	for n in range(Utils.random_int(0, len(random_lines))):
-		var i = Utils.random_int(0, len(random_lines))
+	for n in range(Tools.random_int(0, len(random_lines))):
+		var i = Tools.random_int(0, len(random_lines))
 		
 		random_lines[i].remove()
 		random_lines.remove(i)
@@ -104,7 +104,7 @@ func _start_game(player: Node) -> void:
 		connect_sound.stop()
 		main_music.play()
 		
-		Global.subtitle.say(tr("NARRATOR04"), 0.5, 3.0)
+		Game.subtitle.say(tr("NARRATOR04"), 0.5, 3.0)
 		yield(timer(2.0), "timeout")
 	
 	game_playing = true
@@ -155,7 +155,7 @@ func _on_exit() -> void:
 	
 	if not end_door_area.overlaps_body(player):
 		if not_close_enough_help:
-			Global.subtitle.say(tr("NARRATOR05"))
+			Game.subtitle.say(tr("NARRATOR05"))
 			
 			not_close_enough_help = false
 		
@@ -193,7 +193,7 @@ func _on_scene_started() -> void:
 		connect_sound.play()
 
 func _process(delta: float) -> void:
-	if Global.loader:
+	if Game.loader:
 		return
 	
 	_process_enemy_path_finding(delta)

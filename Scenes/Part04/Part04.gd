@@ -4,13 +4,13 @@ export var next_scene: String = "res://Scenes/Part05/Part05.tscn"
 export var tick_length_min: float = 10.0
 export var tick_length_max: float = 15.0
 export var number_of_pillars: int = 25
-export var width_between_pillars: float = 3000
-export var pillar_high_offset: float = -370
-export var pillar_low_offset: float = 335
+export var width_between_pillars: float = 3000.0
+export var pillar_high_offset: float = -370.0
+export var pillar_low_offset: float = 335.0
 export var teleport_player_to_end: bool = false
 
 onready var player = $Player
-onready var camera = $Player/DefaultCamera
+onready var camera = $Player/GameCamera
 
 onready var club = $Dynamic/Environment/BuildingEnd/Dirt/Road/Club
 
@@ -56,17 +56,17 @@ func _ready() -> void:
 
 func _generate_pillars():
 	var pillars_y = []
-	var zero_count = Global.random_generator.randi_range(1, 3)
+	var zero_count = Game.random_generator.randi_range(1, 3)
 	
 	for i in range(number_of_pillars):
 		if zero_count == 0:
-			pillars_y.push_back(-1 if Global.random_generator.randi_range(0, 1) else 1)
-			zero_count = Global.random_generator.randi_range(0, 2)
+			pillars_y.push_back(-1 if Game.random_generator.randi_range(0, 1) else 1)
+			zero_count = Game.random_generator.randi_range(0, 2)
 		else:
 			pillars_y.push_back(0)
 			zero_count -= 1
 	
-	var end_zero_count = Global.random_generator.randi_range(0, 2)
+	var end_zero_count = Game.random_generator.randi_range(0, 2)
 	
 	if number_of_pillars >= end_zero_count:
 		for n in range(end_zero_count):
@@ -114,7 +114,7 @@ func _on_scene_started() -> void:
 	else:
 		_create_train()
 	
-	Global.subtitle.say(tr("NARRATOR09"))
+	Game.subtitle.say(tr("NARRATOR09"))
 
 func _on_player_on_train_top() -> void:
 	if first_on_top_called or player.dead:
@@ -122,7 +122,7 @@ func _on_player_on_train_top() -> void:
 	
 	main_music.force_next(music_01)
 	camera.zoom_action()
-	Global.subtitle.say(tr("NARRATOR10"))
+	Game.subtitle.say(tr("NARRATOR10"))
 	
 	first_on_top_called = true
 
@@ -180,11 +180,11 @@ func _create_train() -> void:
 	add_child(new_train)
 	new_train.start()
 	
-	wait_time = Global.random_generator.randf_range(tick_length_min, tick_length_max)
+	wait_time = Game.random_generator.randf_range(tick_length_min, tick_length_max)
 	counter = 0.0
 
 func _process(delta: float) -> void:
-	if first_on_top_called or reached_end or player.dead or Global.loader:
+	if first_on_top_called or reached_end or player.dead or Game.loader:
 		return
 	
 	counter += delta

@@ -9,7 +9,7 @@ var keep_describe = false
 var lines = []
 
 func _ready() -> void:
-	Global.subtitle_display = self
+	Game.subtitle_display = self
 	
 	top.text = ""
 	bottom.text = ""

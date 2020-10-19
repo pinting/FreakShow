@@ -64,10 +64,8 @@ export var sync_player_delay: float = 2.0
 # Register player to the store
 export var register_player: bool = true
 
-# Zero value
-export var zero: float = 1.0
-
-const kick_y_divide = 10
+const zero: float = 1.0
+const kick_y_divide: float = 10.0
 
 onready var platform_detector_00 = $PlatformDetector00
 onready var platform_detector_01 = $PlatformDetector01
@@ -145,8 +143,8 @@ func _ready() -> void:
 	animation_prefix = "" if avatar_mode else "a"
 	
 	if register:
-		Global.players.push_back(self)
-		Global.debug("Player registered")
+		Game.players.push_back(self)
+		Game.debug("Player registered")
 
 func set_animation_frames(frames) -> void:
 	assert(frames != null)
@@ -221,14 +219,14 @@ func disable_avatar_mode() -> void:
 		toggle_avatar_mode()
 
 func _process(delta: float) -> void:
-	if dead or Global.loader:
+	if dead or Game.loader:
 		return
 	
 	_process_transforming_effect(delta)
 	_process_collision_shapes()
 
 func _physics_process(delta: float) -> void:
-	if dead or Global.loader:
+	if dead or Game.loader:
 		return
 	
 	current_second += delta
@@ -386,7 +384,7 @@ func _get_direction() -> Vector2:
 
 func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: float, skip_sync: bool) -> Vector2:
 	var next_velocity = current_velocity
-	var players = Global.players
+	var players = Game.players
 	
 	direction *= scale_velocity
 	
@@ -534,3 +532,15 @@ func _get_next_animation(direction: Vector2) -> Dictionary:
 		"name": next_animation,
 		"pause": pause
 	}
+
+func create_clone():
+	var clone = duplicate()
+
+	clone.register = false
+	
+	for n in clone.get_children():
+		if n.name == "GameCamera":
+			clone.remove_child(n)
+			break
+	
+	return clone

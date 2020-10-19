@@ -74,6 +74,7 @@ region_rect = Rect2( 0, 0, 4000, 140 )
 
 [node name="Button" parent="Inside" instance=ExtResource( 17 )]
 light_mask = -2147483135
+position = Vector2( 1064.14, 36.2056 )
 
 [node name="Light" type="Light2D" parent="Inside/Button"]
 visible = false

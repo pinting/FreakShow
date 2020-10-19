@@ -35,7 +35,7 @@ signal fade_in_done
 signal intro_over
 
 func _ready() -> void:
-	if Global.NO_INTRO:
+	if Config.no_intro:
 		fade_current = 0.0
 		intro_started = true
 		intro_over = true
@@ -145,7 +145,7 @@ func fade_in(duration: float = 1.0) -> void:
 	fade_direction = -1.0
 
 func timer(duration: float = 1.0) -> SceneTreeTimer:
-	return Global.timer(duration)
+	return Game.timer(duration)
 
 func load_scene(path: String) -> void:
 	if loading_in_progress:
@@ -153,7 +153,7 @@ func load_scene(path: String) -> void:
 	
 	loading_in_progress = true
 	
-	var players = Global.players
+	var players = Game.players
 
 	for player in players:
 		player.freeze()
@@ -161,7 +161,7 @@ func load_scene(path: String) -> void:
 	fade_out(2.0)
 	yield(timer(2.0), "timeout")
 	
-	Global.load_scene(path)
+	Game.load_scene(path)
 
 func move_with_fade(player: Player, next_position: Vector2, sound: AudioStreamPlayer = null) -> void:
 	if move_in_progress:
@@ -169,7 +169,7 @@ func move_with_fade(player: Player, next_position: Vector2, sound: AudioStreamPl
 	
 	move_in_progress = true
 	
-	var camera = Global.current_camera
+	var camera = Game.current_camera
 	var smoothing_enabled = camera.smoothing_enabled
 	
 	if sound:

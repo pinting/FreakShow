@@ -8,25 +8,16 @@ export var description: String = ""
 export var offset_key: String = ""
 
 # Primary effect name
-export var primary_key: String = ""
+export var effect_key: String = ""
 
 # Primary effect when mouse is hovering
-export var primary_hover: float = 0.0
+export var effect_hover: float = 0.0
 
 # Default primary effect value
-export var primary_default: float = 0.0
+export var effect_default: float = 0.0
 
-# Secondary effect name
-export var secondary_key: String = ""
-
-# Secondary effect when mouse is hovering
-export var secondary_hover: float = 0.0
-
-# Default secondary effect value
-export var secondary_default: float = 0.0
-
-# Effect step size in one second (both primary and secondary)
-export var effect_step: float = 1.0
+# Effect step size in one second
+export var effect_step: float = 0.5
 
 # Selection area scale
 export var selection_area_scale: Vector2 = Vector2(1.0, 1.0)
@@ -34,8 +25,7 @@ export var selection_area_scale: Vector2 = Vector2(1.0, 1.0)
 # Clone material
 export var clone_material: bool = false
 
-var current_primary: float = primary_default
-var current_secondary: float = secondary_default
+var current: float = effect_default
 
 var disabled = false
 var held = false
@@ -43,8 +33,7 @@ var held = false
 signal selected
 
 func _ready() -> void:
-	assert(primary_hover >= primary_default)
-	assert(secondary_hover >= secondary_default)
+	assert(effect_hover >= effect_default)
 	assert(is_in_group("selectable"))
 	
 	if clone_material:
@@ -90,7 +79,7 @@ func _is_top(mouse_position: Vector2) -> bool:
 	return true
 
 func _on_select(mouse_position) -> bool:
-	if not Global.disable_selectable and not disabled and visible:
+	if not Game.disable_selectable and not disabled and visible:
 		var rect = get_rect()
 		var scale = selection_area_scale
 		var offset = rect.size / -scale if max(scale.x, scale.y) > 1.0 else Vector2.ZERO
@@ -102,11 +91,11 @@ func _on_select(mouse_position) -> bool:
 	return false
 
 func _input(event: InputEvent) -> void:
-	if not Global.disable_selectable and not disabled and event is InputEventMouseButton:
+	if not Game.disable_selectable and not disabled and event is InputEventMouseButton:
 		if held and not event.pressed:
 			held = false
 
-		var mouse_position = Global.get_world_mouse_position()
+		var mouse_position = VirtualInput.get_world_mouse_position()
 		
 		if _on_select(mouse_position) and event.pressed:
 			held = true
@@ -114,13 +103,13 @@ func _input(event: InputEvent) -> void:
 			emit_signal("selected")
 
 func show_description() -> void:
-	Global.subtitle.describe(get_instance_id(), tr(description))
+	Game.subtitle.describe(get_instance_id(), tr(description))
 
 func remove_description() -> void:
-	Global.subtitle.describe_remove(get_instance_id())
+	Game.subtitle.describe_remove(get_instance_id())
 
 func _physics_process(delta: float) -> void:
-	var mouse_position = Global.get_world_mouse_position()
+	var mouse_position = VirtualInput.get_world_mouse_position()
 	
 	if _on_select(mouse_position):
 		if len(offset_key):
@@ -134,31 +123,20 @@ func _physics_process(delta: float) -> void:
 			
 			material.set_shader_param(offset_key, offset)
 		
-		if len(primary_key):
-			current_primary += effect_step * delta
-			current_primary = min(primary_hover, current_primary)
-		
-		if len(secondary_key):
-			current_secondary += effect_step * delta
-			current_secondary = min(secondary_hover, current_secondary)
+		if len(effect_key):
+			current += effect_step / delta
+			current = min(effect_hover, current)
 		
 		show_description()
 	elif not held:
-		if len(primary_key):
-			current_primary -= effect_step * delta
-			current_primary = max(primary_default, current_primary)
-		
-		if len(secondary_key):
-			current_secondary -= effect_step * delta
-			current_secondary = max(secondary_default, current_secondary)
+		if len(effect_key):
+			current -= effect_step / delta
+			current = max(effect_default, current)
 		
 		remove_description()
 	
-	if len(primary_key):
-		material.set_shader_param(primary_key, current_primary)
-	
-	if len(secondary_key):
-		material.set_shader_param(secondary_key, current_secondary)
+	if len(effect_key):
+		material.set_shader_param(effect_key, current)
 
 func disable():
 	remove_description()

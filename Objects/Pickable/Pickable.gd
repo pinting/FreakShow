@@ -15,6 +15,7 @@ export var MAX_FORCE = Vector2(120.0, 120.0)
 # Selectable or normal selectable
 onready var selectable = $Sprite
 
+var disable_position: Vector2 = Vector2.ZERO
 var disabled = false
 var held = false
 
@@ -30,10 +31,17 @@ func _on_sprite_selected():
 	emit_signal("picked", self)
 
 func _physics_process(_delta: float) -> void:
-	if not held or disabled:
+	if disabled:
+		position = disable_position
+		mode = RigidBody2D.MODE_STATIC
+		sleeping = true
+		
 		return
 	
-	var position_diff = Global.get_world_mouse_position() - global_position
+	if not held:
+		return
+	
+	var position_diff = VirtualInput.get_world_mouse_position() - global_position
 	var grab_force = position_diff.normalized() * GRAB_FORCE
 	
 	if abs(linear_velocity.x) < MAX_VELOCITY.x and abs(linear_velocity.y) < MAX_VELOCITY.y :
@@ -58,6 +66,8 @@ func drop(impulse: Vector2 = Vector2.ZERO) -> void:
 	held = false
 
 func disable() -> void:
+	disable_position = position
+	
 	disabled = true
 	held = false
 	

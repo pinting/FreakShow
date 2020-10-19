@@ -21,7 +21,7 @@
 shader = ExtResource( 14 )
 shader_param/keep_size = true
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.0
+shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
 shader_param/glow_amount = 0.0
 
@@ -29,7 +29,7 @@ shader_param/glow_amount = 0.0
 shader = ExtResource( 14 )
 shader_param/keep_size = true
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.0
+shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
 shader_param/glow_amount = 0.0
 
@@ -37,7 +37,7 @@ shader_param/glow_amount = 0.0
 shader = ExtResource( 14 )
 shader_param/keep_size = true
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.0
+shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
 shader_param/glow_amount = 0.0
 
@@ -70,11 +70,9 @@ texture = ExtResource( 1 )
 script = ExtResource( 13 )
 description = "PAPER03"
 offset_key = "offset"
-primary_key = "grab_amount"
-primary_hover = 1.1
-primary_default = 1.0
-secondary_key = "glow_amount"
-secondary_hover = 0.5
+effect_key = "scale"
+effect_hover = 1.0
+effect_default = 0.0
 clone_material = true
 
 [node name="Paper01" type="Sprite" parent="Building" groups=[
@@ -87,11 +85,9 @@ texture = ExtResource( 3 )
 script = ExtResource( 13 )
 description = "PAPER02"
 offset_key = "offset"
-primary_key = "grab_amount"
-primary_hover = 1.1
-primary_default = 1.0
-secondary_key = "glow_amount"
-secondary_hover = 0.5
+effect_key = "scale"
+effect_hover = 1.0
+effect_default = 0.0
 clone_material = true
 
 [node name="Paper02" type="Sprite" parent="Building" groups=[
@@ -105,11 +101,9 @@ texture = ExtResource( 2 )
 script = ExtResource( 13 )
 description = "PAPER06"
 offset_key = "offset"
-primary_key = "grab_amount"
-primary_hover = 1.1
-primary_default = 1.0
-secondary_key = "glow_amount"
-secondary_hover = 0.5
+effect_key = "scale"
+effect_hover = 1.0
+effect_default = 0.0
 clone_material = true
 
 [node name="Lamp00" type="StaticBody2D" parent="Building" instance=ExtResource( 5 )]

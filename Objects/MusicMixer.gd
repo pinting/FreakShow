@@ -16,7 +16,7 @@ export var max_volume: int = 0
 # Muting volume in DB
 export var min_volume: int = -60
 
-# Debug the music player (Global.debug needs to be true)
+# Debug the music player (Game.debug needs to be true)
 export var debug: bool = false
 
 onready var player_00 = $AudioStreamPlayer00
@@ -288,7 +288,7 @@ func _finish_mixing(next_part_index: int) -> void:
 
 func _debug(message: String) -> void:
 	if debug:
-		Global.debug(message)
+		Game.debug(message)
 
 func _debug_if_integer(t: float, message: String) -> void:
 	if abs(floor(t) - t) < 0.05:

@@ -22,7 +22,7 @@
 [ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=20]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall16.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Environmnent/Pillar06.png" type="Texture" id=22]
-[ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Environmnent/TornPaper00.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Environmnent/TornPaper01.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Environmnent/DirectionSign00.png" type="Texture" id=26]
@@ -73,25 +73,25 @@ blend_mode = 2
 shader = ExtResource( 35 )
 shader_param/keep_size = false
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.05
+shader_param/scale = 0.05
 shader_param/glow_radius = 10.0
-shader_param/glow_amount = 0.2
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 35 )
 shader_param/keep_size = false
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.1
+shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
-shader_param/glow_amount = 0.2
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 35 )
 shader_param/keep_size = false
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.1
+shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
-shader_param/glow_amount = 0.2
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 1317.73, 39.3521 )
@@ -143,7 +143,7 @@ animation_frames = ExtResource( 37 )
 avatar_max_speed = 1000.0
 avatar_acceleration = 2000.0
 
-[node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 23 )]
+[node name="GameCamera" parent="BaseScene/Player" instance=ExtResource( 23 )]
 position = Vector2( 6.06445, -312.324 )
 zoom = Vector2( 5, 5 )
 
@@ -377,8 +377,7 @@ region_rect = Rect2( 0, 0, 6000, 85 )
 [node name="ExitDoor" parent="BaseScene/Environment/Maze/SteelBlock/WallBlock" instance=ExtResource( 15 )]
 position = Vector2( -1534.77, 90.0312 )
 scale = Vector2( 1.26594, 1.26594 )
-primary_hover = 1.025
-secondary_hover = 0.25
+effect_hover = 0.25
 
 [node name="PillarLeft" type="Sprite" parent="BaseScene/Environment/Maze/SteelBlock/WallBlock"]
 position = Vector2( -2940.34, 149.125 )

@@ -12,4 +12,5 @@ visible = false
 
 [node name="Light" type="Sprite" parent="Current"]
 show_behind_parent = true
+scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )

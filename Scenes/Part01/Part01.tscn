@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://Scenes/Part01/Part01_Building01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part01/Part01_Building00.tscn" type="PackedScene" id=2]
@@ -6,23 +6,21 @@
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti02.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Environmnent/Fence02_A.png" type="Texture" id=5]
 [ext_resource path="res://Objects/Pickable/Pickable_Crate.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/Light/Light_Street.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Part01/Part01_PhoneBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Part01/Part01.gd" type="Script" id=8]
 [ext_resource path="res://Objects/Sky.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Music/Part01.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Objects/Static/Static_BallHoop.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Part01/Part01_Hoop.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Environmnent/Building01.png" type="Texture" id=13]
 [ext_resource path="res://Objects/Pickable/Pickable_BeachBall.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/Train.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Objects/Static/Static_Building01.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Objects/Light/Light_Side.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Environmnent/Phone00.png" type="Texture" id=18]
 [ext_resource path="res://Objects/Static/Static_SideLamp00.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=20]
-[ext_resource path="res://Assets/Environmnent/Phone00_Glow.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
-[ext_resource path="res://Objects/DefaultCamera.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti01.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Environmnent/Shed00.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Environmnent/Dirt00.png" type="Texture" id=26]
@@ -42,7 +40,6 @@
 [ext_resource path="res://Assets/Sounds/Phone00.ogg" type="AudioStream" id=41]
 [ext_resource path="res://Objects/Viewable/Viewable_Ad05.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti11.png" type="Texture" id=43]
-[ext_resource path="res://Objects/Selectable/Selectable_BluePhone.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Assets/Sounds/Phone01.wav" type="AudioStream" id=45]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=46]
 [ext_resource path="res://Assets/Environmnent/Board00.png" type="Texture" id=47]
@@ -71,9 +68,9 @@ extents = Vector2( 30000, 10 )
 shader = ExtResource( 49 )
 shader_param/keep_size = true
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.0
+shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
-shader_param/glow_amount = 0.0
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 544.604, 2552.49 )
@@ -81,39 +78,33 @@ extents = Vector2( 544.604, 2552.49 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 19446.7, 941.674 )
 
-[sub_resource type="CanvasItemMaterial" id=8]
-blend_mode = 1
-
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 49 )
 shader_param/keep_size = true
 shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/grab_amount = 1.0
+shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
-shader_param/glow_amount = 0.0
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
 
-[sub_resource type="PhysicsMaterial" id=10]
+[sub_resource type="PhysicsMaterial" id=9]
 bounce = 0.9
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 227.945, 2041.4 )
-
-[sub_resource type="CapsuleShape2D" id=12]
-radius = 20.625
-height = 0.0
 
 [node name="Part01" type="Node2D"]
 position = Vector2( 59.2303, 0.734743 )
 
 [node name="BaseScene" parent="." instance=ExtResource( 46 )]
 script = ExtResource( 8 )
+teleport_player_to_end = true
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -4797.1, -349.489 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 37 )
 
-[node name="DefaultCamera" parent="BaseScene/Player" instance=ExtResource( 23 )]
+[node name="GameCamera" parent="BaseScene/Player" instance=ExtResource( 23 )]
 position = Vector2( 6.06445, -312.324 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
@@ -242,11 +233,8 @@ texture = ExtResource( 29 )
 script = ExtResource( 52 )
 description = "DOOR02"
 offset_key = "offset"
-primary_key = "grab_amount"
-primary_hover = 1.05
-primary_default = 1.0
-secondary_key = "glow_amount"
-secondary_hover = 0.5
+effect_key = "scale"
+effect_hover = 0.5
 clone_material = true
 
 [node name="Building01" parent="BaseScene/Environment" instance=ExtResource( 1 )]
@@ -276,10 +264,6 @@ position = Vector2( 1400, 0 )
 texture = ExtResource( 48 )
 
 [node name="Hoop" parent="BaseScene/Environment" instance=ExtResource( 12 )]
-position = Vector2( -103.324, 30.7614 )
-z_index = -1
-collision_layer = 1
-collision_mask = 1
 
 [node name="Building03" parent="BaseScene/Environment" instance=ExtResource( 16 )]
 position = Vector2( 19105.1, -388.684 )
@@ -326,26 +310,7 @@ shape = SubResource( 7 )
 
 [node name="RoadBlock" parent="BaseScene/Environment" instance=ExtResource( 36 )]
 
-[node name="PhoneBox" type="Sprite" parent="BaseScene/Environment"]
-position = Vector2( 11476.8, -329.819 )
-z_index = -2
-texture = ExtResource( 18 )
-
-[node name="Phone" parent="BaseScene/Environment/PhoneBox" instance=ExtResource( 44 )]
-visible = false
-position = Vector2( -1.2998, -42.096 )
-primary_key = "grab_amount"
-primary_hover = 1.25
-primary_default = 1.0
-
-[node name="Lamp" type="Sprite" parent="BaseScene/Environment/PhoneBox"]
-material = SubResource( 8 )
-position = Vector2( -0.856445, 0 )
-texture = ExtResource( 21 )
-
-[node name="Light" parent="BaseScene/Environment/PhoneBox/Lamp" instance=ExtResource( 7 )]
-position = Vector2( -321.001, 406.521 )
-scale = Vector2( 1.03047, 0.376077 )
+[node name="PhoneBox" parent="BaseScene/Environment" instance=ExtResource( 7 )]
 
 [node name="Board" type="Sprite" parent="BaseScene/Environment"]
 position = Vector2( 13810.4, -238.892 )
@@ -355,7 +320,7 @@ z_index = -1
 texture = ExtResource( 47 )
 
 [node name="Paper00" parent="BaseScene/Environment/Board" instance=ExtResource( 35 )]
-material = SubResource( 9 )
+material = SubResource( 8 )
 position = Vector2( 25.296, -136.393 )
 scale = Vector2( 0.076, 0.076 )
 
@@ -374,7 +339,7 @@ can_sleep = false
 [node name="Ball" parent="BaseScene/Environment" instance=ExtResource( 14 )]
 position = Vector2( 12442.2, 41.3428 )
 collision_mask = 2147483650
-physics_material_override = SubResource( 10 )
+physics_material_override = SubResource( 9 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 position = Vector2( -59.2303, -0.734743 )
@@ -385,7 +350,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerComment"]
-shape = SubResource( 11 )
+shape = SubResource( 10 )
 
 [node name="TriggerTrain" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 3308.45, -25.9426 )
@@ -393,7 +358,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerTrain"]
-shape = SubResource( 11 )
+shape = SubResource( 10 )
 
 [node name="ReachingHoop" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 15696.3, -72.9816 )
@@ -401,7 +366,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingHoop"]
-shape = SubResource( 11 )
+shape = SubResource( 10 )
 
 [node name="ReachingPhoneBox" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 11534.7, -72.9816 )
@@ -409,16 +374,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingPhoneBox"]
-shape = SubResource( 11 )
-
-[node name="InsideHoop" type="Area2D" parent="BaseScene/Trigger"]
-position = Vector2( 16778.5, -756.826 )
-collision_layer = 7
-collision_mask = 7
-
-[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/InsideHoop"]
-position = Vector2( -1.04688, -25.6003 )
-shape = SubResource( 12 )
+shape = SubResource( 10 )
 
 [node name="TeleportPlayer" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( 10363.7, -184.486 )

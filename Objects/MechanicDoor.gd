@@ -55,7 +55,7 @@ func open():
 	if door_move:
 		door_move.play()
 	
-	yield(Global.timer(1.0), "timeout")
+	yield(Game.timer(1.0), "timeout")
 	
 	open = true
 	moving = true

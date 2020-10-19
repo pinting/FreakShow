@@ -1,5 +1,5 @@
 extends Camera2D
-class_name DefaultCamera 
+class_name GameCamera 
 
 # Maximum shake in pixels.
 export var max_offset = Vector2(100, 75)
@@ -20,9 +20,9 @@ var is_action_zoom_on: bool = false
 var zoom_base: Vector2
 
 func _ready() -> void:
-	assert(Global.current_camera == null)
+	assert(Game.current_camera == null)
 	
-	Global.current_camera = self
+	Game.current_camera = self
 	
 	noise.seed = randi()
 	noise.period = 4
@@ -46,7 +46,7 @@ func _process_shake(delta: float) -> void:
 
 
 func _process_zoom(delta: float) -> void:
-	var camera = Global.current_camera
+	var camera = Game.current_camera
 	
 	if not camera:
 		return

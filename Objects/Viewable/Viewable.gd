@@ -10,8 +10,8 @@ func _ready() -> void:
 	connect("selected", self, "_on_selected")
 
 func _on_selected():
-	var camera = Global.current_camera
-	var display = Global.viewable_display
+	var camera = Game.current_camera
+	var display = Game.viewable_display
 	
 	if not camera or not display:
 		return
@@ -19,7 +19,7 @@ func _on_selected():
 	if display.current.visible:
 		return
 	
-	var players = Global.players
+	var players = Game.players
 	
 	for player in players:
 		player.freeze(true)

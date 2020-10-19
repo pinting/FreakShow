@@ -18,17 +18,16 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 description = "PUSSY00"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Inside" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape" type="CollisionShape2D" parent="Inside"]
 position = Vector2( 0, -3.50455 )
 shape = SubResource( 1 )
 disabled = true
 
 [node name="Filled" type="Sprite" parent="."]
-visible = false
 light_mask = 513
 texture = ExtResource( 3 )
 
