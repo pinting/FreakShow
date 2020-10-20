@@ -60,7 +60,6 @@ func _ready() -> void:
 	music_01 = main_music.add_part(4 * 60 + 0.7, 4 * 60 + 25, true, 0.5, 0.5, -1)
 	
 	connect("scene_started", self, "_on_scene_started")
-	
 	fall_to_death.connect("body_entered", self, "_kill_player")
 	boss_mouth.connect("body_entered", self, "_kill_player")
 	game_begin.connect("body_entered", self, "_start_game")

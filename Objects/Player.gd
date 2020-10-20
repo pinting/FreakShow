@@ -43,12 +43,6 @@ export var floor_normal: Vector2 = Vector2.UP
 # Floor detect distance
 export var floor_detect_distance: float = 20.0
 
-# Freeze the player in place
-export var frozen: bool = false
-
-# Enable or disable avatar mode
-export var avatar_mode: bool = false
-
 # The player dies after taking this amount of a hit
 export var hit_to_die: Vector2 = Vector2(20.0, 50.0)
 
@@ -67,22 +61,18 @@ export var register_player: bool = true
 const zero: float = 1.0
 const kick_y_divide: float = 10.0
 
+onready var animation_player = $AnimationPlayer
+onready var animated_sprite = $AnimatedSprite
 onready var platform_detector_00 = $PlatformDetector00
 onready var platform_detector_01 = $PlatformDetector01
 onready var top_detector = $TopDetector
-
 onready var stand_collision_shape = $StandCollisionShape
 onready var crouch_collision_shape = $CrouchCollisionShape
 onready var avatar_collision_shape = $AvatarCollisionShape
-
 onready var transform_effect = $TransformEffect
 onready var death_effect = $DeathEffect
-
-onready var animated_sprite = $AnimatedSprite
-
 onready var kick_area = $KickArea
 onready var kick_area_collision_shape = $KickArea/CollisionShape
-
 onready var fast_walk_icon = $CanvasLayer/FastWalkIcon
 
 signal reseted
@@ -108,15 +98,6 @@ var transition: bool = false
 # Moving in X direction
 var moving_x: bool = false
 
-# Transformation in progress
-var transforming: bool = false
-
-# Transformation effect timeout counter
-var transforming_seconds: float = 0.0
-
-# Is transforming done
-var transforming_done: bool = true
-
 # Enable crouching
 var crouching: bool = false
 
@@ -128,6 +109,12 @@ var force_gravity: bool = false
 
 # Is the player dead
 var dead: bool = false
+
+# Is the player frozen
+var frozen: bool = false
+
+# Enable or disable avatar mode
+var avatar_mode: bool = false
 
 # Register player to players list
 var register: bool = register_player
@@ -173,56 +160,28 @@ func set_animation_frames(frames) -> void:
 	
 	animated_sprite.frames = frames
 
-func _process_transforming_effect(delta: float) -> void:
-	if not transforming:
-		transform_effect.self_modulate.a = 0.0
-		return
-	
-	transforming_seconds += delta
-	
-	var t = transforming_seconds
-	
-	if t >= 0.0 and t < 1.0:
-		transform_effect.emitting = true
-		transform_effect.self_modulate.a = t
-		frozen = true
-		transforming_done = false
-	elif t >= 1.0 and t < 2.0:
-		if not transforming_done:
-			avatar_mode = not avatar_mode
-			transforming_done = true
-		
-		transform_effect.self_modulate.a = 1.0 - (t - 1.0)
-	elif t >= 2.0:
-		transform_effect.self_modulate.a = 0.0
-		transform_effect.emitting = false
-		frozen = false
-		transforming = false
-		transforming_seconds = 0.0
-
 func _process_collision_shapes() -> void:
 	stand_collision_shape.disabled = dead or crouching or avatar_mode
 	crouch_collision_shape.disabled = dead or not crouching or avatar_mode
 	avatar_collision_shape.disabled = dead or not avatar_mode
 	kick_area_collision_shape.disabled = dead or avatar_mode
 
-func toggle_avatar_mode() -> void:
-	if not frozen:
-		transforming = not transforming
+# This function is called by the animation player
+func _toggle_avatar_mode() -> void:
+	avatar_mode = not avatar_mode
 
 func enable_avatar_mode() -> void:
-	if not avatar_mode:
-		toggle_avatar_mode()
+	if not avatar_mode and not frozen:
+		animation_player.play("toggle_avatar_mode")
 
 func disable_avatar_mode() -> void:
-	if avatar_mode:
-		toggle_avatar_mode()
+	if avatar_mode and not frozen:
+		animation_player.play("toggle_avatar_mode")
 
 func _process(delta: float) -> void:
 	if dead or Game.loader:
 		return
 	
-	_process_transforming_effect(delta)
 	_process_collision_shapes()
 
 func _physics_process(delta: float) -> void:
@@ -450,7 +409,7 @@ func freeze(with_gravity: bool = false) -> void:
 	frozen = true
 
 func unfreeze() -> void:
-	if not transforming:
+	if not animation_player.is_playing():
 		frozen = false
 
 func kill() -> void:
@@ -459,7 +418,6 @@ func kill() -> void:
 	
 	dead = true
 	frozen = true
-	transforming = false
 	animated_sprite.visible = false
 	death_effect.emitting = true
 	
@@ -474,7 +432,6 @@ func reset(start_in_avatar_mode: bool = false) -> void:
 	dead = false
 	avatar_mode = start_in_avatar_mode
 	frozen = false
-	transforming = false
 	animated_sprite.visible = true
 	death_effect.emitting = false
 	
