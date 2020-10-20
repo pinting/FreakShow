@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Sounds/Phone02.wav" type="AudioStream" id=2]
@@ -42,15 +42,16 @@
 [ext_resource path="res://Assets/Sounds/Warning04.wav" type="AudioStream" id=40]
 [ext_resource path="res://Objects/Selectable/Selectable_DrugSexHellGraffiti.tscn" type="PackedScene" id=41]
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=42]
+[ext_resource path="res://Objects/Effect/Screen/ScreenEffect_CRT.tscn" type="PackedScene" id=43]
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="Environment" id=2]
 background_mode = 4
 glow_enabled = true
 glow_intensity = 1.0
 glow_strength = 1.4
 glow_hdr_threshold = 0.4
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 14 )
 shader_param/screen_width = 1920.0
 shader_param/screen_height = 1080.0
@@ -152,24 +153,15 @@ light_mask = 0
 color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
-environment = SubResource( 1 )
+environment = SubResource( 2 )
 
-[node name="ScreenEffect" type="CanvasLayer" parent="BaseScene"]
-
-[node name="ColorRect" type="ColorRect" parent="BaseScene/ScreenEffect"]
-material = SubResource( 2 )
-margin_right = 960.0
-margin_bottom = 540.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ScreenEffect" parent="BaseScene" instance=ExtResource( 43 )]
 
 [node name="BlackBackground" type="CanvasLayer" parent="BaseScene"]
 layer = -90
 
-[node name="ColorRect" type="ColorRect" parent="BaseScene/BlackBackground"]
-material = SubResource( 2 )
+[node name="Canvas" type="ColorRect" parent="BaseScene/BlackBackground"]
+material = SubResource( 1 )
 margin_right = 960.0
 margin_bottom = 540.0
 mouse_filter = 2

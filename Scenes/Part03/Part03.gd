@@ -2,11 +2,10 @@ extends "res://Scenes/BaseScene.gd"
 
 export var next_scene: String = "res://Scenes/Part04/Part04.tscn"
 export var disable_movement_delay: bool = false
-export var player_animation_frames_flash: SpriteFrames
 
 onready var player = $Player
 onready var camera = $Player/GameCamera
-onready var screen_effect = $ScreenEffect/ColorRect
+onready var screen_effect = $ScreenEffect
 
 onready var keypad = $Environment/Ditch/Wall/Door00/Keypad
 onready var ditch_door = $Environment/Ditch/Wall/Door01
@@ -24,16 +23,9 @@ onready var main_music = $Sound/MainMusic
 onready var next_level_music = $Sound/NextLevelMusic
 onready var door_open_sound = $Sound/DoorOpenSound
 
-var player_animation_frames_base: SpriteFrames
 var ending_open: bool = false
 var code_help_said: bool = false
 var ending_triggered: bool = false
-var enable_next_level_effect: bool = false
-var next_level_effect_state: bool = false
-var next_level_effect_counter: float = 0.0
-var next_level_effect_interval: float = 1.0
-var next_level_effect_barrel_power: float = 1.0
-var next_level_effect_color_bleeding: float = 1.0
 
 var music_00: int
 var music_01: int
@@ -46,8 +38,6 @@ func _ready() -> void:
 	music_02 = main_music.add_part(3 * 60, 4 * 60, true, 0.5, 0.5, -1)
 	
 	next_level_music.add_part(7 * 60 + 5, 8 * 60, true, 5, 2, 0)
-	
-	player_animation_frames_base = player.animation_frames
 	
 	connect("scene_started", self, "_on_scene_started")
 	ditch_door.connect("selected", self, "_on_ditch_door_select")
@@ -80,9 +70,9 @@ func _keypad_selected() -> void:
 	ending_triggered = true
 	
 	next_level_music.play()
+	screen_effect.enable(player)
 	
 	Game.disable_selectable = true
-	enable_next_level_effect = true
 	
 	yield(timer(5.0), "timeout")
 	
@@ -94,35 +84,6 @@ func _keypad_selected() -> void:
 	
 	Game.disable_selectable = false
 	load_scene(next_scene)
-
-func _process_next_level_effect(delta: float) -> void:
-	if not enable_next_level_effect:
-		return
-	
-	next_level_effect_counter += delta
-	
-	if next_level_effect_counter > next_level_effect_interval:
-		camera.shake = pow(2.0 * abs(sin(current_second)) + 1.0, Game.random_generator.randf_range(1.0, 2.0))
-		
-		screen_effect.modulate.a = min(1.0, screen_effect.modulate.a + delta)
-		screen_effect.material.set_shader_param("barrel_power", min(2.2, next_level_effect_barrel_power + delta))
-		screen_effect.material.set_shader_param("color_bleeding", min(2.4, next_level_effect_color_bleeding + delta))
-		
-		if next_level_effect_state:
-			player.set_animation_frames(player_animation_frames_flash)
-			next_level_effect_state = false
-		else:
-			player.set_animation_frames(player_animation_frames_base)
-			next_level_effect_state = true
-		
-		next_level_effect_counter = 0.0
-		next_level_effect_interval /= 1.5
-
-func _process(delta: float) -> void:
-	if Game.loader:
-		return
-	
-	_process_next_level_effect(delta)
 
 func _hide_papers_visibility(visible: bool) -> void:
 	for node in hide_papers.get_children():

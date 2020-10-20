@@ -28,10 +28,10 @@ onready var door_sound = $Sound/DoorSound
 const train_scene = preload("res://Objects/Train.tscn")
 const pillar_scene = preload("res://Scenes/Part04/Part04_DoublePillar.tscn")
 
+var train_wait_time: float = INF
+var train_counter: float = 0.0
 var first_on_top_called: bool = false
-var wait_time: float = INF
 var reached_end: bool = false
-var counter: float = 0.0
 
 var music_00
 var music_01
@@ -180,14 +180,14 @@ func _create_train() -> void:
 	add_child(new_train)
 	new_train.start()
 	
-	wait_time = Game.random_generator.randf_range(tick_length_min, tick_length_max)
-	counter = 0.0
+	train_wait_time = Game.random_generator.randf_range(tick_length_min, tick_length_max)
+	train_counter = 0.0
 
 func _process(delta: float) -> void:
 	if first_on_top_called or reached_end or player.dead or Game.loader:
 		return
 	
-	counter += delta
+	train_counter += delta
 	
-	if counter >= wait_time:
+	if train_counter >= train_wait_time:
 		_create_train()
