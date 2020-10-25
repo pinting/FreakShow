@@ -33,7 +33,6 @@ func _process(delta: float) -> void:
 			camera.shake = pow(2.0 * abs(sin(current_second)) + 1.0, Game.random_generator.randf_range(1.0, 2.0))
 		
 		canvas.modulate.a = min(1.0, canvas.modulate.a + delta)
-		
 		canvas.material.set_shader_param("barrel_power", min(2.2, barrel_power + delta))
 		canvas.material.set_shader_param("color_bleeding", min(2.4, color_bleeding + delta))
 		
@@ -48,7 +47,7 @@ func _process(delta: float) -> void:
 		counter = 0.0
 		interval /= 1.5
 
-func enable(target_player: Player = null):
+func play(target_player: Player = null):
 	if target_player:
 		player = target_player
 		base_player_animation_frames = target_player.animation_frames

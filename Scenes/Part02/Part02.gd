@@ -49,7 +49,7 @@ var music_00: int
 var music_01: int
 
 var path_finder_fire: float = 0.0
-var game_started: bool = false
+var boss_follows: bool = false
 var game_playing: bool = false
 var not_close_enough_help: bool = true
 var boss_base_position: Vector2
@@ -94,20 +94,18 @@ func _start_game(player: Node) -> void:
 		return
 	
 	wall_after_enter.disabled = false
+	game_playing = true
 	
 	# If the actual game is turned off, for debug purposes
 	if not teleport_player_to_end:
 		camera.zoom_action()
 		player.enable_avatar_mode()
-	
 		connect_sound.stop()
 		main_music.play()
-		
 		Game.subtitle.say(tr("NARRATOR04"), 0.5, 3.0)
-		yield(timer(2.0), "timeout")
+		yield(Game.timer(2.0), "timeout")
 	
-	game_playing = true
-	game_started = true
+	boss_follows = true
 
 func _on_player_reset() -> void:
 	boss.path = []
@@ -116,21 +114,21 @@ func _on_player_reset() -> void:
 
 func _reset_game() -> void:
 	# Small fix so the player does not show death animation before entering the game
-	if not game_playing and not game_started:
+	if not game_playing:
 		player.reset()
 	else:
-		yield(timer(2.0), "timeout")
+		yield(Game.timer(2.0), "timeout")
 	
 	main_music.kill(0.5)
 	
-	if game_playing and game_started:
+	if game_playing and boss_follows:
 		game_playing = false
-		game_started = false
+		boss_follows = false
 		
 		move_with_fade(player, player_respawn_01.global_position)
-	elif not game_playing and not game_started:
+	elif not game_playing and not boss_follows:
 		move_with_fade(player, player_respawn_00.global_position)
-	elif not game_playing and game_started:
+	elif not game_playing and boss_follows:
 		move_with_fade(player, player_respawn_02.global_position)
 
 func _end_game(player: Node) -> void:
@@ -155,34 +153,31 @@ func _on_exit() -> void:
 	if not end_door_area.overlaps_body(player):
 		if not_close_enough_help:
 			Game.subtitle.say(tr("NARRATOR05"))
-			
 			not_close_enough_help = false
 		
 		not_close_enough_sound.play()
 		return;
 	
 	end_door_area.visible = false
-	
 	player.freeze(true)
 	door_locked_sound.play()
-	
-	yield(timer(0.75), "timeout")
-	
+	yield(Game.timer(0.75), "timeout")
+
 	falling_sound.play()
-	
 	end_tube.open_mouth = true
-	
-	yield(timer(0.25), "timeout")
-	
+	yield(Game.timer(0.25), "timeout")
+
 	wall_ending_bottom.disabled = true
-	
-	yield(timer(1.0), "timeout")
-	fade_out(2.0)
-	yield(timer(5.0), "timeout")
+	yield(Game.timer(1.0), "timeout")
+
+	black_screen.fade_in(2.0)
+	yield(Game.timer(5.0), "timeout")
 	
 	load_scene(next_scene)
 
 func _on_scene_started() -> void:
+	black_screen.fade_out(2.0)
+
 	if teleport_player_to_end:
 		_start_game(player)
 		_end_game(player)
@@ -198,7 +193,7 @@ func _process(delta: float) -> void:
 	_process_enemy_path_finding(delta)
 
 func _process_enemy_path_finding(delta) -> void:
-	if not game_started or boss.dead:
+	if not boss_follows or boss.dead:
 		return
 	
 	path_finder_fire += delta

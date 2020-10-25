@@ -48,8 +48,6 @@ func _ready() -> void:
 	top_hand.connect("player_on_palm", self, "_player_on_palm")
 	fall_to_death.connect("body_entered", self, "_on_fall_to_death")
 	top_rug.connect("selected", self, "_remove_rug")
-	
-	main_music.play()
 
 func _remove_rug() -> void:
 	top_rug.get_parent().remove_child(top_rug)
@@ -61,31 +59,31 @@ func _player_on_palm(player: Player) -> void:
 		return
 	
 	game_finished = true
-	
-	yield(timer(3.0), "timeout")
-	fade_out(2.0)
-	yield(timer(2.0), "timeout")
+	yield(Game.timer(3.0), "timeout")
+
+	black_screen.fade_in(2.0)
+	yield(Game.timer(2.0), "timeout")
 	
 	end_animated_sprite.frames = player.animated_sprite.frames
 	end_animated_sprite.playing = true 
-	
 	camera.current = false
 	end_camera.current = true
-	
 	end_fap_sound.play()
+	black_screen.fade_out(5.0)
+	yield(Game.timer(10.0), "timeout")
 	
-	fade_in(5.0)
-	yield(timer(10.0), "timeout")
-	
-	fade_out(5.0)
+	black_screen.fade_in(5.0)
 	main_music.kill(7.0)
-	yield(timer(10.0), "timeout")
+	yield(Game.timer(10.0), "timeout")
 	
 	load_scene(next_scene)
 
 func _on_bottom_button_selected() -> void:
-	if not dildo_in_place or top_hand.moving or bottom_hand.moving:
+	if not dildo_in_place:
 		not_close_enough_sound.play()
+		return
+	
+	if top_hand.moving or bottom_hand.moving:
 		return
 	
 	if top_hand.open:
@@ -98,6 +96,9 @@ func _on_top_button_selected() -> void:
 		not_close_enough_sound.play()
 		return
 	
+	if top_hand.moving or bottom_hand.moving:
+		return
+	
 	if bottom_hand.open:
 		bottom_hand.close()
 	
@@ -107,23 +108,24 @@ func _on_dildo_inside() -> void:
 	dildo_in_place = true
 	
 	bottom_door.open()
-	
-	yield(timer(2.0), "timeout")
+	yield(Game.timer(2.0), "timeout")
 	
 	camera.zoom_action()
 	Game.subtitle.say(tr("NARRATOR11"))
-	
+
 	top_player_collision_right_shape.disabled = true
 	bottom_player_collision_left_shape.disabled = true
 	top_button_light.visible = true
 	bottom_button_light.visible = true
 
 func _on_scene_started() -> void:
-	pass
+	main_music.play()
 
 func _on_fall_to_death(body: Node) -> void:
 	if game_over:
 		return
+	
+	game_over = true
 	
 	if dildo_in_place and body.is_in_group("player"):
 		var store_index = Game.players.find(body)
@@ -137,14 +139,15 @@ func _on_fall_to_death(body: Node) -> void:
 		if len(Game.players) > 0:
 			return
 	
-	game_over = true
-	
 	main_music.kill(2.0);
-	fade_out(2.0)
-	yield(timer(2.0), "timeout")
+	black_screen.fade_in(2.0)
+	yield(Game.timer(2.0), "timeout")
 	
 	load_scene(get_parent().filename)
 
+# The position of P2.X is the mirrored (by the origo) position of P1.X.
+# This function validates if they are still in sync and if not their position X
+# is set to the average distance X from the origo.
 func _process(delta):
 	if not is_instance_valid(player_top) or not is_instance_valid(player_bottom):
 		return

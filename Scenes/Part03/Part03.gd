@@ -46,15 +46,32 @@ func _ready() -> void:
 	paper_with_code.connect("selected", self, "_unlock_ending")
 	keypad.connect("selected", self, "_keypad_selected")
 	
-	main_music.play()
-	
 	if not disable_movement_delay:
 		camera.smoothing_enabled = true
 		player.visible = false
-		
 		player.freeze(true)
 	
 	_hide_papers_visibility(false)
+
+func _on_scene_started() -> void:
+	black_screen.fade_out(2.0)
+	main_music.play()
+
+	if not disable_movement_delay:
+		yield(Game.timer(4.5), "timeout")
+		Game.subtitle.say(tr("NARRATOR06"))
+		
+		player.visible = true
+		
+		yield(Game.timer(3.5), "timeout")
+		
+		for n in range(4):
+			camera.smoothing_speed += 0.5
+			yield(Game.timer(0.5), "timeout")
+		
+		camera.smoothing_enabled = false
+		
+		player.unfreeze()
 
 func _keypad_selected() -> void:
 	if not ending_open:
@@ -68,19 +85,15 @@ func _keypad_selected() -> void:
 		return
 	
 	ending_triggered = true
-	
 	next_level_music.play()
-	screen_effect.enable(player)
-	
+	screen_effect.play(player)
 	Game.disable_selectable = true
-	
-	yield(timer(5.0), "timeout")
+	yield(Game.timer(5.0), "timeout")
 	
 	main_music.kill(2.0)
 	next_level_music.kill(2.0)
-	
-	fade_out(2.0)
-	yield(timer(2.0), "timeout")
+	black_screen.fade_in(3.0)
+	yield(Game.timer(2.0), "timeout")
 	
 	Game.disable_selectable = false
 	load_scene(next_scene)
@@ -88,23 +101,6 @@ func _keypad_selected() -> void:
 func _hide_papers_visibility(visible: bool) -> void:
 	for node in hide_papers.get_children():
 		node.visible = visible
-
-func _on_scene_started() -> void:
-	if not disable_movement_delay:
-		yield(timer(4.5), "timeout")
-		Game.subtitle.say(tr("NARRATOR06"))
-		
-		player.visible = true
-		
-		yield(timer(3.5), "timeout")
-		
-		for n in range(4):
-			camera.smoothing_speed += 0.5
-			yield(timer(0.5), "timeout")
-		
-		camera.smoothing_enabled = false
-		
-		player.unfreeze()
 
 func _on_ditch_door_select() -> void:
 	move_with_fade(player, maintenance_room_spawn.position, door_open_sound)
@@ -118,5 +114,4 @@ func _on_battery_in_place() -> void:
 
 func _unlock_ending() -> void:
 	Game.subtitle.say(tr("NARRATOR08"))
-
 	ending_open = true

@@ -19,10 +19,10 @@ onready var hallway_01 = $Environment/Hallway01
 onready var hallway_02 = $Environment/Hallway02
 
 onready var flat_spawn = $Trigger/FlatSpawn
-onready var random_flat_spawn = $Trigger/RandomFlatSpawn
 onready var hallway_spawn = $Trigger/HallwaySpawn
 onready var hallway_begin = $Trigger/HallwayLoopBegin
 onready var hallway_end = $Trigger/HallwayLoopEnd
+onready var random_flat_spawn = $Trigger/RandomFlatSpawn
 
 onready var main_music = $Sound/MainMusic
 onready var waiting_music  = $Sound/WaitingMusic
@@ -32,7 +32,6 @@ onready var silent_door_open_sound = $Sound/SilentDoorOpenSound
 
 const random_flat_scene = preload("res://Scenes/Part00/Part00_RandomFlat.tscn")
 
-var number_of_hallway_enters: int = 0
 var is_player_in_hallway: bool = false
 var hallway_previous_player_position: float = 0.0
 var hallway_wait_counter: float = 0.0
@@ -40,7 +39,8 @@ var hallway_help_complete: bool = false
 var hallway_exit_enabled: bool = false
 var hallway_exit_open: bool = false
 var hallway_exiting: bool = false
-var dupe_player: Player = null
+var hallway_enter_count: int = 0
+var player_copy: Player = null
 var loop_index: int = 0
 var home_index = 4
 
@@ -54,44 +54,38 @@ func _ready() -> void:
 	waiting_music.add_part(13 * 60 + 35, 15 * 60 + 10, true, 5, 5, 0)
 	
 	connect("scene_started", self, "_on_scene_started")
-	
 	flat_door.connect("selected", self, "_on_flat_exit_select")
-	
 	hallway_00.connect("door_selected", self, "_on_hallway_door_select")
 	hallway_01.connect("door_selected", self, "_on_hallway_door_select")
 	hallway_02.connect("door_selected", self, "_on_hallway_door_select")
 	
-	main_music.play()
-	
 	camera.smoothing_enabled = false
 
 func _on_scene_started() -> void:
-	yield(timer(1.5), "timeout")
+	yield(Game.timer(2.0), "timeout")
+	black_screen.fade_out(3.0)
+	yield(Game.timer(1.5), "timeout")
 	Game.subtitle.say(tr("NARRATOR00"))
+	main_music.play()
+
+func _enable_next_traffic_lamp(lamps_to_show: int = 0):
+	if lamps_to_show <= 0:
+		return
+	
+	for lamp_index in range(lamps_to_show):
+		if lamp_index >= len(hallway_01.lamps):
+			break
+		
+		hallway_00.lamps[lamp_index].enable()
+		hallway_01.lamps[lamp_index].enable()
+		hallway_02.lamps[lamp_index].enable()
 
 func _on_flat_exit_select():
 	is_player_in_hallway = true
-	number_of_hallway_enters += 1
+	hallway_enter_count += 1
 	
-	var lamps_to_show = number_of_hallway_enters - show_red_stop_lamps_from
-	
-	if lamps_to_show > 0:
-		for lamp_index in range(lamps_to_show):
-			if lamp_index >= len(hallway_01.lamps):
-				break
-			
-			hallway_00.lamps[lamp_index].enable()
-			hallway_01.lamps[lamp_index].enable()
-			hallway_02.lamps[lamp_index].enable()
-	
+	_enable_next_traffic_lamp(hallway_enter_count - show_red_stop_lamps_from)
 	move_with_fade(player, hallway_spawn.position, door_open_sound)
-
-func _dupe_player() -> Node2D:
-	var clone = player.create_clone()
-
-	add_child(clone)
-	
-	return clone
 
 func _on_hallway_door_select(door, index) -> void:
 	is_player_in_hallway = false
@@ -189,6 +183,16 @@ func _process_hallway_wait(delta: float) -> void:
 		
 		_reset_hallway_wait()
 
+# When reaching the end of the hallway the player is teleported to the
+# beginning, but a shallow clone stays at the old position for one
+# tick. This solves a flickering issue.
+func _dupe_player() -> Node2D:
+	var clone = player.create_clone()
+
+	add_child(clone)
+	
+	return clone
+
 func _process_hallway_loop(_delta: float) -> void:
 	var left_end_position = hallway_begin.global_position
 	var right_end_position = hallway_end.global_position
@@ -196,7 +200,7 @@ func _process_hallway_loop(_delta: float) -> void:
 	
 	# Left end
 	if left_end_position.x > player_position.x:
-		dupe_player = _dupe_player()
+		player_copy = _dupe_player()
 		
 		var diff = left_end_position.x - player_position.x
 		
@@ -205,7 +209,7 @@ func _process_hallway_loop(_delta: float) -> void:
 	
 	# Right end
 	if right_end_position.x < player_position.x:
-		dupe_player = _dupe_player()
+		player_copy = _dupe_player()
 		
 		var diff = player_position.x - right_end_position.x
 		
@@ -216,10 +220,10 @@ func _process(delta: float) -> void:
 	if Game.loader:
 		return
 	
-	if dupe_player:
-		remove_child(dupe_player)
-		dupe_player.queue_free()
-		dupe_player = null
+	if player_copy:
+		remove_child(player_copy)
+		player_copy.queue_free()
+		player_copy = null
 	
 	_process_hallway_loop(delta)
 	_process_hallway_wait(delta)

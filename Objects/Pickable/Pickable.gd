@@ -44,11 +44,10 @@ func _physics_process(_delta: float) -> void:
 	var position_diff = VirtualInput.get_world_mouse_position() - global_position
 	var grab_force = position_diff.normalized() * GRAB_FORCE
 	
-	if abs(linear_velocity.x) < MAX_VELOCITY.x and abs(linear_velocity.y) < MAX_VELOCITY.y :
-		apply_force(grab_force)
+	apply_force(grab_force)
 
 func apply_force(force: Vector2) -> void:
-	if force < MAX_FORCE and linear_velocity < MAX_VELOCITY:
+	if force < MAX_FORCE and linear_velocity.abs() < MAX_VELOCITY:
 		apply_central_impulse(force)
 
 func pickup() -> void:

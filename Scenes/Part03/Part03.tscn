@@ -51,8 +51,8 @@ flash_player_animation_frames = ExtResource( 10 )
 
 [node name="Background" type="Sprite" parent="BaseScene/Environment"]
 light_mask = 0
-position = Vector2( 125.709, 0 )
-scale = Vector2( 0.885024, 1 )
+position = Vector2( 117.241, -0.822754 )
+scale = Vector2( 0.887, 1 )
 z_index = -10
 texture = ExtResource( 14 )
 region_enabled = true

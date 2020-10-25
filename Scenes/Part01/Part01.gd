@@ -41,8 +41,6 @@ func _ready() -> void:
 	music_02 = main_music.add_part(8 * 60 + 21, 9 * 60 + 56.5, true, 5, 5, -40)
 	
 	connect("scene_started", self, "_on_scene_started")
-	connect("intro_over", self, "_on_intro_over")
-	
 	trigger_comment.connect("body_entered", self, "_trigger_comment")
 	trigger_train.connect("body_entered", self, "_trigger_train")
 	reaching_hoop.connect("body_entered", self, "_trigger_hoop_part")
@@ -51,9 +49,8 @@ func _ready() -> void:
 	exhibition_door.connect("selected", self, "_on_exhibition_door_selected")
 	hoop.connect("ball_in_hoop", self, "_trigger_ball_in_hoop")
 	
-	if not Config.no_intro:
-		main_music.master_player.pitch_scale = 0.001
-		wind_sound.pitch_scale = 0.001
+	main_music.master_player.pitch_scale = 0.001
+	wind_sound.pitch_scale = 0.001
 	
 	wind_sound.play()
 	
@@ -64,11 +61,10 @@ func _ready() -> void:
 
 	road_block.visible = false
 
-func _on_intro_over() -> void:
-	main_music.play()
-
 func _on_scene_started() -> void:
+	black_screen.fade_out(3.0)
 	Game.subtitle.say(tr("NARRATOR02"), 6.0)
+	main_music.play()
 
 func _on_shed_door_selected() -> void:
 	move_with_fade(player, exhibition_spawn.global_position, door_sound)
@@ -82,17 +78,17 @@ func _on_phone_selected() -> void:
 	
 	phone_box.flashing_phone_light = false
 	phone_selected = true
-	
+
 	main_music.kill(2.0);
-	fade_out(2.0)
-	
-	yield(timer(3.0), "timeout")
+	black_screen.fade_in(2.0)
+	yield(Game.timer(3.0), "timeout")
+
 	ring_sound.stop()
-	
-	yield(timer(0.5), "timeout")
+	yield(Game.timer(0.5), "timeout")
+
 	pick_up_sound.play()
-	
-	yield(timer(2.0), "timeout")
+	yield(Game.timer(2.0), "timeout")
+
 	load_scene(next_scene)
 
 func _trigger_comment(player: Node) -> void:
@@ -100,7 +96,6 @@ func _trigger_comment(player: Node) -> void:
 		return
 	
 	trigger_comment.visible = false
-	
 	Game.subtitle.say(tr("NARRATOR03"), 6)
 
 func _trigger_train(player: Node) -> void:
@@ -115,7 +110,6 @@ func _reaching_phone_box(player: Node) -> void:
 		return
 	
 	Tools.set_shapes_disabled(road_block, false)
-
 	road_block.visible = true
 
 func _trigger_hoop_part(ball: Node) -> void:
@@ -127,16 +121,14 @@ func _trigger_hoop_part(ball: Node) -> void:
 
 func _trigger_ball_in_hoop() -> void:
 	yield(Game.timer(5.0), "timeout")
-	
 	ring_sound.play()
 	phone_box.phone.connect("selected", self, "_on_phone_selected")
-	
 	phone_box.phone.visible = true
 	phone_box.lamp.visible = true
 	phone_box.flashing_phone_light = true
 
-func _process_wind_intro(_delta: float) -> void:
-	if Config.no_intro:
+func _process(delta: float) -> void:
+	if Game.loader:
 		return
 	
 	# Make vinyl sound effect
@@ -148,9 +140,3 @@ func _process_wind_intro(_delta: float) -> void:
 	else:
 		wind_sound.pitch_scale = max(min(pitch_value, 1.0), 0.001)
 		main_music.master_player.pitch_scale = max(min(pitch_value, 1.0), 0.001)
-
-func _process(delta: float) -> void:
-	if Game.loader:
-		return
-	
-	_process_wind_intro(delta)

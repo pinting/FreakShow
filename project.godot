@@ -83,6 +83,18 @@ mouse_cursor/custom_image="res://Assets/Environmnent/Cursor00.png"
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
+[editor]
+
+Tools=false
+
+[external]
+
+Tools=false
+
+[global]
+
+Tools=false
+
 [importer_defaults]
 
 texture={
@@ -226,7 +238,7 @@ quality/reflections/high_quality_ggx=false
 quality/reflections/irradiance_max_size=32
 quality/depth_prepass/disable_for_vendors=""
 quality/filters/use_nearest_mipmap_filter=true
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_clear_color=Color( 0.898039, 0, 1, 1 )
 quality/reflections/atlas_size=512
 quality/reflections/atlas_subdiv=1
 quality/depth/hdr=false

@@ -28,6 +28,8 @@ func _input(event: InputEvent) -> void:
 		load_scene(next_scene)
 
 func _on_scene_started() -> void:
+	black_screen.fade_out(2.0)
+	
 	var last_scene = Config.last_loaded_scene
 	
 	if last_scene and last_scene != "res://Scenes/GameBegin.tscn":

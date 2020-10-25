@@ -1,19 +1,23 @@
 extends Sprite
 
-onready var area = $Area2D
+onready var inside = $Inside
 
 signal battery_inside
 
-var inside: Node = null
+var inside_body: Node = null
 
 func _ready() -> void:
-	area.connect("body_entered", self, "_on_body_entered")
+	inside.connect("body_entered", self, "_on_body_entered")
 
 func _on_body_entered(body: Node):
-	if not inside or not body.is_in_group("battery") or not body.is_in_group("pickable"):
+	if inside_body or not body.is_in_group("battery") :
 		return
 	
-	inside.rotation_degrees = rotation_degrees - fmod(rotation_degrees, 90.0)
-	inside = body
+	body.rotation_degrees = rotation_degrees - fmod(rotation_degrees, 90.0)
+	body.global_position = inside.global_position
+	
+	body.disable()
+	
+	inside_body = body
 	
 	emit_signal("battery_inside")

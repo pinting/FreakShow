@@ -2,7 +2,16 @@ extends Node2D
 
 export var color_change_speed: float = 0.5
 
+# Name of the property on the self to change 
+export var color_property: String = "modulate"
+
+# Name of the shader parameter on the material to change
+export var color_shader_param: String = ""
+
+# Add this offset to the result
 export var offset: Color = Color(0.75, 0.75, 0.75)
+
+# Scale color with this property
 export var scale_color: Color = Color(0.33, 0.33, 0.33)
 
 var current: Color = Color(0.0, 0.0, 0.0)
@@ -47,7 +56,14 @@ func _process(delta: float) -> void:
 	current.g = max(0.0, min(1.0, current.g))
 	current.b = max(0.0, min(1.0, current.b))
 	
-	modulate = Color(
+	# Scale and add offset, but limit the value between 0.0 - 1.0
+	var result = Color(
 		max(min(scale_color.r * current.r + offset.r, 1.0), 0.0), 
 		max(min(scale_color.g * current.g + offset.g, 1.0), 0.0),
 		max(min(scale_color.b * current.b + offset.b, 1.0), 0.0))
+	
+	if len(color_property):
+		set(color_property, result)
+	
+	if len(color_shader_param) and material:
+		material.set_shader_param(color_shader_param, result)

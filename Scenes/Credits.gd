@@ -18,7 +18,8 @@ func _ready() -> void:
 	disable_auto_restart = true
 
 func _on_scene_started() -> void:
-	yield(timer(credits_delay), "timeout")
+	black_screen.fade_out(2.0)
+	yield(Game.timer(credits_delay), "timeout")
 
 	for n in range(0, credits_count):
 		var sn = str(n)
@@ -32,14 +33,14 @@ func _on_scene_started() -> void:
 		text_top.text = top
 		text_bottom.text = bottom
 
-		yield(timer(credits_timeout), "timeout")
+		yield(Game.timer(credits_timeout), "timeout")
 		
 		text_top.text = ""
 		text_bottom.text = ""
 
-		yield(timer(credits_delay), "timeout")
+		yield(Game.timer(credits_delay), "timeout")
 	
-	fade_out(2.0)
-	yield(timer(2.0), "timeout")
+	black_screen.fade_in(2.0)
+	yield(Game.timer(2.0), "timeout")
 	
 	load_scene(ProjectSettings.get_setting("application/run/main_scene"))

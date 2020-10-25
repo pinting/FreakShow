@@ -17,7 +17,7 @@ export var effect_hover: float = 0.0
 export var effect_default: float = 0.0
 
 # Effect step size in one second
-export var effect_step: float = 0.5
+export var effect_step: float = 0.1
 
 # Selection area scale
 export var selection_area_scale: Vector2 = Vector2(1.0, 1.0)
@@ -124,13 +124,13 @@ func _physics_process(delta: float) -> void:
 			material.set_shader_param(offset_key, offset)
 		
 		if len(effect_key):
-			current += effect_step / delta
+			current += delta / effect_step
 			current = min(effect_hover, current)
 		
 		show_description()
-	elif not held:
+	elif not held or disabled:
 		if len(effect_key):
-			current -= effect_step / delta
+			current -= delta / effect_step
 			current = max(effect_default, current)
 		
 		remove_description()

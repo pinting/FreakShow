@@ -1,8 +1,6 @@
 # Missing proprietary music files
 
-Should be placed into `Assets/Music`. Use `setup.sh` to process the files!
-
-Playlist: https://www.youtube.com/playlist?list=PLfecV2b5DItOgrSQ3Dy-3OY3Oc9zsDb73
+Should be placed into root of the project folder. Files should not be renamed, . Use `setup.sh` to process the files!
 
 ## Cluster & Eno - Wehrmut
 
@@ -63,3 +61,7 @@ https://ghostbox.greedbag.com/buy/sleep-games
 Required minimum length is 5 minutes and 5 seconds
 
 Copyright (c) 2012 Ghost Box
+
+# Playlist
+
+https://www.youtube.com/playlist?list=PLfecV2b5DItOgrSQ3Dy-3OY3Oc9zsDb73

@@ -31,7 +31,6 @@ font_data = SubResource( 2 )
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
-fade_in_after = 5.0
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
 position = Vector2( -1270.34, -60.2246 )
@@ -48,7 +47,7 @@ layer = -90
 scale = Vector2( 1.26, 1.27 )
 z_index = -1
 frames = ExtResource( 1 )
-frame = 119
+frame = 158
 playing = true
 centered = false
 

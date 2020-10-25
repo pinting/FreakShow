@@ -97,7 +97,6 @@ position = Vector2( 59.2303, 0.734743 )
 
 [node name="BaseScene" parent="." instance=ExtResource( 46 )]
 script = ExtResource( 8 )
-teleport_player_to_end = true
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -4797.1, -349.489 )

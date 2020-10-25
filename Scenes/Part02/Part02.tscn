@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Sounds/Phone02.wav" type="AudioStream" id=2]
@@ -13,7 +13,7 @@
 [ext_resource path="res://Objects/MusicMixer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Part02/Part02_MovingEye.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Sounds/Wind00.ogg" type="AudioStream" id=13]
-[ext_resource path="res://Shaders/CRT.shader" type="Shader" id=14]
+[ext_resource path="res://Objects/BlackScreen.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Objects/Selectable/Selectable_CrazyDoor.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Objects/Static/Static_SideLamp00.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/Environmnent/Lines00_H00_Thin.png" type="Texture" id=17]
@@ -44,25 +44,12 @@
 [ext_resource path="res://Objects/Selectable/Selectable.gd" type="Script" id=42]
 [ext_resource path="res://Objects/Effect/Screen/ScreenEffect_CRT.tscn" type="PackedScene" id=43]
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=1]
 background_mode = 4
 glow_enabled = true
 glow_intensity = 1.0
 glow_strength = 1.4
 glow_hdr_threshold = 0.4
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 14 )
-shader_param/screen_width = 1920.0
-shader_param/screen_height = 1080.0
-shader_param/barrel_power = 1.0
-shader_param/color_bleeding = 1.0
-shader_param/bleeding_range_x = 3.0
-shader_param/bleeding_range_y = 3.0
-shader_param/lines_distance = 4.0
-shader_param/scan_size = 2.0
-shader_param/scanline_alpha = 0.9
-shader_param/lines_velocity = 30.0
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
@@ -153,22 +140,12 @@ light_mask = 0
 color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
-environment = SubResource( 2 )
+environment = SubResource( 1 )
 
 [node name="ScreenEffect" parent="BaseScene" instance=ExtResource( 43 )]
 
-[node name="BlackBackground" type="CanvasLayer" parent="BaseScene"]
+[node name="BlackBackground" parent="BaseScene" instance=ExtResource( 14 )]
 layer = -90
-
-[node name="Canvas" type="ColorRect" parent="BaseScene/BlackBackground"]
-material = SubResource( 1 )
-margin_right = 960.0
-margin_bottom = 540.0
-mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 

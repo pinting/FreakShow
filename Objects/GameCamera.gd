@@ -44,7 +44,6 @@ func _process_shake(delta: float) -> void:
 	offset.x = max_offset.x * shake * noise.get_noise_2d(noise.seed * 2, shake_offset_y)
 	offset.y = max_offset.y * shake * noise.get_noise_2d(noise.seed * 3, shake_offset_y)
 
-
 func _process_zoom(delta: float) -> void:
 	var camera = Game.current_camera
 	

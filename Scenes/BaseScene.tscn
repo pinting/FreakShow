@@ -1,31 +1,15 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Objects/ViewableDisplay.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Objects/VirtualCursor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/BlackScreen.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Objects/SubtitleDisplay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/BaseScene.gd" type="Script" id=11]
 
 [node name="BaseScene" type="Node2D"]
 script = ExtResource( 11 )
 
-[node name="VirtualCursorDisplay" parent="." instance=ExtResource( 2 )]
-
 [node name="SubtitleDisplay" parent="." instance=ExtResource( 8 )]
 
-[node name="BlackScreen" type="CanvasLayer" parent="."]
-layer = 100
-
-[node name="ColorRect" type="ColorRect" parent="BlackScreen"]
-visible = false
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = -10000.0
-margin_top = -10000.0
-margin_right = 10000.0
-margin_bottom = 10000.0
-mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="BlackScreen" parent="." instance=ExtResource( 3 )]
 
 [node name="ViewableDisplay" parent="." instance=ExtResource( 1 )]

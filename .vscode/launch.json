@@ -2,14 +2,78 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run in Godot",
+            "name": "Attach",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "port": 6007,
+            "address": "127.0.0.1"
+        },
+        {
+            "name": "Part00",
             "type": "godot",
             "request": "launch",
             "project": "${workspaceFolder}",
             "port": 6007,
             "address": "127.0.0.1",
+            "scene_file": "res://Scenes/Part00/Part00.tscn",
             "launch_game_instance": true,
-            "launch_scene": false
+            "launch_scene": true
+        },
+        {
+            "name": "Part01",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "port": 6007,
+            "address": "127.0.0.1",
+            "scene_file": "res://Scenes/Part01/Part01.tscn",
+            "launch_game_instance": true,
+            "launch_scene": true
+        },
+        {
+            "name": "Part02",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "port": 6007,
+            "address": "127.0.0.1",
+            "scene_file": "res://Scenes/Part02/Part02.tscn",
+            "launch_game_instance": true,
+            "launch_scene": true
+        },
+        {
+            "name": "Part03",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "port": 6007,
+            "address": "127.0.0.1",
+            "scene_file": "res://Scenes/Part03/Part03.tscn",
+            "launch_game_instance": true,
+            "launch_scene": true
+        },
+        {
+            "name": "Part04",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "port": 6007,
+            "address": "127.0.0.1",
+            "scene_file": "res://Scenes/Part04/Part04.tscn",
+            "launch_game_instance": true,
+            "launch_scene": true
+        },
+        {
+            "name": "Part05",
+            "type": "godot",
+            "request": "launch",
+            "project": "${workspaceFolder}",
+            "port": 6007,
+            "address": "127.0.0.1",
+            "scene_file": "res://Scenes/Part05/Part05.tscn",
+            "launch_game_instance": true,
+            "launch_scene": true
         }
     ]
 }

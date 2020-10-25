@@ -45,7 +45,7 @@ func _process(delta: float):
 		if door_move:
 			door_move.stop()
 
-func open():
+func open() -> void:
 	if open or moving:
 		return
 	
@@ -61,7 +61,7 @@ func open():
 	moving = true
 	direction = 1.0
 
-func close():
+func close() -> void:
 	if not open or moving:
 		return
 	

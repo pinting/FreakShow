@@ -215,7 +215,7 @@ func _process_player_on_top(delta: float) -> void:
 		if player.current_velocity.x > player.current_max_speed:
 			player.current_velocity.x -= player.current_max_speed * delta
 
-func _process_fade_in(delta: float) -> void:
+func _process_black_screen.fade_out(delta: float) -> void:
 	if not enable_sound:
 		return
 	
@@ -236,13 +236,13 @@ func _process_recycle() -> void:
 		stop()
 		destroy()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not started or Game.loader:
 		return
 	
 	current_second += delta
 	
-	_process_fade_in(delta)
+	_process_black_screen.fade_out(delta)
 	_process_exit_list()
 	_process_train_movement(delta)
 	_process_player_on_top(delta)

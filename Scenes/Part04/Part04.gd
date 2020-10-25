@@ -46,13 +46,11 @@ func _ready() -> void:
 	music_02 = main_music.add_part(30.8, 41.9, false, 0, 2, 0)
 	music_03 = main_music.add_part(0, 19.3, true, 2, 2, -5)
 	
+	connect("scene_started", self, "_on_scene_started")
 	fall_to_died.connect("body_entered", self, "_kill_player")
 	player.connect("died", self, "_on_player_die")
 	game_end.connect("body_entered", self, "_on_player_reach_game_end")
 	club.connect("door_selected", self, "_on_exit_selected")
-	connect("scene_started", self, "_on_scene_started")
-	
-	main_music.play()
 
 func _generate_pillars():
 	var pillars_y = []
@@ -114,6 +112,10 @@ func _on_scene_started() -> void:
 	else:
 		_create_train()
 	
+	black_screen.fade_in(3.0)
+	main_music.play()
+
+	yield(Game.timer(2.0), "timeout")
 	Game.subtitle.say(tr("NARRATOR09"))
 
 func _on_player_on_train_top() -> void:
@@ -147,19 +149,19 @@ func _on_exit_selected() -> void:
 	door_sound.play()
 	main_music.kill(2.0)
 	
-	fade_out(0.5)
-	yield(timer(0.5), "timeout")
+	black_screen.fade_in(0.5)
+	yield(Game.timer(0.5), "timeout")
 	
 	club.bass_sound.volume_db = 10
-	yield(timer(1.0), "timeout")
+	yield(Game.timer(1.0), "timeout")
 	
 	_clean_trains()
-	yield(timer(0.5), "timeout")
+	yield(Game.timer(0.5), "timeout")
 	
 	load_scene(next_scene)
 
 func _on_player_die() -> void:
-	yield(timer(2.0), "timeout")
+	yield(Game.timer(2.0), "timeout")
 	
 	main_music.force_next(music_00)
 	move_with_fade(player, player_respawn.global_position)
@@ -174,7 +176,6 @@ func _create_train() -> void:
 	new_train.position = train_spawn.position
 	new_train.collision_layer = 8
 	new_train.collision_mask = 8
-	
 	new_train.connect("player_on_top", self, "_on_player_on_train_top")
 	
 	add_child(new_train)

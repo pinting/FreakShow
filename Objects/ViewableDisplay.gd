@@ -1,3 +1,4 @@
+class_name ViewableDisplay
 extends CanvasLayer
 
 # Process user input after this amount of seconds, so the user cannot click through stuff

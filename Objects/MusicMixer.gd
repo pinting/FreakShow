@@ -16,7 +16,7 @@ export var max_volume: int = 0
 # Muting volume in DB
 export var min_volume: int = -60
 
-# Debug the music player (Game.debug needs to be true)
+# Debug the music player (Config.debug needs to be true)
 export var debug: bool = false
 
 onready var player_00 = $AudioStreamPlayer00

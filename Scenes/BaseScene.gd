@@ -4,23 +4,13 @@ extends Node2D
 # Game restart after this amount of seconds if player is idle
 export var game_restart_after: float = 300.0
 
-# Time after the game fades in
-export var fade_in_after: float = 2.0
-
-# Fade out duration
-export var fade_in_duration: float = 3.0
-
-# Delay
+# Delay game start
 export var delay: float = 0.0
 
-onready var black_screen = $BlackScreen/ColorRect
+onready var black_screen = $BlackScreen
 
 var held_object: Object = null
-var fade_current: float = 1.0
-var fade_duration: float = 1.0
-var fade_direction: float = 0.0
 var intro_started: bool = false
-var intro_over: bool = false
 var current_delay: float = 0.0
 var current_second: float = 0.0
 var disable_auto_restart: bool = false
@@ -30,45 +20,15 @@ var move_in_progress: bool = false
 var loading_in_progress: bool = false
 
 signal scene_started
-signal fade_out_done
-signal fade_in_done
-signal intro_over
 
 func _ready() -> void:
-	if Config.no_intro:
-		fade_current = 0.0
-		intro_started = true
-		intro_over = true
-		
-		emit_signal("intro_over")
-	else:
-		black_screen.visible = true
-	
 	for node in get_tree().get_nodes_in_group("pickable"):
 		node.connect("picked", self, "_on_pickable_picked")
-
-func _on_pickable_picked(object: Object) -> void:
-	if not held_object:
-		held_object = object
-		held_object.pickup()
-
-func _input(event: InputEvent) -> void:
-	restart_counter = 0.0
-	
-	if event is InputEventMouseButton:
-		if held_object and not event.pressed:
-			if is_instance_valid(held_object):
-				held_object.drop(Input.get_last_mouse_speed())
-			
-			held_object = null
 
 func _process(delta: float) -> void:
 	if current_delay < delay:
 		current_delay += delta
 		return
-	
-	if current_second == 0.0:
-		emit_signal("scene_started")
 	
 	if not disable_auto_restart:
 		if restart_counter >= game_restart_after:
@@ -76,11 +36,12 @@ func _process(delta: float) -> void:
 		
 		restart_counter += delta
 	
-	current_second += delta
-	
-	_process_intro(delta)
-	_process_fade(delta)
 	_process_restart_button(delta)
+	
+	if current_second == 0.0:
+		emit_signal("scene_started")
+	
+	current_second += delta
 
 func _process_restart_button(delta: float) -> void:
 	var restart_game = Input.is_action_pressed("restart_game")
@@ -97,55 +58,20 @@ func _process_restart_button(delta: float) -> void:
 	else:
 		restart_button_counter += 0
 
-func _process_intro(_delta: float) -> void:
-	if intro_started:
-		return
-	
-	if current_second > fade_in_after:
-		fade_in(fade_in_duration)
-		intro_started = true
+func _on_pickable_picked(object: Object) -> void:
+	if not held_object:
+		held_object = object
+		held_object.pickup()
 
-func _process_fade(delta: float) -> void:
-	if fade_current == 0.0:
-		black_screen.visible = false
-	else:
-		black_screen.visible = true
+func _input(event: InputEvent) -> void:
+	restart_counter = 0.0
 	
-	if fade_direction == 0.0:
-		return
-	
-	fade_current += fade_direction * (delta / fade_duration)
-	fade_current = min(1.0, max(0.0, fade_current))
-	
-	if fade_current == 0.0 or fade_current == 1.0:
-		fade_direction = 0.0
-	
-	if fade_current == 1.0:
-		emit_signal("fade_out_done")
-	elif fade_current == 0.0:
-		emit_signal("fade_in_done")
-		
-		if(not intro_over):
-			intro_over = true
+	if event is InputEventMouseButton:
+		if held_object and not event.pressed:
+			if is_instance_valid(held_object):
+				held_object.drop(Input.get_last_mouse_speed())
 			
-			emit_signal("intro_over")
-	
-	black_screen.modulate = Color(0.0, 0.0, 0.0, fade_current)
-
-func fade_out(duration: float = 1.0) -> void:
-	assert(duration > 0.0)
-	
-	fade_duration = duration
-	fade_direction = 1.0
-
-func fade_in(duration: float = 1.0) -> void:
-	assert(duration > 0.0)
-	
-	fade_duration = duration
-	fade_direction = -1.0
-
-func timer(duration: float = 1.0) -> SceneTreeTimer:
-	return Game.timer(duration)
+			held_object = null
 
 func load_scene(path: String) -> void:
 	if loading_in_progress:
@@ -158,8 +84,8 @@ func load_scene(path: String) -> void:
 	for player in players:
 		player.freeze()
 		
-	fade_out(2.0)
-	yield(timer(2.0), "timeout")
+	black_screen.fade_in(2.0)
+	yield(Game.timer(2.0), "timeout")
 	
 	Game.load_scene(path)
 
@@ -175,20 +101,20 @@ func move_with_fade(player: Player, next_position: Vector2, sound: AudioStreamPl
 	if sound:
 		sound.play()
 	
-	fade_out(0.9)
-	yield(timer(0.9), "timeout")
+	black_screen.fade_in(0.8)
+	yield(Game.timer(0.8), "timeout")
 		
 	if camera and smoothing_enabled:
 		camera.smoothing_enabled = false
 	
 	player.position = next_position
-	yield(timer(0.2), "timeout")
+
 	player.reset()
 	
 	if camera and smoothing_enabled:
 		camera.smoothing_enabled = smoothing_enabled
 	
-	yield(timer(0.9), "timeout")
-	fade_in(0.9)
+	yield(Game.timer(0.8), "timeout")
+	black_screen.fade_out(0.8)
 	
 	move_in_progress = false

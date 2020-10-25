@@ -22,5 +22,4 @@ func _trigger_in_hoop(ball: Node) -> void:
 	ball.global_position = inside_hoop.global_position
 	
 	ball.disable()
-	
 	emit_signal("ball_in_hoop")

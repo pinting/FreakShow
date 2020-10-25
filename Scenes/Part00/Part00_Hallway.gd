@@ -16,8 +16,8 @@ onready var hallway_lamp_03 = $Inside/StopLamp03
 
 signal door_selected
 
-var doors
-var lamps
+var doors: Array = []
+var lamps: Array = []
 
 func _ready() -> void:
 	doors = [

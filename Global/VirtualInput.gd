@@ -1,8 +1,5 @@
 extends Node
 
-# Virtual cursor canvas layer
-var virtual_cursor: CanvasLayer = null
-
 # Actual mouse clicks and virtual ones are distinguished by their pressure value
 var pressure_virtual = max(0.1, min(0.9, randf()))
 
@@ -14,7 +11,7 @@ var last_virtual_click_right: bool = false
 var using_virtual: bool = false
 
 func _ready() -> void:
-	using_virtual = Config.only_virtual_mouse
+	using_virtual = Config.virtual_mouse_only
 
 func _mouse_viewport_to_window_position(viewport_position: Vector2) -> Vector2:
 	var viewport_size = get_viewport().size
@@ -43,10 +40,6 @@ func _set_virtual_mouse_position(viewport_position: Vector2, change_cursor_posit
 
 func set_cursor_position(viewport_position) -> void:
 	get_viewport().warp_mouse(viewport_position)
-	
-	if Config.virtual_cursor and virtual_cursor:
-		virtual_cursor.cursor.position = viewport_position
-		virtual_cursor.visible = true
 
 func get_world_mouse_position() -> Vector2:
 	var camera = Game.current_camera
@@ -93,7 +86,7 @@ func _create_move_event(viewport_position: Vector2, relative: Vector2, pressure:
 	get_tree().input_event(event)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion and not Config.only_virtual_mouse:
+	if event is InputEventMouseMotion and not Config.virtual_mouse_only:
 		using_virtual = event.pressure == pressure_virtual
 		
 		if not using_virtual:
