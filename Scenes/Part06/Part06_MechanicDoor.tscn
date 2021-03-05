@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Prefabs/SlidingNode.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/Door03_Stop.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Environmnent/Misc00.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sounds/Door03_Start.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Sounds/Door03_Moving.ogg" type="AudioStream" id=5]
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 506.776, 110.062 )
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( -523.676, 56.7059, -523.176, -58.7604, 455.357, -58.4635, 456.109, 57.0028 )
+
+[node name="Part06_MechanicDoor" type="Node2D"]
+rotation = 1.5708
+script = ExtResource( 1 )
+speed = Vector2( 0, 300 )
+
+[node name="HideUnder" type="ColorRect" parent="."]
+margin_left = 455.0
+margin_top = -108.0
+margin_right = 1752.0
+margin_bottom = 98.0001
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+light_mask = -2147482623
+position = Vector2( -34.5477, -0.564781 )
+scale = Vector2( 0.959281, 1.00982 )
+z_index = -1
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1020, 115 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite"]
+position = Vector2( 20.144, 0.559288 )
+scale = Vector2( 1.01262, 0.990273 )
+collision_layer = 15
+collision_mask = 2147483663
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+position = Vector2( -16.8192, -0.0741072 )
+shape = SubResource( 1 )
+
+[node name="StartSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+max_distance = 10000.0
+attenuation = 0.000396608
+
+[node name="MoveSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+max_distance = 10000.0
+attenuation = 0.000396608
+
+[node name="StopSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+max_distance = 10000.0
+attenuation = 9.98168e-10
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+light_mask = 3
+occluder = SubResource( 2 )
+light_mask = 3

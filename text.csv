@@ -1,5 +1,4 @@
 keys,en,hu
-CONTINUE00,"Press one of the click buttons to begin","Nyomd be az egyik kattintás gombot a folytatáshoz"
 DOOR00,Door of the flat,Lakásajtó
 DOOR01,Way out,Kijárat
 DOOR02,BUKA OPEN,BUKA NYITVA
@@ -19,6 +18,7 @@ SPRINKLER00,Cute yellow sprinkler,Aranyos sárga locsoló
 BUTTON00,Red button,Piros gomb
 KNOCK00,"Knock, knock, knock...",Kop-kop-kop...
 HELP00,"The way is down","Lefele vezet az út"
+PHONE00,"Phone booth","Utca telefon"
 PAPER00,Sex and the Bible,Szex és a Biblia
 PAPER01,CAUTION! FIRESTARTER!,VIGYÁZAT! GYÚJTOGATÓ!
 PAPER02,Looking for a serious relationship,Komoly kapcsolatot keresek
@@ -46,7 +46,7 @@ MISC00,Mask from Dieng,Maszk Diengből
 RUG00,Rug from the Bantul night market,Szőnyeg a bantuli piacról
 RUG01,An old rug,Egy régi szőnyeg
 PUSSY00,"Pussy to fuck","Baszni való pina"
-SIGN00,Food,Élelmiszer
+SIGN00,Food market,Élelmiszer
 SIGN01,HAPPY COMPANY,BOLDOG KFT.
 SIGN02,ATTENTION! NO TRESPASSING!,ÉLETVESZÉLY! BELÉPNI TILOS!
 SIGN03,II. FLOOR,II. EMELET
@@ -58,7 +58,7 @@ GRAFFITI01,Foreskin!,Fityma!
 GRAFFITI02,You whore,Te kurva
 GRAFFITI03,I've been stealing,Lopni járok
 GRAFFITI04,COPS ARE FAGS,BUZI AKI RENDŐR
-GRAFFITI05,WOULD FUCK YOU,MEGDUGNÁLAK
+GRAFFITI05,WOULD FUCK YOU,MEGBASZNÁLAK
 GRAFFITI06,VEGAN LIBERAL SCUM,VEGÁN LIBSI GECIK
 GRAFFITI07,STUPID RUSSIANS,HÜLYE OROSZOK
 GRAFFITI08,WELCOME ASSHOLES!,ÜDV GECZIK!
@@ -77,15 +77,15 @@ NARRATOR08,"I found the code for the door on a piece of paper.","Megtaláltam az
 NARRATOR09,"Who I was at this point? It was hard to decide.","Ki voltam én ekkor tulajdonképpen? Nehéz volt eldönteni."
 NARRATOR10,"While I was on the top of the train, had to be really careful with the obstacles.","Amíg a vonat tetején voltam, nagyon vigyáznom kellett a kiálló akadályokkal."
 NARRATOR11,"A deep voice warned us. We had to choose! Only one could enter paradise!","Egy mély hang figyelmeztetett. Választunk kellett! Csak egy léphet be a paradicsomba!"
-CREDITS05_0,"Special thanks to","Külön köszönet"
-CREDITS05_1,"Godot Engine team, Xavier Gómez Gosálbez, \nNathan Lovato, Jozsef Koller, Janos Bito","Godot Engine csapata, Xavier Gómez Gosálbez, \nNathan Lovato, Koller József, Bitó János"
-CREDITS04_0,"Visual contributions","Vizuális hozzájárulás"
-CREDITS04_1,"Denes Tornyi, Zsuzsa Buka, Diana Baranyi, \nZsofi Szabo, Babett Farkas","Tornyi Dénes, Buka Zsuzsa, Baranyi Diana, \nSzabó Zsófi, Farkas Babett"
-CREDITS03_0,"Emotional support","Lelki támogatás"
-CREDITS03_1,"Zsuzsa Buka, Gergo Tornyi","Buka Zsuzsa, Tornyi Gergő"
-CREDITS02_0,"Characters","Karakterek"
-CREDITS02_1,"Denes Tornyi, Gergo Tornyi","Tornyi Dénes, Tornyi Gergő"
-CREDITS01_0,"Programming","Programozta"
-CREDITS01_1,"Denes Tornyi","Tornyi Dénes"
 CREDITS00_0,"Music","Zene"
 CREDITS00_1,"Brian Eno, Cluster, Phuture, Neu, \nBooka Shade, Pye Corner Audio","Brian Eno, Cluster, Phuture, Neu, \nBooka Shade, Pye Corner Audio"
+CREDITS01_0,"Programming","Programozta"
+CREDITS01_1,"Denes Tornyi","Tornyi Dénes"
+CREDITS02_0,"Characters","Karakterek"
+CREDITS02_1,"Denes Tornyi, Gergo Tornyi","Tornyi Dénes, Tornyi Gergő"
+CREDITS03_0,"Emotional support","Lelki támogatás"
+CREDITS03_1,"Zsuzsa Buka, Gergo Tornyi","Buka Zsuzsa, Tornyi Gergő"
+CREDITS04_0,"Visual contributions","Vizuális hozzájárulás"
+CREDITS04_1,"Denes Tornyi, Zsuzsa Buka, Diana Baranyi, \nZsofi Szabo, Babett Farkas","Tornyi Dénes, Buka Zsuzsa, Baranyi Diana, \nSzabó Zsófi, Farkas Babett"
+CREDITS05_0,"Special thanks to","Külön köszönet"
+CREDITS05_1,"Jozsef Koller, Janos Bito, Godot Engine contributors","Koller József, Bitó János, Godot Engine fejlesztői"

@@ -1,9 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Animations/Fog00.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Animations/FakeFog00.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scenes/Credits.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Prefabs/GameCamera.tscn" type="PackedScene" id=7]
+
+
 
 
 [sub_resource type="Environment" id=1]

@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Animations/Fog00.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Shaders/Fog.shader" type="Shader" id=1]
 [ext_resource path="res://Scenes/GameBegin.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Environmnent/Help00.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Environmnent/Help01.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/GameBegin_Decoration.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Objects/GameCamera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Objects/ColorChanger.gd" type="Script" id=8]
+[ext_resource path="res://Prefabs/GameCamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Prefabs/ColorChanger.gd" type="Script" id=8]
+[ext_resource path="res://Prefabs/Selectable/Selectable_Menu01.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Prefabs/Selectable/Selectable_Menu00.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -16,16 +18,14 @@ glow_intensity = 1.0
 glow_strength = 1.4
 glow_hdr_threshold = 0.4
 
-[sub_resource type="DynamicFontData" id=2]
-font_path = "res://font.ttf"
-
-[sub_resource type="DynamicFont" id=3]
-size = 24
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/offset = Vector2( 0, 0 )
+shader_param/width = 3.0
+shader_param/color = Color( 1, 0.67451, 0.87451, 1 )
+shader_param/noise_scale = 20.0
+shader_param/alpha_power = 2.0
+shader_param/octaves = 1
 
 [node name="GameBegin" type="Node2D"]
 
@@ -33,59 +33,57 @@ font_data = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
-position = Vector2( -1270.34, -60.2246 )
-scale = Vector2( 0.7, 0.7 )
-smoothing_speed = 0.75
+anchor_mode = 0
+zoom = Vector2( 1, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )
 
-[node name="Background" type="CanvasLayer" parent="BaseScene"]
-layer = -90
+[node name="CanvasLayer" type="CanvasLayer" parent="BaseScene"]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="BaseScene/Background"]
-scale = Vector2( 1.26, 1.27 )
-z_index = -1
-frames = ExtResource( 1 )
-frame = 158
-playing = true
-centered = false
-
-[node name="TextCanvas" type="CanvasLayer" parent="BaseScene"]
-
-[node name="ColorChanger" type="Node2D" parent="BaseScene/TextCanvas"]
-script = ExtResource( 8 )
-
-[node name="Decoration" parent="BaseScene/TextCanvas/ColorChanger" instance=ExtResource( 5 )]
-position = Vector2( -138.385, 300.786 )
-
-[node name="Continue" type="Label" parent="BaseScene/TextCanvas/ColorChanger"]
-light_mask = 786432
-margin_left = 10.0
-margin_top = 235.091
-margin_right = 950.0
-margin_bottom = 290.091
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Press any key to begin"
-align = 1
-autowrap = true
+[node name="Background" type="ColorRect" parent="BaseScene/CanvasLayer"]
+material = SubResource( 2 )
+margin_right = 960.0
+margin_bottom = 540.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Help" type="Node2D" parent="BaseScene/TextCanvas/ColorChanger"]
+[node name="ColorChanger" type="Node2D" parent="BaseScene/CanvasLayer"]
+script = ExtResource( 8 )
+offset = Color( 0.74902, 0.74902, 0.74902, 1 )
+scale_color = Color( 0.329412, 0.329412, 0.329412, 1 )
+
+[node name="Decoration" parent="BaseScene/CanvasLayer/ColorChanger" instance=ExtResource( 5 )]
+modulate = Color( 1, 1, 1, 0.156863 )
+position = Vector2( -138.385, 300.786 )
+
+[node name="Menu" type="Node2D" parent="BaseScene/CanvasLayer/ColorChanger"]
+modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 179.673, 0 )
+scale = Vector2( 1, 1 )
+z_index = 1
+
+[node name="NewGame" parent="BaseScene/CanvasLayer/ColorChanger/Menu" instance=ExtResource( 12 )]
+position = Vector2( 60.2782, 245.095 )
+scale = Vector2( 0.33, 0.33 )
+z_index = 1
+
+[node name="ContinueGame" parent="BaseScene/CanvasLayer/ColorChanger/Menu" instance=ExtResource( 9 )]
+position = Vector2( 547.482, 245.095 )
+scale = Vector2( 0.4, 0.4 )
+z_index = 1
+
+[node name="Help" type="Node2D" parent="BaseScene/CanvasLayer/ColorChanger"]
 modulate = Color( 1, 1, 1, 0.588235 )
 position = Vector2( 179.673, 0 )
 
-[node name="Help00" type="Sprite" parent="BaseScene/TextCanvas/ColorChanger/Help"]
+[node name="Help00" type="Sprite" parent="BaseScene/CanvasLayer/ColorChanger/Help"]
 position = Vector2( 301.099, 105.862 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="Help01" type="Sprite" parent="BaseScene/TextCanvas/ColorChanger/Help"]
+[node name="Help01" type="Sprite" parent="BaseScene/CanvasLayer/ColorChanger/Help"]
 position = Vector2( 288.531, 409.526 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )

@@ -1,142 +1,229 @@
 extends "res://Scenes/BaseScene.gd"
 
 export var next_scene: String = "res://Scenes/Part02/Part02.tscn"
-export var low_pitch_intro_length: float = 10.0
-export var teleport_player_to_end: bool = false
+export var help_after_index: int = 2
+export var hallway_open_exit_after: float = 20.0
+export var hallway_waiting_music_after: float = 5.0
+export var hallway_camera_shake_after: float = 10.0
+export var max_position_diff_to_wait: float = 100.0
+export var show_red_stop_lamps_from: int = 3
 
 onready var player = $Player
+onready var camera = $Player/GameCamera
 
-onready var background_train = $Environment/BackgroundTrain
-onready var road_block = $Environment/RoadBlock
-onready var phone_box = $Environment/PhoneBox
-onready var crate = $Environment/Crate
-onready var shed_door = $Environment/Shed/Door
-onready var exhibition_door = $Environment/ExhibitionRoom/Door
-onready var hoop = $Environment/Hoop
+onready var flat_door = $Environment/Flat/Inside/Door
+onready var random_flat_container = $Environment/RandomFlatContainer
 
-onready var trigger_comment = $Trigger/TriggerComment
-onready var trigger_train = $Trigger/TriggerTrain
-onready var reaching_phone_box = $Trigger/ReachingPhoneBox
-onready var reaching_hoop = $Trigger/ReachingHoop
-onready var teleport_player = $Trigger/TeleportPlayer
-onready var shed_spawn = $Trigger/ShedSpawn
-onready var exhibition_spawn = $Trigger/ExhibitationSpawn
+onready var hallway_00 = $Environment/Hallway00
+onready var hallway_01 = $Environment/Hallway01
+onready var hallway_02 = $Environment/Hallway02
+
+onready var flat_spawn = $Trigger/FlatSpawn
+onready var hallway_spawn = $Trigger/HallwaySpawn
+onready var hallway_begin = $Trigger/HallwayLoopBegin
+onready var hallway_end = $Trigger/HallwayLoopEnd
+onready var random_flat_spawn = $Trigger/RandomFlatSpawn
 
 onready var main_music = $Sound/MainMusic
+onready var waiting_music  = $Sound/WaitingMusic
+onready var knock_sound = $Sound/KnockSound
+onready var door_open_sound = $Sound/DoorOpenSound
+onready var silent_door_open_sound = $Sound/SilentDoorOpenSound
 
-onready var door_sound = $Sound/DoorSound
-onready var wind_sound = $Sound/WindSound
-onready var ring_sound = $Sound/RingSound
-onready var pick_up_sound = $Sound/PickUpSound
+const random_flat_scene = preload("res://Scenes/Part01/Part01_RandomFlat.tscn")
+
+var is_player_in_hallway: bool = false
+var hallway_previous_player_position: float = 0.0
+var hallway_wait_counter: float = 0.0
+var hallway_help_complete: bool = false
+var hallway_exit_enabled: bool = false
+var hallway_exit_open: bool = false
+var hallway_exiting: bool = false
+var hallway_enter_count: int = 0
+var player_copy: Player = null
+var loop_index: int = 0
+var home_index = 4
 
 var music_00: int
 var music_01: int
-var music_02: int
-
-var phone_selected: bool = false
 
 func _ready() -> void:
-	music_00 = main_music.add_part(0, 3 * 60 + 20, true, 0, 10, -40)
-	music_01 = main_music.add_part(5 * 60 + 36, 7 * 60 + 27, true, 10, 10, -40)
-	music_02 = main_music.add_part(8 * 60 + 21, 9 * 60 + 56.5, true, 5, 5, -40)
+	music_00 = main_music.add_part(2, 5 * 60, false, 5, 5, -5)
+	music_01 = main_music.add_part(30, 5 * 60, true, 5, 5, -5)
+	
+	waiting_music.add_part(13 * 60 + 35, 15 * 60 + 10, true, 5, 5, 0)
 	
 	connect("scene_started", self, "_on_scene_started")
-	trigger_comment.connect("body_entered", self, "_trigger_comment")
-	trigger_train.connect("body_entered", self, "_trigger_train")
-	reaching_hoop.connect("body_entered", self, "_trigger_hoop_part")
-	reaching_phone_box.connect("body_entered", self, "_reaching_phone_box")
-	shed_door.connect("selected", self, "_on_shed_door_selected")
-	exhibition_door.connect("selected", self, "_on_exhibition_door_selected")
-	hoop.connect("ball_in_hoop", self, "_trigger_ball_in_hoop")
+	flat_door.connect("selected", self, "_on_flat_exit_select")
+	hallway_00.connect("door_selected", self, "_on_hallway_door_select")
+	hallway_01.connect("door_selected", self, "_on_hallway_door_select")
+	hallway_02.connect("door_selected", self, "_on_hallway_door_select")
 	
-	main_music.master_player.pitch_scale = 0.001
-	wind_sound.pitch_scale = 0.001
-	
-	wind_sound.play()
-	
-	if teleport_player_to_end:
-		player.position = teleport_player.position
-	
-	Tools.set_shapes_disabled(road_block, true)
-
-	road_block.visible = false
+	camera.smoothing_enabled = false
 
 func _on_scene_started() -> void:
-	black_screen.fade_out(3.0)
-	Game.subtitle.say(tr("NARRATOR02"), 6.0)
-	main_music.play()
-
-func _on_shed_door_selected() -> void:
-	move_with_fade(player, exhibition_spawn.global_position, door_sound)
-
-func _on_exhibition_door_selected() -> void:
-	move_with_fade(player, shed_spawn.global_position, door_sound)
-
-func _on_phone_selected() -> void:
-	if phone_selected:
-		return
-	
-	phone_box.flashing_phone_light = false
-	phone_selected = true
-
-	main_music.kill(2.0);
-	black_screen.fade_in(2.0)
-	yield(Game.timer(3.0), "timeout")
-
-	ring_sound.stop()
-	yield(Game.timer(0.5), "timeout")
-
-	pick_up_sound.play()
+	# Some empty waiting for a dramatic start
 	yield(Game.timer(2.0), "timeout")
+	black_screen.fade_out(3.0)
+	yield(Game.timer(1.5), "timeout")
+	main_music.play()
+	SubtitleManager.say(tr("NARRATOR00"))
 
-	load_scene(next_scene)
-
-func _trigger_comment(player: Node) -> void:
-	if not player.is_in_group("player") or not trigger_comment.visible:
+func _enable_next_traffic_lamp(lamps_to_show: int = 0):
+	if lamps_to_show <= 0:
 		return
 	
-	trigger_comment.visible = false
-	Game.subtitle.say(tr("NARRATOR03"), 6)
+	for lamp_index in range(lamps_to_show):
+		if lamp_index >= len(hallway_01.lamps):
+			break
+		
+		hallway_00.lamps[lamp_index].enable()
+		hallway_01.lamps[lamp_index].enable()
+		hallway_02.lamps[lamp_index].enable()
 
-func _trigger_train(player: Node) -> void:
-	if not player.is_in_group("player") or not trigger_train.visible:
+func _on_flat_exit_select():
+	is_player_in_hallway = true
+	hallway_enter_count += 1
+	
+	_enable_next_traffic_lamp(hallway_enter_count - show_red_stop_lamps_from)
+	move_with_fade(player, hallway_spawn.position, door_open_sound)
+
+func _on_hallway_door_select(door, index) -> void:
+	is_player_in_hallway = false
+	
+	if index == home_index:
+		if not hallway_exit_open:
+			hallway_spawn.global_position = door.global_position
+			
+			move_with_fade(player, flat_spawn.position, door_open_sound)
+		elif hallway_exit_open and not hallway_exiting:
+			hallway_exiting = true
+			
+			main_music.kill(3.0)
+			black_screen.fade_in(3.0)
+			yield(Game.timer(3.0), "timeout")
+			load_scene(next_scene, true)
+	else:
+		for child in random_flat_container.get_children():
+			random_flat_container.remove_child(child)
+			child.queue_free()
+		
+		Game.random_generator.randomize()
+		
+		var random_flat_instance = random_flat_scene.instance()
+		
+		random_flat_instance.connect("exit_selected", self, "_on_flat_exit_select")
+		random_flat_container.add_child(random_flat_instance)
+		
+		hallway_spawn.global_position = door.global_position
+		
+		move_with_fade(player, random_flat_spawn.position, door_open_sound)
+		
+		# Can only exit the hallway after looked into another room
+		hallway_exit_enabled = true
+
+func _reset_hallway_wait() -> void:
+	if not waiting_music.stopped:
+		waiting_music.kill(0.5)
+	
+	camera.shake = 0.0
+
+func _process_hallway_wait(delta: float) -> void:
+	if hallway_exit_open or not hallway_exit_enabled:
 		return
 	
-	trigger_train.visible = false
-	background_train.start()
-
-func _reaching_phone_box(player: Node) -> void:
-	if not player.is_in_group("player") or road_block.visible:
+	if not is_player_in_hallway:
+		_reset_hallway_wait()
 		return
 	
-	Tools.set_shapes_disabled(road_block, false)
-	road_block.visible = true
+	if abs(loop_index) > help_after_index and not hallway_help_complete:
+		SubtitleManager.say(tr("NARRATOR01"))
+		
+		hallway_help_complete = true
+	
+	var player_position = player.global_position.x
+	var previous_position = hallway_previous_player_position
+	var position_x_diff = abs(player_position - previous_position)
+	
+	if position_x_diff < max_position_diff_to_wait:
+		hallway_wait_counter += delta
+		
+		var d = hallway_wait_counter / hallway_open_exit_after
+		
+		# Play the waiting music sequence
+		if hallway_wait_counter > hallway_waiting_music_after:
+			if waiting_music.stopped:
+				waiting_music.play()
+			
+			waiting_music.global_level = d + 0.33
+		
+		# Starts to play effects if the player stands long enough at one place
+		if hallway_wait_counter > hallway_camera_shake_after:
+			# Start to shake the camera more and more
+			camera.shake = pow(d + 1.0, 2.0)
+		
+		# Open the door
+		if hallway_wait_counter > hallway_open_exit_after:
+			camera.shake = 0.0
+			
+			main_music.kill(5.0)
+			silent_door_open_sound.play()
+			
+			home_index = hallway_01.get_closest_door(player.global_position)
+			hallway_exit_open = true
+			
+			hallway_00.open_exit(home_index)
+			hallway_01.open_exit(home_index)
+			hallway_02.open_exit(home_index)
+			
+			for lamp_index in range(len(hallway_01.lamps)):
+				hallway_00.lamps[lamp_index].disable()
+				hallway_01.lamps[lamp_index].disable()
+				hallway_02.lamps[lamp_index].disable()
+	else:
+		hallway_previous_player_position = player_position
+		hallway_wait_counter = 0.0
+		
+		_reset_hallway_wait()
 
-func _trigger_hoop_part(ball: Node) -> void:
-	if not ball.is_in_group("ball") or not reaching_hoop.visible:
-		return
+# When reaching the end of the hallway the player is teleported to the
+# beginning, but a shallow clone stays at the old position for one
+# tick. This solves a flickering issue.
+func _dupe_player() -> Node2D:
+	var clone = player.create_clone()
 
-	reaching_hoop.visible = false
-	main_music.force_next(music_01)
+	add_child(clone)
+	
+	return clone
 
-func _trigger_ball_in_hoop() -> void:
-	yield(Game.timer(5.0), "timeout")
-	ring_sound.play()
-	phone_box.phone.connect("selected", self, "_on_phone_selected")
-	phone_box.phone.visible = true
-	phone_box.lamp.visible = true
-	phone_box.flashing_phone_light = true
+func _process_hallway_loop(_delta: float) -> void:
+	var left_end_position = hallway_begin.global_position
+	var right_end_position = hallway_end.global_position
+	var player_position = player.global_position
+	
+	# Left end
+	if left_end_position.x > player_position.x:
+		player_copy = _dupe_player()
+		
+		var diff = left_end_position.x - player_position.x
+		
+		player.global_position = Vector2(right_end_position.x - diff, player_position.y)
+		loop_index -= 1
+	
+	# Right end
+	if right_end_position.x < player_position.x:
+		player_copy = _dupe_player()
+		
+		var diff = player_position.x - right_end_position.x
+		
+		player.global_position = Vector2(left_end_position.x + diff, player_position.y)
+		loop_index += 1
 
 func _process(delta: float) -> void:
-	if Game.loader:
-		return
+	if player_copy:
+		remove_child(player_copy)
+		player_copy.queue_free()
+		player_copy = null
 	
-	# Make vinyl sound effect
-	var pitch_value = current_second / low_pitch_intro_length
-	
-	if pitch_value >= 1.0:
-		wind_sound.pitch_scale = 1.0
-		main_music.master_player.pitch_scale = 1.0
-	else:
-		wind_sound.pitch_scale = max(min(pitch_value, 1.0), 0.001)
-		main_music.master_player.pitch_scale = max(min(pitch_value, 1.0), 0.001)
+	_process_hallway_loop(delta)
+	_process_hallway_wait(delta)

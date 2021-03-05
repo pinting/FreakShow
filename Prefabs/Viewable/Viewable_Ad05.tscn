@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Prefabs/Viewable/Viewable.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Environmnent/Decoration/Paper09.png" type="Texture" id=2]
+
+
+[node name="Viewable_Ad05" type="Sprite" groups=[
+"selectable",
+]]
+position = Vector2( 200.689, 516.816 )
+rotation = 0.0147636
+scale = Vector2( 0.201957, 0.201957 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+description = "PAPER15"

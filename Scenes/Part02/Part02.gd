@@ -1,213 +1,156 @@
 extends "res://Scenes/BaseScene.gd"
 
 export var next_scene: String = "res://Scenes/Part03/Part03.tscn"
-export var path_finding_interval: float = 0.5
+export var low_pitch_intro_length: float = 10.0
 export var teleport_player_to_end: bool = false
+export var ball_reposition_delay: float = 5.0
+export var ball_reposition_y_offset: float = 3000.0
 
 onready var player = $Player
-onready var camera = $Player/GameCamera
 
-onready var debug_line = $Environment/DebugLine
-onready var navigation = $Environment/Navigation2D
-onready var exit_door = $Environment/Maze/SteelBlock/WallBlock/ExitDoor
-onready var end_tube = $Environment/Maze/EndTube
+onready var train = $Environment/Train
+onready var road_block = $Environment/RoadBlock
+onready var phone_box = $Environment/PhoneBox
+onready var crate = $Environment/Crate
+onready var shed_door = $Environment/Shed/Door
+onready var exhibition_door = $Environment/ExhibitionRoom/Door
+onready var hoop = $Environment/Hoop
+onready var ball = $Environment/Ball
 
-onready var boss = $Environment/Boss
-onready var boss_mouth = $Environment/Boss/MouthArea
-
-onready var wall_after_enter = $Environment/HiddenWalls/AfterEnter
-onready var wall_after_leave = $Environment/HiddenWalls/AfterLeave
-onready var wall_ending_bottom = $Environment/HiddenWalls/EndingBottom
-
-onready var removable_line_00 = $Environment/Maze/RemovableLine00
-onready var blocking_line_00 = $Environment/Maze/BlockingLine00
-onready var blocking_line_01 = $Environment/Maze/BlockingLine01
-onready var blocking_line_02 = $Environment/Maze/BlockingLine02
-
-onready var random_line_00 = $Environment/Maze/RandomLine00
-onready var random_line_01 = $Environment/Maze/RandomLine01
-onready var random_line_02 = $Environment/Maze/RandomLine02
-onready var random_line_03 = $Environment/Maze/RandomLine03
-onready var random_line_04 = $Environment/Maze/RandomLine04
-
-onready var fall_to_death = $Trigger/FallToDeath
-onready var game_begin = $Trigger/GameBegin
-onready var game_end = $Trigger/GameEnd
-onready var end_door_area = $Trigger/EndDoorArea
-onready var player_respawn_00 = $Trigger/PlayerRespawn00
-onready var player_respawn_01 = $Trigger/PlayerRespawn01
-onready var player_respawn_02 = $Trigger/PlayerRespawn02
+onready var trigger_comment = $Trigger/TriggerComment
+onready var trigger_train = $Trigger/TriggerTrain
+onready var reaching_phone_box = $Trigger/ReachingPhoneBox
+onready var reaching_hoop = $Trigger/ReachingHoop
+onready var teleport_player = $Trigger/TeleportPlayer
+onready var shed_spawn = $Trigger/ShedSpawn
+onready var exhibition_spawn = $Trigger/ExhibitationSpawn
+onready var ball_area = $Trigger/BallArea
 
 onready var main_music = $Sound/MainMusic
-onready var connect_sound = $Sound/ConnectSound
+
+onready var door_sound = $Sound/DoorSound
 onready var wind_sound = $Sound/WindSound
-onready var door_locked_sound = $Sound/DoorLockedSound
-onready var falling_sound = $Sound/FallingSound
-onready var not_close_enough_sound = $Sound/NotCloseEnoughSound
+onready var ring_sound = $Sound/RingSound
+onready var pick_up_sound = $Sound/PickUpSound
 
 var music_00: int
 var music_01: int
+var music_02: int
 
-var path_finder_fire: float = 0.0
-var boss_follows: bool = false
-var game_playing: bool = false
-var not_close_enough_help: bool = true
-var boss_base_position: Vector2
-var boss_base_rotation: float
+var phone_selected: bool = false
+var ball_reposition_sleep: float = ball_reposition_delay
 
 func _ready() -> void:
-	music_00 = main_music.add_part(0, 4 * 60 + 0.7, false, 0, 0, 0)
-	music_01 = main_music.add_part(4 * 60 + 0.7, 4 * 60 + 25, true, 0.5, 0.5, -1)
+	music_00 = main_music.add_part(0, 3 * 60 + 20, true, 0, 10, -40)
+	music_01 = main_music.add_part(5 * 60 + 36, 7 * 60 + 27, true, 10, 10, -40)
+	music_02 = main_music.add_part(8 * 60 + 21, 9 * 60 + 56.5, true, 5, 5, -40)
 	
 	connect("scene_started", self, "_on_scene_started")
-	fall_to_death.connect("body_entered", self, "_kill_player")
-	boss_mouth.connect("body_entered", self, "_kill_player")
-	game_begin.connect("body_entered", self, "_start_game")
-	game_end.connect("body_entered", self, "_end_game")
-	exit_door.connect("selected", self, "_on_exit")
-	player.connect("died", self, "_reset_game")
-	player.connect("reseted", self, "_on_player_reset")
+	trigger_comment.connect("body_entered", self, "_trigger_comment")
+	trigger_train.connect("body_entered", self, "_trigger_train")
+	reaching_hoop.connect("body_entered", self, "_trigger_hoop_part")
+	reaching_phone_box.connect("body_entered", self, "_reaching_phone_box")
+	shed_door.connect("selected", self, "_on_shed_door_selected")
+	exhibition_door.connect("selected", self, "_on_exhibition_door_selected")
+	hoop.connect("ball_in_hoop", self, "_trigger_ball_in_hoop")
 	
-	var blocking_lines = [blocking_line_00, blocking_line_01, blocking_line_02]
-	
-	blocking_lines[Tools.random_int(0, len(blocking_lines))].remove()
-	
-	var random_lines = [random_line_00, random_line_01, random_line_02, random_line_03, random_line_04]
-	
-	for n in range(Tools.random_int(0, len(random_lines))):
-		var i = Tools.random_int(0, len(random_lines))
-		
-		random_lines[i].remove()
-		random_lines.remove(i)
-	
-	boss_base_position = boss.global_position
-	boss_base_rotation = boss.rotation_degrees
-
-func _kill_player(player: Node) -> void:
-	if not player.is_in_group("player"):
-		return
-	
-	player.kill()
-
-func _start_game(player: Node) -> void:
-	if not player.is_in_group("player") or game_playing:
-		return
-	
-	wall_after_enter.disabled = false
-	game_playing = true
-	
-	# If the actual game is turned off, for debug purposes
-	if not teleport_player_to_end:
-		camera.zoom_action()
-		player.enable_avatar_mode()
-		connect_sound.stop()
-		main_music.play()
-		Game.subtitle.say(tr("NARRATOR04"), 0.5, 3.0)
-		yield(Game.timer(2.0), "timeout")
-	
-	boss_follows = true
-
-func _on_player_reset() -> void:
-	boss.path = []
-	boss.global_position = boss_base_position
-	boss.rotation_degrees = boss_base_rotation
-
-func _reset_game() -> void:
-	# Small fix so the player does not show death animation before entering the game
-	if not game_playing:
-		player.reset()
-	else:
-		yield(Game.timer(2.0), "timeout")
-	
-	main_music.kill(0.5)
-	
-	if game_playing and boss_follows:
-		game_playing = false
-		boss_follows = false
-		
-		move_with_fade(player, player_respawn_01.global_position)
-	elif not game_playing and not boss_follows:
-		move_with_fade(player, player_respawn_00.global_position)
-	elif not game_playing and boss_follows:
-		move_with_fade(player, player_respawn_02.global_position)
-
-func _end_game(player: Node) -> void:
-	if not player.is_in_group("player") or not game_playing:
-		return
-	
-	if not teleport_player_to_end:
-		camera.zoom_base()
-		player.disable_avatar_mode()
-
-		game_playing = false
-		wall_after_leave.disabled = false
-	
-		main_music.kill(5.0);
+	main_music.master_player.pitch_scale = 0.001
+	wind_sound.pitch_scale = 0.001
 	
 	wind_sound.play()
-
-func _on_exit() -> void:
-	if not end_door_area.visible:
-		return false
 	
-	if not end_door_area.overlaps_body(player):
-		if not_close_enough_help:
-			Game.subtitle.say(tr("NARRATOR05"))
-			not_close_enough_help = false
-		
-		not_close_enough_sound.play()
-		return;
+	if teleport_player_to_end:
+		player.position = teleport_player.position
 	
-	end_door_area.visible = false
-	player.freeze(true)
-	door_locked_sound.play()
-	yield(Game.timer(0.75), "timeout")
+	Tools.set_shapes_disabled(road_block, true)
 
-	falling_sound.play()
-	end_tube.open_mouth = true
-	yield(Game.timer(0.25), "timeout")
-
-	wall_ending_bottom.disabled = true
-	yield(Game.timer(1.0), "timeout")
-
-	black_screen.fade_in(2.0)
-	yield(Game.timer(5.0), "timeout")
-	
-	load_scene(next_scene)
+	road_block.visible = false
 
 func _on_scene_started() -> void:
-	black_screen.fade_out(2.0)
+	black_screen.fade_out(3.0)
+	SubtitleManager.say(tr("NARRATOR02"), 6.0)
+	main_music.play()
 
-	if teleport_player_to_end:
-		_start_game(player)
-		_end_game(player)
-		
-		player.position = player_respawn_02.position
+func _on_shed_door_selected() -> void:
+	move_with_fade(player, exhibition_spawn.global_position, door_sound)
+
+func _on_exhibition_door_selected() -> void:
+	move_with_fade(player, shed_spawn.global_position, door_sound)
+
+func _on_phone_selected() -> void:
+	if phone_selected:
+		return
+	
+	phone_box.flashing_phone_light = false
+	phone_selected = true
+
+	main_music.kill(2.0);
+	black_screen.fade_in(2.0)
+	yield(Game.timer(3.0), "timeout")
+
+	ring_sound.stop()
+	yield(Game.timer(0.5), "timeout")
+
+	pick_up_sound.play()
+	yield(Game.timer(2.0), "timeout")
+
+	load_scene(next_scene, true)
+
+func _trigger_comment(player: Node) -> void:
+	if not player.is_in_group("player") or not trigger_comment.visible:
+		return
+	
+	trigger_comment.visible = false
+	SubtitleManager.say(tr("NARRATOR03"), 6)
+
+func _trigger_train(player: Node) -> void:
+	if not player.is_in_group("player") or not trigger_train.visible:
+		return
+	
+	trigger_train.visible = false
+	train.start()
+
+func _reaching_phone_box(player: Node) -> void:
+	if not player.is_in_group("player") or road_block.visible:
+		return
+	
+	Tools.set_shapes_disabled(road_block, false)
+	road_block.visible = true
+
+func _trigger_hoop_part(ball: Node) -> void:
+	if not ball.is_in_group("ball") or not reaching_hoop.visible:
+		return
+
+	reaching_hoop.visible = false
+	main_music.force_next(music_01)
+
+func _trigger_ball_in_hoop() -> void:
+	yield(Game.timer(5.0), "timeout")
+	ring_sound.play()
+	phone_box.phone.connect("selected", self, "_on_phone_selected")
+	phone_box.phone.visible = true
+	phone_box.lamp.visible = true
+	phone_box.flashing_phone_light = true
+
+func _process_sound_effect(delta: float) -> void:
+	var pitch_value = current_second / low_pitch_intro_length
+	
+	if pitch_value >= 1.0:
+		wind_sound.pitch_scale = 1.0
+		main_music.master_player.pitch_scale = 1.0
 	else:
-		connect_sound.play()
+		wind_sound.pitch_scale = max(min(pitch_value, 1.0), 0.001)
+		main_music.master_player.pitch_scale = max(min(pitch_value, 1.0), 0.001)
+
+func _process_ball_reposition_sleep(delta: float) -> void:
+	if ball_reposition_sleep > 0:
+		ball_reposition_sleep -= delta
 
 func _process(delta: float) -> void:
-	if Game.loader:
-		return
-	
-	_process_enemy_path_finding(delta)
+	_process_sound_effect(delta)
+	_process_ball_reposition_sleep(delta)
 
-func _process_enemy_path_finding(delta) -> void:
-	if not boss_follows or boss.dead:
-		return
-	
-	path_finder_fire += delta
-	
-	if path_finder_fire <= path_finding_interval:
-		return
-	
-	var dest = player.global_position
-	
-	if player.dead or not game_playing:
-		dest = boss_base_position
-	
-	var path = navigation.get_simple_path(boss.global_position, dest)
-	
-	boss.path = path
-	debug_line.points = path
-	path_finder_fire = 0.0
+func _physics_process(delta: float) -> void:
+	if ball_reposition_sleep <= 0 and not ball_area.overlaps_body(ball):
+		ball.reset(player.global_position + Vector2.UP * ball_reposition_y_offset)
+		ball_reposition_sleep = ball_reposition_delay

@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=1]
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=2]
+[ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Environmnent/Cup00.png" type="Texture" id=4]
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/scale = 0.0
+shader_param/glow_radius = 10.0
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
+
+[node name="Pickable_LargeCup" type="RigidBody2D" groups=[
+"pickable",
+]]
+input_pickable = true
+collision_layer = 2
+collision_mask = 2
+mass = 0.03
+gravity_scale = 5.0
+contacts_reported = 3
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 3 )
+
+[node name="Selectable" type="Sprite" parent="." groups=[
+"selectable",
+]]
+material = SubResource( 1 )
+texture = ExtResource( 4 )
+script = ExtResource( 1 )
+description = "CUP00"
+offset_key = "offset"
+effect_key = "scale"
+effect_hover = 1.0
+clone_material = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -19.7069, -22.3776, 6.44992, -22.6912, 8.45716, -17.4222, 17.2388, -15.7286, 21.6924, -11.2123, 21.9433, -1.48976, 17.3643, 4.59467, 9.2726, 8.17006, 9.5235, 18.3944, -21.7141, 18.3317, -21.7768, -18.9904 )

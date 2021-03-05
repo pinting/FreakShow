@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=1]
+[ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Environmnent/Door02.png" type="Texture" id=3]
+[ext_resource path="res://Prefabs/Static/Static_RoomLamp01.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Part01/Part01_Door_Block.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Environmnent/Door02_OpenBlack.png" type="Texture" id=8]
+
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/scale = 0.0
+shader_param/glow_radius = 10.0
+shader_param/line_color = Color( 0.960784, 0.34902, 0.45098, 0 )
+
+[node name="Part01_Hallway_Block" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="DoorClosed" type="Sprite" parent="." groups=[
+"selectable",
+]]
+material = SubResource( 1 )
+position = Vector2( 0, 1.38705 )
+scale = Vector2( 0.83, 0.83 )
+texture = ExtResource( 3 )
+script = ExtResource( 5 )
+offset_key = "offset"
+effect_key = "scale"
+effect_hover = 1.0
+clone_material = true
+
+[node name="DoorOpen" type="Sprite" parent="." groups=[
+"selectable",
+]]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 1 )
+scale = Vector2( 0.83, 0.83 )
+texture = ExtResource( 8 )
+script = ExtResource( 5 )
+offset_key = "offset"
+effect_key = "scale"
+effect_hover = 1.0
+clone_material = true
+
+[node name="Lamp" parent="." instance=ExtResource( 4 )]
+position = Vector2( -2.9668, -295.24 )
+scale = Vector2( 0.496706, 0.496706 )
+z_index = 2
+
+[node name="Light" parent="Lamp" instance=ExtResource( 2 )]
+position = Vector2( -617.671, 1183.84 )
+scale = Vector2( 2.14794, 0.669221 )

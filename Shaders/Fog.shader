@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform float offset = 0.0;
+uniform vec2 offset = vec2(0.0, 0.0);
 uniform float width = 1;
 uniform vec4 color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float noise_scale = 20.0;

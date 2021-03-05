@@ -1,0 +1,142 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Prefabs/Player.gd" type="Script" id=1]
+[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Environmnent/FastWalkIcon.png" type="Texture" id=3]
+[ext_resource path="res://Prefabs/Effect/Effect_SalamiDeath.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Effect/Effect_Transforming.tscn" type="PackedScene" id=6]
+
+
+[sub_resource type="Animation" id=1]
+resource_name = "toggle_avatar_mode"
+length = 3.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransformEffect:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TransformEffect:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_toggle_avatar_mode"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:frozen")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 150.815, 84.7947 )
+
+[node name="Player" type="KinematicBody2D" groups=[
+"player",
+]]
+position = Vector2( -1.66553, -111.588 )
+collision_layer = 10
+collision_mask = 10
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+anims/toggle_avatar_mode = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 1025
+material = SubResource( 2 )
+position = Vector2( -0.811218, -3.40119 )
+frames = ExtResource( 2 )
+frame = 87
+playing = true
+
+[node name="PlatformDetector00" type="RayCast2D" parent="."]
+position = Vector2( 72.4627, 495.781 )
+enabled = true
+cast_to = Vector2( 0, 1 )
+collision_mask = 10
+collide_with_areas = true
+
+[node name="PlatformDetector01" type="RayCast2D" parent="."]
+position = Vector2( -51.2906, 496.192 )
+enabled = true
+cast_to = Vector2( 0, 1 )
+collision_mask = 10
+collide_with_areas = true
+
+[node name="TopDetector" type="RayCast2D" parent="."]
+position = Vector2( 18.8954, -335.472 )
+enabled = true
+cast_to = Vector2( 0, -50 )
+collision_mask = 2
+
+[node name="CrouchCollisionShape" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.642532, 0 )
+polygon = PoolVector2Array( 113.359, 496.24, -51.9472, 495.985, -116.13, 407.475, -164.8, 277.866, -57.4096, 145.083, 95.3698, 70.2806, 160.968, 97.2604, 122.35, 206.238, 112.298, 281.358 )
+
+[node name="StandCollisionShape" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.869019, 0 )
+polygon = PoolVector2Array( -51.7286, 496.019, 73.0905, 495.758, 59.7819, -170.704, 83.5267, -312.183, 18.2286, -336.917, -35.197, -305.257, -39.9453, -199.198, -96.1416, -156.062 )
+
+[node name="AvatarCollisionShape" type="CollisionPolygon2D" parent="."]
+position = Vector2( -2.35354, -1.70543 )
+scale = Vector2( 1.5, 1.5 )
+polygon = PoolVector2Array( -93.7505, -23.063, -51.4589, -134.875, 42.3937, -135.454, 84.106, -28.8563, 64.4085, 85.8524, 1.91668, 141.315, -57.2523, 87.5904 )
+
+[node name="TransformEffect" parent="." instance=ExtResource( 6 )]
+emitting = true
+
+[node name="DeathEffect" parent="." instance=ExtResource( 5 )]
+
+[node name="KickArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape2D" parent="KickArea"]
+position = Vector2( 15.4153, 413.321 )
+shape = SubResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FastWalkIcon" type="Sprite" parent="CanvasLayer"]
+visible = false
+position = Vector2( 925, 505 )
+scale = Vector2( 0.33, 0.33 )
+texture = ExtResource( 3 )

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[node name="Light_Room" type="Node2D"]
+
+[node name="DirectionalLight" type="Light2D" parent="."]
+position = Vector2( -30.416, 321.667 )
+scale = Vector2( 3.5, 2 )
+texture = ExtResource( 2 )
+range_z_min = -128
+range_z_max = 128
+
+[node name="FakeLight" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.117647 )
+material = SubResource( 1 )
+position = Vector2( -3.84644, 254.876 )
+scale = Vector2( 1.5, 1.1 )
+texture = ExtResource( 1 )

@@ -1,0 +1,109 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scenes/Part06/Part06_Bottom.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/GameCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Part06/Part06_Top.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Part06/Part06.gd" type="Script" id=9]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=11]
+[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://Assets/Sounds/Warning04.wav" type="AudioStream" id=33]
+[ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=38]
+[ext_resource path="res://Assets/Music/Part06.ogg" type="AudioStream" id=39]
+[ext_resource path="res://Scenes/Part06/Part06_End.tscn" type="PackedScene" id=40]
+
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 0.1
+glow_strength = 0.9
+glow_blend_mode = 0
+glow_hdr_threshold = 0.1
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 13540.8, 1076.04 )
+
+[node name="Part06" type="Node2D"]
+
+[node name="BaseScene" parent="." instance=ExtResource( 5 )]
+script = ExtResource( 9 )
+
+[node name="GameCamera" parent="BaseScene" instance=ExtResource( 3 )]
+position = Vector2( -22.4501, -29.64 )
+scale = Vector2( 0.7, -0.7 )
+zoom = Vector2( 4.2, 4.2 )
+limit_left = -4870
+limit_right = 4870
+zoom_action = Vector2( 7.5, 7.5 )
+zoom_speed = 0.5
+
+[node name="PlayerTop" parent="BaseScene" instance=ExtResource( 4 )]
+position = Vector2( -1460, -412.95 )
+scale = Vector2( 0.665, 0.665 )
+z_index = 2
+animation_frames = ExtResource( 13 )
+sync_player = true
+
+[node name="AroundLight" type="Light2D" parent="BaseScene/PlayerTop"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 11 )
+energy = 1.25
+mode = 2
+
+[node name="PlayerBottom" parent="BaseScene" instance=ExtResource( 4 )]
+position = Vector2( 1460, 573.85 )
+rotation = 3.14159
+scale = Vector2( 0.665, -0.665 )
+z_index = 2
+animation_frames = ExtResource( 1 )
+scale_velocity = Vector2( -1, 1 )
+
+[node name="AroundLight" type="Light2D" parent="BaseScene/PlayerBottom"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 11 )
+energy = 1.25
+mode = 2
+range_item_cull_mask = 1024
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
+environment = SubResource( 1 )
+
+[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
+light_mask = 524288
+position = Vector2( -1972.52, -1794.02 )
+color = Color( 0.352941, 0.352941, 0.352941, 1 )
+
+[node name="ScreenEffect" type="CanvasLayer" parent="BaseScene"]
+
+[node name="Environment" type="Node2D" parent="BaseScene"]
+position = Vector2( 251.75, 489.46 )
+scale = Vector2( 0.95, 0.95 )
+
+[node name="End" parent="BaseScene/Environment" instance=ExtResource( 40 )]
+
+[node name="Top" parent="BaseScene/Environment" instance=ExtResource( 6 )]
+
+[node name="Bottom" parent="BaseScene/Environment" instance=ExtResource( 2 )]
+
+[node name="Trigger" type="Node2D" parent="BaseScene"]
+position = Vector2( 251.75, 489.46 )
+
+[node name="FallToDeath" type="Area2D" parent="BaseScene/Trigger"]
+position = Vector2( 0, 3892.17 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/FallToDeath"]
+position = Vector2( -288.733, 21.0557 )
+shape = SubResource( 2 )
+
+[node name="Sound" type="Node" parent="BaseScene"]
+
+[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource( 38 )]
+stream = ExtResource( 39 )
+
+[node name="NotCloseEnoughSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
+stream = ExtResource( 33 )

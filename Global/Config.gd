@@ -1,16 +1,28 @@
 extends Node
 
-# Max loading time per tick (in msec)
-const LOADING_TIME_PER_TICK: int = 100
-
 # Enable debug messages
 const DEBUG: bool = true
 
 # Report endpoint
-const REPORT_URL = "https://j82k55n66d.execute-api.us-east-1.amazonaws.com/prod/report"
+const REPORT_URL: String = "https://j82k55n66d.execute-api.us-east-1.amazonaws.com/prod/report"
+
+# Path to the configuration file
+const CONFIG_PATH: String = "user://config.cfg"
+
+# Max loading time per tick (in msec)
+const LOADING_TIME_PER_TICK: int = 100
+
+# Start scene
+const FIRST_SCENE: String = "res://Scenes/Part01/Part01.tscn"
+
+# Credits scene
+const CREDITS_SCENE: String = "res://Scenes/Credits.tscn"
 
 # Disable sounds
-var no_sound: bool = false
+var no_sound: bool = true
+
+# Save file path
+var save_path: String = "user://default.save"
 
 # Only use the virtual mouse
 var virtual_mouse_only: bool = false
@@ -18,44 +30,37 @@ var virtual_mouse_only: bool = false
 # Virtual mouse speed
 var virtual_mouse_speed: Vector2 = Vector2(3, 3)
 
-# Last loaded scene
-var last_loaded_scene = null
-
 func _ready() -> void:
-	if not DEBUG:
-		_read_config()
-	
-	save_config()
-	
-	if no_sound:
-		for i in range(AudioServer.bus_count):
-			AudioServer.set_bus_volume_db(i, -500)
+	if not _exists():
+		save()
+	elif not DEBUG:
+		_load()
 
-func _read_config() -> void:
-	var config = ConfigFile.new()
-	var error = config.load("user://config.cfg")
+func _exists() -> bool:
+	return File.new().file_exists(CONFIG_PATH)
 
-	if error != OK:
+func _load() -> void:
+	if not _exists():
 		return
 	
-	if config.has_section_key("game", "no_sounds"):
-		no_sound = config.get_value("game", "no_sounds")
+	var config = ConfigFile.new()
+	var error = config.load(CONFIG_PATH)
 	
-	if config.has_section_key("game", "last_loaded_scene"):
-		last_loaded_scene = config.get_value("game", "last_loaded_scene")
+	no_sound = config.get_value("game", "no_sound", no_sound)
+	save_path = config.get_value("game", "save_path", save_path)
+	virtual_mouse_only = config.get_value("input", "virtual_mouse_only", virtual_mouse_only)
+	virtual_mouse_speed = config.get_value("input", "virtual_mouse_speed", virtual_mouse_speed)
 	
-	if config.has_section_key("input", "virtual_mouse_only"):
-		virtual_mouse_only = config.get_value("game", "virtual_mouse_only")
-	
-	if config.has_section_key("input", "virtual_mouse_speed"):
-		virtual_mouse_speed = config.get_value("game", "virtual_mouse_speed")
+	# If config exists, but corrupted, fix it
+	if error != OK:
+		save()
 
-func save_config() -> void:
+func save() -> void:
 	var config = ConfigFile.new()
 	
-	config.set_value("game", "no_sounds", no_sound)
-	config.set_value("game", "last_loaded_scene", last_loaded_scene)
+	config.set_value("game", "no_sound", no_sound)
+	config.set_value("game", "save_path", save_path)
 	config.set_value("input", "virtual_mouse_only", virtual_mouse_only)
 	config.set_value("input", "virtual_mouse_speed", virtual_mouse_speed)
 
-	config.save("user://config.cfg")
+	config.save(CONFIG_PATH)

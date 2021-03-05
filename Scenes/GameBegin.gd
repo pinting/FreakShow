@@ -1,38 +1,36 @@
 extends "res://Scenes/BaseScene.gd"
 
-# Next scene
-export var next_scene: String = "res://Scenes/Part00/Part00.tscn"
+export var speed_div: Vector2 = Vector2(30.0, 1500.0)
 
-# Continue blink interval
-export var continue_blink_interval: float = 0.5
+onready var background = $CanvasLayer/Background
+onready var new_game = $CanvasLayer/ColorChanger/Menu/NewGame
+onready var continue_game = $CanvasLayer/ColorChanger/Menu/ContinueGame
 
-# Zero value
-export var zero: float = 0.05
-
-onready var text_continue = $TextCanvas/ColorChanger/Continue
+var offset: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	connect("scene_started", self, "_on_scene_started")
-
-	text_continue.text = tr("CONTINUE00")
-	text_continue.visible = false
+	new_game.connect("selected", self, "_on_new_game_selected")
+	continue_game.connect("selected", self, "_on_continue_game_selected")
 	
 	disable_auto_restart = true
+	disable_cancel_button = true
 
 func _process(delta: float) -> void:
-	if fmod(current_second, continue_blink_interval) <= zero:
-		text_continue.visible = not text_continue.visible
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		load_scene(next_scene)
+	offset = offset + Vector2(delta, sin(current_second)) / speed_div
+	background.material.set_shader_param("offset", offset)
 
 func _on_scene_started() -> void:
-	black_screen.fade_out(2.0)
+	black_screen.fade_out()
+
+func _on_new_game_selected() -> void:
+	yield(black_screen.fade_in(), "animation_finished")
+	Save.clear()
+	load_scene(Config.FIRST_SCENE, true)
+
+func _on_continue_game_selected() -> void:
+	var last_scene = Save.get_value("game", "current_scene")
 	
-	var last_scene = Config.last_loaded_scene
-	
-	if last_scene and last_scene != "res://Scenes/GameBegin.tscn":
-		visible = false
-		
+	if last_scene:
+		yield(black_screen.fade_in(), "animation_finished")
 		load_scene(last_scene)

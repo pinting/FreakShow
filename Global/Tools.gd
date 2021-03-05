@@ -70,3 +70,21 @@ func set_shapes_disabled(body: CollisionObject2D, disabled: bool):
 	for child in body.get_children():
 		if child is CollisionPolygon2D or child is CollisionShape2D:
 			child.disabled = disabled
+
+func keep_child_at(parent: Node, index: int):
+	var children = parent.get_children()
+	var count = parent.get_child_count()
+	var chosen = null
+	
+	assert(index < count)
+	
+	for i in range(count, 0, -1):
+		var child = children[i - 1]
+		
+		if i - 1 != index:
+			parent.remove_child(child)
+			child.queue_free()
+		else:
+			chosen = child
+	
+	return chosen

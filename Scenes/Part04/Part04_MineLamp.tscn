@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Prefabs/Static/Static_MineLamp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=3]
+
+
+[node name="Part04_MineLamp" type="Node2D"]
+
+[node name="Lamp" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 0 )
+
+[node name="Light" parent="Lamp" instance=ExtResource( 3 )]
+position = Vector2( -901.96, 803.463 )
+rotation = -0.0170932
+scale = Vector2( 2.84515, 0.470046 )

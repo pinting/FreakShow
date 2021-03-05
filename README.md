@@ -30,18 +30,15 @@ The game was imagined based on a selection of music tracks - however, I do not o
 * Jozsef Koller - animation interpolation
 * Babett Farkas - photo assets
 * Janos Bito - sound effects
-* Xavier Gómez Gosálbez - CRT shader
-* Nathan Lovato - fog shader
-* Godot Engine - engine, shaders, sprites of particles
 
 Thank you for the musical inspiration to the following artists (or group of artists).
 
-* Part00 - Cluster & Eno
+* Part01 - Cluster & Eno
 * Part01 - Cluster
-* Part02 - Phuture
-* Part03 - Neu
-* Part04 - Booka Shade
-* Part05 - Pye Corner Audio
+* Part03 - Phuture
+* Part04 - Neu
+* Part05 - Booka Shade
+* Part06 - Pye Corner Audio
 
 ## License
 

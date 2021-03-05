@@ -1,164 +1,194 @@
-extends "res://Scenes/BaseScene.gd"
+extends BaseScene
 
-export var next_scene: String = "res://Scenes/Credits.tscn"
-export var player_sync_fix_max_diff: float = 10.0
+export var next_scene: String = "res://Scenes/Part06/Part06.tscn"
+export var tick_length_min: float = 10.0
+export var tick_length_max: float = 15.0
+export var number_of_pillars: int = 25
+export var width_between_pillars: float = 3000.0
+export var pillar_high_offset: float = -370.0
+export var pillar_low_offset: float = 335.0
+export var teleport_player_to_end: bool = false
 
-onready var player_top = $PlayerTop
-onready var player_bottom = $PlayerBottom
-onready var camera = $GameCamera
+onready var player = $Player
+onready var camera = $Player/GameCamera
 
-onready var top_rug = $Environment/Top/Inside/Rug
-onready var top_pussy = $Environment/Top/Inside/Pussy
-onready var top_button = $Environment/Top/Inside/Button
-onready var top_hand = $Environment/Top/Hand
-onready var top_player_collision_right_shape = $Environment/Top/CollisionPlayer/Right
-onready var top_button_light = $Environment/Top/Inside/Button/Light
+onready var club = $Dynamic/Environment/BuildingEnd/Dirt/Road/Club
 
-onready var bottom_door = $Environment/Bottom/Door
-onready var bottom_button = $Environment/Bottom/Inside/Button
-onready var bottom_hand = $Environment/Bottom/Hand
-onready var bottom_player_collision_left_shape = $Environment/Bottom/CollisionPlayer/Left
-onready var bottom_button_light = $Environment/Bottom/Inside/Button/Light
-
-onready var end_camera = $Environment/End/Camera
-onready var end_animated_sprite = $Environment/End/AnimatedSprite
-onready var end_fap_sound = $Environment/End/FapSound
-
-onready var fall_to_death = $Trigger/FallToDeath
+onready var dynamic = $Dynamic
+onready var game_end = $Dynamic/Trigger/GameEnd
+onready var fall_to_died = $Dynamic/Trigger/FallToDeath
+onready var train_spawn = $Trigger/TrainSpawn
+onready var pillar_spawn = $Trigger/PillarSpawn
+onready var teleport_player = $Dynamic/Trigger/TeleportPlayer
+onready var player_respawn = $Trigger/PlayerRespawn
 
 onready var main_music = $Sound/MainMusic
-onready var not_close_enough_sound = $Sound/NotCloseEnoughSound
+onready var door_sound = $Sound/DoorSound
 
-var dildo_in_place = false
-var game_over = false
-var game_finished = false
+const train_scene = preload("res://Objects/Train.tscn")
+const pillar_scene = preload("res://Scenes/Part05/Part05_DoublePillar.tscn")
+
+var train_wait_time: float = INF
+var train_counter: float = 0.0
+var first_on_top_called: bool = false
+var reached_end: bool = false
 
 var music_00
 var music_01
+var music_02
+var music_03
 
 func _ready() -> void:
-	music_00 = main_music.add_part(0, 60 + 21, false, 0, 0.5, 0)
-	music_01 = main_music.add_part(15, 60 + 21, true, 0.5, 0.5, -1)
+	dynamic.position.x += width_between_pillars * (number_of_pillars + 1)
+	
+	music_00 = main_music.add_part(0, 19.3, true, 2, 2, -5)
+	music_01 = main_music.add_part(42, 5 * 38, true, 0, 0, 0)
+	music_02 = main_music.add_part(30.8, 41.9, false, 0, 2, 0)
+	music_03 = main_music.add_part(0, 19.3, true, 2, 2, -5)
 	
 	connect("scene_started", self, "_on_scene_started")
-	top_pussy.connect("dildo_inside", self, "_on_dildo_inside")
-	bottom_button.connect("selected", self, "_on_bottom_button_selected")
-	top_button.connect("selected", self, "_on_top_button_selected")
-	bottom_hand.connect("player_on_palm", self, "_player_on_palm")
-	top_hand.connect("player_on_palm", self, "_player_on_palm")
-	fall_to_death.connect("body_entered", self, "_on_fall_to_death")
-	top_rug.connect("selected", self, "_remove_rug")
+	fall_to_died.connect("body_entered", self, "_kill_player")
+	player.connect("died", self, "_on_player_die")
+	game_end.connect("body_entered", self, "_on_player_reach_game_end")
+	club.connect("door_selected", self, "_on_exit_selected")
 
-func _remove_rug() -> void:
-	top_rug.get_parent().remove_child(top_rug)
-	top_rug.queue_free()
-	top_pussy.enable()
+func _generate_pillars():
+	var pillars_y = []
+	var zero_count = Game.random_generator.randi_range(1, 3)
+	
+	for i in range(number_of_pillars):
+		if zero_count == 0:
+			pillars_y.push_back(-1 if Game.random_generator.randi_range(0, 1) else 1)
+			zero_count = Game.random_generator.randi_range(0, 2)
+		else:
+			pillars_y.push_back(0)
+			zero_count -= 1
+	
+	var end_zero_count = Game.random_generator.randi_range(0, 2)
+	
+	if number_of_pillars >= end_zero_count:
+		for n in range(end_zero_count):
+			pillars_y[number_of_pillars - (1 + n)] = 0
+	
+	return pillars_y
 
-func _player_on_palm(player: Player) -> void:
-	if game_finished:
+func _create_pillars(pillars_y: Array) -> void:
+	for child in pillar_spawn.get_children():
+		pillar_spawn.remove_child(child)
+		child.queue_free()
+	
+	var pillar
+	
+	for i in range(number_of_pillars):
+		pillar = pillar_scene.instance()
+		
+		var x_offset = i * width_between_pillars
+		var y_offset = 0
+		
+		if pillars_y and len(pillars_y) > i:
+			if pillars_y[i] == -1:
+				y_offset = pillar_low_offset
+			elif pillars_y[i] == 1:
+				y_offset = pillar_high_offset
+		
+		var offset = Vector2(x_offset, y_offset)
+		
+		pillar.position = offset
+		pillar.z_index = pillar_spawn.z_index
+		
+		pillar_spawn.add_child(pillar)
+
+func _kill_player(player: Node) -> void:
+	if not player.is_in_group("player"):
 		return
 	
-	game_finished = true
-	yield(Game.timer(3.0), "timeout")
-
-	black_screen.fade_in(2.0)
-	yield(Game.timer(2.0), "timeout")
-	
-	end_animated_sprite.frames = player.animated_sprite.frames
-	end_animated_sprite.playing = true 
-	camera.current = false
-	end_camera.current = true
-	end_fap_sound.play()
-	black_screen.fade_out(5.0)
-	yield(Game.timer(10.0), "timeout")
-	
-	black_screen.fade_in(5.0)
-	main_music.kill(7.0)
-	yield(Game.timer(10.0), "timeout")
-	
-	load_scene(next_scene)
-
-func _on_bottom_button_selected() -> void:
-	if not dildo_in_place:
-		not_close_enough_sound.play()
-		return
-	
-	if top_hand.moving or bottom_hand.moving:
-		return
-	
-	if top_hand.open:
-		top_hand.close()
-	
-	bottom_hand.open()
-
-func _on_top_button_selected() -> void:
-	if not dildo_in_place:
-		not_close_enough_sound.play()
-		return
-	
-	if top_hand.moving or bottom_hand.moving:
-		return
-	
-	if bottom_hand.open:
-		bottom_hand.close()
-	
-	top_hand.open()
-
-func _on_dildo_inside() -> void:
-	dildo_in_place = true
-	
-	bottom_door.open()
-	yield(Game.timer(2.0), "timeout")
-	
-	camera.zoom_action()
-	Game.subtitle.say(tr("NARRATOR11"))
-
-	top_player_collision_right_shape.disabled = true
-	bottom_player_collision_left_shape.disabled = true
-	top_button_light.visible = true
-	bottom_button_light.visible = true
+	player.kill()
 
 func _on_scene_started() -> void:
+	_create_pillars(_generate_pillars())
+	
+	if teleport_player_to_end:
+		player.global_position = teleport_player.global_position
+	else:
+		_create_train()
+	
+	black_screen.fade_out(3.0)
 	main_music.play()
 
-func _on_fall_to_death(body: Node) -> void:
-	if game_over:
+	yield(Game.timer(2.0), "timeout")
+	SubtitleManager.say(tr("NARRATOR09"))
+
+func _on_player_on_train_top() -> void:
+	if first_on_top_called or player.dead:
 		return
 	
-	game_over = true
+	main_music.force_next(music_01)
+	camera.zoom_action()
+	SubtitleManager.say(tr("NARRATOR10"))
 	
-	if dildo_in_place and body.is_in_group("player"):
-		var store_index = Game.players.find(body)
-		
-		if store_index >= 0:
-			Game.players.remove(store_index)
-		
-		body.get_parent().remove_child(body)
-		body.queue_free()
-		
-		if len(Game.players) > 0:
-			return
+	first_on_top_called = true
+
+func _on_player_reach_game_end(player: Node) -> void:
+	if not player.is_in_group("player") or reached_end:
+		return
 	
-	main_music.kill(2.0);
-	black_screen.fade_in(2.0)
+	main_music.force_next(music_02)
+	camera.zoom_base()
+	
+	reached_end = true
+
+func _clean_trains():
+	var trains = get_tree().get_nodes_in_group("train")
+	
+	for train in trains:
+		train.stop()
+		remove_child(train)
+		train.queue_free()
+
+func _on_exit_selected() -> void:
+	door_sound.play()
+	main_music.kill(2.0)
+	
+	black_screen.fade_in(0.5)
+	yield(Game.timer(0.5), "timeout")
+	
+	club.bass_sound.volume_db = 10
+	yield(Game.timer(1.0), "timeout")
+	
+	_clean_trains()
+	yield(Game.timer(0.5), "timeout")
+	
+	load_scene(next_scene, true)
+
+func _on_player_die() -> void:
 	yield(Game.timer(2.0), "timeout")
 	
-	load_scene(get_parent().filename)
+	main_music.force_next(music_00)
+	move_with_fade(player, player_respawn.global_position)
+	
+	first_on_top_called = false
+	reached_end = false
 
-# The position of P2.X is the mirrored (by the origo) position of P1.X.
-# This function validates if they are still in sync and if not their position X
-# is set to the average distance X from the origo.
-func _process(delta):
-	if not is_instance_valid(player_top) or not is_instance_valid(player_bottom):
+func _create_train() -> void:
+	var new_train = train_scene.instance()
+	
+	new_train.z_index = train_spawn.z_index
+	new_train.position = train_spawn.position
+	new_train.collision_layer = 8
+	new_train.collision_mask = 8
+	new_train.connect("player_on_top", self, "_on_player_on_train_top")
+	
+	add_child(new_train)
+	new_train.start()
+	
+	train_wait_time = Game.random_generator.randf_range(tick_length_min, tick_length_max)
+	train_counter = 0.0
+
+func _process(delta: float) -> void:
+	if first_on_top_called or reached_end or player.dead:
 		return
 	
-	var p1 = player_top.global_position
-	var p2 = player_bottom.global_position
+	train_counter += delta
 	
-	var diff = abs(abs(p1.x) - abs(p2.x))
-	
-	if diff > player_sync_fix_max_diff:
-		var avg = (abs(p1.x) + abs(p2.x)) / 2
-		
-		player_top.global_position.x = avg * (p1.x / abs(p1.x))
-		player_bottom.global_position.x = avg * (p2.x / abs(p2.x))
+	if train_counter >= train_wait_time:
+		_create_train()

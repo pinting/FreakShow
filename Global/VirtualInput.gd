@@ -1,7 +1,7 @@
 extends Node
 
 # Actual mouse clicks and virtual ones are distinguished by their pressure value
-var pressure_virtual = max(0.1, min(0.9, randf()))
+var pressure_virtual: float = 0.0123456789
 
 # Position on the viewport
 var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
@@ -13,15 +13,17 @@ var using_virtual: bool = false
 func _ready() -> void:
 	using_virtual = Config.virtual_mouse_only
 
-func _mouse_viewport_to_window_position(viewport_position: Vector2) -> Vector2:
+func get_project_size() -> Vector2:
+	var project_width = ProjectSettings.get_setting("display/window/size/width")
+	var project_height = ProjectSettings.get_setting("display/window/size/height")
+	
+	return Vector2(project_width, project_height)
+
+func mouse_viewport_to_window_position(viewport_position: Vector2) -> Vector2:
 	var viewport_size = get_viewport().size
 	var window_size = OS.window_size
 	var ratio = window_size / viewport_size
-	
-	var project_width = ProjectSettings.get_setting("display/window/size/width")
-	var project_height = ProjectSettings.get_setting("display/window/size/height")
-	var project_size = Vector2(project_width, project_height)
-	
+	var project_size = get_project_size()
 	var base = (viewport_position / project_size) * viewport_size
 	
 	if ProjectSettings.get_setting("display/window/stretch/aspect") == "keep":
@@ -67,8 +69,8 @@ func _create_click_event(viewport_position: Vector2, button_index: int, pressed:
 	var event = InputEventMouseButton.new()
 	
 	# Documentation says this should be viewport relative, but it only works like this
-	event.position = _mouse_viewport_to_window_position(viewport_position)
-	event.global_position = _mouse_viewport_to_window_position(viewport_position)
+	event.position = mouse_viewport_to_window_position(viewport_position)
+	event.global_position = mouse_viewport_to_window_position(viewport_position)
 	event.button_index = button_index
 	event.pressed = pressed
 	
@@ -77,8 +79,8 @@ func _create_click_event(viewport_position: Vector2, button_index: int, pressed:
 func _create_move_event(viewport_position: Vector2, relative: Vector2, pressure: float) -> void:
 	var event = InputEventMouseMotion.new()
 	
-	event.position = _mouse_viewport_to_window_position(viewport_position)
-	event.global_position = _mouse_viewport_to_window_position(viewport_position)
+	event.position = mouse_viewport_to_window_position(viewport_position)
+	event.global_position = mouse_viewport_to_window_position(viewport_position)
 	event.relative = relative
 	event.speed = Config.virtual_mouse_speed
 	event.pressure = pressure
