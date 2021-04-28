@@ -23,7 +23,10 @@ SOFTWARE.
 Applies to the following list of files:
 
 > Shaders/Blur.shader
+> Shaders/ScreenBlur.shader
 > Shaders/Disintegrate.shader
+> Shaders/OnlyOutline.shader
+> Shaders/Outline.shader
 > Shaders/Glow.shader
 > Shaders/Waves.shader
 

@@ -97,8 +97,10 @@ position = Vector2( -4797.1, -349.489 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 37 )
 
-[node name="GameCamera" parent="BaseScene/Player" instance=ExtResource( 23 )]
-position = Vector2( 6.06445, -312.324 )
+[node name="GameCamera" parent="BaseScene" instance=ExtResource( 23 )]
+position = Vector2( -4789.55, -372.142 )
+scale = Vector2( 0.7, 0.7 )
+follow_offset = Vector2( 0, -250 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )

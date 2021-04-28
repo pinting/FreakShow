@@ -59,7 +59,7 @@ func _on_scene_started() -> void:
 
 	if not disable_movement_delay:
 		yield(Game.timer(4.5), "timeout")
-		SubtitleManager.say(tr("NARRATOR06"))
+		SubtitleManager.say(Text.find("Narrator006"))
 		
 		player.visible = true
 		
@@ -76,7 +76,7 @@ func _on_scene_started() -> void:
 func _keypad_selected() -> void:
 	if not ending_open:
 		if not code_help_said:
-			SubtitleManager.say(tr("NARRATOR07"))
+			SubtitleManager.say(Text.find("Narrator007"))
 			code_help_said = true
 		
 		return
@@ -113,5 +113,5 @@ func _on_battery_in_place() -> void:
 	train_platform.open()
 
 func _unlock_ending() -> void:
-	SubtitleManager.say(tr("NARRATOR08"))
+	SubtitleManager.say(Text.find("Narrator008"))
 	ending_open = true

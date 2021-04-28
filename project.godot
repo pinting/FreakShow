@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scenes/BaseScene.gd"
 }, {
-"base": "Node2D",
-"class": "BaseSelectable",
-"language": "GDScript",
-"path": "res://Prefabs/Selectable/BaseSelectable.gd"
-}, {
 "base": "CanvasLayer",
 "class": "BlackScreen",
 "language": "GDScript",
@@ -29,25 +24,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Prefabs/ColorChanger.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "Enemy",
-"language": "GDScript",
-"path": "res://Prefabs/PathFindingEnemy.gd"
-}, {
 "base": "Camera2D",
 "class": "GameCamera",
 "language": "GDScript",
 "path": "res://Prefabs/GameCamera.gd"
 }, {
-"base": "BaseSelectable",
-"class": "GroupSelectable",
+"base": "Node2D",
+"class": "Loop",
 "language": "GDScript",
-"path": "res://Prefabs/Selectable/GroupSelectable.gd"
+"path": "res://Prefabs/Loop.gd"
 }, {
 "base": "Node",
 "class": "MusicMixer",
 "language": "GDScript",
 "path": "res://Prefabs/MusicMixer.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "PathFindingEnemy",
+"language": "GDScript",
+"path": "res://Prefabs/PathFindingEnemy.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Pickable",
+"language": "GDScript",
+"path": "res://Prefabs/Pickable/Pickable.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -59,20 +59,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Prefabs/RandomChild.gd"
 }, {
-"base": "GroupSelectable",
-"class": "RandomSelectable",
-"language": "GDScript",
-"path": "res://Prefabs/Selectable/RandomSelectable.gd"
-}, {
 "base": "Node2D",
 "class": "RollingChild",
 "language": "GDScript",
 "path": "res://Prefabs/RollingChild.gd"
-}, {
-"base": "GroupSelectable",
-"class": "RollingSelectable",
-"language": "GDScript",
-"path": "res://Prefabs/Selectable/RollingSelectable.gd"
 }, {
 "base": "Sprite",
 "class": "Selectable",
@@ -101,18 +91,16 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "BaseScene": "",
-"BaseSelectable": "",
 "BlackScreen": "",
 "ColorChanger": "",
-"Enemy": "",
 "GameCamera": "",
-"GroupSelectable": "",
+"Loop": "",
 "MusicMixer": "",
+"PathFindingEnemy": "",
+"Pickable": "",
 "Player": "",
 "RandomChild": "",
-"RandomSelectable": "",
 "RollingChild": "",
-"RollingSelectable": "",
 "Selectable": "",
 "SlidingNode": "",
 "SubtitleDisplay": "",
@@ -136,6 +124,7 @@ Cursor="*res://Global/Cursor.gd"
 SubtitleManager="*res://Global/SubtitleManager.gd"
 Save="*res://Global/Save.gd"
 Game="*res://Global/Game.gd"
+Text="*res://Global/Text.gd"
 
 [display]
 

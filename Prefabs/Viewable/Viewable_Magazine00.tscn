@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=1]
+[ext_resource path="res://Prefabs/Viewable/Viewable.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Environmnent/Decoration/Pajtas00.png" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/scale = 0.0
+shader_param/glow_radius = 10.0
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
+
+[node name="Viewable_Magazine00" type="Sprite" groups=[
+"selectable",
+]]
+material = SubResource( 1 )
+position = Vector2( -1514.44, -248.129 )
+rotation = 0.0952376
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 3 )
+script = ExtResource( 2 )
+offset_key = "offset"
+effect_key = "scale"
+effect_hover = 1.0
+clone_material = true

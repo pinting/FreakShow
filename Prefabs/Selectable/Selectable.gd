@@ -149,6 +149,9 @@ func disable():
 	_reset_description()
 	disabled = true
 
+func enable():
+	disabled = false
+
 func hold():
 	held = true
 
@@ -156,11 +159,11 @@ func drop():
 	held = false
 
 func _set_description() -> void:
-	if not is_described:
+	if not is_described and len(description):
+		SubtitleManager.set_describe(get_instance_id(), Text.find(description))
 		is_described = true
-		SubtitleManager.describe(get_instance_id(), tr(description))
 
 func _reset_description() -> void:
-	if is_described:
+	if is_described and len(description):
+		SubtitleManager.reset_describe(get_instance_id())
 		is_described = false
-		SubtitleManager.describe_reset(get_instance_id())

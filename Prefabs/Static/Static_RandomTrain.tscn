@@ -9,7 +9,6 @@
 [ext_resource path="res://Assets/Environmnent/Train01.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Environmnent/Train03.png" type="Texture" id=8]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2047.14, 501.191 )
 

@@ -16,7 +16,7 @@ func _exists() -> bool:
 	return File.new().file_exists(Config.save_path)
 
 func _remove() -> void:
-	File.new().remove(Config.save_path)
+	Directory.new().remove(Config.save_path)
 
 func clear() -> void:
 	_remove()

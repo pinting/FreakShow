@@ -14,5 +14,5 @@ material = SubResource( 1 )
 position = Vector2( 1029.39, 38.4341 )
 texture = ExtResource( 2 )
 script = ExtResource( 3 )
-description = "BUTTON00"
+description = "Description014"
 clone_material = true

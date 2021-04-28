@@ -13,6 +13,11 @@ export var move_with_fade_timeout: float = 0.8
 # Amount of seconds for the cancel button to be held down to escape
 export var cancel_button_timeout: float = 1.0
 
+# Color of the subtitles
+export var subtitle_color: Color = Color.white
+
+onready var subtitle_display = $SubtitleDisplay
+onready var viewable_display = $ViewableDisplay 
 onready var black_screen = $BlackScreen
 
 var held_pickable: RigidBody2D = null
@@ -31,6 +36,8 @@ var loading_in_progress: bool = false
 signal scene_started
 
 func _ready() -> void:
+	subtitle_display.set_color(subtitle_color)
+	
 	for node in get_tree().get_nodes_in_group("pickable"):
 		node.connect("picked", self, "_on_pickable_picked")
 
@@ -104,23 +111,19 @@ func move_with_fade(player: Player, next_position: Vector2, sound: AudioStreamPl
 	
 	move_in_progress = true
 	
-	var camera = Game.current_camera
-	var smoothing_enabled = camera.smoothing_enabled
-	
 	if sound:
 		sound.play()
 	
 	
 	yield(black_screen.fade_in(move_with_fade_timeout), "animation_finished")
-		
-	if camera and smoothing_enabled:
-		camera.smoothing_enabled = false
 	
 	player.position = next_position
 	player.reset()
 	
-	if camera and smoothing_enabled:
-		camera.smoothing_enabled = smoothing_enabled
+	var camera = Game.current_camera
+	
+	if camera:
+		camera.reset(player.global_position)
 	
 	yield(black_screen.fade_out(move_with_fade_timeout), "animation_finished")
 	

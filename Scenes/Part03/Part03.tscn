@@ -177,7 +177,7 @@ scale = Vector2( 1.52999, 1.52999 )
 z_index = 2
 texture = ExtResource( 10 )
 script = ExtResource( 42 )
-description = "HELP00"
+description = "Description015"
 
 [node name="Maze" type="Node2D" parent="BaseScene/Environment"]
 position = Vector2( 1117.5, 9761.04 )

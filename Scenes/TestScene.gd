@@ -13,7 +13,7 @@ func _ready():
 	lock_area.connect("body_entered", self, "_on_lock_area_touched")
 
 func _on_scene_started() -> void:
-	black_screen.fade_out(1.0)
+	black_screen.fade_out()
 
 func _on_lock_area_touched(body) -> void:
 	if not body.is_in_group("pickable"):

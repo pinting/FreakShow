@@ -15,10 +15,10 @@ func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
         
         Game.subtitle_display.say(text, speed, timeout)
 
-func describe(owner: int, text: String, keep: bool = false) -> void:
+func set_describe(owner: int, text: String, keep: bool = false) -> void:
     if Game.subtitle_display:
-        Game.subtitle_display.describe(owner, text, keep)
+        Game.subtitle_display.set_describe(owner, text, keep)
 
-func describe_reset(owner: int, force: bool = false) -> void:
+func reset_describe(owner: int, force: bool = false) -> void:
     if Game.subtitle_display:
-        Game.subtitle_display.describe_reset(owner, force)
+        Game.subtitle_display.reset_describe(owner, force)

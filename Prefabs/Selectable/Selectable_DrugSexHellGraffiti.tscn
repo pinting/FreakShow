@@ -11,4 +11,4 @@ self_modulate = Color( 1, 1, 1, 0.960784 )
 position = Vector2( 2306.15, 49.5547 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-description = "GRAFFITI09"
+description = "Description038"

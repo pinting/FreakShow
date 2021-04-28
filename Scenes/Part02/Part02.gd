@@ -68,7 +68,7 @@ func _ready() -> void:
 
 func _on_scene_started() -> void:
 	black_screen.fade_out(3.0)
-	SubtitleManager.say(tr("NARRATOR02"), 6.0)
+	SubtitleManager.say(Text.find("Narrator002"), 6.0)
 	main_music.play()
 
 func _on_shed_door_selected() -> void:
@@ -101,7 +101,7 @@ func _trigger_comment(player: Node) -> void:
 		return
 	
 	trigger_comment.visible = false
-	SubtitleManager.say(tr("NARRATOR03"), 6)
+	SubtitleManager.say(Text.find("Narrator003"), 6)
 
 func _trigger_train(player: Node) -> void:
 	if not player.is_in_group("player") or not trigger_train.visible:

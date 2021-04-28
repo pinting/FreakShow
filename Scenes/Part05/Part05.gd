@@ -73,9 +73,7 @@ func _generate_pillars():
 	return pillars_y
 
 func _create_pillars(pillars_y: Array) -> void:
-	for child in pillar_spawn.get_children():
-		pillar_spawn.remove_child(child)
-		child.queue_free()
+	Tools.remove_childs(pillar_spawn)
 	
 	var pillar
 	
@@ -116,15 +114,15 @@ func _on_scene_started() -> void:
 	main_music.play()
 
 	yield(Game.timer(2.0), "timeout")
-	SubtitleManager.say(tr("NARRATOR09"))
+	SubtitleManager.say(Text.find("Narrator009"))
 
 func _on_player_on_train_top() -> void:
 	if first_on_top_called or player.dead:
 		return
 	
 	main_music.force_next(music_01)
-	camera.zoom_action()
-	SubtitleManager.say(tr("NARRATOR10"))
+	camera.set_zoom_action()
+	SubtitleManager.say(Text.find("Narrator010"))
 	
 	first_on_top_called = true
 
@@ -133,7 +131,7 @@ func _on_player_reach_game_end(player: Node) -> void:
 		return
 	
 	main_music.force_next(music_02)
-	camera.zoom_base()
+	camera.revert_zoom()
 	
 	reached_end = true
 

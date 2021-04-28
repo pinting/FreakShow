@@ -1,6 +1,6 @@
 extends Node
 
-func _quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:
+func quadratic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:
 	var q0 = p0.linear_interpolate(p1, t)
 	var q1 = p1.linear_interpolate(p2, t)
 	
@@ -17,7 +17,7 @@ func smooth_path(raw_path: PoolVector2Array, step: float = 10) -> PoolVector2Arr
 	
 	while i + 2 < raw_size:
 		for t in range(step + 1):
-			var v = _quadratic_bezier(raw_path[i], raw_path[i + 1], raw_path[i + 2], t / step)
+			var v = quadratic_bezier(raw_path[i], raw_path[i + 1], raw_path[i + 2], t / step)
 			
 			result.push_back(v)
 		
@@ -88,3 +88,23 @@ func keep_child_at(parent: Node, index: int):
 			chosen = child
 	
 	return chosen
+
+func remove_childs(parent: Node):
+	for child in parent.get_children():
+		parent.remove_child(child)
+		child.queue_free()
+
+func get_longest_line(text: String) -> String:
+	var lines = text.split("\n")
+	
+	var current_max = 0
+	var longest_line = ""
+	
+	for line in lines:
+		var length = len(line)
+		
+		if current_max < length:
+			current_max = length
+			longest_line = line
+	
+	return longest_line

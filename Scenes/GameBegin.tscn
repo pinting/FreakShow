@@ -31,6 +31,7 @@ shader_param/octaves = 1
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
+subtitle_color = Color( 1, 0.85098, 0.85098, 0.901961 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
 anchor_mode = 0
@@ -55,36 +56,35 @@ offset = Color( 0.74902, 0.74902, 0.74902, 1 )
 scale_color = Color( 0.329412, 0.329412, 0.329412, 1 )
 
 [node name="Decoration" parent="BaseScene/CanvasLayer/ColorChanger" instance=ExtResource( 5 )]
-modulate = Color( 1, 1, 1, 0.156863 )
 position = Vector2( -138.385, 300.786 )
 
 [node name="Menu" type="Node2D" parent="BaseScene/CanvasLayer/ColorChanger"]
 modulate = Color( 1, 1, 1, 0.588235 )
 position = Vector2( 179.673, 0 )
-scale = Vector2( 1, 1 )
 z_index = 1
 
 [node name="NewGame" parent="BaseScene/CanvasLayer/ColorChanger/Menu" instance=ExtResource( 12 )]
-position = Vector2( 60.2782, 245.095 )
-scale = Vector2( 0.33, 0.33 )
-z_index = 1
-
-[node name="ContinueGame" parent="BaseScene/CanvasLayer/ColorChanger/Menu" instance=ExtResource( 9 )]
-position = Vector2( 547.482, 245.095 )
+position = Vector2( 87.0052, 251.331 )
 scale = Vector2( 0.4, 0.4 )
 z_index = 1
+description = "Description058"
+
+[node name="ContinueGame" parent="BaseScene/CanvasLayer/ColorChanger/Menu" instance=ExtResource( 9 )]
+position = Vector2( 504.735, 251.331 )
+z_index = 1
+description = "Description059"
 
 [node name="Help" type="Node2D" parent="BaseScene/CanvasLayer/ColorChanger"]
 modulate = Color( 1, 1, 1, 0.588235 )
 position = Vector2( 179.673, 0 )
 
 [node name="Help00" type="Sprite" parent="BaseScene/CanvasLayer/ColorChanger/Help"]
-position = Vector2( 301.099, 105.862 )
+position = Vector2( 298.594, 123.499 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
 [node name="Help01" type="Sprite" parent="BaseScene/CanvasLayer/ColorChanger/Help"]
-position = Vector2( 288.531, 409.526 )
+position = Vector2( 291.204, 400.344 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 

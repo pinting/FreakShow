@@ -9,6 +9,9 @@ export var credits_delay: float = 2.0
 # How many lines of credits to display
 export var credits_count: int = 6
 
+# Prefix of the credits entries in the translation file
+export var text_prefix = "Cred"
+
 onready var text_bottom = $TextCanvas/Bottom
 onready var text_top = $TextCanvas/Top
 
@@ -22,12 +25,15 @@ func _on_scene_started() -> void:
 	yield(Game.timer(credits_delay), "timeout")
 
 	for n in range(0, credits_count):
-		var sn = str(n)
-		var prefix = "CREDITS" + (sn if len(sn) > 1 else "0" + sn) + "_"
-		var top = tr(prefix + "0")
-		var bottom = tr(prefix + "1")
+		var padded_top_index = str("000", 2 * n)
+		var padded_bottom_index = str("000", 2 * n + 1)
+		var top_index = padded_top_index.right(len(padded_top_index) - 3)
+		var bottom_index = padded_bottom_index.right(len(padded_bottom_index) - 3)
+
+		var top = Text.find(text_prefix + top_index)
+		var bottom = Text.find(text_prefix + bottom_index)
 		
-		if not len(top) or top == prefix + "0" or not len(bottom) or bottom == prefix + "1":
+		if not len(top) or not len(bottom):
 			continue
 
 		text_top.text = top

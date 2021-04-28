@@ -15,8 +15,6 @@
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_SplitPersonality.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=14]
 
-
-
 [sub_resource type="Environment" id=1]
 background_mode = 4
 glow_enabled = true

@@ -4,8 +4,11 @@ extends Node2D
 # Debug the subtitle display (Config.debug needs to be true)
 export var debug: bool = false
 
-onready var top = $Top/Top
-onready var bottom = $Bottom/Bottom
+# Color of the (top and bottom) labels
+export var color: Color = Color.white
+
+onready var describe_label: Label = $Top/DescribeLabel
+onready var say_label: Label = $Bottom/SayLabel
 
 var current_describe_owner = null
 var keep_describe = false
@@ -14,8 +17,14 @@ var lines = []
 func _ready() -> void:
 	Game.subtitle_display = self
 	
-	top.text = ""
-	bottom.text = ""
+	describe_label.text = ""
+	say_label.text = ""
+	
+	set_color(color)
+
+func set_color(color: Color) -> void:
+	describe_label.set("custom_colors/font_color", color)
+	say_label.set("custom_colors/font_color", color)
 
 func _process(delta: float) -> void:
 	var text = ""
@@ -41,7 +50,7 @@ func _process(delta: float) -> void:
 	for n in marked:
 		lines.remove(n)
 	
-	bottom.text = text
+	say_label.text = text
 	
 func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 	lines.push_back({
@@ -51,21 +60,21 @@ func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 		"show_percentage": 0 if speed > 0 else 100
 	})
 
-func describe(owner: int, text: String, keep: bool = false) -> void:
-	_debug(str("Set describe for ", owner, " and KEEP" if keep else ""))
+func set_describe(owner: int, text: String, keep: bool = false) -> void:
+	_debug(str("Set describe for '", owner, "'", " and keep" if keep else ""))
 
 	if keep_describe:
 		return
 	
-	top.text = text
+	describe_label.text = text
 	current_describe_owner = owner
 	keep_describe = keep
 
-func describe_reset(owner: int, force: bool = false) -> void:
-	_debug(str("Remove describe for ", owner, " with FORCE" if force else ""))
+func reset_describe(owner: int, force: bool = false) -> void:
+	_debug(str("Remove describe for '", owner, "'", " with force" if force else ""))
 
 	if current_describe_owner == owner or force:
-		top.text = ""
+		describe_label.text = ""
 		current_describe_owner = null
 		keep_describe = false
 

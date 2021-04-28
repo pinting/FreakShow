@@ -11,4 +11,4 @@ position = Vector2( -88.9295, -43.0964 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-description = "PAPER14"
+description = "Description055"

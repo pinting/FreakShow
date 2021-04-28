@@ -10,8 +10,9 @@ func _ready() -> void:
 	canvas.material.set_shader_param("color", color)
 
 func _process(_delta: float) -> void:
-	if len(Game.players) > 0:
-		var master_player = Game.players[0]
-		var offset = master_player.global_position / speed_div
+	var camera = Game.current_camera
+
+	if camera:
+		var offset = camera.scrolling_vector / speed_div
 		
 		canvas.material.set_shader_param("offset", offset)

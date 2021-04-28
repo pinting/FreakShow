@@ -1,4 +1,4 @@
-class_name Enemy
+class_name PathFindingEnemy
 extends KinematicBody2D
 
 # Speed of the enemy

@@ -11,5 +11,5 @@ position = Vector2( 211.247, 81.3408 )
 scale = Vector2( 0.17063, 0.17063 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-description = "PAPER16"
+description = "Description057"
 enlarged_zoom = 0.33

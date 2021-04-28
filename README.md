@@ -15,20 +15,20 @@ The game was imagined based on a selection of music tracks - however, I do not o
 * Clone or download the repository.
 * _(optional)_ Place [the missing proprietary music tracks](docs/Music.md) into the project folder.
 * Run `./setup.sh` to prepare the project. This command will convert and move all the proprietary music tracks into the `Assets/Music` directory. If they are not present, the attached sample (`.ogg.sample`) tracks will be used.
-* Open the project file with [Godot Editor](https://godotengine.org/) `3.2.x`. Importing the assets will take a couple of minutes.
+* Open the project file with [Godot Editor](https://godotengine.org/) `3.3.x`. Importing the assets will take a couple of minutes.
 * Select `Project` -> `Export`.
 * Click on `Export All`.
 * The DMG and EXE application files will be placed into the `out` directory.
 
 ## Credits
 
-* Denes Tornyi - scripting, custom shaders, photo assets, character actor
-* Gergo Tornyi - photo assets, character actor
-* Zsuzsa Buka - photo assets, drawings
-* Diana Baranyi - photo assets
-* Zsofi Szabo - photo assets
+* Denes Tornyi - director, scripting, custom shaders, textures, translations, character actor
+* Zsuzsa Buka - poems, translations, drawings, textures
+* Gergo Tornyi - textures, translations, character actor
+* Diana Baranyi - textures
+* Zsofi Szabo - textures
 * Jozsef Koller - animation interpolation
-* Babett Farkas - photo assets
+* Babett Farkas - textures
 * Janos Bito - sound effects
 
 Thank you for the musical inspiration to the following artists (or group of artists).

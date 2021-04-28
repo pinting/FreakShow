@@ -19,19 +19,15 @@ func _on_selected():
 	if not camera or not display:
 		return
 	
-	if display.current.visible:
-		return
-	
-	var project_width = ProjectSettings.get_setting("display/window/size/width")
-	var project_height = ProjectSettings.get_setting("display/window/size/height")
-	var project_size = Vector2(project_width, project_height)
-	
-	var texture_size = texture.get_size()
-	var ratio = project_size / texture_size
-	var child_scale = min(ratio.x, ratio.y) * enlarged_zoom
-	
 	emit_signal("cursor_outside")
-	display.add(texture, tr(get("description")), child_scale)
+
+	var description_key = get("description")
+	var description_text = ""
+
+	if description_key and len(description_key):
+		description_text = Text.find(description_key)
+	
+	display.show(self, enlarged_zoom, description_text)
 
 func _set_cursor():
 	Cursor.set_icon("view", get_instance_id())

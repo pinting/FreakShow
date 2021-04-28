@@ -18,10 +18,10 @@
 [ext_resource path="res://Assets/Environmnent/Misc12.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Environmnent/Misc11.png" type="Texture" id=17]
 [ext_resource path="res://Assets/Environmnent/Misc14.png" type="Texture" id=18]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Letter02.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Letter03.tscn" type="PackedScene" id=20]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Letter01.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Letter04.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Prefabs/Viewable/WithText/Viewable_WithText_Letter02.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Prefabs/Viewable/WithText/Viewable_WithText_Letter03.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Prefabs/Viewable/WithText/Viewable_WithText_Letter01.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Prefabs/Viewable/WithText/Viewable_WithText_Letter04.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Assets/Environmnent/Building00_1x1_Right.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Environmnent/Building00_1x1_Left.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Environmnent/Building00_1x7_Top.png" type="Texture" id=25]
@@ -33,7 +33,7 @@
 [ext_resource path="res://Assets/Environmnent/Surface/Floor08.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall17.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall16.png" type="Texture" id=33]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Letter00.tscn" type="PackedScene" id=34]
+[ext_resource path="res://Prefabs/Viewable/WithText/Viewable_WithText_Letter00.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Assets/Environmnent/Decoration/Paper08.png" type="Texture" id=35]
 [ext_resource path="res://Prefabs/RandomChild.tscn" type="PackedScene" id=36]
 
@@ -49,125 +49,125 @@ position = Vector2( 324.193, -43.0864 )
 z_index = -4
 z_as_relative = false
 
-[node name="Cupboard" parent="Inside" instance=ExtResource( 36 )]
+[node name="RandomCupboard" parent="Inside" instance=ExtResource( 36 )]
 position = Vector2( 382.269, 82.1108 )
 
-[node name="Cupboard00" parent="Inside/Cupboard" instance=ExtResource( 9 )]
+[node name="Cupboard00" parent="Inside/RandomCupboard" instance=ExtResource( 9 )]
 position = Vector2( -840.831, 233.744 )
 z_index = 1
 collision_layer = 0
 collision_mask = 0
 
-[node name="Cupboard01" parent="Inside/Cupboard" instance=ExtResource( 9 )]
+[node name="Cupboard01" parent="Inside/RandomCupboard" instance=ExtResource( 9 )]
 position = Vector2( -3028.31, 215.175 )
 z_index = 1
 collision_layer = 0
 collision_mask = 0
 
-[node name="Empty00" type="Node2D" parent="Inside/Cupboard"]
+[node name="Empty00" type="Node2D" parent="Inside/RandomCupboard"]
 position = Vector2( -2811.43, -25.4822 )
 
-[node name="Empty01" type="Node2D" parent="Inside/Cupboard"]
+[node name="Empty01" type="Node2D" parent="Inside/RandomCupboard"]
 position = Vector2( -2811.43, -25.4822 )
 
-[node name="Chair" parent="Inside" instance=ExtResource( 36 )]
+[node name="RandomChair" parent="Inside" instance=ExtResource( 36 )]
 position = Vector2( 296.889, 66.9067 )
 
-[node name="Chair00" parent="Inside/Chair" instance=ExtResource( 12 )]
+[node name="Chair00" parent="Inside/RandomChair" instance=ExtResource( 12 )]
 position = Vector2( -2010.36, 284.799 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
-[node name="Chair01" parent="Inside/Chair" instance=ExtResource( 12 )]
+[node name="Chair01" parent="Inside/RandomChair" instance=ExtResource( 12 )]
 position = Vector2( -1288.07, 283.686 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
-[node name="Chair02" parent="Inside/Chair" instance=ExtResource( 12 )]
+[node name="Chair02" parent="Inside/RandomChair" instance=ExtResource( 12 )]
 position = Vector2( -548.393, 274.827 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
-[node name="Chair03" parent="Inside/Chair" instance=ExtResource( 12 )]
+[node name="Chair03" parent="Inside/RandomChair" instance=ExtResource( 12 )]
 position = Vector2( 126.777, 274.827 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
-[node name="Chair04" parent="Inside/Chair" instance=ExtResource( 12 )]
+[node name="Chair04" parent="Inside/RandomChair" instance=ExtResource( 12 )]
 position = Vector2( 941.508, 274.827 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
-[node name="Chair05" parent="Inside/Chair" instance=ExtResource( 12 )]
+[node name="Chair05" parent="Inside/RandomChair" instance=ExtResource( 12 )]
 position = Vector2( 941.508, 274.827 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
-[node name="WashingMachine" parent="Inside" instance=ExtResource( 36 )]
+[node name="RandomWashingMachine" parent="Inside" instance=ExtResource( 36 )]
 position = Vector2( 296.889, 66.9067 )
 
-[node name="WashingMachine00" parent="Inside/WashingMachine" instance=ExtResource( 3 )]
+[node name="WashingMachine00" parent="Inside/RandomWashingMachine" instance=ExtResource( 3 )]
 position = Vector2( -1941.81, 100.553 )
 z_index = 1
 
-[node name="Empty00" type="Node2D" parent="Inside/WashingMachine"]
+[node name="Empty00" type="Node2D" parent="Inside/RandomWashingMachine"]
 position = Vector2( -2767.89, 0 )
 
-[node name="Empty01" type="Node2D" parent="Inside/WashingMachine"]
+[node name="Empty01" type="Node2D" parent="Inside/RandomWashingMachine"]
 position = Vector2( -2767.89, 0 )
 
-[node name="Empty02" type="Node2D" parent="Inside/WashingMachine"]
+[node name="Empty02" type="Node2D" parent="Inside/RandomWashingMachine"]
 position = Vector2( -2767.89, 0 )
 
-[node name="Table" parent="Inside" instance=ExtResource( 36 )]
+[node name="RandomTable" parent="Inside" instance=ExtResource( 36 )]
 position = Vector2( 296.889, 66.9067 )
 
-[node name="Table00" parent="Inside/Table" instance=ExtResource( 10 )]
+[node name="Table00" parent="Inside/RandomTable" instance=ExtResource( 10 )]
 position = Vector2( -677.733, 276.432 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
-[node name="Table01" parent="Inside/Table" instance=ExtResource( 10 )]
+[node name="Table01" parent="Inside/RandomTable" instance=ExtResource( 10 )]
 position = Vector2( -2167.75, 266.873 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
-[node name="Empty00" type="Node2D" parent="Inside/Table"]
+[node name="Empty00" type="Node2D" parent="Inside/RandomTable"]
 position = Vector2( 6.10352e-05, 0 )
 
-[node name="Empty01" type="Node2D" parent="Inside/Table"]
+[node name="Empty01" type="Node2D" parent="Inside/RandomTable"]
 position = Vector2( 6.10352e-05, 0 )
 
-[node name="Decoration" parent="Inside" instance=ExtResource( 36 )]
+[node name="RandomDecoration" parent="Inside" instance=ExtResource( 36 )]
 
-[node name="Decoration00" type="Sprite" parent="Inside/Decoration"]
+[node name="Decoration00" type="Sprite" parent="Inside/RandomDecoration"]
 position = Vector2( -939.276, -109.696 )
 scale = Vector2( 0.516053, 0.516053 )
 texture = ExtResource( 35 )
 
-[node name="Decoration01" type="Sprite" parent="Inside/Decoration"]
+[node name="Decoration01" type="Sprite" parent="Inside/RandomDecoration"]
 position = Vector2( 1167.21, -62.4365 )
 scale = Vector2( 0.44387, 0.44387 )
 texture = ExtResource( 17 )
 
-[node name="Decoration02" type="Sprite" parent="Inside/Decoration"]
+[node name="Decoration02" type="Sprite" parent="Inside/RandomDecoration"]
 position = Vector2( 118.875, -150.971 )
 scale = Vector2( 0.124458, 0.115656 )
 texture = ExtResource( 16 )
 
-[node name="Decoration03" type="Sprite" parent="Inside/Decoration"]
+[node name="Decoration03" type="Sprite" parent="Inside/RandomDecoration"]
 position = Vector2( 1172.17, -41.2036 )
 scale = Vector2( 0.29442, 0.29442 )
 texture = ExtResource( 18 )
 
-[node name="Decoration04" parent="Inside/Decoration" instance=ExtResource( 11 )]
+[node name="Decoration04" parent="Inside/RandomDecoration" instance=ExtResource( 11 )]
 position = Vector2( -940.317, -118.74 )
 scale = Vector2( 0.265109, 0.265109 )
 
-[node name="Floor" parent="Inside" instance=ExtResource( 36 )]
+[node name="RandomFloor" parent="Inside" instance=ExtResource( 36 )]
 z_index = -1
 
-[node name="Floor00" type="Sprite" parent="Inside/Floor"]
+[node name="Floor00" type="Sprite" parent="Inside/RandomFloor"]
 position = Vector2( -367.528, 343.684 )
 scale = Vector2( 0.896258, 1 )
 z_index = 1
@@ -175,7 +175,7 @@ texture = ExtResource( 8 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 140 )
 
-[node name="Floor01" type="Sprite" parent="Inside/Floor"]
+[node name="Floor01" type="Sprite" parent="Inside/RandomFloor"]
 position = Vector2( -367.528, 343.684 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
@@ -183,7 +183,7 @@ texture = ExtResource( 29 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10000, 300 )
 
-[node name="Floor02" type="Sprite" parent="Inside/Floor"]
+[node name="Floor02" type="Sprite" parent="Inside/RandomFloor"]
 position = Vector2( -367.528, 343.684 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
@@ -191,7 +191,7 @@ texture = ExtResource( 33 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10000, 300 )
 
-[node name="Floor03" type="Sprite" parent="Inside/Floor"]
+[node name="Floor03" type="Sprite" parent="Inside/RandomFloor"]
 position = Vector2( -367.528, 343.684 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
@@ -199,7 +199,7 @@ texture = ExtResource( 32 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10000, 300 )
 
-[node name="Floor04" type="Sprite" parent="Inside/Floor"]
+[node name="Floor04" type="Sprite" parent="Inside/RandomFloor"]
 position = Vector2( -367.528, 343.684 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
@@ -207,7 +207,7 @@ texture = ExtResource( 30 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10000, 300 )
 
-[node name="Floor05" type="Sprite" parent="Inside/Floor"]
+[node name="Floor05" type="Sprite" parent="Inside/RandomFloor"]
 position = Vector2( -367.528, 343.684 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
@@ -215,10 +215,10 @@ texture = ExtResource( 31 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10000, 300 )
 
-[node name="Wall" parent="Inside" instance=ExtResource( 36 )]
+[node name="RandomWall" parent="Inside" instance=ExtResource( 36 )]
 position = Vector2( 340.428, 92.3889 )
 
-[node name="Wall00" type="Sprite" parent="Inside/Wall"]
+[node name="Wall00" type="Sprite" parent="Inside/RandomWall"]
 position = Vector2( -706.714, -106.536 )
 scale = Vector2( 0.896382, 1 )
 texture = ExtResource( 7 )
@@ -226,7 +226,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 576 )
 region_filter_clip = true
 
-[node name="Wall01" type="Sprite" parent="Inside/Wall"]
+[node name="Wall01" type="Sprite" parent="Inside/RandomWall"]
 position = Vector2( -706.714, -106.536 )
 scale = Vector2( 0.896382, 1 )
 texture = ExtResource( 27 )
@@ -234,7 +234,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 576 )
 region_filter_clip = true
 
-[node name="Wall02" type="Sprite" parent="Inside/Wall"]
+[node name="Wall02" type="Sprite" parent="Inside/RandomWall"]
 position = Vector2( -706.714, -106.536 )
 scale = Vector2( 0.896382, 1 )
 texture = ExtResource( 28 )
@@ -242,7 +242,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 576 )
 region_filter_clip = true
 
-[node name="Wall03" type="Sprite" parent="Inside/Wall"]
+[node name="Wall03" type="Sprite" parent="Inside/RandomWall"]
 position = Vector2( -706.714, -106.536 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 26 )
@@ -250,7 +250,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 722 )
 region_filter_clip = true
 
-[node name="Wall04" type="Sprite" parent="Inside/Wall"]
+[node name="Wall04" type="Sprite" parent="Inside/RandomWall"]
 position = Vector2( -706.714, -106.536 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 13 )
@@ -258,28 +258,28 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 722 )
 region_filter_clip = true
 
-[node name="Letter" parent="Inside" instance=ExtResource( 2 )]
+[node name="RollingLetter" parent="Inside" instance=ExtResource( 2 )]
 position = Vector2( -366.286, -14.1475 )
 scale = Vector2( 0.8, 0.8 )
 key = "Part01_Letters"
 
-[node name="Letter00" parent="Inside/Letter" instance=ExtResource( 34 )]
+[node name="Letter00" parent="Inside/RollingLetter" instance=ExtResource( 34 )]
 position = Vector2( -233.862, -122.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
-[node name="Letter01" parent="Inside/Letter" instance=ExtResource( 21 )]
+[node name="Letter01" parent="Inside/RollingLetter" instance=ExtResource( 21 )]
 position = Vector2( -233.862, -122.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
-[node name="Letter02" parent="Inside/Letter" instance=ExtResource( 19 )]
+[node name="Letter02" parent="Inside/RollingLetter" instance=ExtResource( 19 )]
 position = Vector2( -233.862, -122.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
-[node name="Letter03" parent="Inside/Letter" instance=ExtResource( 20 )]
+[node name="Letter03" parent="Inside/RollingLetter" instance=ExtResource( 20 )]
 position = Vector2( -233.862, -122.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
-[node name="Letter04" parent="Inside/Letter" instance=ExtResource( 22 )]
+[node name="Letter04" parent="Inside/RollingLetter" instance=ExtResource( 22 )]
 position = Vector2( -233.862, -122.901 )
 scale = Vector2( 0.168825, 0.168825 )
 

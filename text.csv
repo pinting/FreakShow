@@ -1,91 +1,92 @@
-keys,en,hu
-DOOR00,Door of the flat,Lakásajtó
-DOOR01,Way out,Kijárat
-DOOR02,BUKA OPEN,BUKA NYITVA
-KEYPAD00,Keypad,Numerikus billentyűzet
-BAG00,Old bag,Régi táska
-BALL00,Beach ball,Strandlabda
-CLOTHES00,Pile of clothes,Halom ruha
-CRATE00,Crate,Láda
-BATTERY00,Battery,Akkumulátor
-BUKA00,Exhibition of Zsuzsa Buka,Buka Zsuzsa kiállítása
-DILDO00,Purple dildo,Purple dildo
-CUP00,Beer jug,Söröskorsó
-FRUIT00,Unripe mango,Éretlen mangó
-PILLOW00,Dusty pillow,Poros párna
-POT00,Wretched coffee pot,Nyomorult kotyogó
-SPRINKLER00,Cute yellow sprinkler,Aranyos sárga locsoló
-BUTTON00,Red button,Piros gomb
-KNOCK00,"Knock, knock, knock...",Kop-kop-kop...
-HELP00,"The way is down","Lefele vezet az út"
-PHONE00,"Phone booth","Utca telefon"
-PAPER00,Sex and the Bible,Szex és a Biblia
-PAPER01,CAUTION! FIRESTARTER!,VIGYÁZAT! GYÚJTOGATÓ!
-PAPER02,Looking for a serious relationship,Komoly kapcsolatot keresek
-PAPER03," "," "
-PAPER04,Understanding and love will guide you,"Egyetértés, szeretet vezéreljen tégedet"
-PAPER05,"White dove flies over the village, carrying my sorrowful soul","Fehér galamb száll a falu felett, viszi az én bánatos lelkemet"
-PAPER06,Want to move as soon as possible!,Sürgősen költöznék!
-PAPER07,DANGEROUS CRIMINAL,VESZÉLYES BŰNÖZŐ
-PAPER08,STANDS,HELYT ÁLL
-PAPER09,FOOD FOR SALE,TŰZIFA ELADÓ
-PAPER10,Nutmeat is available for purchase!,Dióbél van eladó!
-PAPER11,Buying wrecked cars,Roncs autók felvásárlása
-PAPER12,English lessons,Angol órák
-PAPER13,Man for electrical installation,Villanyszerelést vállalok
-PAPER14,W201 swimsuit,W201 fürdőruha
-PAPER15,"SALE AND PURCHASE OF WOMEN'S AND MEN'S CLOTHING","NŐI-FÉRFI RUHÁZATI ADÁS-VÉTEL"
-PAPER16,The code for the door,A kód az ajtóhoz
-LETTER00,"No need for a screeching halt, you can stop gracefully.","Nem kell megtorpanni, elég méltósággal megállni."
-LETTER01,"The red light is there to help you reach your destination.","Azért kapsz pirost, hogy célba érj."
-LETTER02,"I hold onto my cigarette break.","A cigiszünet tart."
-LETTER03,"He would have slapped me but the red light forced him to stay.","Megpofozott volna, de megfogta a lámpa, így – maradt."
-LETTER04,"A lonely dot in the center of four corners; time keeps passing but you remain still.","Egy pont négy sarok között; az idő halad, te meg maradsz."
-CAN00,Turkish coffee,Török kávé
-MISC00,Mask from Dieng,Maszk Diengből
-RUG00,Rug from the Bantul night market,Szőnyeg a bantuli piacról
-RUG01,An old rug,Egy régi szőnyeg
-PUSSY00,"Pussy to fuck","Baszni való pina"
-SIGN00,Food market,Élelmiszer
-SIGN01,HAPPY COMPANY,BOLDOG KFT.
-SIGN02,ATTENTION! NO TRESPASSING!,ÉLETVESZÉLY! BELÉPNI TILOS!
-SIGN03,II. FLOOR,II. EMELET
-SIGN04,GROUND FLOOR,FÖLDSZINT
-SIGN05,CAR FOR SALE,ELADÓ KOCSI
-SIGN06,LOOKING FOR GIRL DANCERS,TÁNCOSLÁNYOKAT KERESÜNK
-GRAFFITI00,Son of a bitch,Anyád
-GRAFFITI01,Foreskin!,Fityma!
-GRAFFITI02,You whore,Te kurva
-GRAFFITI03,I've been stealing,Lopni járok
-GRAFFITI04,COPS ARE FAGS,BUZI AKI RENDŐR
-GRAFFITI05,WOULD FUCK YOU,MEGBASZNÁLAK
-GRAFFITI06,VEGAN LIBERAL SCUM,VEGÁN LIBSI GECIK
-GRAFFITI07,STUPID RUSSIANS,HÜLYE OROSZOK
-GRAFFITI08,WELCOME ASSHOLES!,ÜDV GECZIK!
-GRAFFITI09,"DROG, SEX, HELL","DROG, SZEX, POKOL"
-GRAFFITI10,WHERE AM I,HOL VAGYOK
-GRAFFITI11,JUST STOP,CSAK ÁLLJ MEG
-NARRATOR00,It was near dawn when something woke me up.,"Már majdnem hajnalodott, amikor valami felébresztett."
-NARRATOR01,The corridor felt endless...,A folyosó végtelennek érződött...
-NARRATOR02,I finally reached the light. The wind blew the smell of piss and sweat into my nose.,Végül kiértem a fényre. A szél húgy- és izzadságszaggal mászott be az orromba.
-NARRATOR03,People were crazy to sell their junk - you just had to name your price.,Az emberek mindenáron elakarták adni magukat - csak ki kellett találnod az árad.
-NARRATOR04,"Come on, get the fuck away from here!","Gyerünk, menjünk már a faszba innen!"
-NARRATOR05,"Come a bit closer child. Let me have a look at you!","Gyere közelebb gyermekem. Hadd vegyelek szemügyre!"
-NARRATOR06,"Where could I have been? It was a strange place.","Hol lehettem? Furcsa egy hely volt."
-NARRATOR07,"There was a large metal door asking for a code I did not know.","Volt ott egy nagy fém ajtó, mely egy kódot kérdezett, amit nem tudtam."
-NARRATOR08,"I found the code for the door on a piece of paper.","Megtaláltam az ajtó kódját egy darab papíron."
-NARRATOR09,"Who I was at this point? It was hard to decide.","Ki voltam én ekkor tulajdonképpen? Nehéz volt eldönteni."
-NARRATOR10,"While I was on the top of the train, had to be really careful with the obstacles.","Amíg a vonat tetején voltam, nagyon vigyáznom kellett a kiálló akadályokkal."
-NARRATOR11,"A deep voice warned us. We had to choose! Only one could enter paradise!","Egy mély hang figyelmeztetett. Választunk kellett! Csak egy léphet be a paradicsomba!"
-CREDITS00_0,"Music","Zene"
-CREDITS00_1,"Brian Eno, Cluster, Phuture, Neu, \nBooka Shade, Pye Corner Audio","Brian Eno, Cluster, Phuture, Neu, \nBooka Shade, Pye Corner Audio"
-CREDITS01_0,"Programming","Programozta"
-CREDITS01_1,"Denes Tornyi","Tornyi Dénes"
-CREDITS02_0,"Characters","Karakterek"
-CREDITS02_1,"Denes Tornyi, Gergo Tornyi","Tornyi Dénes, Tornyi Gergő"
-CREDITS03_0,"Emotional support","Lelki támogatás"
-CREDITS03_1,"Zsuzsa Buka, Gergo Tornyi","Buka Zsuzsa, Tornyi Gergő"
-CREDITS04_0,"Visual contributions","Vizuális hozzájárulás"
-CREDITS04_1,"Denes Tornyi, Zsuzsa Buka, Diana Baranyi, \nZsofi Szabo, Babett Farkas","Tornyi Dénes, Buka Zsuzsa, Baranyi Diana, \nSzabó Zsófi, Farkas Babett"
-CREDITS05_0,"Special thanks to","Külön köszönet"
-CREDITS05_1,"Jozsef Koller, Janos Bito, Godot Engine contributors","Koller József, Bitó János, Godot Engine fejlesztői"
+keys,en
+Description000,Door of the flat
+Description001,Way out
+Description002,Keypad
+Description003,Old bag
+Description004,Beach ball
+Description005,Pile of clothes
+Description006,Crate
+Description007,Battery
+Description008,Purple dildo
+Description009,Beer jug
+Description010,Unripe mango
+Description011,Dusty pillow
+Description012,Wretched coffee pot
+Description013,Cute yellow sprinkler
+Description014,Red button
+Description015,The way is down
+Description016,Phone booth
+Description017,Turkish coffee
+Description018,Mask from Dieng
+Description019,Rug from the Bantul night market
+Description020,An old rug
+Description021,Pussy to fuck
+Description022,Food market
+Description023,HAPPY COMPANY
+Description024,ATTENTION! NO TRESPASSING!
+Description025,II. FLOOR
+Description026,GROUND FLOOR
+Description027,CAR FOR SALE
+Description028,LOOKING FOR GIRL DANCERS
+Description029,Son of a bitch
+Description030,Foreskin!
+Description031,You whore
+Description032,I've been stealing
+Description033,COPS ARE FAGS
+Description034,WOULD FUCK YOU
+Description035,VEGAN LIBERAL SCUM
+Description036,STUPID RUSSIANS
+Description037,WELCOME ASSHOLES!
+Description038,"DROG, SEX, HELL"
+Description039,WHERE AM I
+Description040,JUST STOP
+Description041,Sex and the Bible
+Description042,CAUTION! FIRESTARTER!
+Description043,Looking for a serious relationship
+Description044, 
+Description045,Understanding and love will guide you
+Description046,"White dove flies over the village, carrying my sorrowful soul"
+Description047,Want to move as soon as possible!
+Description048,DANGEROUS CRIMINAL
+Description049,STANDS
+Description050,FOOD FOR SALE
+Description051,Nutmeat is available for purchase!
+Description052,Buying wrecked cars
+Description053,English lessons
+Description054,Man for electrical installation
+Description055,W201 swimsuit
+Description056,SALE AND PURCHASE OF WOMEN'S AND MEN'S CLOTHING
+Description057,The code for the door
+Description058,"Start a new game by deleting any saved progress"
+Description059,Continue where you left off
+Narrator000,It was near dawn when something woke me up.
+Narrator001,The corridor felt endless...
+Narrator002,I finally reached the light. The wind blew the smell of piss and sweat into my nose.
+Narrator003,People were crazy to sell their junk - you just had to name your price.
+Narrator004,"Come on, get the fuck away from here!"
+Narrator005,Come a bit closer child. Let me have a look at you!
+Narrator006,Where could I have been? It was a strange place.
+Narrator007,There was a large metal door asking for a code I did not know.
+Narrator008,I found the code for the door on a piece of paper.
+Narrator009,Who I was at this point? It was hard to decide.
+Narrator010,"While I was on the top of the train, had to be really careful with the obstacles."
+Narrator011,A deep voice warned us. We had to choose! Only one could enter paradise!
+Text000,<Assets/Text/English/Text000.txt>
+Text001,<Assets/Text/English/Text001.txt>
+Text002,<Assets/Text/English/Text002.txt>
+Text003,<Assets/Text/English/Text003.txt>
+Text004,<Assets/Text/English/Text004.txt>
+Text005,<Assets/Text/English/Text005.txt>
+Text006,<Assets/Text/English/Text006.txt>
+Credits000,Music
+Credits001,"Brian Eno, Cluster, Phuture, Neu,\nBooka Shade, Pye Corner Audio"
+Credits002,"Programming, writings and translations"
+Credits003,Denes Tornyi
+Credits004,"Poems, writings and translations"
+Credits005,Zsuzsa Buka
+Credits006,Character actors
+Credits007,"Denes Tornyi, Gergo Tornyi"
+Credits008,Visual contributions
+Credits009,"Denes Tornyi, Zsuzsa Buka, Diana Baranyi,\nZsofi Szabo, Babett Farkas"
+Credits010,Special thanks to
+Credits011,"Gergo Tornyi, Jozsef Koller,\nJanos Bito, Godot Engine contributors"

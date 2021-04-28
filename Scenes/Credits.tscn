@@ -5,9 +5,6 @@
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/GameCamera.tscn" type="PackedScene" id=7]
 
-
-
-
 [sub_resource type="Environment" id=1]
 background_mode = 4
 glow_enabled = true
@@ -33,7 +30,6 @@ script = ExtResource( 2 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
 scale = Vector2( 0.7, 0.7 )
-smoothing_enabled = false
 smoothing_speed = 0.75
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
@@ -46,7 +42,7 @@ layer = -90
 self_modulate = Color( 0.219608, 0.219608, 0.219608, 1 )
 scale = Vector2( 1.26, 1.27 )
 frames = ExtResource( 1 )
-frame = 132
+frame = 23
 playing = true
 centered = false
 

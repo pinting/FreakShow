@@ -11,4 +11,4 @@ modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
 rotation = 0.00594584
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-description = "SIGN01"
+description = "Description023"

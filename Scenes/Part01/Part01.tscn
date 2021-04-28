@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Part01/Part01_Hallway.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part01/Part01.gd" type="Script" id=2]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/GameCamera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=8]
@@ -13,6 +14,9 @@
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=13]
 [ext_resource path="res://Assets/Sounds/Knock00.wav" type="AudioStream" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3764.84, 2309.42 )
 
 [node name="Part01" type="Node2D"]
 
@@ -25,7 +29,9 @@ position = Vector2( -1270.34, -49.9356 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
-[node name="GameCamera" parent="BaseScene/Player" instance=ExtResource( 7 )]
+[node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
+position = Vector2( -1270.34, -49.9356 )
+scale = Vector2( 0.7, 0.7 )
 
 [node name="Sky" parent="BaseScene" instance=ExtResource( 4 )]
 
@@ -42,22 +48,17 @@ position = Vector2( 23.72, -12.897 )
 position = Vector2( 16.72, 10201.3 )
 scale = Vector2( 0.896382, 1 )
 
-[node name="Hallway00" parent="BaseScene/Environment" instance=ExtResource( 1 )]
-position = Vector2( -7372.62, 5220.15 )
+[node name="Hallway" parent="BaseScene/Environment" instance=ExtResource( 5 )]
+position = Vector2( 165.52, 5220.86 )
 
-[node name="Hallway01" parent="BaseScene/Environment" instance=ExtResource( 1 )]
-position = Vector2( 156.807, 5220.15 )
+[node name="Container" parent="BaseScene/Environment/Hallway" instance=ExtResource( 1 )]
 
-[node name="Hallway02" parent="BaseScene/Environment" instance=ExtResource( 1 )]
-position = Vector2( 7686.12, 5220.15 )
+[node name="Area" type="Area2D" parent="BaseScene/Environment/Hallway"]
+
+[node name="Shape" type="CollisionShape2D" parent="BaseScene/Environment/Hallway/Area"]
+shape = SubResource( 1 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
-
-[node name="HallwayLoopBegin" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( -3608.21, 5220.6 )
-
-[node name="HallwayLoopEnd" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( 3920.76, 5223.21 )
 
 [node name="HallwaySpawn" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( 640.271, 5205.35 )

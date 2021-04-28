@@ -17,7 +17,7 @@ position = Vector2( 29.5511, -169.761 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-description = "PUSSY00"
+description = "Description021"
 
 [node name="Inside" type="Area2D" parent="."]
 collision_layer = 4

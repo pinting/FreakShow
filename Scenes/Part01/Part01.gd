@@ -9,19 +9,14 @@ export var max_position_diff_to_wait: float = 100.0
 export var show_red_stop_lamps_from: int = 3
 
 onready var player = $Player
-onready var camera = $Player/GameCamera
+onready var camera = $GameCamera
 
 onready var flat_door = $Environment/Flat/Inside/Door
 onready var random_flat_container = $Environment/RandomFlatContainer
-
-onready var hallway_00 = $Environment/Hallway00
-onready var hallway_01 = $Environment/Hallway01
-onready var hallway_02 = $Environment/Hallway02
+onready var hallway = $Environment/Hallway
 
 onready var flat_spawn = $Trigger/FlatSpawn
 onready var hallway_spawn = $Trigger/HallwaySpawn
-onready var hallway_begin = $Trigger/HallwayLoopBegin
-onready var hallway_end = $Trigger/HallwayLoopEnd
 onready var random_flat_spawn = $Trigger/RandomFlatSpawn
 
 onready var main_music = $Sound/MainMusic
@@ -32,16 +27,14 @@ onready var silent_door_open_sound = $Sound/SilentDoorOpenSound
 
 const random_flat_scene = preload("res://Scenes/Part01/Part01_RandomFlat.tscn")
 
-var is_player_in_hallway: bool = false
+var hallway_is_player_in: bool = false
 var hallway_previous_player_position: float = 0.0
 var hallway_wait_counter: float = 0.0
-var hallway_help_complete: bool = false
+var hallway_help_disabled: bool = false
 var hallway_exit_enabled: bool = false
 var hallway_exit_open: bool = false
 var hallway_exiting: bool = false
 var hallway_enter_count: int = 0
-var player_copy: Player = null
-var loop_index: int = 0
 var home_index = 4
 
 var music_00: int
@@ -53,13 +46,15 @@ func _ready() -> void:
 	
 	waiting_music.add_part(13 * 60 + 35, 15 * 60 + 10, true, 5, 5, 0)
 	
+	hallway.player = player
+	hallway.camera = camera
+	
 	connect("scene_started", self, "_on_scene_started")
 	flat_door.connect("selected", self, "_on_flat_exit_select")
-	hallway_00.connect("door_selected", self, "_on_hallway_door_select")
-	hallway_01.connect("door_selected", self, "_on_hallway_door_select")
-	hallway_02.connect("door_selected", self, "_on_hallway_door_select")
-	
-	camera.smoothing_enabled = false
+	hallway.connect("looped", self, "_on_loop_index_change")
+	hallway.container.connect("door_selected", self, "_on_hallway_door_select")
+	hallway.left_mirror.connect("door_selected", self, "_on_hallway_door_select")
+	hallway.right_mirror.connect("door_selected", self, "_on_hallway_door_select")
 
 func _on_scene_started() -> void:
 	# Some empty waiting for a dramatic start
@@ -67,34 +62,41 @@ func _on_scene_started() -> void:
 	black_screen.fade_out(3.0)
 	yield(Game.timer(1.5), "timeout")
 	main_music.play()
-	SubtitleManager.say(tr("NARRATOR00"))
+	SubtitleManager.say(Text.find("Narrator000"))
+
+func _on_loop_index_change(direction: String):
+	if abs(hallway.loop_index) > help_after_index and not hallway_help_disabled:
+		SubtitleManager.say(Text.find("Narrator001"))
+		
+		hallway_help_disabled = true
 
 func _enable_next_traffic_lamp(lamps_to_show: int = 0):
 	if lamps_to_show <= 0:
 		return
 	
 	for lamp_index in range(lamps_to_show):
-		if lamp_index >= len(hallway_01.lamps):
+		if lamp_index >= len(hallway.container.lamps):
 			break
 		
-		hallway_00.lamps[lamp_index].enable()
-		hallway_01.lamps[lamp_index].enable()
-		hallway_02.lamps[lamp_index].enable()
+		# Enable in the master and the mirrors too
+		hallway.left_mirror.lamps[lamp_index].enable()
+		hallway.container.lamps[lamp_index].enable()
+		hallway.right_mirror.lamps[lamp_index].enable()
 
 func _on_flat_exit_select():
-	is_player_in_hallway = true
+	hallway_is_player_in = true
 	hallway_enter_count += 1
 	
 	_enable_next_traffic_lamp(hallway_enter_count - show_red_stop_lamps_from)
 	move_with_fade(player, hallway_spawn.position, door_open_sound)
 
 func _on_hallway_door_select(door, index) -> void:
-	is_player_in_hallway = false
+	hallway_is_player_in = false
 	
 	if index == home_index:
 		if not hallway_exit_open:
 			hallway_spawn.global_position = door.global_position
-			
+
 			move_with_fade(player, flat_spawn.position, door_open_sound)
 		elif hallway_exit_open and not hallway_exiting:
 			hallway_exiting = true
@@ -104,9 +106,7 @@ func _on_hallway_door_select(door, index) -> void:
 			yield(Game.timer(3.0), "timeout")
 			load_scene(next_scene, true)
 	else:
-		for child in random_flat_container.get_children():
-			random_flat_container.remove_child(child)
-			child.queue_free()
+		Tools.remove_childs(random_flat_container)
 		
 		Game.random_generator.randomize()
 		
@@ -128,18 +128,13 @@ func _reset_hallway_wait() -> void:
 	
 	camera.shake = 0.0
 
-func _process_hallway_wait(delta: float) -> void:
+func _process(delta: float) -> void:
 	if hallway_exit_open or not hallway_exit_enabled:
 		return
 	
-	if not is_player_in_hallway:
+	if not hallway_is_player_in:
 		_reset_hallway_wait()
 		return
-	
-	if abs(loop_index) > help_after_index and not hallway_help_complete:
-		SubtitleManager.say(tr("NARRATOR01"))
-		
-		hallway_help_complete = true
 	
 	var player_position = player.global_position.x
 	var previous_position = hallway_previous_player_position
@@ -169,61 +164,20 @@ func _process_hallway_wait(delta: float) -> void:
 			main_music.kill(5.0)
 			silent_door_open_sound.play()
 			
-			home_index = hallway_01.get_closest_door(player.global_position)
+			home_index = hallway.container.get_closest_door(player.global_position)
 			hallway_exit_open = true
 			
-			hallway_00.open_exit(home_index)
-			hallway_01.open_exit(home_index)
-			hallway_02.open_exit(home_index)
+			hallway.left_mirror.open_exit(home_index)
+			hallway.container.open_exit(home_index)
+			hallway.right_mirror.open_exit(home_index)
 			
-			for lamp_index in range(len(hallway_01.lamps)):
-				hallway_00.lamps[lamp_index].disable()
-				hallway_01.lamps[lamp_index].disable()
-				hallway_02.lamps[lamp_index].disable()
+			for lamp_index in range(len(hallway.container.lamps)):
+				# Disable in the master and the mirrors too
+				hallway.left_mirror.lamps[lamp_index].disable()
+				hallway.container.lamps[lamp_index].disable()
+				hallway.right_mirror.lamps[lamp_index].disable()
 	else:
 		hallway_previous_player_position = player_position
 		hallway_wait_counter = 0.0
 		
 		_reset_hallway_wait()
-
-# When reaching the end of the hallway the player is teleported to the
-# beginning, but a shallow clone stays at the old position for one
-# tick. This solves a flickering issue.
-func _dupe_player() -> Node2D:
-	var clone = player.create_clone()
-
-	add_child(clone)
-	
-	return clone
-
-func _process_hallway_loop(_delta: float) -> void:
-	var left_end_position = hallway_begin.global_position
-	var right_end_position = hallway_end.global_position
-	var player_position = player.global_position
-	
-	# Left end
-	if left_end_position.x > player_position.x:
-		player_copy = _dupe_player()
-		
-		var diff = left_end_position.x - player_position.x
-		
-		player.global_position = Vector2(right_end_position.x - diff, player_position.y)
-		loop_index -= 1
-	
-	# Right end
-	if right_end_position.x < player_position.x:
-		player_copy = _dupe_player()
-		
-		var diff = player_position.x - right_end_position.x
-		
-		player.global_position = Vector2(left_end_position.x + diff, player_position.y)
-		loop_index += 1
-
-func _process(delta: float) -> void:
-	if player_copy:
-		remove_child(player_copy)
-		player_copy.queue_free()
-		player_copy = null
-	
-	_process_hallway_loop(delta)
-	_process_hallway_wait(delta)

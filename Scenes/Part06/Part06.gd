@@ -107,8 +107,8 @@ func _on_dildo_inside() -> void:
 	bottom_door.open()
 	yield(Game.timer(2.0), "timeout")
 	
-	camera.zoom_action()
-	SubtitleManager.say(tr("NARRATOR11"))
+	camera.set_zoom_action()
+	SubtitleManager.say(Text.find("Narrator011"))
 
 	top_player_collision_right_shape.disabled = true
 	bottom_player_collision_left_shape.disabled = true

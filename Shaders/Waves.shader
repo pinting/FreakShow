@@ -12,7 +12,6 @@ uniform vec2 sine_offset_scale = vec2(0.4, 1.4);
 uniform float sine_wave_size = 0.06;
 uniform vec2 wave_scale = vec2(0.0, 1.0); 
 
-
 void fragment()
 {
 	vec2 base_uv_offset = UV * texture_offset_scale;

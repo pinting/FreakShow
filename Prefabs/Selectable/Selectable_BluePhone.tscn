@@ -19,6 +19,6 @@ shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
 material = SubResource( 1 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-description = "PHONE00"
+description = "Description016"
 offset_key = "offset"
 clone_material = true

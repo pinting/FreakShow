@@ -26,7 +26,6 @@
 [ext_resource path="res://Scenes/Part04/Part04_RandomCrate.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Prefabs/Pickable/Pickable_Battery.tscn" type="PackedScene" id=29]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5661.64, 61.6787 )
 
@@ -51,7 +50,7 @@ position = Vector2( -3438.94, -91.4048 )
 scale = Vector2( 1.02686, 1.02686 )
 texture = ExtResource( 18 )
 script = ExtResource( 23 )
-description = "GRAFFITI10"
+description = "Description039"
 
 [node name="Graffiti01" type="Sprite" parent="Wall"]
 self_modulate = Color( 0, 0, 0, 0.784314 )

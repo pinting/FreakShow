@@ -11,7 +11,7 @@
 [ext_resource path="res://Prefabs/Static/Static_Shelf01.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/Static/Static_Table00.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/Static/Static_Chair01.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Rug.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Prefabs/Viewable/Viewable_TurkishRug.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Prefabs/Pickable/Pickable_ClothesPile.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Prefabs/Pickable/Pickable_DustyPillow.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Environmnent/Shoes00.png" type="Texture" id=15]
@@ -169,7 +169,7 @@ scale = Vector2( 0.271982, 0.271982 )
 [node name="Door" parent="Inside" instance=ExtResource( 1 )]
 position = Vector2( -73.9722, 25.4409 )
 scale = Vector2( 0.948256, 0.85 )
-description = "DOOR00"
+description = "Description000"
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
 position = Vector2( 376.119, 0 )

@@ -96,11 +96,11 @@ func _start_game(player: Node) -> void:
 	
 	# If the actual game is turned off, for debug purposes
 	if not teleport_player_to_end:
-		camera.zoom_action()
+		camera.set_zoom_action()
 		player.enable_avatar_mode()
 		connect_sound.stop()
 		main_music.play()
-		SubtitleManager.say(tr("NARRATOR04"), 0.5, 3.0)
+		SubtitleManager.say(Text.find("Narrator004"), 0.5, 3.0)
 		yield(Game.timer(2.0), "timeout")
 	
 	boss_follows = true
@@ -134,7 +134,7 @@ func _end_game(player: Node) -> void:
 		return
 	
 	if not teleport_player_to_end:
-		camera.zoom_base()
+		camera.revert_zoom()
 		player.disable_avatar_mode()
 
 		game_playing = false
@@ -150,7 +150,7 @@ func _on_exit() -> void:
 	
 	if not end_door_area.overlaps_body(player):
 		if not_close_enough_help:
-			SubtitleManager.say(tr("NARRATOR05"))
+			SubtitleManager.say(Text.find("Narrator005"))
 			not_close_enough_help = false
 		
 		not_close_enough_sound.play()
