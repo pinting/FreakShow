@@ -7,8 +7,8 @@
 shader = ExtResource( 1 )
 shader_param/screen_width = 1920.0
 shader_param/screen_height = 1080.0
-shader_param/barrel_power = 1.0
-shader_param/color_bleeding = 1.0
+shader_param/barrel_power = 1.1
+shader_param/color_bleeding = 1.2
 shader_param/bleeding_range_x = 3.0
 shader_param/bleeding_range_y = 3.0
 shader_param/lines_distance = 4.0

@@ -1,19 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=1]
 
+[sub_resource type="CanvasItemMaterial" id=1]
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 481.622, 180.532 )
 
-[sub_resource type="CanvasItemMaterial" id=5]
+[node name="Static_Car00" type="StaticBody2D"]
 
-[node name="Static_Car00" type="Sprite"]
-material = SubResource( 5 )
-position = Vector2( 324.13, 2353.96 )
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
 scale = Vector2( 0.8997, 0.8997 )
-z_index = 1
 texture = ExtResource( 1 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PoolVector2Array( -485.867, 37.6879, -465.293, 28.6112, -441.089, -7.69524, -352.138, -33.7149, -205.097, -60.3397, -131.879, -97.2512, 1.8501, -188.017, 41.1821, -200.12, 390.33, -189.833, 412.719, -177.125, 498.039, -78.4927, 504.695, 13.4837, 529.505, 47.3698, 523.453, 107.275, 459.917, 121.193, 439.343, 121.798, 423.005, 172.627, 391.54, 205.303, 335.265, 199.857, 299.564, 148.423, 295.933, 119.983, -217.804, 121.193, -222.403, 154.111, -241.161, 176.5, -279.283, 203.124, -333.743, 200.099, -372.47, 160.767, -378.4, 122.282, -480.18, 119.378 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 21.4058, 4.75681 )
+shape = SubResource( 2 )

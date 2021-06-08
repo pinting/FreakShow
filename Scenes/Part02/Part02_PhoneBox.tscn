@@ -7,7 +7,6 @@
 [ext_resource path="res://Assets/Environmnent/Phone00_Glow.png" type="Texture" id=5]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=7]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
 shader_param/keep_size = true

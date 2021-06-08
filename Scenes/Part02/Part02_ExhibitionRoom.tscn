@@ -229,4 +229,4 @@ rotation = -0.0474959
 scale = Vector2( 0.524859, 0.524858 )
 texture = ExtResource( 14 )
 script = ExtResource( 10 )
-description = "BUKA00"
+description_key = "BUKA00"

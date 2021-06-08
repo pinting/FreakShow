@@ -14,9 +14,9 @@ func _trigger_in_hoop(ball: Node) -> void:
 		return
 	
 	while ball.held:
-		yield(Game.timer(ball_is_stuck_timeout), "timeout")
+		yield(Tools.timer(ball_is_stuck_timeout), "timeout")
 	
-	yield(Game.timer(ball_is_stuck_timeout), "timeout")
+	yield(Tools.timer(ball_is_stuck_timeout), "timeout")
 	
 	if not inside_hoop.overlaps_body(ball):
 		return

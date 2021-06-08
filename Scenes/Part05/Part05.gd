@@ -1,16 +1,15 @@
 extends BaseScene
 
-export var next_scene: String = "res://Scenes/Part06/Part06.tscn"
-export var tick_length_min: float = 10.0
-export var tick_length_max: float = 15.0
+export var teleport_player_to_end: bool = false
+export var train_tick_length_min: float = 10.0
+export var train_tick_length_max: float = 15.0
 export var number_of_pillars: int = 25
 export var width_between_pillars: float = 3000.0
 export var pillar_high_offset: float = -370.0
 export var pillar_low_offset: float = 335.0
-export var teleport_player_to_end: bool = false
 
 onready var player = $Player
-onready var camera = $Player/GameCamera
+onready var camera = $GameCamera
 
 onready var club = $Dynamic/Environment/BuildingEnd/Dirt/Road/Club
 
@@ -25,7 +24,7 @@ onready var player_respawn = $Trigger/PlayerRespawn
 onready var main_music = $Sound/MainMusic
 onready var door_sound = $Sound/DoorSound
 
-const train_scene = preload("res://Objects/Train.tscn")
+const train_scene = preload("res://Prefabs/Static/Static_Train.tscn")
 const pillar_scene = preload("res://Scenes/Part05/Part05_DoublePillar.tscn")
 
 var train_wait_time: float = INF
@@ -54,17 +53,17 @@ func _ready() -> void:
 
 func _generate_pillars():
 	var pillars_y = []
-	var zero_count = Game.random_generator.randi_range(1, 3)
+	var zero_count = Tools.random_int(1, 3)
 	
-	for i in range(number_of_pillars):
+	for _i in range(number_of_pillars):
 		if zero_count == 0:
-			pillars_y.push_back(-1 if Game.random_generator.randi_range(0, 1) else 1)
-			zero_count = Game.random_generator.randi_range(0, 2)
+			pillars_y.push_back(-1 if Tools.random_int(0, 1) else 1)
+			zero_count = Tools.random_int(0, 2)
 		else:
 			pillars_y.push_back(0)
 			zero_count -= 1
 	
-	var end_zero_count = Game.random_generator.randi_range(0, 2)
+	var end_zero_count = Tools.random_int(0, 2)
 	
 	if number_of_pillars >= end_zero_count:
 		for n in range(end_zero_count):
@@ -96,8 +95,8 @@ func _create_pillars(pillars_y: Array) -> void:
 		
 		pillar_spawn.add_child(pillar)
 
-func _kill_player(player: Node) -> void:
-	if not player.is_in_group("player"):
+func _kill_player(body: Node) -> void:
+	if not body.is_in_group("player"):
 		return
 	
 	player.kill()
@@ -113,7 +112,7 @@ func _on_scene_started() -> void:
 	black_screen.fade_out(3.0)
 	main_music.play()
 
-	yield(Game.timer(2.0), "timeout")
+	yield(Tools.timer(2.0), "timeout")
 	SubtitleManager.say(Text.find("Narrator009"))
 
 func _on_player_on_train_top() -> void:
@@ -121,13 +120,13 @@ func _on_player_on_train_top() -> void:
 		return
 	
 	main_music.force_next(music_01)
-	camera.set_zoom_action()
+	camera.change_zoom()
 	SubtitleManager.say(Text.find("Narrator010"))
 	
 	first_on_top_called = true
 
-func _on_player_reach_game_end(player: Node) -> void:
-	if not player.is_in_group("player") or reached_end:
+func _on_player_reach_game_end(body: Node) -> void:
+	if not body.is_in_group("player") or reached_end:
 		return
 	
 	main_music.force_next(music_02)
@@ -148,21 +147,21 @@ func _on_exit_selected() -> void:
 	main_music.kill(2.0)
 	
 	black_screen.fade_in(0.5)
-	yield(Game.timer(0.5), "timeout")
+	yield(Tools.timer(0.5), "timeout")
 	
 	club.bass_sound.volume_db = 10
-	yield(Game.timer(1.0), "timeout")
+	yield(Tools.timer(1.0), "timeout")
 	
 	_clean_trains()
-	yield(Game.timer(0.5), "timeout")
+	yield(Tools.timer(0.5), "timeout")
 	
-	load_scene(next_scene, true)
+	load_next_scene()
 
 func _on_player_die() -> void:
-	yield(Game.timer(2.0), "timeout")
+	yield(Tools.timer(2.0), "timeout")
 	
 	main_music.force_next(music_00)
-	move_with_fade(player, player_respawn.global_position)
+	move_player(player, player_respawn.global_position)
 	
 	first_on_top_called = false
 	reached_end = false
@@ -179,7 +178,7 @@ func _create_train() -> void:
 	add_child(new_train)
 	new_train.start()
 	
-	train_wait_time = Game.random_generator.randf_range(tick_length_min, tick_length_max)
+	train_wait_time = Tools.random_float(train_tick_length_min, train_tick_length_max)
 	train_counter = 0.0
 
 func _process(delta: float) -> void:

@@ -2,27 +2,46 @@ extends Node2D
 
 export var duration: float = 0.5
 
-onready var door_closed = $DoorClosed
-onready var door_open = $DoorOpen
+onready var tween: Tween = $Tween
+onready var door_closed: Selectable = $DoorClosed
+onready var door_open: Selectable = $DoorOpen
 
 signal selected
 
 func _ready() -> void:
 	door_closed.connect("selected", self, "_on_door_select")
 	door_open.connect("selected", self, "_on_door_select")
+	
+	door_closed.visible = true
+	door_open.visible = false
+	door_open.modulate.a = 0.0
 
 func _on_door_select() -> void:
 	emit_signal("selected")
 
-func _process(delta: float) -> void:
-	if door_open.visible:
-		var next = door_open.self_modulate.a + delta / duration
-		var a = min(1.0, next)
-		
-		if a == 1.0:
-			door_closed.visible = false
-		
-		door_open.self_modulate.a = a
-
 func open() -> void:
 	door_open.visible = true
+	
+	tween.interpolate_property(
+		door_open,
+		"modulate:a",
+		door_open.modulate.a,
+		1.0,
+		duration,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT)
+	
+	tween.interpolate_property(
+		door_closed,
+		"modulate:a",
+		door_closed.modulate.a,
+		0.0,
+		duration,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT)
+	
+	tween.start()
+	
+	yield(tween, "tween_all_completed")
+	
+	door_closed.visible = false

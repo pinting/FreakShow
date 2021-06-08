@@ -1,17 +1,14 @@
-extends "res://Scenes/BaseScene.gd"
-
-export var next_scene: String = "res://Scenes/Part05/Part05.tscn"
-export var disable_movement_delay: bool = false
+extends "res://Game/BaseScene.gd"
 
 onready var player = $Player
-onready var camera = $Player/GameCamera
+onready var camera = $GameCamera
 onready var screen_effect = $ScreenEffect
 
 onready var keypad = $Environment/Ditch/Wall/Door00/Keypad
 onready var ditch_door = $Environment/Ditch/Wall/Door01
 onready var maintenance_room_door = $Environment/MaintenanceRoom/Door00
 onready var empty_battery_station = $Environment/MaintenanceRoom/EmptyBatteryStation
-onready var train_platform = $Environment/MaintenanceRoom/Platform
+onready var sliding_platform = $Environment/MaintenanceRoom/Platform/SlidingNode
 onready var hide_papers = $Environment/MaintenanceRoom/Wall/HidePapers
 onready var paper_with_code = $Environment/MaintenanceRoom/Wall/HidePapers/PaperWithCode
 
@@ -46,32 +43,12 @@ func _ready() -> void:
 	paper_with_code.connect("selected", self, "_unlock_ending")
 	keypad.connect("selected", self, "_keypad_selected")
 	
-	if not disable_movement_delay:
-		camera.smoothing_enabled = true
-		player.visible = false
-		player.freeze(true)
-	
 	_hide_papers_visibility(false)
 
 func _on_scene_started() -> void:
 	main_music.play()
-	black_screen.fade_out(5.0)
-
-	if not disable_movement_delay:
-		yield(Game.timer(4.5), "timeout")
-		SubtitleManager.say(Text.find("Narrator006"))
-		
-		player.visible = true
-		
-		yield(Game.timer(3.5), "timeout")
-		
-		for n in range(4):
-			camera.smoothing_speed += 0.5
-			yield(Game.timer(0.5), "timeout")
-		
-		camera.smoothing_enabled = false
-		
-		player.unfreeze()
+	yield(black_screen.fade_out(5.0), "tween_completed")
+	SubtitleManager.say(Text.find("Narrator006"), 3.0)
 
 func _keypad_selected() -> void:
 	if not ending_open:
@@ -85,32 +62,35 @@ func _keypad_selected() -> void:
 		return
 	
 	ending_triggered = true
+	
 	next_level_music.play()
 	screen_effect.play(player)
-	Game.disable_selectable = true
-	yield(Game.timer(5.0), "timeout")
-	
+
+	VirtualInput.disable_selectable = true
+
+	yield(Tools.timer(5.0), "timeout")
 	main_music.kill(2.0)
 	next_level_music.kill(2.0)
 	black_screen.fade_in(3.0)
-	yield(Game.timer(2.0), "timeout")
+	yield(Tools.timer(2.0), "timeout")
 	
-	Game.disable_selectable = false
-	load_scene(next_scene, true)
+	VirtualInput.disable_selectable = false
+
+	load_next_scene()
 
 func _hide_papers_visibility(visible: bool) -> void:
 	for node in hide_papers.get_children():
 		node.visible = visible
 
 func _on_ditch_door_select() -> void:
-	move_with_fade(player, maintenance_room_spawn.position, door_open_sound)
+	move_player(player, maintenance_room_spawn.position, door_open_sound)
 
 func _on_maintenance_room_door_select() -> void:
-	move_with_fade(player, ditch_spawn.position, door_open_sound)
+	move_player(player, ditch_spawn.position, door_open_sound)
 
 func _on_battery_in_place() -> void:
 	_hide_papers_visibility(true)
-	train_platform.open()
+	sliding_platform.open()
 
 func _unlock_ending() -> void:
 	SubtitleManager.say(Text.find("Narrator008"))

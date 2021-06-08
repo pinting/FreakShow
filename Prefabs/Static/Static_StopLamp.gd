@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 	
 	if wait <= 0.0:
 		red_figure.visible = not red_figure.visible
-		wait = Game.random_generator.randf_range(0.25, 1.0)
+		wait = Tools.random_float(0.25, 1.0)
 
 func disable() -> void:
 	red_figure.visible = false

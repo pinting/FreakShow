@@ -107,7 +107,7 @@ texture = ExtResource( 4 )
 
 [node name="Graffiti04" parent="Wall" instance=ExtResource( 13 )]
 position = Vector2( 2152.8, -80.416 )
-description = "Description033"
+description_key = "Description033"
 
 [node name="Graffiti05" type="Sprite" parent="Wall"]
 self_modulate = Color( 1, 1, 1, 0.784314 )

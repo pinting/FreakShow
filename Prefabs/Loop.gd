@@ -1,61 +1,177 @@
 class_name Loop
 extends Node2D
 
-export var create_dupe_for_pickables: bool = false
+# Player node path
+export (NodePath) var player_node
 
-onready var container: Node2D = $Container
-onready var area_shape: CollisionShape2D = $Area/Shape
+# Area shape node path
+export (NodePath) var area_shape_node
 
-var left_mirror: Node2D = null
-var right_mirror: Node2D = null
+# Container node path
+export (NodePath) var container_node
+
+# Loop both, left or right sides
+export (String, "both", "left", "right") var loop_mode = "both"
+
+# Copy the container to both, left or right sides
+export (String, "both", "left", "right") var mirror_mode = "both"
+
+var containers = []
+
 var loop_begin: Vector2 = Vector2.ZERO
 var loop_end: Vector2 = Vector2.ZERO
+var loop_top: Vector2 = Vector2.ZERO
+var loop_bottom: Vector2 = Vector2.ZERO
 
-var player: Player = null
-var camera: Camera2D = null
-var pickables_index: Dictionary = {}
-
+var node_index_store: Dictionary = {}
 var loop_index: int = 0
 var copies: Array = []
+
+var player: Player
+var area_shape: CollisionShape2D
+var container: Node2D
 
 signal looped
 
 func _ready() -> void:
-	assert(area_shape.shape is RectangleShape2D, "Area shape is missing")
+	player = get_node(player_node)
+	area_shape = get_node(area_shape_node)
+	container = get_node(container_node)
+
+	assert(player, "Player is not set")
+	assert(area_shape.shape is RectangleShape2D, "Area shape is not rectangle")
+	assert(container, "Container is not set")
 
 	var extents = area_shape.shape.extents
 
 	loop_begin = global_position - Vector2(extents.x, 0)
 	loop_end = global_position + Vector2(extents.x, 0)
+	loop_top = global_position - Vector2(0, extents.y)
+	loop_bottom = global_position + Vector2(0, extents.y)
 	
-	_init_left()
-	_init_right()
-
-func register_pickable(pickable: Pickable) -> void:
-	pickables_index[pickable.get_instance_id()] = loop_index
+	containers.push_back(container)
+	
+	if mirror_mode == "left" or mirror_mode == "both":
+		_init_left()
+	
+	if mirror_mode == "right" or mirror_mode == "both":
+		_init_right()
 
 func _init_left():
 	var extents = area_shape.shape.extents
+	var left_mirror = container.duplicate()
 	
-	left_mirror = container.duplicate()
 	left_mirror.position.x -= 2 * extents.x
 	
+	containers.push_front(left_mirror)
 	add_child(left_mirror)
 
 func _init_right():
 	var extents = area_shape.shape.extents
+	var right_mirror = container.duplicate()
 	
-	right_mirror = container.duplicate()
 	right_mirror.position.x += 2 * extents.x
 	
+	containers.push_back(right_mirror)
 	add_child(right_mirror)
 
 # When reaching the end of the loop the player is teleported to the
 # beginning, but a shallow clone stays at the old position for one
 # tick. This solves a flickering issue.
-func _dupe(clone, parent) -> void:
+func _dupe(node: Node2D) -> void:
+	var parent = node.get_parent()
+	var clone
+
+	if node.has_method("create_clone"):
+		clone = node.create_clone()
+	else:
+		clone = node.duplicate()
+	
 	copies.push_back(clone)
 	parent.add_child(clone)
+
+func _update_player(d: int) -> void:
+	assert(d == -1 or d == 1, "Difference needs to be minus or plus one")
+	
+	var camera = CameraManager.current
+	var cursor_display = VirtualCursorManager.display
+	
+	assert(camera, "GameCamera is not registered")
+	assert(cursor_display, "VirtualCursorManager is not registered")
+	
+	var camera_diff = player.global_position - camera.global_position
+	var cursor_diff = camera.global_position - cursor_display.cursor.global_position
+	
+	if d == -1:
+		player.global_position.x = loop_end.x - (loop_begin.x - player.global_position.x)
+	elif d == 1:
+		player.global_position.x = loop_begin.x + (player.global_position.x - loop_end.x)
+	
+	camera.reset(player.global_position - camera_diff, false)
+
+func _update_node_index_store() -> void:
+	var ids = node_index_store.keys()
+
+	for id in ids:
+		var pickable = instance_from_id(id)
+		var index = node_index_store[id]
+		
+		if index == loop_index:
+			if loop_begin.x > pickable.position.x:
+				node_index_store[id] -= 1
+			elif loop_end.x < pickable.position.x:
+				node_index_store[id] += 1
+
+func _enable_node(node: Node2D) -> void:
+	if node.is_in_group("pickable") or node.is_in_group("selectable"):
+		node.enable()
+
+	node.visible = true
+
+func _disable_node(node: Node2D) -> void:
+	if node.is_in_group("pickable") or node.is_in_group("selectable"):
+		node.disable()
+	
+	node.visible = false
+
+func _apply_diff(node: Node2D, d: int) -> void:
+	var extents = area_shape.shape.extents
+	var diff = Vector2(d * 2 * extents.x, 0)
+	
+	if node.is_in_group("pickable"):
+		# Position of a RigidBody cannot be manipulated directly
+		node.reset(diff, 0, false, true)
+	else:
+		node.global_position += diff
+
+func _update_looped_nodes(d: int) -> void:
+	var ids = node_index_store.keys()
+
+	for id in ids:
+		var node = instance_from_id(id)
+		
+		# Index of the item in store
+		var index = node_index_store[id]
+		
+		# Difference between the current and the item index
+		var index_diff = abs(loop_index - index)
+		
+		if index_diff > 1:
+			_disable_node(node)
+		elif not node.visible:
+			_enable_node(node)
+		else:
+			_apply_diff(node, d)
+
+func _turn(d: int) -> void:
+	assert(d == -1 or d == 1, "Difference needs to be minus or plus one")
+	
+	_update_player(d)
+	_update_node_index_store()
+	
+	loop_index += d
+	
+	_update_looped_nodes(-1 * d)
 
 func _process_copies(_delta: float) -> void:
 	for object in copies:
@@ -64,87 +180,43 @@ func _process_copies(_delta: float) -> void:
 	
 	copies = []
 
-func _turn(d: int) -> void:
-	var ids = pickables_index.keys()
-
-	for id in ids:
-		var pickable = instance_from_id(id)
-		var index = pickables_index[id]
-		
-		if index == loop_index:
-			if loop_begin.x > pickable.position.x:
-				pickables_index[id] -= 1
-			elif loop_end.x < pickable.position.x:
-				pickables_index[id] += 1
+func _process_loop(_delta: float) -> void:
+	var bellow_top = player.global_position.y > loop_top.y
+	var above_bottom = player.global_position.y < loop_bottom.y
+	var inside_y_range = bellow_top and above_bottom
 	
-	loop_index += d
-
-func _update_pickables(d: int) -> void:
-	var ids = pickables_index.keys()
-	var extents = area_shape.shape.extents
-
-	for id in ids:
-		var index = pickables_index[id]
-		var index_diff = abs(loop_index - index)
-		var pickable = instance_from_id(id)
-		var diff = Vector2(d * 2 * extents.x, 0)
-		
-		if index_diff > 1:
-			pickable.disable()
-			pickable.visible = false
-			return
-
-		if pickable.disabled:
-			pickable.enable()
-			pickable.visible = true
-		else:
-			if create_dupe_for_pickables:
-				var dupe_00 = pickable.create_clone()
-				var dupe_01 = pickable.create_clone()
-				
-				dupe_01.global_position += diff
-				dupe_00.disable()
-				dupe_01.disable()
-
-				_dupe(dupe_00, pickable)
-				_dupe(dupe_01, pickable)
-
-			pickable.reset(diff, 0, false, false)
-		
-
-func _process_player(_delta: float) -> void:
-	assert(player, "Player is not set")
-	assert(camera, "Camera is not set")
+	var left_enabled = loop_mode == "both" or loop_mode == "left"
+	var right_enabled = loop_mode == "both" or loop_mode == "right"
 	
-	var player_position = player.global_position
-	var camera_position = camera.global_position
-	
-	if loop_begin.x > player_position.x:
-		_dupe(player.create_clone(), player.get_parent())
-		
-		var loop_diff = loop_begin.x - player_position.x
-		var camera_diff = player_position - camera_position
-		
-		player.global_position = Vector2(loop_end.x - loop_diff, player_position.y)
-		camera.global_position = player.global_position - camera_diff
-		
+	if left_enabled and inside_y_range and loop_begin.x > player.global_position.x:
+		_dupe(player)
 		_turn(-1)
-		_update_pickables(1)
 		emit_signal("looped", "left")
 	
-	if loop_end.x < player_position.x:
-		_dupe(player.create_clone(), player.get_parent())
-		
-		var loop_diff = player_position.x - loop_end.x
-		var camera_diff = player_position - camera_position
-		
-		player.global_position = Vector2(loop_begin.x + loop_diff, player_position.y)
-		camera.global_position = player.global_position - camera_diff
-		
+	if right_enabled and inside_y_range and loop_end.x < player.global_position.x:
+		_dupe(player)
 		_turn(1)
-		_update_pickables(-1)
 		emit_signal("looped", "right")
 
 func _process(delta: float) -> void:
 	_process_copies(delta)
-	_process_player(delta)
+	_process_loop(delta)
+
+func register_pickable(node: Node2D, index_offset: int = 0) -> void:
+	node_index_store[node.get_instance_id()] = loop_index + index_offset
+
+func get_each(key: String):
+	var result = []
+	
+	for c in containers:
+		result.push_back(c.get(key))
+	
+	return result
+
+func set_each(key: String, value) -> void:
+	for c in containers:
+		c.set(key, value)
+
+func call_each(key: String, parameters: Array = []) -> void:
+	for c in containers:
+		c.callv(key, parameters)

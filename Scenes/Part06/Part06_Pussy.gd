@@ -1,4 +1,4 @@
-extends "res://Objects/Selectable/Selectable.gd"
+extends "res://Prefabs/Selectable/Selectable.gd"
 
 onready var inside = $Inside
 onready var filled = $Filled
@@ -17,7 +17,7 @@ func _on_body_entered(body: Node):
 		return
 	
 	Tools.set_shapes_disabled(inside, true);
-	body.destroy()
+	Tools.destroy(body)
 	
 	filled.visible = true
 	

@@ -16,7 +16,7 @@ func _process(delta: float) -> void:
 	eye_ball.position.x = 110 - p * 220
 	eye_ball.position.y = -1 *(abs(sin(p * PI)) * 30 - 15)
 	
-	var player = Game.players.back()
+	var player = PlayerManager.get_by_distance(global_position)
 
 	if not player:
 		return

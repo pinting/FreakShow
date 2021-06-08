@@ -1,4 +1,4 @@
-extends "res://Scenes/BaseScene.gd"
+extends "res://Game/BaseScene.gd"
 
 export var player_sync_fix_max_diff: float = 10.0
 
@@ -59,21 +59,25 @@ func _player_on_palm(player: Player) -> void:
 	
 	game_finished = true
 
-	yield(Game.timer(3.0), "timeout")
-	yield(black_screen.fade_in(2.0), "animation_finished")
+	yield(Tools.timer(3.0), "timeout")
+	yield(black_screen.fade_in(2.0), "tween_completed")
+
 	end_animated_sprite.frames = player.animated_sprite.frames
 	end_animated_sprite.playing = true 
+
 	camera.current = false
 	end_camera.current = true
+
 	end_fap_sound.play()
 	black_screen.fade_out(5.0)
-	yield(Game.timer(10.0), "timeout")
+	yield(Tools.timer(10.0), "timeout")
+	
 	black_screen.fade_in(5.0)
 	main_music.kill(7.0)
-	yield(Game.timer(10.0), "timeout")
+	yield(Tools.timer(10.0), "timeout")
 	
-	Save.clean()
-	load_scene(Config.CREDITS_SCENE)
+	Save.clear()
+	load_next_scene()
 
 func _on_bottom_button_selected() -> void:
 	if not dildo_in_place:
@@ -105,9 +109,9 @@ func _on_dildo_inside() -> void:
 	dildo_in_place = true
 	
 	bottom_door.open()
-	yield(Game.timer(2.0), "timeout")
+	yield(Tools.timer(2.0), "timeout")
 	
-	camera.set_zoom_action()
+	camera.change_zoom()
 	SubtitleManager.say(Text.find("Narrator011"))
 
 	top_player_collision_right_shape.disabled = true
@@ -126,19 +130,19 @@ func _on_fall_to_death(body: Node) -> void:
 	game_over = true
 	
 	if dildo_in_place and body.is_in_group("player"):
-		var store_index = Game.players.find(body)
+		var store_index = PlayerManager.players.find(body)
 		
 		if store_index >= 0:
-			Game.players.remove(store_index)
+			PlayerManager.players.remove(store_index)
 		
 		body.get_parent().remove_child(body)
 		body.queue_free()
 		
-		if len(Game.players) > 0:
+		if len(PlayerManager.players) > 0:
 			return
 	
 	main_music.kill(2.0);
-	yield(black_screen.fade_in(2.0), "animation_finished")
+	yield(black_screen.fade_in(2.0), "tween_completed")
 	
 	# Reload current scene
 	reload_scene()

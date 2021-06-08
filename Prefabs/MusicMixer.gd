@@ -92,7 +92,7 @@ func kill(timeout: float = 5.0) -> void:
 	kill_counter = timeout
 
 func play() -> void:
-	if len(parts) == 0:
+	if len(parts) == 0 or is_playing():
 		return
 	
 	if parts[0].in_duration == 0.0:
@@ -133,7 +133,7 @@ func get_next() -> int:
 	if do_kill:
 		return -1
 	elif forced_next >= 0:
-		assert(len(parts) > forced_next)
+		assert(len(parts) > forced_next, "Forced next is out of range")
 		return forced_next
 	elif current_part.loop and not break_loop:
 		return current_part_index
@@ -286,9 +286,12 @@ func _finish_mixing(next_part_index: int) -> void:
 	forced_next = -1
 	mixing = false
 
+func is_playing() -> bool:
+	return master_player.playing or slave_player.playing
+
 func _debug(message: String) -> void:
 	if debug:
-		Game.debug(message)
+		Tools.debug(message)
 
 func _debug_if_integer(t: float, message: String) -> void:
 	if abs(floor(t) - t) < 0.05:

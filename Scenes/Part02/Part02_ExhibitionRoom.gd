@@ -12,4 +12,4 @@ func _process(delta):
 	
 	if wait <= 0.0:
 		broken_lamp_light.visible = not broken_lamp_light.visible
-		wait = Game.random_generator.randf_range(0.25, 1.0)
+		wait = Tools.random_float(0.25, 1.0)

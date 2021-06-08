@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Shaders/StencilUnshaded.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/edge_color = Color( 1, 1, 1, 1 )
+shader_param/background_color = Color( 0.564706, 0.564706, 0.564706, 1 )
+shader_param/line_thickness = 3.0

@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=3]
 [ext_resource path="res://Prefabs/Selectable/Selectable_StupidRussiansGraffiti.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti30.png" type="Texture" id=5]
-[ext_resource path="res://Prefabs/SlidingNode.gd" type="Script" id=6]
+[ext_resource path="res://Prefabs/SlidingNode.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Selectable/Selectable_WelcomeAssholesGraffiti.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Environmnent/Misc10.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sounds/Door03_Moving.ogg" type="AudioStream" id=9]
@@ -16,71 +16,80 @@
 [ext_resource path="res://Assets/Environmnent/Train04.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Sounds/Door03_Stop.wav" type="AudioStream" id=15]
 
-
-
 [node name="Part04_Platform" type="Node2D"]
-script = ExtResource( 6 )
-stop_after = Vector2( 0, 400 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="SlidingNode" parent="." instance=ExtResource( 6 )]
+stop_after = Vector2( 0, 400 )
+speed = Vector2( 0, -100 )
+
+[node name="StartSound" parent="SlidingNode" index="1"]
+stream = ExtResource( 12 )
+
+[node name="MoveSound" parent="SlidingNode" index="2"]
+stream = ExtResource( 9 )
+
+[node name="StopSound" parent="SlidingNode" index="3"]
+stream = ExtResource( 15 )
+
+[node name="Sprite" type="Sprite" parent="SlidingNode"]
 self_modulate = Color( 1, 0.960784, 0, 1 )
 position = Vector2( 115.938, 1252.9 )
 scale = Vector2( 0.774057, 0.730645 )
 z_index = -2
 texture = ExtResource( 8 )
 
-[node name="Train" type="Sprite" parent="Sprite"]
+[node name="Train" type="Sprite" parent="SlidingNode/Sprite"]
 self_modulate = Color( 0.831373, 0.662745, 0.137255, 1 )
 position = Vector2( 77.8602, -648.381 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 14 )
 
-[node name="Graffiti00" parent="Sprite/Train" instance=ExtResource( 7 )]
+[node name="Graffiti00" parent="SlidingNode/Sprite/Train" instance=ExtResource( 7 )]
 
-[node name="Graffiti01" type="Sprite" parent="Sprite/Train"]
+[node name="Graffiti01" type="Sprite" parent="SlidingNode/Sprite/Train"]
 self_modulate = Color( 0, 0, 0, 0.784314 )
 position = Vector2( -971.563, 70.5612 )
 rotation = -0.156192
 scale = Vector2( 0.179311, 0.189965 )
 texture = ExtResource( 10 )
 
-[node name="Graffiti02" type="Sprite" parent="Sprite/Train"]
+[node name="Graffiti02" type="Sprite" parent="SlidingNode/Sprite/Train"]
 self_modulate = Color( 1, 1, 1, 0.784314 )
 position = Vector2( -600.869, 108.381 )
 scale = Vector2( 0.353869, 0.353869 )
 texture = ExtResource( 5 )
 
-[node name="Graffiti03" parent="Sprite/Train" instance=ExtResource( 4 )]
+[node name="Graffiti03" parent="SlidingNode/Sprite/Train" instance=ExtResource( 4 )]
 
-[node name="Graffiti00" type="Sprite" parent="Sprite"]
+[node name="Graffiti00" type="Sprite" parent="SlidingNode/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.431373 )
 position = Vector2( -1543.25, -17.2944 )
 rotation = 2.86224
 scale = Vector2( 0.278318, -0.292534 )
 texture = ExtResource( 2 )
 
-[node name="Graffiti01" type="Sprite" parent="Sprite"]
+[node name="Graffiti01" type="Sprite" parent="SlidingNode/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.431373 )
 position = Vector2( 1728.91, -9.75696 )
 rotation = -0.0175861
 scale = Vector2( 0.112268, 0.118934 )
 texture = ExtResource( 13 )
 
-[node name="Graffiti02" type="Sprite" parent="Sprite"]
+[node name="Graffiti02" type="Sprite" parent="SlidingNode/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.431373 )
 position = Vector2( -871.583, 19.5571 )
 rotation = -0.279355
 scale = Vector2( 0.278033, 0.292235 )
 texture = ExtResource( 11 )
 
-[node name="Graffiti03" type="Sprite" parent="Sprite"]
+[node name="Graffiti03" type="Sprite" parent="SlidingNode/Sprite"]
 self_modulate = Color( 0, 0, 0, 0.431373 )
 position = Vector2( 1307.75, 14.7142 )
 rotation = -0.240155
 scale = Vector2( 0.405354, 0.426926 )
 texture = ExtResource( 1 )
 
-[node name="PillarLeft" type="Sprite" parent="Sprite"]
+[node name="PillarLeft" type="Sprite" parent="SlidingNode/Sprite"]
 self_modulate = Color( 0.313726, 0.247059, 0.0392157, 1 )
 position = Vector2( -1095.85, 372.82 )
 rotation = 1.5708
@@ -88,7 +97,7 @@ texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 680, 120 )
 
-[node name="PillarRight" type="Sprite" parent="Sprite"]
+[node name="PillarRight" type="Sprite" parent="SlidingNode/Sprite"]
 self_modulate = Color( 0.313726, 0.247059, 0.0392157, 1 )
 position = Vector2( 1040.95, 372.82 )
 rotation = 1.5708
@@ -96,23 +105,4 @@ texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 680, 120 )
 
-[node name="StartSound" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 115.938, 1252.9 )
-scale = Vector2( 0.774057, 0.730645 )
-stream = ExtResource( 12 )
-max_distance = 10000.0
-attenuation = 0.000396608
-
-[node name="MoveSound" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 115.938, 1252.9 )
-scale = Vector2( 0.774057, 0.730645 )
-stream = ExtResource( 9 )
-max_distance = 10000.0
-attenuation = 0.000396608
-
-[node name="StopSound" type="AudioStreamPlayer2D" parent="."]
-position = Vector2( 115.938, 1252.9 )
-scale = Vector2( 0.774057, 0.730645 )
-stream = ExtResource( 15 )
-max_distance = 10000.0
-attenuation = 9.98168e-10
+[editable path="SlidingNode"]

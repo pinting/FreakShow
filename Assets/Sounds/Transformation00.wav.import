@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Transformation00.wav-194ed82e262fdd0db98871bda2caf132.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Transformation00.wav"
+dest_files=[ "res://.import/Transformation00.wav-194ed82e262fdd0db98871bda2caf132.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

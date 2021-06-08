@@ -50,7 +50,7 @@ position = Vector2( -3438.94, -91.4048 )
 scale = Vector2( 1.02686, 1.02686 )
 texture = ExtResource( 18 )
 script = ExtResource( 23 )
-description = "Description039"
+description_key = "Description039"
 
 [node name="Graffiti01" type="Sprite" parent="Wall"]
 self_modulate = Color( 0, 0, 0, 0.784314 )
@@ -145,6 +145,7 @@ texture = ExtResource( 3 )
 position = Vector2( -1811.1, 771.463 )
 rotation = -2.94975
 scale = Vector2( 0.624367, -0.74031 )
+z_index = -1
 
 [node name="SideLight" parent="SideLamp" instance=ExtResource( 10 )]
 position = Vector2( -853.839, 458.33 )
@@ -153,7 +154,6 @@ scale = Vector2( 2.73768, 1.39242 )
 
 [node name="Platform" parent="." instance=ExtResource( 4 )]
 position = Vector2( 115.938, -0.848175 )
-speed = Vector2( 0, -100 )
 
 [node name="BatteryStation00" type="Sprite" parent="."]
 position = Vector2( -2608.93, 1140.92 )
@@ -197,6 +197,7 @@ z_index = -1
 
 [node name="Battery" parent="." instance=ExtResource( 29 )]
 position = Vector2( -3894.44, 1292.96 )
+z_index = -1
 
 [node name="CratesBehind" type="Node2D" parent="."]
 position = Vector2( -3303.79, 1153.03 )

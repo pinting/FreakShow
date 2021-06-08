@@ -117,7 +117,7 @@ position = Vector2( -363.094, -228.85 )
 scale = Vector2( 0.412863, 0.412863 )
 
 [node name="LevelTwoSign" parent="Wall" instance=ExtResource( 2 )]
-description = "Description025"
+description_key = "Description025"
 
 [node name="Graffiti01" type="Sprite" parent="Wall"]
 self_modulate = Color( 1, 1, 1, 0.784314 )

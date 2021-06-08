@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="BackgroundRect" type="Node2D"]
+z_index = -100
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -50000.0
+margin_top = -50000.0
+margin_right = 50000.0
+margin_bottom = 50000.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

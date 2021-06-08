@@ -8,9 +8,9 @@ void fragment()
 {
     vec4 base = texture(TEXTURE, UV);
     vec3 rgb = base.rgb;
-    vec3 diff3 = rgb - color_key.rgb;
+    vec3 diff = rgb - color_key.rgb;
 	
-    float m = max(max(abs(diff3.r), abs(diff3.g)), abs(diff3.b));
+    float m = max(max(abs(diff.r), abs(diff.g)), abs(diff.b));
     float brightness = length(rgb);
 	
     rgb = mix(rgb, replacement_color.rgb * brightness, step(m, tolerance));

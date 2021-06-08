@@ -1,0 +1,215 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=2]
+[ext_resource path="res://Prefabs/Static/Static_RoomLamp01.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall16.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/TornPaper00.png" type="Texture" id=6]
+[ext_resource path="res://Prefabs/Light/Light_Room.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Environmnent/Ball00.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=10]
+[ext_resource path="res://Scenes/Part03/Part03_LevitatingSprite.gd" type="Script" id=13]
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=16]
+[ext_resource path="res://Prefabs/Static/Static_SideLamp00.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Prefabs/Selectable/Selectable_NoTrespassingSign.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Part03/Part03_EndTube.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Prefabs/Selectable/Selectable_HappyCompanySign.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Prefabs/Selectable/Selectable_CrazyDoor.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Prefabs/Light/Light_Side.tscn" type="PackedScene" id=22]
+[ext_resource path="res://Scenes/Part03/Part03_MovingEye.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Prefabs/Selectable/Selectable_DrugSexHellGraffiti.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/Environmnent/Clock00.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Environmnent/Pillar03_Repeat.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=28]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 2
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 16 )
+shader_param/keep_size = false
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/scale = 0.05
+shader_param/glow_radius = 10.0
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 16 )
+shader_param/keep_size = false
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/scale = 0.0
+shader_param/glow_radius = 10.0
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 16 )
+shader_param/keep_size = false
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/scale = 0.0
+shader_param/glow_radius = 10.0
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
+
+[node name="EndPlatform" type="Node2D"]
+position = Vector2( 7879.19, 28528.5 )
+
+[node name="TornPaper" type="Sprite" parent="."]
+light_mask = 0
+material = SubResource( 1 )
+position = Vector2( -959.682, 221.133 )
+scale = Vector2( 11.9766, 4.80124 )
+z_index = -2
+texture = ExtResource( 6 )
+
+[node name="MovingEye00" parent="." instance=ExtResource( 23 )]
+position = Vector2( -3759.17, -968.066 )
+rotation = -0.261799
+scale = Vector2( 1.1, 1.1 )
+
+[node name="MovingEye01" parent="." instance=ExtResource( 23 )]
+position = Vector2( -2722.62, -968.066 )
+rotation = 0.261799
+scale = Vector2( 1.1, 1.1 )
+
+[node name="RoomLamp00" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1396.84, -288.922 )
+z_index = 3
+
+[node name="Light" parent="RoomLamp00" instance=ExtResource( 7 )]
+position = Vector2( 0, 157 )
+scale = Vector2( 0.98568, 1.21196 )
+
+[node name="RoomLamp01" parent="." instance=ExtResource( 3 )]
+position = Vector2( 203.16, -288.922 )
+z_index = 3
+
+[node name="Light" parent="RoomLamp01" instance=ExtResource( 7 )]
+position = Vector2( 0, 157 )
+scale = Vector2( 0.98568, 1.21196 )
+
+[node name="RoomLamp02" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1803.16, -288.922 )
+z_index = 3
+
+[node name="Light" parent="RoomLamp02" instance=ExtResource( 7 )]
+position = Vector2( 0, 157 )
+scale = Vector2( 0.98568, 1.21196 )
+
+[node name="RoomLamp03" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3403.16, -288.922 )
+z_index = 3
+
+[node name="Light" parent="RoomLamp03" instance=ExtResource( 7 )]
+position = Vector2( 0, 157 )
+scale = Vector2( 0.98568, 1.21196 )
+
+[node name="SideLamp00" parent="." instance=ExtResource( 17 )]
+position = Vector2( -4706.74, -210.422 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+z_index = 3
+
+[node name="Light" parent="SideLamp00" instance=ExtResource( 22 )]
+position = Vector2( -186.624, 441.67 )
+scale = Vector2( 1.08489, 0.803742 )
+
+[node name="SteelBlock" type="Sprite" parent="."]
+position = Vector2( -1076.84, 45.2344 )
+z_index = -3
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 11000, 2000 )
+
+[node name="WallBlock" type="Sprite" parent="SteelBlock"]
+position = Vector2( 0, 19.2383 )
+texture = ExtResource( 10 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10800, 846 )
+
+[node name="Floor" type="Sprite" parent="SteelBlock/WallBlock"]
+position = Vector2( 0, 520.563 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 10800, 200 )
+
+[node name="Foot" type="Sprite" parent="SteelBlock/WallBlock"]
+position = Vector2( 0, 656.168 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 11000, 85 )
+
+[node name="ExitDoor" parent="SteelBlock/WallBlock" instance=ExtResource( 21 )]
+position = Vector2( -2127.14, 162.994 )
+effect_hover = 0.25
+
+[node name="CompanySign" parent="SteelBlock/WallBlock" instance=ExtResource( 20 )]
+position = Vector2( -859.51, -252.406 )
+rotation = 0.00539374
+scale = Vector2( 0.693262, 0.693262 )
+
+[node name="WarningSign" parent="SteelBlock/WallBlock" instance=ExtResource( 18 )]
+position = Vector2( -273.5, 263.363 )
+scale = Vector2( 1.83766, 1.83766 )
+
+[node name="Graffiti" parent="SteelBlock/WallBlock" instance=ExtResource( 24 )]
+self_modulate = Color( 1, 1, 1, 0.862745 )
+position = Vector2( -3400.99, -64.4727 )
+rotation = -0.120428
+
+[node name="PillarBottom" type="Sprite" parent="SteelBlock/WallBlock"]
+position = Vector2( 4, 755.164 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 11000, 120 )
+
+[node name="PillarTop" type="Sprite" parent="SteelBlock/WallBlock"]
+position = Vector2( 8.22559, -456.094 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 11000, 120 )
+
+[node name="PillarRight" type="Sprite" parent="SteelBlock/WallBlock"]
+position = Vector2( 5416.57, 113.314 )
+scale = Vector2( 0.9, 1.01596 )
+texture = ExtResource( 26 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 203, 1000 )
+
+[node name="PillarLeft" type="Sprite" parent="SteelBlock/WallBlock"]
+position = Vector2( -5416.09, 113.314 )
+scale = Vector2( 0.9, 1.01596 )
+texture = ExtResource( 26 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 203, 1000 )
+
+[node name="Car" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 2627.77, 231.248 )
+rotation = 0.184918
+scale = Vector2( 1.1, 1.1 )
+z_index = -1
+texture = ExtResource( 28 )
+script = ExtResource( 13 )
+
+[node name="Ball" type="Sprite" parent="."]
+material = SubResource( 3 )
+position = Vector2( -1677.38, 0 )
+rotation = -0.0539786
+scale = Vector2( 1.1, 1.1 )
+z_index = 3
+texture = ExtResource( 9 )
+script = ExtResource( 13 )
+
+[node name="Clock" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( -402.949, 231.249 )
+rotation = 0.367085
+scale = Vector2( 1.1, 1.1 )
+z_index = 3
+texture = ExtResource( 25 )
+script = ExtResource( 13 )
+
+[node name="EndTube" parent="." instance=ExtResource( 19 )]
+position = Vector2( -3200.94, 4878.43 )
+rotation = -1.49012e-08
+z_index = -1

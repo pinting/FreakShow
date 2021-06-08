@@ -8,7 +8,6 @@ collision_layer = 1025
 collision_mask = 0
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 16822.9, -498.997 )
 texture = ExtResource( 2 )
 
 [node name="Overlay" type="Sprite" parent="Sprite"]
@@ -34,4 +33,4 @@ z_index = 100
 polygon = PoolVector2Array( -83.5967, -319.037, -79.2837, -314.852, -99.0415, -279.355 )
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 16593, -1014.24, 17051, -1011.04, 17051, -734.774, 16838.5, -735.893, 16831.8, 17.96, 16806.1, 17.96, 16806.1, -737.011, 16593.6, -738.13 )
+polygon = PoolVector2Array( -230.117, -516.211, 230.838, -515.501, 228.978, -237.823, 11.5, -239, 10.5239, 514.873, -18.4675, 515.05, -17.875, -239.875, -229.75, -238 )

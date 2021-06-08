@@ -1,0 +1,148 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://Scenes/Part00/Part00.gd" type="Script" id=1]
+[ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Materials/CursorBlackMaterial.tres" type="Material" id=4]
+[ext_resource path="res://Scenes/Part00/Part00_Building00.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Part00/Part00_Building01.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Part00/Part00_RoadBlock.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Environmnent/Lines01.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Environmnent/Help00.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Environmnent/Board01.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Environmnent/Help01.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/Part00/Part00_ExitDoor.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Prefabs/BackgroundRect.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Part00/Part00_Crate.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Part00/Part00_Clouds.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Assets/Music/Part00.ogg" type="AudioStream" id=18]
+[ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Materials/StencilMaterial.tres" type="Material" id=20]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10000, 76.036 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7500, 50 )
+
+[node name="Part00" type="Node2D"]
+
+[node name="BaseScene" parent="." instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+auto_fade_out = false
+
+[node name="Cursor" parent="BaseScene/CursorDisplay" index="1"]
+material = ExtResource( 4 )
+
+[node name="Player" parent="BaseScene" instance=ExtResource( 6 )]
+position = Vector2( -2686.45, 466.563 )
+scale = Vector2( 0.7, 0.7 )
+animation_frames = ExtResource( 3 )
+
+[node name="AnimatedSprite" parent="BaseScene/Player" index="1"]
+material = ExtResource( 20 )
+animation = "a_stand_still"
+frame = 0
+
+[node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
+follow_node = NodePath("../Player")
+follow_init_offset = Vector2( 0, -14000 )
+
+[node name="BackgroundRect" parent="BaseScene" instance=ExtResource( 15 )]
+position = Vector2( 0, -28.5088 )
+
+[node name="ColorRect" parent="BaseScene/BackgroundRect" index="0"]
+color = Color( 1, 1, 1, 1 )
+
+[node name="Environment" type="Node2D" parent="BaseScene"]
+
+[node name="Clouds" parent="BaseScene/Environment" instance=ExtResource( 17 )]
+position = Vector2( -3750.77, -1440.57 )
+
+[node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 16 )]
+position = Vector2( 3577.87, 484.975 )
+
+[node name="Board00" type="Sprite" parent="BaseScene/Environment"]
+position = Vector2( -2724.61, 427.24 )
+z_index = -2
+texture = ExtResource( 12 )
+
+[node name="Help" type="Sprite" parent="BaseScene/Environment/Board00"]
+self_modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 25.42, -56.3737 )
+scale = Vector2( 1.00219, 1.07928 )
+texture = ExtResource( 11 )
+
+[node name="Board01" type="Sprite" parent="BaseScene/Environment"]
+position = Vector2( 460.103, 427.24 )
+z_index = -2
+texture = ExtResource( 12 )
+
+[node name="Help" type="Sprite" parent="BaseScene/Environment/Board01"]
+self_modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 4.71057, -60.0012 )
+scale = Vector2( 0.904466, 1.03368 )
+texture = ExtResource( 13 )
+
+[node name="RoadBlock" parent="BaseScene/Environment" instance=ExtResource( 9 )]
+position = Vector2( 3635.5, 754.339 )
+
+[node name="Building00" parent="BaseScene/Environment" instance=ExtResource( 5 )]
+position = Vector2( 5593.66, 553.361 )
+
+[node name="Building01" parent="BaseScene/Environment" instance=ExtResource( 8 )]
+position = Vector2( 7929.43, 553.361 )
+
+[node name="ExitDoor" parent="BaseScene/Environment" instance=ExtResource( 14 )]
+position = Vector2( 13522.4, 401.529 )
+z_index = -1
+effect_hover = 0.8
+
+[node name="Road" type="StaticBody2D" parent="BaseScene/Environment"]
+position = Vector2( 4490.52, 891.419 )
+collision_layer = 15
+collision_mask = 15
+
+[node name="Bottom" type="Sprite" parent="BaseScene/Environment/Road"]
+texture = ExtResource( 10 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 20000, 13 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/Road"]
+position = Vector2( 4.75684, 0 )
+shape = SubResource( 1 )
+
+[node name="WallLeft" type="StaticBody2D" parent="BaseScene/Environment"]
+position = Vector2( -5444.07, 200.645 )
+rotation = 1.5708
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/WallLeft"]
+shape = SubResource( 2 )
+
+[node name="WallRight" type="StaticBody2D" parent="BaseScene/Environment"]
+position = Vector2( 14441.4, 140.712 )
+rotation = 1.5708
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/WallRight"]
+shape = SubResource( 2 )
+
+[node name="Sound" type="Node" parent="BaseScene"]
+
+[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource( 19 )]
+stream = ExtResource( 18 )
+
+[editable path="BaseScene"]
+
+[editable path="BaseScene/CursorDisplay"]
+
+[editable path="BaseScene/Player"]
+
+[editable path="BaseScene/BackgroundRect"]
+
+[editable path="BaseScene/Environment/Building01"]

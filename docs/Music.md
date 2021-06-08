@@ -2,6 +2,18 @@
 
 Should be placed into root of the project folder. Files should not be renamed, . Use `setup.sh` to process the files!
 
+https://www.youtube.com/playlist?list=PLfecV2b5DItOgrSQ3Dy-3OY3Oc9zsDb73
+
+## Delia Derbyshire & Elsa Stansfield - Circle of Light, Pt. 1
+
+https://www.youtube.com/watch?v=7WR63P7sPc0
+
+https://music.apple.com/us/album/circle-of-light-original-electronic-soundtrack-recording/1123740017
+
+Required minimum length is 21 minutes and 14 seconds
+
+Copyright (p) 2016 Trunk Records
+
 ## Cluster & Eno - Wehrmut
 
 https://www.youtube.com/watch?v=q5mwB0LcfzY
@@ -61,7 +73,3 @@ https://ghostbox.greedbag.com/buy/sleep-games
 Required minimum length is 5 minutes and 5 seconds
 
 Copyright (c) 2012 Ghost Box
-
-# Playlist
-
-https://www.youtube.com/playlist?list=PLfecV2b5DItOgrSQ3Dy-3OY3Oc9zsDb73

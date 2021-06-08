@@ -29,7 +29,6 @@
 [ext_resource path="res://Assets/Environmnent/Misc18.png" type="Texture" id=27]
 [ext_resource path="res://Prefabs/Pickable/Pickable_CanOfCoffee.tscn" type="PackedScene" id=28]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1843.14, 10 )
 
@@ -169,7 +168,7 @@ scale = Vector2( 0.271982, 0.271982 )
 [node name="Door" parent="Inside" instance=ExtResource( 1 )]
 position = Vector2( -73.9722, 25.4409 )
 scale = Vector2( 0.948256, 0.85 )
-description = "Description000"
+description_key = "Description000"
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
 position = Vector2( 376.119, 0 )

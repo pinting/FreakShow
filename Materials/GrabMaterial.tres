@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/keep_size = true
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/scale = 0.0
+shader_param/glow_radius = 10.0
+shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )

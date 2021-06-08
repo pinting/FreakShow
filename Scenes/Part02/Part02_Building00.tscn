@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Surface/Floor01.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Building00_2x4.png" type="Texture" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://Prefabs/Light/Light_Side.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Environmnent/Building00_1x2.png" type="Texture" id=14]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 10 )
 shader_param/keep_size = true
@@ -23,6 +22,8 @@ shader_param/offset = Vector2( 0.5, 0.5 )
 shader_param/scale = 0.0
 shader_param/glow_radius = 10.0
 shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=3]
 
 [sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -753.59, 407.076, -746.624, -351.282, 711.923, -347.36, 712.603, 404.682, 848.141, 405.235, 848.574, -5232.52, -2299.02, -5235.85, -2290.62, 611.897, 846.756, 613.875, 847.565, 404.928, 713.626, 406.32 )
@@ -79,6 +80,7 @@ scale = Vector2( 0.409752, 0.409752 )
 texture = ExtResource( 5 )
 
 [node name="Floor" type="Sprite" parent="Inside"]
+material = SubResource( 3 )
 position = Vector2( -5.36716, 314.352 )
 scale = Vector2( 1.00638, 0.393294 )
 texture = ExtResource( 1 )
@@ -127,7 +129,7 @@ position = Vector2( 0.435974, 119.932 )
 scale = Vector2( 1, 0.937116 )
 z_index = 100
 
-[node name="Ground" type="CollisionPolygon2D" parent="CollisionBack"]
+[node name="GroundCollision" type="CollisionPolygon2D" parent="CollisionBack"]
 position = Vector2( 3.63138, -56.6606 )
 z_index = 100
 z_as_relative = false
@@ -140,7 +142,7 @@ z_index = 100
 collision_layer = 2
 collision_mask = 2
 
-[node name="Ground" type="CollisionPolygon2D" parent="CollisionCenter"]
+[node name="GroundCollision" type="CollisionPolygon2D" parent="CollisionCenter"]
 position = Vector2( -0.234589, -24.8149 )
 z_index = 100
 z_as_relative = false
@@ -153,7 +155,7 @@ z_index = 100
 collision_layer = 4
 collision_mask = 4
 
-[node name="Ground" type="CollisionPolygon2D" parent="CollisionFront"]
+[node name="GroundCollision" type="CollisionPolygon2D" parent="CollisionFront"]
 position = Vector2( -0.234619, -24.8147 )
 z_index = 100
 z_as_relative = false
@@ -163,7 +165,7 @@ polygon = PoolVector2Array( -33.3467, 2491.76, 1552.65, 2485.88, 2531.97, 2705.7
 collision_layer = 7
 collision_mask = 7
 
-[node name="Walls" type="CollisionPolygon2D" parent="CollisionAll"]
+[node name="WallCollision" type="CollisionPolygon2D" parent="CollisionAll"]
 position = Vector2( -0.111572, 0.367676 )
 polygon = PoolVector2Array( -28.8685, 1788.68, 1569.39, 1789.08, 1570.13, -2494.04, -1577.78, -2499.21, -1568.93, 2633.67, 1567.59, 2635.08, 1565.3, 2454.31, -33.7491, 2456.96 )
 
@@ -171,5 +173,5 @@ polygon = PoolVector2Array( -28.8685, 1788.68, 1569.39, 1789.08, 1570.13, -2494.
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CollisionPlayer"]
+[node name="BeforeWallCollision" type="CollisionPolygon2D" parent="CollisionPlayer"]
 polygon = PoolVector2Array( 30.5609, 1826.42, 31.8317, 2543.21, -138.464, 2542.55, -139.675, 1670.53, 1570.33, 1675.36, 1570.12, 1829.98 )

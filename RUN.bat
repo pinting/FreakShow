@@ -1,6 +1,6 @@
 @echo off
 
 :start
-out\FreakShow.exe
+godot -f
 timeout /T 10
 goto:start

@@ -10,44 +10,26 @@ export var stop_after: Vector2 = Vector2(0, 1000)
 # Speed to move with (this is inverted, when moving back)
 export var speed: Vector2 = Vector2(0, 100)
 
-# Optional sounds
-onready var door_start = $StartSound
-onready var door_move = $MoveSound
-onready var door_stop = $StopSound
+onready var tween: Tween = $Tween
+onready var door_start: AudioStreamPlayer2D = $StartSound
+onready var door_move: AudioStreamPlayer2D = $MoveSound
+onready var door_stop: AudioStreamPlayer2D = $StopSound
 
-onready var sprite = $Sprite
+var is_open: bool = false
 
-var open: bool = false
-var moving: bool = false
-var direction: float = 0.0
-var counter: Vector2 = Vector2.ZERO
-var last_movement_diff: Vector2 = Vector2.ZERO
+var close_position: Vector2
+var open_position: Vector2
+var change_duration: float
 
 func _ready() -> void:
-	sprite.position += start_with_offset
-
-func _process(delta: float):
-	if not moving:
-		return
+	position += start_with_offset
 	
-	var smooth = max(0.1, abs(sin((counter.x + counter.y) / (stop_after.x + stop_after.y) * PI)))
-	
-	last_movement_diff = smooth * direction * speed * delta
-	sprite.position += last_movement_diff
-	counter += last_movement_diff.abs()
-	
-	if counter > stop_after:
-		counter = Vector2.ZERO
-		moving = false
-		
-		if door_stop:
-			door_stop.play()
-		
-		if door_move:
-			door_move.stop()
+	close_position = position
+	open_position = position + stop_after * (speed / speed.abs())
+	change_duration = (stop_after / speed.abs()).length()
 
 func open() -> void:
-	if open or moving:
+	if is_open or tween.is_active():
 		return
 	
 	if door_start:
@@ -56,19 +38,35 @@ func open() -> void:
 	if door_move:
 		door_move.play()
 	
-	yield(Game.timer(1.0), "timeout")
+	tween.interpolate_property(
+		self,
+		"position",
+		close_position,
+		open_position,
+		change_duration,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT)
 	
-	open = true
-	moving = true
-	direction = 1.0
+	tween.start()
+	
+	is_open = true
 
 func close() -> void:
-	if not open or moving:
+	if not is_open or tween.is_active():
 		return
 	
 	if door_start:
 		door_start.play()
 	
-	open = false
-	moving = true
-	direction = -1.0
+	tween.interpolate_property(
+		self,
+		"position",
+		close_position,
+		open_position,
+		change_duration,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT)
+	
+	tween.start()
+	
+	is_open = false

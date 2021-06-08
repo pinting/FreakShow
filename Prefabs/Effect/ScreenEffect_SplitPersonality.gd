@@ -26,11 +26,11 @@ func _process(delta: float) -> void:
 	current_second += delta
 	counter += delta
 	
-	var camera = Game.current_camera
+	var camera = CameraManager.current
 	
 	if counter > interval:
 		if camera:
-			camera.shake = pow(2.0 * abs(sin(current_second)) + 1.0, Game.random_generator.randf_range(1.0, 2.0))
+			camera.shake = pow(2.0 * abs(sin(current_second)) + 1.0, Tools.random_float(1.0, 2.0))
 		
 		canvas.modulate.a = min(1.0, canvas.modulate.a + delta)
 		canvas.material.set_shader_param("barrel_power", min(2.2, barrel_power + delta))

@@ -10,4 +10,4 @@
 self_modulate = Color( 1, 1, 1, 0.588235 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
-description = "Description031"
+description_key = "Description031"

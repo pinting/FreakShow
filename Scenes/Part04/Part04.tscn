@@ -4,14 +4,14 @@
 [ext_resource path="res://Scenes/Part04/Part04_Ditch.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Part04/Part04_MaintenanceRoom.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Part04/Part04.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Sounds/Door01.wav" type="AudioStream" id=8]
-[ext_resource path="res://Prefabs/GameCamera.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=10]
 [ext_resource path="res://Assets/Music/Part05.ogg" type="AudioStream" id=11]
-[ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Game/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_SplitPersonality.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=14]
 
@@ -29,12 +29,16 @@ glow_hdr_threshold = 0.1
 script = ExtResource( 7 )
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 12 )]
-position = Vector2( -2156.89, -8027.59 )
+position = Vector2( -2156.89, -596.886 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
-[node name="GameCamera" parent="BaseScene/Player" instance=ExtResource( 9 )]
+[node name="GameCamera" parent="BaseScene" instance=ExtResource( 9 )]
+position = Vector2( -2156.89, -8027.59 )
+scale = Vector2( 0.7, 0.7 )
 smoothing_speed = 0.5
+follow_node = NodePath("../Player")
+follow_init_offset = Vector2( 0, -8000 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )

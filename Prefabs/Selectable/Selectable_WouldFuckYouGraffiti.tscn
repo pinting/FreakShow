@@ -13,4 +13,4 @@ rotation = 0.353501
 scale = Vector2( 0.654372, 1.07091 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
-description = "Description034"
+description_key = "Description034"

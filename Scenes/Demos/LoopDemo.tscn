@@ -1,0 +1,129 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Scenes/Demos/LoopDemo.gd" type="Script" id=1]
+[ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Static/Static_StreetLamp00.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Prefabs/Pickable/Pickable_BeachBall.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Prefabs/Static/Static_BallHoop.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Environmnent/Dirt00.png" type="Texture" id=17]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 1.4
+glow_hdr_threshold = 0.4
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2725.18, 55.4996 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 2497.68, 864.785 )
+
+[node name="LoopDemo" type="Node2D"]
+
+[node name="BaseScene" parent="." instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+
+[node name="Player" parent="BaseScene" instance=ExtResource( 6 )]
+position = Vector2( 3943.89, 922.184 )
+scale = Vector2( 0.7, 0.7 )
+animation_frames = ExtResource( 3 )
+
+[node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
+position = Vector2( 1727.88, 673.351 )
+scale = Vector2( 0.7, 0.7 )
+smoothing_speed = 1.0
+follow_node = NodePath("../Player")
+
+[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
+light_mask = 0
+color = Color( 0.294118, 0.294118, 0.294118, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
+environment = SubResource( 1 )
+
+[node name="Sky" parent="BaseScene" instance=ExtResource( 14 )]
+
+[node name="Fog" parent="BaseScene" instance=ExtResource( 15 )]
+
+[node name="Environment" type="Node2D" parent="BaseScene"]
+position = Vector2( 99.8936, -23.7839 )
+
+[node name="Loop" parent="BaseScene/Environment" instance=ExtResource( 8 )]
+position = Vector2( 1630.16, 875.011 )
+player_node = NodePath("../../Player")
+area_shape_node = NodePath("Area/Shape")
+container_node = NodePath("Container")
+
+[node name="Container" type="Node2D" parent="BaseScene/Environment/Loop"]
+
+[node name="Road" type="Sprite" parent="BaseScene/Environment/Loop/Container"]
+position = Vector2( 0, 435.019 )
+z_index = -1
+texture = ExtResource( 16 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5000, 300 )
+
+[node name="Dirt" type="Sprite" parent="BaseScene/Environment/Loop/Container/Road"]
+position = Vector2( 0, 286.343 )
+texture = ExtResource( 17 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5000, 300 )
+
+[node name="Walls" type="StaticBody2D" parent="BaseScene/Environment/Loop/Container"]
+position = Vector2( 0, 369.757 )
+z_index = -2
+collision_layer = 7
+collision_mask = 7
+
+[node name="Bottom" type="CollisionShape2D" parent="BaseScene/Environment/Loop/Container/Walls"]
+position = Vector2( 0, 105.514 )
+z_index = 1
+shape = SubResource( 2 )
+
+[node name="Lamp00" parent="BaseScene/Environment/Loop/Container" instance=ExtResource( 5 )]
+position = Vector2( -1188.94, -504.136 )
+z_index = -1
+
+[node name="Light" parent="BaseScene/Environment/Loop/Container/Lamp00" instance=ExtResource( 4 )]
+position = Vector2( -290.091, 915.182 )
+
+[node name="Lamp01" parent="BaseScene/Environment/Loop/Container" instance=ExtResource( 5 )]
+position = Vector2( 1310.07, -501.136 )
+z_index = -1
+
+[node name="Light" parent="BaseScene/Environment/Loop/Container/Lamp01" instance=ExtResource( 4 )]
+position = Vector2( -290.091, 915.182 )
+
+[node name="Area" type="Area2D" parent="BaseScene/Environment/Loop"]
+
+[node name="Shape" type="CollisionShape2D" parent="BaseScene/Environment/Loop/Area"]
+visible = false
+shape = SubResource( 3 )
+
+[node name="Ball" parent="BaseScene/Environment" instance=ExtResource( 9 )]
+position = Vector2( 1935.86, 1207.89 )
+
+[node name="Hoop" parent="BaseScene/Environment" instance=ExtResource( 10 )]
+position = Vector2( 1739.63, 720.692 )
+z_index = -1
+collision_layer = 0
+
+[node name="OverlayBody" parent="BaseScene/Environment/Hoop/Sprite/Overlay" index="0"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="Trigger" type="Node2D" parent="BaseScene"]
+
+[node name="Sound" type="Node" parent="BaseScene"]
+
+[editable path="BaseScene/Environment/Hoop"]

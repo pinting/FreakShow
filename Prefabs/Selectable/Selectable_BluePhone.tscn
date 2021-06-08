@@ -1,24 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Phone01.png" type="Texture" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
-[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=3]
-
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 3 )
-shader_param/keep_size = true
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/scale = 0.0
-shader_param/glow_radius = 10.0
-shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
+[ext_resource path="res://Materials/GrabMaterial.tres" type="Material" id=3]
 
 [node name="Selectable_BluePhone" type="Sprite" groups=[
 "selectable",
 ]]
-material = SubResource( 1 )
+material = ExtResource( 3 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-description = "Description016"
+description_key = "Description016"
 offset_key = "offset"
-clone_material = true

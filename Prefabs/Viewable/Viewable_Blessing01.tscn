@@ -1,27 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Decoration/Paper01.png" type="Texture" id=1]
-[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=2]
+[ext_resource path="res://Materials/GrabMaterial.tres" type="Material" id=2]
 [ext_resource path="res://Prefabs/Viewable/Viewable.gd" type="Script" id=3]
-
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 2 )
-shader_param/keep_size = true
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/scale = 0.0
-shader_param/glow_radius = 10.0
-shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
 
 [node name="Viewable_Blessing01" type="Sprite" groups=[
 "selectable",
+"viewable",
 ]]
-material = SubResource( 1 )
+material = ExtResource( 2 )
 scale = Vector2( 0.13506, 0.13506 )
 texture = ExtResource( 1 )
 script = ExtResource( 3 )
-description = "Description046"
+description_key = "Description044"
 offset_key = "offset"
 effect_key = "scale"
 effect_hover = 1.0
-clone_material = true
+inner_description_key = "Description046"

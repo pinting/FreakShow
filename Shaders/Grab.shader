@@ -18,29 +18,31 @@ vec4 safe_texture(sampler2D tex, vec2 p)
 	return texture(tex, p);
 }
 
-vec4 outline(float amount, vec4 color, sampler2D tex, vec2 uv, vec2 pixel_size)
+vec4 outline(float amount, vec4 base_color, sampler2D tex, vec2 uv, vec2 pixel_size)
 {
-	vec2 size = pixel_size * amount;
-	float outline = color.a;
+	vec2 s = pixel_size * amount;
 	
-	outline *= safe_texture(tex, uv + vec2(0, size.y)).a;
-	outline *= safe_texture(tex, uv + vec2(size.x, 0)).a;
-	outline *= safe_texture(tex, uv + vec2(0, -size.y)).a;
-	outline *= safe_texture(tex, uv + vec2(-size.x, size.y)).a;
-	outline *= safe_texture(tex, uv + vec2(size.x, size.y)).a;
-	outline *= safe_texture(tex, uv + vec2(-size.x, -size.y)).a;
-	outline *= safe_texture(tex, uv + vec2(size.x, -size.y)).a;
-	outline = 1.0 - outline;
+	float color = base_color.a;
 	
-	vec4 outlined_result = mix(color, line_color, outline * color.a);
+	color *= safe_texture(tex, uv + vec2(0, s.y)).a;
+	color *= safe_texture(tex, uv + vec2(s.x, 0)).a;
+	color *= safe_texture(tex, uv + vec2(0, -s.y)).a;
+	color *= safe_texture(tex, uv + vec2(-s.x, s.y)).a;
+	color *= safe_texture(tex, uv + vec2(s.x, s.y)).a;
+	color *= safe_texture(tex, uv + vec2(-s.x, -s.y)).a;
+	color *= safe_texture(tex, uv + vec2(s.x, -s.y)).a;
+	color = 1.0 - color;
 	
-	return mix(color, outlined_result, outlined_result.a);
+	vec4 outlined_result = mix(base_color, line_color, color * base_color.a);
+	
+	return mix(base_color, outlined_result, outlined_result.a);
 }
 
 vec4 glow(float amount, sampler2D tex, vec2 uv, vec2 pixel_size)
 {
-	vec4 color = texture(tex, uv);
 	float r = glow_radius;
+	
+	vec4 color = texture(tex, uv);
 
 	color += safe_texture(tex, uv + vec2(-r, -r) * pixel_size);
 	color += safe_texture(tex, uv + vec2(-r, 0.0) * pixel_size);
@@ -85,15 +87,15 @@ void fragment()
 	vec4 r_glow = glow(scale / 2.0, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
 	vec4 r_bend = bend(scale / 10.0 + 1.0, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
 	
-	vec3 combined = r_glow.rgb + r_bend.rgb;
-	vec4 base_color = vec4(combined.r, combined.g, combined.b, r_bend.a);
+	vec3 sum = max(min(r_glow.rgb + r_bend.rgb, vec3(1.0)), vec3(0.0));
+	vec4 color = vec4(sum.rgb, r_bend.a);
 	
 	if (scale > 0.5) 
 	{
-		COLOR = outline(scale, base_color, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
+		COLOR = outline(scale, color, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
 	}
 	else
 	{
-		COLOR = base_color;
+		COLOR = color;
 	}
 }

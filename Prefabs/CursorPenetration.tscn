@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Shaders/ScreenPenetration.shader" type="Shader" id=1]
+[ext_resource path="res://Prefabs/CursorPenetration.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/offset = Vector2( 0.5, 0.5 )
+shader_param/value = 0.2
+shader_param/dist = 0.2
+
+[node name="CursorPenetration" type="ColorRect"]
+show_behind_parent = true
+material = SubResource( 1 )
+margin_left = -480.0
+margin_top = -270.0
+margin_right = 480.0
+margin_bottom = 270.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

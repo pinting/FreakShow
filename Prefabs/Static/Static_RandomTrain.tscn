@@ -20,103 +20,91 @@ extents = Vector2( 2036.48, 10.3484 )
 ]]
 script = ExtResource( 1 )
 
+[node name="Tween" type="Tween" parent="."]
+
 [node name="Train00" parent="." instance=ExtResource( 2 )]
-position = Vector2( -4071.72, -816.511 )
+position = Vector2( -874.948, -816.511 )
 scale = Vector2( 20, 15 )
 
 [node name="Train00" type="Sprite" parent="Train00"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 3 )
 
 [node name="Train01" type="Sprite" parent="Train00"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 7 )
 
 [node name="Train02" type="Sprite" parent="Train00"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 6 )
 
 [node name="Train03" type="Sprite" parent="Train00"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 8 )
 
 [node name="Train04" type="Sprite" parent="Train00"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 4 )
 
 [node name="Train01" parent="." instance=ExtResource( 2 )]
+position = Vector2( 3348.12, -816.511 )
 
 [node name="Train00" type="Sprite" parent="Train01"]
 light_mask = -2147483648
-position = Vector2( 3348.12, -816.511 )
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 3 )
 
 [node name="Train01" type="Sprite" parent="Train01"]
 light_mask = -2147483648
-position = Vector2( 3348.12, -816.511 )
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 7 )
 
 [node name="Train02" type="Sprite" parent="Train01"]
 light_mask = -2147483648
-position = Vector2( 3348.12, -816.511 )
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 6 )
 
 [node name="Train03" type="Sprite" parent="Train01"]
 light_mask = -2147483648
-position = Vector2( 3348.12, -816.511 )
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 8 )
 
 [node name="Train04" type="Sprite" parent="Train01"]
 light_mask = -2147483648
-position = Vector2( 3348.12, -816.511 )
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 4 )
 
 [node name="Train02" parent="." instance=ExtResource( 2 )]
-position = Vector2( 4442.07, -816.511 )
+position = Vector2( 7637.92, -816.511 )
 scale = Vector2( 20, 15 )
 
 [node name="Train00" type="Sprite" parent="Train02"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 3 )
 
 [node name="Train01" type="Sprite" parent="Train02"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 7 )
 
 [node name="Train02" type="Sprite" parent="Train02"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 6 )
 
 [node name="Train03" type="Sprite" parent="Train02"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 8 )
 
 [node name="Train04" type="Sprite" parent="Train02"]
 light_mask = -2147483648
-position = Vector2( 159.952, 0 )
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 4 )
 
@@ -132,7 +120,7 @@ shape = SubResource( 1 )
 position = Vector2( 7579.51, -693.153 )
 shape = SubResource( 1 )
 
-[node name="Noise00" type="AudioStreamPlayer2D" parent="."]
+[node name="Sound00" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( -1155.19, -394.782 )
 scale = Vector2( 1.8, 1.8 )
 stream = ExtResource( 5 )
@@ -140,14 +128,14 @@ pitch_scale = 0.7
 max_distance = 15000.0
 attenuation = 0.999999
 
-[node name="Noise01" type="AudioStreamPlayer2D" parent="."]
+[node name="Sound01" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 3024.33, -421.712 )
 scale = Vector2( 1.8, 1.8 )
 stream = ExtResource( 5 )
 max_distance = 15000.0
 attenuation = 0.999999
 
-[node name="Noise02" type="AudioStreamPlayer2D" parent="."]
+[node name="Sound02" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 8035.54, -394.784 )
 scale = Vector2( 1.8, 1.8 )
 stream = ExtResource( 5 )

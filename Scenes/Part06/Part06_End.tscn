@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/Environmnent/Surface/Wall05.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Sounds/Fap00.ogg" type="AudioStream" id=7]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
@@ -95,8 +95,8 @@ void fragment()
     COLOR = vec4((ra.r + rb.r) / 2.0, (ra.g + rb.g) / 2.0, (ra.b + rb.b) / 2.0, rb.a);
 }"
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/time_offset = 30000.0
 
 [node name="Part06_End" type="Node2D"]
@@ -151,7 +151,7 @@ texture = ExtResource( 5 )
 
 [node name="Effect" type="ColorRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.588235 )
-material = SubResource( 1 )
+material = SubResource( 2 )
 margin_left = -1713.0
 margin_top = -905.0
 margin_right = 1421.0

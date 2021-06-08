@@ -3,12 +3,10 @@
 [ext_resource path="res://Assets/Environmnent/Hand00.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Part06/Part06_Hand.gd" type="Script" id=2]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1000.7, 40.5972 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 702.702, 864.785 )
 
 [node name="Part06_Hand" type="Node2D"]
@@ -42,4 +40,4 @@ collision_mask = 2147483656
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Sprite/DetectArea"]
 position = Vector2( -674.054, -566.628 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )

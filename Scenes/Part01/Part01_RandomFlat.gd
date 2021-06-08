@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var door = $Inside/Door
+onready var door: Selectable = $Inside/Door
 
 signal exit_selected
 

@@ -3,18 +3,14 @@
 [ext_resource path="res://Assets/Environmnent/Decoration/Paper10.png" type="Texture" id=1]
 [ext_resource path="res://Prefabs/Viewable/Viewable.gd" type="Script" id=2]
 
-
-
 [node name="Viewable_DangerousCriminal" type="Sprite" groups=[
 "selectable",
+"viewable",
 ]]
 position = Vector2( 10.5156, -121.286 )
 rotation = 0.0781437
 scale = Vector2( -0.109, 0.109 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-description = "Description048"
-offset_key = "offset"
-effect_key = "scale"
 effect_hover = 1.0
-effect_default = 0.0
+inner_description_key = "Description048"

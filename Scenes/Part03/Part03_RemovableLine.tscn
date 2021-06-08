@@ -7,7 +7,6 @@
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/amount = 0.0
-shader_param/pi = 3.14159
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 168.256, 11.3797 )
@@ -22,14 +21,15 @@ material = SubResource( 1 )
 z_index = -1
 texture = ExtResource( 4 )
 script = ExtResource( 3 )
-clone_material = true
 
-[node name="Body" type="StaticBody2D" parent="."]
+[node name="Tween" type="Tween" parent="."]
+
+[node name="LineBody" type="StaticBody2D" parent="."]
 z_index = 100
-collision_layer = 8
-collision_mask = 8
+collision_layer = 15
+collision_mask = 15
 
-[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+[node name="CollisionShape" type="CollisionShape2D" parent="LineBody"]
 position = Vector2( -7.15843, 10.1711 )
 z_index = 100
 shape = SubResource( 2 )

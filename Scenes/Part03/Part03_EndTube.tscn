@@ -1,15 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Lamp04.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Meat00.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=5]
-[ext_resource path="res://Prefabs/Static/Static_MineLamp.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Environmnent/Pillar06.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Part03/Part03_EndTube.gd" type="Script" id=8]
 [ext_resource path="res://Assets/Environmnent/Tooth00.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Environmnent/Tooth01.png" type="Texture" id=10]
-
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.362319, 1 )
@@ -21,24 +16,22 @@ width = 250
 
 [sub_resource type="GradientTexture" id=3]
 
-[sub_resource type="CanvasItemMaterial" id=4]
-blend_mode = 1
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 62.211, 15000 )
 
-[sub_resource type="CanvasItemMaterial" id=5]
-blend_mode = 1
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 62.2114, 3988.45 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 62.211, 15000 )
 
 [node name="Part04_Entry" type="Node2D"]
 script = ExtResource( 8 )
 
 [node name="Meat" type="Sprite" parent="."]
+position = Vector2( 0, 11000 )
 scale = Vector2( 2, 2 )
 z_index = -1
 texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 250, 4000 )
+region_rect = Rect2( 0, 0, 250, 15000 )
 
 [node name="Tooth00" type="Sprite" parent="Meat"]
 position = Vector2( -51.7041, 0 )
@@ -46,7 +39,7 @@ scale = Vector2( 2.3, 1 )
 z_index = 1
 texture = ExtResource( 9 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 4000 )
+region_rect = Rect2( 0, 0, 64, 15000 )
 
 [node name="Tooth01" type="Sprite" parent="Meat"]
 position = Vector2( 53.2733, 0 )
@@ -54,137 +47,28 @@ scale = Vector2( 2.2, 1 )
 z_index = 1
 texture = ExtResource( 10 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 4000 )
+region_rect = Rect2( 0, 0, 64, 15000 )
 
 [node name="GradientEnd" type="Sprite" parent="Meat"]
-position = Vector2( 0, 1553.46 )
+position = Vector2( 0, 6817.71 )
 rotation = -1.5708
 texture = SubResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 300, 250 )
 
 [node name="BlackEnd" type="Sprite" parent="Meat"]
-position = Vector2( 5.13456e-06, 1967.97 )
+position = Vector2( 0, 7230.9 )
 rotation = -1.5708
 scale = Vector2( 1.7831, 1 )
 texture = SubResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 300, 250 )
 
-[node name="Lamps" type="Node2D" parent="Meat"]
-
-[node name="Lamp00" parent="Meat/Lamps" instance=ExtResource( 6 )]
-position = Vector2( -123.209, -1800.01 )
-rotation = -1.5708
-scale = Vector2( 0.425746, 0.650261 )
-
-[node name="Light" type="Sprite" parent="Meat/Lamps/Lamp00"]
-self_modulate = Color( 0.447059, 0.152941, 0.152941, 0.458824 )
-material = SubResource( 4 )
-position = Vector2( -21.4822, 191.361 )
-scale = Vector2( 1.79866, 1.01139 )
-texture = ExtResource( 1 )
-
-[node name="AreaLight" type="Sprite" parent="Meat/Lamps/Lamp00/Light"]
-self_modulate = Color( 0.196078, 0, 0, 1 )
-material = SubResource( 5 )
-position = Vector2( -7.03711, 29.1754 )
-scale = Vector2( 1, 0.843413 )
-texture = ExtResource( 5 )
-
-[node name="Lamp01_BurnedOut" type="Sprite" parent="Meat/Lamps"]
-position = Vector2( 122.739, -1320.57 )
-rotation = -1.5708
-scale = Vector2( 0.426, -0.65 )
-texture = ExtResource( 2 )
-
-[node name="Lamp02" parent="Meat/Lamps" instance=ExtResource( 6 )]
-position = Vector2( -123.209, -847.153 )
-rotation = -1.5708
-scale = Vector2( 0.425746, 0.650261 )
-
-[node name="Light" type="Sprite" parent="Meat/Lamps/Lamp02"]
-self_modulate = Color( 0.447059, 0.152941, 0.152941, 0.458824 )
-material = SubResource( 4 )
-position = Vector2( -21.4822, 191.361 )
-scale = Vector2( 1.79866, 1.01139 )
-texture = ExtResource( 1 )
-
-[node name="AreaLight" type="Sprite" parent="Meat/Lamps/Lamp02/Light"]
-self_modulate = Color( 0.196078, 0, 0, 1 )
-material = SubResource( 5 )
-position = Vector2( -7.03711, 29.1754 )
-scale = Vector2( 1, 0.843413 )
-texture = ExtResource( 5 )
-
-[node name="Lamp03_BurnedOut" type="Sprite" parent="Meat/Lamps"]
-position = Vector2( 122.163, -378.416 )
-rotation = -1.5708
-scale = Vector2( 0.426, -0.65 )
-texture = ExtResource( 2 )
-
-[node name="Lamp04" parent="Meat/Lamps" instance=ExtResource( 6 )]
-position = Vector2( -123.211, 200.253 )
-rotation = -1.5708
-scale = Vector2( 0.425746, 0.650261 )
-
-[node name="Light" type="Sprite" parent="Meat/Lamps/Lamp04"]
-self_modulate = Color( 0.447059, 0.152941, 0.152941, 0.458824 )
-material = SubResource( 4 )
-position = Vector2( -21.4822, 191.361 )
-scale = Vector2( 1.79866, 1.01139 )
-texture = ExtResource( 1 )
-
-[node name="AreaLight" type="Sprite" parent="Meat/Lamps/Lamp04/Light"]
-self_modulate = Color( 0.196078, 0, 0, 1 )
-material = SubResource( 5 )
-position = Vector2( -7.03711, 29.1754 )
-scale = Vector2( 1, 0.843413 )
-texture = ExtResource( 5 )
-
-[node name="Lamp05" parent="Meat/Lamps" instance=ExtResource( 6 )]
-position = Vector2( 122.741, 679.691 )
-rotation = -1.5708
-scale = Vector2( 0.426, -0.65 )
-
-[node name="Light" type="Sprite" parent="Meat/Lamps/Lamp05"]
-self_modulate = Color( 0.447059, 0.152941, 0.152941, 0.458824 )
-material = SubResource( 4 )
-position = Vector2( -21.4822, 191.361 )
-scale = Vector2( 1.79866, 1.01139 )
-texture = ExtResource( 1 )
-
-[node name="AreaLight" type="Sprite" parent="Meat/Lamps/Lamp05/Light"]
-self_modulate = Color( 0.196078, 0, 0, 1 )
-material = SubResource( 5 )
-position = Vector2( -7.03711, 29.1754 )
-scale = Vector2( 1, 0.843413 )
-texture = ExtResource( 5 )
-
-[node name="Lamp06" parent="Meat/Lamps" instance=ExtResource( 6 )]
-position = Vector2( -123.211, 1153.11 )
-rotation = -1.5708
-scale = Vector2( 0.425746, 0.650261 )
-
-[node name="Light" type="Sprite" parent="Meat/Lamps/Lamp06"]
-self_modulate = Color( 0.447059, 0.152941, 0.152941, 0.458824 )
-material = SubResource( 4 )
-position = Vector2( -21.4822, 191.361 )
-scale = Vector2( 1.79866, 1.01139 )
-texture = ExtResource( 1 )
-
-[node name="AreaLight" type="Sprite" parent="Meat/Lamps/Lamp06/Light"]
-self_modulate = Color( 0.196078, 0, 0, 1 )
-material = SubResource( 5 )
-position = Vector2( -7.03711, 29.1754 )
-scale = Vector2( 1, 0.843413 )
-texture = ExtResource( 5 )
-
 [node name="PillarLeft" type="Sprite" parent="."]
-position = Vector2( -305.264, 0 )
+position = Vector2( -305.264, 11000 )
 texture = ExtResource( 7 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 120, 8000 )
+region_rect = Rect2( 0, 0, 120, 30000 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PillarLeft"]
 position = Vector2( 0, -12 )
@@ -192,13 +76,13 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarLeft/StaticBody2D"]
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="PillarRight" type="Sprite" parent="."]
-position = Vector2( 304.906, 0 )
+position = Vector2( 304.906, 11000 )
 texture = ExtResource( 7 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 120, 8000 )
+region_rect = Rect2( 0, 0, 120, 30000 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PillarRight"]
 position = Vector2( 1.86548, -12 )
@@ -206,13 +90,13 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarRight/StaticBody2D"]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="CurtainLeft" type="ColorRect" parent="."]
 margin_left = -507.306
 margin_top = -4000.0
 margin_right = -364.306
-margin_bottom = 4000.0
+margin_bottom = 26000.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -222,7 +106,7 @@ __meta__ = {
 margin_left = 365.898
 margin_top = -4000.0
 margin_right = 531.898
-margin_bottom = 4000.0
+margin_bottom = 26000.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

@@ -10,6 +10,6 @@ static func select_child(parent: Node):
 	if not count:
 		return
 	
-	var random_selected = Game.random_generator.randi_range(0, count - 1)
+	var random_selected = Tools.random_int(0, count - 1)
 	
 	return Tools.keep_child_at(parent, random_selected)

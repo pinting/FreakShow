@@ -10,7 +10,7 @@ func _ready() -> void:
 	canvas.material.set_shader_param("color", color)
 
 func _process(_delta: float) -> void:
-	var camera = Game.current_camera
+	var camera = CameraManager.current
 
 	if camera:
 		var offset = camera.scrolling_vector / speed_div

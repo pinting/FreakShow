@@ -1,49 +1,62 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=1]
 [ext_resource path="res://Scenes/GameBegin.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Environmnent/Help00.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Help01.png" type="Texture" id=4]
-[ext_resource path="res://Scenes/GameBegin_Decoration.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/BaseScene.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Prefabs/GameCamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Prefabs/SineFloatingNode.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka11.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka12.png" type="Texture" id=5]
+[ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/ColorChanger.gd" type="Script" id=8]
 [ext_resource path="res://Prefabs/Selectable/Selectable_Menu01.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka09.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka10.png" type="Texture" id=11]
 [ext_resource path="res://Prefabs/Selectable/Selectable_Menu00.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka13.png" type="Texture" id=13]
+[ext_resource path="res://Materials/CursorPurpleMaterial.tres" type="Material" id=14]
 
-[sub_resource type="Environment" id=1]
-background_mode = 4
-glow_enabled = true
-glow_intensity = 1.0
-glow_strength = 1.4
-glow_hdr_threshold = 0.4
-
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/offset = Vector2( 0, 0 )
 shader_param/width = 3.0
-shader_param/color = Color( 1, 0.67451, 0.87451, 1 )
+shader_param/color = Color( 1, 0.666667, 0.862745, 1 )
 shader_param/noise_scale = 20.0
 shader_param/alpha_power = 2.0
 shader_param/octaves = 1
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="GameBegin" type="Node2D"]
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
-subtitle_color = Color( 1, 0.85098, 0.85098, 0.901961 )
+
+[node name="Cursor" parent="BaseScene/CursorDisplay" index="1"]
+material = ExtResource( 14 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
 anchor_mode = 0
 zoom = Vector2( 1, 1 )
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
-environment = SubResource( 1 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="BaseScene"]
+layer = -1
 
-[node name="Background" type="ColorRect" parent="BaseScene/CanvasLayer"]
-material = SubResource( 2 )
+[node name="BlackBackground" type="ColorRect" parent="BaseScene/CanvasLayer"]
+margin_right = 960.0
+margin_bottom = 540.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Waves" type="ColorRect" parent="BaseScene/CanvasLayer"]
+material = SubResource( 1 )
 margin_right = 960.0
 margin_bottom = 540.0
 __meta__ = {
@@ -55,38 +68,30 @@ script = ExtResource( 8 )
 offset = Color( 0.74902, 0.74902, 0.74902, 1 )
 scale_color = Color( 0.329412, 0.329412, 0.329412, 1 )
 
-[node name="Decoration" parent="BaseScene/CanvasLayer/ColorChanger" instance=ExtResource( 5 )]
-position = Vector2( -138.385, 300.786 )
+[node name="Decoration" type="AnimatedSprite" parent="BaseScene/CanvasLayer/ColorChanger"]
+self_modulate = Color( 1, 1, 1, 0.156863 )
+position = Vector2( -147.375, 246.847 )
+scale = Vector2( 0.390733, 0.390733 )
+frames = SubResource( 2 )
+script = ExtResource( 3 )
+speed = 0.75
+y_scale = 0.75
 
-[node name="Menu" type="Node2D" parent="BaseScene/CanvasLayer/ColorChanger"]
-modulate = Color( 1, 1, 1, 0.588235 )
-position = Vector2( 179.673, 0 )
-z_index = 1
-
-[node name="NewGame" parent="BaseScene/CanvasLayer/ColorChanger/Menu" instance=ExtResource( 12 )]
-position = Vector2( 87.0052, 251.331 )
+[node name="NewGame" parent="BaseScene/CanvasLayer/ColorChanger" instance=ExtResource( 12 )]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 266.678, 251.331 )
 scale = Vector2( 0.4, 0.4 )
 z_index = 1
-description = "Description058"
+description_key = "Description058"
 
-[node name="ContinueGame" parent="BaseScene/CanvasLayer/ColorChanger/Menu" instance=ExtResource( 9 )]
-position = Vector2( 504.735, 251.331 )
+[node name="ContinueGame" parent="BaseScene/CanvasLayer/ColorChanger" instance=ExtResource( 9 )]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+position = Vector2( 684.408, 251.331 )
 z_index = 1
-description = "Description059"
+description_key = "Description059"
 
-[node name="Help" type="Node2D" parent="BaseScene/CanvasLayer/ColorChanger"]
-modulate = Color( 1, 1, 1, 0.588235 )
-position = Vector2( 179.673, 0 )
+[editable path="BaseScene"]
 
-[node name="Help00" type="Sprite" parent="BaseScene/CanvasLayer/ColorChanger/Help"]
-position = Vector2( 298.594, 123.499 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 3 )
+[editable path="BaseScene/SubtitleDisplay"]
 
-[node name="Help01" type="Sprite" parent="BaseScene/CanvasLayer/ColorChanger/Help"]
-position = Vector2( 291.204, 400.344 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 4 )
-
-[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
-light_mask = 524288
+[editable path="BaseScene/CursorDisplay"]

@@ -1,4 +1,4 @@
-extends "res://Objects/PathFindingEnemy.gd"
+extends "res://Prefabs/PathFindingEnemy.gd"
 
 export var high_speed_after: float = 0.0
 export var high_speed_scale: float = 1.0
@@ -10,10 +10,7 @@ onready var mouth_collision_shape = $MouthArea/CollisionShape
 
 var dead = false
 
-func _ready() -> void:
-	pass
-
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var d = path_distance()
 	
 	if d > high_speed_after:

@@ -22,13 +22,13 @@ var trigger_reset: bool = false
 var reset_rotation: float = 0.0;
 var reset_position: Vector2 = Vector2.ZERO
 var reset_velocity: bool = true
-var absolute_reset: bool = false
+var reset_relative: bool = true
 
 signal picked
 
 func _ready() -> void:
-	assert(is_in_group("pickable"))
-	assert(selectable.is_in_group("selectable"))
+	assert(is_in_group("pickable"), "Pickable not in group of 'pickable'")
+	assert(selectable.is_in_group("selectable"), "Selectable not in group of 'selectable'")
 	
 	selectable.connect("selected", self, "_on_selected")
 
@@ -43,7 +43,7 @@ func _integrate_forces(state):
 		if reset_velocity:
 			state.linear_velocity = Vector2.ZERO
 		
-		if absolute_reset:
+		if not reset_relative:
 			state.transform = Transform2D(reset_rotation, reset_position)
 		else:
 			var new_rotation = state.transform.get_rotation() + reset_rotation
@@ -73,7 +73,11 @@ func _physics_process(_delta: float) -> void:
 	
 	_set_cursor()
 	
-	var to = VirtualInput.get_world_mouse_position()
+	var cursor_display = VirtualCursorManager.display
+	
+	assert(cursor_display, "VirtualCursorDisplay is not registered")
+	
+	var to = cursor_display.cursor.global_position
 	var from = global_position
 	var direction = from.direction_to(to)
 	var distance = from.distance_to(to)
@@ -83,11 +87,11 @@ func _physics_process(_delta: float) -> void:
 	else:
 		sleeping = true
 
-func reset(new_pos: Vector2, new_rot = 0.0, reset_v = true, abs_reset = true):
-	reset_position = new_pos
-	reset_rotation = new_rot
-	reset_velocity = reset_v
-	absolute_reset = abs_reset
+func reset(position: Vector2, rotation = 0.0, reset_velocity = true, relative = false):
+	reset_position = position
+	reset_rotation = rotation
+	reset_velocity = reset_velocity
+	reset_relative = relative
 	trigger_reset = true
 
 func push(direction: Vector2 = Vector2.ZERO) -> void:
@@ -131,11 +135,6 @@ func enable() -> void:
 	
 	selectable.enable()
 
-func destroy() -> void:
-	_reset_cursor()
-	get_parent().remove_child(self)
-	queue_free()
-
 func create_clone() -> Pickable:
 	var clone = self.duplicate()
 	
@@ -144,7 +143,10 @@ func create_clone() -> Pickable:
 	return clone
 
 func _set_cursor() -> void:
-	Cursor.set_icon("pick", selectable.get_instance_id())
+	VirtualCursorManager.set_icon("pick", selectable.get_instance_id())
 
 func _reset_cursor() -> void:
-	Cursor.reset_icon(selectable.get_instance_id())
+	VirtualCursorManager.reset_icon(selectable.get_instance_id())
+
+func _exit_tree():
+	_reset_cursor()

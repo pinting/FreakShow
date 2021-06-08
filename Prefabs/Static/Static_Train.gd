@@ -4,13 +4,13 @@ extends StaticBody2D
 export var train_sound: AudioStream
 
 # Start the train using this X offset
-export var start_from: float = -15000.0
+export var offset: Vector2 = Vector2(-15000.0, 0)
 
 # Speed and direction to move on the X axis
 export var speed: float = 1600.0
 
-# Stop the train after this dinstance to the player
-export var stop_after_player_diff: float = 25000.0
+# Recycle the train after this dinstance to the player
+export var recycle_after_distance_to_player: float = 50000.0
 
 # Amplitude of the shake (Y axis)
 export var shake_amp: float = 1.5
@@ -27,53 +27,54 @@ export var max_pitch_diff: float = 0.25
 # Seconds the player will pick up the speed of the train
 export var speed_scale_m: float = 2.5
 
-# How fast the volume should fade in
-export var fade_in_volume_per_s: float = 80
-
 # Disable running-on-top physics script
 export var no_custom_physics: bool = false
 
-onready var on_top = $OnTop
+onready var tween = $Tween
 
 onready var train_00 = $Train00
-onready var audio_stream_00 = $Noise00
+onready var sound_00 = $Sound00
 onready var collision_00 = $CollisionShape00
 onready var on_top_collision_00 = $OnTop/CollisionShape00
 
 onready var train_01 = $Train01
-onready var audio_stream_01 = $Noise01
+onready var sound_01 = $Sound01
 onready var collision_01 = $CollisionShape01
 onready var on_top_collision_01 = $OnTop/CollisionShape01
 
 onready var train_02 = $Train02
-onready var audio_stream_02 = $Noise02
+onready var sound_02 = $Sound02
 onready var collision_02 = $CollisionShape02
 onready var on_top_collision_02 = $OnTop/CollisionShape02
+
+onready var on_top = $OnTop
 
 signal stopped
 signal player_on_top
 
 var started: bool = false
-var enable_sound: bool = true
 var current_second: float = 0.0
 var last_position_diff: Vector2 = Vector2.ZERO
-var base_position: Vector2 = Vector2(0.0, 0.0)
+
+var base_position: Vector2
+
 var exit_list_player = []
 var exit_list_skip_stick = []
 var enter_list_player = []
 var enter_list_speed_scale = []
 
 func _ready() -> void:
+	visible = false
+	
 	on_top.connect("body_exited", self, "_player_exited_top")
 	on_top.connect("body_entered", self, "_player_entered_top")
 	
-	visible = false
 	base_position = global_position
 	
 	if train_sound:
-		audio_stream_00.stream = train_sound
-		audio_stream_01.stream = train_sound
-		audio_stream_02.stream = train_sound
+		sound_00.stream = train_sound
+		sound_01.stream = train_sound
+		sound_02.stream = train_sound
 
 func _player_entered_top(player: Node):
 	if no_custom_physics:
@@ -98,59 +99,84 @@ func _player_exited_top(player: Node):
 	exit_list_skip_stick.push_back(true)
 
 func start() -> void:
-	position.x = base_position.x + start_from
+	Tools.debug("Train start called")
+	
+	global_position = base_position + offset
 	visible = true
 	
-	audio_stream_00.pitch_scale = _generate_pitch_scale()
-	audio_stream_01.pitch_scale = audio_stream_00.pitch_scale
-	audio_stream_02.pitch_scale = audio_stream_00.pitch_scale
+	var pitch_scale = _generate_pitch_scale()
+	
+	sound_00.pitch_scale = pitch_scale
+	sound_01.pitch_scale = pitch_scale
+	sound_02.pitch_scale = pitch_scale
 	
 	resume()
 
 func pause() -> void:
+	Tools.debug("Train pause called")
+	
 	started = false
 	
-	if enable_sound:
-		audio_stream_00.stop()
-		audio_stream_01.stop()
-		audio_stream_02.stop()
+	tween.interpolate_method(
+		self,
+		"_set_sound_volume",
+		0.0,
+		-100.0,
+		2.0,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT)
+	
+	tween.start()
+	
+	yield(tween, "tween_completed")
+	
+	_stop_sound()
 
 func _generate_pitch_scale():
-	return Game.random_generator.randf_range(1.0 - max_pitch_diff, 1.0 + max_pitch_diff)
+	return Tools.random_float(1.0 - max_pitch_diff, 1.0 + max_pitch_diff)
 
 func resume() -> void:
 	if not visible:
 		return
 	
+	Tools.debug("Train resume called")
+	
 	started = true
 	
-	if enable_sound:
-		audio_stream_00.volume_db = -80
-		audio_stream_01.volume_db = -80
-		audio_stream_02.volume_db = -80
-		
-		audio_stream_00.play()
-		audio_stream_01.play()
-		audio_stream_02.play()
+	_play_sound()
+	
+	tween.interpolate_method(
+		self,
+		"_set_sound_volume",
+		-100.0,
+		0.0,
+		2.0,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT)
+	
+	tween.start()
 
 func stop():
+	Tools.debug("Train stop called")
+	
 	pause()
 	
 	visible = false
 
-func destroy():
-	# This might reduce the number of crashes
-	on_top_collision_00.disabled = true
-	collision_00.disabled = true
-	
-	on_top_collision_01.disabled = true
-	collision_01.disabled = true
-	
-	on_top_collision_02.disabled = true
-	collision_02.disabled = true
-	
-	get_parent().remove_child(self)
-	queue_free()
+func _set_sound_volume(volume_db: float) -> void:
+	sound_00.volume_db = volume_db
+	sound_01.volume_db = volume_db
+	sound_02.volume_db = volume_db
+
+func _play_sound() -> void:
+	sound_00.play()
+	sound_01.play()
+	sound_02.play()
+
+func _stop_sound() -> void:
+	sound_00.stop()
+	sound_01.stop()
+	sound_02.stop()
 
 func _process_exit_list() -> void:
 	var new_list_player = []
@@ -180,7 +206,7 @@ func _process_exit_list() -> void:
 	exit_list_player = new_list_player
 	exit_list_skip_stick = new_list_skipped_tick
 
-func _process_train_movement(delta: float) -> void:
+func _process_movement(delta: float) -> void:
 	var s = current_second
 	var m = shake_amp
 	var c = shake_count
@@ -201,9 +227,7 @@ func _process_train_movement(delta: float) -> void:
 	on_top_collision_01.position.y += diff_01
 	on_top_collision_02.position.y += diff_02
 	
-	var position_diff = speed * delta
-	
-	position.x += position_diff
+	position.x += speed * delta
 
 func _process_player_on_top(delta: float) -> void:
 	var position_diff = speed * delta
@@ -223,26 +247,16 @@ func _process_player_on_top(delta: float) -> void:
 		if player.current_velocity.x > player.current_max_speed:
 			player.current_velocity.x -= player.current_max_speed * delta
 
-func _process_fade_out(delta: float) -> void:
-	if not enable_sound:
-		return
-	
-	var d = delta * fade_in_volume_per_s
-	
-	audio_stream_00.volume_db = min(0, audio_stream_00.volume_db + d)
-	audio_stream_01.volume_db = min(0, audio_stream_01.volume_db + d)
-	audio_stream_02.volume_db = min(0, audio_stream_02.volume_db + d)
-
 func _process_recycle() -> void:
-	var source_position = base_position
+	var player = PlayerManager.get_by_distance(global_position)
+	var source_position = base_position + offset
 	
-	for player in Game.players:
+	if player:
 		source_position = player.global_position
-		break
 	
-	if source_position.distance_to(global_position) > stop_after_player_diff:
+	if source_position.distance_to(global_position) > recycle_after_distance_to_player:
 		stop()
-		destroy()
+		Tools.destroy(self)
 
 func _physics_process(delta: float) -> void:
 	if not started:
@@ -250,8 +264,7 @@ func _physics_process(delta: float) -> void:
 	
 	current_second += delta
 	
-	_process_fade_out(delta)
 	_process_exit_list()
-	_process_train_movement(delta)
+	_process_movement(delta)
 	_process_player_on_top(delta)
 	_process_recycle()

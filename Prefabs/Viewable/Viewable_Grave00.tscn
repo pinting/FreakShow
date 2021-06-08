@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Grave00.png" type="Texture" id=1]
+[ext_resource path="res://Prefabs/Viewable/Viewable.gd" type="Script" id=2]
+[ext_resource path="res://Materials/GrabMaterial.tres" type="Material" id=3]
+
+[node name="Viewable_Grave00" type="Sprite" groups=[
+"selectable",
+"viewable",
+]]
+material = ExtResource( 3 )
+scale = Vector2( 0.38, 0.38 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+description_key = "Description060"
+offset_key = "offset"
+effect_key = "scale"
+effect_hover = 0.2
+inner_description_key = "Description061"
