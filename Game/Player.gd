@@ -22,12 +22,6 @@ export var normal_acceleration: float = 800.0
 # Friction on the platform (only X axis)
 export var friction: float = 0.001
 
-# Defines how many waves (0% to 100% to 0% in walk acceleration) happen in a second 
-export var walk_wave_count: float = 1.25
-
-# Offset walk waves (e.g. 0.5 equals start at 100% in walk acceleration)
-export var walk_wave_offset: float = 0.5
-
 # Avatar max speed
 export var avatar_max_speed: float = 900.0
 
@@ -41,7 +35,7 @@ export var jump_force: float = 800.0
 export var gravity: float = 1000.0
 
 # Speed of the animation
-export var animation_speed: float = 1.0
+export var animation_speed: float = 0.95
 
 # In which direction does the floor pushes the player
 export var floor_normal: Vector2 = Vector2.UP
@@ -61,7 +55,14 @@ export var kick_force = Vector2(10.0, 0.0)
 # Force pickable bodies are pushed with
 export var push_force = Vector2(1.0, 1.0)
 
-const zero: float = 1.0
+# Defines how many waves (0% to 100% to 0% in walk acceleration) happen in a second 
+const walk_wave_count: float = 1.25
+
+# Offset walk waves (e.g. 0.5 equals start at 100% in walk acceleration)
+const walk_wave_offset: float = 0.5
+
+# A small number which is used to check for near-ZERO numbers
+const eps: float = 1.0
 
 onready var animation_player = $AnimationPlayer
 onready var animated_sprite = $AnimatedSprite
@@ -234,10 +235,10 @@ func _process_velocity(delta: float, direction: Vector2, skip_sync: bool = false
 		var next_velocity = _calculate_next_velocity(delta, direction, normal_acceleration, skip_sync)
 		var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
 		
-		if abs(current_velocity.x) > zero:
-			var rad = walk_wave_count * current_second * animation_speed * PI
+		if abs(current_velocity.x) > eps:
+			var s = walk_wave_count * current_second * animation_speed + walk_wave_offset
 			
-			current_max_speed = max_speed * abs(sin(rad + walk_wave_offset * PI))	
+			current_max_speed = max_speed * abs(sin(PI * s))	
 		
 		var snap_vector = -1 * floor_normal * floor_detect_distance if direction.y == 0 else Vector2.ZERO
 		
@@ -288,7 +289,7 @@ func _process_facing(direction: Vector2) -> void:
 	elif len(animation_prefix) == 0:
 		animation_prefix = "a"
 	
-	if (gravity > zero and not is_on_floor() and not avatar_mode) or direction.x == 0.0:
+	if (gravity > eps and not is_on_floor() and not avatar_mode) or direction.x == 0.0:
 		return
 	
 	var m = 1.0 if direction.x > 0.0 else -1.0
@@ -312,7 +313,7 @@ func _get_direction() -> Vector2:
 	var up_strength = VirtualInput.get_action_strength("move_up")
 	var down_strength = VirtualInput.get_action_strength("move_down")
 	
-	var can_go_up = avatar_mode or (is_on_floor() and not crouching and not top_colliding) or gravity < zero
+	var can_go_up = avatar_mode or (is_on_floor() and not crouching and not top_colliding) or gravity < eps
 	var can_go_down = avatar_mode or (not is_on_floor() and not crouching)
 	
 	var x = right_strength - left_strength
@@ -326,7 +327,7 @@ func _calculate_next_velocity(delta: float, direction: Vector2, acceleration: fl
 	direction *= scale_velocity
 	
 	# In case of avatar mode is enabled
-	if avatar_mode or abs(gravity) < zero:
+	if avatar_mode or abs(gravity) < eps:
 		if direction.y != 0.0 and abs(next_velocity.y) < avatar_max_speed:
 			# Apply acceleration on Y
 			next_velocity.y += direction.y * acceleration * delta
@@ -463,7 +464,7 @@ func _get_next_animation(direction: Vector2) -> Dictionary:
 				next_animation = "jump"
 			
 			# When falling, pause the current frame of the jump animation
-			if current_velocity.y > 0.0 and gravity > zero:
+			if current_velocity.y > 0.0 and gravity > eps:
 				pause = true
 	
 	return {

@@ -10,7 +10,7 @@
 [ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Part05/Part05.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Part05/Part05_Platform.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Environmnent/Trees.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Environmnent/Trees00.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Music/Part06.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall07.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/Part05/Part05_BuildingBegin.tscn" type="PackedScene" id=14]
@@ -58,7 +58,6 @@ animation_frames = ExtResource( 2 )
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 3 )]
 position = Vector2( -29837.9, 1210.61 )
 scale = Vector2( 0.699999, -0.699999 )
-action_zoom = Vector2( 6, 6 )
 follow_node = NodePath("../Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]

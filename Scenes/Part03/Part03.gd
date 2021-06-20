@@ -5,6 +5,7 @@ export var path_finding_interval: float = 0.5
 
 onready var player = $Player
 onready var camera = $GameCamera
+onready var animation_player = $AnimationPlayer
 onready var debug_line = $DebugLine
 
 onready var entry_block = $Environment/Maze/EntryBlock
@@ -25,6 +26,7 @@ onready var random_line_04 = $Environment/Maze/RandomLine04
 
 onready var exit_door = $Environment/EndPlatform/SteelBlock/WallBlock/ExitDoor
 onready var end_tube = $Environment/EndPlatform/EndTube
+onready var ghost = $Environment/EndPlatform/Ghost
 
 onready var wall_ending_bottom = $Environment/HiddenWalls/EndingBottom
 
@@ -39,7 +41,6 @@ onready var teleport_player = $Trigger/TeleportPlayer
 onready var main_music = $Sound/MainMusic
 onready var connect_sound = $Sound/ConnectSound
 onready var wind_sound = $Sound/WindSound
-onready var door_locked_sound = $Sound/DoorLockedSound
 onready var falling_sound = $Sound/FallingSound
 
 var music_00: int
@@ -58,12 +59,12 @@ func _ready() -> void:
 	
 	connect("scene_started", self, "_on_scene_started")
 	
-	falling_down.connect("body_entered", self, "_trigger_falling_from_island")
-	before_game.connect("body_entered", self, "_trigger_before_game")
+	falling_down.connect("body_entered", self, "_trigger_falling_from_island", [], CONNECT_ONESHOT)
+	before_game.connect("body_entered", self, "_trigger_before_game", [], CONNECT_ONESHOT)
 	game_begin.connect("body_entered", self, "_trigger_game_begin")
 	boss_mouth.connect("body_entered", self, "_on_boss_touched")
 	game_end.connect("body_entered", self, "_trigger_game_end")
-	end_door_area.connect("body_entered", self, "_on_exit_reached")
+	end_door_area.connect("body_entered", self, "_on_exit_reached", [], CONNECT_ONESHOT)
 	player.connect("died", self, "_trigger_reset_game")
 	player.connect("reseted", self, "_on_player_reset")
 	
@@ -81,6 +82,8 @@ func _ready() -> void:
 	
 	boss_base_position = boss.global_position
 	boss_base_rotation = boss.rotation_degrees
+	
+	#ghost.modulate.a = 1.0
 
 func _on_scene_started() -> void:
 	black_screen.fade_out(2.0)
@@ -185,20 +188,15 @@ func _on_exit_reached(body: Node) -> void:
 		return
 
 	player.freeze(true)
-	door_locked_sound.play()
-	SubtitleManager.say(Text.find("Narrator005"), 3.0)
+	camera.change_zoom(Vector2(3.0, 3.0), 2.0)
 	yield(Tools.timer(4.0), "timeout")
-	
-	yield(Tools.timer(0.75), "timeout")
 	falling_sound.play()
 	end_tube.open_mouth = true
 	yield(Tools.timer(0.25), "timeout")
 	wall_ending_bottom.disabled = true
 	yield(Tools.timer(3.0), "timeout")
 	yield(black_screen.fade_in(2.0), "tween_completed")
-	yield(Tools.timer(0.25), "timeout")
-	SubtitleManager.show_quote(Text.find("Text006"))
-	yield(Tools.timer(25.0), "timeout")
+	yield(Tools.timer(1.0), "timeout")
 	
 	load_next_scene()
 

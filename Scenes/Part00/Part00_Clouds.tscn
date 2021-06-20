@@ -4,6 +4,7 @@
 [ext_resource path="res://Assets/Environmnent/Cloud02.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Cloud00.png" type="Texture" id=3]
 [ext_resource path="res://Shaders/Tremble.shader" type="Shader" id=4]
+[ext_resource path="res://Materials/TrembleMaterial.tres" type="Material" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -11,11 +12,6 @@ shader_param/time_factor = 1.0
 shader_param/amplitude = Vector2( 10, 5 )
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 4 )
-shader_param/time_factor = 1.0
-shader_param/amplitude = Vector2( 10, 5 )
-
-[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 4 )
 shader_param/time_factor = 1.0
 shader_param/amplitude = Vector2( 10, 5 )
@@ -29,22 +25,22 @@ material = SubResource( 1 )
 texture = ExtResource( 3 )
 
 [node name="Cloud01" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 631.824, -568.552 )
 texture = ExtResource( 1 )
 
 [node name="Cloud02" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 1036.15, 30.8096 )
 texture = ExtResource( 2 )
 
 [node name="Cloud03" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 936.261, -1239.26 )
 texture = ExtResource( 2 )
 
 [node name="Cloud04" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 1117.02, -1976.57 )
 texture = ExtResource( 1 )
 
@@ -54,17 +50,17 @@ position = Vector2( 208.235, -1847.42 )
 texture = ExtResource( 3 )
 
 [node name="Cloud06" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 524.154, -2673.19 )
 texture = ExtResource( 2 )
 
 [node name="Cloud07" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( -185.64, -1102.58 )
 texture = ExtResource( 2 )
 
 [node name="Cloud08" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( -355.958, -2490.72 )
 texture = ExtResource( 1 )
 
@@ -84,22 +80,22 @@ position = Vector2( 0, -3545.02 )
 texture = ExtResource( 3 )
 
 [node name="Cloud12" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 631.824, -4113.57 )
 texture = ExtResource( 1 )
 
 [node name="Cloud13" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 1036.15, -3514.21 )
 texture = ExtResource( 2 )
 
 [node name="Cloud14" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 936.261, -4784.29 )
 texture = ExtResource( 2 )
 
 [node name="Cloud15" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 1117.02, -5521.59 )
 texture = ExtResource( 1 )
 
@@ -109,17 +105,17 @@ position = Vector2( 208.235, -5392.44 )
 texture = ExtResource( 3 )
 
 [node name="Cloud17" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 524.154, -6218.21 )
 texture = ExtResource( 2 )
 
 [node name="Cloud18" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( -185.64, -4647.61 )
 texture = ExtResource( 2 )
 
 [node name="Cloud19" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( -355.958, -6035.74 )
 texture = ExtResource( 1 )
 
@@ -134,17 +130,17 @@ position = Vector2( 1492.58, -6305.75 )
 texture = ExtResource( 3 )
 
 [node name="Cloud22" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 2063.63, -32.2139 )
 texture = ExtResource( 2 )
 
 [node name="Cloud23" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 1963.74, -1302.29 )
 texture = ExtResource( 2 )
 
 [node name="Cloud24" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 2144.5, -2039.6 )
 texture = ExtResource( 1 )
 
@@ -169,12 +165,12 @@ position = Vector2( 2002.56, -5505.19 )
 texture = ExtResource( 3 )
 
 [node name="Cloud29" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 2116.81, -4658.64 )
 texture = ExtResource( 2 )
 
 [node name="Cloud30" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 2395.99, -6212.64 )
 texture = ExtResource( 1 )
 
@@ -184,22 +180,22 @@ position = Vector2( 0, -7104.01 )
 texture = ExtResource( 3 )
 
 [node name="Cloud32" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 631.824, -7672.56 )
 texture = ExtResource( 1 )
 
 [node name="Cloud33" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 1036.15, -7073.2 )
 texture = ExtResource( 2 )
 
 [node name="Cloud34" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 936.261, -8343.27 )
 texture = ExtResource( 2 )
 
 [node name="Cloud35" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 1117.02, -9080.58 )
 texture = ExtResource( 1 )
 
@@ -209,17 +205,17 @@ position = Vector2( 208.235, -8951.43 )
 texture = ExtResource( 3 )
 
 [node name="Cloud37" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 524.154, -9777.2 )
 texture = ExtResource( 2 )
 
 [node name="Cloud38" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( -185.64, -8206.59 )
 texture = ExtResource( 2 )
 
 [node name="Cloud39" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( -355.958, -9594.73 )
 texture = ExtResource( 1 )
 
@@ -239,22 +235,22 @@ position = Vector2( 0, -10649 )
 texture = ExtResource( 3 )
 
 [node name="Cloud43" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 631.824, -11217.6 )
 texture = ExtResource( 1 )
 
 [node name="Cloud44" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 1036.15, -10618.2 )
 texture = ExtResource( 2 )
 
 [node name="Cloud45" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 936.261, -11888.3 )
 texture = ExtResource( 2 )
 
 [node name="Cloud46" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 1117.02, -12625.6 )
 texture = ExtResource( 1 )
 
@@ -264,17 +260,17 @@ position = Vector2( 208.235, -12496.4 )
 texture = ExtResource( 3 )
 
 [node name="Cloud48" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 524.154, -13322.2 )
 texture = ExtResource( 2 )
 
 [node name="Cloud49" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( -185.64, -11751.6 )
 texture = ExtResource( 2 )
 
 [node name="Cloud50" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( -355.958, -13139.7 )
 texture = ExtResource( 1 )
 
@@ -289,17 +285,17 @@ position = Vector2( 1492.58, -13409.8 )
 texture = ExtResource( 3 )
 
 [node name="Cloud53" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 2063.63, -7136.22 )
 texture = ExtResource( 2 )
 
 [node name="Cloud54" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 1963.74, -8406.3 )
 texture = ExtResource( 2 )
 
 [node name="Cloud55" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 2144.5, -9143.61 )
 texture = ExtResource( 1 )
 
@@ -324,11 +320,11 @@ position = Vector2( 2002.56, -12609.2 )
 texture = ExtResource( 3 )
 
 [node name="Cloud60" type="Sprite" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 2116.81, -11762.6 )
 texture = ExtResource( 2 )
 
 [node name="Cloud61" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 5 )
 position = Vector2( 2395.99, -13316.6 )
 texture = ExtResource( 1 )

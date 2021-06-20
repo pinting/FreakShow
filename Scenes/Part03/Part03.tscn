@@ -1,25 +1,26 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Assets/Music/Part03.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Sounds/Phone02.wav" type="AudioStream" id=2]
 [ext_resource path="res://Scenes/Part03/Part03_EndPlatform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Part03/Part03_RemovableLine.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Part03/Part03.gd" type="Script" id=5]
-[ext_resource path="res://Animations/Ghost00.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://Scenes/Part03/Part03_MovingEye.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/TileSet/WhiteLines.tres" type="TileSet" id=7]
 [ext_resource path="res://Scenes/Part03/Part03_Boss.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Materials/GhostMaterial.tres" type="Material" id=10]
+[ext_resource path="res://Scenes/Part03/Part03_EndTube.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Sounds/Wind00.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Prefabs/BackgroundRect.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti40.png" type="Texture" id=15]
+[ext_resource path="res://Scenes/Part03/Part03_Ghost.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Assets/Environmnent/Lines00_H00_Thin.png" type="Texture" id=17]
 [ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scenes/Part03/Part03_Island.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=37]
-[ext_resource path="res://Assets/Sounds/Door02.wav" type="AudioStream" id=38]
 [ext_resource path="res://Assets/Sounds/Warning02.wav" type="AudioStream" id=39]
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_CRT.tscn" type="PackedScene" id=43]
 [ext_resource path="res://Scenes/Part03/Part03_Pillars.tscn" type="PackedScene" id=44]
@@ -51,16 +52,16 @@ extents = Vector2( 61.4194, 1726.79 )
 extents = Vector2( 8384.25, 287.97 )
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 639.127, 287.97 )
+extents = Vector2( 620.89, 287.97 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 639.127, 287.97 )
+extents = Vector2( 624.854, 287.97 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 660.521, 99.7715 )
+extents = Vector2( 618.003, 99.7715 )
 
 [sub_resource type="RectangleShape2D" id=11]
-extents = Vector2( 99.7427, 642.932 )
+extents = Vector2( 99.7427, 382.711 )
 
 [node name="Part03" type="Node2D"]
 position = Vector2( 59.2303, 0.734743 )
@@ -69,6 +70,7 @@ position = Vector2( 59.2303, 0.734743 )
 script = ExtResource( 5 )
 delay = 1.0
 auto_fade_out = false
+teleport_player_to_end = true
 
 [node name="CursorPenetration" parent="BaseScene/CursorDisplay/Cursor" index="0"]
 visible = false
@@ -115,7 +117,10 @@ position = Vector2( -4383.13, -2762.52 )
 position = Vector2( -1148.46, -2873.82 )
 player_node = NodePath("../../Player")
 area_shape_node = NodePath("Area/Shape")
-container_node = NodePath("Container")
+container_node = NodePath("PillarsContainer")
+
+[node name="PillarsContainer" parent="BaseScene/Environment/PillarsLoop" instance=ExtResource( 44 )]
+position = Vector2( 0, 24.6448 )
 
 [node name="Area" type="Area2D" parent="BaseScene/Environment/PillarsLoop"]
 position = Vector2( 0, -16 )
@@ -125,9 +130,6 @@ collision_mask = 0
 [node name="Shape" type="CollisionShape2D" parent="BaseScene/Environment/PillarsLoop/Area"]
 shape = SubResource( 2 )
 
-[node name="Container" parent="BaseScene/Environment/PillarsLoop" instance=ExtResource( 44 )]
-position = Vector2( 0, 24.6448 )
-
 [node name="Maze" type="Node2D" parent="BaseScene/Environment"]
 position = Vector2( 1117.5, 9761.04 )
 scale = Vector2( 1.1, 1.1 )
@@ -136,7 +138,7 @@ scale = Vector2( 1.1, 1.1 )
 position = Vector2( 699.073, -8333.88 )
 scale = Vector2( 3.2, 2 )
 texture = ExtResource( 17 )
-description_key = "Description061"
+description_key = "Description060"
 selection_area = NodePath("ColorRect")
 
 [node name="ColorRect" type="ColorRect" parent="BaseScene/Environment/Maze/RemovableLine"]
@@ -242,20 +244,64 @@ enable_player_interaction = false
 
 [node name="EndPlatform" parent="BaseScene/Environment" instance=ExtResource( 3 )]
 
-[node name="Ghost" type="AnimatedSprite" parent="BaseScene/Environment/EndPlatform"]
-material = ExtResource( 10 )
-position = Vector2( -4193.5, 333.131 )
-rotation = -0.0349066
-scale = Vector2( -1, 1 )
-z_index = -1
-frames = ExtResource( 6 )
-frame = 31
-playing = true
-
-[node name="Light2D" type="Light2D" parent="BaseScene/Environment/EndPlatform/Ghost"]
-position = Vector2( 16.7577, -16.9192 )
-scale = Vector2( 2.04374, 2.04374 )
+[node name="PurpleLight" type="Light2D" parent="BaseScene/Environment/EndPlatform"]
+visible = false
+position = Vector2( -4234.11, 309.738 )
+rotation = 3.10669
+scale = Vector2( 4.39088, -3.03738 )
 texture = ExtResource( 12 )
+color = Color( 0.827451, 0.490196, 1, 1 )
+energy = 1.2
+mode = 2
+
+[node name="Graffiti00" type="Sprite" parent="BaseScene/Environment/EndPlatform"]
+self_modulate = Color( 1, 1, 1, 0.529412 )
+position = Vector2( -6027.25, 241.813 )
+rotation = -0.151327
+scale = Vector2( 0.426411, 0.426411 )
+z_index = -3
+texture = ExtResource( 15 )
+
+[node name="Graffiti01" type="Sprite" parent="BaseScene/Environment/EndPlatform"]
+self_modulate = Color( 1, 1, 1, 0.529412 )
+position = Vector2( -5598.04, -65.3438 )
+rotation = -0.268228
+scale = Vector2( 0.426411, 0.426411 )
+z_index = -3
+texture = ExtResource( 15 )
+
+[node name="Graffiti02" type="Sprite" parent="BaseScene/Environment/EndPlatform"]
+self_modulate = Color( 1, 1, 1, 0.529412 )
+position = Vector2( -4905.92, 105.898 )
+rotation = 0.271692
+scale = Vector2( 0.426411, 0.426411 )
+z_index = -3
+texture = ExtResource( 15 )
+
+[node name="Graffiti03" type="Sprite" parent="BaseScene/Environment/EndPlatform"]
+self_modulate = Color( 1, 1, 1, 0.529412 )
+position = Vector2( -3378.05, -88 )
+rotation = -0.268228
+scale = Vector2( 0.426411, 0.426411 )
+z_index = -3
+texture = ExtResource( 15 )
+
+[node name="MovingEye00" parent="BaseScene/Environment/EndPlatform" instance=ExtResource( 6 )]
+position = Vector2( -4779.07, -968.066 )
+rotation = -0.261799
+scale = Vector2( 1.1, 1.1 )
+player_node = NodePath("../../../Player")
+
+[node name="MovingEye01" parent="BaseScene/Environment/EndPlatform" instance=ExtResource( 6 )]
+position = Vector2( -3742.52, -968.066 )
+rotation = 0.261799
+scale = Vector2( 1.1, 1.1 )
+player_node = NodePath("../../../Player")
+
+[node name="EndTube" parent="BaseScene/Environment/EndPlatform" instance=ExtResource( 10 )]
+position = Vector2( -4220.84, 4878.43 )
+rotation = -1.49012e-08
+z_index = -1
 
 [node name="HiddenWalls" type="StaticBody2D" parent="BaseScene/Environment"]
 collision_layer = 15
@@ -308,10 +354,11 @@ collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/BeforeGame"]
+position = Vector2( 11, 0 )
 shape = SubResource( 8 )
 
 [node name="GameBegin" type="Area2D" parent="BaseScene/Trigger"]
-position = Vector2( 1892.4, 5646.92 )
+position = Vector2( 1907.11, 5649.16 )
 collision_layer = 8
 collision_mask = 8
 
@@ -319,22 +366,22 @@ collision_mask = 8
 shape = SubResource( 9 )
 
 [node name="GameEnd" type="Area2D" parent="BaseScene/Trigger"]
-position = Vector2( 74.348, 547.977 )
+position = Vector2( 49.807, 547.977 )
 collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/GameEnd"]
-position = Vector2( 7782.31, 23397.7 )
+position = Vector2( 7791.75, 23397.7 )
 shape = SubResource( 10 )
 
 [node name="EndDoorArea" type="Area2D" parent="BaseScene/Trigger"]
-position = Vector2( 5145.94, 27132.6 )
+position = Vector2( 3611.56, 28567.7 )
 scale = Vector2( 1.1, 1.1 )
 collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/EndDoorArea"]
-position = Vector2( -489.809, 1435.08 )
+position = Vector2( 0, 146.066 )
 shape = SubResource( 11 )
 
 [node name="PlayerRespawn" type="Node2D" parent="BaseScene/Trigger"]
@@ -355,13 +402,18 @@ stream = ExtResource( 13 )
 stream = ExtResource( 2 )
 volume_db = -10.0
 
-[node name="DoorLockedSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
-stream = ExtResource( 38 )
-volume_db = -10.0
-
 [node name="FallingSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 39 )
 
-[editable path="BaseScene"]
+[node name="Ghost" parent="BaseScene" instance=ExtResource( 16 )]
+position = Vector2( 1847.1, 28861.6 )
+rotation = 3.10669
+scale = Vector2( 1, -1 )
+player_node = NodePath("../Player")
+origo_node = NodePath("Origo")
 
+[node name="Origo" type="Node2D" parent="BaseScene/Ghost"]
+position = Vector2( -1725.52, 27.4804 )
+
+[editable path="BaseScene"]
 [editable path="BaseScene/CursorDisplay"]

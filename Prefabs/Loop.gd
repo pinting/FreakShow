@@ -16,48 +16,53 @@ export (String, "both", "left", "right") var loop_mode = "both"
 # Copy the container to both, left or right sides
 export (String, "both", "left", "right") var mirror_mode = "both"
 
-var containers = []
+var player: Player
+var area_shape: CollisionShape2D
+var area: Area2D
+var container: Node2D
 
-var loop_begin: Vector2 = Vector2.ZERO
-var loop_end: Vector2 = Vector2.ZERO
-var loop_top: Vector2 = Vector2.ZERO
-var loop_bottom: Vector2 = Vector2.ZERO
+var loop_top_left: Vector2
+var loop_bottom_right: Vector2
+
+var containers = []
 
 var node_index_store: Dictionary = {}
 var loop_index: int = 0
 var copies: Array = []
-
-var player: Player
-var area_shape: CollisionShape2D
-var container: Node2D
 
 signal looped
 
 func _ready() -> void:
 	player = get_node(player_node)
 	area_shape = get_node(area_shape_node)
-	container = get_node(container_node)
+	area = area_shape.get_parent()
 
 	assert(player, "Player is not set")
-	assert(area_shape.shape is RectangleShape2D, "Area shape is not rectangle")
-	assert(container, "Container is not set")
+	assert(area_shape.shape is RectangleShape2D, "Shape is not RectangleShape2D")
+	#assert(area.position == Vector2.ZERO, "Area2D relative position needs to be zero")
+	#assert(area_shape.position == Vector2.ZERO, "RectangleShape2D relative position needs to be zero")
 
 	var extents = area_shape.shape.extents
 
-	loop_begin = global_position - Vector2(extents.x, 0)
-	loop_end = global_position + Vector2(extents.x, 0)
-	loop_top = global_position - Vector2(0, extents.y)
-	loop_bottom = global_position + Vector2(0, extents.y)
+	loop_top_left = global_position - Vector2(extents.x, extents.y)
+	loop_bottom_right = global_position + Vector2(extents.x, extents.y)
+	
+	if container_node:
+		_mirror(get_node(container_node))
+
+func _mirror(container: Node2D):
+	if not container:
+		return
 	
 	containers.push_back(container)
 	
 	if mirror_mode == "left" or mirror_mode == "both":
-		_init_left()
+		_mirror_left(container)
 	
 	if mirror_mode == "right" or mirror_mode == "both":
-		_init_right()
+		_mirror_right(container)
 
-func _init_left():
+func _mirror_left(container: Node2D):
 	var extents = area_shape.shape.extents
 	var left_mirror = container.duplicate()
 	
@@ -66,7 +71,7 @@ func _init_left():
 	containers.push_front(left_mirror)
 	add_child(left_mirror)
 
-func _init_right():
+func _mirror_right(container: Node2D):
 	var extents = area_shape.shape.extents
 	var right_mirror = container.duplicate()
 	
@@ -100,12 +105,14 @@ func _update_player(d: int) -> void:
 	assert(cursor_display, "VirtualCursorManager is not registered")
 	
 	var camera_diff = player.global_position - camera.global_position
-	var cursor_diff = camera.global_position - cursor_display.cursor.global_position
+	
+	var tl = loop_top_left
+	var br = loop_bottom_right
 	
 	if d == -1:
-		player.global_position.x = loop_end.x - (loop_begin.x - player.global_position.x)
+		player.global_position.x = br.x - (tl.x - player.global_position.x)
 	elif d == 1:
-		player.global_position.x = loop_begin.x + (player.global_position.x - loop_end.x)
+		player.global_position.x = tl.x + (player.global_position.x - br.x)
 	
 	camera.reset(player.global_position - camera_diff, false)
 
@@ -117,9 +124,9 @@ func _update_node_index_store() -> void:
 		var index = node_index_store[id]
 		
 		if index == loop_index:
-			if loop_begin.x > pickable.position.x:
+			if loop_top_left.x > pickable.position.x:
 				node_index_store[id] -= 1
-			elif loop_end.x < pickable.position.x:
+			elif loop_bottom_right.x < pickable.position.x:
 				node_index_store[id] += 1
 
 func _enable_node(node: Node2D) -> void:
@@ -181,19 +188,24 @@ func _process_copies(_delta: float) -> void:
 	copies = []
 
 func _process_loop(_delta: float) -> void:
-	var bellow_top = player.global_position.y > loop_top.y
-	var above_bottom = player.global_position.y < loop_bottom.y
-	var inside_y_range = bellow_top and above_bottom
+	var bellow_top = player.global_position.y > loop_top_left.y
+	var above_bottom = player.global_position.y < loop_bottom_right.y
+	
+	if not bellow_top or not above_bottom:
+		return
+	
+	var before_left = loop_top_left.x > player.global_position.x
+	var after_right = loop_bottom_right.x < player.global_position.x
 	
 	var left_enabled = loop_mode == "both" or loop_mode == "left"
 	var right_enabled = loop_mode == "both" or loop_mode == "right"
 	
-	if left_enabled and inside_y_range and loop_begin.x > player.global_position.x:
+	if left_enabled and before_left:
 		_dupe(player)
 		_turn(-1)
 		emit_signal("looped", "left")
 	
-	if right_enabled and inside_y_range and loop_end.x < player.global_position.x:
+	if right_enabled and after_right:
 		_dupe(player)
 		_turn(1)
 		emit_signal("looped", "right")

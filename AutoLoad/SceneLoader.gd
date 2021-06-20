@@ -58,6 +58,9 @@ func load_scene(path: String, save_progress: bool = false) -> void:
 	
 	Tools.report_scene(path)
 	
+	VirtualInput.test_mode = false
+	VirtualInput.test_keys = []
+	
 	scene_loader = ResourceLoader.load_interactive(path)
 	
 	if scene_loader == null:

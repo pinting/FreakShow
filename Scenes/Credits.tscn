@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Animations/Waves00.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scenes/Credits.gd" type="Script" id=2]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=3]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=6]
@@ -63,18 +62,6 @@ margin_bottom = 540.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="BaseScene/Waves"]
-position = Vector2( 147.781, 280.581 )
-frames = ExtResource( 1 )
-frame = 16
-playing = true
-
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="BaseScene/Waves"]
-position = Vector2( 443.55, 283.7 )
-frames = ExtResource( 1 )
-frame = 16
-playing = true
 
 [node name="TextCanvas" type="CanvasLayer" parent="BaseScene"]
 layer = 102

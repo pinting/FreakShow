@@ -9,14 +9,14 @@ onready var door_open: Selectable = $DoorOpen
 signal selected
 
 func _ready() -> void:
-	door_closed.connect("selected", self, "_on_door_select")
-	door_open.connect("selected", self, "_on_door_select")
+	door_closed.connect("selected", self, "_on_door_selected")
+	door_open.connect("selected", self, "_on_door_selected")
 	
 	door_closed.visible = true
 	door_open.visible = false
 	door_open.modulate.a = 0.0
 
-func _on_door_select() -> void:
+func _on_door_selected() -> void:
 	emit_signal("selected")
 
 func open() -> void:

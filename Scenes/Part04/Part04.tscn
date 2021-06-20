@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/Part04/Part04_Ditch.tscn" type="PackedScene" id=2]
@@ -10,10 +10,16 @@
 [ext_resource path="res://Assets/Sounds/Door01.wav" type="AudioStream" id=8]
 [ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Animations/Player01.tres" type="SpriteFrames" id=10]
-[ext_resource path="res://Assets/Music/Part05.ogg" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Music/Part04.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_SplitPersonality.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=14]
+[ext_resource path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Part04/Part04_Cemetery.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Animations/Ghost00.tres" type="SpriteFrames" id=18]
+[ext_resource path="res://Materials/GhostMaterial.tres" type="Material" id=19]
+[ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=28]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -23,22 +29,46 @@ glow_strength = 0.9
 glow_blend_mode = 0
 glow_hdr_threshold = 0.1
 
+[sub_resource type="Animation" id=2]
+resource_name = "fade_out_ghost"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Environment/CemeteryLoop/Cemetery/Ghost:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.431373 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 6250, 1000 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 3967.87, 2306.21 )
+
 [node name="Part04" type="Node2D"]
 
 [node name="BaseScene" parent="." instance=ExtResource( 5 )]
 script = ExtResource( 7 )
+auto_fade_out = false
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 12 )]
-position = Vector2( -2156.89, -596.886 )
+position = Vector2( 1502.24, -2640.3 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 9 )]
-position = Vector2( -2156.89, -8027.59 )
+position = Vector2( 1708.81, -8027.59 )
 scale = Vector2( 0.7, 0.7 )
+zoom = Vector2( 3.5, 3.5 )
 smoothing_speed = 0.5
 follow_node = NodePath("../Player")
-follow_init_offset = Vector2( 0, -8000 )
+follow_init_offset = Vector2( 0, -5000 )
+follow_offset = Vector2( 0, -416 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )
@@ -47,35 +77,81 @@ environment = SubResource( 1 )
 light_mask = 524288
 color = Color( 0.235294, 0.235294, 0.235294, 1 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BaseScene"]
+anims/fade_out_ghost = SubResource( 2 )
+
 [node name="ScreenEffect" parent="BaseScene" instance=ExtResource( 13 )]
 flash_player_animation_frames = ExtResource( 10 )
 
+[node name="Sky" parent="BaseScene" instance=ExtResource( 15 )]
+
+[node name="Fog" parent="BaseScene" instance=ExtResource( 16 )]
+
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
-[node name="Background" type="Sprite" parent="BaseScene/Environment"]
+[node name="CemeteryLoop" parent="BaseScene/Environment" instance=ExtResource( 28 )]
+position = Vector2( 2605.06, -2821.81 )
+player_node = NodePath("../../Player")
+area_shape_node = NodePath("Area/Shape")
+container_node = NodePath("Cemetery")
+
+[node name="Area" type="Area2D" parent="BaseScene/Environment/CemeteryLoop"]
+
+[node name="Shape" type="CollisionShape2D" parent="BaseScene/Environment/CemeteryLoop/Area"]
+visible = false
+shape = SubResource( 3 )
+
+[node name="Cemetery" parent="BaseScene/Environment/CemeteryLoop" instance=ExtResource( 17 )]
+
+[node name="Ghost" type="AnimatedSprite" parent="BaseScene/Environment/CemeteryLoop/Cemetery"]
+self_modulate = Color( 1, 1, 1, 0.411954 )
+material = ExtResource( 19 )
+position = Vector2( 2486.65, 103.322 )
+rotation = -0.0349066
+scale = Vector2( -0.95, 0.95 )
+z_index = -1
+frames = ExtResource( 18 )
+frame = 111
+playing = true
+
+[node name="BellowLoop" parent="BaseScene/Environment" instance=ExtResource( 28 )]
+position = Vector2( 619.608, 1573.55 )
+player_node = NodePath("../../Player")
+area_shape_node = NodePath("Area/Shape")
+container_node = NodePath("Container")
+
+[node name="Area" type="Area2D" parent="BaseScene/Environment/BellowLoop"]
+
+[node name="Shape" type="CollisionShape2D" parent="BaseScene/Environment/BellowLoop/Area"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="Container" type="Node2D" parent="BaseScene/Environment/BellowLoop"]
+position = Vector2( -6.10352e-05, 0 )
+
+[node name="Background" type="Sprite" parent="BaseScene/Environment/BellowLoop/Container"]
 light_mask = 0
-position = Vector2( 117.241, -0.822754 )
-scale = Vector2( 0.887, 1 )
+position = Vector2( 0, -178.139 )
 z_index = -10
 texture = ExtResource( 14 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 16000, 18000 )
+region_rect = Rect2( 180, 0, 8005, 7000 )
 
-[node name="Ditch" parent="BaseScene/Environment" instance=ExtResource( 2 )]
-position = Vector2( 619.608, -430.808 )
+[node name="Ditch" parent="BaseScene/Environment/BellowLoop/Container" instance=ExtResource( 2 )]
+position = Vector2( 0, -521.019 )
 scale = Vector2( 0.993, 1 )
 z_index = -2
 
-[node name="MaintenanceRoom" parent="BaseScene/Environment" instance=ExtResource( 6 )]
-position = Vector2( 615.555, 169.822 )
+[node name="MaintenanceRoom" parent="BaseScene/Environment/BellowLoop/Container" instance=ExtResource( 6 )]
+position = Vector2( -4.06006, 79.6116 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 
 [node name="DitchSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( 4111.26, -575.879 )
+position = Vector2( 3261.05, 918.543 )
 
 [node name="MaintenanceRoomSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( 4045.2, 1466.32 )
+position = Vector2( 3405.16, 2922.79 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
 

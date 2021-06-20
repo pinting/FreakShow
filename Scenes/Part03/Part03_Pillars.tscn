@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Environmnent/Misc23.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Pillar09.png" type="Texture" id=2]
 
-[node name="Container" type="Node2D"]
+[node name="Part03_PillarsContainer" type="Node2D"]
 
 [node name="Top" type="Sprite" parent="."]
 position = Vector2( 0, 2165.97 )

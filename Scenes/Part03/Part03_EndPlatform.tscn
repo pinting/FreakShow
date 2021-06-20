@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=2]
@@ -11,13 +11,9 @@
 [ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Part03/Part03_LevitatingSprite.gd" type="Script" id=13]
 [ext_resource path="res://Shaders/Grab.shader" type="Shader" id=16]
-[ext_resource path="res://Prefabs/Static/Static_SideLamp00.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Prefabs/Selectable/Selectable_NoTrespassingSign.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Scenes/Part03/Part03_EndTube.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Prefabs/Selectable/Selectable_HappyCompanySign.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Prefabs/Selectable/Selectable_CrazyDoor.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Prefabs/Light/Light_Side.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Scenes/Part03/Part03_MovingEye.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Prefabs/Selectable/Selectable_DrugSexHellGraffiti.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Assets/Environmnent/Clock00.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Environmnent/Pillar03_Repeat.png" type="Texture" id=26]
@@ -61,57 +57,61 @@ scale = Vector2( 11.9766, 4.80124 )
 z_index = -2
 texture = ExtResource( 6 )
 
-[node name="MovingEye00" parent="." instance=ExtResource( 23 )]
-position = Vector2( -3759.17, -968.066 )
-rotation = -0.261799
-scale = Vector2( 1.1, 1.1 )
-
-[node name="MovingEye01" parent="." instance=ExtResource( 23 )]
-position = Vector2( -2722.62, -968.066 )
-rotation = 0.261799
-scale = Vector2( 1.1, 1.1 )
-
 [node name="RoomLamp00" parent="." instance=ExtResource( 3 )]
-position = Vector2( -1396.84, -288.922 )
-z_index = 3
+position = Vector2( -5816.96, -288.922 )
+z_index = 4
 
 [node name="Light" parent="RoomLamp00" instance=ExtResource( 7 )]
 position = Vector2( 0, 157 )
 scale = Vector2( 0.98568, 1.21196 )
 
 [node name="RoomLamp01" parent="." instance=ExtResource( 3 )]
-position = Vector2( 203.16, -288.922 )
-z_index = 3
+position = Vector2( -4216.96, -288.922 )
+z_index = 4
 
 [node name="Light" parent="RoomLamp01" instance=ExtResource( 7 )]
 position = Vector2( 0, 157 )
 scale = Vector2( 0.98568, 1.21196 )
 
 [node name="RoomLamp02" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1803.16, -288.922 )
-z_index = 3
+position = Vector2( -2616.96, -288.922 )
+z_index = 4
 
 [node name="Light" parent="RoomLamp02" instance=ExtResource( 7 )]
 position = Vector2( 0, 157 )
 scale = Vector2( 0.98568, 1.21196 )
 
 [node name="RoomLamp03" parent="." instance=ExtResource( 3 )]
-position = Vector2( 3403.16, -288.922 )
-z_index = 3
+position = Vector2( -1016.96, -288.922 )
+z_index = 4
 
 [node name="Light" parent="RoomLamp03" instance=ExtResource( 7 )]
 position = Vector2( 0, 157 )
 scale = Vector2( 0.98568, 1.21196 )
 
-[node name="SideLamp00" parent="." instance=ExtResource( 17 )]
-position = Vector2( -4706.74, -210.422 )
-rotation = 3.14159
-scale = Vector2( 1, -1 )
-z_index = 3
+[node name="RoomLamp04" parent="." instance=ExtResource( 3 )]
+position = Vector2( 583.045, -288.922 )
+z_index = 4
 
-[node name="Light" parent="SideLamp00" instance=ExtResource( 22 )]
-position = Vector2( -186.624, 441.67 )
-scale = Vector2( 1.08489, 0.803742 )
+[node name="Light" parent="RoomLamp04" instance=ExtResource( 7 )]
+position = Vector2( 0, 157 )
+scale = Vector2( 0.98568, 1.21196 )
+
+[node name="RoomLamp05" parent="." instance=ExtResource( 3 )]
+position = Vector2( 2183.04, -288.922 )
+z_index = 4
+
+[node name="Light" parent="RoomLamp05" instance=ExtResource( 7 )]
+position = Vector2( 0, 157 )
+scale = Vector2( 0.98568, 1.21196 )
+
+[node name="RoomLamp06" parent="." instance=ExtResource( 3 )]
+position = Vector2( 3783.04, -288.922 )
+z_index = 4
+
+[node name="Light" parent="RoomLamp06" instance=ExtResource( 7 )]
+position = Vector2( 0, 157 )
+scale = Vector2( 0.98568, 1.21196 )
 
 [node name="SteelBlock" type="Sprite" parent="."]
 position = Vector2( -1076.84, 45.2344 )
@@ -139,11 +139,11 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 11000, 85 )
 
 [node name="ExitDoor" parent="SteelBlock/WallBlock" instance=ExtResource( 21 )]
-position = Vector2( -2127.14, 162.994 )
+position = Vector2( -3147.04, 162.994 )
 effect_hover = 0.25
 
 [node name="CompanySign" parent="SteelBlock/WallBlock" instance=ExtResource( 20 )]
-position = Vector2( -859.51, -252.406 )
+position = Vector2( 1569.5, -252.406 )
 rotation = 0.00539374
 scale = Vector2( 0.693262, 0.693262 )
 
@@ -153,7 +153,7 @@ scale = Vector2( 1.83766, 1.83766 )
 
 [node name="Graffiti" parent="SteelBlock/WallBlock" instance=ExtResource( 24 )]
 self_modulate = Color( 1, 1, 1, 0.862745 )
-position = Vector2( -3400.99, -64.4727 )
+position = Vector2( -926.11, -64.4727 )
 rotation = -0.120428
 
 [node name="PillarBottom" type="Sprite" parent="SteelBlock/WallBlock"]
@@ -193,7 +193,7 @@ script = ExtResource( 13 )
 
 [node name="Ball" type="Sprite" parent="."]
 material = SubResource( 3 )
-position = Vector2( -1677.38, 0 )
+position = Vector2( -2463.1, 0 )
 rotation = -0.0539786
 scale = Vector2( 1.1, 1.1 )
 z_index = 3
@@ -208,8 +208,3 @@ scale = Vector2( 1.1, 1.1 )
 z_index = 3
 texture = ExtResource( 25 )
 script = ExtResource( 13 )
-
-[node name="EndTube" parent="." instance=ExtResource( 19 )]
-position = Vector2( -3200.94, 4878.43 )
-rotation = -1.49012e-08
-z_index = -1

@@ -2,10 +2,15 @@ extends Node
 
 var http_request: HTTPRequest
 var random_generator: RandomNumberGenerator
+var noise: OpenSimplexNoise = OpenSimplexNoise.new()
 
 func _ready() -> void:
 	random_generator = RandomNumberGenerator.new()
 	http_request = HTTPRequest.new()
+	
+	noise.seed = randi()
+	noise.period = 4
+	noise.octaves = 2
 	
 	random_generator.randomize()
 	add_child(http_request)

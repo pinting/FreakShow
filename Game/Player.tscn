@@ -80,7 +80,7 @@ anims/toggle_avatar_mode = SubResource( 1 )
 light_mask = 1025
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-frame = 74
+frame = 33
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]

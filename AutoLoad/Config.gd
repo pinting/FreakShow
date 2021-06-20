@@ -19,8 +19,8 @@ const SCENES = [
 	"res://Scenes/Part02/Part02.tscn",
 	"res://Scenes/Part03/Part03.tscn",
 	"res://Scenes/Part04/Part04.tscn",
-	"res://Scenes/Part05/Part05.tscn",
-	"res://Scenes/Part06/Part06.tscn",
+#	"res://Scenes/Part05/Part05.tscn",
+#	"res://Scenes/Part06/Part06.tscn",
 	"res://Scenes/Credits.tscn"
 ]
 

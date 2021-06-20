@@ -25,6 +25,9 @@ export (NodePath) var selection_area
 # Clone material
 export var clone_material: bool = true
 
+# Cursor according to viewport (if false, according to world)
+export var viewport_cursor: bool = false
+
 var current_effect_value: float = effect_default
 var is_inside: bool = false
 var disabled: bool = false
@@ -123,7 +126,12 @@ func _process(delta: float) -> void:
 	if not cursor_display:
 		return
 	
-	var cursor_position = cursor_display.cursor.global_position
+	var cursor_position 
+	
+	if viewport_cursor:
+		cursor_position = cursor_display.get_viewport_position()
+	else:
+		cursor_position = cursor_display.cursor.global_position
 
 	if _is_hovering(cursor_position):
 		if len(offset_key):

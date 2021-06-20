@@ -50,13 +50,13 @@ func _ready() -> void:
 		move_player(player, teleport_player.position)
 
 func _on_scene_started() -> void:
-	yield(Tools.timer(2.0), "timeout")
+	SubtitleManager.say(Text.find("Narrator002"), 6.0, 12.0)
+	yield(Tools.timer(4.0), "timeout")
 	animation_player.play("pitch_effect")
 	yield(Tools.timer(1.0), "timeout")
 	wind_sound.play()
 	main_music.play()
 	black_screen.fade_out(5.0)
-	SubtitleManager.say(Text.find("Narrator002"), 6.0)
 
 func _on_phone_selected() -> void:
 	phone_box.flashing_phone_light = false

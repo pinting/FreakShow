@@ -42,9 +42,9 @@ func _ready() -> void:
 	lamps.shuffle()
 	
 	for i in range(len(doors)):
-		doors[i].connect("selected", self, "_on_hallway_door_select", [doors[i], i])
+		doors[i].connect("selected", self, "_on_hallway_door_selected", [doors[i], i])
 
-func _on_hallway_door_select(door: Node2D, index: int) -> void:
+func _on_hallway_door_selected(door: Node2D, index: int) -> void:
 	emit_signal("door_selected", door, index)
 
 func open_exit(index: int) -> void:

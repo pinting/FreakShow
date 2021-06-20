@@ -19,6 +19,9 @@ export var follow_scale_speed_before: float = 1200.0
 # Distance under the reached signal is emitted
 export var follow_reached_distance: float = 500.0
 
+# Move cursor with follow
+export var follow_move_cursor: bool = false
+
 # Maximum shake in pixels.
 export var shake_max_offset = Vector2(100, 75)
 
@@ -30,7 +33,6 @@ onready var tween: Tween = $Tween
 # Vector for scrolling background
 var scrolling_vector: Vector2 = Vector2.ZERO
 
-var noise: OpenSimplexNoise = OpenSimplexNoise.new()
 var shake: float = 0.0
 var shake_offset_y: float = 0.0
 
@@ -47,10 +49,6 @@ func _ready() -> void:
 	assert(not smoothing_enabled, "Smoothing is not supported!")
 	
 	CameraManager.set_current(self)
-	
-	noise.seed = randi()
-	noise.period = 4
-	noise.octaves = 2
 	
 	base_zoom = zoom
 	base_follow_speed = follow_speed
@@ -82,12 +80,14 @@ func _process_follow(delta: float) -> void:
 	global_position += step
 	scrolling_vector += step
 	
-	var cursor_display = VirtualCursorManager.display
-	
 	if distance <= follow_reached_distance:
 		emit_signal("target_reached")
-	elif cursor_display:
-		cursor_display.cursor.global_position += step
+	
+	if follow_move_cursor:
+		var cursor_display = VirtualCursorManager.display
+		
+		if cursor_display:
+			cursor_display.cursor.global_position += step
 
 func _process_shake(delta: float) -> void:
 	if not shake:
@@ -98,9 +98,9 @@ func _process_shake(delta: float) -> void:
 	
 	shake_offset_y += delta
 	
-	rotation = shake_max_roll * shake * noise.get_noise_2d(noise.seed, shake_offset_y)
-	offset.x = shake_max_offset.x * shake * noise.get_noise_2d(noise.seed * 2, shake_offset_y)
-	offset.y = shake_max_offset.y * shake * noise.get_noise_2d(noise.seed * 3, shake_offset_y)
+	rotation = shake_max_roll * shake * Tools.noise.get_noise_2d(Tools.noise.seed, shake_offset_y)
+	offset.x = shake_max_offset.x * shake * Tools.noise.get_noise_2d(Tools.noise.seed * 2, shake_offset_y)
+	offset.y = shake_max_offset.y * shake * Tools.noise.get_noise_2d(Tools.noise.seed * 3, shake_offset_y)
 
 func change_zoom(amount: Vector2, speed: float) -> void:
 	tween.stop_all()

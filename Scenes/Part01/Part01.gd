@@ -45,12 +45,12 @@ func _ready() -> void:
 	
 	waiting_music.add_part(13 * 60 + 35, 15 * 60 + 10, true, 5, 5, 0)
 	
-	connect("scene_started", self, "_on_scene_started")
-	flat_door.connect("selected", self, "_on_flat_exit_select")
+	connect("scene_started", self, "_on_scene_started", [], CONNECT_ONESHOT)
+	flat_door.connect("selected", self, "_on_flat_exit_selected")
 	hallway.connect("looped", self, "_on_loop_index_change")
 	
 	for container in hallway.containers:
-		container.connect("door_selected", self, "_on_hallway_door_select")
+		container.connect("door_selected", self, "_on_hallway_door_selected")
 
 func _on_scene_started() -> void:
 	yield(Tools.timer(2.0), "timeout")
@@ -75,7 +75,7 @@ func _enable_next_traffic_lamp(lamps_to_show: int = 0) -> void:
 		for lamps in hallway.get_each("lamps"):
 			lamps[lamp_index].enable()
 
-func _on_flat_exit_select() -> void:
+func _on_flat_exit_selected() -> void:
 	player_is_in_hallway = true
 	hallway_enter_count += 1
 
@@ -84,7 +84,7 @@ func _on_flat_exit_select() -> void:
 	_enable_next_traffic_lamp(next)
 	move_player(player, hallway_spawn.position, door_open_sound)
 
-func _on_hallway_door_select(door, index) -> void:
+func _on_hallway_door_selected(door, index) -> void:
 	player_is_in_hallway = false
 	
 	if index == hallway_home_index:
@@ -93,13 +93,13 @@ func _on_hallway_door_select(door, index) -> void:
 			move_player(player, flat_spawn.position, door_open_sound)
 		elif hallway_exit_open and not hallway_exiting:
 			hallway_exiting = true
-			main_music.kill(3.0)
+			waiting_music.kill(3.0)
 			yield(black_screen.fade_in(3.0), "tween_completed")
 			load_next_scene()
 	else:
 		var random_flat_instance = random_flat_scene.instance()
 		
-		random_flat_instance.connect("exit_selected", self, "_on_flat_exit_select")
+		random_flat_instance.connect("exit_selected", self, "_on_flat_exit_selected")
 		
 		Tools.remove_childs(random_flat_container)
 		random_flat_container.add_child(random_flat_instance)

@@ -14,22 +14,22 @@ func _ready() -> void:
 	music_00 = main_music.add_part(2 * 60 + 19, 6 * 60 + 20, false, 15, 5, 0)
 	music_01 = main_music.add_part(4 * 60 + 42, 6 * 60 + 20, true, 5, 5, -10)
 	
-	connect("scene_started", self, "_on_scene_started")
+	connect("scene_started", self, "_on_scene_started", [], CONNECT_ONESHOT)
 	camera.connect("target_reached", self, "_on_camera_reaches", [], CONNECT_ONESHOT)
 	exit_door.connect("selected", self, "_on_exit_door_selected")
 
 func _on_scene_started() -> void:
+	camera.disable_follow = true
+	camera.follow_speed = camera.base_follow_speed / 2
+
 	VirtualCursorManager.hide()
 	player.freeze(true)
 	yield(Tools.timer(1.0), "timeout")
 	main_music.play()
 	
-	camera.disable_follow = true
-	
 	SubtitleManager.show_quote(Text.find("Text005"))
 	yield(Tools.timer(25.0), "timeout")
 	
-	camera.follow_speed = camera.base_follow_speed / 2
 	camera.disable_follow = false
 	
 	black_screen.fade_out(10.0)

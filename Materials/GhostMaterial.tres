@@ -5,5 +5,5 @@
 [resource]
 shader = ExtResource( 1 )
 shader_param/edge_color = Color( 1, 1, 1, 1 )
-shader_param/background_color = Color( 0, 0, 0, 1 )
+shader_param/background_color = Color( 1, 1, 1, 0.0980392 )
 shader_param/line_thickness = 3.0
