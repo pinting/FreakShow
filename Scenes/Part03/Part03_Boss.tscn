@@ -6,7 +6,6 @@
 [ext_resource path="res://Shaders/ColorChanger.shader" type="Shader" id=4]
 [ext_resource path="res://Prefabs/ColorChanger.gd" type="Script" id=5]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
 shader_param/color_key = Color( 0, 0.509804, 0.913725, 1 )
@@ -18,7 +17,7 @@ radius = 169.863
 height = 328.573
 
 [node name="Part03_Boss" type="KinematicBody2D" groups=[
-"boss",
+"_boss",
 ]]
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 31
@@ -33,6 +32,7 @@ polygon = PoolVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -49
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 1 )
 frames = ExtResource( 2 )
+frame = 1
 playing = true
 offset = Color( 0, 0, 0, 0 )
 script = ExtResource( 5 )

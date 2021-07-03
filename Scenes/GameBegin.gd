@@ -10,9 +10,6 @@ func _ready() -> void:
 	new_game.connect("selected", self, "_on_new_game_selected")
 	continue_game.connect("selected", self, "_on_continue_game_selected")
 	
-	disable_auto_restart = true
-	disable_cancel_button = true
-	
 	VirtualInput.test_mode = true
 	VirtualInput.test_keys = ["move_right"]
 

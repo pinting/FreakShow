@@ -6,6 +6,8 @@ onready var color_rect = $ColorRect
 
 func _ready() -> void:
 	color_rect.modulate.a = 1.0
+	
+	VirtualCursorManager.hide()
 
 func is_fading() -> bool:
 	return tween.is_active()
@@ -26,7 +28,7 @@ func fade_in(duration: float = 1.0) -> Tween:
 		Tween.EASE_IN)
 	
 	tween.start()
-	SubtitleManager.reset_describe(-1, true)
+	VirtualCursorManager.hide()
 
 	Tools.debug("Black screen fade in")
 
@@ -45,6 +47,7 @@ func fade_out(duration: float = 1.0) -> Tween:
 		Tween.EASE_OUT)
 	
 	tween.start()
+	VirtualCursorManager.show()
 
 	Tools.debug("Black screen fade out")
 	

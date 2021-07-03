@@ -1,14 +1,14 @@
 [gd_scene format=2]
 
-[node name="BackgroundRect" type="Node2D"]
-z_index = -100
+[node name="BackgroundRect" type="CanvasLayer"]
+layer = -101
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -50000.0
-margin_top = -50000.0
-margin_right = 50000.0
-margin_bottom = 50000.0
-color = Color( 0, 0, 0, 1 )
+[node name="ColorRect" type="ColorRect" parent="." groups=[
+"auto_visible",
+]]
+visible = false
+margin_right = 960.0
+margin_bottom = 540.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

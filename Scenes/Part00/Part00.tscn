@@ -19,7 +19,7 @@
 [ext_resource path="res://Scenes/Part00/Part00_Clouds.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Music/Part00.ogg" type="AudioStream" id=18]
 [ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Materials/StencilMaterial.tres" type="Material" id=20]
+[ext_resource path="res://Materials/GhostBlackMaterial.tres" type="Material" id=20]
 [ext_resource path="res://Assets/Environmnent/Car00_Stencil.png" type="Texture" id=21]
 [ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=22]
 
@@ -53,10 +53,6 @@ follow_node = NodePath("../Player")
 follow_init_offset = Vector2( 0, -14000 )
 
 [node name="BackgroundRect" parent="BaseScene" instance=ExtResource( 15 )]
-position = Vector2( 0, -28.5088 )
-
-[node name="ColorRect" parent="BaseScene/BackgroundRect" index="0"]
-color = Color( 1, 1, 1, 1 )
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 

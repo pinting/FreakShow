@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Materials/GrabMaterial.tres" type="Material" id=1]
 [ext_resource path="res://Prefabs/Viewable/Viewable.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Environmnent/Misc13.png" type="Texture" id=3]
 
@@ -8,13 +7,9 @@
 "selectable",
 "viewable",
 ]]
-material = ExtResource( 1 )
 position = Vector2( 1526.05, -346.526 )
 scale = Vector2( 0.465462, 0.465462 )
 z_index = -1
 texture = ExtResource( 3 )
 script = ExtResource( 2 )
-offset_key = "offset"
-effect_key = "scale"
-effect_hover = 1.0
 inner_description_key = "Description019"

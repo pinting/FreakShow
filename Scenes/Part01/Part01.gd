@@ -10,7 +10,7 @@ export var show_red_stop_lamps_from: int = 3
 onready var player: Player = $Player
 onready var camera: GameCamera = $GameCamera
 
-onready var flat_door: Node2D = $Environment/Flat/Inside/Door
+onready var flat_door: Node2D = $Environment/Flat/Inside/Floor/Door
 onready var random_flat_container: Node2D = $Environment/RandomFlatContainer
 onready var hallway: Node2D = $Environment/Hallway
 

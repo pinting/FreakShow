@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/GameBegin.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/Environmnent/Decoration/Buka10.png" type="Texture" id=11]
 [ext_resource path="res://Prefabs/Selectable/Selectable_Menu00.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Environmnent/Decoration/Buka13.png" type="Texture" id=13]
+[ext_resource path="res://DefaultEnvironment.tres" type="Environment" id=14]
 [ext_resource path="res://Assets/Environmnent/Misc01.png" type="Texture" id=15]
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=17]
@@ -34,15 +35,17 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1400, 55.5 )
+extents = Vector2( 1600, 55.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 1250, 1500 )
+extents = Vector2( 1500, 1500 )
 
 [node name="GameBegin" type="Node2D"]
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
+disable_cancel_button = true
+disable_auto_restart = true
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 29 )]
 position = Vector2( 759.628, 922.184 )
@@ -56,6 +59,11 @@ follow_node = NodePath("../Player")
 follow_init_offset = Vector2( 0, -400 )
 follow_offset = Vector2( 0, -400 )
 follow_move_cursor = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=[
+"world_environment",
+]]
+environment = ExtResource( 14 )
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
@@ -112,27 +120,27 @@ position = Vector2( 0, 435.019 )
 z_index = -2
 texture = ExtResource( 27 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 2500, 300 )
+region_rect = Rect2( 0, 0, 3000, 300 )
 
 [node name="Bellow" type="Sprite" parent="BaseScene/Loop/Container/Road"]
-position = Vector2( 0, 286.343 )
-scale = Vector2( 1.031, 1.031 )
+position = Vector2( 0, 276.343 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 15 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 2424, 348 )
+region_rect = Rect2( 0, 0, 2000, 348 )
 
 [node name="Fence" type="Sprite" parent="BaseScene/Loop/Container/Road"]
 position = Vector2( 0, -550.911 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 2500, 846 )
+region_rect = Rect2( 0, 0, 3000, 846 )
 
 [node name="Trees" type="Sprite" parent="BaseScene/Loop/Container/Road"]
 position = Vector2( 0, -1021.31 )
 z_index = -1
 texture = ExtResource( 22 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 2500, 846 )
+region_rect = Rect2( 0, 0, 3000, 846 )
 
 [node name="Lamp" parent="BaseScene/Loop/Container/Road" instance=ExtResource( 18 )]
 position = Vector2( 0, -912.727 )

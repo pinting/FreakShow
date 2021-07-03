@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
+[ext_resource path="res://Materials/PurpleFogMaterial.tres" type="Material" id=1]
 [ext_resource path="res://Scenes/Credits.gd" type="Script" id=2]
-[ext_resource path="res://Shaders/Fog.shader" type="Shader" id=3]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
 
@@ -11,15 +11,6 @@ glow_enabled = true
 glow_intensity = 1.0
 glow_strength = 1.4
 glow_hdr_threshold = 0.4
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 3 )
-shader_param/offset = Vector2( 0, 0 )
-shader_param/width = 3.0
-shader_param/color = Color( 1, 0.67451, 0.87451, 1 )
-shader_param/noise_scale = 20.0
-shader_param/alpha_power = 2.0
-shader_param/octaves = 1
 
 [sub_resource type="DynamicFontData" id=3]
 font_path = "res://font.ttf"
@@ -36,6 +27,8 @@ font_data = SubResource( 3 )
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
+disable_cancel_button = true
+disable_auto_restart = true
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
 scale = Vector2( 0.7, 0.7 )
@@ -55,8 +48,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Waves" type="ColorRect" parent="BaseScene/Waves"]
-material = SubResource( 2 )
+[node name="Waves" type="ColorRect" parent="BaseScene/Waves" groups=[
+"high_performance",
+]]
+material = ExtResource( 1 )
 margin_right = 960.0
 margin_bottom = 540.0
 __meta__ = {

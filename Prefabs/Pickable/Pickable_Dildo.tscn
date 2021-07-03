@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Dildo00.png" type="Texture" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
-[ext_resource path="res://Materials/GrabMaterial.tres" type="Material" id=3]
 [ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=4]
 
 [node name="Pickable_Dildo" type="RigidBody2D" groups=[
@@ -23,14 +22,10 @@ script = ExtResource( 4 )
 "selectable",
 ]]
 light_mask = 1025
-material = ExtResource( 3 )
 scale = Vector2( 0.5, -0.5 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 description_key = "Description008"
-offset_key = "offset"
-effect_key = "scale"
-effect_hover = 1.0
 
 [node name="CollisionShape" type="CollisionPolygon2D" parent="."]
 visible = false

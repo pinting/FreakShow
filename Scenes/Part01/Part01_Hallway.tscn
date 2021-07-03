@@ -28,91 +28,110 @@ polygon = PoolVector2Array( -6881.84, -4986.47, -6881.94, -3582.45, 648.009, -35
 script = ExtResource( 11 )
 
 [node name="Inside" type="Sprite" parent="."]
-position = Vector2( 0, -72.071 )
+position = Vector2( 0, 22.7603 )
+scale = Vector2( 1.205, 1.2 )
 z_index = -2
 z_as_relative = false
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 7530, 578 )
+region_rect = Rect2( 0, 0, 7500, 578 )
 
 [node name="Graffiti00" parent="Inside" instance=ExtResource( 7 )]
-position = Vector2( -1847.07, -29.7145 )
-rotation = 0.00896583
-scale = Vector2( 0.506171, 0.510359 )
+position = Vector2( -1111.5, 42.5123 )
+rotation = 0.00900319
+scale = Vector2( 0.420059, 0.425299 )
 
 [node name="Graffiti01" parent="Inside" instance=ExtResource( 8 )]
-rotation = 0.144954
-scale = Vector2( 0.861026, 0.848049 )
+position = Vector2( 120.923, 67.2744 )
+rotation = 0.145549
+scale = Vector2( 0.714607, 0.706647 )
 
 [node name="Graffiti02" parent="Inside" instance=ExtResource( 6 )]
-position = Vector2( 1765.52, 160.611 )
-rotation = -0.147355
+position = Vector2( 888.246, 201.117 )
+rotation = -0.14796
+scale = Vector2( 0.82995, 0.833259 )
 
 [node name="Graffiti03" type="Sprite" parent="Inside"]
 self_modulate = Color( 1, 1, 1, 0.392157 )
-position = Vector2( 3582.78, -130.193 )
-rotation = 0.291425
-scale = Vector2( 0.1604, 0.1604 )
+position = Vector2( 3063.26, 33.6956 )
+rotation = 0.292571
+scale = Vector2( 0.133158, 0.133621 )
 texture = ExtResource( 4 )
 
 [node name="Graffiti04" type="Sprite" parent="Inside"]
 self_modulate = Color( 1, 0.956863, 0.32549, 0.862745 )
-position = Vector2( -2797.77, -19.994 )
-scale = Vector2( 0.437502, 0.437502 )
+position = Vector2( -1883.63, 50.6128 )
+scale = Vector2( 0.363072, 0.364585 )
 texture = ExtResource( 10 )
 
 [node name="Graffiti05" parent="Inside" instance=ExtResource( 14 )]
+position = Vector2( 1747.9, -44.9156 )
+scale = Vector2( 0.819254, 0.822667 )
 
 [node name="Paper00" parent="Inside" instance=ExtResource( 12 )]
-position = Vector2( 2061.49, -15.3505 )
-rotation = 0.0285267
+position = Vector2( 1133.87, 54.4824 )
+rotation = 0.0286455
+scale = Vector2( 0.112083, 0.11255 )
 
 [node name="Door00" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -3279.88, 31.129 )
+position = Vector2( -3298.81, 93.2153 )
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="Door01" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -2338.88, 31.129 )
+position = Vector2( -2361.05, 93.2153 )
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="Door02" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -1399.49, 29.5197 )
+position = Vector2( -1423.29, 91.8744 )
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="Door03" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -458.493, 29.5197 )
+position = Vector2( -485.53, 91.8744 )
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="Door04" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 482.507, 29.5197 )
+position = Vector2( 452.23, 91.8744 )
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="Door05" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 1420.65, 29.5197 )
+position = Vector2( 1389.99, 91.8744 )
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="Door06" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 2361.65, 29.5197 )
+position = Vector2( 2327.75, 91.8744 )
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="Door07" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 3302.65, 29.5197 )
+position = Vector2( 3265.5, 91.8744 )
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="Floor" type="Sprite" parent="Inside"]
 light_mask = 3
-position = Vector2( 0.115723, 353.841 )
+position = Vector2( 0.0960357, 343.481 )
+scale = Vector2( 0.829875, 0.833333 )
 texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 7530, 140 )
+region_rect = Rect2( 0, 0, 9036, 140 )
 
 [node name="StopLamp00" parent="Inside" instance=ExtResource( 13 )]
-position = Vector2( -3559.91, -143.499 )
-rotation = 0.000739249
+position = Vector2( -2824.25, -52.3081 )
+rotation = 0.000742329
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="StopLamp01" parent="Inside" instance=ExtResource( 13 )]
-position = Vector2( -946.151, -143.499 )
-rotation = 0.0187291
+position = Vector2( -903.481, -52.3081 )
+rotation = 0.0188071
+scale = Vector2( 0.829876, 0.833332 )
 
 [node name="StopLamp02" parent="Inside" instance=ExtResource( 13 )]
-position = Vector2( 906, -143.499 )
-rotation = -0.0236613
+position = Vector2( 876.076, -52.3081 )
+rotation = -0.0237599
+scale = Vector2( 0.829877, 0.833331 )
 
 [node name="StopLamp03" parent="Inside" instance=ExtResource( 13 )]
-position = Vector2( 2638.75, -143.499 )
-rotation = 0.000739248
+position = Vector2( 2778.54, -52.3081 )
+rotation = 0.000742328
+scale = Vector2( 0.829875, 0.833333 )
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
 position = Vector2( 0.784424, 219.525 )
@@ -120,11 +139,11 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="Top" type="CollisionShape2D" parent="CollisionAll"]
-position = Vector2( 9.52588, -912.922 )
+position = Vector2( 9.52588, -828.36 )
 shape = SubResource( 1 )
 
 [node name="Bottom" type="CollisionShape2D" parent="CollisionAll"]
-position = Vector2( 0, 380.115 )
+position = Vector2( 0, 584.659 )
 shape = SubResource( 1 )
 
 [node name="Building" type="Node2D" parent="."]
@@ -133,7 +152,8 @@ scale = Vector2( 2, 2 )
 
 [node name="Building_Top" type="Sprite" parent="Building"]
 light_mask = 0
-position = Vector2( 0, 3 )
+position = Vector2( 0, -68.1644 )
+scale = Vector2( 1.2, 1.2 )
 z_index = 3
 z_as_relative = false
 texture = ExtResource( 9 )
@@ -147,7 +167,8 @@ occluder = SubResource( 2 )
 
 [node name="Building_Bottom" type="Sprite" parent="Building"]
 light_mask = 0
-position = Vector2( 0, 1349.91 )
+position = Vector2( 0, 1529.71 )
+scale = Vector2( 1.2, 1.2 )
 z_index = 3
 z_as_relative = false
 texture = ExtResource( 2 )

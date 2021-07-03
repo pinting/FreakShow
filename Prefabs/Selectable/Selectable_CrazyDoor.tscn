@@ -1,15 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Door03.png" type="Texture" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
-[ext_resource path="res://Materials/GrabMaterial.tres" type="Material" id=3]
 
 [node name="Selectable_CrazyDoor" type="Sprite" groups=[
 "selectable",
 ]]
-material = ExtResource( 3 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-offset_key = "offset"
-effect_key = "scale"
-effect_hover = 1.0

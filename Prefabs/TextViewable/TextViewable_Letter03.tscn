@@ -1,37 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=1]
 [ext_resource path="res://Prefabs/TextViewable/TextViewable.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Environmnent/Decoration/Letter03.png" type="Texture" id=3]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 1 )
-shader_param/keep_size = true
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/scale = 0.0
-shader_param/glow_radius = 10.0
-shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
-
-[sub_resource type="DynamicFontData" id=2]
+[sub_resource type="DynamicFontData" id=1]
 font_path = "res://font.ttf"
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 28
 outline_size = 1
 use_filter = true
-font_data = SubResource( 2 )
+font_data = SubResource( 1 )
 
 [node name="TextViewable_Letter03" type="Sprite" groups=[
 "selectable",
 "viewable",
 ]]
-material = SubResource( 1 )
 scale = Vector2( 0.13506, 0.13506 )
 texture = ExtResource( 3 )
 script = ExtResource( 2 )
-offset_key = "offset"
-effect_key = "scale"
-effect_hover = 1.0
 text_key = "Text003"
 
 [node name="InnerText" type="Label" parent="."]
@@ -40,7 +27,7 @@ margin_left = -313.69
 margin_top = 175.505
 margin_right = 313.31
 margin_bottom = 419.505
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.121569, 0.0705882, 0.0235294, 0.784314 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 0.529412 )
 text = "Megpofozott volna, de megfogta a lámpa - így maradt."

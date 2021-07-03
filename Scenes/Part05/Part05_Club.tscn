@@ -74,11 +74,10 @@ material = SubResource( 2 )
 position = Vector2( -77.0089, 105.767 )
 texture = ExtResource( 8 )
 script = ExtResource( 6 )
-offset_key = "offset"
+effect_offset_key = "offset"
 effect_key = "scale"
 effect_hover = 0.5
 effect_default = 0.0
-clone_material = true
 
 [node name="BassSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )

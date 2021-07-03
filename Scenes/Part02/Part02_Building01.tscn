@@ -1,40 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Prefabs/Static/Static_Building00.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Prefabs/Static/Static_StreetLamp00.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Ad00.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Prefabs/Viewable/Viewable_RomanticPartnerPaper.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/Viewable/Viewable_KidPaper.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Prefabs/Selectable/Selectable_SonOfBitchGraffiti.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=14]
-[ext_resource path="res://Prefabs/Static/Static_Car00.tscn" type="PackedScene" id=16]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 14 )
-shader_param/keep_size = true
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/scale = 0.0
-shader_param/glow_radius = 10.0
-shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 14 )
-shader_param/keep_size = true
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/scale = 0.0
-shader_param/glow_radius = 10.0
-shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 14 )
-shader_param/keep_size = true
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/scale = 0.0
-shader_param/glow_radius = 10.0
-shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
-
-[sub_resource type="CanvasItemMaterial" id=4]
 
 [node name="Building01" type="Node2D"]
 position = Vector2( 1122.5, -2508.43 )
@@ -48,39 +18,14 @@ rotation = -0.146264
 scale = Vector2( 0.336574, 0.359564 )
 
 [node name="Paper00" parent="Building" instance=ExtResource( 11 )]
-material = SubResource( 1 )
 position = Vector2( -1377.33, 2204.62 )
 scale = Vector2( 0.196675, 0.196675 )
 
 [node name="Paper01" parent="Building" instance=ExtResource( 9 )]
-material = SubResource( 2 )
 position = Vector2( 1103.56, 2185.85 )
 scale = Vector2( 0.0971474, 0.0971474 )
 
 [node name="Paper02" parent="Building" instance=ExtResource( 8 )]
-material = SubResource( 3 )
 position = Vector2( 1352.07, 2230.44 )
 rotation = -0.220333
 scale = Vector2( 0.0609779, 0.0609779 )
-
-[node name="Lamp00" parent="Building" instance=ExtResource( 5 )]
-position = Vector2( -1181.73, 1797.7 )
-scale = Vector2( 0.9, 0.9 )
-z_index = 1
-
-[node name="Light" parent="Building/Lamp00" instance=ExtResource( 7 )]
-position = Vector2( -1184.55, 913.627 )
-scale = Vector2( 3.67457, 1.10197 )
-
-[node name="Lamp01" parent="Building" instance=ExtResource( 5 )]
-position = Vector2( 1268.27, 1797.7 )
-scale = Vector2( 0.9, 0.9 )
-z_index = 1
-
-[node name="Light" parent="Building/Lamp01" instance=ExtResource( 7 )]
-position = Vector2( -1182.14, 913.627 )
-scale = Vector2( 3.67457, 1.10197 )
-
-[node name="Car00" parent="Building" instance=ExtResource( 16 )]
-material = SubResource( 4 )
-position = Vector2( 0, 2371.01 )

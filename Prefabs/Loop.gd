@@ -39,8 +39,8 @@ func _ready() -> void:
 
 	assert(player, "Player is not set")
 	assert(area_shape.shape is RectangleShape2D, "Shape is not RectangleShape2D")
-	#assert(area.position == Vector2.ZERO, "Area2D relative position needs to be zero")
-	#assert(area_shape.position == Vector2.ZERO, "RectangleShape2D relative position needs to be zero")
+	assert(area.position == Vector2.ZERO, "Area2D relative position needs to be zero")
+	assert(area_shape.position == Vector2.ZERO, "RectangleShape2D relative position needs to be zero")
 
 	var extents = area_shape.shape.extents
 
@@ -48,21 +48,23 @@ func _ready() -> void:
 	loop_bottom_right = global_position + Vector2(extents.x, extents.y)
 	
 	if container_node:
-		_mirror(get_node(container_node))
+		container = get_node(container_node)
+		
+		_mirror()
 
-func _mirror(container: Node2D):
+func _mirror():
 	if not container:
 		return
 	
 	containers.push_back(container)
 	
 	if mirror_mode == "left" or mirror_mode == "both":
-		_mirror_left(container)
+		_mirror_left()
 	
 	if mirror_mode == "right" or mirror_mode == "both":
-		_mirror_right(container)
+		_mirror_right()
 
-func _mirror_left(container: Node2D):
+func _mirror_left():
 	var extents = area_shape.shape.extents
 	var left_mirror = container.duplicate()
 	
@@ -71,7 +73,7 @@ func _mirror_left(container: Node2D):
 	containers.push_front(left_mirror)
 	add_child(left_mirror)
 
-func _mirror_right(container: Node2D):
+func _mirror_right():
 	var extents = area_shape.shape.extents
 	var right_mirror = container.duplicate()
 	

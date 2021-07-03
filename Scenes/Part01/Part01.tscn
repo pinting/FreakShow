@@ -17,7 +17,7 @@
 [ext_resource path="res://Assets/Music/Part01.ogg" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3764.84, 2309.42 )
+extents = Vector2( 4517.71, 2309.42 )
 
 [node name="Part01" type="Node2D"]
 
@@ -27,9 +27,10 @@ delay = 1.0
 auto_fade_out = false
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 8 )]
-position = Vector2( -1270.34, -49.9356 )
+position = Vector2( -1106.41, 3.51831 )
 scale = Vector2( 0.7, 0.7 )
 animation_frames = ExtResource( 3 )
+disable_jump = true
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
 position = Vector2( -1270.34, -49.9356 )
@@ -69,13 +70,13 @@ shape = SubResource( 1 )
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 
 [node name="HallwaySpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( 640.271, 5205.35 )
+position = Vector2( 701.674, 5338.83 )
 
 [node name="FlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( 3.07458, -25.8766 )
+position = Vector2( -3.36622, -0.365431 )
 
 [node name="RandomFlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( -487.468, 10169.4 )
+position = Vector2( -487.468, 10181.4 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
 

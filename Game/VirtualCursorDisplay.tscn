@@ -19,4 +19,6 @@ material = SubResource( 1 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="CursorPenetration" parent="Cursor" instance=ExtResource( 3 )]
+[node name="CursorPenetration" parent="Cursor" groups=[
+"high_performance",
+] instance=ExtResource( 3 )]

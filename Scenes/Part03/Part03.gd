@@ -82,8 +82,6 @@ func _ready() -> void:
 	
 	boss_base_position = boss.global_position
 	boss_base_rotation = boss.rotation_degrees
-	
-	#ghost.modulate.a = 1.0
 
 func _on_scene_started() -> void:
 	black_screen.fade_out(2.0)
@@ -127,7 +125,6 @@ func _trigger_game_begin(body: Node) -> void:
 	
 	# If the actual game is turned off (for debug purposes)
 	if teleport_player_to_end:
-		boss_follows = true
 		return
 	
 	connect_sound.stop()
@@ -180,6 +177,7 @@ func _trigger_game_end(body: Node) -> void:
 		return
 	
 	player.disable_avatar_mode()
+	player.disable_jump = true
 	main_music.kill(5.0)
 	game_playing = false
 

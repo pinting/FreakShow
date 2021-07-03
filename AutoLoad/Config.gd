@@ -36,6 +36,9 @@ var lock_mouse: bool = true
 # Virtual mouse speed
 var virtual_mouse_speed: Vector2 = Vector2(3, 3)
 
+# Low performance
+var low_performance: bool = true
+
 func _ready() -> void:
 	if not _exists():
 		save()
@@ -54,6 +57,7 @@ func _load() -> void:
 	
 	no_sound = config.get_value("game", "no_sound", no_sound)
 	save_path = config.get_value("game", "save_path", save_path)
+	low_performance = config.get_value("game", "low_performance", low_performance)
 	lock_mouse = config.get_value("input", "lock_mouse", lock_mouse)
 	virtual_mouse_speed = config.get_value("input", "virtual_mouse_speed", virtual_mouse_speed)
 	
@@ -66,6 +70,7 @@ func save() -> void:
 	
 	config.set_value("game", "no_sound", no_sound)
 	config.set_value("game", "save_path", save_path)
+	config.set_value("game", "low_performance", low_performance)
 	config.set_value("input", "lock_mouse", lock_mouse)
 	config.set_value("input", "virtual_mouse_speed", virtual_mouse_speed)
 

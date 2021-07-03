@@ -11,7 +11,7 @@ onready var grab_distance: float = 40.0
 export var max_velocity: Vector2 = Vector2(400.0, 400.0)
 
 # Disable shapes when disabled
-export var disable_shapes: bool = true
+export var disable_with_shapes: bool = true
 
 onready var selectable = $Selectable
 
@@ -120,7 +120,7 @@ func disable() -> void:
 	held = false
 	mode = RigidBody2D.MODE_STATIC
 	
-	if disable_shapes:
+	if disable_with_shapes:
 		Tools.set_shapes_disabled(self, true)
 	
 	selectable.disable()
@@ -130,7 +130,7 @@ func enable() -> void:
 	disabled = false
 	mode = RigidBody2D.MODE_RIGID
 	
-	if disable_shapes:
+	if disable_with_shapes:
 		Tools.set_shapes_disabled(self, false)
 	
 	selectable.enable()

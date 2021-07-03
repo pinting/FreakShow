@@ -1,19 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
 [ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Environmnent/Crate05.png" type="Texture" id=4]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 1 )
-shader_param/keep_size = false
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/scale = 0.0
-shader_param/glow_radius = 10.0
-shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 120.252, 138.594 )
 
 [node name="Crate" type="RigidBody2D" groups=[
@@ -32,17 +23,12 @@ grab_force = Vector2( 60, 60 )
 [node name="Selectable" type="Sprite" parent="." groups=[
 "selectable",
 ]]
-material = SubResource( 1 )
 scale = Vector2( 0.66, 0.66 )
 texture = ExtResource( 4 )
 script = ExtResource( 2 )
 description_key = "Description006"
-offset_key = "offset"
-effect_key = "scale"
-effect_hover = 1.0
-clone_material = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.561157, -1.12244 )
 scale = Vector2( 0.66, 0.66 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )

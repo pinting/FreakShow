@@ -1,8 +1,8 @@
 class_name ViewableDisplay
 extends Node
 
-# Process user input after this amount of seconds, so the user cannot click through stuff
-export var input_delay: float = 0.1
+# Selectable script
+export (Script) var selectable_script = preload("res://Prefabs/Selectable/PureSelectable.gd")
 
 # Display material
 export (ShaderMaterial) var display_material = preload("res://Materials/ViewableDisplayMaterial.tres")
@@ -18,6 +18,9 @@ export var effect_min: float = 0.0
 
 # Effect maximum
 export var effect_max: float = 20.0
+
+# Process user input after this amount of seconds, so the user cannot click through stuff
+export var input_delay: float = 0.1
 
 onready var tween: Tween = $Tween
 onready var display: Node2D = $Display
@@ -49,10 +52,10 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	
 	# Create a duplicate from the incoming Viewable and set the correct parameters
 	var dupe = viewable.duplicate()
-
-	dupe.material = display_material.duplicate()
-	dupe.material.set_shader_param(effect_key, effect_max)
 	
+	dupe.set_script(selectable_script)
+	dupe.material = display_material
+	dupe.material.set_shader_param(effect_key, effect_max)
 	dupe.scale = Vector2(child_scale, child_scale)
 	dupe.rotation_degrees = 0.0
 	dupe.position = Vector2.ZERO

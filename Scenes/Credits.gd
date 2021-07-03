@@ -18,8 +18,6 @@ onready var text_top = $TextCanvas/Top
 func _ready() -> void:
 	connect("scene_started", self, "_on_scene_started")
 
-	disable_auto_restart = true
-
 func _on_scene_started() -> void:
 	black_screen.fade_out(2.0)
 	yield(Tools.timer(credits_delay), "timeout")

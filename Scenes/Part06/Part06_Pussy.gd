@@ -1,4 +1,4 @@
-extends "res://Prefabs/Selectable/Selectable.gd"
+extends Selectable
 
 onready var inside = $Inside
 onready var filled = $Filled

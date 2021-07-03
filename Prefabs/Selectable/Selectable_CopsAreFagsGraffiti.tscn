@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=1]
+[ext_resource path="res://Prefabs/Selectable/PureSelectable.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti15.png" type="Texture" id=2]
-
 
 [node name="Selectable_CopsAreFagsGraffiti" type="Sprite" groups=[
 "selectable",
@@ -13,4 +12,4 @@ rotation = -0.114528
 scale = Vector2( 0.575347, 0.543844 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
-description_key = "Cops are fags"
+description_key = "Description033"

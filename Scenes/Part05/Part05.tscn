@@ -15,34 +15,27 @@
 [ext_resource path="res://Assets/Environmnent/Surface/Wall07.png" type="Texture" id=13]
 [ext_resource path="res://Scenes/Part05/Part05_BuildingBegin.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Assets/Sounds/Door02.wav" type="AudioStream" id=15]
+[ext_resource path="res://DefaultEnvironment.tres" type="Environment" id=16]
 [ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=18]
 
-[sub_resource type="Environment" id=1]
-background_mode = 4
-glow_enabled = true
-glow_intensity = 0.1
-glow_strength = 0.9
-glow_blend_mode = 0
-glow_hdr_threshold = 0.1
-
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.362319, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0.637681, 0.296875, 0.0261056, 0.0261056, 0 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 width = 250
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 214485, 2296.39 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 5.57422, 1044.97 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 872.377, 50.7571 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 493.805, 110.137 )
 
 [node name="Part05" type="Node2D"]
@@ -60,8 +53,10 @@ position = Vector2( -29837.9, 1210.61 )
 scale = Vector2( 0.699999, -0.699999 )
 follow_node = NodePath("../Player")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
-environment = SubResource( 1 )
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=[
+"world_environment",
+]]
+environment = ExtResource( 16 )
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 524288
@@ -103,7 +98,7 @@ position = Vector2( 0.405499, -15573.7 )
 rotation = -1.5708
 scale = Vector2( 2.38267, 2000 )
 z_index = 3
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 300, 250 )
 
@@ -184,11 +179,11 @@ collision_mask = 15
 
 [node name="Bottom" type="CollisionShape2D" parent="BaseScene/Dynamic/Trigger/FallToDeath"]
 position = Vector2( 22425.2, 20183.7 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="EndPlatformSide" type="CollisionShape2D" parent="BaseScene/Dynamic/Trigger/FallToDeath"]
 position = Vector2( -18673.1, 16975.7 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="GameEnd" type="Area2D" parent="BaseScene/Dynamic/Trigger"]
 position = Vector2( -12333.7, 2935.58 )
@@ -197,15 +192,15 @@ collision_mask = 8
 
 [node name="CollisionShape00" type="CollisionShape2D" parent="BaseScene/Dynamic/Trigger/GameEnd"]
 position = Vector2( -305.164, -71.5574 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape01" type="CollisionShape2D" parent="BaseScene/Dynamic/Trigger/GameEnd"]
 position = Vector2( 864.465, -214.329 )
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="CollisionShape02" type="CollisionShape2D" parent="BaseScene/Dynamic/Trigger/GameEnd"]
 position = Vector2( 1773.9, -407.951 )
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 

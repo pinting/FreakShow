@@ -1,21 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Part02/Part02_PhoneBox.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable_BluePhone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Environmnent/Phone00.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Environmnent/Phone00_Glow.png" type="Texture" id=5]
-[ext_resource path="res://Shaders/Grab.shader" type="Shader" id=7]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 7 )
-shader_param/keep_size = true
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/scale = 0.0
-shader_param/glow_radius = 10.0
-shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
-
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
 [node name="Part02_PhoneBox" type="Sprite"]
@@ -26,13 +17,11 @@ script = ExtResource( 1 )
 
 [node name="Phone" parent="." instance=ExtResource( 2 )]
 visible = false
-material = SubResource( 1 )
 position = Vector2( -1.2998, -42.096 )
-effect_key = "scale"
 effect_hover = 1.25
 
 [node name="Lamp" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( -0.856445, 0 )
 texture = ExtResource( 5 )
 

@@ -21,30 +21,24 @@
 [ext_resource path="res://Prefabs/Viewable/Viewable_Blessing00.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Prefabs/TextViewable/TextViewable.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Prefabs/TextViewable/TextViewable_Letter01.tscn" type="PackedScene" id=21]
+[ext_resource path="res://DefaultEnvironment.tres" type="Environment" id=22]
 
-[sub_resource type="Environment" id=1]
-background_mode = 4
-glow_enabled = true
-glow_intensity = 1.0
-glow_strength = 1.4
-glow_hdr_threshold = 0.4
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1458.7, 55.4996 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 1458.7, 55.4996 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 1458.7, 55.4996 )
+extents = Vector2( 70.4053, 1210.01 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 70.4053, 1210.01 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 70.4053, 1210.01 )
-
-[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 35.5979, 35.9004 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 558.552, 409.674 )
 
 [node name="Demo" type="Node2D"]
@@ -67,8 +61,10 @@ follow_node = NodePath("../Player")
 light_mask = 0
 color = Color( 0.294118, 0.294118, 0.294118, 1 )
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
-environment = SubResource( 1 )
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=[
+"world_environment",
+]]
+environment = ExtResource( 22 )
 
 [node name="Sky" parent="BaseScene" instance=ExtResource( 14 )]
 
@@ -103,33 +99,35 @@ collision_mask = 7
 
 [node name="Top" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
 position = Vector2( 1453.57, -2183.42 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Bottom" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
 position = Vector2( 1453.57, 113.265 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Left" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
 position = Vector2( -67.959, -1030.71 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Right" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
 position = Vector2( 2978.87, -1030.71 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="Lamp00" parent="BaseScene/Environment" instance=ExtResource( 5 )]
 position = Vector2( 796.353, 366.895 )
 z_index = -1
 
 [node name="Light" parent="BaseScene/Environment/Lamp00" instance=ExtResource( 4 )]
-position = Vector2( -290.091, 915.182 )
+position = Vector2( -541.523, 915.182 )
+scale = Vector2( 1.79918, 0.554654 )
 
 [node name="Lamp01" parent="BaseScene/Environment" instance=ExtResource( 5 )]
 position = Vector2( 2447.87, 366.895 )
 z_index = -1
 
 [node name="Light" parent="BaseScene/Environment/Lamp01" instance=ExtResource( 4 )]
-position = Vector2( -290.091, 915.182 )
+position = Vector2( -541.523, 915.182 )
+scale = Vector2( 1.79918, 0.554654 )
 
 [node name="Ball" parent="BaseScene/Environment" instance=ExtResource( 8 )]
 position = Vector2( 2457.1, 1156.7 )
@@ -206,7 +204,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/LockArea"]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="BallArea" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 2622.99, 828.714 )
@@ -225,6 +223,4 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/BallArea"]
 position = Vector2( 8.46143, 10.549 )
-shape = SubResource( 7 )
-
-[node name="Sound" type="Node" parent="BaseScene"]
+shape = SubResource( 6 )

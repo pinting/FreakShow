@@ -10,7 +10,7 @@ func _ready():
 	inside_hoop.connect("body_entered", self, "_trigger_in_hoop")
 
 func _trigger_in_hoop(ball: Node) -> void:
-	if not ball.is_in_group("ball") or not inside_hoop.visible:
+	if not ball.is_in_group("_ball") or not inside_hoop.visible:
 		return
 	
 	while ball.held:

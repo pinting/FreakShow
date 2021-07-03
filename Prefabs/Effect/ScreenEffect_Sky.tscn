@@ -5,7 +5,7 @@
 [ext_resource path="res://Shaders/Glow.shader" type="Shader" id=3]
 [ext_resource path="res://Assets/Environmnent/Sky00.png" type="Texture" id=4]
 [ext_resource path="res://Shaders/Fog.shader" type="Shader" id=5]
-[ext_resource path="res://Prefabs/Effect/ScreenEffect_Fog.gd" type="Script" id=6]
+[ext_resource path="res://Prefabs/ScrollingFog.gd" type="Script" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -23,25 +23,23 @@ shader_param/noise_scale = 20.0
 shader_param/alpha_power = 1.5
 shader_param/octaves = 4
 
-[node name="Sky" type="CanvasLayer"]
+[node name="ScreenEffect_Sky" type="CanvasLayer"]
 layer = -100
-script = ExtResource( 6 )
-color = Color( 0.156863, 0.156863, 0, 1 )
 
 [node name="Sky" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 0.984314, 1 )
 light_mask = 0
 material = SubResource( 1 )
 position = Vector2( 480.088, 270.049 )
-scale = Vector2( 0.499909, 0.499909 )
+scale = Vector2( 2, 2 )
 z_index = -100
 z_as_relative = false
 texture = ExtResource( 4 )
 
 [node name="Light" type="Sprite" parent="Sky"]
 self_modulate = Color( 1, 0.772549, 0, 0.27451 )
-position = Vector2( 673.885, -369.108 )
-scale = Vector2( 0.513726, 0.513726 )
+position = Vector2( 168.441, -92.2602 )
+scale = Vector2( 0.128408, 0.128408 )
 texture = ExtResource( 2 )
 
 [node name="Moon" type="Sprite" parent="Sky/Light"]
@@ -51,10 +49,15 @@ use_parent_material = true
 position = Vector2( 0, 6.10352e-05 )
 texture = ExtResource( 1 )
 
-[node name="Canvas" type="ColorRect" parent="."]
+[node name="Canvas" type="ColorRect" parent="." groups=[
+"auto_visible",
+"high_performance",
+]]
+visible = false
 material = SubResource( 3 )
 margin_right = 960.0
 margin_bottom = 540.0
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

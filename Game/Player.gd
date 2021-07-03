@@ -13,6 +13,9 @@ export var sync_player: bool = false
 # Since player after this amount of seconds passed
 export var sync_player_delay: float = 2.0
 
+# Disable jumping
+export var disable_jump: bool = false
+
 # Max velocity
 export var max_speed: float = 320.0
 
@@ -313,8 +316,10 @@ func _get_direction() -> Vector2:
 	var up_strength = VirtualInput.get_action_strength("move_up")
 	var down_strength = VirtualInput.get_action_strength("move_down")
 	
-	var can_go_up = avatar_mode or (is_on_floor() and not crouching and not top_colliding) or gravity < eps
-	var can_go_down = avatar_mode or (not is_on_floor() and not crouching)
+	var on_floor = is_on_floor()
+	var can_jump = on_floor and not crouching and not top_colliding and not disable_jump
+	var can_go_up = avatar_mode or gravity < eps or can_jump
+	var can_go_down = avatar_mode or (not on_floor and not crouching)
 	
 	var x = right_strength - left_strength
 	var y = (down_strength if can_go_down else 0.0) - (up_strength if can_go_up else 0.0)

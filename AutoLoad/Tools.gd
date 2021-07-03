@@ -29,6 +29,7 @@ func destroy(object: Object):
 	if parent:
 		parent.remove_child(object)
 	
+	object.set_script(null)
 	object.queue_free()
 
 # Generate a random integer

@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Materials/GrabMaterial.tres" type="Material" id=1]
 [ext_resource path="res://Assets/Environmnent/Button00.png" type="Texture" id=2]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=3]
 
@@ -8,7 +7,6 @@
 "selectable",
 ]]
 light_mask = -2147483647
-material = ExtResource( 1 )
 position = Vector2( 1029.39, 38.4341 )
 texture = ExtResource( 2 )
 script = ExtResource( 3 )

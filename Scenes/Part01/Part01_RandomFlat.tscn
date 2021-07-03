@@ -1,8 +1,7 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Prefabs/Selectable/Selectable_WoodenDoor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/RollingChild.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Prefabs/Static/Static_WashingMachine00.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Light/Light_Room.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Static/Static_RoomLamp00.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Environmnent/Building00_1x7_Bottom.png" type="Texture" id=6]
@@ -37,8 +36,17 @@
 [ext_resource path="res://Assets/Environmnent/Decoration/Paper08.png" type="Texture" id=35]
 [ext_resource path="res://Prefabs/RandomChild.tscn" type="PackedScene" id=36]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1843.14, 10 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 2756.7, 99.7452 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 208.582, 679.61 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 208.582, 679.61 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 2176.26, 10 )
 
 [node name="Part01_RandomFlat" type="Node2D"]
 position = Vector2( -664.621, -49.3025 )
@@ -49,17 +57,60 @@ position = Vector2( 324.193, -43.0864 )
 z_index = -4
 z_as_relative = false
 
+[node name="RandomWall" parent="Inside" instance=ExtResource( 36 )]
+position = Vector2( 340.428, 104.815 )
+
+[node name="Wall00" type="Sprite" parent="Inside/RandomWall"]
+position = Vector2( -704.936, -140.362 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 2500, 576 )
+region_filter_clip = true
+
+[node name="Wall01" type="Sprite" parent="Inside/RandomWall"]
+position = Vector2( -703.936, -140.362 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 27 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5500, 1000 )
+region_filter_clip = true
+
+[node name="Wall02" type="Sprite" parent="Inside/RandomWall"]
+position = Vector2( -703.936, -140.362 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 28 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5500, 1000 )
+region_filter_clip = true
+
+[node name="Wall03" type="Sprite" parent="Inside/RandomWall"]
+position = Vector2( -703.936, -140.362 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 26 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5500, 1000 )
+region_filter_clip = true
+
+[node name="Wall04" type="Sprite" parent="Inside/RandomWall"]
+position = Vector2( -703.936, -140.362 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 13 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5500, 1000 )
+region_filter_clip = true
+
 [node name="RandomCupboard" parent="Inside" instance=ExtResource( 36 )]
-position = Vector2( 382.269, 82.1108 )
+position = Vector2( 382.269, 171.899 )
 
 [node name="Cupboard00" parent="Inside/RandomCupboard" instance=ExtResource( 9 )]
-position = Vector2( -840.831, 233.744 )
+position = Vector2( 336.972, -264.883 )
 z_index = 1
 collision_layer = 0
 collision_mask = 0
 
 [node name="Cupboard01" parent="Inside/RandomCupboard" instance=ExtResource( 9 )]
-position = Vector2( -3028.31, 215.175 )
+position = Vector2( -2134.59, -264.883 )
 z_index = 1
 collision_layer = 0
 collision_mask = 0
@@ -71,64 +122,43 @@ position = Vector2( -2811.43, -25.4822 )
 position = Vector2( -2811.43, -25.4822 )
 
 [node name="RandomChair" parent="Inside" instance=ExtResource( 36 )]
-position = Vector2( 296.889, 66.9067 )
+position = Vector2( 296.889, 156.695 )
 
 [node name="Chair00" parent="Inside/RandomChair" instance=ExtResource( 12 )]
-position = Vector2( -2010.36, 284.799 )
+position = Vector2( -2507.23, 81.799 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
 [node name="Chair01" parent="Inside/RandomChair" instance=ExtResource( 12 )]
-position = Vector2( -1288.07, 283.686 )
+position = Vector2( -1646.82, 80.686 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
 [node name="Chair02" parent="Inside/RandomChair" instance=ExtResource( 12 )]
-position = Vector2( -548.393, 274.827 )
+position = Vector2( -824.393, 71.827 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
 [node name="Chair03" parent="Inside/RandomChair" instance=ExtResource( 12 )]
-position = Vector2( 126.777, 274.827 )
+position = Vector2( 2.94836, 71.827 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
 [node name="Chair04" parent="Inside/RandomChair" instance=ExtResource( 12 )]
-position = Vector2( 941.508, 274.827 )
+position = Vector2( 817.68, 71.827 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
-
-[node name="Chair05" parent="Inside/RandomChair" instance=ExtResource( 12 )]
-position = Vector2( 941.508, 274.827 )
-scale = Vector2( 0.896382, 1 )
-z_index = 1
-
-[node name="RandomWashingMachine" parent="Inside" instance=ExtResource( 36 )]
-position = Vector2( 296.889, 66.9067 )
-
-[node name="WashingMachine00" parent="Inside/RandomWashingMachine" instance=ExtResource( 3 )]
-position = Vector2( -1941.81, 100.553 )
-z_index = 1
-
-[node name="Empty00" type="Node2D" parent="Inside/RandomWashingMachine"]
-position = Vector2( -2767.89, 0 )
-
-[node name="Empty01" type="Node2D" parent="Inside/RandomWashingMachine"]
-position = Vector2( -2767.89, 0 )
-
-[node name="Empty02" type="Node2D" parent="Inside/RandomWashingMachine"]
-position = Vector2( -2767.89, 0 )
 
 [node name="RandomTable" parent="Inside" instance=ExtResource( 36 )]
-position = Vector2( 296.889, 66.9067 )
+position = Vector2( 296.889, 156.695 )
 
 [node name="Table00" parent="Inside/RandomTable" instance=ExtResource( 10 )]
-position = Vector2( -677.733, 276.432 )
+position = Vector2( 409.516, 125.071 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
 [node name="Table01" parent="Inside/RandomTable" instance=ExtResource( 10 )]
-position = Vector2( -2167.75, 266.873 )
+position = Vector2( -1232.67, 115.512 )
 scale = Vector2( 0.896382, 1 )
 z_index = 1
 
@@ -139,6 +169,7 @@ position = Vector2( 6.10352e-05, 0 )
 position = Vector2( 6.10352e-05, 0 )
 
 [node name="RandomDecoration" parent="Inside" instance=ExtResource( 36 )]
+position = Vector2( 0, 89.7881 )
 
 [node name="Decoration00" type="Sprite" parent="Inside/RandomDecoration"]
 position = Vector2( -939.276, -109.696 )
@@ -146,7 +177,7 @@ scale = Vector2( 0.516053, 0.516053 )
 texture = ExtResource( 35 )
 
 [node name="Decoration01" type="Sprite" parent="Inside/RandomDecoration"]
-position = Vector2( 1167.21, -62.4365 )
+position = Vector2( 1395.25, -62.4365 )
 scale = Vector2( 0.44387, 0.44387 )
 texture = ExtResource( 17 )
 
@@ -156,7 +187,7 @@ scale = Vector2( 0.124458, 0.115656 )
 texture = ExtResource( 16 )
 
 [node name="Decoration03" type="Sprite" parent="Inside/RandomDecoration"]
-position = Vector2( 1172.17, -41.2036 )
+position = Vector2( 1400.21, -41.2036 )
 scale = Vector2( 0.29442, 0.29442 )
 texture = ExtResource( 18 )
 
@@ -165,6 +196,7 @@ position = Vector2( -940.317, -118.74 )
 scale = Vector2( 0.265109, 0.265109 )
 
 [node name="RandomFloor" parent="Inside" instance=ExtResource( 36 )]
+position = Vector2( 0, 89.7881 )
 z_index = -1
 
 [node name="Floor00" type="Sprite" parent="Inside/RandomFloor"]
@@ -215,116 +247,88 @@ texture = ExtResource( 31 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 10000, 300 )
 
-[node name="RandomWall" parent="Inside" instance=ExtResource( 36 )]
-position = Vector2( 340.428, 92.3889 )
-
-[node name="Wall00" type="Sprite" parent="Inside/RandomWall"]
-position = Vector2( -706.714, -106.536 )
-scale = Vector2( 0.896382, 1 )
-texture = ExtResource( 7 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 5000, 576 )
-region_filter_clip = true
-
-[node name="Wall01" type="Sprite" parent="Inside/RandomWall"]
-position = Vector2( -706.714, -106.536 )
-scale = Vector2( 0.896382, 1 )
-texture = ExtResource( 27 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 5000, 576 )
-region_filter_clip = true
-
-[node name="Wall02" type="Sprite" parent="Inside/RandomWall"]
-position = Vector2( -706.714, -106.536 )
-scale = Vector2( 0.896382, 1 )
-texture = ExtResource( 28 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 5000, 576 )
-region_filter_clip = true
-
-[node name="Wall03" type="Sprite" parent="Inside/RandomWall"]
-position = Vector2( -706.714, -106.536 )
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 26 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 5000, 722 )
-region_filter_clip = true
-
-[node name="Wall04" type="Sprite" parent="Inside/RandomWall"]
-position = Vector2( -706.714, -106.536 )
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 13 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 5000, 722 )
-region_filter_clip = true
-
 [node name="RollingLetter" parent="Inside" instance=ExtResource( 2 )]
-position = Vector2( -366.286, -14.1475 )
+position = Vector2( -366.286, 75.6406 )
 scale = Vector2( 0.8, 0.8 )
 key = "Part01_Letters"
 
 [node name="Letter00" parent="Inside/RollingLetter" instance=ExtResource( 34 )]
-position = Vector2( -233.862, -122.901 )
+position = Vector2( -218.862, -177.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Letter01" parent="Inside/RollingLetter" instance=ExtResource( 21 )]
-position = Vector2( -233.862, -122.901 )
+position = Vector2( -218.862, -177.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Letter02" parent="Inside/RollingLetter" instance=ExtResource( 19 )]
-position = Vector2( -233.862, -122.901 )
+position = Vector2( -218.862, -177.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Letter03" parent="Inside/RollingLetter" instance=ExtResource( 20 )]
-position = Vector2( -233.862, -122.901 )
+position = Vector2( -218.862, -177.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Letter04" parent="Inside/RollingLetter" instance=ExtResource( 22 )]
-position = Vector2( -233.862, -122.901 )
+position = Vector2( -218.862, -177.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Door" parent="Inside" instance=ExtResource( 1 )]
-position = Vector2( -189.387, 11.2935 )
-scale = Vector2( 0.85, 0.85 )
+position = Vector2( -189.387, 58.8038 )
+scale = Vector2( 0.975, 0.975 )
 texture = ExtResource( 14 )
 
 [node name="RoomLamp00" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -935.385, -245.369 )
+position = Vector2( -1014.82, -309.123 )
+scale = Vector2( 1.1156, 1 )
 z_index = 2
 z_as_relative = false
+collision_layer = 4
+collision_mask = 4
 
 [node name="Light" parent="Inside/RoomLamp00" instance=ExtResource( 4 )]
-position = Vector2( 1.22949, 18.5236 )
-scale = Vector2( 1.62313, 0.95 )
+position = Vector2( 14.9398, 7.73397 )
+scale = Vector2( 1.623, 1.15 )
 
 [node name="RoomLamp01" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 725.906, -247.314 )
+position = Vector2( 812.53, -311.068 )
+scale = Vector2( 1.1156, 1 )
 z_index = 2
 z_as_relative = false
+collision_layer = 4
+collision_mask = 4
 
 [node name="Light" parent="Inside/RoomLamp01" instance=ExtResource( 4 )]
-position = Vector2( 14.9396, 12.9938 )
-scale = Vector2( 1.62531, 0.95 )
+position = Vector2( 14.9396, 11.8714 )
+scale = Vector2( 1.625, 1.15 )
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
 position = Vector2( 376.119, 0 )
 collision_layer = 15
 collision_mask = 15
 
-[node name="Walls" type="CollisionPolygon2D" parent="CollisionAll"]
-polygon = PoolVector2Array( -2144.95, -310.92, 1278.02, -296.672, 1275.33, 335.12, -2132.85, 345.068, -2123.44, -422.492, -2372.15, -418.077, -2377.75, 518.065, 1497.67, 528.145, 1504.21, -434.131, -2143.6, -417.115 )
+[node name="Top" type="CollisionShape2D" parent="CollisionAll"]
+position = Vector2( 42.5016, -447.627 )
+shape = SubResource( 5 )
+
+[node name="Left" type="CollisionShape2D" parent="CollisionAll"]
+position = Vector2( -2668.95, 139.691 )
+shape = SubResource( 6 )
+
+[node name="Right" type="CollisionShape2D" parent="CollisionAll"]
+position = Vector2( 1773.99, 139.691 )
+shape = SubResource( 7 )
 
 [node name="CollisionBack" type="StaticBody2D" parent="."]
-position = Vector2( -1830.44, -2009.37 )
+position = Vector2( -1830.44, -1928.64 )
 scale = Vector2( 1, 0.937116 )
 z_index = 100
 
 [node name="Ground" type="CollisionShape2D" parent="CollisionBack"]
 position = Vector2( 1788.39, 2424.27 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="CollisionCenter" type="StaticBody2D" parent="."]
-position = Vector2( -1824.69, -1978.28 )
+position = Vector2( -1824.69, -1897.55 )
 scale = Vector2( 1, 0.937116 )
 z_index = 100
 collision_layer = 2
@@ -332,10 +336,10 @@ collision_mask = 2
 
 [node name="Ground" type="CollisionShape2D" parent="CollisionCenter"]
 position = Vector2( 1787.72, 2446.91 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="CollisionFront" type="StaticBody2D" parent="."]
-position = Vector2( -1822.06, -1943.05 )
+position = Vector2( -1822.06, -1862.32 )
 scale = Vector2( 1, 0.937116 )
 z_index = 100
 collision_layer = 4
@@ -343,7 +347,7 @@ collision_mask = 4
 
 [node name="Ground" type="CollisionShape2D" parent="CollisionFront"]
 position = Vector2( 1790.55, 2442.76 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="Building" type="Node2D" parent="."]
 position = Vector2( -12.3802, -690.529 )
@@ -352,19 +356,23 @@ z_index = 4
 
 [node name="Building_Top" type="Sprite" parent="Building"]
 light_mask = 2
-position = Vector2( 1.52588e-05, -0.228821 )
+position = Vector2( -19.734, -69.8103 )
+scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 25 )
 region_rect = Rect2( 0, 0, 3144, 709 )
 
 [node name="Building_Bottom" type="Sprite" parent="Building"]
 light_mask = 2
-position = Vector2( 0.222198, 706.33 )
+position = Vector2( -20.4164, 779.742 )
+scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 6 )
 
 [node name="Building_Left" type="Sprite" parent="Building"]
-position = Vector2( -1121.66, 354.076 )
+position = Vector2( -1367.09, 354.076 )
+scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 24 )
 
 [node name="Building_Right" type="Sprite" parent="Building"]
-position = Vector2( 1107.5, 354.022 )
+position = Vector2( 1309.16, 354.522 )
+scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 23 )

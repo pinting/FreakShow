@@ -18,7 +18,7 @@ func set_display(cursor_display: VirtualCursorDisplay) -> void:
 	emit_signal("display_changed")
 
 func is_free(owner: int):
-	return current_owner == -1 or current_owner == owner
+	return not is_hidden() and (current_owner == -1 or current_owner == owner)
 
 func set_icon(type: String, owner: int, force: bool = false):
 	if not display or (not force and not is_free(owner)):

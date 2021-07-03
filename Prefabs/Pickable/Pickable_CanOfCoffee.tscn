@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=1]
-[ext_resource path="res://Materials/GrabMaterial.tres" type="Material" id=2]
 [ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Environmnent/Misc17.png" type="Texture" id=4]
 
@@ -24,14 +23,10 @@ script = ExtResource( 3 )
 [node name="Selectable" type="Sprite" parent="." groups=[
 "selectable",
 ]]
-material = ExtResource( 2 )
 scale = Vector2( 0.85, 0.85 )
 texture = ExtResource( 4 )
 script = ExtResource( 1 )
 description_key = "Description017"
-offset_key = "offset"
-effect_key = "scale"
-effect_hover = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

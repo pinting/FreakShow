@@ -16,6 +16,12 @@ export var cancel_button_timeout: float = 1.0
 # Auto fade out
 export var auto_fade_out: bool = true
 
+# Disable cancel button
+export var disable_cancel_button: bool = false
+
+# Disable auto restart
+export var disable_auto_restart: bool = false
+
 onready var subtitle_display = $SubtitleDisplay
 onready var viewable_display = $ViewableDisplay 
 onready var black_screen = $BlackScreen
@@ -27,31 +33,49 @@ var current_second: float = 0.0
 
 var held_pickable: RigidBody2D = null
 
-var disable_auto_restart: bool = false
-var auto_restart_counter: float = 0.0
-
-var disable_cancel_button: bool = false
 var cancel_button_counter: float = 0.0
+var auto_restart_counter: float = 0.0
 
 var player_move_in_progress: bool = false
 
 func _ready() -> void:
-	for node in get_tree().get_nodes_in_group("pickable"):
+	if Config.low_performance:
+		_low_performance_mode()
+	else:
+		_high_performance_mode()
+	
+	var tree = get_tree()
+	
+	for node in tree.get_nodes_in_group("pickable"):
 		node.connect("picked", self, "_on_pickable_picked")
+	
+	for node in tree.get_nodes_in_group("auto_visible"):
+		node.visible = true
+
+func _low_performance_mode() -> void:
+	var tree = get_tree()
+	
+	for node in tree.get_nodes_in_group("high_performance"):
+		Tools.destroy(node)
+	
+	for node in tree.get_nodes_in_group("light"):
+		Tools.destroy(node)
+	
+	for node in tree.get_nodes_in_group("world_environment"):
+		node.environment = load("res://LowEnvironment.tres")
+
+func _high_performance_mode() -> void:
+	var tree = get_tree()
+	
+	for node in tree.get_nodes_in_group("fake_light"):
+		Tools.destroy(node)
 
 func _process(delta: float) -> void:
 	if current_delay < delay:
 		current_delay += delta
 		return
 	
-	var main_scene = ProjectSettings.get_setting("application/run/main_scene")
-	
-	if not disable_auto_restart:
-		if auto_restart_counter >= game_restart_after:
-			SceneLoader.load_scene(main_scene)
-		
-		auto_restart_counter += delta
-	
+	_process_auto_restart(delta)
 	_process_cancel_button(delta)
 	
 	if current_second == 0.0:
@@ -61,6 +85,17 @@ func _process(delta: float) -> void:
 			black_screen.fade_out()
 	
 	current_second += delta
+
+func _process_auto_restart(delta: float) -> void:
+	if disable_auto_restart:
+		return
+	
+	var main_scene = ProjectSettings.get_setting("application/run/main_scene")
+	
+	if auto_restart_counter >= game_restart_after:
+		SceneLoader.load_scene(main_scene)
+	
+	auto_restart_counter += delta
 
 func _process_cancel_button(delta: float) -> void:
 	if disable_cancel_button:
