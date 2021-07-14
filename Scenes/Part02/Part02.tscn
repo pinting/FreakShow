@@ -250,7 +250,7 @@ position = Vector2( -5508.19, -2427.62 )
 [node name="Lamp00" parent="BaseScene/Environment/Building01" instance=ExtResource( 25 )]
 position = Vector2( -1181.73, 1797.7 )
 scale = Vector2( 0.9, 0.9 )
-z_index = 1
+z_index = -1
 
 [node name="Light" parent="BaseScene/Environment/Building01/Lamp00" instance=ExtResource( 26 )]
 position = Vector2( -1184.55, 913.627 )
@@ -259,7 +259,7 @@ scale = Vector2( 3.67457, 1.10197 )
 [node name="Lamp01" parent="BaseScene/Environment/Building01" instance=ExtResource( 25 )]
 position = Vector2( 1268.27, 1797.7 )
 scale = Vector2( 0.9, 0.9 )
-z_index = 1
+z_index = -1
 
 [node name="Light" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource( 26 )]
 position = Vector2( -1182.14, 913.627 )
@@ -268,6 +268,7 @@ scale = Vector2( 3.67457, 1.10197 )
 [node name="Car00" parent="BaseScene/Environment/Building01" instance=ExtResource( 10 )]
 material = SubResource( 6 )
 position = Vector2( 0, 2371.01 )
+z_index = -1
 
 [node name="RoadBlock" parent="BaseScene/Environment" instance=ExtResource( 36 )]
 

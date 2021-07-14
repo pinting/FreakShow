@@ -73,7 +73,7 @@ shape = SubResource( 1 )
 position = Vector2( 701.674, 5338.83 )
 
 [node name="FlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( -3.36622, -0.365431 )
+position = Vector2( -3.36622, 11.6346 )
 
 [node name="RandomFlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( -487.468, 10181.4 )

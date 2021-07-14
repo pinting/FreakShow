@@ -1,7 +1,7 @@
 extends Node
 
 # Enable debug messages
-const DEBUG: bool = true
+const DEBUG: bool = false
 
 # Report endpoint
 const REPORT_URL: String = "https://j82k55n66d.execute-api.us-east-1.amazonaws.com/prod/report"
@@ -18,7 +18,7 @@ const SCENES = [
 	"res://Scenes/Part01/Part01.tscn",
 	"res://Scenes/Part02/Part02.tscn",
 	"res://Scenes/Part03/Part03.tscn",
-	"res://Scenes/Part04/Part04.tscn",
+#	"res://Scenes/Part04/Part04.tscn",
 #	"res://Scenes/Part05/Part05.tscn",
 #	"res://Scenes/Part06/Part06.tscn",
 	"res://Scenes/Credits.tscn"
@@ -37,7 +37,7 @@ var lock_mouse: bool = true
 var virtual_mouse_speed: Vector2 = Vector2(3, 3)
 
 # Low performance
-var low_performance: bool = true
+var low_performance: bool = false
 
 func _ready() -> void:
 	if not _exists():

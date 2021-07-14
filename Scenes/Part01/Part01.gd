@@ -87,6 +87,8 @@ func _on_flat_exit_selected() -> void:
 func _on_hallway_door_selected(door, index) -> void:
 	player_is_in_hallway = false
 	
+	_reset_hallway_wait()
+	
 	if index == hallway_home_index:
 		if not hallway_exit_open:
 			hallway_spawn.global_position = door.global_position
@@ -122,7 +124,6 @@ func _process(delta: float) -> void:
 		return
 	
 	if not player_is_in_hallway:
-		_reset_hallway_wait()
 		return
 	
 	var player_position = player.global_position.x

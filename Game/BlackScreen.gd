@@ -18,6 +18,8 @@ func is_faded() -> bool:
 func fade_in(duration: float = 1.0) -> Tween:
 	assert(duration > 0.0, "Duration needs to be greater than zero")
 	
+	tween.stop_all()
+	
 	tween.interpolate_property(
 		color_rect,
 		"modulate:a",
@@ -36,6 +38,8 @@ func fade_in(duration: float = 1.0) -> Tween:
 
 func fade_out(duration: float = 1.0) -> Tween:
 	assert(duration > 0.0, "Duration needs to be greater than zero")
+	
+	tween.stop_all()
 	
 	tween.interpolate_property(
 		color_rect,

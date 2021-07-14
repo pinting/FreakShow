@@ -12,8 +12,8 @@ static func select_child(parent: Node, key: String):
 	if not count:
 		return
 	
-	var n = Save.get_value("temp", key, 0)
+	var n = Save.get_temp(key, 0)
 	
-	Save.set_value("temp", key, (n + 1) % count)
+	Save.set_temp(key, (n + 1) % count)
 	
 	return Tools.keep_child_at(parent, n % count)
