@@ -11,7 +11,6 @@ export var description_fade_duration: float = 0.33
 export var line_break: String = "\r\n"
 
 onready var tween: Tween = $Tween
-onready var describe_tween: Tween = $DescribeTween
 
 onready var top_label: Label = $TopLabel
 onready var bottom_label: Label = $BottomLabel
@@ -82,10 +81,9 @@ func set_describe(owner: int, text: String, keep: bool = false) -> void:
 	current_describe_owner = owner
 	keep_describe = keep
 	
-	if describe_tween.is_active():
-		describe_tween.stop_all()
+	tween.stop(top_label, "modulate:a")
 	
-	describe_tween.interpolate_property(
+	tween.interpolate_property(
 		top_label,
 		"modulate:a",
 		top_label.modulate.a,
@@ -94,7 +92,7 @@ func set_describe(owner: int, text: String, keep: bool = false) -> void:
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN_OUT)
 	
-	describe_tween.start()
+	tween.start()
 
 func reset_describe(owner: int, force: bool = false) -> void:
 	_debug(str("Remove describe for '", owner, "'", " with force" if force else ""))
@@ -105,10 +103,9 @@ func reset_describe(owner: int, force: bool = false) -> void:
 	current_describe_owner = null
 	keep_describe = false
 	
-	if describe_tween.is_active():
-		describe_tween.stop_all()
+	tween.stop(top_label, "modulate:a")
 	
-	describe_tween.interpolate_property(
+	tween.interpolate_property(
 		top_label,
 		"modulate:a",
 		top_label.modulate.a,
@@ -117,15 +114,17 @@ func reset_describe(owner: int, force: bool = false) -> void:
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN_OUT)
 	
-	describe_tween.start()
+	tween.start()
 	
-	yield(describe_tween, "tween_completed")
+	yield(tween, "tween_completed")
 	
 	if current_describe_owner == null:
 		top_label.text = ""
 
 func show_quote(text: String, duration: float = 5.0) -> void:
 	center_label.text = text
+	
+	tween.stop(center_label, "modulate:a")
 	
 	tween.interpolate_property(
 		center_label,
@@ -138,7 +137,9 @@ func show_quote(text: String, duration: float = 5.0) -> void:
 	
 	tween.start()
 
-func hide_quote(duration: float = 5.0) -> void:
+func hide_quote(duration: float = 5.0) -> void:	
+	tween.stop(center_label, "modulate:a")
+	
 	tween.interpolate_property(
 		center_label,
 		"modulate:a",

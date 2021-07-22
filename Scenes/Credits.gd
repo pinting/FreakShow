@@ -19,6 +19,7 @@ func _ready() -> void:
 	connect("scene_started", self, "_on_scene_started")
 
 func _on_scene_started() -> void:
+	VirtualCursorManager.hide()
 	black_screen.fade_out(2.0)
 	yield(Tools.timer(credits_delay), "timeout")
 

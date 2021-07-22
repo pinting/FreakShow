@@ -8,6 +8,9 @@ export var width_between_pillars: float = 3000.0
 export var pillar_high_offset: float = -370.0
 export var pillar_low_offset: float = 335.0
 
+const train_scene = preload("res://Prefabs/Static/Static_Train.tscn")
+const pillar_scene = preload("res://Scenes/Part05/Part05_DoublePillar.tscn")
+
 onready var player = $Player
 onready var camera = $GameCamera
 
@@ -23,9 +26,6 @@ onready var player_respawn = $Trigger/PlayerRespawn
 
 onready var main_music = $Sound/MainMusic
 onready var door_sound = $Sound/DoorSound
-
-const train_scene = preload("res://Prefabs/Static/Static_Train.tscn")
-const pillar_scene = preload("res://Scenes/Part05/Part05_DoublePillar.tscn")
 
 var train_wait_time: float = INF
 var train_counter: float = 0.0

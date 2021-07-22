@@ -1,8 +1,9 @@
 extends "res://Game/BaseScene.gd"
 
 export var teleport_player_to_end: bool = false
-export var ball_reposition_delay: float = 5.0
-export var ball_reposition_y_offset: float = 3000.0
+
+const ball_reposition_delay: float = 5.0
+const ball_reposition_y_offset: float = 3000.0
 
 onready var player: Player = $Player
 onready var animation_player: AnimationPlayer = $AnimationPlayer

@@ -1,32 +1,42 @@
 extends "res://Game/BaseScene.gd"
 
 export var teleport_player_to_end: bool = false
-export var path_finding_interval: float = 0.5
+
+const camera_change_duration: float = 2.0
+
+const start_camera_zoom: Vector2 = Vector2(5.0, 5.0)
+const start_follow_speed_scale: float = 2.0
+const start_follow_offset: float = 1.0
+
+const loop_camera_zoom: Vector2 = Vector2(4.0, 4.0)
+const loop_follow_speed_scale: float = 2.0
+const loop_follow_offset: float = 0.0
+
+const game_camera_zoom: Vector2 = Vector2(10.0, 10.0)
+const game_follow_speed_scale: float = 1.0
+const game_follow_offset: float = 0.0
+
+const end_camera_zoom: Vector2 = Vector2(5.0, 5.0)
+const end_follow_speed_scale: float = 2.0
+const end_follow_offset: float = 0.5
+
+const exit_camera_zoom: Vector2 = Vector2(3.0, 3.0)
+const exit_follow_speed_scale: float = 2.0
+const exit_follow_offset: float = 0.5
 
 onready var player = $Player
 onready var camera = $GameCamera
-onready var animation_player = $AnimationPlayer
 onready var debug_line = $DebugLine
 
+onready var boss = $Boss
+onready var boss_mouth = $Boss/MouthArea
+
 onready var entry_block = $Environment/Maze/EntryBlock
-
 onready var navigation = $Environment/Maze/Navigation
-onready var boss = $Environment/Maze/Boss
-onready var boss_mouth = $Environment/Maze/Boss/MouthArea
-
-onready var blocking_line_00 = $Environment/Maze/BlockingLine00
-onready var blocking_line_01 = $Environment/Maze/BlockingLine01
-onready var blocking_line_02 = $Environment/Maze/BlockingLine02
-
-onready var random_line_00 = $Environment/Maze/RandomLine00
-onready var random_line_01 = $Environment/Maze/RandomLine01
-onready var random_line_02 = $Environment/Maze/RandomLine02
-onready var random_line_03 = $Environment/Maze/RandomLine03
-onready var random_line_04 = $Environment/Maze/RandomLine04
+onready var tile_map = $Environment/Maze/Navigation/TileMap
 
 onready var exit_door = $Environment/EndPlatform/SteelBlock/WallBlock/ExitDoor
 onready var end_tube = $Environment/EndPlatform/EndTube
-onready var ghost = $Environment/EndPlatform/Ghost
 
 onready var wall_ending_bottom = $Environment/HiddenWalls/EndingBottom
 
@@ -34,7 +44,7 @@ onready var falling_down = $Trigger/FallingDown
 onready var before_game = $Trigger/BeforeGame
 onready var game_begin = $Trigger/GameBegin
 onready var game_end = $Trigger/GameEnd
-onready var end_door_area = $Trigger/EndDoorArea
+onready var exit_door_area = $Trigger/ExitDoorArea
 onready var player_respawn = $Trigger/PlayerRespawn
 onready var teleport_player = $Trigger/TeleportPlayer
 
@@ -47,11 +57,7 @@ var music_00: int
 var music_01: int
 
 var game_playing: bool = false
-var boss_follows: bool = false
-var path_finder_counter: float = 0.0
-
-var boss_base_position: Vector2
-var boss_base_rotation: float
+var ending_triggered: bool = false
 
 func _ready() -> void:
 	music_00 = main_music.add_part(0, 4 * 60 + 0.7, false, 0, 0, 0)
@@ -62,37 +68,24 @@ func _ready() -> void:
 	falling_down.connect("body_entered", self, "_trigger_falling_from_island", [], CONNECT_ONESHOT)
 	before_game.connect("body_entered", self, "_trigger_before_game", [], CONNECT_ONESHOT)
 	game_begin.connect("body_entered", self, "_trigger_game_begin")
-	boss_mouth.connect("body_entered", self, "_on_boss_touched")
+	boss_mouth.connect("body_entered", self, "_on_boss_mouth_interaction")
 	game_end.connect("body_entered", self, "_trigger_game_end")
-	end_door_area.connect("body_entered", self, "_on_exit_reached", [], CONNECT_ONESHOT)
+	exit_door.connect("selected", self, "_on_exit_door_selected")
 	player.connect("died", self, "_trigger_reset_game")
-	player.connect("reseted", self, "_on_player_reset")
-	
-	var blocking_lines = [blocking_line_00, blocking_line_01, blocking_line_02]
-	
-	blocking_lines[Tools.random_int(0, len(blocking_lines) - 1)].disable()
-	
-	var random_lines = [random_line_00, random_line_01, random_line_02, random_line_03, random_line_04]
-	
-	for n in range(Tools.random_int(0, len(random_lines) - 1)):
-		var i = Tools.random_int(0, len(random_lines) - 1)
-		
-		random_lines[i].disable()
-		random_lines.remove(i)
-	
-	boss_base_position = boss.global_position
-	boss_base_rotation = boss.rotation_degrees
 
 func _on_scene_started() -> void:
 	black_screen.fade_out(2.0)
-	camera.follow_speed = camera.base_follow_speed * 2
+	
+	camera.scale_follow_offset(start_follow_offset)
+	camera.scale_follow_speed(start_follow_speed_scale)
+	camera.change_zoom(start_camera_zoom, camera_change_duration)
 	
 	if teleport_player_to_end:
 		_trigger_falling_from_island(player)
 		_trigger_before_game(player)
 		_trigger_game_begin(player)
 		_trigger_game_end(player)
-		move_player(player, teleport_player.position)
+		move_player(player, teleport_player.global_position)
 		return
 	
 	connect_sound.play()
@@ -101,18 +94,20 @@ func _trigger_falling_from_island(body: Node) -> void:
 	if not body.is_in_group("player"):
 		return
 	
-	camera.follow_offset = Vector2.ZERO
+	camera.scale_follow_offset(loop_follow_offset)
+	camera.scale_follow_speed(loop_follow_speed_scale)
 	
 	if teleport_player_to_end:
 		return
 	
-	camera.change_zoom(Vector2(4.0, 4.0), 2.0)
+	camera.change_zoom(loop_camera_zoom, camera_change_duration)
 
 func _trigger_before_game(body: Node) -> void:
 	if not body.is_in_group("player"):
 		return
 	
 	player.current_velocity.x = 0.0
+	player.freeze(true)
 	
 	VirtualCursorManager.hide(false)
 
@@ -121,44 +116,54 @@ func _trigger_game_begin(body: Node) -> void:
 		return
 	
 	game_playing = true
-	camera.follow_speed = camera.base_follow_speed
 	
-	# If the actual game is turned off (for debug purposes)
+	camera.scale_follow_offset(game_follow_offset)
+	camera.scale_follow_speed(game_follow_speed_scale)
+	
 	if teleport_player_to_end:
 		return
 	
+	camera.change_zoom(game_camera_zoom, camera_change_duration)
+	
 	connect_sound.stop()
-	camera.change_zoom(Vector2(10.0, 10.0), 2.0)
 	player.freeze()
-	player.enable_avatar_mode()
 	entry_block.show()
-	yield(player.animation_player, "animation_finished")
+	yield(player.enable_avatar_mode(), "completed")
 	
 	main_music.play()
 	SubtitleManager.say(Text.find("Narrator004"), 0.5, 3.0)
-	yield(Tools.timer(2.0), "timeout")
 	player.unfreeze()
+	yield(Tools.timer(1.0), "timeout")
 	
-	boss_follows = true
+	boss.follows = true
 
-func _on_boss_touched(body: Node) -> void:
-	if not body.is_in_group("player"):
-		return
-	
-	player.kill()
-
-# When player is moved
-func _on_player_reset() -> void:
-	boss.path = []
-	boss.global_position = boss_base_position
-	boss.rotation_degrees = boss_base_rotation
+func _on_boss_mouth_interaction(body: Node) -> void:
+	if body.is_in_group("_removable_line_body"):
+		var removable_line = body.get_parent()
+		
+		if removable_line.enable_boss_interaction:
+			removable_line.hide()
+	elif body.is_in_group("player"):
+		player.kill()
 
 func _trigger_reset_game() -> void:
-	yield(Tools.timer(2.0), "timeout")
+	boss.go_back = true
 	
-	camera.follow_speed = camera.base_follow_speed * 2
+	yield(Tools.timer(2.0), "timeout")
+	yield(black_screen.fade_in(2.0), "tween_completed")
+	
 	game_playing = false
-	boss_follows = false
+	
+	camera.scale_follow_offset(loop_follow_offset)
+	camera.scale_follow_speed(loop_follow_speed_scale)
+	
+	boss.reset()
+	tile_map.reset()
+	
+	var lines = get_tree().get_nodes_in_group("_removable_line_reset")
+	
+	for line in lines:
+		line.reset()
 	
 	move_player(player, player_respawn.global_position)
 
@@ -166,9 +171,11 @@ func _trigger_game_end(body: Node) -> void:
 	if not body.is_in_group("player") or not game_playing:
 		return
 	
-	camera.follow_offset = camera.base_follow_offset / 2
-	camera.follow_speed = camera.base_follow_speed * 2
-	camera.change_zoom(Vector2(5.0, 5.0), 2.0)
+	boss.go_back = true
+	
+	camera.scale_follow_offset(end_follow_offset)
+	camera.scale_follow_speed(end_follow_speed_scale)
+	camera.change_zoom(end_camera_zoom, camera_change_duration)
 	
 	VirtualCursorManager.show()
 	wind_sound.play()
@@ -176,17 +183,25 @@ func _trigger_game_end(body: Node) -> void:
 	if teleport_player_to_end:
 		return
 	
+	main_music.kill(5.0)
+	
 	player.disable_avatar_mode()
 	player.disable_jump = true
-	main_music.kill(5.0)
+	
 	game_playing = false
 
-func _on_exit_reached(body: Node) -> void:
-	if not body.is_in_group("player"):
+func _on_exit_door_selected() -> void:
+	if ending_triggered or not exit_door_area.overlaps_body(player):
 		return
-
+	
+	ending_triggered = true
+	
+	camera.scale_follow_offset(exit_follow_offset)
+	camera.scale_follow_speed(exit_follow_speed_scale)
+	camera.change_zoom(exit_camera_zoom, camera_change_duration)
+	
+	VirtualCursorManager.hide()
 	player.freeze(true)
-	camera.change_zoom(Vector2(3.0, 3.0), 2.0)
 	yield(Tools.timer(4.0), "timeout")
 	falling_sound.play()
 	end_tube.open_mouth = true
@@ -197,23 +212,3 @@ func _on_exit_reached(body: Node) -> void:
 	yield(Tools.timer(1.0), "timeout")
 	
 	load_next_scene()
-
-func _process(delta: float) -> void:
-	if not boss_follows or boss.dead:
-		return
-	
-	path_finder_counter += delta
-	
-	if path_finder_counter <= path_finding_interval:
-		return
-	
-	var target = player.global_position
-	
-	if player.dead or not game_playing:
-		target = boss_base_position
-	
-	var path = navigation.get_simple_path(boss.global_position, target)
-	
-	boss.path = path
-	debug_line.points = path
-	path_finder_counter = 0.0

@@ -2,7 +2,7 @@ extends Node2D
 
 export var ball_is_stuck_timeout: float = 6.0
 
-onready var inside_hoop = $InsideHoop
+onready var inside_hoop: Area2D = $InsideHoop
 
 signal ball_in_hoop
 

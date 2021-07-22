@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 580.928, 14.645 )
 
-[node name="Part03_Island" type="StaticBody2D"]
+[node name="Part03_TopIsland" type="StaticBody2D"]
 position = Vector2( 1867.43, -2762.52 )
 scale = Vector2( 2.4, 2.4 )
 collision_layer = 15

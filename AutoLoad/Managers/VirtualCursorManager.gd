@@ -59,17 +59,17 @@ func show():
 	
 	display.cursor.show()
 	
-	VirtualInput.disable_movement = false
+	VirtualInput.disable = false
 
-func hide(with_disable_movement: bool = true):
+func hide(with_disable: bool = true):
 	if not display:
 		Tools.debug("VirtualCursorDisplay not exists, but hide was called")
 		return
 	
 	display.cursor.hide()
 	
-	if with_disable_movement:
-		VirtualInput.disable_movement = true
+	if with_disable:
+		VirtualInput.disable = true
 
 func is_hidden() -> bool:
 	return not display or display.is_hidden()

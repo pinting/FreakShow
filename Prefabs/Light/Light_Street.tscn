@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/LightTilted00.png" type="Texture" id=3]
 [ext_resource path="res://Materials/FakeLightMaterial.tres" type="Material" id=4]
 
@@ -55,12 +54,3 @@ scale = Vector2( 3.36624, 3.6692 )
 z_index = 99
 z_as_relative = false
 texture = ExtResource( 3 )
-
-[node name="ExtraLight" type="Sprite" parent="."]
-self_modulate = Color( 1, 1, 1, 0.117647 )
-material = ExtResource( 4 )
-position = Vector2( 282.673, -848.019 )
-scale = Vector2( 1.53809, 3.88575 )
-z_index = 99
-z_as_relative = false
-texture = ExtResource( 2 )

@@ -6,7 +6,6 @@
 blend_mode = 1
 
 [node name="Effect_Transforming" type="CPUParticles2D"]
-self_modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
 material = SubResource( 1 )
 position = Vector2( 4.66537, 49.5136 )

@@ -11,9 +11,9 @@
 [ext_resource path="res://Assets/Environmnent/Building05_Top.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti16.png" type="Texture" id=10]
 [ext_resource path="res://Scenes/Part01/Part01_Hallway.gd" type="Script" id=11]
-[ext_resource path="res://Prefabs/Viewable/Viewable_StandCommunistPaper.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Prefabs/Static/Static_StopLamp.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Prefabs/Selectable/Selectable_JustStopGraffiti.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Prefabs/Selectable/Selectable_ReadTheSignsGraffiti.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4722.81, 353.699 )
@@ -46,15 +46,21 @@ position = Vector2( 120.923, 67.2744 )
 rotation = 0.145549
 scale = Vector2( 0.714607, 0.706647 )
 
-[node name="Graffiti02" parent="Inside" instance=ExtResource( 6 )]
-position = Vector2( 888.246, 201.117 )
-rotation = -0.14796
-scale = Vector2( 0.82995, 0.833259 )
+[node name="Graffiti07" type="Sprite" parent="Inside"]
+self_modulate = Color( 0, 0, 0, 0.607843 )
+position = Vector2( -1078.05, 156.862 )
+rotation = 0.222748
+scale = Vector2( 0.133158, 0.133621 )
+texture = ExtResource( 4 )
 
-[node name="Graffiti03" type="Sprite" parent="Inside"]
-self_modulate = Color( 1, 1, 1, 0.392157 )
-position = Vector2( 3063.26, 33.6956 )
-rotation = 0.292571
+[node name="Graffiti06" parent="Inside" instance=ExtResource( 15 )]
+position = Vector2( -814.368, 224.462 )
+scale = Vector2( 0.381316, 0.381316 )
+
+[node name="Graffiti08" type="Sprite" parent="Inside"]
+self_modulate = Color( 0, 0, 0, 0.607843 )
+position = Vector2( -952.971, 57.8028 )
+rotation = -0.293743
 scale = Vector2( 0.133158, 0.133621 )
 texture = ExtResource( 4 )
 
@@ -65,13 +71,14 @@ scale = Vector2( 0.363072, 0.364585 )
 texture = ExtResource( 10 )
 
 [node name="Graffiti05" parent="Inside" instance=ExtResource( 14 )]
-position = Vector2( 1747.9, -44.9156 )
+position = Vector2( 1851.39, 43.6947 )
 scale = Vector2( 0.819254, 0.822667 )
 
-[node name="Paper00" parent="Inside" instance=ExtResource( 12 )]
-position = Vector2( 1133.87, 54.4824 )
-rotation = 0.0286455
-scale = Vector2( 0.112083, 0.11255 )
+[node name="Graffiti02" parent="Inside" instance=ExtResource( 6 )]
+self_modulate = Color( 0, 0, 0, 0.588235 )
+position = Vector2( 2579.55, 172.558 )
+rotation = -0.14796
+scale = Vector2( 0.82995, 0.833259 )
 
 [node name="Door00" parent="Inside" instance=ExtResource( 5 )]
 position = Vector2( -3298.81, 93.2153 )

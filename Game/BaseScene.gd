@@ -16,6 +16,9 @@ export var cancel_button_timeout: float = 1.0
 # Auto fade out
 export var auto_fade_out: bool = true
 
+# Auto show cursor
+export var auto_show_cursor: bool = true
+
 # Disable cancel button
 export var disable_cancel_button: bool = false
 
@@ -51,6 +54,8 @@ func _ready() -> void:
 	
 	for node in tree.get_nodes_in_group("auto_visible"):
 		node.visible = true
+	
+	VirtualCursorManager.hide(true)
 
 func _low_performance_mode() -> void:
 	var tree = get_tree()
@@ -79,10 +84,15 @@ func _process(delta: float) -> void:
 	_process_cancel_button(delta)
 	
 	if current_second == 0.0:
-		emit_signal("scene_started")
+		VirtualCursorManager.move_to_center()
 
 		if auto_fade_out:
 			black_screen.fade_out()
+		
+		if auto_show_cursor:
+			VirtualCursorManager.show()
+		
+		emit_signal("scene_started")
 	
 	current_second += delta
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Scenes/Part02/Part02_Building01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part02/Part02_Building00.tscn" type="PackedScene" id=2]
@@ -28,21 +28,20 @@
 [ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=27]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Prefabs/Viewable/Viewable_Ad00.tscn" type="PackedScene" id=29]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti05.png" type="Texture" id=30]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti04.png" type="Texture" id=31]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti06.png" type="Texture" id=32]
 [ext_resource path="res://Prefabs/Selectable/Selectable_FoodSign.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Prefabs/Viewable/Viewable_FirestarterPaper.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Prefabs/Viewable/Viewable_DangerousCriminal.tscn" type="PackedScene" id=35]
 [ext_resource path="res://Prefabs/Static/Static_Car01.tscn" type="PackedScene" id=36]
-[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=37]
+[ext_resource path="res://Prefabs/Viewable/Viewable_RomanticPartnerPaper.tscn" type="PackedScene" id=37]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti27.png" type="Texture" id=39]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Ad04.tscn" type="PackedScene" id=40]
 [ext_resource path="res://Assets/Sounds/Phone00.ogg" type="AudioStream" id=41]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Ad05.tscn" type="PackedScene" id=42]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti11.png" type="Texture" id=43]
 [ext_resource path="res://Assets/Sounds/Phone01.wav" type="AudioStream" id=45]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=46]
-[ext_resource path="res://Assets/Environmnent/Board00.png" type="Texture" id=47]
 [ext_resource path="res://Assets/Environmnent/Fence02_B.png" type="Texture" id=48]
 
 [sub_resource type="Environment" id=1]
@@ -115,9 +114,7 @@ script = ExtResource( 8 )
 auto_fade_out = false
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
-position = Vector2( -4797.1, -349.489 )
-scale = Vector2( 0.7, 0.7 )
-animation_frames = ExtResource( 37 )
+position = Vector2( -6117.1, -358.398 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 23 )]
 position = Vector2( -4789.55, -372.142 )
@@ -200,7 +197,7 @@ region_rect = Rect2( 0, 1, 20000, 780 )
 
 [node name="Graffiti00" type="Sprite" parent="BaseScene/Environment/Fence00"]
 modulate = Color( 0, 0, 0, 0.823529 )
-position = Vector2( -7430.75, 32.6986 )
+position = Vector2( -7361.6, 32.6986 )
 scale = Vector2( 0.574805, 0.574805 )
 texture = ExtResource( 32 )
 
@@ -225,15 +222,8 @@ modulate = Color( 0, 0, 0, 0.823529 )
 position = Vector2( 7944.49, 53.3038 )
 texture = ExtResource( 31 )
 
-[node name="Graffiti05" type="Sprite" parent="BaseScene/Environment/Fence00"]
-self_modulate = Color( 1, 1, 1, 0.588235 )
-position = Vector2( 9337.09, 259.565 )
-rotation = -0.0761728
-scale = Vector2( 0.866326, 0.866326 )
-texture = ExtResource( 43 )
-
 [node name="Train" parent="BaseScene/Environment" instance=ExtResource( 15 )]
-position = Vector2( -18774.3, 848.314 )
+position = Vector2( -19640, 848.314 )
 scale = Vector2( 1.2, 1.2 )
 z_index = 5
 collision_layer = 0
@@ -243,31 +233,59 @@ speed = 2000.0
 no_custom_physics = true
 
 [node name="Building00" parent="BaseScene/Environment" instance=ExtResource( 2 )]
-position = Vector2( -5508.19, -2427.62 )
+position = Vector2( -7011.22, -3087.91 )
 
 [node name="Building01" parent="BaseScene/Environment" instance=ExtResource( 1 )]
+position = Vector2( 20.0947, -3151.99 )
 
 [node name="Lamp00" parent="BaseScene/Environment/Building01" instance=ExtResource( 25 )]
-position = Vector2( -1181.73, 1797.7 )
+position = Vector2( -1550, 2448 )
 scale = Vector2( 0.9, 0.9 )
 z_index = -1
 
 [node name="Light" parent="BaseScene/Environment/Building01/Lamp00" instance=ExtResource( 26 )]
-position = Vector2( -1184.55, 913.627 )
+position = Vector2( -1184.55, 1002.47 )
 scale = Vector2( 3.67457, 1.10197 )
 
 [node name="Lamp01" parent="BaseScene/Environment/Building01" instance=ExtResource( 25 )]
-position = Vector2( 1268.27, 1797.7 )
+position = Vector2( 30, 2448 )
 scale = Vector2( 0.9, 0.9 )
 z_index = -1
 
 [node name="Light" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource( 26 )]
-position = Vector2( -1182.14, 913.627 )
+position = Vector2( -1182.14, 1002.47 )
+scale = Vector2( 3.67457, 1.10197 )
+
+[node name="Lamp02" parent="BaseScene/Environment/Building01" instance=ExtResource( 25 )]
+position = Vector2( 1610, 2448 )
+scale = Vector2( 0.9, 0.9 )
+z_index = -1
+
+[node name="Light" parent="BaseScene/Environment/Building01/Lamp02" instance=ExtResource( 26 )]
+position = Vector2( -1182.14, 1002.47 )
 scale = Vector2( 3.67457, 1.10197 )
 
 [node name="Car00" parent="BaseScene/Environment/Building01" instance=ExtResource( 10 )]
 material = SubResource( 6 )
-position = Vector2( 0, 2371.01 )
+position = Vector2( 313.601, 3021.11 )
+z_index = -1
+
+[node name="Paper00" parent="BaseScene/Environment/Building01" instance=ExtResource( 34 )]
+position = Vector2( -1675.69, 2741.97 )
+rotation = -0.105697
+scale = Vector2( 0.181122, 0.182457 )
+z_index = -1
+
+[node name="Paper01" parent="BaseScene/Environment/Building01" instance=ExtResource( 37 )]
+position = Vector2( 1241.19, 2727.28 )
+rotation = -0.0334422
+scale = Vector2( 0.0971474, 0.0971474 )
+z_index = -1
+
+[node name="Paper02" parent="BaseScene/Environment/Building01" instance=ExtResource( 29 )]
+position = Vector2( 1352.07, 2782.96 )
+rotation = -0.220333
+scale = Vector2( 0.0609779, 0.0609779 )
 z_index = -1
 
 [node name="RoadBlock" parent="BaseScene/Environment" instance=ExtResource( 36 )]
@@ -279,28 +297,6 @@ position = Vector2( 12442.2, 41.3428 )
 collision_layer = 18
 collision_mask = 2147483666
 grab_force = Vector2( 3, 3 )
-
-[node name="Board" type="Sprite" parent="BaseScene/Environment"]
-position = Vector2( 13810.4, -238.892 )
-rotation = -2.53518e-06
-z_index = -1
-texture = ExtResource( 47 )
-
-[node name="Paper00" parent="BaseScene/Environment/Board" instance=ExtResource( 35 )]
-position = Vector2( -13.4063, -102.354 )
-scale = Vector2( 0.076, 0.076 )
-selection_area = NodePath("ColorRect")
-
-[node name="ColorRect" type="ColorRect" parent="BaseScene/Environment/Board/Paper00"]
-visible = false
-margin_left = -2051.0
-margin_top = -1966.0
-margin_right = 2140.0
-margin_bottom = 2381.0
-rect_rotation = -4.28113
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Building02" type="Sprite" parent="BaseScene/Environment"]
 position = Vector2( 14766.4, -1311.51 )
@@ -314,10 +310,9 @@ position = Vector2( -204.007, 291.77 )
 scale = Vector2( 0.396585, 0.396585 )
 texture = ExtResource( 39 )
 
-[node name="Paper00" parent="BaseScene/Environment/Building02" instance=ExtResource( 40 )]
-position = Vector2( -194.625, 604.128 )
-rotation = 0.0324645
-scale = Vector2( 0.05, 0.05 )
+[node name="Paper00" parent="BaseScene/Environment/Building02" instance=ExtResource( 35 )]
+position = Vector2( -175.531, 616.648 )
+scale = Vector2( 0.038, 0.038 )
 
 [node name="Paper01" parent="BaseScene/Environment/Building02" instance=ExtResource( 42 )]
 
@@ -354,7 +349,7 @@ position = Vector2( -562.596, 524.016 )
 position = Vector2( -59.2303, -0.734743 )
 
 [node name="TriggerComment" type="Area2D" parent="BaseScene/Trigger"]
-position = Vector2( 1139.3, -33.0197 )
+position = Vector2( 734.585, -33.0197 )
 collision_layer = 8
 collision_mask = 8
 

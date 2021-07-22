@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Part01/Part01_Hallway.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part01/Part01.gd" type="Script" id=2]
-[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=6]
@@ -28,8 +27,6 @@ auto_fade_out = false
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 8 )]
 position = Vector2( -1106.41, 3.51831 )
-scale = Vector2( 0.7, 0.7 )
-animation_frames = ExtResource( 3 )
 disable_jump = true
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]

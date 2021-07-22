@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/GameBegin.gd" type="Script" id=2]
@@ -22,9 +22,10 @@
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_CRT.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Assets/Environmnent/Trees00.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Environmnent/PlayPauseButton00.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Environmnent/StopButton00.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=27]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=32]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -49,8 +50,6 @@ disable_auto_restart = true
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 29 )]
 position = Vector2( 759.628, 922.184 )
-scale = Vector2( 0.7, 0.7 )
-animation_frames = ExtResource( 32 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
 position = Vector2( -2299.06, 919.555 )
@@ -88,17 +87,20 @@ speed = 0.75
 y_scale = 0.75
 
 [node name="NewGame" parent="BaseScene/Menu/ColorChanger" instance=ExtResource( 12 )]
-self_modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( 266.678, 251.331 )
-scale = Vector2( 0.4, 0.4 )
+self_modulate = Color( 1, 1, 1, 0.882353 )
+position = Vector2( 366.678, 251.331 )
+scale = Vector2( 0.2, 0.2 )
 z_index = 1
+texture = ExtResource( 24 )
 description_key = "Description058"
 viewport_cursor = true
 
 [node name="ContinueGame" parent="BaseScene/Menu/ColorChanger" instance=ExtResource( 9 )]
-self_modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( 684.408, 251.331 )
+self_modulate = Color( 1, 1, 1, 0.882353 )
+position = Vector2( 584.408, 251.331 )
+scale = Vector2( 0.2, 0.2 )
 z_index = 1
+texture = ExtResource( 23 )
 description_key = "Description059"
 viewport_cursor = true
 

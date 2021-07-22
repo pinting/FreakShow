@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Environmnent/Ball01.png" type="Texture" id=2]
+[ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.9
+absorbent = true
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 66.6354
+
+[node name="Pickable_BeachBall_White" type="RigidBody2D" groups=[
+"_ball",
+"pickable",
+]]
+input_pickable = true
+collision_layer = 2
+collision_mask = 2
+mass = 0.01
+physics_material_override = SubResource( 1 )
+gravity_scale = 5.0
+contacts_reported = 3
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 3 )
+grab_force = Vector2( 5, 5 )
+
+[node name="Selectable" type="Sprite" parent="." groups=[
+"selectable",
+]]
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+description_key = "Description004"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 1.04492, -0.78376 )
+shape = SubResource( 2 )

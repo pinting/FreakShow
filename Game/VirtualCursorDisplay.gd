@@ -14,13 +14,8 @@ func _ready():
 	assert(margin.x > 0 and margin.y > 0, "Negative margin")
 	
 	VirtualCursorManager.set_display(self)
-	CameraManager.connect("current_changed", self, "_on_camera_changed")
 	
 	cursor.visible = true
-
-func _on_camera_changed() -> void:
-	# Call both on virtual input and virtual cursor
-	VirtualInput.move_to_center()
 
 func is_hidden() -> bool:
 	return not cursor.visible
@@ -59,8 +54,10 @@ func move_to_center() -> void:
 	var camera = CameraManager.current
 	
 	assert(camera, "Camera is not registered")
-	
+
 	cursor.global_position = camera.get_camera_screen_center()
+
+	VirtualInput.set_position_to_center()
 
 func correct_position() -> void:
 	var camera = CameraManager.current

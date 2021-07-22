@@ -12,16 +12,16 @@ glow_intensity = 1.0
 glow_strength = 1.4
 glow_hdr_threshold = 0.4
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="DynamicFontData" id=2]
 font_path = "res://font.ttf"
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 24
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
-font_data = SubResource( 3 )
+font_data = SubResource( 2 )
 
 [node name="Credits" type="Node2D"]
 
@@ -67,7 +67,7 @@ margin_left = 10.0
 margin_top = 471.439
 margin_right = 950.0
 margin_bottom = 526.439
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -83,7 +83,7 @@ margin_left = 10.0
 margin_top = 20.7062
 margin_right = 950.0
 margin_bottom = 96.0491
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )

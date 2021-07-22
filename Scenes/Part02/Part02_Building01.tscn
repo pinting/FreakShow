@@ -1,31 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Prefabs/Static/Static_Building00.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Ad00.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Prefabs/Viewable/Viewable_RomanticPartnerPaper.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Prefabs/Viewable/Viewable_KidPaper.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Prefabs/Selectable/Selectable_SonOfBitchGraffiti.tscn" type="PackedScene" id=12]
 
 [node name="Building01" type="Node2D"]
 position = Vector2( 1122.5, -2508.43 )
 
 [node name="Building" parent="." instance=ExtResource( 4 )]
+scale = Vector2( 1.25, 1.25 )
 z_index = -2
 
 [node name="Graffiti" parent="Building" instance=ExtResource( 12 )]
-position = Vector2( -871.656, 1977.12 )
+position = Vector2( -620.409, 1977.12 )
 rotation = -0.146264
-scale = Vector2( 0.336574, 0.359564 )
-
-[node name="Paper00" parent="Building" instance=ExtResource( 11 )]
-position = Vector2( -1377.33, 2204.62 )
-scale = Vector2( 0.196675, 0.196675 )
-
-[node name="Paper01" parent="Building" instance=ExtResource( 9 )]
-position = Vector2( 1103.56, 2185.85 )
-scale = Vector2( 0.0971474, 0.0971474 )
-
-[node name="Paper02" parent="Building" instance=ExtResource( 8 )]
-position = Vector2( 1352.07, 2230.44 )
-rotation = -0.220333
-scale = Vector2( 0.0609779, 0.0609779 )
+scale = Vector2( 0.239643, 0.256013 )

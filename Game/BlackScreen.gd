@@ -6,8 +6,6 @@ onready var color_rect = $ColorRect
 
 func _ready() -> void:
 	color_rect.modulate.a = 1.0
-	
-	VirtualCursorManager.hide()
 
 func is_fading() -> bool:
 	return tween.is_active()
@@ -18,7 +16,7 @@ func is_faded() -> bool:
 func fade_in(duration: float = 1.0) -> Tween:
 	assert(duration > 0.0, "Duration needs to be greater than zero")
 	
-	tween.stop_all()
+	tween.stop(color_rect, "modulate:a")
 	
 	tween.interpolate_property(
 		color_rect,
@@ -30,7 +28,6 @@ func fade_in(duration: float = 1.0) -> Tween:
 		Tween.EASE_IN)
 	
 	tween.start()
-	VirtualCursorManager.hide()
 
 	Tools.debug("Black screen fade in")
 
@@ -39,7 +36,7 @@ func fade_in(duration: float = 1.0) -> Tween:
 func fade_out(duration: float = 1.0) -> Tween:
 	assert(duration > 0.0, "Duration needs to be greater than zero")
 	
-	tween.stop_all()
+	tween.stop(color_rect, "modulate:a")
 	
 	tween.interpolate_property(
 		color_rect,
@@ -51,7 +48,6 @@ func fade_out(duration: float = 1.0) -> Tween:
 		Tween.EASE_OUT)
 	
 	tween.start()
-	VirtualCursorManager.show()
 
 	Tools.debug("Black screen fade out")
 	

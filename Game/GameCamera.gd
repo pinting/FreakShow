@@ -48,7 +48,7 @@ signal target_reached
 func _ready() -> void:
 	assert(not smoothing_enabled, "Smoothing is not supported!")
 	
-	CameraManager.set_current(self)
+	_process_current()
 	
 	base_zoom = zoom
 	base_follow_speed = follow_speed
@@ -57,9 +57,17 @@ func _ready() -> void:
 	if follow_node:
 		global_position = get_node(follow_node).global_position + follow_init_offset
 
+func update_position() -> void:
+	global_position = get_node(follow_node).global_position + follow_offset
+
 func _process(delta: float) -> void:
+	_process_current()
 	_process_shake(delta)
 	_process_follow(delta)
+
+func _process_current():
+	if current and CameraManager.current != self:
+		CameraManager.set_current(self)
 
 func _process_follow(delta: float) -> void:
 	if not follow_node or disable_follow:
@@ -102,15 +110,29 @@ func _process_shake(delta: float) -> void:
 	offset.x = shake_max_offset.x * shake * Tools.noise.get_noise_2d(Tools.noise.seed * 2, shake_offset_y)
 	offset.y = shake_max_offset.y * shake * Tools.noise.get_noise_2d(Tools.noise.seed * 3, shake_offset_y)
 
-func change_zoom(amount: Vector2, speed: float) -> void:
-	tween.stop_all()
+func change_zoom(amount: Vector2, duration: float) -> void:
+	tween.stop(self, "zoom")
 	
 	tween.interpolate_property(
 		self,
 		"zoom",
 		zoom,
 		amount,
-		speed,
+		duration,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT)
+	
+	tween.start()
+
+func change_shake(amount: float, duration: float) -> void:
+	tween.stop(self, "shake")
+	
+	tween.interpolate_property(
+		self,
+		"shake",
+		shake,
+		amount,
+		duration,
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN_OUT)
 	
@@ -132,3 +154,9 @@ func reset(new_position: Vector2, with_scrolling_vector: bool = true) -> void:
 	
 	cursor_display.correct_position()
 	cursor_display.cursor.global_position = new_position - cursor_diff
+
+func scale_follow_speed(scale: float) -> void:
+	follow_speed = base_follow_speed * scale
+
+func scale_follow_offset(scale: float) -> void:
+	follow_offset = base_follow_offset * scale

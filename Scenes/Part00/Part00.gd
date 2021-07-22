@@ -3,7 +3,7 @@ extends BaseScene
 onready var player: Player = $Player
 onready var camera: GameCamera = $GameCamera
 
-onready var exit_door: Selectable = $Environment/ExitDoor
+onready var exit_door: Selectable = $Environment/Building02/Block00/Door
 
 onready var main_music: MusicMixer = $Sound/MainMusic
 
@@ -21,8 +21,7 @@ func _ready() -> void:
 func _on_scene_started() -> void:
 	camera.disable_follow = true
 	camera.follow_speed = camera.base_follow_speed / 2
-
-	VirtualCursorManager.hide()
+	
 	player.freeze(true)
 	yield(Tools.timer(1.0), "timeout")
 	main_music.play()

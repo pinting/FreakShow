@@ -4,8 +4,9 @@
 [ext_resource path="res://Assets/Environmnent/Building08_1x2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Foot03.png" type="Texture" id=3]
 
-[node name="Building01" type="Sprite"]
+[node name="Part00_Building01" type="Sprite"]
 position = Vector2( 1081.74, 553.361 )
+scale = Vector2( 1.25, 1.25 )
 z_index = -2
 texture = ExtResource( 3 )
 

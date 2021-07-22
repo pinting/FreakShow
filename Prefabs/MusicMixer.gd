@@ -152,6 +152,40 @@ func force_next(index: int) -> void:
 	break_loop_now = true
 	break_loop = true
 
+func _finish_mixing(next_part_index: int) -> void:
+	_debug(str("new master index ", next_part_index))
+	
+	# Swap players
+	var temp = master_player
+	
+	master_player = slave_player
+	slave_player = temp
+	
+	# Fix volumes
+	master_volume = max_volume
+	slave_volume = min_volume
+	
+	# Set the next part as current and stop mixing
+	current_part_index = next_part_index
+	
+	virtual_position = master_player.get_playback_position()
+	playback_prev_position = virtual_position
+	break_loop = false
+	break_loop_now = false
+	forced_next = -1
+	mixing = false
+
+func is_playing() -> bool:
+	return master_player.playing or slave_player.playing
+
+func _debug(message: String) -> void:
+	if debug:
+		Tools.debug(message)
+
+func _debug_if_integer(t: float, message: String) -> void:
+	if abs(floor(t) - t) < 0.05:
+		_debug(message)
+
 func _process(delta: float) -> void:
 	if stopped:
 		return
@@ -262,37 +296,3 @@ func _process(delta: float) -> void:
 	
 	master_player.volume_db = master_volume * pause_level * global_level
 	slave_player.volume_db = slave_volume * pause_level * global_level
-
-func _finish_mixing(next_part_index: int) -> void:
-	_debug(str("new master index ", next_part_index))
-	
-	# Swap players
-	var temp = master_player
-	
-	master_player = slave_player
-	slave_player = temp
-	
-	# Fix volumes
-	master_volume = max_volume
-	slave_volume = min_volume
-	
-	# Set the next part as current and stop mixing
-	current_part_index = next_part_index
-	
-	virtual_position = master_player.get_playback_position()
-	playback_prev_position = virtual_position
-	break_loop = false
-	break_loop_now = false
-	forced_next = -1
-	mixing = false
-
-func is_playing() -> bool:
-	return master_player.playing or slave_player.playing
-
-func _debug(message: String) -> void:
-	if debug:
-		Tools.debug(message)
-
-func _debug_if_integer(t: float, message: String) -> void:
-	if abs(floor(t) - t) < 0.05:
-		_debug(message)

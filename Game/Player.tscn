@@ -1,86 +1,29 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Player.gd" type="Script" id=1]
 [ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Assets/Sounds/Transformation00.wav" type="AudioStream" id=3]
-[ext_resource path="res://Prefabs/Effect/Effect_SalamiDeath.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/Effect/Effect_Transforming.tscn" type="PackedScene" id=6]
 
-[sub_resource type="Animation" id=1]
-resource_name = "toggle_avatar_mode"
-length = 3.0
-step = 1.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("TransformEffect:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.1, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("TransformEffect:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "_toggle_avatar_mode"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("TransformSound:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 150.815, 84.7947 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
 position = Vector2( -1.66553, -111.588 )
+scale = Vector2( 0.7, 0.7 )
 collision_layer = 10
 collision_mask = 10
 script = ExtResource( 1 )
+animation_speed = 0.9
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-method_call_mode = 1
-anims/toggle_avatar_mode = SubResource( 1 )
+[node name="Tween" type="Tween" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 light_mask = 1025
 position = Vector2( -0.811218, -3.40119 )
 frames = ExtResource( 2 )
-frame = 33
+frame = 81
 playing = true
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
@@ -122,11 +65,10 @@ collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape2D" parent="KickArea"]
 position = Vector2( 15.4153, 413.321 )
-shape = SubResource( 2 )
-
-[node name="TransformEffect" parent="." instance=ExtResource( 6 )]
+shape = SubResource( 1 )
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 
-[node name="DeathEffect" parent="." instance=ExtResource( 5 )]
+[node name="TransformEffectContainer" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )

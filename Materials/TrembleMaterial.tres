@@ -4,5 +4,5 @@
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/time_factor = 1.0
+shader_param/time_factor = 3.0
 shader_param/amplitude = Vector2( 10, 5 )

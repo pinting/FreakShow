@@ -143,7 +143,7 @@ position = Vector2( -3147.04, 162.994 )
 effect_hover = 0.25
 
 [node name="CompanySign" parent="SteelBlock/WallBlock" instance=ExtResource( 20 )]
-position = Vector2( 1569.5, -252.406 )
+position = Vector2( 1362.58, -252.406 )
 rotation = 0.00539374
 scale = Vector2( 0.693262, 0.693262 )
 
@@ -176,7 +176,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 203, 1000 )
 
 [node name="PillarLeft" type="Sprite" parent="SteelBlock/WallBlock"]
-position = Vector2( -5416.09, 113.314 )
+position = Vector2( -5254.64, 113.314 )
 scale = Vector2( 0.9, 1.01596 )
 texture = ExtResource( 26 )
 region_enabled = true

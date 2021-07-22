@@ -16,6 +16,7 @@ z_index = 1
 emitting = false
 amount = 10
 lifetime = 10.0
+one_shot = true
 speed_scale = 2.5
 explosiveness = 1.0
 local_coords = false

@@ -24,7 +24,6 @@ func _next_decoration_frame():
 
 func _on_scene_started() -> void:
 	black_screen.fade_out()
-	VirtualCursorManager.move_to_center()
 
 func _on_new_game_selected() -> void:
 	yield(black_screen.fade_in(), "tween_completed")

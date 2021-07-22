@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Prefabs/Selectable/Selectable_WoodenDoor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/Static/Static_Bed01.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://Prefabs/Viewable/Viewable_HorseHead.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Assets/Environmnent/Misc18.png" type="Texture" id=27]
 [ext_resource path="res://Prefabs/Pickable/Pickable_CanOfCoffee.tscn" type="PackedScene" id=28]
+[ext_resource path="res://Prefabs/Viewable/Viewable_LipstickBitchPaper.tscn" type="PackedScene" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2756.7, 99.7452 )
@@ -165,9 +166,14 @@ collision_mask = 1
 [node name="Fridge" parent="Inside/Floor" instance=ExtResource( 3 )]
 position = Vector2( 1614.42, -276.88 )
 
-[node name="Paper" parent="Inside/Floor/Fridge" instance=ExtResource( 21 )]
+[node name="Paper00" parent="Inside/Floor/Fridge" instance=ExtResource( 21 )]
 position = Vector2( 33.9775, -141.211 )
 rotation = -0.0778485
+
+[node name="Paper01" parent="Inside/Floor/Fridge" instance=ExtResource( 29 )]
+position = Vector2( -34.6634, -0.930714 )
+rotation = 0.0271969
+scale = Vector2( 0.105454, 0.0965133 )
 
 [node name="Sprinkler" parent="Inside/Floor" instance=ExtResource( 16 )]
 position = Vector2( 1548.05, -542.201 )

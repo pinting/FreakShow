@@ -2,16 +2,19 @@ class_name Player
 extends KinematicBody2D
 
 # Animation
-export (SpriteFrames) var animation_frames
+export var animation_frames = preload("res://Animations/Player00.tres")
+
+# Transform effect
+export var transform_effect = preload("res://Prefabs/Effect/Effect_Transforming.tscn")
+
+# Death effect
+export var death_effect = preload("res://Prefabs/Effect/Effect_PlayerDeath.tscn")
 
 # Register player to the store
 export var register_player: bool = true
 
 # Sync player movement with others
 export var sync_player: bool = false
-
-# Since player after this amount of seconds passed
-export var sync_player_delay: float = 2.0
 
 # Disable jumping
 export var disable_jump: bool = false
@@ -43,20 +46,26 @@ export var animation_speed: float = 0.95
 # In which direction does the floor pushes the player
 export var floor_normal: Vector2 = Vector2.UP
 
-# Floor detect distance
-export var floor_detect_distance: float = 20.0
-
 # The player dies after taking this amount of a hit
 export var hit_to_die: Vector2 = Vector2(20.0, 50.0)
 
 # Scale velocity
-export var scale_velocity: Vector2 = Vector2(1, 1)
+export var scale_velocity: Vector2 = Vector2(1.0, 1.0)
 
 # Force pickable bodies are kicked with
 export var kick_force = Vector2(10.0, 0.0)
 
 # Force pickable bodies are pushed with
 export var push_force = Vector2(1.0, 1.0)
+
+# Duration of the transform effect
+const transform_duration: float = 2.0
+
+# Since player after this amount of seconds passed
+const sync_player_delay: float = 2.0
+
+# Floor detect distance
+const floor_detect_distance: float = 20.0
 
 # Defines how many waves (0% to 100% to 0% in walk acceleration) happen in a second 
 const walk_wave_count: float = 1.25
@@ -67,7 +76,7 @@ const walk_wave_offset: float = 0.5
 # A small number which is used to check for near-ZERO numbers
 const eps: float = 1.0
 
-onready var animation_player = $AnimationPlayer
+onready var tween = $Tween
 onready var animated_sprite = $AnimatedSprite
 
 onready var platform_detector_00 = $PlatformDetector00
@@ -81,8 +90,8 @@ onready var avatar_collision_shape = $AvatarCollisionShape
 onready var kick_area = $KickArea
 onready var kick_area_collision_shape = $KickArea/CollisionShape
 
-onready var transform_effect = $TransformEffect
-onready var death_effect = $DeathEffect
+onready var transform_sound = $TransformSound
+onready var transform_effect_container = $TransformEffectContainer
 
 signal reseted
 signal died
@@ -166,17 +175,50 @@ func _process_collision_shapes() -> void:
 	avatar_collision_shape.disabled = dead or not avatar_mode
 	kick_area_collision_shape.disabled = dead or avatar_mode
 
-# This function is called by the animation player
-func _toggle_avatar_mode() -> void:
+func toggle_avatar_mode() -> void:
+	if tween.is_active():
+		return
+	
+	Tools.play_packed_effect(transform_effect, self, transform_duration)
+	transform_sound.play()
+	
+	tween.interpolate_property(
+		transform_effect_container,
+		"modulate:a",
+		0.0,
+		1.0,
+		transform_duration / 2.0,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT)
+	
+	tween.start()
+	
+	yield(tween, "tween_all_completed")
+	
 	avatar_mode = not avatar_mode
+	
+	tween.interpolate_property(
+		transform_effect_container,
+		"modulate:a",
+		1.0,
+		0.0,
+		transform_duration / 2.0,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT)
+	
+	tween.start()
+	
+	yield(tween, "tween_all_completed")
+	
+	tween.stop_all()
 
 func enable_avatar_mode() -> void:
 	if not avatar_mode:
-		animation_player.play("toggle_avatar_mode")
+		yield(toggle_avatar_mode(), "completed")
 
 func disable_avatar_mode() -> void:
 	if avatar_mode:
-		animation_player.play("toggle_avatar_mode")
+		yield(toggle_avatar_mode(), "completed")
 
 func _process(delta: float) -> void:
 	if dead:
@@ -393,7 +435,7 @@ func freeze(with_gravity: bool = false) -> void:
 	frozen = true
 
 func unfreeze() -> void:
-	if not animation_player.is_playing():
+	if not tween.is_active():
 		frozen = false
 
 func kill() -> void:
@@ -403,7 +445,8 @@ func kill() -> void:
 	dead = true
 	frozen = true
 	animated_sprite.visible = false
-	death_effect.emitting = true
+	
+	Tools.play_packed_effect(death_effect, self)
 	
 	_process_collision_shapes()
 	emit_signal("died")
@@ -412,12 +455,11 @@ func is_dead() -> bool:
 	return dead
 
 func reset(start_in_avatar_mode: bool = false) -> void:
+	animated_sprite.visible = true
 	current_velocity = Vector2.ZERO
 	dead = false
 	avatar_mode = start_in_avatar_mode
 	frozen = false
-	animated_sprite.visible = true
-	death_effect.emitting = false
 	
 	emit_signal("reseted")
 

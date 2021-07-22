@@ -1,7 +1,7 @@
 extends Node
 
 # Enable debug messages
-const DEBUG: bool = false
+const DEBUG: bool = true
 
 # Report endpoint
 const REPORT_URL: String = "https://j82k55n66d.execute-api.us-east-1.amazonaws.com/prod/report"
@@ -34,7 +34,7 @@ var save_path: String = "user://default.save"
 var lock_mouse: bool = true
 
 # Virtual mouse speed
-var virtual_mouse_speed: Vector2 = Vector2(3, 3)
+var virtual_mouse_speed: Vector2 = Vector2(2, 2)
 
 # Low performance
 var low_performance: bool = false

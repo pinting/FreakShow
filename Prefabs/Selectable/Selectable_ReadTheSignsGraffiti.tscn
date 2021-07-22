@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti11.png" type="Texture" id=1]
+[ext_resource path="res://Prefabs/Selectable/PureSelectable.gd" type="Script" id=2]
+
+[node name="Selectable_ReadTheSignsGraffiti" type="Sprite" groups=[
+"selectable",
+]]
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( -3036.29, 224.344 )
+rotation = 0.0127636
+scale = Vector2( 0.381316, 0.381316 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+description_key = "Description061"

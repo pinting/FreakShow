@@ -1,7 +1,7 @@
 extends Sprite
 
-onready var lamp = $Lamp
-onready var phone = $Phone
+onready var lamp: Sprite = $Lamp
+onready var phone: Selectable = $Phone
 
 const zero: float = 0.05
 

@@ -17,14 +17,16 @@ var test_mode: bool = false
 var test_keys: Array = []
 
 # Disable the movement of the mouse
-var disable_movement: bool = false
+var disable: bool = false
 
 # Disable every selectable
 var disable_selectable: bool = false
 
-# Call both on virtual input and virtual cursor
-func move_to_center() -> void:
+func set_position_to_center() -> void:
 	_set_virtual_mouse_position(get_project_size() / 2, false)
+
+func move_to_center() -> void:
+	set_position_to_center()
 	VirtualCursorManager.move_to_center()
 
 func get_project_size() -> Vector2:
@@ -51,7 +53,9 @@ func mouse_viewport_to_window_position(viewport_position: Vector2) -> Vector2:
 func _set_virtual_mouse_position(viewport_position: Vector2, apply_cursor: bool = true) -> void:
 	var camera = CameraManager.current
 	
-	assert(camera, "Camera is not registered")
+	if not camera:
+		Tools.debug("No GameCamera is registered")
+		return
 	
 	last_virtual_mouse_position = virtual_mouse_position
 	virtual_mouse_position = viewport_position
@@ -118,7 +122,7 @@ func _input(event: InputEvent) -> void:
 		release_mouse()
 	elif event is InputEventMouseButton and not is_locked():
 			lock_mouse()
-	elif event is InputEventMouseMotion and is_locked() and not disable_movement:
+	elif event is InputEventMouseMotion and is_locked() and not disable:
 		using_virtual = event.pressure == VIRTUAL_PRESSURE
 		
 		if not using_virtual:
@@ -176,7 +180,7 @@ func get_action_strength(action: String) -> float:
 	if test_mode:
 		return 1.0 if test_keys.has(action) else 0.0
 	
-	if not is_locked() or disable_movement:
+	if not is_locked() or disable:
 		return 0.0
 	
 	return Input.get_action_strength(action)
@@ -185,7 +189,7 @@ func is_action_pressed(action: String) -> bool:
 	if test_mode:
 		return test_keys.has(action)
 	
-	if not is_locked() or disable_movement:
+	if not is_locked() or disable:
 		return false
 	
 	return Input.is_action_pressed(action)
@@ -194,7 +198,7 @@ func is_action_just_pressed(action: String) -> bool:
 	if test_mode:
 		return test_keys.has(action)
 	
-	if not is_locked() or disable_movement:
+	if not is_locked() or disable:
 		return false
 	
 	return Input.is_action_just_pressed(action)

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Part00/Part00.gd" type="Script" id=1]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Scenes/Part00/Part00_Building02.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Materials/CursorBlackMaterial.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/Part00/Part00_Building00.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=6]
@@ -13,7 +13,7 @@
 [ext_resource path="res://Assets/Environmnent/Help00.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Environmnent/Board01.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Environmnent/Help01.png" type="Texture" id=13]
-[ext_resource path="res://Scenes/Part00/Part00_ExitDoor.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Prefabs/Pickable/Pickable_BeachBall_White.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Prefabs/BackgroundRect.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Part00/Part00_Crate.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Scenes/Part00/Part00_Clouds.tscn" type="PackedScene" id=17]
@@ -34,14 +34,13 @@ extents = Vector2( 1500, 1500 )
 [node name="BaseScene" parent="." instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 auto_fade_out = false
+auto_show_cursor = false
 
 [node name="Cursor" parent="BaseScene/CursorDisplay" index="1"]
 material = ExtResource( 4 )
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 6 )]
 position = Vector2( -2686.45, 466.563 )
-scale = Vector2( 0.7, 0.7 )
-animation_frames = ExtResource( 3 )
 
 [node name="AnimatedSprite" parent="BaseScene/Player" index="1"]
 material = ExtResource( 20 )
@@ -70,7 +69,7 @@ region_rect = Rect2( 0, 0, 40000, 13 )
 position = Vector2( 4.75684, 0 )
 shape = SubResource( 1 )
 
-[node name="Loop00" parent="BaseScene/Environment" instance=ExtResource( 22 )]
+[node name="LoopLeft" parent="BaseScene/Environment" instance=ExtResource( 22 )]
 position = Vector2( -7806.94, -601.089 )
 player_node = NodePath("../../Player")
 area_shape_node = NodePath("Area/CollisionShape2D")
@@ -78,11 +77,11 @@ container_node = NodePath("Container")
 loop_mode = "left"
 mirror_mode = "left"
 
-[node name="Container" type="Node2D" parent="BaseScene/Environment/Loop00"]
+[node name="Container" type="Node2D" parent="BaseScene/Environment/LoopLeft"]
 
-[node name="Area" type="Area2D" parent="BaseScene/Environment/Loop00"]
+[node name="Area" type="Area2D" parent="BaseScene/Environment/LoopLeft"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/Loop00/Area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/LoopLeft/Area"]
 shape = SubResource( 2 )
 
 [node name="Clouds" parent="BaseScene/Environment" instance=ExtResource( 17 )]
@@ -117,39 +116,21 @@ texture = ExtResource( 13 )
 position = Vector2( 3635.5, 754.339 )
 
 [node name="Building00" parent="BaseScene/Environment" instance=ExtResource( 5 )]
-position = Vector2( 5593.66, 553.361 )
+position = Vector2( 6912.19, 553.361 )
 
 [node name="Car00" type="Sprite" parent="BaseScene/Environment"]
-position = Vector2( 6021.86, 567.476 )
-scale = Vector2( 0.9, 0.9 )
+position = Vector2( 7371.85, 582.459 )
 z_index = -1
 texture = ExtResource( 21 )
 
+[node name="Ball" parent="BaseScene/Environment" instance=ExtResource( 14 )]
+position = Vector2( 10742.7, 747.386 )
+
 [node name="Building01" parent="BaseScene/Environment" instance=ExtResource( 8 )]
-position = Vector2( 7929.43, 553.361 )
+position = Vector2( 9247.96, 553.361 )
 
-[node name="ExitDoor" parent="BaseScene/Environment" instance=ExtResource( 14 )]
-position = Vector2( 10055.4, 313.653 )
-z_index = -1
-effect_hover = 0.8
-
-[node name="Building02" parent="BaseScene/Environment" instance=ExtResource( 5 )]
-position = Vector2( 11715.8, 553.361 )
-
-[node name="Loop01" parent="BaseScene/Environment" instance=ExtResource( 22 )]
-position = Vector2( 16202.1, -601.089 )
-player_node = NodePath("../../Player")
-area_shape_node = NodePath("Area/CollisionShape2D")
-container_node = NodePath("Container")
-loop_mode = "right"
-mirror_mode = "right"
-
-[node name="Container" type="Node2D" parent="BaseScene/Environment/Loop01"]
-
-[node name="Area" type="Area2D" parent="BaseScene/Environment/Loop01"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/Loop01/Area"]
-shape = SubResource( 2 )
+[node name="Building02" parent="BaseScene/Environment" instance=ExtResource( 3 )]
+position = Vector2( 14458, 201.836 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
 

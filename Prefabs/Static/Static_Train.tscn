@@ -84,7 +84,7 @@ shape = SubResource( 1 )
 [node name="Sound00" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( -966.829, -677.323 )
 stream = ExtResource( 3 )
-volume_db = 5.0
+volume_db = 15.0
 pitch_scale = 0.7
 max_distance = 15000.0
 attenuation = 0.999999
@@ -92,14 +92,14 @@ attenuation = 0.999999
 [node name="Sound01" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 3293.42, -704.253 )
 stream = ExtResource( 3 )
-volume_db = 5.0
+volume_db = 15.0
 max_distance = 15000.0
 attenuation = 0.999999
 
 [node name="Sound02" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 7524.27, -690.78 )
 stream = ExtResource( 3 )
-volume_db = 5.0
+volume_db = 15.0
 pitch_scale = 0.7
 max_distance = 15000.0
 attenuation = 0.999999

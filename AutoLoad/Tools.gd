@@ -32,6 +32,24 @@ func destroy(object: Object):
 	object.set_script(null)
 	object.queue_free()
 
+func play_packed_effect(effect: PackedScene, parent: Node2D, timeout: float = 0.0) -> void:
+	var instance = effect.instance()
+	
+	assert(instance is CPUParticles2D, "Only CPUParticles2D supported")
+	
+	parent.add_child(instance)
+	
+	instance.emitting = true
+	
+	if timeout <= 0.0:
+		timeout = instance.lifetime
+	
+	yield(Tools.timer(timeout), "timeout")
+	
+	instance.emitting = false
+	
+	Tools.destroy(instance)
+
 # Generate a random integer
 func random_int(min_value: int, max_value: int) -> int:
 	return random_generator.randi_range(min_value, max_value)
@@ -39,6 +57,9 @@ func random_int(min_value: int, max_value: int) -> int:
 # Generate a random float
 func random_float(min_value: float, max_value: float) -> float:
 	return random_generator.randf_range(min_value, max_value)
+
+func guess() -> bool:
+	return random_int(0, 99) % 2 == 0
 
 # Generate N number of random bytes
 func random_bytes(n: int):
