@@ -1,9 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Materials/PurpleFogMaterial.tres" type="Material" id=1]
 [ext_resource path="res://Scenes/Credits.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka09.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka13.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka12.png" type="Texture" id=5]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka11.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Decoration/Buka10.png" type="Texture" id=9]
+[ext_resource path="res://Prefabs/SineFloatingNode.gd" type="Script" id=10]
+[ext_resource path="res://Prefabs/ColorChanger.gd" type="Script" id=11]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -12,16 +19,24 @@ glow_intensity = 1.0
 glow_strength = 1.4
 glow_hdr_threshold = 0.4
 
-[sub_resource type="DynamicFontData" id=2]
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFontData" id=3]
 font_path = "res://font.ttf"
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 24
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
-font_data = SubResource( 2 )
+font_data = SubResource( 3 )
 
 [node name="Credits" type="Node2D"]
 
@@ -36,6 +51,22 @@ smoothing_speed = 0.75
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )
+
+[node name="Art" type="CanvasLayer" parent="BaseScene"]
+
+[node name="ColorChanger" type="Node2D" parent="BaseScene/Art"]
+script = ExtResource( 11 )
+offset = Color( 0.74902, 0.74902, 0.74902, 1 )
+scale_color = Color( 0.329412, 0.329412, 0.329412, 1 )
+
+[node name="Decoration" type="AnimatedSprite" parent="BaseScene/Art/ColorChanger"]
+self_modulate = Color( 1, 1, 1, 0.509804 )
+position = Vector2( -147.375, 246.847 )
+scale = Vector2( 0.390733, 0.390733 )
+frames = SubResource( 2 )
+script = ExtResource( 10 )
+speed = 0.75
+y_scale = 0.75
 
 [node name="Waves" type="CanvasLayer" parent="BaseScene"]
 layer = -90
@@ -67,7 +98,7 @@ margin_left = 10.0
 margin_top = 471.439
 margin_right = 950.0
 margin_bottom = 526.439
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -83,7 +114,7 @@ margin_left = 10.0
 margin_top = 20.7062
 margin_right = 950.0
 margin_bottom = 96.0491
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )

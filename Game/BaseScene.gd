@@ -28,6 +28,7 @@ export var disable_auto_restart: bool = false
 onready var subtitle_display = $SubtitleDisplay
 onready var viewable_display = $ViewableDisplay 
 onready var black_screen = $BlackScreen
+onready var virtual_splash = $VirtualSplash
 
 signal scene_started
 
@@ -76,6 +77,9 @@ func _high_performance_mode() -> void:
 		Tools.destroy(node)
 
 func _process(delta: float) -> void:
+	if not virtual_splash.complete:
+		return
+	
 	if current_delay < delay:
 		current_delay += delta
 		return

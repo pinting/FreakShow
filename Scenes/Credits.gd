@@ -1,10 +1,10 @@
 extends "res://Game/BaseScene.gd"
 
 # Timeout of a credit block
-export var credits_timeout: float = 5.0
+export var credits_timeout: float = 0.5#30.0
 
 # Delay between credits
-export var credits_delay: float = 2.0
+export var credits_delay: float = 0.5#5.0
 
 # How many lines of credits to display
 export var credits_count: int = 6
@@ -12,11 +12,22 @@ export var credits_count: int = 6
 # Prefix of the credits entries in the translation file
 export var text_prefix = "Credits"
 
+onready var decoration = $Art/ColorChanger/Decoration
 onready var text_bottom = $TextCanvas/Bottom
 onready var text_top = $TextCanvas/Top
 
 func _ready() -> void:
 	connect("scene_started", self, "_on_scene_started")
+	decoration.connect("direction_changed", self, "_next_decoration_frame")
+
+func _next_decoration_frame():
+	var current_animation = decoration.animation
+	var last_frame = decoration.frames.get_frame_count(current_animation) - 1
+	
+	if decoration.frame == last_frame:
+		decoration.frame = 0
+	else:
+		decoration.frame += 1
 
 func _on_scene_started() -> void:
 	VirtualCursorManager.hide()

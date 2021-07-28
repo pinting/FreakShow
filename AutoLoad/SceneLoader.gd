@@ -1,6 +1,7 @@
 extends Node
 
 var scene_loader: ResourceInteractiveLoader = null
+var scene_count: int = 0
 
 func _process(_delta: float) -> void:
 	if not scene_loader:
@@ -25,6 +26,8 @@ func _process(_delta: float) -> void:
 			break
 
 func _finish_loading(scene_resource) -> void:
+	scene_count += 1
+	
 	PlayerManager.clear()
 	CameraManager.clear()
 	SubtitleManager.clear()
