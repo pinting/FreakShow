@@ -20,7 +20,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 3765, 400 )
 
 [node name="Sign" type="Sprite" parent="Sprite"]
-position = Vector2( 855.54, 1004.89 )
+position = Vector2( -882.29, 1004.89 )
 rotation = 0.00342183
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 2 )

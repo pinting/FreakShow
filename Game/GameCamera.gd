@@ -13,14 +13,8 @@ export var follow_offset: Vector2 = Vector2(0.0, 0.0)
 # Speed to follow with
 export var follow_speed: Vector2 = Vector2(1000.0, 1000.0)
 
-# Distance to reach the follow speed
-export var follow_scale_speed_before: float = 1200.0
-
-# Distance under the reached signal is emitted
-export var follow_reached_distance: float = 500.0
-
 # Move cursor with follow
-export var follow_move_cursor: bool = false
+export var follow_move_cursor_with: bool = false
 
 # Maximum shake in pixels.
 export var shake_max_offset = Vector2(100, 75)
@@ -29,6 +23,12 @@ export var shake_max_offset = Vector2(100, 75)
 export var shake_max_roll = 0.1
 
 onready var tween: Tween = $Tween
+
+const debug_zoom_speed: Vector2 = Vector2(0.2, 0.2)
+const debug_move_speed: Vector2 = Vector2(10.0, 10.0)
+
+const follow_scale_speed_after_distance: float = 1200.0
+const follow_reached_distance: float = 500.0
 
 # Vector for scrolling background
 var scrolling_vector: Vector2 = Vector2.ZERO
@@ -55,15 +55,40 @@ func _ready() -> void:
 	base_follow_offset = follow_offset
 	
 	if follow_node:
-		global_position = get_node(follow_node).global_position + follow_init_offset
+		var target = get_node(follow_node)
+		
+		global_position = target.global_position + follow_init_offset
 
 func update_position() -> void:
-	global_position = get_node(follow_node).global_position + follow_offset
+	var target = get_node(follow_node)
+	
+	global_position = target.global_position + follow_offset
 
 func _process(delta: float) -> void:
+	if Config.DEBUG:
+		_process_debug_zoom_control()
+	
 	_process_current()
 	_process_shake(delta)
 	_process_follow(delta)
+
+func _process_debug_zoom_control() -> void:
+	var zoom_in = VirtualInput.get_action_strength("camera_zoom_in")
+	var zoom_out = VirtualInput.get_action_strength("camera_zoom_out")
+	
+	var zoom_diff = -1 * debug_zoom_speed * zoom_in + debug_zoom_speed * zoom_out
+	
+	zoom += zoom_diff
+	
+	var camera_left = VirtualInput.get_action_strength("camera_left")
+	var camera_right = VirtualInput.get_action_strength("camera_right")
+	var camera_up = VirtualInput.get_action_strength("camera_up")
+	var camera_down = VirtualInput.get_action_strength("camera_down")
+	
+	var x = camera_right - camera_left
+	var y = camera_down - camera_up
+	
+	position += Vector2(x, y) * debug_move_speed
 
 func _process_current():
 	if current and CameraManager.current != self:
@@ -77,7 +102,7 @@ func _process_follow(delta: float) -> void:
 	var direction = global_position.direction_to(destination)
 	var distance = global_position.distance_to(destination)
 
-	var speed_scale = min(distance / follow_scale_speed_before, 1.0)
+	var speed_scale = min(distance / follow_scale_speed_after_distance, 1.0)
 	var step = delta * speed_scale * follow_speed * direction
 	var step_distance = global_position.distance_to(global_position + step)
 	var diff = destination - global_position
@@ -91,7 +116,7 @@ func _process_follow(delta: float) -> void:
 	if distance <= follow_reached_distance:
 		emit_signal("target_reached")
 	
-	if follow_move_cursor:
+	if follow_move_cursor_with:
 		var cursor_display = VirtualCursorManager.display
 		
 		if cursor_display:
@@ -139,21 +164,22 @@ func change_shake(amount: float, duration: float) -> void:
 	tween.start()
 
 func reset(new_position: Vector2, with_scrolling_vector: bool = true) -> void:
-	var cursor_display = VirtualCursorManager.display
-	
-	assert(cursor_display, "VirtualCursorDisplay is not registered")
-	
 	var old_position = global_position
 	
 	if with_scrolling_vector:
 		scrolling_vector += new_position - old_position
 	
-	var cursor_diff = old_position - cursor_display.cursor.global_position
-	
 	global_position = new_position
 	
-	cursor_display.correct_position()
-	cursor_display.cursor.global_position = new_position - cursor_diff
+	if VirtualInput.use_virtual_cursor:
+		var cursor_display = VirtualCursorManager.display
+
+		assert(cursor_display, "VirtualCursorDisplay is not registered")
+		
+		var cursor_diff = old_position - cursor_display.cursor.global_position
+		
+		cursor_display.correct_position()
+		cursor_display.cursor.global_position = new_position - cursor_diff
 
 func scale_follow_speed(scale: float) -> void:
 	follow_speed = base_follow_speed * scale

@@ -68,7 +68,7 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	VirtualCursorManager.hide()
 	
 	# Disable every selectable
-	VirtualInput.disable_selectable = true
+	SelectableManager.disable = true
 	
 	# Freeze players
 	PlayerManager.call_each("freeze")
@@ -145,7 +145,7 @@ func hide() -> void:
 	VirtualCursorManager.show()
 
 	# Enable selectables
-	VirtualInput.disable_selectable = false
+	SelectableManager.disable = false
 
 func _process(delta: float) -> void:
 	if display.visible:

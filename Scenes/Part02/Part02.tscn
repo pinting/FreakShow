@@ -239,54 +239,39 @@ position = Vector2( -7011.22, -3087.91 )
 position = Vector2( 20.0947, -3151.99 )
 
 [node name="Lamp00" parent="BaseScene/Environment/Building01" instance=ExtResource( 25 )]
-position = Vector2( -1550, 2448 )
+position = Vector2( -929.845, 1806.91 )
 scale = Vector2( 0.9, 0.9 )
-z_index = -1
 
 [node name="Light" parent="BaseScene/Environment/Building01/Lamp00" instance=ExtResource( 26 )]
 position = Vector2( -1184.55, 1002.47 )
 scale = Vector2( 3.67457, 1.10197 )
 
 [node name="Lamp01" parent="BaseScene/Environment/Building01" instance=ExtResource( 25 )]
-position = Vector2( 30, 2448 )
+position = Vector2( 1050.15, 1806.91 )
 scale = Vector2( 0.9, 0.9 )
-z_index = -1
 
 [node name="Light" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource( 26 )]
 position = Vector2( -1182.14, 1002.47 )
 scale = Vector2( 3.67457, 1.10197 )
 
-[node name="Lamp02" parent="BaseScene/Environment/Building01" instance=ExtResource( 25 )]
-position = Vector2( 1610, 2448 )
-scale = Vector2( 0.9, 0.9 )
-z_index = -1
-
-[node name="Light" parent="BaseScene/Environment/Building01/Lamp02" instance=ExtResource( 26 )]
-position = Vector2( -1182.14, 1002.47 )
-scale = Vector2( 3.67457, 1.10197 )
-
 [node name="Car00" parent="BaseScene/Environment/Building01" instance=ExtResource( 10 )]
 material = SubResource( 6 )
-position = Vector2( 313.601, 3021.11 )
-z_index = -1
+position = Vector2( 313.601, 2380.02 )
 
 [node name="Paper00" parent="BaseScene/Environment/Building01" instance=ExtResource( 34 )]
-position = Vector2( -1675.69, 2741.97 )
+position = Vector2( -1675.69, 2189.57 )
 rotation = -0.105697
 scale = Vector2( 0.181122, 0.182457 )
-z_index = -1
 
 [node name="Paper01" parent="BaseScene/Environment/Building01" instance=ExtResource( 37 )]
-position = Vector2( 1241.19, 2727.28 )
+position = Vector2( 1241.19, 2174.88 )
 rotation = -0.0334422
 scale = Vector2( 0.0971474, 0.0971474 )
-z_index = -1
 
 [node name="Paper02" parent="BaseScene/Environment/Building01" instance=ExtResource( 29 )]
-position = Vector2( 1352.07, 2782.96 )
+position = Vector2( 1352.07, 2230.57 )
 rotation = -0.220333
 scale = Vector2( 0.0609779, 0.0609779 )
-z_index = -1
 
 [node name="RoadBlock" parent="BaseScene/Environment" instance=ExtResource( 36 )]
 

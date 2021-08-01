@@ -25,19 +25,11 @@ func _ready() -> void:
 	assert(not material or not effect_material, "Both material and effect_material exists")
 
 func _process(delta: float) -> void:
-	var cursor_display = VirtualCursorManager.display
+	var is_selected = SelectableManager.is_selected(self, viewport_based_cursor)
 	
-	if not cursor_display:
-		return
-	
-	var cursor_position 
-	
-	if viewport_cursor:
-		cursor_position = cursor_display.get_viewport_position()
-	else:
-		cursor_position = cursor_display.cursor.global_position
-
-	if _is_hovering(cursor_position):
+	if is_selected:
+		var cursor_position = VirtualCursorManager.get_position(viewport_based_cursor)
+		
 		if not is_inside:
 			is_inside = true
 
@@ -64,7 +56,7 @@ func _process(delta: float) -> void:
 			if current_effect_value != effect_hover:
 				current_effect_value += delta / effect_step
 				current_effect_value = min(effect_hover, current_effect_value)
-	elif not held:
+	elif not keep_selected:
 		if is_inside:
 			is_inside = false
 

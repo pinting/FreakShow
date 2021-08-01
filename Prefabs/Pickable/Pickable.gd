@@ -73,11 +73,7 @@ func _physics_process(_delta: float) -> void:
 	
 	_set_cursor()
 	
-	var cursor_display = VirtualCursorManager.display
-	
-	assert(cursor_display, "VirtualCursorDisplay is not registered")
-	
-	var to = cursor_display.cursor.global_position
+	var to = VirtualCursorManager.get_position()
 	var from = global_position
 	var direction = from.direction_to(to)
 	var distance = from.distance_to(to)
@@ -105,15 +101,16 @@ func drop(impulse: Vector2 = Vector2.ZERO) -> void:
 		return
 	
 	held = false
+	selectable.keep_selected = false
+
 	apply_central_impulse(impulse)
-	selectable.drop()
 
 func hold() -> void:
 	if held or disabled:
 		return
 	
 	held = true
-	selectable.hold()
+	selectable.keep_selected = true
 
 func disable() -> void:
 	disabled = true

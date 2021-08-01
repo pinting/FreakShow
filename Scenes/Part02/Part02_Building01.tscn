@@ -1,16 +1,60 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Prefabs/Static/Static_Building00.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Environmnent/Building05_WithoutBottom.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Decoration/Sign03.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Foot00.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Building05_BlockWithWindow.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Building05_BottomOnlyThree.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/Building05_Shutter.png" type="Texture" id=6]
+[ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=7]
 [ext_resource path="res://Prefabs/Selectable/Selectable_SonOfBitchGraffiti.tscn" type="PackedScene" id=12]
 
-[node name="Building01" type="Node2D"]
-position = Vector2( 1122.5, -2508.43 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1880.44, 1951.78 )
 
-[node name="Building" parent="." instance=ExtResource( 4 )]
+[node name="Part02_Building01" type="StaticBody2D"]
 scale = Vector2( 1.25, 1.25 )
 z_index = -2
 
-[node name="Graffiti" parent="Building" instance=ExtResource( 12 )]
+[node name="Top" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1882, 1412 )
+
+[node name="Bottom" type="Sprite" parent="Top"]
+position = Vector2( -227.034, 882.483 )
+texture = ExtResource( 5 )
+
+[node name="RightBlock" type="Sprite" parent="Top/Bottom"]
+position = Vector2( 940.763, 0.0892334 )
+texture = ExtResource( 4 )
+
+[node name="Shutter" type="Sprite" parent="Top/Bottom/RightBlock" groups=[
+"selectable",
+]]
+position = Vector2( -6.9386, -44.8989 )
+z_index = -1
+texture = ExtResource( 6 )
+script = ExtResource( 7 )
+
+[node name="Graffiti" parent="." instance=ExtResource( 12 )]
 position = Vector2( -620.409, 1977.12 )
 rotation = -0.146264
 scale = Vector2( 0.239643, 0.256013 )
+
+[node name="Foot" type="Sprite" parent="."]
+position = Vector2( 0, 2318.46 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 3765, 400 )
+
+[node name="Sign" type="Sprite" parent="."]
+position = Vector2( -1764.58, 2009.78 )
+rotation = 0.00342183
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 552.822 )
+shape = SubResource( 1 )

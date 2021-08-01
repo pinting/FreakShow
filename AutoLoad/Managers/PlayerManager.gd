@@ -6,6 +6,7 @@ var players: Array = []
 
 func register(player: Player) -> void:
 	players.push_back(player)
+	
 	Tools.debug("Player registered")
 	emit_signal("player_added", player)
 

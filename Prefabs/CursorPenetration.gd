@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 		material.set_shader_param("value", 0)
 		return
 	
-	var position = VirtualCursorManager.get_viewport_cursor_position()
+	var position = VirtualCursorManager.get_position(true)
 	var size = VirtualInput.get_project_size()
 	var offset = position / size
 	

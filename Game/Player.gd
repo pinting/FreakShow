@@ -311,7 +311,7 @@ func _process_pickable_kick() -> void:
 			_push_pickable(body, push_force)
 
 func _process_crouch() -> void:
-	var crouch_pressed = VirtualInput.is_action_just_pressed("crouch")
+	var crouch_pressed = VirtualInput.is_action_just_pressed("player_crouch")
 	
 	if crouch_pressed:
 		crouching = not crouching
@@ -353,10 +353,10 @@ func _get_direction() -> Vector2:
 	
 	var top_colliding = top_detector.is_colliding()
 	
-	var right_strength = VirtualInput.get_action_strength("move_right")
-	var left_strength = VirtualInput.get_action_strength("move_left")
-	var up_strength = VirtualInput.get_action_strength("move_up")
-	var down_strength = VirtualInput.get_action_strength("move_down")
+	var right_strength = VirtualInput.get_action_strength("player_right")
+	var left_strength = VirtualInput.get_action_strength("player_left")
+	var up_strength = VirtualInput.get_action_strength("player_up")
+	var down_strength = VirtualInput.get_action_strength("player_down")
 	
 	var on_floor = is_on_floor()
 	var can_jump = on_floor and not crouching and not top_colliding and not disable_jump

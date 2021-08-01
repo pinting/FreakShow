@@ -43,7 +43,7 @@ follow_node = NodePath("../Player")
 follow_init_offset = Vector2( 0, -400 )
 follow_offset = Vector2( 0, -400 )
 follow_speed = Vector2( 10000, 10000 )
-follow_move_cursor = true
+follow_move_cursor_with = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=[
 "world_environment",
@@ -65,7 +65,7 @@ scale = Vector2( 0.15, 0.15 )
 z_index = 1
 texture = ExtResource( 24 )
 description_key = "Description058"
-viewport_cursor = true
+viewport_based_cursor = true
 
 [node name="ContinueGame" parent="BaseScene/Menu" instance=ExtResource( 9 )]
 self_modulate = Color( 1, 1, 1, 0.882353 )
@@ -74,7 +74,7 @@ scale = Vector2( 0.15, 0.15 )
 z_index = 1
 texture = ExtResource( 23 )
 description_key = "Description059"
-viewport_cursor = true
+viewport_based_cursor = true
 
 [node name="ScreenEffect" parent="BaseScene" instance=ExtResource( 20 )]
 layer = 2

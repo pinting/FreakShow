@@ -93,10 +93,11 @@ origo_node = NodePath("Origo")
 [node name="Origo" type="Node2D" parent="BaseScene/Ghost"]
 position = Vector2( -1787.16, -18.3966 )
 
-[node name="DebugCamera" type="Camera2D" parent="BaseScene"]
+[node name="DebugCamera" parent="BaseScene" instance=ExtResource( 23 )]
 visible = false
 position = Vector2( 4046.12, 15566.4 )
 scale = Vector2( 0.7, 0.7 )
+current = false
 zoom = Vector2( 40, 40 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 23 )]

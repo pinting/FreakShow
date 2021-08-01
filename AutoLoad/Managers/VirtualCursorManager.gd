@@ -14,22 +14,42 @@ func set_display(cursor_display: VirtualCursorDisplay) -> void:
 		return
 	
 	display = cursor_display
+	VirtualInput.use_virtual_cursor = true
+	
+	reset_icon(-1, true)
+
 	Tools.debug("Cursor display changed")
 	emit_signal("display_changed")
+
+func clear() -> void:
+	if not display:
+		Tools.debug("VirtualCursorDisplay not exists, but clear was called")
+		return
+	
+	Tools.destroy(display)
+	
+	display = null
+	VirtualInput.use_virtual_cursor = false
 
 func is_free(owner: int):
 	return not is_hidden() and (current_owner == -1 or current_owner == owner)
 
+func _set_texture(texture: Resource) -> void:
+	if VirtualInput.use_virtual_cursor:
+		display.cursor.set_texture(texture)
+	else:
+		Input.set_custom_mouse_cursor(texture)
+
 func set_icon(type: String, owner: int, force: bool = false):
-	if not display or (not force and not is_free(owner)):
+	if not force and not is_free(owner):
 		return
 	
 	if type == "default":
-		display.cursor.texture = cursor_default
+		_set_texture(cursor_default)
 	elif type == "pick":
-		display.cursor.texture = cursor_pick
+		_set_texture(cursor_pick)
 	elif type == "view":
-		display.cursor.texture = cursor_view
+		_set_texture(cursor_view)
 	else:
 		Tools.debug("Non-existing cursor type was used!")
 	
@@ -39,37 +59,53 @@ func reset_icon(owner: float, force: bool = false):
 	if current_owner == owner or force:
 		set_icon("default", -1, true);
 
-func get_viewport_cursor_position() -> Vector2:
-	if not display:
-		return Vector2.ZERO
+func get_position(viewport_based: bool = false) -> Vector2:
+	if VirtualInput.use_virtual_cursor:
+		if viewport_based:
+			return display.get_viewport_position()
+		
+		return display.cursor.global_position
 	
-	return display.get_viewport_position()
+	if viewport_based:
+		return VirtualInput.virtual_mouse_position
+	
+	return VirtualInput.get_world_mouse_position()
 
-func move_to_center():
-	if not display:
-		Tools.debug("VirtualCursorDisplay not exists, but move_to_center was called")
-		return
+func apply_movement(diff: Vector2) -> void:
+	var camera = CameraManager.current
 	
-	display.move_to_center()
+	assert(camera, "No GameCamera is registered")
+	
+	display.cursor.global_position += diff * camera.zoom
+
+func move_to_center() -> void:
+	var center = VirtualInput.get_project_size() / 2
+
+	if VirtualInput.use_virtual_cursor:
+		VirtualInput.set_virtual_mouse_position(center, false)
+		display.move_to_center()
+	else:
+		VirtualInput.set_virtual_mouse_position(center)
 
 func show():
-	if not display:
-		Tools.debug("VirtualCursorDisplay not exists, but show was called")
-		return
+	if VirtualInput.use_virtual_cursor:
+		display.cursor.show()
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	display.cursor.show()
-	
-	VirtualInput.disable = false
+	VirtualInput.disable_movement = false
 
 func hide(with_disable: bool = true):
-	if not display:
-		Tools.debug("VirtualCursorDisplay not exists, but hide was called")
-		return
-	
-	display.cursor.hide()
+	if VirtualInput.use_virtual_cursor:
+		display.cursor.hide()
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	if with_disable:
-		VirtualInput.disable = true
+		VirtualInput.disable_movement = true
 
 func is_hidden() -> bool:
-	return not display or display.is_hidden()
+	var physical_cursor_hidden = Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN
+	var virtual_cursor_hidden = display and display.is_hidden()
+	
+	return physical_cursor_hidden or virtual_cursor_hidden

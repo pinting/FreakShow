@@ -101,10 +101,8 @@ func _update_player(d: int) -> void:
 	assert(d == -1 or d == 1, "Difference needs to be minus or plus one")
 	
 	var camera = CameraManager.current
-	var cursor_display = VirtualCursorManager.display
 	
 	assert(camera, "GameCamera is not registered")
-	assert(cursor_display, "VirtualCursorManager is not registered")
 	
 	var camera_diff = player.global_position - camera.global_position
 	

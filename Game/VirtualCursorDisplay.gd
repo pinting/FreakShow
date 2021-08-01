@@ -53,11 +53,9 @@ func hide(duration: float = 1.0) -> void:
 func move_to_center() -> void:
 	var camera = CameraManager.current
 	
-	assert(camera, "Camera is not registered")
+	assert(camera, "No GameCamera is registered")
 
 	cursor.global_position = camera.get_camera_screen_center()
-
-	VirtualInput.set_position_to_center()
 
 func correct_position() -> void:
 	var camera = CameraManager.current
@@ -87,8 +85,7 @@ func correct_position() -> void:
 func get_viewport_position() -> Vector2:
 	var camera = CameraManager.current
 
-	if not camera:
-		return Vector2.ZERO
+	assert(camera, "No GameCamera is registered")
 	
 	var project_size = VirtualInput.get_project_size()
 	var world_position = cursor.global_position
