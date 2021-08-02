@@ -41,8 +41,8 @@ func _on_camera_reaches() -> void:
 	camera.follow_speed = camera.base_follow_speed
 	
 	player.unfreeze()
-	VirtualCursorManager.show()
-	VirtualCursorManager.move_to_center()
+	CursorManager.show()
+	CursorManager.move_to_center()
 	SubtitleManager.say(Text.find("Narrator013"))
 
 func _on_exit_door_selected() -> void:

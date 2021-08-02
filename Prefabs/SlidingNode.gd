@@ -38,15 +38,7 @@ func open() -> void:
 	if door_move:
 		door_move.play()
 	
-	tween.interpolate_property(
-		self,
-		"position",
-		close_position,
-		open_position,
-		change_duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(self, "position", close_position, open_position, change_duration)
 	tween.start()
 	
 	is_open = true
@@ -58,15 +50,7 @@ func close() -> void:
 	if door_start:
 		door_start.play()
 	
-	tween.interpolate_property(
-		self,
-		"position",
-		close_position,
-		open_position,
-		change_duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(self, "position", close_position, open_position, change_duration)
 	tween.start()
 	
 	is_open = false

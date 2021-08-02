@@ -33,17 +33,18 @@ script = ExtResource( 2 )
 disable_cancel_button = true
 disable_auto_restart = true
 
+[node name="CursorDisplay" parent="BaseScene" index="3"]
+disable = true
+
+[node name="CursorPenetration" parent="BaseScene" index="5"]
+strength = 0.2
+
 [node name="Player" parent="BaseScene" instance=ExtResource( 29 )]
 position = Vector2( 759.628, 922.184 )
 
-[node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
-position = Vector2( -2299.06, 919.555 )
+[node name="GameCamera" parent="BaseScene/Player" instance=ExtResource( 7 )]
+position = Vector2( 0, -480 )
 zoom = Vector2( 4, 4 )
-follow_node = NodePath("../Player")
-follow_init_offset = Vector2( 0, -400 )
-follow_offset = Vector2( 0, -400 )
-follow_speed = Vector2( 10000, 10000 )
-follow_move_cursor_with = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=[
 "world_environment",
@@ -90,6 +91,7 @@ container_node = NodePath("Container")
 [node name="Container" type="Node2D" parent="BaseScene/Loop"]
 
 [node name="Road" type="Sprite" parent="BaseScene/Loop/Container"]
+light_mask = 3
 position = Vector2( 0, 435.019 )
 z_index = -2
 texture = ExtResource( 27 )
@@ -120,8 +122,8 @@ region_rect = Rect2( 0, 0, 3000, 846 )
 position = Vector2( 0, -912.727 )
 
 [node name="Light" parent="BaseScene/Loop/Container/Road/Lamp" instance=ExtResource( 17 )]
-position = Vector2( -541.523, 915.182 )
-scale = Vector2( 1.79918, 0.554654 )
+position = Vector2( -545.523, 890.388 )
+scale = Vector2( 1.77255, 0.607693 )
 
 [node name="Walls" type="StaticBody2D" parent="BaseScene/Loop/Container"]
 position = Vector2( 0, 369.757 )
@@ -139,3 +141,5 @@ shape = SubResource( 1 )
 [node name="Shape" type="CollisionShape2D" parent="BaseScene/Loop/Area"]
 visible = false
 shape = SubResource( 2 )
+
+[editable path="BaseScene"]

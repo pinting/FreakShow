@@ -181,31 +181,18 @@ func toggle_avatar_mode() -> void:
 	
 	Tools.play_packed_effect(transform_effect, self, transform_duration)
 	transform_sound.play()
+
+	var duration = transform_duration / 2.0
+	var target = transform_effect_container
 	
-	tween.interpolate_property(
-		transform_effect_container,
-		"modulate:a",
-		0.0,
-		1.0,
-		transform_duration / 2.0,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(target, "modulate:a", 0.0, 1.0, duration)
 	tween.start()
 	
 	yield(tween, "tween_all_completed")
 	
 	avatar_mode = not avatar_mode
 	
-	tween.interpolate_property(
-		transform_effect_container,
-		"modulate:a",
-		1.0,
-		0.0,
-		transform_duration / 2.0,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(target, "modulate:a", 1.0, 0.0, duration)
 	tween.start()
 	
 	yield(tween, "tween_all_completed")

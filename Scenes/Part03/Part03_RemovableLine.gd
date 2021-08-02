@@ -19,18 +19,18 @@ export var effect_key = "amount"
 export var use_material_at_init: bool = true
 
 # Start effect value
-export var effect_value_on_init: float = 0.0
+export var effect_init: float = 0.0
 
 # Max effect value
-export var effect_value_on_hide: float = 10.0
+export var effect_end: float = 10.0
 
 # Speed of step
-export var effect_speed: float = 1.0
+export var effect_duration: float = 1.0
 
 onready var tween = $Tween
 onready var line_body = $LineBody
 
-var current_effect_value: int = 0
+var current_effect_value: float = 0.0
 
 func _ready() -> void:
 	connect("selected", self, "_on_selected")
@@ -41,14 +41,14 @@ func reset() -> void:
 	
 	if hide_on_init:
 		disable()
-		_set_effect_value(effect_value_on_hide)
+		_effect(effect_end)
 	else:
 		enable()
-		_set_effect_value(effect_value_on_init)
+		_effect(effect_init)
 
-func _set_effect_value(value: float) -> void:
-	var at_init = value == effect_value_on_init
-	var at_hide = value == effect_value_on_hide
+func _effect(value: float) -> void:
+	var at_init = value == effect_init
+	var at_hide = value == effect_end
 	
 	if (not use_material_at_init and at_init) or at_hide:
 		material = null
@@ -65,15 +65,7 @@ func _on_selected() -> void:
 		hide()
 
 func hide() -> void:
-	tween.interpolate_method(
-		self,
-		"_set_effect_value",
-		current_effect_value,
-		effect_value_on_hide,
-		effect_speed,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_method(self, "_effect", current_effect_value, effect_end, effect_duration)
 	tween.start()
 	
 	yield(tween, "tween_completed")
@@ -83,15 +75,7 @@ func hide() -> void:
 func show() -> void:
 	enable()
 	
-	tween.interpolate_method(
-		self,
-		"_set_effect_value",
-		current_effect_value,
-		effect_value_on_init,
-		effect_speed,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_method(self, "_effect", current_effect_value, effect_init, effect_duration)
 	tween.start()
 
 func disable() -> void:

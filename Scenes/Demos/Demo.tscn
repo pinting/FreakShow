@@ -221,3 +221,5 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Trigger/BallArea"]
 position = Vector2( 8.46143, 10.549 )
 shape = SubResource( 6 )
+
+[editable path="BaseScene"]

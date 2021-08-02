@@ -13,9 +13,6 @@ export var follow_offset: Vector2 = Vector2(0.0, 0.0)
 # Speed to follow with
 export var follow_speed: Vector2 = Vector2(1000.0, 1000.0)
 
-# Move cursor with follow
-export var follow_move_cursor_with: bool = false
-
 # Maximum shake in pixels.
 export var shake_max_offset = Vector2(100, 75)
 
@@ -40,6 +37,7 @@ var base_zoom: Vector2
 var base_follow_speed: Vector2
 var base_follow_offset: Vector2
 
+var follow_target: Node2D = null
 var disable_follow: float = false
 var instant_follow: bool = false
 
@@ -55,14 +53,8 @@ func _ready() -> void:
 	base_follow_offset = follow_offset
 	
 	if follow_node:
-		var target = get_node(follow_node)
-		
-		global_position = target.global_position + follow_init_offset
-
-func update_position() -> void:
-	var target = get_node(follow_node)
-	
-	global_position = target.global_position + follow_offset
+		follow_target = get_node(follow_node)
+		global_position = follow_target.global_position + follow_init_offset
 
 func _process(delta: float) -> void:
 	if Config.DEBUG:
@@ -76,9 +68,9 @@ func _process_debug_zoom_control() -> void:
 	var zoom_in = VirtualInput.get_action_strength("camera_zoom_in")
 	var zoom_out = VirtualInput.get_action_strength("camera_zoom_out")
 	
-	var zoom_diff = -1 * debug_zoom_speed * zoom_in + debug_zoom_speed * zoom_out
+	var diff = -1 * debug_zoom_speed * zoom_in + debug_zoom_speed * zoom_out
 	
-	zoom += zoom_diff
+	zoom = Vector2(max(1.0, zoom.x + diff.x), max(1.0, zoom.y + diff.y))
 	
 	var camera_left = VirtualInput.get_action_strength("camera_left")
 	var camera_right = VirtualInput.get_action_strength("camera_right")
@@ -95,10 +87,10 @@ func _process_current():
 		CameraManager.set_current(self)
 
 func _process_follow(delta: float) -> void:
-	if not follow_node or disable_follow:
+	if not follow_target or disable_follow:
 		return
 	
-	var destination = get_node(follow_node).global_position + follow_offset
+	var destination = follow_target.global_position + follow_offset
 	var direction = global_position.direction_to(destination)
 	var distance = global_position.distance_to(destination)
 
@@ -115,12 +107,6 @@ func _process_follow(delta: float) -> void:
 	
 	if distance <= follow_reached_distance:
 		emit_signal("target_reached")
-	
-	if follow_move_cursor_with:
-		var cursor_display = VirtualCursorManager.display
-		
-		if cursor_display:
-			cursor_display.cursor.global_position += step
 
 func _process_shake(delta: float) -> void:
 	if not shake:
@@ -171,15 +157,7 @@ func reset(new_position: Vector2, with_scrolling_vector: bool = true) -> void:
 	
 	global_position = new_position
 	
-	if VirtualInput.use_virtual_cursor:
-		var cursor_display = VirtualCursorManager.display
-
-		assert(cursor_display, "VirtualCursorDisplay is not registered")
-		
-		var cursor_diff = old_position - cursor_display.cursor.global_position
-		
-		cursor_display.correct_position()
-		cursor_display.cursor.global_position = new_position - cursor_diff
+	CursorManager.reset(old_position, new_position)
 
 func scale_follow_speed(scale: float) -> void:
 	follow_speed = base_follow_speed * scale

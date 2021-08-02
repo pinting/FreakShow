@@ -22,24 +22,8 @@ func _on_door_selected() -> void:
 func open() -> void:
 	door_open.visible = true
 	
-	tween.interpolate_property(
-		door_open,
-		"modulate:a",
-		door_open.modulate.a,
-		1.0,
-		duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
-	tween.interpolate_property(
-		door_closed,
-		"modulate:a",
-		door_closed.modulate.a,
-		0.0,
-		duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(door_open, "modulate:a", door_open.modulate.a, 1.0, duration)
+	tween.interpolate_property(door_closed, "modulate:a", door_closed.modulate.a, 0.0, duration)
 	tween.start()
 	
 	yield(tween, "tween_all_completed")

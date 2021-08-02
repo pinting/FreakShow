@@ -68,9 +68,6 @@ auto_fade_out = false
 [node name="CursorDisplay" parent="BaseScene" index="3"]
 position = Vector2( 0, -2676.38 )
 
-[node name="CursorPenetration" parent="BaseScene/CursorDisplay/Cursor" index="0"]
-visible = false
-
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -4420.53, -5777.4 )
 avatar_max_speed = 1000.0
@@ -163,7 +160,7 @@ texture = ExtResource( 17 )
 description_key = "Description060"
 selection_area = NodePath("ColorRect")
 enable_boss_interaction = false
-effect_value_on_init = 0.5
+effect_init = 0.5
 
 [node name="ColorRect" type="ColorRect" parent="BaseScene/Environment/Maze/RemovableLine"]
 visible = false
@@ -213,8 +210,8 @@ position = Vector2( 48.834, -4740.83 )
 rotation = 1.5708
 scale = Vector2( 3.93594, 2 )
 enable_player_interaction = false
-effect_value_on_init = 1.0
-effect_speed = 0.33
+effect_init = 1.0
+effect_duration = 0.33
 
 [node name="BlockingLine01" parent="BaseScene/Environment/Maze" groups=[
 "_removable_line_reset",
@@ -223,8 +220,8 @@ position = Vector2( 1249.09, -4740.83 )
 rotation = 1.5708
 scale = Vector2( 3.93594, 2 )
 enable_player_interaction = false
-effect_value_on_init = 1.0
-effect_speed = 0.33
+effect_init = 1.0
+effect_duration = 0.33
 
 [node name="BlockingLine02" parent="BaseScene/Environment/Maze" groups=[
 "_removable_line_reset",
@@ -233,8 +230,8 @@ position = Vector2( -1752.5, -6540.97 )
 rotation = 1.5708
 scale = Vector2( 3.93594, 2 )
 enable_player_interaction = false
-effect_value_on_init = 1.0
-effect_speed = 0.33
+effect_init = 1.0
+effect_duration = 0.33
 
 [node name="BlockingLine03" parent="BaseScene/Environment/Maze" groups=[
 "_removable_line_reset",
@@ -243,8 +240,8 @@ position = Vector2( 3058.11, -6540.06 )
 rotation = 1.5708
 scale = Vector2( 3.93594, 2 )
 enable_player_interaction = false
-effect_value_on_init = 1.0
-effect_speed = 0.33
+effect_init = 1.0
+effect_duration = 0.33
 
 [node name="EndPlatform" parent="BaseScene/Environment" instance=ExtResource( 3 )]
 position = Vector2( 7218.43, 28528.5 )

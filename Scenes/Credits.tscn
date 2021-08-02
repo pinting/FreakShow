@@ -42,6 +42,7 @@ font_data = SubResource( 3 )
 
 [node name="BaseScene" parent="." instance=ExtResource( 6 )]
 script = ExtResource( 2 )
+auto_show_cursor = false
 disable_cancel_button = true
 disable_auto_restart = true
 

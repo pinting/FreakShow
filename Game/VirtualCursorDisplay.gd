@@ -1,6 +1,9 @@
 class_name VirtualCursorDisplay
 extends Node2D
 
+# Disable VirtualCursorDisplay, do not register and destroy instantly
+export var disable: bool = false
+
 # Margin of the cursor area (positive pair of numbers)
 export var margin: Vector2 = Vector2(100.0, 100.0)
 
@@ -12,43 +15,31 @@ onready var cursor: Sprite = $Cursor
 
 func _ready():
 	assert(margin.x > 0 and margin.y > 0, "Negative margin")
-	
-	VirtualCursorManager.set_display(self)
-	
-	cursor.visible = true
+
+	if disable:
+		Tools.destroy(self)
+	else:
+		CursorManager.set_display(self)
 
 func is_hidden() -> bool:
 	return not cursor.visible
 
-func show(duration: float = 1.0) -> void:
+func show(duration: float = 0.5) -> void:
 	cursor.visible = true
 	
-	tween.interpolate_property(
-		cursor,
-		"modulate:a",
-		cursor.modulate.a,
-		1.0,
-		duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.stop_all()
+	tween.interpolate_property(cursor, "modulate:a", cursor.modulate.a, 1.0, duration)
 	tween.start()
 
-func hide(duration: float = 1.0) -> void:
-	tween.interpolate_property(
-		cursor,
-		"modulate:a",
-		cursor.modulate.a,
-		0.0,
-		duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+func hide(duration: float = 0.5) -> void:
+	tween.stop_all()
+	tween.interpolate_property(cursor, "modulate:a", cursor.modulate.a, 0.0, duration)
 	tween.start()
 	
 	yield(tween, "tween_completed")
 	
-	cursor.visible = false
+	if cursor.modulate.a == 0.0:
+		cursor.visible = false
 
 func move_to_center() -> void:
 	var camera = CameraManager.current
@@ -96,3 +87,10 @@ func get_viewport_position() -> Vector2:
 
 func _process(_delta: float) -> void:
 	correct_position()
+
+func reset(from: Vector2, to: Vector2) -> void:
+	var diff = from - cursor.global_position
+	
+	correct_position()
+	
+	cursor.global_position = to - diff

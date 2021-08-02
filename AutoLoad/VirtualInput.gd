@@ -6,24 +6,22 @@ const virtual_pressure: float = 0.123
 # Maximum difference to compare pressure with
 const eps: float = 0.01
 
-# Position on the viewport
-var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
+# Disable every input
+var disable: bool = false
 
-# Previous position on the viewport
+# Disable motion input
+var disable_motion: bool = false
+
+var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
 var prev_virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
 
-var last_virtual_click_left: bool = false
-var last_virtual_click_right: bool = false
+var prev_virtual_click_left: bool = false
+var prev_virtual_click_right: bool = false
+
 var using_virtual_input: bool = false
 
 var test_mode: bool = false
 var test_keys: Array = []
-
-# Disable the movement of the mouse
-var disable_movement: bool = false
-
-# Use virtual cursor
-var use_virtual_cursor: bool = false
 
 func get_project_size() -> Vector2:
 	var project_width = ProjectSettings.get_setting("display/window/size/width")
@@ -46,17 +44,14 @@ func mouse_viewport_to_window_position(viewport_position: Vector2) -> Vector2:
 	 
 	return base
 
-func set_virtual_mouse_position(viewport_position: Vector2, warp_cursor: bool = true) -> void:
+func set_virtual_mouse_position(viewport_position: Vector2, warp_cursor: bool, from_virtual: bool = false) -> void:
 	prev_virtual_mouse_position = virtual_mouse_position
 	virtual_mouse_position = viewport_position
 	
-	var diff = virtual_mouse_position - prev_virtual_mouse_position
+	var relative = virtual_mouse_position - prev_virtual_mouse_position
 	
 	if warp_cursor:
-		if use_virtual_cursor:
-			VirtualCursorManager.apply_movement(diff)
-		else:
-			get_viewport().warp_mouse(viewport_position)
+		CursorManager.apply_movement(viewport_position, relative, from_virtual)
 
 func get_world_mouse_position() -> Vector2:
 	var camera = CameraManager.current
@@ -78,7 +73,7 @@ func get_world_mouse_position() -> Vector2:
 	
 	return camera.get_camera_screen_center() + project_size * camera.zoom * p
 
-func _create_click_event(viewport_position: Vector2, button_index: int, pressed: bool) -> void:
+func create_click_event(viewport_position: Vector2, button_index: int, pressed: bool) -> void:
 	var event = InputEventMouseButton.new()
 	
 	# Documentation says this should be viewport relative, but it only works like this
@@ -89,7 +84,7 @@ func _create_click_event(viewport_position: Vector2, button_index: int, pressed:
 	
 	get_tree().input_event(event)
 
-func _create_move_event(viewport_position: Vector2, relative: Vector2, speed: Vector2, pressure: float) -> void:
+func create_move_event(viewport_position: Vector2, relative: Vector2, speed: Vector2, pressure: float) -> void:
 	var event = InputEventMouseMotion.new()
 	
 	event.position = mouse_viewport_to_window_position(viewport_position)
@@ -101,53 +96,37 @@ func _create_move_event(viewport_position: Vector2, relative: Vector2, speed: Ve
 	get_tree().input_event(event)
 
 func _input(event: InputEvent) -> void:
-	var lock_needed = is_lock_needed()
-	var is_cancel = Input.is_action_pressed("ui_cancel")
-	var is_click = event is InputEventMouseButton 
 	var is_motion = event is InputEventMouseMotion
 	
-	if is_cancel:
-		release_mouse()
-	elif is_click and lock_needed:
-		lock_mouse()
-	elif is_motion and not disable_movement and not lock_needed:
-		using_virtual_input = abs(event.pressure - virtual_pressure) < eps
-		
-		if not using_virtual_input:
-			# When mouse is NOT captured, new position comes precalculated
-			var mouse_position = event.position
-
-			# When mouse is captured, new position needs to be calculated manually
-			if is_mouse_captured():
-				mouse_position = virtual_mouse_position + event.relative
-			
-			set_virtual_mouse_position(mouse_position, use_virtual_cursor)
-
-func _get_virtual_input_directions() -> Dictionary:
-	var os_name = OS.get_name()
-	var directions = {}
-
-	match os_name:
-		"OSX":
-			directions.right = "virtual_mouse_right"
-			directions.left = "virtual_mouse_up"
-			directions.up = "virtual_mouse_down"
-			directions.down = "virtual_mouse_left"
-		_:
-			directions.right = "virtual_mouse_right"
-			directions.left = "virtual_mouse_left"
-			directions.up = "virtual_mouse_up"
-			directions.down = "virtual_mouse_down"
+	if not is_motion or disable or disable_motion:
+		return
 	
-	return directions
+	using_virtual_input = abs(event.pressure - virtual_pressure) < eps
+	
+	if not using_virtual_input:
+		# When mouse is NOT captured, new position comes precalculated
+		var mouse_position = event.position
+
+		# When mouse is captured, new position needs to be calculated manually
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			mouse_position = virtual_mouse_position + event.relative
+		
+		set_virtual_mouse_position(mouse_position, true, false)
 
 func _process(_delta: float) -> void:
-	var directions = _get_virtual_input_directions()
+	if disable:
+		return
+	
+	if not disable_motion:
+		_process_virtual_motion()
+	
+	_process_virtual_click()
 
-	var virtual_mouse_right = VirtualInput.get_action_strength(directions.get("right"))
-	var virtual_mouse_left = VirtualInput.get_action_strength(directions.get("left"))
-	var virtual_mouse_up = VirtualInput.get_action_strength(directions.get("up"))
-	var virtual_mouse_down = VirtualInput.get_action_strength(directions.get("down"))
+func _process_virtual_motion() -> void:
+	var virtual_mouse_right = VirtualInput.get_action_strength("virtual_mouse_right")
+	var virtual_mouse_left = VirtualInput.get_action_strength("virtual_mouse_left")
+	var virtual_mouse_up = VirtualInput.get_action_strength("virtual_mouse_up")
+	var virtual_mouse_down = VirtualInput.get_action_strength("virtual_mouse_down")
 	
 	var virtual_mouse = Vector2(virtual_mouse_right - virtual_mouse_left, virtual_mouse_down - virtual_mouse_up)
 	
@@ -156,29 +135,30 @@ func _process(_delta: float) -> void:
 		
 		var relative = virtual_mouse * Config.virtual_mouse_speed
 		
-		set_virtual_mouse_position(virtual_mouse_position + relative)
-		_create_move_event(virtual_mouse_position, relative, Config.virtual_mouse_speed, virtual_pressure)
-	
+		set_virtual_mouse_position(virtual_mouse_position + relative, true, true)
+		create_move_event(virtual_mouse_position, relative, Config.virtual_mouse_speed, virtual_pressure)
+
+func _process_virtual_click() -> void:
 	var virtual_click_left = VirtualInput.is_action_pressed("virtual_click_left")
 	var virtual_click_right = VirtualInput.is_action_pressed("virtual_click_right")
 	
-	if (last_virtual_click_left and not virtual_click_left) or (not last_virtual_click_left and virtual_click_left):
-		last_virtual_click_left = virtual_click_left
+	if (prev_virtual_click_left and not virtual_click_left) or (not prev_virtual_click_left and virtual_click_left):
+		prev_virtual_click_left = virtual_click_left
 		using_virtual_input = true
 		
-		_create_click_event(virtual_mouse_position, BUTTON_LEFT, virtual_click_left)
+		create_click_event(virtual_mouse_position, BUTTON_LEFT, virtual_click_left)
 	
-	if (last_virtual_click_right and not virtual_click_right) or (not last_virtual_click_right and virtual_click_right):
-		last_virtual_click_right = virtual_click_right
+	if (prev_virtual_click_right and not virtual_click_right) or (not prev_virtual_click_right and virtual_click_right):
+		prev_virtual_click_right = virtual_click_right
 		using_virtual_input = true
 		
-		_create_click_event(virtual_mouse_position, BUTTON_RIGHT, virtual_click_right)
+		create_click_event(virtual_mouse_position, BUTTON_RIGHT, virtual_click_right)
 
 func get_action_strength(action: String) -> float:
 	if test_mode:
 		return 1.0 if test_keys.has(action) else 0.0
 	
-	if is_lock_needed() or disable_movement:
+	if disable:
 		return 0.0
 	
 	return Input.get_action_strength(action)
@@ -187,7 +167,7 @@ func is_action_pressed(action: String) -> bool:
 	if test_mode:
 		return test_keys.has(action)
 	
-	if is_lock_needed() or disable_movement:
+	if disable:
 		return false
 	
 	return Input.is_action_pressed(action)
@@ -196,24 +176,7 @@ func is_action_just_pressed(action: String) -> bool:
 	if test_mode:
 		return test_keys.has(action)
 	
-	if is_lock_needed() or disable_movement:
+	if disable:
 		return false
 	
 	return Input.is_action_just_pressed(action)
-
-func lock_mouse() -> void:
-	if use_virtual_cursor:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-func release_mouse() -> void:
-	if use_virtual_cursor:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-func is_mouse_captured() -> bool:
-	return Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-
-func is_lock_needed() -> bool:
-	if use_virtual_cursor:
-		return not is_mouse_captured()
-	
-	return false

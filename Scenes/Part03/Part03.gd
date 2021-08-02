@@ -109,7 +109,7 @@ func _trigger_before_game(body: Node) -> void:
 	player.current_velocity.x = 0.0
 	player.freeze(true)
 	
-	VirtualCursorManager.hide(false)
+	CursorManager.hide()
 
 func _trigger_game_begin(body: Node) -> void:
 	if not body.is_in_group("player") or game_playing:
@@ -177,7 +177,7 @@ func _trigger_game_end(body: Node) -> void:
 	camera.scale_follow_speed(end_follow_speed_scale)
 	camera.change_zoom(end_camera_zoom, camera_change_duration)
 	
-	VirtualCursorManager.show()
+	CursorManager.show()
 	wind_sound.play()
 	
 	if teleport_player_to_end:
@@ -200,7 +200,7 @@ func _on_exit_door_selected() -> void:
 	camera.scale_follow_speed(exit_follow_speed_scale)
 	camera.change_zoom(exit_camera_zoom, camera_change_duration)
 	
-	VirtualCursorManager.hide()
+	CursorManager.hide()
 	player.freeze(true)
 	yield(Tools.timer(4.0), "timeout")
 	falling_sound.play()

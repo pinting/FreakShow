@@ -14,8 +14,8 @@ func _ready() -> void:
 	assert(is_in_group("viewable"), "Viewable not in group of 'viewable'")
 
 	connect("selected", self, "_on_selected")
-	connect("cursor_inside", self, "_set_cursor")
-	connect("cursor_outside", self, "_reset_cursor")
+	connect("cursor_inside", self, "set_cursor")
+	connect("cursor_outside", self, "reset_cursor")
 
 func _on_selected():
 	emit_signal("cursor_outside")
@@ -25,8 +25,8 @@ func _on_selected():
 	
 	ViewableManager.show(self, enlarged_zoom, description_text)
 
-func _set_cursor():
-	VirtualCursorManager.set_icon("view", get_instance_id())
+func set_cursor():
+	CursorManager.set_icon("view", get_instance_id())
 
-func _reset_cursor():
-	VirtualCursorManager.reset_icon(get_instance_id())
+func reset_cursor():
+	CursorManager.reset_icon(get_instance_id())

@@ -24,15 +24,7 @@ func play():
 	
 	yield(Tools.timer(hide_after), "timeout")
 
-	tween.interpolate_property(
-		container,
-		"modulate:a",
-		1.0,
-		0.0,
-		hide_duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(container, "modulate:a", 1.0, 0.0, hide_duration)
 	tween.start()
 	
 	yield(tween, "tween_all_completed")

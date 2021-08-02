@@ -68,12 +68,12 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	if not held:
-		_reset_cursor()
+		reset_cursor()
 		return
 	
-	_set_cursor()
+	set_cursor()
 	
-	var to = VirtualCursorManager.get_position()
+	var to = CursorManager.get_position()
 	var from = global_position
 	var direction = from.direction_to(to)
 	var distance = from.distance_to(to)
@@ -83,10 +83,10 @@ func _physics_process(_delta: float) -> void:
 	else:
 		sleeping = true
 
-func reset(position: Vector2, rotation = 0.0, reset_velocity = true, relative = false):
+func reset(position: Vector2, rotation = 0.0, reset_v = true, relative = false):
 	reset_position = position
 	reset_rotation = rotation
-	reset_velocity = reset_velocity
+	reset_velocity = reset_v
 	reset_relative = relative
 	trigger_reset = true
 
@@ -121,7 +121,7 @@ func disable() -> void:
 		Tools.set_shapes_disabled(self, true)
 	
 	selectable.disable()
-	_reset_cursor()
+	reset_cursor()
 
 func enable() -> void:
 	disabled = false
@@ -139,11 +139,11 @@ func create_clone() -> Pickable:
 	
 	return clone
 
-func _set_cursor() -> void:
-	VirtualCursorManager.set_icon("pick", selectable.get_instance_id())
+func set_cursor() -> void:
+	CursorManager.set_icon("pick", selectable.get_instance_id())
 
-func _reset_cursor() -> void:
-	VirtualCursorManager.reset_icon(selectable.get_instance_id())
+func reset_cursor() -> void:
+	CursorManager.reset_icon(selectable.get_instance_id())
 
 func _exit_tree():
-	_reset_cursor()
+	reset_cursor()

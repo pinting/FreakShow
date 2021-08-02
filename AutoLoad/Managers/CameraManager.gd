@@ -22,6 +22,7 @@ func create_debug_camera() -> void:
 	var root = get_tree().get_root()
 	
 	root.add_child(camera)
+	CursorManager.show()
 	Tools.debug("Debug camera was created")
 
 func set_current(camera: GameCamera) -> void:

@@ -11,7 +11,7 @@ export (ShaderMaterial) var display_material = preload("res://Materials/Viewable
 export var effect_key: String = "amount"
 
 # Effect fade in and fade out speed
-export var effect_speed: float = 0.33
+export var effect_duration: float = 0.5
 
 # Effect minimum (fade-in: min to max, fade-out: max to min) 
 export var effect_min: float = 0.0
@@ -23,18 +23,16 @@ export var effect_max: float = 20.0
 export var input_delay: float = 0.1
 
 onready var tween: Tween = $Tween
-onready var display: Node2D = $Display
-onready var container: Node2D = $Display/Container
-onready var background_light: Sprite = $Display/BackgroundLight
+onready var inner_display: Node2D = $InnerDisplay
+onready var container: Node2D = $InnerDisplay/Container
+onready var background_light: Sprite = $InnerDisplay/BackgroundLight
 
 var visible_since: float = 0.0
 
 func _ready() -> void:
 	ViewableManager.set_display(self)
-	
-	display.visible = false
 
-func _set_effect(amount: float) -> void:
+func _effect(amount: float) -> void:
 	for child in container.get_children():
 		child.material.set_shader_param(effect_key, amount)
 
@@ -65,7 +63,10 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	container.add_child(dupe)
 
 	# Hide cursor
-	VirtualCursorManager.hide()
+	CursorManager.hide(0.0)
+	
+	# Disable motion input
+	VirtualInput.disable_motion = true
 	
 	# Disable every selectable
 	SelectableManager.disable = true
@@ -73,33 +74,17 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	# Freeze players
 	PlayerManager.call_each("freeze")
 	
-	# Show display
-	display.position = center_position
-	display.visible = true
-	display.modulate.a = 0.0
+	# Show inner display
+	inner_display.position = center_position
+	inner_display.visible = true
+	inner_display.modulate.a = 0.0
 
 	# Reset the counter to zero
 	visible_since = 0.0
 	
 	# Play effect
-	tween.interpolate_property(
-		display,
-		"modulate:a",
-		0.0,
-		1.0,
-		effect_speed,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
-	tween.interpolate_method(
-		self,
-		"_set_effect",
-		effect_max,
-		effect_min,
-		effect_speed,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(inner_display, "modulate:a", 0.0, 1.0, effect_duration)
+	tween.interpolate_method(self, "_effect", effect_max, effect_min, effect_duration)
 	tween.start()
 
 	# Force reset the description text and set it to the new value
@@ -107,24 +92,8 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 
 func hide() -> void:
 	# Play effect
-	tween.interpolate_property(
-		display,
-		"modulate:a",
-		1.0,
-		0.0,
-		effect_speed,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
-	tween.interpolate_method(
-		self,
-		"_set_effect",
-		effect_min,
-		effect_max,
-		effect_speed,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(inner_display, "modulate:a", 1.0, 0.0, effect_duration)
+	tween.interpolate_method(self, "_effect", effect_min, effect_max, effect_duration)
 	tween.start()
 
 	# Reset describe text
@@ -135,24 +104,29 @@ func hide() -> void:
 	# Unfreeze players
 	PlayerManager.call_each("unfreeze")
 	
-	# Hide display
-	display.visible = false
+	# Hide inner display
+	inner_display.visible = false
 	
 	# Remove children of the container
 	Tools.remove_childs(container)
+	
+	# Enable motion input
+	VirtualInput.disable_motion = false
 
 	# Show cursor
-	VirtualCursorManager.show()
+	CursorManager.show()
 
 	# Enable selectables
 	SelectableManager.disable = false
 
 func _process(delta: float) -> void:
-	if display.visible:
+	if inner_display.visible:
 		visible_since += delta
 
 func _input(event: InputEvent) -> void:
-	if not display.visible or not (event is InputEventMouseButton) or not event.pressed:
+	var is_button_event = event is InputEventMouseButton
+
+	if not inner_display.visible or not is_button_event or not event.pressed:
 		return
 	
 	if tween.is_active() or visible_since < input_delay:

@@ -12,7 +12,7 @@ func can_hover(selectable: PureSelectable) -> bool:
 		not disable and \
 		not selectable.disabled and \
 		selectable.visible and \
-		VirtualCursorManager.is_free(selectable_id)
+		CursorManager.is_free(selectable_id)
 
 func is_hovering(selectable: PureSelectable, mouse_position: Vector2) -> bool:
 	if can_hover(selectable):
@@ -67,8 +67,8 @@ func is_selected(selectable: PureSelectable, viewport_based: bool) -> bool:
 	return selectable == world_selection
 
 func _process(_delta: float) -> void:
-	var world_cursor_position = VirtualCursorManager.get_position(false)
-	var viewport_cursor_position = VirtualCursorManager.get_position(true)
+	var world_cursor_position = CursorManager.get_position(false)
+	var viewport_cursor_position = CursorManager.get_position(true)
 	
 	world_selection = get_top(world_cursor_position, false)
 	viewport_selection = get_top(viewport_cursor_position, true)

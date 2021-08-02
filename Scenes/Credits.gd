@@ -1,10 +1,10 @@
 extends "res://Game/BaseScene.gd"
 
 # Timeout of a credit block
-export var credits_timeout: float = 0.5#30.0
+export var credits_timeout: float = 30.0
 
 # Delay between credits
-export var credits_delay: float = 0.5#5.0
+export var credits_delay: float = 5.0
 
 # How many lines of credits to display
 export var credits_count: int = 6
@@ -30,7 +30,7 @@ func _next_decoration_frame():
 		decoration.frame += 1
 
 func _on_scene_started() -> void:
-	VirtualCursorManager.hide()
+	CursorManager.hide()
 	black_screen.fade_out(2.0)
 	yield(Tools.timer(credits_delay), "timeout")
 

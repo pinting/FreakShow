@@ -32,7 +32,7 @@ func _finish_loading(scene_resource) -> void:
 	CameraManager.clear()
 	SubtitleManager.clear()
 	ViewableManager.clear()
-	VirtualCursorManager.clear()
+	CursorManager.clear()
 	
 	var root = get_tree().get_root()
 	var current_scene = root.get_child(root.get_child_count() - 1)

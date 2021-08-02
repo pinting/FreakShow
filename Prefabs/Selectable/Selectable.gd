@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 	var is_selected = SelectableManager.is_selected(self, viewport_based_cursor)
 	
 	if is_selected:
-		var cursor_position = VirtualCursorManager.get_position(viewport_based_cursor)
+		var cursor_position = CursorManager.get_position(viewport_based_cursor)
 		
 		if not is_inside:
 			is_inside = true

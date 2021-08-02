@@ -42,7 +42,7 @@ func _on_scene_started() -> void:
 	camera.disable_follow = true
 	camera.follow_speed = camera.base_follow_speed / 4
 	
-	VirtualCursorManager.hide()
+	CursorManager.hide()
 	player.freeze(true)
 	yield(Tools.timer(1.0), "timeout")
 	main_music.play()
@@ -61,8 +61,8 @@ func _on_camera_reaches() -> void:
 	camera.follow_speed = camera.base_follow_speed
 	
 	player.unfreeze()
-	VirtualCursorManager.show()
-	VirtualCursorManager.move_to_center()
+	CursorManager.show()
+	CursorManager.move_to_center()
 	SubtitleManager.say(Text.find("Narrator006"), 3.0)
 
 func _on_ditch_door_selected() -> void:

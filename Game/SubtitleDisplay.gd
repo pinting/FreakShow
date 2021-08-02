@@ -80,18 +80,11 @@ func set_describe(owner: int, text: String, keep: bool = false) -> void:
 	top_label.text = text
 	current_describe_owner = owner
 	keep_describe = keep
+
+	var duration = description_fade_duration
 	
 	tween.stop(top_label, "modulate:a")
-	
-	tween.interpolate_property(
-		top_label,
-		"modulate:a",
-		top_label.modulate.a,
-		1.0,
-		description_fade_duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(top_label, "modulate:a", top_label.modulate.a, 1.0, duration)
 	tween.start()
 
 func reset_describe(owner: int, force: bool = false) -> void:
@@ -103,17 +96,10 @@ func reset_describe(owner: int, force: bool = false) -> void:
 	current_describe_owner = null
 	keep_describe = false
 	
+	var duration = description_fade_duration
+
 	tween.stop(top_label, "modulate:a")
-	
-	tween.interpolate_property(
-		top_label,
-		"modulate:a",
-		top_label.modulate.a,
-		0.0,
-		description_fade_duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(top_label, "modulate:a", top_label.modulate.a, 0.0, duration)
 	tween.start()
 	
 	yield(tween, "tween_completed")
@@ -125,30 +111,12 @@ func show_quote(text: String, duration: float = 5.0) -> void:
 	center_label.text = text
 	
 	tween.stop(center_label, "modulate:a")
-	
-	tween.interpolate_property(
-		center_label,
-		"modulate:a",
-		center_label.modulate.a,
-		1.0,
-		duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(center_label, "modulate:a", center_label.modulate.a, 1.0, duration)
 	tween.start()
 
 func hide_quote(duration: float = 5.0) -> void:	
 	tween.stop(center_label, "modulate:a")
-	
-	tween.interpolate_property(
-		center_label,
-		"modulate:a",
-		center_label.modulate.a,
-		0.0,
-		duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(center_label, "modulate:a", center_label.modulate.a, 0.0, duration)
 	tween.start()
 
 func _debug(message: String) -> void:
