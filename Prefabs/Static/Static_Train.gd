@@ -63,6 +63,9 @@ var exit_list_skip_stick = []
 var enter_list_player = []
 var enter_list_speed_scale = []
 
+const silent = -100.0
+const silence_duration = 2.0
+
 func _ready() -> void:
 	visible = false
 	
@@ -117,15 +120,7 @@ func pause() -> void:
 	
 	started = false
 	
-	tween.interpolate_method(
-		self,
-		"_set_sound_volume",
-		0.0,
-		-100.0,
-		2.0,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_method(self, "_set_volume", 0.0, silent, silence_duration)
 	tween.start()
 	
 	yield(tween, "tween_completed")
@@ -145,15 +140,7 @@ func resume() -> void:
 	
 	_play_sound()
 	
-	tween.interpolate_method(
-		self,
-		"_set_sound_volume",
-		-100.0,
-		0.0,
-		2.0,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_method(self, "_set_volume", silent, 0.0, silence_duration)
 	tween.start()
 
 func stop():
@@ -163,7 +150,7 @@ func stop():
 	
 	visible = false
 
-func _set_sound_volume(volume_db: float) -> void:
+func _set_volume(volume_db: float) -> void:
 	sound_00.volume_db = volume_db
 	sound_01.volume_db = volume_db
 	sound_02.volume_db = volume_db

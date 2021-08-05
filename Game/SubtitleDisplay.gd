@@ -4,9 +4,6 @@ extends Node
 # Debug the subtitle display (Config.debug needs to be true)
 export var debug: bool = false
 
-# Time the quote label takes to fade in or in
-export var description_fade_duration: float = 0.33
-
 # Line break
 export var line_break: String = "\r\n"
 
@@ -19,6 +16,8 @@ onready var center_label: Label = $CenterLabel
 var current_describe_owner = null
 var keep_describe = false
 var lines = []
+
+signal line_timeout
 
 func _ready() -> void:
 	SubtitleManager.set_display(self)
@@ -60,6 +59,7 @@ func _process(delta: float) -> void:
 	
 	for n in marked:
 		lines.remove(n)
+		emit_signal("line_timeout")
 	
 	bottom_label.text = text
 
@@ -71,7 +71,7 @@ func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 		"show_percentage": 0.0 if speed > 0.0 else 1.0
 	})
 
-func set_describe(owner: int, text: String, keep: bool = false) -> void:
+func set_describe(owner: int, text: String, keep: bool = false, duration: float = 0.33) -> void:
 	_debug(str("Set describe for '", owner, "'", " and keep" if keep else ""))
 
 	if keep_describe:
@@ -80,14 +80,12 @@ func set_describe(owner: int, text: String, keep: bool = false) -> void:
 	top_label.text = text
 	current_describe_owner = owner
 	keep_describe = keep
-
-	var duration = description_fade_duration
 	
 	tween.stop(top_label, "modulate:a")
 	tween.interpolate_property(top_label, "modulate:a", top_label.modulate.a, 1.0, duration)
 	tween.start()
 
-func reset_describe(owner: int, force: bool = false) -> void:
+func reset_describe(owner: int, force: bool = false, duration: float = 0.33) -> void:
 	_debug(str("Remove describe for '", owner, "'", " with force" if force else ""))
 
 	if current_describe_owner != owner and not force:
@@ -95,8 +93,6 @@ func reset_describe(owner: int, force: bool = false) -> void:
 	
 	current_describe_owner = null
 	keep_describe = false
-	
-	var duration = description_fade_duration
 
 	tween.stop(top_label, "modulate:a")
 	tween.interpolate_property(top_label, "modulate:a", top_label.modulate.a, 0.0, duration)

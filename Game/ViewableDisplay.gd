@@ -32,7 +32,7 @@ var visible_since: float = 0.0
 func _ready() -> void:
 	ViewableManager.set_display(self)
 
-func _effect(amount: float) -> void:
+func _set_effect(amount: float) -> void:
 	for child in container.get_children():
 		child.material.set_shader_param(effect_key, amount)
 
@@ -84,7 +84,7 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	
 	# Play effect
 	tween.interpolate_property(inner_display, "modulate:a", 0.0, 1.0, effect_duration)
-	tween.interpolate_method(self, "_effect", effect_max, effect_min, effect_duration)
+	tween.interpolate_method(self, "_set_effect", effect_max, effect_min, effect_duration)
 	tween.start()
 
 	# Force reset the description text and set it to the new value
@@ -93,7 +93,7 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 func hide() -> void:
 	# Play effect
 	tween.interpolate_property(inner_display, "modulate:a", 1.0, 0.0, effect_duration)
-	tween.interpolate_method(self, "_effect", effect_min, effect_max, effect_duration)
+	tween.interpolate_method(self, "_set_effect", effect_min, effect_max, effect_duration)
 	tween.start()
 
 	# Reset describe text

@@ -16,8 +16,14 @@ func _ready() -> void:
 	add_child(http_request)
 	
 	if Config.no_sound:
+		# Mute each audio server
 		for i in range(AudioServer.bus_count):
 			AudioServer.set_bus_volume_db(i, -500)
+
+func _process(_delta: float) -> void:
+	# Process toggle fullscreen button
+	if VirtualInput.is_action_just_pressed("toggle_fullscreen"):
+		OS.window_fullscreen = not OS.window_fullscreen
 
 # Destroy an object, remove it from its parent and mark for garbage collection
 func destroy(object: Object):
@@ -32,6 +38,7 @@ func destroy(object: Object):
 	object.set_script(null)
 	object.queue_free()
 
+# Create a new instance of a packed CPUParticles2D, play it, destroy it
 func play_packed_effect(effect: PackedScene, parent: Node2D, timeout: float = 0.0) -> void:
 	var instance = effect.instance()
 	
@@ -58,6 +65,7 @@ func random_int(min_value: int, max_value: int) -> int:
 func random_float(min_value: float, max_value: float) -> float:
 	return random_generator.randf_range(min_value, max_value)
 
+# Generate random true or false
 func guess() -> bool:
 	return random_int(0, 99) % 2 == 0
 
@@ -125,6 +133,16 @@ func keep_child_at(parent: Node, index: int):
 			chosen = child
 	
 	return chosen
+
+# Change group visibility and disable/enable the shapes
+func set_group_visibility(name: String, state: bool, with_shapes: bool = false) -> void:
+	var nodes = get_tree().get_nodes_in_group(name)
+	
+	for node in nodes:
+		node.visible = state
+		
+		if with_shapes:
+			set_shapes_disabled(node, not state)
 
 # Remove every child node
 func remove_childs(parent: Node):

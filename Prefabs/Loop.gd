@@ -11,10 +11,10 @@ export (NodePath) var area_shape_node
 export (NodePath) var container_node
 
 # Loop both, left or right sides
-export (String, "both", "left", "right") var loop_mode = "both"
+export (String, "both", "left", "right", "none") var loop_mode = "both"
 
 # Copy the container to both, left or right sides
-export (String, "both", "left", "right") var mirror_mode = "both"
+export (String, "both", "left", "right", "none") var mirror_mode = "both"
 
 var player: Player
 var area_shape: CollisionShape2D
@@ -25,6 +25,7 @@ var loop_top_left: Vector2
 var loop_bottom_right: Vector2
 
 var containers = []
+var mirrors = []
 
 var node_index_store: Dictionary = {}
 var loop_index: int = 0
@@ -50,9 +51,15 @@ func _ready() -> void:
 	if container_node:
 		container = get_node(container_node)
 		
-		_mirror()
+		mirror()
 
-func _mirror():
+func undo_mirror():
+	for mirror in mirrors:
+		Tools.destroy(mirror)
+	
+	mirrors = []
+
+func mirror():
 	if not container:
 		return
 	
@@ -71,6 +78,7 @@ func _mirror_left():
 	left_mirror.position.x -= 2 * extents.x
 	
 	containers.push_front(left_mirror)
+	mirrors.push_back(left_mirror)
 	add_child(left_mirror)
 
 func _mirror_right():
@@ -80,6 +88,7 @@ func _mirror_right():
 	right_mirror.position.x += 2 * extents.x
 	
 	containers.push_back(right_mirror)
+	mirrors.push_back(right_mirror)
 	add_child(right_mirror)
 
 # When reaching the end of the loop the player is teleported to the

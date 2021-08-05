@@ -24,13 +24,13 @@ collision_mask = 7
 [node name="LeftSide" type="CollisionPolygon2D" parent="Sprite/Overlay/OverlayBody"]
 position = Vector2( -1.44922, 0.483215 )
 z_index = 100
-polygon = PoolVector2Array( -85.7197, -312.615, -80.5654, -315.353, -63.8135, -275.407 )
+polygon = PoolVector2Array( -85.7197, -312.615, -80.5654, -315.353, -59.4589, -271.336 )
 
 [node name="RightSide" type="CollisionPolygon2D" parent="Sprite/Overlay/OverlayBody"]
 position = Vector2( 176.644, 16.9705 )
 scale = Vector2( 1.15769, 1.03912 )
 z_index = 100
-polygon = PoolVector2Array( -83.5967, -319.037, -79.2837, -314.852, -99.0415, -279.355 )
+polygon = PoolVector2Array( -83.5967, -319.037, -79.2837, -314.852, -102.858, -276.988 )
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -230.117, -516.211, 230.838, -515.501, 228.978, -237.823, 11.5, -239, 10.5239, 514.873, -18.4675, 515.05, -17.875, -239.875, -229.75, -238 )

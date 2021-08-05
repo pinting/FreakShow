@@ -9,9 +9,9 @@ onready var color_rect: ColorRect = $ColorRect
 var is_hidden: bool = true
 
 func _ready() -> void:
-	_effect(0.0)
+	_set_effect(0.0)
 
-func _effect(value: float) -> void:
+func _set_effect(value: float) -> void:
 	color_rect.material.set_shader_param("value", value)
 
 func show(duration: float = 0.5) -> void:
@@ -19,7 +19,7 @@ func show(duration: float = 0.5) -> void:
 		return
 	
 	tween.stop_all()
-	tween.interpolate_method(self, "_effect", 0.0, strength, duration)
+	tween.interpolate_method(self, "_set_effect", 0.0, strength, duration)
 	tween.start()
 	
 	is_hidden = false
@@ -29,7 +29,7 @@ func hide(duration: float = 0.5) -> void:
 		return
 	
 	tween.stop_all()
-	tween.interpolate_method(self, "_effect", strength, 0.0, duration)
+	tween.interpolate_method(self, "_set_effect", strength, 0.0, duration)
 	tween.start()
 	
 	is_hidden = true

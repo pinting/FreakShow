@@ -123,30 +123,12 @@ func _process_shake(delta: float) -> void:
 
 func change_zoom(amount: Vector2, duration: float) -> void:
 	tween.stop(self, "zoom")
-	
-	tween.interpolate_property(
-		self,
-		"zoom",
-		zoom,
-		amount,
-		duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(self, "zoom", zoom, amount, duration)
 	tween.start()
 
 func change_shake(amount: float, duration: float) -> void:
 	tween.stop(self, "shake")
-	
-	tween.interpolate_property(
-		self,
-		"shake",
-		shake,
-		amount,
-		duration,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT)
-	
+	tween.interpolate_property(self, "shake", shake, amount, duration)
 	tween.start()
 
 func reset(new_position: Vector2, with_scrolling_vector: bool = true) -> void:

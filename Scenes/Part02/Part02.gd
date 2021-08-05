@@ -6,18 +6,18 @@ const ball_reposition_delay: float = 5.0
 const ball_reposition_y_offset: float = 3000.0
 
 onready var player: Player = $Player
+onready var ball: Pickable = $Ball
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 onready var train: StaticBody2D = $Environment/Train
-onready var road_block: StaticBody2D = $Environment/RoadBlock
+onready var loop: Loop = $Environment/Loop
 onready var phone_box: Sprite = $Environment/PhoneBox
 onready var hoop: Node2D = $Environment/Hoop
-onready var ball: RigidBody2D = $Environment/Ball
 
 onready var trigger_comment: Area2D = $Trigger/TriggerComment
 onready var trigger_train: Area2D = $Trigger/TriggerTrain
-onready var reaching_phone_box: Area2D = $Trigger/ReachingPhoneBox
-onready var reaching_hoop: Area2D = $Trigger/ReachingHoop
+onready var reaching_loop_with_ball: Area2D = $Trigger/ReachingLoopWithBall
+onready var reaching_hoop_with_ball: Area2D = $Trigger/ReachingHoopWithBall
 onready var ball_area: Area2D = $Trigger/BallArea
 onready var teleport_player: Node2D = $Trigger/TeleportPlayer
 
@@ -35,20 +35,24 @@ var ball_reposition_sleep: float = ball_reposition_delay
 
 func _ready() -> void:
 	music_00 = main_music.add_part(0, 3 * 60 + 20, true, 0, 10, -40)
-	music_01 = main_music.add_part(5 * 60 + 36, 7 * 60 + 27, true, 10, 10, -40)
-	music_02 = main_music.add_part(8 * 60 + 21, 9 * 60 + 56.5, true, 5, 5, -40)
+	music_01 = main_music.add_part(8 * 60 + 21, 9 * 60 + 56.5, true, 5, 5, -10)
+	music_02 = main_music.add_part(5 * 60 + 36, 7 * 60 + 27, true, 5, 5, -10)
 	
 	connect("scene_started", self, "_on_scene_started")
 	trigger_comment.connect("body_entered", self, "_trigger_comment", [], CONNECT_ONESHOT)
+	ball.connect("picked", self, "_trigger_ball_picked", [], CONNECT_ONESHOT)
 	trigger_train.connect("body_entered", self, "_trigger_train", [], CONNECT_ONESHOT)
-	reaching_hoop.connect("body_entered", self, "_trigger_hoop_part", [], CONNECT_ONESHOT)
-	reaching_phone_box.connect("body_entered", self, "_reaching_phone_box", [], CONNECT_ONESHOT)
+	reaching_loop_with_ball.connect("body_entered", self, "_reaching_loop_with_ball", [], CONNECT_ONESHOT)
+	reaching_hoop_with_ball.connect("body_entered", self, "_reaching_hoop_with_ball", [], CONNECT_ONESHOT)
 	hoop.connect("ball_in_hoop", self, "_trigger_ball_in_hoop", [], CONNECT_ONESHOT)
 	
-	Tools.set_body_visibility(road_block, false)
+	Tools.set_group_visibility("_right_side", false)
 	
 	if teleport_player_to_end:
-		move_player(player, teleport_player.position)
+		_trigger_ball_picked(ball)
+		_reaching_loop_with_ball(ball)
+		yield(move_player(player, teleport_player.position), "completed")
+		_reset_ball()
 
 func _on_scene_started() -> void:
 	SubtitleManager.say(Text.find("Narrator002"), 6.0, 12.0)
@@ -59,10 +63,39 @@ func _on_scene_started() -> void:
 	main_music.play()
 	black_screen.fade_out(5.0)
 
+func _trigger_comment(_body: Node) -> void:
+	SubtitleManager.say(Text.find("Narrator003"), 6.0)
+
+func _trigger_ball_picked(_ball: Pickable) -> void:
+	ball.z_index = 0
+
+func _trigger_train(_body: Node) -> void:
+	train.start()
+
+func _reaching_loop_with_ball(_body: Node) -> void:
+	loop.loop_mode = "none"
+	loop.mirror_mode = "none"
+	loop.undo_mirror()
+	Tools.set_group_visibility("_right_side", true)
+
+func _reaching_hoop_with_ball(_body: Node) -> void:
+	main_music.force_next(music_01)
+
+func _trigger_ball_in_hoop() -> void:
+	main_music.force_next(music_02)
+	
+	yield(Tools.timer(5.0), "timeout")
+
+	ring_sound.play()
+
+	phone_box.phone.visible = true
+	phone_box.lamp.visible = true
+	phone_box.flashing_phone_light = true
+	phone_box.phone.connect("selected", self, "_on_phone_selected", [], CONNECT_ONESHOT)
+
 func _on_phone_selected() -> void:
 	phone_box.flashing_phone_light = false
-
-	main_music.kill(2.0);
+	
 	black_screen.fade_in(2.0)
 	yield(Tools.timer(3.0), "timeout")
 
@@ -71,31 +104,17 @@ func _on_phone_selected() -> void:
 
 	pick_up_sound.play()
 	yield(Tools.timer(2.0), "timeout")
-
-	load_next_scene()
-
-func _trigger_comment(_body: Node) -> void:
-	SubtitleManager.say(Text.find("Narrator003"), 6.0)
-
-func _trigger_train(_body: Node) -> void:
-	train.start()
-
-func _reaching_phone_box(_body: Node) -> void:
-	Tools.set_body_visibility(road_block, true)
-
-func _trigger_hoop_part(_body: Node) -> void:
-	main_music.force_next(music_01)
-
-func _trigger_ball_in_hoop() -> void:
-	yield(Tools.timer(5.0), "timeout")
-
-	ring_sound.play()
-
-	phone_box.phone.visible = true
-	phone_box.lamp.visible = true
-	phone_box.flashing_phone_light = true
 	
-	phone_box.phone.connect("selected", self, "_on_phone_selected", [], CONNECT_ONESHOT)
+	yield(SubtitleManager.say(Text.find("Narrator012"), 1.0, 2.0), "completed")
+	yield(SubtitleManager.say(Text.find("Narrator013"), 1.0, 2.0), "completed")
+	yield(SubtitleManager.say(Text.find("Narrator014"), 2.0, 3.0), "completed")
+	yield(SubtitleManager.say(Text.find("Narrator015"), 2.0, 3.0), "completed")
+	yield(SubtitleManager.say(Text.find("Narrator016"), 6.0, 10.0), "completed")
+
+	main_music.kill(2.0)
+	yield(Tools.timer(3.0), "timeout")
+	
+	load_next_scene()
 
 func _process(delta: float) -> void:
 	if ball_reposition_sleep > 0:
@@ -103,5 +122,8 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if ball_reposition_sleep <= 0 and not ball_area.overlaps_body(ball):
-		ball.reset(player.global_position + Vector2.UP * ball_reposition_y_offset)
 		ball_reposition_sleep = ball_reposition_delay
+		_reset_ball()
+
+func _reset_ball() -> void:
+	ball.reset(player.global_position + Vector2.UP * ball_reposition_y_offset)

@@ -10,6 +10,9 @@ onready var grab_distance: float = 40.0
 # Force max kick velocity
 export var max_velocity: Vector2 = Vector2(400.0, 400.0)
 
+# Disable at init
+export var disable_at_init: bool = false
+
 # Disable shapes when disabled
 export var disable_with_shapes: bool = true
 
@@ -31,6 +34,9 @@ func _ready() -> void:
 	assert(selectable.is_in_group("selectable"), "Selectable not in group of 'selectable'")
 	
 	selectable.connect("selected", self, "_on_selected")
+	
+	if disable_at_init:
+		disable()
 
 func _on_selected():
 	emit_signal("picked", self)

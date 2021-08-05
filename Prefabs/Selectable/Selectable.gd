@@ -4,6 +4,9 @@ extends PureSelectable
 # Selection material
 export (Material) var effect_material = preload("res://Materials/GrabMaterial.tres")
 
+# Vanish material
+export (Material) var vanish_material = preload("res://Materials/DisintegrateMaterial.tres")
+
 # Primary effect name
 export var effect_key: String = "scale"
 
@@ -18,6 +21,18 @@ export var effect_default: float = 0.0
 
 # Effect step size in one second
 export var effect_step: float = 0.1
+
+# Vanish key
+export var vanish_key: String = "amount"
+
+# Vanish minimum value
+export var vanish_min: float = 0.0
+
+# Vanish maximum value
+export var vanish_max: float = 10.0
+
+# Vanish duration
+export var vanish_duration: float = 1.0
 
 var current_effect_value: float = effect_default
 

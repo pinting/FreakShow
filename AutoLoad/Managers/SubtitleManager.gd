@@ -2,8 +2,10 @@ extends Node
 
 signal display_changed
 
-var display: Node = null
+var display: SubtitleDisplay = null
 var say_queue = []
+
+const describe_duration = 0.33
 
 func set_display(subtitle_display: SubtitleDisplay) -> void:
 	if not subtitle_display:
@@ -31,20 +33,22 @@ func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 		say_queue.push_back({ "text": text, "speed": speed, "timeout": timeout })
 	else:
 		display.say(text, speed, timeout)
+	
+	yield(display, "line_timeout")
 
 func set_describe(owner: int, text: String, keep: bool = false) -> void:
 	if not display:
 		Tools.debug("SubtitleDisplay not exists, but set_describe was called")
 		return
 	
-	display.set_describe(owner, text, keep)
+	display.set_describe(owner, text, keep, describe_duration)
 
 func reset_describe(owner: int, force: bool = false) -> void:
 	if not display:
 		Tools.debug("SubtitleDisplay not exists, but reset_describe was called")
 		return
 	
-	display.reset_describe(owner, force)
+	display.reset_describe(owner, force, describe_duration)
 
 func show_quote(text: String) -> void:
 	if not display:

@@ -10,7 +10,6 @@
 blend_mode = 1
 
 [node name="Part02_PhoneBox" type="Sprite"]
-position = Vector2( 11476.8, -329.819 )
 z_index = -2
 texture = ExtResource( 4 )
 script = ExtResource( 1 )
@@ -18,6 +17,7 @@ script = ExtResource( 1 )
 [node name="Phone" parent="." instance=ExtResource( 2 )]
 visible = false
 position = Vector2( -1.2998, -42.096 )
+description_key = ""
 effect_hover = 1.25
 
 [node name="Lamp" type="Sprite" parent="."]

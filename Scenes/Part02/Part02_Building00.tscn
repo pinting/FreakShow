@@ -109,10 +109,6 @@ position = Vector2( 901.344, 2623.34 )
 scale = Vector2( 1.25, 1.09773 )
 occluder = SubResource( 2 )
 
-[node name="BeforeWallCollision" type="CollisionPolygon2D" parent="."]
-scale = Vector2( 1.25, 1.25 )
-polygon = PoolVector2Array( 30.5609, 1826.42, 31.8317, 2543.21, -138.464, 2542.55, -139.675, 1670.53, 1570.33, 1675.36, 1570.12, 1829.98 )
-
 [node name="GroundCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2( 3.79406, 107.858 )
 scale = Vector2( 1.25, 1.1714 )
@@ -124,3 +120,11 @@ polygon = PoolVector2Array( -33.3467, 2491.76, 1552.65, 2485.88, 2615.03, 2726.0
 position = Vector2( -0.139465, 0.459595 )
 scale = Vector2( 1.25, 1.25 )
 polygon = PoolVector2Array( -28.8685, 1788.68, 1569.39, 1789.08, 1570.13, -2494.04, -1577.78, -2499.21, -1568.93, 2633.67, 1567.59, 2635.08, 1565.3, 2454.31, -33.7491, 2456.96 )
+
+[node name="PlayerBlock" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="BeforeWallCollision" type="CollisionPolygon2D" parent="PlayerBlock"]
+scale = Vector2( 1.25, 1.25 )
+polygon = PoolVector2Array( 30.5609, 1826.42, 31.8317, 2543.21, -138.464, 2542.55, -139.675, 1670.53, 1570.33, 1675.36, 1570.12, 1829.98 )
