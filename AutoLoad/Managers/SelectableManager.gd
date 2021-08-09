@@ -5,6 +5,9 @@ var disable: bool = false
 var viewport_selection: PureSelectable = null
 var world_selection: PureSelectable = null
 
+signal cursor_entered(selectable)
+signal cursor_exited(selectable)
+
 func can_hover(selectable: PureSelectable) -> bool:
 	var selectable_id = selectable.get_instance_id()
 
@@ -60,15 +63,41 @@ func get_top(mouse_position: Vector2, viewport_based: bool) -> PureSelectable:
 	
 	return result
 
-func is_selected(selectable: PureSelectable, viewport_based: bool) -> bool:
-	if viewport_based:
+func is_selected(selectable: PureSelectable) -> bool:
+	if selectable.viewport_based_cursor:
 		return selectable == viewport_selection
 	
 	return selectable == world_selection
 
 func _process(_delta: float) -> void:
-	var world_cursor_position = CursorManager.get_position(false)
-	var viewport_cursor_position = CursorManager.get_position(true)
+	if not world_selection or not world_selection.lock:
+		var prev_world_selection = world_selection
+		var world_cursor_position = CursorManager.get_position(false)
+		
+		world_selection = get_top(world_cursor_position, false)
+		
+		if prev_world_selection != world_selection:
+			if prev_world_selection != null:
+				emit_signal("cursor_exited", prev_world_selection)
+			
+			emit_signal("cursor_entered", world_selection)
 	
-	world_selection = get_top(world_cursor_position, false)
-	viewport_selection = get_top(viewport_cursor_position, true)
+	if not viewport_selection or not viewport_selection.lock:
+		var prev_viewport_selection = viewport_selection
+		var viewport_cursor_position = CursorManager.get_position(true)
+		
+		viewport_selection = get_top(viewport_cursor_position, true)
+		
+		if prev_viewport_selection != viewport_selection:
+			if prev_viewport_selection != null:
+				emit_signal("cursor_exited", prev_viewport_selection)
+			
+			emit_signal("cursor_entered", viewport_selection)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		if world_selection:
+			world_selection.select()
+		
+		if viewport_selection:
+			viewport_selection.select()

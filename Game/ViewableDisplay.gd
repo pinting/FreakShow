@@ -83,8 +83,10 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	visible_since = 0.0
 	
 	# Play effect
-	tween.interpolate_property(inner_display, "modulate:a", 0.0, 1.0, effect_duration)
-	tween.interpolate_method(self, "_set_effect", effect_max, effect_min, effect_duration)
+	tween.interpolate_property(inner_display, "modulate:a", 
+		0.0, 1.0, effect_duration)
+	tween.interpolate_method(self, "_set_effect",
+		effect_max, effect_min, effect_duration)
 	tween.start()
 
 	# Force reset the description text and set it to the new value
@@ -92,8 +94,10 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 
 func hide() -> void:
 	# Play effect
-	tween.interpolate_property(inner_display, "modulate:a", 1.0, 0.0, effect_duration)
-	tween.interpolate_method(self, "_set_effect", effect_min, effect_max, effect_duration)
+	tween.interpolate_property(inner_display, "modulate:a", 
+		1.0, 0.0, effect_duration)
+	tween.interpolate_method(self, "_set_effect",
+		effect_min, effect_max, effect_duration)
 	tween.start()
 
 	# Reset describe text

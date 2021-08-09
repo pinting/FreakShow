@@ -82,7 +82,8 @@ func set_describe(owner: int, text: String, keep: bool = false, duration: float 
 	keep_describe = keep
 	
 	tween.stop(top_label, "modulate:a")
-	tween.interpolate_property(top_label, "modulate:a", top_label.modulate.a, 1.0, duration)
+	tween.interpolate_property(top_label, "modulate:a",
+		top_label.modulate.a, 1.0, duration)
 	tween.start()
 
 func reset_describe(owner: int, force: bool = false, duration: float = 0.33) -> void:
@@ -95,7 +96,8 @@ func reset_describe(owner: int, force: bool = false, duration: float = 0.33) -> 
 	keep_describe = false
 
 	tween.stop(top_label, "modulate:a")
-	tween.interpolate_property(top_label, "modulate:a", top_label.modulate.a, 0.0, duration)
+	tween.interpolate_property(top_label, "modulate:a",
+		top_label.modulate.a, 0.0, duration)
 	tween.start()
 	
 	yield(tween, "tween_completed")
@@ -107,12 +109,14 @@ func show_quote(text: String, duration: float = 5.0) -> void:
 	center_label.text = text
 	
 	tween.stop(center_label, "modulate:a")
-	tween.interpolate_property(center_label, "modulate:a", center_label.modulate.a, 1.0, duration)
+	tween.interpolate_property(center_label, "modulate:a",
+		center_label.modulate.a, 1.0, duration)
 	tween.start()
 
 func hide_quote(duration: float = 5.0) -> void:	
 	tween.stop(center_label, "modulate:a")
-	tween.interpolate_property(center_label, "modulate:a", center_label.modulate.a, 0.0, duration)
+	tween.interpolate_property(center_label, "modulate:a",
+		center_label.modulate.a, 0.0, duration)
 	tween.start()
 
 func _debug(message: String) -> void:

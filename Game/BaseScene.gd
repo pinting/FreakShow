@@ -50,9 +50,6 @@ func _ready() -> void:
 	
 	var tree = get_tree()
 	
-	for node in tree.get_nodes_in_group("pickable"):
-		node.connect("picked", self, "_on_pickable_picked")
-	
 	for node in tree.get_nodes_in_group("auto_visible"):
 		node.visible = true
 
@@ -125,20 +122,8 @@ func _process_cancel_button(delta: float) -> void:
 	else:
 		cancel_button_counter += 0
 
-func _on_pickable_picked(object: Object) -> void:
-	if not held_pickable:
-		held_pickable = object
-		held_pickable.hold()
-
 func _input(event: InputEvent) -> void:
 	auto_restart_counter = 0.0
-	
-	if event is InputEventMouseButton:
-		if held_pickable and not event.pressed:
-			if is_instance_valid(held_pickable):
-				held_pickable.drop(Vector2.ZERO)
-			
-			held_pickable = null
 
 func reload_scene() -> void:
 	var current_scene_path = get_parent().filename

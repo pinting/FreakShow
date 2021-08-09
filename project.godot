@@ -147,6 +147,7 @@ SubtitleManager="*res://AutoLoad/Managers/SubtitleManager.gd"
 ViewableManager="*res://AutoLoad/Managers/ViewableManager.gd"
 CursorManager="*res://AutoLoad/Managers/CursorManager.gd"
 SelectableManager="*res://AutoLoad/Managers/SelectableManager.gd"
+PickableManager="*res://AutoLoad/Managers/PickableManager.gd"
 Text="*res://AutoLoad/Text.gd"
 SceneLoader="*res://AutoLoad/SceneLoader.gd"
 

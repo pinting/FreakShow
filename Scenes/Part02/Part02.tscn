@@ -122,6 +122,7 @@ position = Vector2( 59.2303, 0.734743 )
 [node name="BaseScene" parent="." instance=ExtResource( 46 )]
 script = ExtResource( 8 )
 auto_fade_out = false
+teleport_player_to_end = true
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -6109.33, -417.985 )
@@ -147,7 +148,10 @@ follow_offset = Vector2( 0, -500 )
 ]]
 environment = SubResource( 1 )
 
-[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
+[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=[
+"auto_visible",
+]]
+visible = false
 light_mask = 0
 color = Color( 0.294118, 0.294118, 0.294118, 1 )
 
@@ -233,9 +237,9 @@ scale = Vector2( 1.2, 1.2 )
 z_index = 5
 collision_layer = 0
 collision_mask = 0
-offset = Vector2( -5000, 0 )
-speed = 2000.0
 no_custom_physics = true
+offset = Vector2( -5000, 0 )
+speed = 3000.0
 
 [node name="Building00" parent="BaseScene/Environment" instance=ExtResource( 2 )]
 position = Vector2( -7011.22, -3087.91 )
@@ -326,7 +330,7 @@ z_index = -5
 texture = ExtResource( 24 )
 
 [node name="CableBox" type="Sprite" parent="BaseScene/Environment/Loop/Container"]
-position = Vector2( 432.599, 679.745 )
+position = Vector2( -2646.04, 679.745 )
 z_index = 1
 texture = ExtResource( 36 )
 
@@ -452,7 +456,7 @@ z_index = 1
 shape = SubResource( 11 )
 
 [node name="TeleportPlayer" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( 14316.5, -184.486 )
+position = Vector2( 12299.6, -359.681 )
 
 [node name="Sound" type="Node" parent="BaseScene"]
 

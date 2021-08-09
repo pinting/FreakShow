@@ -36,7 +36,10 @@ follow_node = NodePath("../Player")
 
 [node name="Sky" parent="BaseScene" instance=ExtResource( 4 )]
 
-[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
+[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=[
+"auto_visible",
+]]
+visible = false
 light_mask = 524288
 color = Color( 0.372549, 0.372549, 0.372549, 1 )
 

@@ -10,22 +10,24 @@ export (NodePath) var selection_area
 # Cursor according to viewport (if false, according to world)
 export var viewport_based_cursor: bool = false
 
-var is_inside: bool = false
-var is_described: bool = false
 var disabled: bool = false
-var keep_selected: bool = false
+var lock: bool = false
 
 signal selected
-signal cursor_inside
-signal cursor_outside
+signal cursor_entered
+signal cursor_exited
 
 func _ready() -> void:
 	assert(is_in_group("selectable"), "Selectable not in group of 'selectable'")
+	
+	SelectableManager.connect("cursor_entered", self, "_on_cursor_entered")
+	SelectableManager.connect("cursor_exited", self, "_on_cursor_exited")
 
-func _input(event: InputEvent) -> void:
-	var not_disabled = not SelectableManager.disable and not disabled
-
-	if not_disabled and event is InputEventMouseButton and event.pressed and is_inside:
+func select() -> void:
+	var is_disabled = SelectableManager.disable or disabled
+	var is_selected = SelectableManager.is_selected(self)
+	
+	if not is_disabled and is_selected:
 		emit_signal("selected")
 
 func get_selection_area() -> Rect2:
@@ -36,38 +38,44 @@ func get_selection_area() -> Rect2:
 	
 	return get_rect()
 
-func _process(_delta: float) -> void:
-	var is_selected = SelectableManager.is_selected(self, viewport_based_cursor)
+func _on_cursor_entered(target: PureSelectable) -> void:
+	if target != self:
+		return
 	
-	if is_selected:
-		if not is_inside:
-			is_inside = true
-
-			emit_signal("cursor_inside")
-			_on_cursor_inside()
-	elif not keep_selected:
-		if is_inside:
-			is_inside = false
-
-			emit_signal("cursor_outside")
-			_on_cursor_outside()
-
-func _on_cursor_inside() -> void:
-	if not is_described and len(description_key):
+	if description_key:
 		SubtitleManager.set_describe(get_instance_id(), Text.find(description_key))
-		is_described = true
+	
+	emit_signal("cursor_entered")
 
-func _on_cursor_outside() -> void:
-	if is_described and len(description_key):
+func _on_cursor_exited(target: PureSelectable) -> void:
+	if target != self:
+		return
+	
+	if description_key:
 		SubtitleManager.reset_describe(get_instance_id())
-		is_described = false
+	
+	emit_signal("cursor_exited")
 
 func _exit_tree():
-	_on_cursor_outside()
+	_on_cursor_exited(self)
 
 func disable() -> void:
+	if disabled:
+		return
+	
 	disabled = true
-	_on_cursor_outside()
+	lock = false
+	
+	_on_cursor_exited(self)
 
 func enable() -> void:
+	if not disabled:
+		return
+	
 	disabled = false
+
+func show() -> void:
+	visible = true
+
+func hide() -> void:
+	visible = false

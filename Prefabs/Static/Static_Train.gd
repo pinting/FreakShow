@@ -1,7 +1,7 @@
 extends StaticBody2D
 
-# Sound of the train
-export var train_sound: AudioStream
+# Disable running-on-top physics script
+export var no_custom_physics: bool = false
 
 # Start the train using this X offset
 export var offset: Vector2 = Vector2(-15000.0, 0)
@@ -10,25 +10,28 @@ export var offset: Vector2 = Vector2(-15000.0, 0)
 export var speed: float = 1600.0
 
 # Recycle the train after this dinstance to the player
-export var recycle_after_distance_to_player: float = 50000.0
+export var recycle_after: float = 50000.0
+
+# Sound of the train
+export var sound: AudioStream = preload("res://Assets/Sounds/Train01.ogg")
+
+# Volume DB of the train
+export var base_volume: float = 20.0
 
 # Amplitude of the shake (Y axis)
-export var shake_amp: float = 1.5
+const shake_amp: float = 1.5
 
 # Number of shakes (X axis)
-export var shake_count: float = 15.0
+const shake_count: float = 15.0
 
 # Difference in rhythem per train
-export var rhythm_diff: float = 0.33
+const rhythm_diff: float = 0.33
 
 # Maximum pitch diff
-export var max_pitch_diff: float = 0.25
+const max_pitch_diff: float = 0.25
 
 # Seconds the player will pick up the speed of the train
-export var speed_scale_m: float = 2.5
-
-# Disable running-on-top physics script
-export var no_custom_physics: bool = false
+const speed_scale_m: float = 2.5
 
 onready var tween = $Tween
 
@@ -74,10 +77,8 @@ func _ready() -> void:
 	
 	base_position = global_position
 	
-	if train_sound:
-		sound_00.stream = train_sound
-		sound_01.stream = train_sound
-		sound_02.stream = train_sound
+	_set_sound(sound)
+	_set_volume(base_volume)
 
 func _player_entered_top(player: Node):
 	if no_custom_physics:
@@ -107,11 +108,11 @@ func start() -> void:
 	global_position = base_position + offset
 	visible = true
 	
-	var pitch_scale = _generate_pitch_scale()
+	var pitch = Tools.random_float(1.0 - max_pitch_diff, 1.0 + max_pitch_diff)
 	
-	sound_00.pitch_scale = pitch_scale
-	sound_01.pitch_scale = pitch_scale
-	sound_02.pitch_scale = pitch_scale
+	sound_00.pitch_scale = pitch
+	sound_01.pitch_scale = pitch
+	sound_02.pitch_scale = pitch
 	
 	resume()
 
@@ -120,15 +121,12 @@ func pause() -> void:
 	
 	started = false
 	
-	tween.interpolate_method(self, "_set_volume", 0.0, silent, silence_duration)
+	tween.interpolate_method(self, "_set_volume", base_volume, silent, silence_duration)
 	tween.start()
 	
 	yield(tween, "tween_completed")
 	
 	_stop_sound()
-
-func _generate_pitch_scale():
-	return Tools.random_float(1.0 - max_pitch_diff, 1.0 + max_pitch_diff)
 
 func resume() -> void:
 	if not visible:
@@ -140,7 +138,7 @@ func resume() -> void:
 	
 	_play_sound()
 	
-	tween.interpolate_method(self, "_set_volume", silent, 0.0, silence_duration)
+	tween.interpolate_method(self, "_set_volume", silent, base_volume, silence_duration)
 	tween.start()
 
 func stop():
@@ -149,6 +147,11 @@ func stop():
 	pause()
 	
 	visible = false
+
+func _set_sound(stream: AudioStream) -> void:
+	sound_00.stream = stream
+	sound_01.stream = stream
+	sound_02.stream = stream
 
 func _set_volume(volume_db: float) -> void:
 	sound_00.volume_db = volume_db
@@ -241,7 +244,7 @@ func _process_recycle() -> void:
 	if player:
 		source_position = player.global_position
 	
-	if source_position.distance_to(global_position) > recycle_after_distance_to_player:
+	if source_position.distance_to(global_position) > recycle_after:
 		stop()
 		Tools.destroy(self)
 

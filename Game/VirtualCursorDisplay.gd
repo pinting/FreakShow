@@ -28,12 +28,14 @@ func show(duration: float = 0.5) -> void:
 	cursor.visible = true
 	
 	tween.stop_all()
-	tween.interpolate_property(cursor, "modulate:a", cursor.modulate.a, 1.0, duration)
+	tween.interpolate_property(cursor, "modulate:a",
+		cursor.modulate.a, 1.0, duration)
 	tween.start()
 
 func hide(duration: float = 0.5) -> void:
 	tween.stop_all()
-	tween.interpolate_property(cursor, "modulate:a", cursor.modulate.a, 0.0, duration)
+	tween.interpolate_property(cursor, "modulate:a",
+		cursor.modulate.a, 0.0, duration)
 	tween.start()
 	
 	yield(tween, "tween_completed")

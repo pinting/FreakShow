@@ -11,6 +11,15 @@ var ball_reposition_sleep: float = ball_reposition_delay
 func _ready():
 	lock_area.connect("body_entered", self, "_on_lock_area_touched")
 
+func _process(delta: float) -> void:
+	var is_accept = VirtualInput.is_action_just_pressed("ui_accept")
+	
+	if is_accept:
+		if ball.selectable.visible:
+			ball.hide()
+		else:
+			ball.show()
+
 func _on_lock_area_touched(body) -> void:
 	if not body.is_in_group("pickable"):
 		return
@@ -25,5 +34,10 @@ func _physics_process(delta: float) -> void:
 		ball_reposition_sleep -= delta
 	
 	if ball_reposition_sleep <= 0 and not ball_area.overlaps_body(ball):
-		ball.reset(ball_area.global_position)
+		_reset_ball()
 		ball_reposition_sleep = ball_reposition_delay
+
+func _reset_ball() -> void:
+	yield(ball.hide(), "completed")
+	yield(ball.reset(ball_area.global_position), "completed")
+	ball.show()

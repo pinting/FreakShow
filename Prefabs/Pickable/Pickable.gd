@@ -27,19 +27,17 @@ var reset_position: Vector2 = Vector2.ZERO
 var reset_velocity: bool = true
 var reset_relative: bool = true
 
-signal picked
+signal picked(pickable)
+signal dropped(pickable)
 
 func _ready() -> void:
 	assert(is_in_group("pickable"), "Pickable not in group of 'pickable'")
 	assert(selectable.is_in_group("selectable"), "Selectable not in group of 'selectable'")
 	
-	selectable.connect("selected", self, "_on_selected")
+	selectable.connect("selected", self, "hold")
 	
 	if disable_at_init:
 		disable()
-
-func _on_selected():
-	emit_signal("picked", self)
 
 func _integrate_forces(state):
 	if state.linear_velocity.abs() > max_velocity:
@@ -61,12 +59,6 @@ func _integrate_forces(state):
 	
 	if disabled:
 		state.linear_velocity = Vector2.ZERO
-
-func _process(_delta: float) -> void:
-	selectable.visible = visible
-
-	if not visible:
-		disable()
 
 func _physics_process(_delta: float) -> void:
 	if disabled:
@@ -95,6 +87,9 @@ func reset(position: Vector2, rotation = 0.0, reset_v = true, relative = false):
 	reset_velocity = reset_v
 	reset_relative = relative
 	trigger_reset = true
+	
+	while trigger_reset:
+		yield(Tools.timer(0.1), "timeout")
 
 func push(direction: Vector2 = Vector2.ZERO) -> void:
 	if held or disabled:
@@ -107,16 +102,19 @@ func drop(impulse: Vector2 = Vector2.ZERO) -> void:
 		return
 	
 	held = false
-	selectable.keep_selected = false
+	selectable.lock = false
 
 	apply_central_impulse(impulse)
+	emit_signal("dropped", self)
 
 func hold() -> void:
 	if held or disabled:
 		return
 	
 	held = true
-	selectable.keep_selected = true
+	selectable.lock = true
+	
+	emit_signal("picked", self)
 
 func disable() -> void:
 	disabled = true
@@ -137,6 +135,13 @@ func enable() -> void:
 		Tools.set_shapes_disabled(self, false)
 	
 	selectable.enable()
+
+func hide() -> void:
+	yield(selectable.hide(), "completed")
+	drop()
+
+func show() -> void:
+	yield(selectable.show(), "completed")
 
 func create_clone() -> Pickable:
 	var clone = self.duplicate()

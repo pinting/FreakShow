@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Environmnent/Cloud02.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Cloud00.png" type="Texture" id=3]
 [ext_resource path="res://Shaders/Tremble.shader" type="Shader" id=4]
-[ext_resource path="res://Materials/TrembleMaterial.tres" type="Material" id=5]
+[ext_resource path="res://Materials/CloudMaterial.tres" type="Material" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )

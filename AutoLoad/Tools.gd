@@ -15,6 +15,9 @@ func _ready() -> void:
 	random_generator.randomize()
 	add_child(http_request)
 	
+	print("is this true or false: ", not(not ""))
+	print("is this true or false: ", not(not "abc"))
+
 	if Config.no_sound:
 		# Mute each audio server
 		for i in range(AudioServer.bus_count):

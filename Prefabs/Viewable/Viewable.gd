@@ -14,8 +14,8 @@ func _ready() -> void:
 	assert(is_in_group("viewable"), "Viewable not in group of 'viewable'")
 
 	connect("selected", self, "_on_selected")
-	connect("cursor_inside", self, "set_cursor")
-	connect("cursor_outside", self, "reset_cursor")
+	SelectableManager.connect("cursor_entered", self, "set_cursor")
+	SelectableManager.connect("cursor_exited", self, "reset_cursor")
 
 func _on_selected():
 	emit_signal("cursor_outside")

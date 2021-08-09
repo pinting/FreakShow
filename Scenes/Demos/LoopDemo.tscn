@@ -64,6 +64,7 @@ container_node = NodePath("Container")
 [node name="Container" type="Node2D" parent="BaseScene/Environment/Loop"]
 
 [node name="Road" type="Sprite" parent="BaseScene/Environment/Loop/Container"]
+light_mask = 3
 position = Vector2( 0, 435.019 )
 z_index = -1
 texture = ExtResource( 16 )

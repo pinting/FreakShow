@@ -63,8 +63,8 @@ func _process(delta: float) -> void:
 		max(min(scale_color.g * current.g + offset.g, 1.0), 0.0),
 		max(min(scale_color.b * current.b + offset.b, 1.0), 0.0))
 	
-	if len(color_property):
+	if color_property:
 		set(color_property, result)
 	
-	if len(color_shader_param) and material:
+	if color_shader_param and material:
 		material.set_shader_param(color_shader_param, result)

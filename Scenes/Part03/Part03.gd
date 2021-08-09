@@ -160,11 +160,6 @@ func _trigger_reset_game() -> void:
 	boss.reset()
 	tile_map.reset()
 	
-	var lines = get_tree().get_nodes_in_group("_removable_line_reset")
-	
-	for line in lines:
-		line.reset()
-	
 	move_player(player, player_respawn.global_position)
 
 func _trigger_game_end(body: Node) -> void:

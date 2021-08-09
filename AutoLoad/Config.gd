@@ -25,7 +25,7 @@ const SCENES = [
 ]
 
 # Disable sounds
-var no_sound: bool = false
+var no_sound: bool = true
 
 # Save file path
 var save_path: String = "user://default.save"

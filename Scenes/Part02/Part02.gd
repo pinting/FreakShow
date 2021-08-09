@@ -29,14 +29,12 @@ onready var pick_up_sound: AudioStreamPlayer2D = $Sound/PickUpSound
 
 var music_00: int
 var music_01: int
-var music_02: int
 
 var ball_reposition_sleep: float = ball_reposition_delay
 
 func _ready() -> void:
 	music_00 = main_music.add_part(0, 3 * 60 + 20, true, 0, 10, -40)
-	music_01 = main_music.add_part(8 * 60 + 21, 9 * 60 + 56.5, true, 5, 5, -10)
-	music_02 = main_music.add_part(5 * 60 + 36, 7 * 60 + 27, true, 5, 5, -10)
+	music_01 = main_music.add_part(5 * 60 + 36, 7 * 60 + 27, true, 5, 5, -10)
 	
 	connect("scene_started", self, "_on_scene_started")
 	trigger_comment.connect("body_entered", self, "_trigger_comment", [], CONNECT_ONESHOT)
@@ -82,7 +80,7 @@ func _reaching_hoop_with_ball(_body: Node) -> void:
 	main_music.force_next(music_01)
 
 func _trigger_ball_in_hoop() -> void:
-	main_music.force_next(music_02)
+	main_music.force_next(music_01)
 	
 	yield(Tools.timer(5.0), "timeout")
 
@@ -91,6 +89,7 @@ func _trigger_ball_in_hoop() -> void:
 	phone_box.phone.visible = true
 	phone_box.lamp.visible = true
 	phone_box.flashing_phone_light = true
+	
 	phone_box.phone.connect("selected", self, "_on_phone_selected", [], CONNECT_ONESHOT)
 
 func _on_phone_selected() -> void:
@@ -126,4 +125,8 @@ func _physics_process(_delta: float) -> void:
 		_reset_ball()
 
 func _reset_ball() -> void:
-	ball.reset(player.global_position + Vector2.UP * ball_reposition_y_offset)
+	var new_position = player.global_position + Vector2.UP * ball_reposition_y_offset
+	
+	yield(ball.hide(), "completed")
+	yield(ball.reset(new_position), "completed")
+	ball.show()

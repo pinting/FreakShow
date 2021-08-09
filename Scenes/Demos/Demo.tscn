@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Demos/Demo.gd" type="Script" id=1]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Selectable/Selectable_WelcomeAssholesGraffiti.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Static/Static_StreetLamp00.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=6]
@@ -54,7 +55,10 @@ scale = Vector2( 0.7, 0.7 )
 smoothing_speed = 1.0
 follow_node = NodePath("../Player")
 
-[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
+[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=[
+"auto_visible",
+]]
+visible = false
 light_mask = 0
 color = Color( 0.294118, 0.294118, 0.294118, 1 )
 
@@ -71,6 +75,7 @@ environment = ExtResource( 22 )
 position = Vector2( 99.8936, -23.7839 )
 
 [node name="Road" type="Sprite" parent="BaseScene/Environment"]
+light_mask = 3
 position = Vector2( 1641.43, 1306.05 )
 z_index = -1
 texture = ExtResource( 16 )
@@ -181,6 +186,10 @@ z_index = -1
 [node name="Viewable03" parent="BaseScene/Environment" instance=ExtResource( 19 )]
 position = Vector2( 989.957, 742.804 )
 scale = Vector2( 0.235765, 0.235765 )
+z_index = -1
+
+[node name="Selectable00" parent="BaseScene/Environment" instance=ExtResource( 3 )]
+position = Vector2( 958.43, 951.025 )
 z_index = -1
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
