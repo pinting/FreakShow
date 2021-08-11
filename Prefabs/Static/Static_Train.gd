@@ -33,6 +33,9 @@ const max_pitch_diff: float = 0.25
 # Seconds the player will pick up the speed of the train
 const speed_scale_m: float = 2.5
 
+# Duration of turning volume up or down
+const volume_change_duration = 5.0
+
 onready var tween = $Tween
 
 onready var train_00 = $Train00
@@ -65,9 +68,6 @@ var exit_list_player = []
 var exit_list_skip_stick = []
 var enter_list_player = []
 var enter_list_speed_scale = []
-
-const silent = -100.0
-const silence_duration = 2.0
 
 func _ready() -> void:
 	visible = false
@@ -121,7 +121,8 @@ func pause() -> void:
 	
 	started = false
 	
-	tween.interpolate_method(self, "_set_volume", base_volume, silent, silence_duration)
+	tween.interpolate_method(self, "_set_volume", 
+		base_volume, Tools.SILENT, volume_change_duration)
 	tween.start()
 	
 	yield(tween, "tween_completed")
@@ -138,7 +139,8 @@ func resume() -> void:
 	
 	_play_sound()
 	
-	tween.interpolate_method(self, "_set_volume", silent, base_volume, silence_duration)
+	tween.interpolate_method(self, "_set_volume", 
+		Tools.SILENT, base_volume, volume_change_duration)
 	tween.start()
 
 func stop():
@@ -246,7 +248,7 @@ func _process_recycle() -> void:
 	
 	if source_position.distance_to(global_position) > recycle_after:
 		stop()
-		Tools.destroy_node(self)
+		Tools.destroy_node(self, true)
 
 func _physics_process(delta: float) -> void:
 	if not started:
@@ -257,4 +259,6 @@ func _physics_process(delta: float) -> void:
 	_process_exit_list()
 	_process_movement(delta)
 	_process_player_on_top(delta)
+
+func _process(_delta: float) -> void:
 	_process_recycle()

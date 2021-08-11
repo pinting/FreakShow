@@ -4,12 +4,13 @@ onready var new_game = $Menu/NewGame
 onready var continue_game = $Menu/ContinueGame
 
 func _ready() -> void:
-	connect("scene_started", self, "_on_scene_started")
 	new_game.connect("selected", self, "_on_new_game_selected")
 	continue_game.connect("selected", self, "_on_continue_game_selected")
 	
-	VirtualInput.test_mode = true
-	VirtualInput.test_keys = ["player_right"]
+	VirtualInput.test_keys = {
+		"player_right": 1.0,
+		"player_left": 0.0
+	}
 
 func _on_new_game_selected() -> void:
 	CursorManager.lock()

@@ -33,14 +33,17 @@ func _process(_delta: float) -> void:
 		OS.window_fullscreen = not OS.window_fullscreen
 
 # Destroy an object, remove it from its parent and mark for garbage collection
-func destroy_node(object: Object):
+func destroy_node(object: Object, deferred: bool = false):
 	if not is_instance_valid(object):
 		return
 	
 	var parent = object.get_parent()
 
 	if parent:
-		parent.remove_child(object)
+		if deferred:
+			parent.call_deferred("remove_child", object)
+		else:
+			parent.remove_child(object)
 	
 	object.set_script(null)
 	object.queue_free()

@@ -17,9 +17,9 @@ func _process(_delta: float) -> void:
 			break
 		elif result == OK:
 			var current = resource_loader.get_stage()
-			var count = resource_loader.get_stage_count()
+			var stage_count = resource_loader.get_stage_count()
 			
-			Tools.debug(str("Loader progress: ", current + 1, "/", count))
+			Tools.debug(str("Loader progress: ", current + 1, "/", stage_count))
 		else:
 			Tools.debug("Error during loading!")
 			resource_loader = null
@@ -64,8 +64,7 @@ func load_scene(path: String, save_progress: bool = false) -> void:
 	
 	Tools.report_scene(path)
 	
-	VirtualInput.test_mode = false
-	VirtualInput.test_keys = []
+	VirtualInput.test_keys = {}
 	
 	resource_loader = ResourceLoader.load_interactive(path)
 	

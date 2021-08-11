@@ -1,7 +1,7 @@
 extends Node
 
 # Enable debug messages
-const DEBUG: bool = true
+const DEBUG: bool = false
 
 # Report endpoint
 const REPORT_URL: String = "https://j82k55n66d.execute-api.us-east-1.amazonaws.com/prod/report"

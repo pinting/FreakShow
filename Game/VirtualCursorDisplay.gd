@@ -17,7 +17,7 @@ func _ready():
 	assert(margin.x > 0 and margin.y > 0, "Negative margin")
 
 	if disable:
-		Tools.destroy_node(self)
+		Tools.destroy_node(self, true)
 	else:
 		CursorManager.set_display(self)
 

@@ -84,20 +84,20 @@ shape = SubResource( 1 )
 position = Vector2( -966.829, -677.323 )
 volume_db = 15.0
 pitch_scale = 0.7
-max_distance = 15000.0
-attenuation = 0.999999
+max_distance = 20000.0
+attenuation = 1.4
 
 [node name="Sound01" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 3293.42, -704.253 )
-max_distance = 15000.0
-attenuation = 0.999999
+max_distance = 20000.0
+attenuation = 1.4
 
 [node name="Sound02" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 7524.27, -690.78 )
 volume_db = 15.0
 pitch_scale = 0.7
-max_distance = 15000.0
-attenuation = 0.999999
+max_distance = 20000.0
+attenuation = 1.4
 
 [node name="OnTop" type="Area2D" parent="."]
 position = Vector2( 0, 26.8505 )

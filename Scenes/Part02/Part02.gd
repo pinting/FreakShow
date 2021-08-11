@@ -9,6 +9,7 @@ const ball_reposition_y_offset: float = 3000.0
 onready var player: Player = $Player
 onready var ball: Pickable = $Ball
 
+onready var circle: Sprite = $Environment/Building01/Top/Bottom/RightBlock/Circle
 onready var train: StaticBody2D = $Environment/Train
 onready var loop: Loop = $Environment/Loop
 onready var phone_box: Sprite = $Environment/PhoneBox
@@ -46,6 +47,7 @@ func _ready() -> void:
 	trigger_comment.connect("body_entered", self, "_trigger_comment", [], CONNECT_ONESHOT)
 	ball.connect("picked", self, "_trigger_ball_picked", [], CONNECT_ONESHOT)
 	trigger_train.connect("body_entered", self, "_trigger_train", [], CONNECT_ONESHOT)
+	loop.connect("looped", self, "_player_looped", [], CONNECT_ONESHOT)
 	reaching_loop_with_ball.connect("body_entered", self, "_reaching_loop_with_ball", [], CONNECT_ONESHOT)
 	reaching_hoop_with_ball.connect("body_entered", self, "_reaching_hoop_with_ball", [], CONNECT_ONESHOT)
 	hoop.connect("ball_in_hoop", self, "_trigger_ball_in_hoop", [], CONNECT_ONESHOT)
@@ -85,6 +87,9 @@ func _trigger_ball_picked(_ball: Pickable) -> void:
 
 func _trigger_train(_body: Node) -> void:
 	train.start()
+
+func _player_looped(_direction: String) -> void:
+	circle.visible = true
 
 func _reaching_loop_with_ball(_body: Node) -> void:
 	loop.loop_mode = "none"

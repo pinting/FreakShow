@@ -31,7 +31,7 @@ var node_index_store: Dictionary = {}
 var loop_index: int = 0
 var copies: Array = []
 
-signal looped
+signal looped(direction)
 
 func _ready() -> void:
 	player = get_node(player_node)

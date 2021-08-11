@@ -77,5 +77,7 @@ void fragment()
 	vec4 outline = outline(line_thickness * scale, color, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
 	vec4 glow = glow(scale * glow_scale, outline, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
 	
-	COLOR = glow;
+	glow.rgb *= color.a;
+	
+	COLOR = vec4(glow.rgb, color.a);
 }

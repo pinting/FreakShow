@@ -11,6 +11,6 @@ script = ExtResource( 3 )
 material = ExtResource( 2 )
 z_index = -1
 frames = ExtResource( 1 )
-frame = 91
+frame = 99
 speed_scale = 1.2
 playing = true

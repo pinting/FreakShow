@@ -20,8 +20,7 @@ var prev_virtual_click_right: bool = false
 
 var using_virtual_input: bool = false
 
-var test_mode: bool = false
-var test_keys: Array = []
+var test_keys: Dictionary = {}
 
 func get_project_size() -> Vector2:
 	var project_width = ProjectSettings.get_setting("display/window/size/width")
@@ -155,8 +154,8 @@ func _process_virtual_click() -> void:
 		create_click_event(virtual_mouse_position, BUTTON_RIGHT, virtual_click_right)
 
 func get_action_strength(action: String) -> float:
-	if test_mode:
-		return 1.0 if test_keys.has(action) else 0.0
+	if test_keys.has(action):
+		return test_keys[action]
 	
 	if disable:
 		return 0.0
@@ -164,8 +163,8 @@ func get_action_strength(action: String) -> float:
 	return Input.get_action_strength(action)
 
 func is_action_pressed(action: String) -> bool:
-	if test_mode:
-		return test_keys.has(action)
+	if test_keys.has(action):
+		return bool(test_keys[action])
 	
 	if disable:
 		return false
@@ -173,8 +172,8 @@ func is_action_pressed(action: String) -> bool:
 	return Input.is_action_pressed(action)
 
 func is_action_just_pressed(action: String) -> bool:
-	if test_mode:
-		return test_keys.has(action)
+	if test_keys.has(action):
+		return bool(test_keys[action])
 	
 	if disable:
 		return false

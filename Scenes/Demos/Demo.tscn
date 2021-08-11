@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Scenes/Demos/Demo.gd" type="Script" id=1]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=2]
@@ -23,7 +23,6 @@
 [ext_resource path="res://Prefabs/TextViewable/TextViewable_Letter01.tscn" type="PackedScene" id=21]
 [ext_resource path="res://DefaultEnvironment.tres" type="Environment" id=22]
 [ext_resource path="res://Prefabs/Gamma.gd" type="Script" id=23]
-[ext_resource path="res://Scenes/Part00/Part00_Crate.tscn" type="PackedScene" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1458.7, 55.4996 )
@@ -155,10 +154,6 @@ collision_mask = 66
 position = Vector2( 962.751, 1182.92 )
 collision_layer = 66
 collision_mask = 66
-
-[node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 24 )]
-position = Vector2( 1289.36, 1106.08 )
-z_index = -1
 
 [node name="Viewable00" parent="BaseScene/Environment" instance=ExtResource( 13 )]
 position = Vector2( 526.924, 866.775 )
