@@ -2,7 +2,9 @@
 
 [ext_resource path="res://Game/GameCamera.gd" type="Script" id=1]
 
-[node name="GameCamera" type="Camera2D"]
+[node name="GameCamera" type="Camera2D" groups=[
+"no_dupe",
+]]
 current = true
 zoom = Vector2( 3, 3 )
 script = ExtResource( 1 )

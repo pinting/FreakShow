@@ -13,7 +13,7 @@ func _trigger_in_hoop(ball: Node) -> void:
 	if not ball.is_in_group("_ball") or not inside_hoop.visible:
 		return
 	
-	while ball.held:
+	while ball.is_held():
 		yield(Tools.timer(ball_is_stuck_timeout), "timeout")
 	
 	yield(Tools.timer(ball_is_stuck_timeout), "timeout")

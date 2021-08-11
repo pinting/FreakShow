@@ -105,6 +105,8 @@ func _on_hallway_door_selected(door, index) -> void:
 			yield(black_screen.fade_in(3.0), "tween_completed")
 			load_next_scene()
 	else:
+		Tools.random_generator.randomize()
+		
 		var random_flat_instance = random_flat.instance()
 		
 		random_flat_instance.connect("exit_selected", self, "_on_flat_exit_selected")
@@ -120,10 +122,13 @@ func _on_hallway_door_selected(door, index) -> void:
 		can_exit_open = true
 
 func _reset_hallway_wait() -> void:
+	wait_counter = 0.0
+	
 	if not is_exit_open and not waiting_music.stopped:
 		waiting_music.kill(1.0)
 	
-	camera.change_shake(0.0, 1.0)
+	if camera.shake > 0.0:
+		camera.change_shake(0.0, 1.0)
 
 func _process(delta: float) -> void:
 	if is_exit_open or not can_exit_open:
@@ -162,6 +167,5 @@ func _process(delta: float) -> void:
 				waiting_music.play()
 	else:
 		previous_player_position = player.global_position
-		wait_counter = 0.0
 		
 		_reset_hallway_wait()

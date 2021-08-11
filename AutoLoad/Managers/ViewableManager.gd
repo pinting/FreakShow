@@ -18,7 +18,7 @@ func clear() -> void:
 		Tools.debug("ViewableDisplay not exists, but clear was called")
 		return
 	
-	Tools.destroy(display)
+	Tools.destroy_node(display)
 	
 	display = null
 

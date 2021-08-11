@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export PATH=$PATH:$(pwd)/bin
+
 ffmpeg -i *Circle\ of\ Light* Assets/Music/Part00.ogg
 rm *Circle\ of\ Light*
 

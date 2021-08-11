@@ -246,7 +246,7 @@ func _process_recycle() -> void:
 	
 	if source_position.distance_to(global_position) > recycle_after:
 		stop()
-		Tools.destroy(self)
+		Tools.destroy_node(self)
 
 func _physics_process(delta: float) -> void:
 	if not started:

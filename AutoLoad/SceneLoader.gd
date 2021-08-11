@@ -1,38 +1,40 @@
 extends Node
 
-var scene_loader: ResourceInteractiveLoader = null
-var scene_count: int = 0
+var resource_loader: ResourceInteractiveLoader = null
+var count: int = 0
 
 func _process(_delta: float) -> void:
-	if not scene_loader:
+	if not resource_loader:
 		return
 	
 	var now = OS.get_ticks_msec()
 	
 	while OS.get_ticks_msec() < now + Config.LOADING_TIME_PER_TICK:
-		var result = scene_loader.poll()
+		var result = resource_loader.poll()
 		
 		if result == ERR_FILE_EOF:
-			_finish_loading(scene_loader.get_resource())
+			_finish_loading(resource_loader.get_resource())
 			break
 		elif result == OK:
-			var current = scene_loader.get_stage()
-			var count = scene_loader.get_stage_count()
+			var current = resource_loader.get_stage()
+			var count = resource_loader.get_stage_count()
 			
 			Tools.debug(str("Loader progress: ", current + 1, "/", count))
 		else:
 			Tools.debug("Error during loading!")
-			scene_loader = null
+			resource_loader = null
 			break
 
 func _finish_loading(scene_resource) -> void:
-	scene_count += 1
+	count += 1
 	
 	PlayerManager.clear()
 	CameraManager.clear()
 	SubtitleManager.clear()
 	ViewableManager.clear()
 	CursorManager.clear()
+	SelectableManager.clear()
+	PickableManager.clear()
 	
 	var root = get_tree().get_root()
 	var current_scene = root.get_child(root.get_child_count() - 1)
@@ -51,10 +53,10 @@ func _finish_loading(scene_resource) -> void:
 	
 	root.add_child(next_scene)
 	
-	scene_loader = null
+	resource_loader = null
 
 func load_scene(path: String, save_progress: bool = false) -> void:
-	if scene_loader:
+	if resource_loader:
 		return
 	
 	if save_progress:
@@ -65,7 +67,7 @@ func load_scene(path: String, save_progress: bool = false) -> void:
 	VirtualInput.test_mode = false
 	VirtualInput.test_keys = []
 	
-	scene_loader = ResourceLoader.load_interactive(path)
+	resource_loader = ResourceLoader.load_interactive(path)
 	
-	if scene_loader == null:
+	if resource_loader == null:
 		Tools.debug("Loader failed to initialize!")

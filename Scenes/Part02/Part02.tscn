@@ -19,7 +19,7 @@
 [ext_resource path="res://Prefabs/Light/Light_Side.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Prefabs/Static/Static_SideLamp00.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=20]
+[ext_resource path="res://Prefabs/Gamma.gd" type="Script" id=20]
 [ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=21]
 [ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
 [ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=23]
@@ -39,6 +39,7 @@
 [ext_resource path="res://Prefabs/Viewable/Viewable_RomanticPartnerPaper.tscn" type="PackedScene" id=37]
 [ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=38]
 [ext_resource path="res://Assets/Environmnent/Decoration/Graffiti27.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Music/Part04.ogg" type="AudioStream" id=40]
 [ext_resource path="res://Assets/Sounds/Phone00.ogg" type="AudioStream" id=41]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Ad05.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Assets/Sounds/Phone01.wav" type="AudioStream" id=45]
@@ -52,68 +53,29 @@ glow_intensity = 1.0
 glow_strength = 1.4
 glow_hdr_threshold = 0.4
 
-[sub_resource type="Animation" id=2]
-length = 5.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sound/MainMusic/AudioStreamPlayer00:pitch_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.01, 1.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sound/MainMusic/AudioStreamPlayer01:pitch_scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.01, 1.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sound/WindSound:pitch_scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.01, 1.0 ]
-}
+[sub_resource type="CanvasItemMaterial" id=2]
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 30000, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 30000, 10 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 30000, 10 )
+[sub_resource type="CanvasItemMaterial" id=5]
 
-[sub_resource type="CanvasItemMaterial" id=6]
-
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 189.365, 24.6057 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 12.73, 53.2883 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 3671.5, 3000 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 227.945, 5139.76 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 13881.1, 2648 )
 
 [node name="Part02" type="Node2D"]
@@ -122,7 +84,6 @@ position = Vector2( 59.2303, 0.734743 )
 [node name="BaseScene" parent="." instance=ExtResource( 46 )]
 script = ExtResource( 8 )
 auto_fade_out = false
-teleport_player_to_end = true
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -6109.33, -417.985 )
@@ -153,10 +114,8 @@ environment = SubResource( 1 )
 ]]
 visible = false
 light_mask = 0
-color = Color( 0.294118, 0.294118, 0.294118, 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BaseScene"]
-anims/pitch_effect = SubResource( 2 )
+color = Color( 0.352941, 0.352941, 0.352941, 1 )
+script = ExtResource( 20 )
 
 [node name="Sky" parent="BaseScene" instance=ExtResource( 9 )]
 
@@ -166,7 +125,7 @@ anims/pitch_effect = SubResource( 2 )
 
 [node name="Road" type="Sprite" parent="BaseScene/Environment"]
 light_mask = 3
-material = SubResource( 3 )
+material = SubResource( 2 )
 position = Vector2( 8491.99, 92.625 )
 scale = Vector2( 1.049, 1 )
 z_index = -2
@@ -180,7 +139,7 @@ z_index = 100
 z_as_relative = false
 
 [node name="Ground" type="CollisionShape2D" parent="BaseScene/Environment/Road/CollisionBack"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="CollisionCenter" type="StaticBody2D" parent="BaseScene/Environment/Road"]
 position = Vector2( 0, 25.48 )
@@ -190,7 +149,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="Ground" type="CollisionShape2D" parent="BaseScene/Environment/Road/CollisionCenter"]
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="CollisionFront" type="StaticBody2D" parent="BaseScene/Environment/Road"]
 position = Vector2( 0, 90.54 )
@@ -200,7 +159,7 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="Ground" type="CollisionShape2D" parent="BaseScene/Environment/Road/CollisionFront"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Bellow" type="Sprite" parent="BaseScene/Environment"]
 light_mask = 0
@@ -269,7 +228,7 @@ rotation = -0.0145137
 scale = Vector2( 0.05, 0.05 )
 
 [node name="Car" parent="BaseScene/Environment/Building01" instance=ExtResource( 10 )]
-material = SubResource( 6 )
+material = SubResource( 5 )
 position = Vector2( 313.601, 2297.03 )
 
 [node name="Paper00" parent="BaseScene/Environment/Building01" instance=ExtResource( 34 )]
@@ -288,15 +247,15 @@ collision_layer = 16
 collision_mask = 16
 
 [node name="Bottom" type="CollisionShape2D" parent="BaseScene/Environment/Building01/BallFloor"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="Left" type="CollisionShape2D" parent="BaseScene/Environment/Building01/BallFloor"]
 position = Vector2( -170.443, -73.8983 )
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 
 [node name="Right" type="CollisionShape2D" parent="BaseScene/Environment/Building01/BallFloor"]
 position = Vector2( 166.014, -76.6644 )
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 
 [node name="Loop" parent="BaseScene/Environment" instance=ExtResource( 38 )]
 position = Vector2( 9242.35, -672.894 )
@@ -310,7 +269,7 @@ mirror_mode = "right"
 
 [node name="Shape" type="CollisionShape2D" parent="BaseScene/Environment/Loop/Area"]
 visible = false
-shape = SubResource( 9 )
+shape = SubResource( 8 )
 
 [node name="Container" type="Node2D" parent="BaseScene/Environment/Loop"]
 
@@ -354,8 +313,8 @@ position = Vector2( 12746.6, -329.819 )
 [node name="Building03" type="Sprite" parent="BaseScene/Environment" groups=[
 "_right_side",
 ]]
-position = Vector2( 15407.6, -1311.51 )
-scale = Vector2( 2, 2 )
+position = Vector2( 15407.6, -1647.51 )
+scale = Vector2( 2.5, 2.5 )
 z_index = -1
 texture = ExtResource( 13 )
 
@@ -413,7 +372,7 @@ collision_mask = 8
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerComment"]
 visible = false
 z_index = 1
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 
 [node name="TriggerTrain" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 3308.45, -25.9426 )
@@ -423,7 +382,7 @@ collision_mask = 8
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerTrain"]
 visible = false
 z_index = 1
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 
 [node name="ReachingLoopWithBall" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 7483.15, -72.9817 )
@@ -433,7 +392,7 @@ collision_mask = 16
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingLoopWithBall"]
 visible = false
 z_index = 1
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 
 [node name="ReachingHoopWithBall" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 16337.5, -72.9817 )
@@ -443,7 +402,7 @@ collision_mask = 2147483664
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingHoopWithBall"]
 visible = false
 z_index = 1
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 
 [node name="BallArea" type="Area2D" parent="BaseScene/Trigger"]
 position = Vector2( 5286.36, -2059.8 )
@@ -453,7 +412,7 @@ collision_mask = 16
 [node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/BallArea"]
 visible = false
 z_index = 1
-shape = SubResource( 11 )
+shape = SubResource( 10 )
 
 [node name="TeleportPlayer" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2( 12299.6, -359.681 )
@@ -463,15 +422,8 @@ position = Vector2( 12299.6, -359.681 )
 [node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource( 11 )]
 stream = ExtResource( 6 )
 
-[node name="AudioStreamPlayer00" parent="BaseScene/Sound/MainMusic" index="0"]
-pitch_scale = 0.604
-
-[node name="AudioStreamPlayer01" parent="BaseScene/Sound/MainMusic" index="1"]
-pitch_scale = 0.604
-
-[node name="DoorSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
-stream = ExtResource( 20 )
-volume_db = -5.0
+[node name="PhoneMusic" parent="BaseScene/Sound" instance=ExtResource( 11 )]
+stream = ExtResource( 40 )
 
 [node name="WindSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
 stream = ExtResource( 3 )
@@ -488,5 +440,3 @@ max_distance = 8000.0
 position = Vector2( 12804.3, -399.016 )
 stream = ExtResource( 45 )
 volume_db = 20.0
-
-[editable path="BaseScene/Sound/MainMusic"]

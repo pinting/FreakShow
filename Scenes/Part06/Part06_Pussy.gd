@@ -17,7 +17,7 @@ func _on_body_entered(body: Node):
 		return
 	
 	Tools.set_shapes_disabled(inside, true);
-	Tools.destroy(body)
+	Tools.destroy_node(body)
 	
 	filled.visible = true
 	

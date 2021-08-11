@@ -70,6 +70,15 @@ func is_selected(selectable: PureSelectable) -> bool:
 	return selectable == world_selection
 
 func _process(_delta: float) -> void:
+	if SceneLoader.resource_loader:
+		return
+	
+	if not is_instance_valid(world_selection):
+		world_selection = null
+	
+	if not is_instance_valid(viewport_selection):
+		viewport_selection = null
+	
 	if not world_selection or not world_selection.lock:
 		var prev_world_selection = world_selection
 		var world_cursor_position = CursorManager.get_position(false)
@@ -95,9 +104,16 @@ func _process(_delta: float) -> void:
 			emit_signal("cursor_entered", viewport_selection)
 
 func _input(event: InputEvent) -> void:
+	if SceneLoader.resource_loader:
+		return
+	
 	if event is InputEventMouseButton and event.pressed:
 		if world_selection:
 			world_selection.select()
 		
 		if viewport_selection:
 			viewport_selection.select()
+
+func clear() -> void:
+	world_selection = null
+	viewport_selection = null

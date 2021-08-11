@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	if ball_reposition_sleep > 0:
 		ball_reposition_sleep -= delta
 	
-	if ball_reposition_sleep <= 0 and not ball_area.overlaps_body(ball):
+	if ball_reposition_sleep <= 0 and not ball.disabled and not ball_area.overlaps_body(ball):
 		_reset_ball()
 		ball_reposition_sleep = ball_reposition_delay
 

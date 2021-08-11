@@ -1,6 +1,6 @@
 # Missing proprietary music files
 
-Should be placed into root of the project folder. Files should not be renamed, . Use `setup.sh` to process the files!
+Should be placed into root of the project folder. Files should not be renamed, the setup script only works with their original title. Run `./setup.sh` to process the files!
 
 https://www.youtube.com/playlist?list=PLfecV2b5DItOgrSQ3Dy-3OY3Oc9zsDb73
 

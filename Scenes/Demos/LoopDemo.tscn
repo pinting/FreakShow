@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Demos/LoopDemo.gd" type="Script" id=1]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Gamma.gd" type="Script" id=3]
 [ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Static/Static_StreetLamp00.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=6]
@@ -44,6 +45,7 @@ follow_node = NodePath("../Player")
 [node name="Darkness" type="CanvasModulate" parent="BaseScene"]
 light_mask = 0
 color = Color( 0.294118, 0.294118, 0.294118, 1 )
+script = ExtResource( 3 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
 environment = SubResource( 1 )

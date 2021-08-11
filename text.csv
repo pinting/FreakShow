@@ -67,11 +67,11 @@ Narrator000,It was near dawn when I woke up.
 Narrator001,The corridor felt endless...
 Narrator002,Upon reaching the moonlit street the sweet smell of urine greeted me.
 Narrator003,People were crazy to sell their junk - you just had to name your price.
-Narrator012,Hallo?
-Narrator013,Hallo.
-Narrator014,Will you come over?
-Narrator015,How come?
-Narrator016,"You know, I am just here - sitting on my bed with two fellas."
+Narrator014,Hallo?
+Narrator015,Will you come over?
+Narrator016,How come?
+Narrator017,"You know me, I am just here..."
+Narrator018,"...sitting on the sofa inbetween two horny guys."
 Narrator004,"It was time to get the fuck away from there!"
 Narrator006,Where could I have been? It was a strange place.
 Narrator007,There was a large metal door asking for a code I did not know.
@@ -86,15 +86,16 @@ Text003,<Assets/Text/English/Text003.txt>
 Text004,<Assets/Text/English/Text004.txt>
 Text005,<Assets/Text/English/Text005.txt>
 Text006,<Assets/Text/English/Text006.txt>
+Text007,<Assets/Text/English/Text007.txt>
 Credits000,Music
 Credits001,"Brian Eno, Cluster, Phuture, Neu,\nBooka Shade, Pye Corner Audio"
-Credits002,"Programming, writings and translations"
+Credits002,"Programming"
 Credits003,Denes Tornyi
-Credits004,"Poems, writings and translations"
+Credits004,"Poetry"
 Credits005,Zsuzsa Buka
-Credits006,Character actors
-Credits007,"Denes Tornyi, Gergo Tornyi"
+Credits006,"Writings, translations and acting"
+Credits007,"Denes Tornyi, Zsuzsa Buka, Gergo Tornyi"
 Credits008,Visual contributions
-Credits009,"Denes Tornyi, Zsuzsa Buka, Diana Baranyi,\nZsofi Szabo, Babett Farkas"
+Credits009,"Denes Tornyi, Zsuzsa Buka, Diana Baranyi,\nKatalin Bito, Zsofi Szabo, Babett Farkas"
 Credits010,Special thanks to
-Credits011,"Gergo Tornyi, Jozsef Koller,\nJanos Bito, Godot Engine contributors"
+Credits011,"Janos Bito, Gergo Tornyi, Godot Engine contributors"

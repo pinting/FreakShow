@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Environmnent/Lines00_H00.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 160.997, 11.3797 )
+extents = Vector2( 150.477, 11.3797 )
 
 [node name="Part03_RemovableLine" type="Sprite" groups=[
 "_removable_line",
@@ -19,7 +19,6 @@ script = ExtResource( 3 )
 [node name="LineBody" type="StaticBody2D" parent="." groups=[
 "_removable_line_body",
 ]]
-position = Vector2( 0.12273, -7.07107 )
 z_index = 100
 collision_layer = 15
 collision_mask = 15

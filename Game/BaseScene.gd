@@ -10,17 +10,11 @@ export var delay: float = 0.0
 # Fade in and fade out time (2x will used)
 export var move_player_timeout: float = 0.8
 
-# Amount of seconds for the cancel button to be held down to escape
-export var cancel_button_timeout: float = 1.0
-
 # Auto fade out
 export var auto_fade_out: bool = true
 
 # Auto show cursor at scene started
 export var auto_show_cursor: bool = true
-
-# Disable cancel button
-export var disable_cancel_button: bool = false
 
 # Disable auto restart
 export var disable_auto_restart: bool = false
@@ -35,9 +29,6 @@ signal scene_started
 var current_delay: float = 0.0
 var current_second: float = 0.0
 
-var held_pickable: RigidBody2D = null
-
-var cancel_button_counter: float = 0.0
 var auto_restart_counter: float = 0.0
 
 var player_move_in_progress: bool = false
@@ -57,10 +48,10 @@ func _low_performance_mode() -> void:
 	var tree = get_tree()
 	
 	for node in tree.get_nodes_in_group("high_performance"):
-		Tools.destroy(node)
+		Tools.destroy_node(node)
 	
 	for node in tree.get_nodes_in_group("light"):
-		Tools.destroy(node)
+		Tools.destroy_node(node)
 	
 	for node in tree.get_nodes_in_group("world_environment"):
 		node.environment = load("res://LowEnvironment.tres")
@@ -69,7 +60,7 @@ func _high_performance_mode() -> void:
 	var tree = get_tree()
 	
 	for node in tree.get_nodes_in_group("fake_light"):
-		Tools.destroy(node)
+		Tools.destroy_node(node)
 
 func _process(delta: float) -> void:
 	if not virtual_splash.complete:
@@ -80,7 +71,6 @@ func _process(delta: float) -> void:
 		return
 	
 	_process_auto_restart(delta)
-	_process_cancel_button(delta)
 	
 	if current_second == 0.0:
 		CursorManager.move_to_center()
@@ -105,22 +95,6 @@ func _process_auto_restart(delta: float) -> void:
 		SceneLoader.load_scene(main_scene)
 	
 	auto_restart_counter += delta
-
-func _process_cancel_button(delta: float) -> void:
-	if disable_cancel_button:
-		return
-	
-	var ui_cancel = VirtualInput.is_action_pressed("ui_cancel")
-	var main_scene = ProjectSettings.get_setting("application/run/main_scene")
-	
-	if ui_cancel:
-		cancel_button_counter += delta
-		
-		if cancel_button_counter >= cancel_button_timeout:
-			yield(black_screen.fade_in(2.0), "tween_completed")
-			SceneLoader.load_scene(main_scene)
-	else:
-		cancel_button_counter += 0
 
 func _input(event: InputEvent) -> void:
 	auto_restart_counter = 0.0

@@ -2,26 +2,30 @@ extends Node
 
 var http_request: HTTPRequest
 var random_generator: RandomNumberGenerator
-var noise: OpenSimplexNoise = OpenSimplexNoise.new()
+var noise: OpenSimplexNoise
+var tween: Tween
+
+const SILENT: float = -100.0
 
 func _ready() -> void:
 	random_generator = RandomNumberGenerator.new()
 	http_request = HTTPRequest.new()
+	noise = OpenSimplexNoise.new()
+	tween = Tween.new()
+	
+	random_generator.randomize()
 	
 	noise.seed = randi()
 	noise.period = 4
 	noise.octaves = 2
 	
-	random_generator.randomize()
 	add_child(http_request)
-	
-	print("is this true or false: ", not(not ""))
-	print("is this true or false: ", not(not "abc"))
+	add_child(tween)
 
 	if Config.no_sound:
 		# Mute each audio server
 		for i in range(AudioServer.bus_count):
-			AudioServer.set_bus_volume_db(i, -500)
+			AudioServer.set_bus_volume_db(i, SILENT)
 
 func _process(_delta: float) -> void:
 	# Process toggle fullscreen button
@@ -29,7 +33,7 @@ func _process(_delta: float) -> void:
 		OS.window_fullscreen = not OS.window_fullscreen
 
 # Destroy an object, remove it from its parent and mark for garbage collection
-func destroy(object: Object):
+func destroy_node(object: Object):
 	if not is_instance_valid(object):
 		return
 	
@@ -42,7 +46,7 @@ func destroy(object: Object):
 	object.queue_free()
 
 # Create a new instance of a packed CPUParticles2D, play it, destroy it
-func play_packed_effect(effect: PackedScene, parent: Node2D, timeout: float = 0.0) -> void:
+func play_packed_particles(effect: PackedScene, parent: Node2D, timeout: float = 0.0) -> void:
 	var instance = effect.instance()
 	
 	assert(instance is CPUParticles2D, "Only CPUParticles2D supported")
@@ -58,7 +62,23 @@ func play_packed_effect(effect: PackedScene, parent: Node2D, timeout: float = 0.
 	
 	instance.emitting = false
 	
-	Tools.destroy(instance)
+	Tools.destroy_node(instance)
+
+# Slide the volune of AudioStreamPlayer
+func slide_volume(player, from_db: float, to_db: float, duration: float = 2.0) -> void:
+	player.volume_db = from_db
+	
+	tween.stop(player, "volume_db")
+	tween.interpolate_property(player, "volume_db", from_db, to_db, duration)
+	tween.start()
+
+# Slide the pitch of AudioStreamPlayer
+func slide_pitch(player, from_pitch: float, to_pitch: float, duration: float = 2.0) -> void:
+	player.pitch_scale = from_pitch
+	
+	tween.stop(player, "pitch_scale")
+	tween.interpolate_property(player, "pitch_scale", from_pitch, to_pitch, duration)
+	tween.start()
 
 # Generate a random integer
 func random_int(min_value: int, max_value: int) -> int:
@@ -68,15 +88,11 @@ func random_int(min_value: int, max_value: int) -> int:
 func random_float(min_value: float, max_value: float) -> float:
 	return random_generator.randf_range(min_value, max_value)
 
-# Generate random true or false
-func guess() -> bool:
-	return random_int(0, 99) % 2 == 0
-
 # Generate N number of random bytes
 func random_bytes(n: int):
 	var r = []
 	
-	for index in range(0, n):
+	for _index in range(0, n):
 		r.append(random_int(0, 256))
 	
 	return r

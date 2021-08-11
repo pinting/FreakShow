@@ -38,7 +38,7 @@ func clear() -> void:
 		Tools.debug("VirtualCursorDisplay not exists, but clear was called")
 		return
 	
-	Tools.destroy(display)
+	Tools.destroy_node(display)
 	
 	display = null
 	VirtualInput.disable = is_lock_needed()

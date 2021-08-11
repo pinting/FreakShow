@@ -39,6 +39,6 @@ func clear() -> void:
 		Tools.debug("Current GameCamera not exists, but clear was called")
 		return
 	
-	Tools.destroy(current)
+	Tools.destroy_node(current)
 	
 	current = null

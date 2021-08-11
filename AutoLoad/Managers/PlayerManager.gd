@@ -12,7 +12,7 @@ func register(player: Player) -> void:
 
 func clear() -> void:
 	for player in players:
-		Tools.destroy(player)
+		Tools.destroy_node(player)
 	
 	players = []
 

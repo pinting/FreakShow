@@ -55,7 +55,7 @@ func _ready() -> void:
 
 func undo_mirror():
 	for mirror in mirrors:
-		Tools.destroy(mirror)
+		Tools.destroy_node(mirror)
 	
 	mirrors = []
 

@@ -13,9 +13,6 @@ export var autoplay: bool = false
 # Playing volume in DB
 export var max_volume: int = 0
 
-# Muting volume in DB
-export var min_volume: int = -60
-
 # Debug the music player (Config.debug needs to be true)
 export var debug: bool = false
 
@@ -47,13 +44,13 @@ var do_kill: bool = false
 func _ready() -> void:
 	master_player = player_00
 	master_player.stream = stream
-	master_player.volume_db = min_volume
-	master_volume = min_volume
+	master_player.volume_db = Tools.SILENT
+	master_volume = Tools.SILENT
 	
 	slave_player = player_01
 	slave_player.stream = stream
-	master_player.volume_db = min_volume
-	slave_volume = min_volume
+	master_player.volume_db = Tools.SILENT
+	slave_volume = Tools.SILENT
 	
 	if autoplay:
 		play()
@@ -97,7 +94,7 @@ func play() -> void:
 	
 	if parts[0].in_duration == 0.0:
 		master_volume = max_volume
-		slave_volume = min_volume
+		slave_volume = Tools.SILENT
 	
 	master_player.play(parts[0].start)
 	
@@ -163,7 +160,7 @@ func _finish_mixing(next_part_index: int) -> void:
 	
 	# Fix volumes
 	master_volume = max_volume
-	slave_volume = min_volume
+	slave_volume = Tools.SILENT
 	
 	# Set the next part as current and stop mixing
 	current_part_index = next_part_index
@@ -235,7 +232,7 @@ func _process(delta: float) -> void:
 	
 	_debug_if_integer(diff_to_start, str(round(diff_to_start), " / ", round(diff_to_end)))
 	
-	var volume_diff = abs(max_volume - min_volume)
+	var volume_diff = abs(max_volume - Tools.SILENT)
 	
 	# Fade in the current part 
 	if not break_loop_now and diff_to_start < 0:
@@ -251,7 +248,7 @@ func _process(delta: float) -> void:
 		master_volume -= volume_diff * (delta / current_part.out_duration)
 		_debug_if_integer(diff_to_start, str("master fade out ", master_volume))
 	elif diff_to_end <= 0:
-		master_volume = min_volume
+		master_volume = Tools.SILENT
 		_debug_if_integer(diff_to_start, "master min volume")
 	
 	# Determinate if the current or the next part should be played as next
@@ -270,7 +267,7 @@ func _process(delta: float) -> void:
 		if break_loop_now or diff_to_end + next_part.offset < 0:
 			if not mixing:
 				slave_player.play(next_part.start)
-				slave_volume = min_volume
+				slave_volume = Tools.SILENT
 				mixing = true
 			
 			if mixing:
@@ -284,7 +281,7 @@ func _process(delta: float) -> void:
 				elif diff_to_end < 0:
 					_finish_mixing(next_part_index)
 				elif break_loop_now:
-					if master_volume > min_volume:
+					if master_volume > Tools.SILENT:
 						if current_part.out_duration > 0:
 							master_volume -= volume_diff * (delta / current_part.out_duration)
 						else:

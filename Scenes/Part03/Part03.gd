@@ -74,11 +74,21 @@ func _ready() -> void:
 	player.connect("died", self, "_trigger_reset_game")
 
 func _on_scene_started() -> void:
-	black_screen.fade_out(2.0)
-	
 	camera.scale_follow_offset(start_follow_offset)
 	camera.scale_follow_speed(start_follow_speed_scale)
 	camera.change_zoom(start_camera_zoom, camera_change_duration)
+	
+	Tools.slide_volume(wind_sound, Tools.SILENT, -8.0)
+	wind_sound.play()
+
+	if not teleport_player_to_end:
+		SubtitleManager.show_quote(Text.find("Text007"))
+		yield(Tools.timer(15.0), "timeout")
+		SubtitleManager.hide_quote()
+		yield(Tools.timer(2.0), "timeout")
+	
+	black_screen.fade_out(2.0)
+	CursorManager.show()
 	
 	if teleport_player_to_end:
 		_trigger_falling_from_island(player)
@@ -87,8 +97,6 @@ func _on_scene_started() -> void:
 		_trigger_game_end(player)
 		move_player(player, teleport_player.global_position)
 		return
-	
-	connect_sound.play()
 
 func _trigger_falling_from_island(body: Node) -> void:
 	if not body.is_in_group("player"):
@@ -130,6 +138,7 @@ func _trigger_game_begin(body: Node) -> void:
 	entry_block.show()
 	yield(player.enable_avatar_mode(), "completed")
 	
+	Tools.slide_volume(wind_sound, -8.0, Tools.SILENT)
 	main_music.play()
 	SubtitleManager.say(Text.find("Narrator004"), 0.5, 3.0)
 	player.unfreeze()
@@ -173,12 +182,12 @@ func _trigger_game_end(body: Node) -> void:
 	camera.change_zoom(end_camera_zoom, camera_change_duration)
 	
 	CursorManager.show()
-	wind_sound.play()
 	
 	if teleport_player_to_end:
 		return
 	
 	main_music.kill(5.0)
+	Tools.slide_volume(wind_sound, Tools.SILENT, 0.0)
 	
 	player.disable_avatar_mode()
 	player.disable_jump = true

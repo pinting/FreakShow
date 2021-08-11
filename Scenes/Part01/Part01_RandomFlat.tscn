@@ -172,28 +172,28 @@ position = Vector2( 6.10352e-05, 0 )
 position = Vector2( 0, 89.7881 )
 
 [node name="Decoration00" parent="Inside/RandomDecoration" instance=ExtResource( 11 )]
-position = Vector2( -940.317, -118.74 )
-scale = Vector2( 0.265109, 0.265109 )
+position = Vector2( -933.805, -190.173 )
+scale = Vector2( 0.322736, 0.322736 )
 
 [node name="Decoration01" type="Sprite" parent="Inside/RandomDecoration"]
-position = Vector2( 1395.25, -62.4365 )
+position = Vector2( 1395.25, -186.8 )
 scale = Vector2( 0.44387, 0.44387 )
 texture = ExtResource( 17 )
 
 [node name="Decoration02" type="Sprite" parent="Inside/RandomDecoration"]
-position = Vector2( 118.875, -150.971 )
+position = Vector2( 118.875, -197.336 )
 scale = Vector2( 0.124458, 0.115656 )
 texture = ExtResource( 16 )
 
 [node name="Decoration03" type="Sprite" parent="Inside/RandomDecoration"]
-position = Vector2( 1400.21, -41.2036 )
+position = Vector2( 1400.21, -165.568 )
 scale = Vector2( 0.29442, 0.29442 )
 texture = ExtResource( 18 )
 
 [node name="Decoration04" parent="Inside/RandomDecoration" instance=ExtResource( 3 )]
-position = Vector2( 285.322, -147.228 )
+position = Vector2( 1107.46, -187.082 )
 rotation = 0.0286455
-scale = Vector2( 0.112083, 0.11255 )
+scale = Vector2( 0.08, 0.08 )
 
 [node name="RandomFloor" parent="Inside" instance=ExtResource( 36 )]
 position = Vector2( 0, 89.7881 )
@@ -253,23 +253,23 @@ scale = Vector2( 0.8, 0.8 )
 key = "Part01_Letters"
 
 [node name="Letter00" parent="Inside/RollingLetter" instance=ExtResource( 34 )]
-position = Vector2( -218.862, -177.901 )
+position = Vector2( -218.862, -217.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Letter01" parent="Inside/RollingLetter" instance=ExtResource( 21 )]
-position = Vector2( -218.862, -177.901 )
+position = Vector2( -218.862, -217.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Letter02" parent="Inside/RollingLetter" instance=ExtResource( 19 )]
-position = Vector2( -218.862, -177.901 )
+position = Vector2( -218.862, -217.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Letter03" parent="Inside/RollingLetter" instance=ExtResource( 20 )]
-position = Vector2( -218.862, -177.901 )
+position = Vector2( -218.862, -217.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Letter04" parent="Inside/RollingLetter" instance=ExtResource( 22 )]
-position = Vector2( -218.862, -177.901 )
+position = Vector2( -218.862, -217.901 )
 scale = Vector2( 0.168825, 0.168825 )
 
 [node name="Door" parent="Inside" instance=ExtResource( 1 )]

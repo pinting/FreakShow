@@ -179,7 +179,7 @@ func toggle_avatar_mode() -> void:
 	if tween.is_active():
 		return
 	
-	Tools.play_packed_effect(transform_effect, self, transform_duration)
+	Tools.play_packed_particles(transform_effect, self, transform_duration)
 	transform_sound.play()
 
 	var duration = transform_duration / 2.0
@@ -433,7 +433,7 @@ func kill() -> void:
 	frozen = true
 	animated_sprite.visible = false
 	
-	Tools.play_packed_effect(death_effect, self)
+	Tools.play_packed_particles(death_effect, self)
 	
 	_process_collision_shapes()
 	emit_signal("died")
@@ -511,5 +511,9 @@ func create_clone():
 
 	# Disable register property of clones
 	clone.register = false
+	
+	for child in clone.get_children():
+		if child.is_in_group("no_dupe"):
+			Tools.destroy_node(child)
 	
 	return clone

@@ -18,15 +18,21 @@ func _ready() -> void:
 	SelectableManager.connect("cursor_exited", self, "reset_cursor")
 
 func _on_selected():
-	emit_signal("cursor_outside")
+	emit_signal("cursor_exited")
 
 	var description_key = get("inner_description_key")
 	var description_text = Text.find(description_key)
 	
 	ViewableManager.show(self, enlarged_zoom, description_text)
 
-func set_cursor():
+func set_cursor(target: PureSelectable) -> void:
+	if target != self:
+		return
+	
 	CursorManager.set_icon("view", get_instance_id())
 
-func reset_cursor():
+func reset_cursor(target: PureSelectable) -> void:
+	if target != self:
+		return
+	
 	CursorManager.reset_icon(get_instance_id())

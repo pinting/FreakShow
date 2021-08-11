@@ -13,7 +13,7 @@ onready var color_rect = $Container/ColorRect
 var complete: bool = false
 
 func _ready():
-	if SceneLoader.scene_count > 0:
+	if SceneLoader.count > 0:
 		done()
 	else:
 		play()

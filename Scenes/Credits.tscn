@@ -62,12 +62,12 @@ scale_color = Color( 0.329412, 0.329412, 0.329412, 1 )
 
 [node name="Decoration" type="AnimatedSprite" parent="BaseScene/Art/ColorChanger"]
 self_modulate = Color( 1, 1, 1, 0.509804 )
-position = Vector2( -147.375, 246.847 )
+position = Vector2( -247.375, 246.847 )
 scale = Vector2( 0.390733, 0.390733 )
 frames = SubResource( 2 )
 script = ExtResource( 10 )
-speed = 0.75
-y_scale = 0.75
+limit = 1450.0
+y_scale = 0.33
 
 [node name="Waves" type="CanvasLayer" parent="BaseScene"]
 layer = -90

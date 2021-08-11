@@ -11,9 +11,6 @@ func _ready() -> void:
 	VirtualInput.test_mode = true
 	VirtualInput.test_keys = ["player_right"]
 
-func _on_scene_started() -> void:
-	black_screen.fade_out()
-
 func _on_new_game_selected() -> void:
 	CursorManager.lock()
 	yield(black_screen.fade_in(), "tween_completed")

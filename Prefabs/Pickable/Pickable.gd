@@ -19,7 +19,6 @@ export var disable_with_shapes: bool = true
 onready var selectable = $Selectable
 
 var disabled: bool = false
-var held: bool = false
 
 var trigger_reset: bool = false
 var reset_rotation: float = 0.0;
@@ -38,6 +37,9 @@ func _ready() -> void:
 	
 	if disable_at_init:
 		disable()
+
+func is_held() -> bool:
+	return PickableManager.is_held(self)
 
 func _integrate_forces(state):
 	if state.linear_velocity.abs() > max_velocity:
@@ -65,7 +67,7 @@ func _physics_process(_delta: float) -> void:
 		sleeping = true
 		return
 	
-	if not held:
+	if not is_held():
 		reset_cursor()
 		return
 	
@@ -92,33 +94,35 @@ func reset(position: Vector2, rotation = 0.0, reset_v = true, relative = false):
 		yield(Tools.timer(0.1), "timeout")
 
 func push(direction: Vector2 = Vector2.ZERO) -> void:
-	if held or disabled:
+	if is_held() or disabled:
 		return
 	
 	apply_central_impulse(direction)
 
 func drop(impulse: Vector2 = Vector2.ZERO) -> void:
-	if not held:
+	if not is_held():
 		return
 	
-	held = false
 	selectable.lock = false
-
+	
 	apply_central_impulse(impulse)
+	
+	PickableManager.drop(self)
 	emit_signal("dropped", self)
 
 func hold() -> void:
-	if held or disabled:
+	if is_held() or disabled:
 		return
 	
-	held = true
 	selectable.lock = true
 	
+	PickableManager.pick(self)
 	emit_signal("picked", self)
 
 func disable() -> void:
+	PickableManager.drop(self)
+	
 	disabled = true
-	held = false
 	mode = RigidBody2D.MODE_STATIC
 	
 	if disable_with_shapes:
@@ -147,6 +151,10 @@ func create_clone() -> Pickable:
 	var clone = self.duplicate()
 	
 	clone.selectable = self.selectable.duplicate()
+	
+	for child in clone.get_children():
+		if child.is_in_group("no_dupe"):
+			Tools.destroy_node(child)
 	
 	return clone
 

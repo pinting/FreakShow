@@ -5,7 +5,7 @@ uniform bool keep_size = true;
 uniform vec2 offset = vec2(0.5, 0.5);
 uniform float scale = 0.0;
 
-uniform float glow_scale = 0.33;
+uniform float glow_scale = 0.5;
 uniform float glow_radius = 10.0;
 uniform float line_thickness = 3.0;
 uniform vec4 line_color: hint_color = vec4(0.96, 0.35, 0.45, 1);
@@ -40,45 +40,42 @@ vec4 outline(float thickness, vec4 base_color, sampler2D tex, vec2 uv, vec2 pixe
 	return mix(base_color, outlined_result, outlined_result.a);
 }
 
-vec4 glow(float amount, sampler2D tex, vec2 uv, vec2 pixel_size)
+vec4 glow(float amount, vec4 base_color, sampler2D tex, vec2 uv, vec2 pixel_size)
 {
-	vec4 color = texture(tex, uv);
-	
+	vec4 g = base_color;
 	float r = glow_radius;
-	vec4 glow = color;
 
-	glow += texture(tex, uv + vec2(-r, -r) * pixel_size);
-	glow += texture(tex, uv + vec2(-r, 0.0) * pixel_size);
-	glow += texture(tex, uv + vec2(-r, r) * pixel_size);
-	glow += texture(tex, uv + vec2(0.0, -r) * pixel_size);
-	glow += texture(tex, uv + vec2(0.0, r) * pixel_size);
-	glow += texture(tex, uv + vec2(r, -r) * pixel_size);
-	glow += texture(tex, uv + vec2(r, 0.0) * pixel_size);
-	glow += texture(tex, uv + vec2(r, r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(-r, -r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(-r, 0.0) * pixel_size);
+	g += safe_texture(tex, uv + vec2(-r, r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(0.0, -r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(0.0, r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(r, -r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(r, 0.0) * pixel_size);
+	g += safe_texture(tex, uv + vec2(r, r) * pixel_size);
 
 	r *= 2.0;
 	
-	glow += texture(tex, uv + vec2(-r, -r) * pixel_size);
-	glow += texture(tex, uv + vec2(-r, 0.0) * pixel_size);
-	glow += texture(tex, uv + vec2(-r, r) * pixel_size);
-	glow += texture(tex, uv + vec2(0.0, -r) * pixel_size);
-	glow += texture(tex, uv + vec2(0.0, r) * pixel_size);
-	glow += texture(tex, uv + vec2(r, -r) * pixel_size);
-	glow += texture(tex, uv + vec2(r, 0.0) * pixel_size);
-	glow += texture(tex, uv + vec2(r, r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(-r, -r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(-r, 0.0) * pixel_size);
+	g += safe_texture(tex, uv + vec2(-r, r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(0.0, -r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(0.0, r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(r, -r) * pixel_size);
+	g += safe_texture(tex, uv + vec2(r, 0.0) * pixel_size);
+	g += safe_texture(tex, uv + vec2(r, r) * pixel_size);
 
-	glow /= 17.0; // Number of texture calls
-	glow *= amount;
+	g /= 17.0; // Number of texture calls
+	g *= amount;
 	
-	color.rgb *= color.a;
-
-	return glow + color;
+	return g + vec4(base_color.rgb * base_color.a, base_color.a);
 }
 
 void fragment()
 {
-	vec4 glow = glow(scale * glow_scale, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
-	vec4 outline = outline(line_thickness, glow, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
+	vec4 color = safe_texture(TEXTURE, UV);
+	vec4 outline = outline(line_thickness * scale, color, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
+	vec4 glow = glow(scale * glow_scale, outline, TEXTURE, UV, TEXTURE_PIXEL_SIZE);
 	
-	COLOR = mix(glow, outline, scale);
+	COLOR = glow;
 }

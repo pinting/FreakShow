@@ -25,7 +25,10 @@ const SCENES = [
 ]
 
 # Disable sounds
-var no_sound: bool = true
+var no_sound: bool = false
+
+# Gamma
+var gamma: float = 1.35
 
 # Save file path
 var save_path: String = "user://default.save"
@@ -56,6 +59,7 @@ func _load() -> void:
 	var error = config.load(CONFIG_PATH)
 	
 	no_sound = config.get_value("game", "no_sound", no_sound)
+	gamma = config.get_value("game", "gamma", gamma)
 	save_path = config.get_value("game", "save_path", save_path)
 	low_performance = config.get_value("game", "low_performance", low_performance)
 	lock_mouse = config.get_value("input", "lock_mouse", lock_mouse)
@@ -69,6 +73,7 @@ func save() -> void:
 	var config = ConfigFile.new()
 	
 	config.set_value("game", "no_sound", no_sound)
+	config.set_value("game", "gamma", gamma)
 	config.set_value("game", "save_path", save_path)
 	config.set_value("game", "low_performance", low_performance)
 	config.set_value("input", "lock_mouse", lock_mouse)

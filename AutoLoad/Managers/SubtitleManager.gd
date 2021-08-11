@@ -24,7 +24,7 @@ func clear() -> void:
 		Tools.debug("SubtitleDisplay not exists, but clear was called")
 		return
 	
-	Tools.destroy(display)
+	Tools.destroy_node(display)
 	
 	display = null
 
@@ -34,7 +34,7 @@ func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 	else:
 		display.say(text, speed, timeout)
 	
-	yield(display, "line_timeout")
+	yield(Tools.timer(timeout), "timeout")
 
 func set_describe(owner: int, text: String, keep: bool = false) -> void:
 	if not display:
