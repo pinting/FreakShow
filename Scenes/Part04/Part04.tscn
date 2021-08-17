@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/Part04/Part04_Ditch.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Animations/Player00.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Part04/Part04_MaintenanceRoom.tscn" type="PackedScene" id=6]
@@ -35,8 +34,6 @@ auto_fade_out = false
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 12 )]
 position = Vector2( 1502.24, -2640.3 )
-scale = Vector2( 0.7, 0.7 )
-animation_frames = ExtResource( 3 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 9 )]
 position = Vector2( 1708.81, -8027.59 )

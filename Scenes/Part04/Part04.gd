@@ -2,7 +2,6 @@ extends "res://Game/BaseScene.gd"
 
 onready var player = $Player
 onready var camera = $GameCamera
-onready var screen_effect = $ScreenEffect
 
 onready var keypad = $Environment/BellowLoop/Container/Ditch/Wall/Door00/Keypad
 onready var ditch_door = $Environment/BellowLoop/Container/Ditch/Wall/Door01
@@ -11,7 +10,6 @@ onready var sliding_platform = $Environment/BellowLoop/Container/MaintenanceRoom
 
 onready var ditch_spawn = $Trigger/DitchSpawn
 onready var maintenance_room_spawn = $Trigger/MaintenanceRoomSpawn
-onready var next_level_trigger = $Trigger/NextLevelTrigger
 
 onready var main_music = $Sound/MainMusic
 onready var next_level_music = $Sound/NextLevelMusic

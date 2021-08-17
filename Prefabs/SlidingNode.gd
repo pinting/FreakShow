@@ -43,7 +43,7 @@ func open() -> void:
 	is_open = true
 
 func close() -> void:
-	if not is_open or tween.is_active():
+	if not is_open or Animator.is_active(self, "position"):
 		return
 	
 	if door_start:
