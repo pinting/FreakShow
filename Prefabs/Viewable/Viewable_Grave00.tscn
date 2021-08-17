@@ -10,4 +10,4 @@
 scale = Vector2( 0.38, 0.38 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-effect_hover = 0.2
+effect_max = 0.2

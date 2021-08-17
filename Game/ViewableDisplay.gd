@@ -22,7 +22,6 @@ export var effect_max: float = 20.0
 # Process user input after this amount of seconds, so the user cannot click through stuff
 export var input_delay: float = 0.1
 
-onready var tween: Tween = $Tween
 onready var inner_display: Node2D = $InnerDisplay
 onready var container: Node2D = $InnerDisplay/Container
 onready var background_light: Sprite = $InnerDisplay/BackgroundLight
@@ -32,9 +31,13 @@ var visible_since: float = 0.0
 func _ready() -> void:
 	ViewableManager.set_display(self)
 
-func _set_effect(amount: float) -> void:
+func _set_effect(value: float) -> void:
+	inner_display.modulate.a = value
+
+	var effect_value = effect_min + (1.0 - value) * (effect_max - effect_min)
+
 	for child in container.get_children():
-		child.material.set_shader_param(effect_key, amount)
+		child.material.set_shader_param(effect_key, effect_value)
 
 func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	# Calculate the right child scale and center position
@@ -73,37 +76,27 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	
 	# Freeze players
 	PlayerManager.call_each("freeze")
+
+	# Play effect
+	Animator.run(self, "_set_effect", 0.0, 1.0, effect_duration)
 	
 	# Show inner display
 	inner_display.position = center_position
 	inner_display.visible = true
-	inner_display.modulate.a = 0.0
 
 	# Reset the counter to zero
 	visible_since = 0.0
-	
-	# Play effect
-	tween.interpolate_property(inner_display, "modulate:a", 
-		0.0, 1.0, effect_duration)
-	tween.interpolate_method(self, "_set_effect",
-		effect_max, effect_min, effect_duration)
-	tween.start()
 
 	# Force reset the description text and set it to the new value
 	SubtitleManager.set_describe(container.get_instance_id(), description_text, true)
 
 func hide() -> void:
-	# Play effect
-	tween.interpolate_property(inner_display, "modulate:a", 
-		1.0, 0.0, effect_duration)
-	tween.interpolate_method(self, "_set_effect",
-		effect_min, effect_max, effect_duration)
-	tween.start()
-
 	# Reset describe text
 	SubtitleManager.reset_describe(container.get_instance_id(), true)
 	
-	yield(tween, "tween_all_completed")
+	# Play effect
+	yield(Animator.run(self, "_set_effect",
+		1.0, 0.0, effect_duration), "completed")
 	
 	# Unfreeze players
 	PlayerManager.call_each("unfreeze")
@@ -133,7 +126,9 @@ func _input(event: InputEvent) -> void:
 	if not inner_display.visible or not is_button_event or not event.pressed:
 		return
 	
-	if tween.is_active() or visible_since < input_delay:
+	var is_tween_active = Animator.is_active(self, "_set_effect")
+	
+	if is_tween_active or visible_since < input_delay:
 		return
 	
 	hide()

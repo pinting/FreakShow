@@ -22,8 +22,6 @@ scale = Vector2( 1.25, 1.25 )
 z_index = -2
 script = ExtResource( 8 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="Top" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
@@ -47,7 +45,7 @@ position = Vector2( -6.9386, -44.8989 )
 z_index = -1
 texture = ExtResource( 6 )
 script = ExtResource( 7 )
-effect_hover = 0.5
+effect_max = 0.5
 
 [node name="Wall" type="Sprite" parent="Top/Bottom/RightBlock"]
 scale = Vector2( 0.4, 0.4 )

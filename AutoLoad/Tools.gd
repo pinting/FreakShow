@@ -1,26 +1,19 @@
 extends Node
 
-var http_request: HTTPRequest
 var random_generator: RandomNumberGenerator
 var noise: OpenSimplexNoise
-var tween: Tween
 
 const SILENT: float = -100.0
 
 func _ready() -> void:
 	random_generator = RandomNumberGenerator.new()
-	http_request = HTTPRequest.new()
 	noise = OpenSimplexNoise.new()
-	tween = Tween.new()
 	
 	random_generator.randomize()
 	
 	noise.seed = randi()
 	noise.period = 4
 	noise.octaves = 2
-	
-	add_child(http_request)
-	add_child(tween)
 
 	if Config.no_sound:
 		# Mute each audio server
@@ -48,11 +41,11 @@ func destroy_node(object: Object, deferred: bool = false):
 	object.set_script(null)
 	object.queue_free()
 
-# Create a new instance of a packed CPUParticles2D, play it, destroy it
 func play_packed_particles(effect: PackedScene, parent: Node2D, timeout: float = 0.0) -> void:
 	var instance = effect.instance()
 	
-	assert(instance is CPUParticles2D, "Only CPUParticles2D supported")
+	assert(instance is Particles2D or instance is CPUParticles2D,
+		"Only Particles2D or CPUParticles2D are supported")
 	
 	parent.add_child(instance)
 	
@@ -67,21 +60,13 @@ func play_packed_particles(effect: PackedScene, parent: Node2D, timeout: float =
 	
 	Tools.destroy_node(instance)
 
-# Slide the volune of AudioStreamPlayer
-func slide_volume(player, from_db: float, to_db: float, duration: float = 2.0) -> void:
-	player.volume_db = from_db
-	
-	tween.stop(player, "volume_db")
-	tween.interpolate_property(player, "volume_db", from_db, to_db, duration)
-	tween.start()
+# Animate the volume of AudioStreamPlayer
+func animate_volume(player, from_db: float, to_db: float, duration: float = 2.0) -> void:
+	Animator.run(player, "volume_db", from_db, to_db, duration)
 
-# Slide the pitch of AudioStreamPlayer
-func slide_pitch(player, from_pitch: float, to_pitch: float, duration: float = 2.0) -> void:
-	player.pitch_scale = from_pitch
-	
-	tween.stop(player, "pitch_scale")
-	tween.interpolate_property(player, "pitch_scale", from_pitch, to_pitch, duration)
-	tween.start()
+# Animate the pitch of AudioStreamPlayer
+func animate_pitch(player, from_pitch: float, to_pitch: float, duration: float = 2.0) -> void:
+	Animator.run(player, "pitch_scale", from_pitch, to_pitch, duration)
 
 # Generate a random integer
 func random_int(min_value: int, max_value: int) -> int:
@@ -207,22 +192,3 @@ func timer(duration: float = 1.0) -> SceneTreeTimer:
 func debug(message: String) -> void:
 	if Config.DEBUG:
 		print(message)
-
-# Report scene to the remote analytics service
-func report_scene(path) -> void:
-	var headers = ["Content-Type: application/json"]
-	var user_id = str(OS.get_unique_id()).sha1_text()
-	var query = JSON.print({
-		"userId": user_id,
-		"scenePath": path
-	})
-	
-	var result = http_request.request(
-		Config.REPORT_URL,
-		headers,
-		true,
-		HTTPClient.METHOD_POST,
-		query
-	)
-	
-	debug(str("Reporting '", query, "' with result '", result, "'"))

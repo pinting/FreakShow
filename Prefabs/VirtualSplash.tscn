@@ -7,8 +7,6 @@
 layer = 128
 script = ExtResource( 2 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="Container" type="Node2D" parent="."]
 visible = false
 

@@ -250,7 +250,7 @@ region_rect = Rect2( 0, 0, 10000, 300 )
 [node name="RollingLetter" parent="Inside" instance=ExtResource( 2 )]
 position = Vector2( -366.286, 75.6406 )
 scale = Vector2( 0.8, 0.8 )
-key = "Part01_Letters"
+custom_key = "Part01_Letters"
 
 [node name="Letter00" parent="Inside/RollingLetter" instance=ExtResource( 34 )]
 position = Vector2( -218.862, -217.901 )

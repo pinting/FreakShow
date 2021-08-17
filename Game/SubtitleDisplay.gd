@@ -7,8 +7,6 @@ export var debug: bool = false
 # Line break
 export var line_break: String = "\r\n"
 
-onready var tween: Tween = $Tween
-
 onready var top_label: Label = $TopLabel
 onready var bottom_label: Label = $BottomLabel
 onready var center_label: Label = $CenterLabel
@@ -81,10 +79,8 @@ func set_describe(owner: int, text: String, keep: bool = false, duration: float 
 	current_describe_owner = owner
 	keep_describe = keep
 	
-	tween.stop(top_label, "modulate:a")
-	tween.interpolate_property(top_label, "modulate:a",
-		top_label.modulate.a, 1.0, duration)
-	tween.start()
+	yield(Animator.run(top_label, "modulate:a",
+		top_label.modulate.a, 1.0, duration), "completed")
 
 func reset_describe(owner: int, force: bool = false, duration: float = 0.33) -> void:
 	_debug(str("Remove describe for '", owner, "'", " with force" if force else ""))
@@ -95,29 +91,21 @@ func reset_describe(owner: int, force: bool = false, duration: float = 0.33) -> 
 	current_describe_owner = null
 	keep_describe = false
 
-	tween.stop(top_label, "modulate:a")
-	tween.interpolate_property(top_label, "modulate:a",
-		top_label.modulate.a, 0.0, duration)
-	tween.start()
-	
-	yield(tween, "tween_completed")
+	yield(Animator.run(top_label, "modulate:a",
+		top_label.modulate.a, 0.0, duration), "completed")
 	
 	if current_describe_owner == null:
 		top_label.text = ""
 
 func show_quote(text: String, duration: float = 5.0) -> void:
 	center_label.text = text
-	
-	tween.stop(center_label, "modulate:a")
-	tween.interpolate_property(center_label, "modulate:a",
-		center_label.modulate.a, 1.0, duration)
-	tween.start()
+
+	yield(Animator.run(center_label, "modulate:a",
+		center_label.modulate.a, 1.0, duration), "completed")
 
 func hide_quote(duration: float = 5.0) -> void:	
-	tween.stop(center_label, "modulate:a")
-	tween.interpolate_property(center_label, "modulate:a",
-		center_label.modulate.a, 0.0, duration)
-	tween.start()
+	yield(Animator.run(center_label, "modulate:a",
+		center_label.modulate.a, 0.0, duration), "completed")
 
 func _debug(message: String) -> void:
 	if debug:

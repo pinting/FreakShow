@@ -71,9 +71,9 @@ func _on_scene_started() -> void:
 		SubtitleManager.say(Text.find("Narrator002"), 6.0, 12.0)
 		yield(Tools.timer(4.0), "timeout")
 	
-	Tools.slide_pitch(main_music.master_player, 0.01, 1.0)
-	Tools.slide_pitch(main_music.slave_player, 0.01, 1.0)
-	Tools.slide_volume(wind_sound, Tools.SILENT, -8.0)
+	Tools.animate_pitch(main_music.master_player, 0.01, 1.0)
+	Tools.animate_pitch(main_music.slave_player, 0.01, 1.0)
+	Tools.animate_volume(wind_sound, Tools.SILENT, -8.0)
 	
 	wind_sound.play()
 	main_music.play()

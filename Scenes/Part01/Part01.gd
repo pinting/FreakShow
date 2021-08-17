@@ -102,7 +102,7 @@ func _on_hallway_door_selected(door, index) -> void:
 		elif is_exit_open and not exiting:
 			exiting = true
 			waiting_music.kill(3.0)
-			yield(black_screen.fade_in(3.0), "tween_completed")
+			yield(black_screen.fade_in(3.0), "completed")
 			load_next_scene()
 	else:
 		Tools.random_generator.randomize()

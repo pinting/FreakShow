@@ -28,8 +28,6 @@ font_data = SubResource( 3 )
 layer = 101
 script = ExtResource( 2 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="TopLabel" type="Label" parent="."]
 visible = false
 light_mask = 786432

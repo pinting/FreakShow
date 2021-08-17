@@ -47,6 +47,6 @@ func _on_camera_reaches() -> void:
 
 func _on_exit_door_selected() -> void:
 	main_music.kill(3.0)
-	yield(black_screen.fade_in(3.0), "tween_completed")
+	yield(black_screen.fade_in(3.0), "completed")
 	yield(Tools.timer(1.0), "timeout")
 	load_next_scene()

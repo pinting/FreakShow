@@ -2,7 +2,6 @@ extends Node2D
 
 export var duration: float = 0.5
 
-onready var tween: Tween = $Tween
 onready var door_closed: Selectable = $DoorClosed
 onready var door_open: Selectable = $DoorOpen
 
@@ -19,13 +18,13 @@ func _ready() -> void:
 func _on_door_selected() -> void:
 	emit_signal("selected")
 
+func _set_effect(value: float) -> void:
+	door_open.modulate.a = value
+	door_closed.modulate.a = 1.0 - value
+
 func open() -> void:
 	door_open.visible = true
 	
-	tween.interpolate_property(door_open, "modulate:a", door_open.modulate.a, 1.0, duration)
-	tween.interpolate_property(door_closed, "modulate:a", door_closed.modulate.a, 0.0, duration)
-	tween.start()
-	
-	yield(tween, "tween_all_completed")
+	yield(Animator.run(self, "_set_effect", 0.0, 1.0, duration), "completed")
 	
 	door_closed.visible = false

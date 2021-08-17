@@ -6,7 +6,6 @@ export var hide_after: float = 1.0
 # Duration of the hide animation
 export var hide_duration: float = 1.0
 
-onready var tween = $Tween
 onready var container = $Container
 onready var color_rect = $Container/ColorRect
 
@@ -23,11 +22,9 @@ func play():
 	container.visible = true
 	
 	yield(Tools.timer(hide_after), "timeout")
-
-	tween.interpolate_property(container, "modulate:a", 1.0, 0.0, hide_duration)
-	tween.start()
 	
-	yield(tween, "tween_all_completed")
+	yield(Animator.run(container, "modulate:a",
+		1.0, 0.0, hide_duration), "completed")
 	
 	done()
 

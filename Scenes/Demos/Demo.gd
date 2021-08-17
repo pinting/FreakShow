@@ -11,7 +11,7 @@ var ball_reposition_sleep: float = ball_reposition_delay
 func _ready():
 	lock_area.connect("body_entered", self, "_on_lock_area_touched")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var is_accept = VirtualInput.is_action_just_pressed("ui_accept")
 	
 	if is_accept:

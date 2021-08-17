@@ -36,8 +36,6 @@ const speed_scale_m: float = 2.5
 # Duration of turning volume up or down
 const volume_change_duration = 5.0
 
-onready var tween = $Tween
-
 onready var train_00 = $Train00
 onready var sound_00 = $Sound00
 onready var collision_00 = $CollisionShape00
@@ -55,7 +53,6 @@ onready var on_top_collision_02 = $OnTop/CollisionShape02
 
 onready var on_top = $OnTop
 
-signal stopped
 signal player_on_top
 
 var started: bool = false
@@ -121,11 +118,8 @@ func pause() -> void:
 	
 	started = false
 	
-	tween.interpolate_method(self, "_set_volume", 
-		base_volume, Tools.SILENT, volume_change_duration)
-	tween.start()
-	
-	yield(tween, "tween_completed")
+	yield(Animator.run(self, "_set_volume", 
+		base_volume, Tools.SILENT, volume_change_duration), "completed")
 	
 	_stop_sound()
 
@@ -139,9 +133,8 @@ func resume() -> void:
 	
 	_play_sound()
 	
-	tween.interpolate_method(self, "_set_volume", 
-		Tools.SILENT, base_volume, volume_change_duration)
-	tween.start()
+	yield(Animator.run(self, "_set_volume", 
+		Tools.SILENT, base_volume, volume_change_duration), "completed")
 
 func stop():
 	Tools.debug("Train stop called")

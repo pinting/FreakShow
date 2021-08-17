@@ -96,7 +96,7 @@ func _process_auto_restart(delta: float) -> void:
 	
 	auto_restart_counter += delta
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	auto_restart_counter = 0.0
 
 func reload_scene() -> void:
@@ -111,7 +111,7 @@ func load_next_scene(use_fade = true, freeze_player = true) -> void:
 	
 	# Fade in the black screen
 	if use_fade and not black_screen.is_fading() and not black_screen.is_faded():
-		yield(black_screen.fade_in(), "tween_completed")
+		yield(black_screen.fade_in(), "completed")
 	
 	var current_scene_path = get_parent().filename
 	var next_scene_index = Config.SCENES.find(current_scene_path)
@@ -136,7 +136,7 @@ func move_player(player: Player, next_position: Vector2, sound: AudioStreamPlaye
 	if sound:
 		sound.play()
 	
-	yield(black_screen.fade_in(move_player_timeout), "tween_completed")
+	yield(black_screen.fade_in(move_player_timeout), "completed")
 	
 	player.position = next_position
 	player.reset()
@@ -149,6 +149,6 @@ func move_player(player: Player, next_position: Vector2, sound: AudioStreamPlaye
 	if camera:
 		camera.reset(player.global_position)
 	
-	yield(black_screen.fade_out(move_player_timeout), "tween_completed")
+	yield(black_screen.fade_out(move_player_timeout), "completed")
 	
 	player_move_in_progress = false

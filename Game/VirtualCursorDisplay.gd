@@ -10,7 +10,6 @@ export var margin: Vector2 = Vector2(100.0, 100.0)
 # Scale up the cursor by this value
 export var cursor_scale: float = 0.66
 
-onready var tween: Tween = $Tween
 onready var cursor: Sprite = $Cursor
 
 func _ready():
@@ -27,18 +26,12 @@ func is_hidden() -> bool:
 func show(duration: float = 0.5) -> void:
 	cursor.visible = true
 	
-	tween.stop_all()
-	tween.interpolate_property(cursor, "modulate:a",
-		cursor.modulate.a, 1.0, duration)
-	tween.start()
+	yield(Animator.run(cursor, "modulate:a",
+		cursor.modulate.a, 1.0, duration), "completed")
 
 func hide(duration: float = 0.5) -> void:
-	tween.stop_all()
-	tween.interpolate_property(cursor, "modulate:a",
-		cursor.modulate.a, 0.0, duration)
-	tween.start()
-	
-	yield(tween, "tween_completed")
+	yield(Animator.run(cursor, "modulate:a",
+		cursor.modulate.a, 0.0, duration), "completed")
 	
 	if cursor.modulate.a == 0.0:
 		cursor.visible = false

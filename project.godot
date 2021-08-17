@@ -150,6 +150,8 @@ SelectableManager="*res://AutoLoad/Managers/SelectableManager.gd"
 PickableManager="*res://AutoLoad/Managers/PickableManager.gd"
 Text="*res://AutoLoad/Text.gd"
 SceneLoader="*res://AutoLoad/SceneLoader.gd"
+Analytics="*res://AutoLoad/Analytics.gd"
+Animator="*res://AutoLoad/Animator.gd"
 
 [display]
 

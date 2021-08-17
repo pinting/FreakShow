@@ -60,7 +60,7 @@ func _player_on_palm(player: Player) -> void:
 	game_finished = true
 
 	yield(Tools.timer(3.0), "timeout")
-	yield(black_screen.fade_in(2.0), "tween_completed")
+	yield(black_screen.fade_in(2.0), "completed")
 
 	end_animated_sprite.frames = player.animated_sprite.frames
 	end_animated_sprite.playing = true 
@@ -142,7 +142,7 @@ func _on_fall_to_death(body: Node) -> void:
 			return
 	
 	main_music.kill(2.0);
-	yield(black_screen.fade_in(2.0), "tween_completed")
+	yield(black_screen.fade_in(2.0), "completed")
 	
 	# Reload current scene
 	reload_scene()

@@ -17,7 +17,7 @@ func _ready() -> void:
 	
 	assert(player, "Player node not found")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var p = eye_position - floor(eye_position)
 	
 	eye_ball.position.x = 110 - p * 220

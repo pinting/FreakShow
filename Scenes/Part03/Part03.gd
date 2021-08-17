@@ -78,7 +78,7 @@ func _on_scene_started() -> void:
 	camera.scale_follow_speed(start_follow_speed_scale)
 	camera.change_zoom(start_camera_zoom, camera_change_duration)
 	
-	Tools.slide_volume(wind_sound, Tools.SILENT, -8.0)
+	Tools.animate_volume(wind_sound, Tools.SILENT, -8.0)
 	wind_sound.play()
 
 	if not teleport_player_to_end:
@@ -138,7 +138,7 @@ func _trigger_game_begin(body: Node) -> void:
 	entry_block.show()
 	yield(player.enable_avatar_mode(), "completed")
 	
-	Tools.slide_volume(wind_sound, -8.0, Tools.SILENT)
+	Tools.animate_volume(wind_sound, -8.0, Tools.SILENT)
 	main_music.play()
 	SubtitleManager.say(Text.find("Narrator004"), 0.5, 3.0)
 	player.unfreeze()
@@ -159,7 +159,7 @@ func _trigger_reset_game() -> void:
 	boss.go_back = true
 	
 	yield(Tools.timer(2.0), "timeout")
-	yield(black_screen.fade_in(2.0), "tween_completed")
+	yield(black_screen.fade_in(2.0), "completed")
 	
 	game_playing = false
 	
@@ -187,7 +187,7 @@ func _trigger_game_end(body: Node) -> void:
 		return
 	
 	main_music.kill(5.0)
-	Tools.slide_volume(wind_sound, Tools.SILENT, 0.0)
+	Tools.animate_volume(wind_sound, Tools.SILENT, 0.0)
 	
 	player.disable_avatar_mode()
 	player.disable_jump = true
@@ -212,7 +212,7 @@ func _on_exit_door_selected() -> void:
 	yield(Tools.timer(0.25), "timeout")
 	wall_ending_bottom.disabled = true
 	yield(Tools.timer(3.0), "timeout")
-	yield(black_screen.fade_in(2.0), "tween_completed")
+	yield(black_screen.fade_in(2.0), "completed")
 	yield(Tools.timer(1.0), "timeout")
 	
 	load_next_scene()

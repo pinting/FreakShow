@@ -168,7 +168,7 @@ selection_area = NodePath("ColorRect")
 enable_boss_interaction = false
 effect_min = 0.5
 
-[node name="LineBody" parent="BaseScene/Environment/Maze/RemovableLine" index="1"]
+[node name="LineBody" parent="BaseScene/Environment/Maze/RemovableLine" index="0"]
 position = Vector2( 0, 11.021 )
 
 [node name="ColorRect" type="ColorRect" parent="BaseScene/Environment/Maze/RemovableLine"]

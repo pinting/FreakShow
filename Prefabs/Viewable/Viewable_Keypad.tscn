@@ -12,5 +12,5 @@ scale = Vector2( 0.113572, 0.113572 )
 texture = ExtResource( 3 )
 script = ExtResource( 1 )
 description_key = "Description002"
-effect_hover = 0.5
+effect_max = 0.5
 enlarged_zoom = 0.33

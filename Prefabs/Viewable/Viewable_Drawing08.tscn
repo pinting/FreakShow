@@ -11,4 +11,4 @@ position = Vector2( 3340.02, 0.774475 )
 scale = Vector2( 0.15, 0.15 )
 texture = ExtResource( 3 )
 script = ExtResource( 2 )
-effect_hover = 0.5
+effect_max = 0.5

@@ -12,5 +12,5 @@ rotation = 0.0781437
 scale = Vector2( -0.109, 0.109 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-effect_hover = 1.0
+effect_max = 1.0
 inner_description_key = "Description048"

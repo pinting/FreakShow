@@ -19,8 +19,6 @@ export var shake_max_offset = Vector2(100, 75)
 # Maximum rotation in radians
 export var shake_max_roll = 0.1
 
-onready var tween: Tween = $Tween
-
 const debug_zoom_speed: Vector2 = Vector2(0.2, 0.2)
 const debug_move_speed: Vector2 = Vector2(10.0, 10.0)
 
@@ -122,14 +120,12 @@ func _process_shake(delta: float) -> void:
 	offset.y = shake_max_offset.y * shake * Tools.noise.get_noise_2d(Tools.noise.seed * 3, shake_offset_y)
 
 func change_zoom(amount: Vector2, duration: float) -> void:
-	tween.stop(self, "zoom")
-	tween.interpolate_property(self, "zoom", zoom, amount, duration)
-	tween.start()
+	yield(Animator.run(self, "zoom", 
+		zoom, amount, duration), "completed")
 
 func change_shake(amount: float, duration: float) -> void:
-	tween.stop(self, "shake")
-	tween.interpolate_property(self, "shake", shake, amount, duration)
-	tween.start()
+	yield(Animator.run(self, "shake", 
+		shake, amount, duration), "completed")
 
 func reset(new_position: Vector2, with_scrolling_vector: bool = true) -> void:
 	var old_position = global_position

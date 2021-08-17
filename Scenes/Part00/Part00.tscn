@@ -36,13 +36,13 @@ script = ExtResource( 1 )
 auto_fade_out = false
 auto_show_cursor = false
 
-[node name="Cursor" parent="BaseScene/CursorDisplay" index="1"]
+[node name="Cursor" parent="BaseScene/CursorDisplay" index="0"]
 material = ExtResource( 4 )
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 6 )]
 position = Vector2( -2686.45, 466.563 )
 
-[node name="AnimatedSprite" parent="BaseScene/Player" index="1"]
+[node name="AnimatedSprite" parent="BaseScene/Player" index="0"]
 material = ExtResource( 20 )
 animation = "a_stand_still"
 frame = 0

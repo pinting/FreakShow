@@ -27,56 +27,50 @@ export var effect_min: float = 0.0
 # Max effect value
 export var effect_max: float = 10.0
 
-onready var tween = $Tween
 onready var line_body = $LineBody
-
-var current_effect_value: float = 0.0
 
 func _ready() -> void:
 	connect("selected", self, "_on_selected")
 	reset()
 
 func reset() -> void:
-	tween.stop_all()
+	Animator.remove_tween(self, "_set_hide_effect")
 	
 	if hide_on_init:
 		disable()
-		_set_effect(effect_max)
+		_set_hide_effect(1.0)
 	else:
 		enable()
-		_set_effect(effect_min)
+		_set_hide_effect(0.0)
 
-func _set_effect(value: float) -> void:
-	var at_init = value == effect_min
-	var at_hide = value == effect_max
-	
-	if (not effect_material_on_init and at_init) or at_hide:
+func _set_hide_effect(value: float) -> void:
+	modulate.a = 1.0 - value
+
+	if (not effect_material_on_init and value == 0.0) or value == 1.0:
 		material = null
 	elif not material:
 		material = effect_material.duplicate()
 	
 	if material:
-		material.set_shader_param(effect_key, value)
-	
-	current_effect_value = value
+		var effect_value = effect_min + value * (effect_max - effect_min)
+
+		material.set_shader_param(effect_key, effect_value)
 
 func _on_selected() -> void:
 	if enable_player_interaction:
 		hide()
 
 func hide() -> void:
-	tween.interpolate_method(self, "_set_effect", current_effect_value, effect_max, effect_duration)
-	tween.start()
-	
-	yield(tween, "tween_completed")
+	yield(Animator.run(self, "_set_hide_effect",
+		0.0, 1.0, effect_duration), "completed")
 	
 	disable()
 
 func show() -> void:
 	enable()
 	
-	tween.interpolate_method(self, "_set_effect", current_effect_value, effect_min, effect_duration)
-	tween.start()
+	yield(Animator.run(self, "_set_hide_effect",
+		1.0, 0.0, effect_duration), "completed")
 
 func disable() -> void:
 	visible = false

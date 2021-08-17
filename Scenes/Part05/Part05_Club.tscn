@@ -76,8 +76,8 @@ texture = ExtResource( 8 )
 script = ExtResource( 6 )
 effect_offset_key = "offset"
 effect_key = "scale"
-effect_hover = 0.5
-effect_default = 0.0
+effect_max = 0.5
+effect_min = 0.0
 
 [node name="BassSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )

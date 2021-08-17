@@ -10,7 +10,6 @@ export var stop_after: Vector2 = Vector2(0, 1000)
 # Speed to move with (this is inverted, when moving back)
 export var speed: Vector2 = Vector2(0, 100)
 
-onready var tween: Tween = $Tween
 onready var door_start: AudioStreamPlayer2D = $StartSound
 onready var door_move: AudioStreamPlayer2D = $MoveSound
 onready var door_stop: AudioStreamPlayer2D = $StopSound
@@ -29,7 +28,7 @@ func _ready() -> void:
 	change_duration = (stop_after / speed.abs()).length()
 
 func open() -> void:
-	if is_open or tween.is_active():
+	if is_open or Animator.is_active(self, "position"):
 		return
 	
 	if door_start:
@@ -38,8 +37,8 @@ func open() -> void:
 	if door_move:
 		door_move.play()
 	
-	tween.interpolate_property(self, "position", close_position, open_position, change_duration)
-	tween.start()
+	yield(Animator.run(self, "position",
+		close_position, open_position, change_duration), "completed")
 	
 	is_open = true
 
@@ -50,7 +49,7 @@ func close() -> void:
 	if door_start:
 		door_start.play()
 	
-	tween.interpolate_property(self, "position", close_position, open_position, change_duration)
-	tween.start()
+	yield(Animator.run(self, "position",
+		close_position, open_position, change_duration), "completed")
 	
 	is_open = false

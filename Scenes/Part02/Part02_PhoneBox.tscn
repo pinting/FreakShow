@@ -18,7 +18,7 @@ script = ExtResource( 1 )
 visible = false
 position = Vector2( -1.2998, -42.096 )
 description_key = ""
-effect_hover = 1.25
+effect_max = 1.25
 
 [node name="Lamp" type="Sprite" parent="."]
 material = SubResource( 1 )

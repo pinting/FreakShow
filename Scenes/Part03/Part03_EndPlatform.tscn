@@ -140,7 +140,7 @@ region_rect = Rect2( 0, 0, 11000, 85 )
 
 [node name="ExitDoor" parent="SteelBlock/WallBlock" instance=ExtResource( 21 )]
 position = Vector2( -3147.04, 162.994 )
-effect_hover = 0.25
+effect_max = 0.25
 
 [node name="CompanySign" parent="SteelBlock/WallBlock" instance=ExtResource( 20 )]
 position = Vector2( 1362.58, -252.406 )

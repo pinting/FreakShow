@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func _on_new_game_selected() -> void:
 	CursorManager.lock()
-	yield(black_screen.fade_in(), "tween_completed")
+	yield(black_screen.fade_in(), "completed")
 	Save.clear()
 	load_next_scene()
 
@@ -23,5 +23,5 @@ func _on_continue_game_selected() -> void:
 	
 	if last_scene:
 		CursorManager.lock()
-		yield(black_screen.fade_in(), "tween_completed")
+		yield(black_screen.fade_in(), "completed")
 		SceneLoader.load_scene(last_scene)

@@ -15,8 +15,6 @@ extents = Vector2( 2036.48, 10.3484 )
 position = Vector2( 241.904, 987.778 )
 script = ExtResource( 8 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="Train00" type="Sprite" parent="."]
 light_mask = -2147483648
 position = Vector2( -896.653, -816.511 )

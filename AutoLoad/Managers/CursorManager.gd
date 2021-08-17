@@ -2,17 +2,17 @@ extends Node
 
 signal display_changed
 
-const cursor_default: Texture = preload("res://Assets/Cursor/Cursor_Default.png")
-const cursor_pick: Texture = preload("res://Assets/Cursor/Cursor_Pick.png")
-const cursor_view: Texture = preload("res://Assets/Cursor/Cursor_View.png")
+const CURSOR_DEFAULT: Texture = preload("res://Assets/Cursor/Cursor_Default.png")
+const CURSOR_PICK: Texture = preload("res://Assets/Cursor/Cursor_Pick.png")
+const CURSOR_VIEW: Texture = preload("res://Assets/Cursor/Cursor_View.png")
 
-const no_owner = -1
+const NO_OWNER = -1
 
 var display: VirtualCursorDisplay = null
-var current_owner: int = no_owner
+var current_owner: int = NO_OWNER
 
 func _ready() -> void:
-	reset_icon(no_owner, true)
+	reset_icon(NO_OWNER, true)
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -24,7 +24,7 @@ func set_display(cursor_display: VirtualCursorDisplay) -> void:
 	display = cursor_display
 	VirtualInput.disable = is_lock_needed()
 	
-	reset_icon(no_owner, true)
+	reset_icon(NO_OWNER, true)
 	Input.set_custom_mouse_cursor(null)
 
 	if is_lock_needed():
@@ -44,7 +44,7 @@ func clear() -> void:
 	VirtualInput.disable = is_lock_needed()
 
 func is_free(owner: int):
-	return not is_hidden() and (current_owner == no_owner or current_owner == owner)
+	return not is_hidden() and (current_owner == NO_OWNER or current_owner == owner)
 
 func set_cursor_texture(texture: Resource) -> void:
 	if display:
@@ -58,11 +58,11 @@ func set_icon(type: String, owner: int, force: bool = false):
 	
 	match type:
 		"default":
-			set_cursor_texture(cursor_default)
+			set_cursor_texture(CURSOR_DEFAULT)
 		"pick":
-			set_cursor_texture(cursor_pick)
+			set_cursor_texture(CURSOR_PICK)
 		"view":
-			set_cursor_texture(cursor_view)
+			set_cursor_texture(CURSOR_VIEW)
 		_:
 			Tools.debug("Non-existing cursor type was used!")
 	
@@ -70,7 +70,7 @@ func set_icon(type: String, owner: int, force: bool = false):
 
 func reset_icon(owner: int, force: bool = false):
 	if current_owner == owner or force:
-		set_icon("default", no_owner, true);
+		set_icon("default", NO_OWNER, true);
 
 func get_position(viewport_based: bool = false) -> Vector2:
 	if display:

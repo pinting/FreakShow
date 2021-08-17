@@ -1,10 +1,10 @@
 extends Node
 
 # Actual mouse clicks and virtual ones are distinguished by their pressure value
-const virtual_pressure: float = 0.123
+const VIRTUAL_PRESSURE: float = 0.123
 
 # Maximum difference to compare pressure with
-const eps: float = 0.01
+const EPS: float = 0.01
 
 # Disable every input
 var disable: bool = false
@@ -100,7 +100,7 @@ func _input(event: InputEvent) -> void:
 	if not is_motion or disable or disable_motion:
 		return
 	
-	using_virtual_input = abs(event.pressure - virtual_pressure) < eps
+	using_virtual_input = abs(event.pressure - VIRTUAL_PRESSURE) < EPS
 	
 	if not using_virtual_input:
 		# When mouse is NOT captured, new position comes precalculated
@@ -135,7 +135,7 @@ func _process_virtual_motion() -> void:
 		var relative = virtual_mouse * Config.virtual_mouse_speed
 		
 		set_virtual_mouse_position(virtual_mouse_position + relative, true, true)
-		create_move_event(virtual_mouse_position, relative, Config.virtual_mouse_speed, virtual_pressure)
+		create_move_event(virtual_mouse_position, relative, Config.virtual_mouse_speed, VIRTUAL_PRESSURE)
 
 func _process_virtual_click() -> void:
 	var virtual_click_left = VirtualInput.is_action_pressed("virtual_click_left")

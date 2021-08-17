@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 	radius = animated_sprite.global_position.distance_to(origo.global_position)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player.global_position.distance_to(origo.global_position) > radius:
 		return
 	

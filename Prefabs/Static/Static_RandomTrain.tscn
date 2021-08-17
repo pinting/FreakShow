@@ -20,8 +20,6 @@ extents = Vector2( 2036.48, 10.3484 )
 ]]
 script = ExtResource( 1 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="Train00" parent="." instance=ExtResource( 2 )]
 position = Vector2( -874.948, -816.511 )
 scale = Vector2( 20, 15 )

@@ -3,7 +3,6 @@ extends CanvasLayer
 # Strength of the effect
 export var strength: float = 0.1
 
-onready var tween: Tween = $Tween
 onready var color_rect: ColorRect = $ColorRect
 
 var is_hidden: bool = true
@@ -18,21 +17,19 @@ func show(duration: float = 0.5) -> void:
 	if not is_hidden:
 		return
 	
-	tween.stop_all()
-	tween.interpolate_method(self, "_set_effect", 0.0, strength, duration)
-	tween.start()
-	
 	is_hidden = false
+	
+	yield(Animator.run(self, "_set_effect", 
+		0.0, strength, duration), "completed")
 
 func hide(duration: float = 0.5) -> void:
 	if is_hidden:
 		return
 	
-	tween.stop_all()
-	tween.interpolate_method(self, "_set_effect", strength, 0.0, duration)
-	tween.start()
-	
 	is_hidden = true
+	
+	yield(Animator.run(self, "_set_effect",
+		strength, 0.0, duration), "completed")
 
 func _process(_delta: float) -> void:
 	if CursorManager.is_hidden():

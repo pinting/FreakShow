@@ -14,8 +14,6 @@ z_index = -1
 texture = ExtResource( 4 )
 script = ExtResource( 3 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="LineBody" type="StaticBody2D" parent="." groups=[
 "_removable_line_body",
 ]]

@@ -10,8 +10,6 @@ light_mode = 1
 z_index = 1000
 script = ExtResource( 1 )
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="Cursor" type="Sprite" parent="."]
 visible = false
 material = SubResource( 1 )

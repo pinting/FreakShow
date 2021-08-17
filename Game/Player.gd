@@ -76,7 +76,6 @@ const walk_wave_offset: float = 0.5
 # A small number which is used to check for near-ZERO numbers
 const eps: float = 1.0
 
-onready var tween = $Tween
 onready var animated_sprite = $AnimatedSprite
 
 onready var platform_detector_00 = $PlatformDetector00
@@ -176,28 +175,19 @@ func _process_collision_shapes() -> void:
 	kick_area_collision_shape.disabled = dead or avatar_mode
 
 func toggle_avatar_mode() -> void:
-	if tween.is_active():
+	if Animator.is_active(transform_effect_container, "modulate:a"):
 		return
 	
 	Tools.play_packed_particles(transform_effect, self, transform_duration)
 	transform_sound.play()
-
-	var duration = transform_duration / 2.0
-	var target = transform_effect_container
 	
-	tween.interpolate_property(target, "modulate:a", 0.0, 1.0, duration)
-	tween.start()
-	
-	yield(tween, "tween_all_completed")
+	yield(Animator.run(transform_effect_container, "modulate:a", 
+		0.0, 1.0, transform_duration / 2.0), "completed")
 	
 	avatar_mode = not avatar_mode
 	
-	tween.interpolate_property(target, "modulate:a", 1.0, 0.0, duration)
-	tween.start()
-	
-	yield(tween, "tween_all_completed")
-	
-	tween.stop_all()
+	yield(Animator.run(transform_effect_container, "modulate:a", 
+		0.0, 1.0, transform_duration / 2.0), "completed")
 
 func enable_avatar_mode() -> void:
 	if not avatar_mode:
@@ -207,7 +197,7 @@ func disable_avatar_mode() -> void:
 	if avatar_mode:
 		yield(toggle_avatar_mode(), "completed")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if dead:
 		return
 	
@@ -422,8 +412,7 @@ func freeze(with_gravity: bool = false) -> void:
 	frozen = true
 
 func unfreeze() -> void:
-	if not tween.is_active():
-		frozen = false
+	frozen = false
 
 func kill() -> void:
 	if dead:

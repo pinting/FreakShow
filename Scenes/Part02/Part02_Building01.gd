@@ -1,6 +1,5 @@
 extends StaticBody2D
 
-onready var tween = $Tween
 onready var shutter = $Top/Bottom/RightBlock/Shutter
 
 const duration: float = 2.0
@@ -15,9 +14,6 @@ func _on_shutter_selected() -> void:
 	var from = shutter.position.y
 	var to = from - height
 	
-	tween.interpolate_property(shutter, "position:y", from, to, duration)
-	tween.start()
-	
-	yield(tween, "tween_all_completed")
+	yield(Animator.run(shutter, "position:y", from, to, duration), "completed")
 	
 	emit_signal("shutter_opened")
