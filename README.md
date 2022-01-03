@@ -4,9 +4,11 @@ A video game experiment with photo based assets built around emotions.
 
 ## Preview
 
+<a href="https://www.youtube.com/watch?v=Z677WRkLmXU">
 <img src="https://github.com/pinting/FreakShow/raw/master/screenshot.png" width="600" />
+</a>
 
-Watch a [recording](https://youtu.be/SdWDLyBJdVU) about the latest gameplay elements.
+Watch a [recording](https://www.youtube.com/watch?v=Z677WRkLmXU) about the latest gameplay elements.
 
 ## Setup
 
@@ -45,6 +47,6 @@ Thank you for the musical inspiration to the following artists (or group of arti
 
 All Rights Reserved.
 
-Copyright (c) 2021 Dénes Tornyi.
+Copyright (c) 2022 Dénes Tornyi.
 
 The project is uploaded for educational purpose, to serve as an example how a game can be built around emotions. Contribution and fair use of the scripts and assets are welcomed, however, please contact me before doing so.
