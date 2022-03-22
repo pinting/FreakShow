@@ -34,7 +34,7 @@ func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 	else:
 		display.say(text, speed, timeout)
 	
-	yield(Tools.timer(timeout), "timeout")
+	yield(Tools.wait(timeout), "completed")
 
 func set_describe(owner: int, text: String, keep: bool = false) -> void:
 	if not display:

@@ -122,7 +122,7 @@ visible = false
 shape = SubResource( 3 )
 
 [node name="Ball" parent="BaseScene/Environment" instance=ExtResource( 9 )]
-position = Vector2( 1935.86, 1207.89 )
+position = Vector2( 3345.2, 1207.89 )
 
 [node name="Hoop" parent="BaseScene/Environment" instance=ExtResource( 10 )]
 position = Vector2( 1739.63, 720.692 )

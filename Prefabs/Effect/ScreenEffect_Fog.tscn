@@ -15,10 +15,7 @@ shader_param/octaves = 4
 [node name="ScreenEffect_Fog" type="CanvasLayer"]
 layer = 49
 
-[node name="Canvas" type="ColorRect" parent="." groups=[
-"auto_visible",
-"high_performance",
-]]
+[node name="Canvas" type="ColorRect" parent="." groups=["auto_visible", "high_performance"]]
 visible = false
 material = SubResource( 1 )
 margin_right = 960.0

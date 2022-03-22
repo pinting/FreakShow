@@ -21,7 +21,7 @@ func play():
 	color_rect.color = ProjectSettings.get_setting("application/boot_splash/bg_color")
 	container.visible = true
 	
-	yield(Tools.timer(hide_after), "timeout")
+	yield(Tools.wait(hide_after), "completed")
 	
 	yield(Animator.run(container, "modulate:a",
 		1.0, 0.0, hide_duration), "completed")

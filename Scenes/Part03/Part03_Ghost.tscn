@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Animations/Ghost00.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://Materials/GhostWhiteMaterial.tres" type="Material" id=2]
+[ext_resource path="res://Resources/Animations/Ghost00.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Resources/Materials/GhostWhiteMaterial.tres" type="Material" id=2]
 [ext_resource path="res://Scenes/Part03/Part03_Ghost.gd" type="Script" id=3]
 
 [node name="Part03_Ghost" type="Node2D"]

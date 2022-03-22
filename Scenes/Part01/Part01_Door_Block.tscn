@@ -11,29 +11,22 @@
 script = ExtResource( 6 )
 
 [node name="Lamp" parent="." instance=ExtResource( 4 )]
-position = Vector2( -2.9668, -406.238 )
+position = Vector2( -2.9668, -466.238 )
 scale = Vector2( 0.7, 0.7 )
 z_index = 2
 
-[node name="Light" parent="Lamp" groups=[
-"auto_visible",
-"light",
-] instance=ExtResource( 2 )]
+[node name="Light" parent="Lamp" groups=["auto_visible", "light"] instance=ExtResource( 2 )]
 visible = false
 position = Vector2( -475.43, 1063.28 )
 scale = Vector2( 1.52205, 0.532185 )
 
-[node name="DoorOpen" type="Sprite" parent="." groups=[
-"selectable",
-]]
+[node name="DoorOpen" type="Sprite" parent="." groups=["selectable"]]
 position = Vector2( 0, -62.433 )
 scale = Vector2( 0.95, 0.95 )
 texture = ExtResource( 8 )
 script = ExtResource( 5 )
 
-[node name="DoorClosed" type="Sprite" parent="." groups=[
-"selectable",
-]]
+[node name="DoorClosed" type="Sprite" parent="." groups=["selectable"]]
 position = Vector2( 0, -61.046 )
 scale = Vector2( 0.95, 0.95 )
 texture = ExtResource( 3 )

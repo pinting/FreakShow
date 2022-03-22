@@ -2,10 +2,10 @@ class_name Selectable
 extends PureSelectable
 
 # Selection material
-export (Material) var effect_material = preload("res://Materials/SelectionMaterial.tres")
+export (Material) var effect_material = preload("res://Resources/Materials/SelectionMaterial.tres")
 
 # Vanish material
-export (Material) var vanish_material = preload("res://Materials/DisintegrateMaterial.tres")
+export (Material) var vanish_material = preload("res://Resources/Materials/DisintegrateMaterial.tres")
 
 # Primary effect name
 export var effect_key: String = "scale"
@@ -42,7 +42,7 @@ func _ready() -> void:
 	SelectableManager.connect("cursor_exited", self, "_on_cursor_outside")
 
 func _set_effect(value: float) -> void:
-	if material and effect_key:
+	if material and effect_material and effect_key:
 		var effect_value = effect_min + value * (effect_max - effect_min)
 		
 		material.set_shader_param(effect_key, effect_value)
@@ -55,7 +55,7 @@ func _process(_delta: float) -> void:
 	
 	var cursor_position = CursorManager.get_position(viewport_based_cursor)
 	
-	if material and effect_offset_key:
+	if material and effect_material and effect_offset_key:
 		var rect = get_selection_area()
 		var offset = to_local(cursor_position) / rect.size
 		
@@ -74,7 +74,7 @@ func _on_cursor_inside(target: Selectable) -> void:
 	if effect_material:
 		material = effect_material.duplicate()
 	
-	if material and effect_key:
+	if material and effect_material and effect_key:
 		yield(Animator.run(self, "_set_effect", 
 			0.0, 1.0, effect_duration), "completed")
 
@@ -82,10 +82,10 @@ func _on_cursor_outside(target: Selectable) -> void:
 	if target != self:
 		return
 	
-	if not material:
+	if not material or not effect_material:
 		return
 	
-	if effect_key:
+	if effect_material and effect_key:
 		yield(Animator.run(self, "_set_effect", 
 			1.0, 0.0, effect_duration), "completed")
 	

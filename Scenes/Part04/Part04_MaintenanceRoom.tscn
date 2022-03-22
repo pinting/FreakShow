@@ -28,9 +28,7 @@ texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 8000, 722 )
 
-[node name="Graffiti00" type="Sprite" parent="Wall" groups=[
-"selectable",
-]]
+[node name="Graffiti00" type="Sprite" parent="Wall" groups=["selectable"]]
 self_modulate = Color( 1, 1, 1, 0.784314 )
 position = Vector2( 431.59, 20.8414 )
 scale = Vector2( 1.02686, 1.02686 )

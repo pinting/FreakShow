@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/Part00/Part00.gd" type="Script" id=1]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Part00/Part00_Building02.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Materials/CursorBlackMaterial.tres" type="Material" id=4]
+[ext_resource path="res://Resources/Materials/CursorBlackMaterial.tres" type="Material" id=4]
 [ext_resource path="res://Scenes/Part00/Part00_Building00.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
@@ -19,14 +19,14 @@
 [ext_resource path="res://Scenes/Part00/Part00_Clouds.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Assets/Music/Part00.ogg" type="AudioStream" id=18]
 [ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Materials/GhostBlackMaterial.tres" type="Material" id=20]
+[ext_resource path="res://Resources/Materials/GhostBlackMaterial.tres" type="Material" id=20]
 [ext_resource path="res://Assets/Environmnent/Car00_Stencil.png" type="Texture" id=21]
 [ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=22]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 20000, 76.036 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 1500, 1500 )
 
 [node name="Part00" type="Node2D"]
@@ -67,7 +67,7 @@ region_rect = Rect2( 0, 0, 40000, 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/Road"]
 position = Vector2( 4.75684, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 6 )
 
 [node name="LoopLeft" parent="BaseScene/Environment" instance=ExtResource( 22 )]
 position = Vector2( -7806.94, -601.089 )
@@ -82,7 +82,7 @@ mirror_mode = "left"
 [node name="Area" type="Area2D" parent="BaseScene/Environment/LoopLeft"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/LoopLeft/Area"]
-shape = SubResource( 2 )
+shape = SubResource( 7 )
 
 [node name="Clouds" parent="BaseScene/Environment" instance=ExtResource( 17 )]
 position = Vector2( -3750.77, -1440.57 )
@@ -138,7 +138,10 @@ position = Vector2( 14458, 201.836 )
 stream = ExtResource( 18 )
 max_volume = 10
 
+[connection signal="selected" from="BaseScene/Environment/Building02/Block00/Door" to="BaseScene" method="_on_exit_door_selected"]
+
 [editable path="BaseScene"]
 [editable path="BaseScene/CursorDisplay"]
 [editable path="BaseScene/Player"]
 [editable path="BaseScene/BackgroundRect"]
+[editable path="BaseScene/Environment/Building02"]

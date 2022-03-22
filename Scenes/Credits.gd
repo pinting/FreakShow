@@ -32,7 +32,7 @@ func _next_decoration_frame():
 func _on_scene_started() -> void:
 	CursorManager.hide()
 	black_screen.fade_out(2.0)
-	yield(Tools.timer(credits_delay), "timeout")
+	yield(Tools.wait(credits_delay), "completed")
 
 	for n in range(0, credits_count):
 		var top_index = Tools.pad_number(2 * n, 3)
@@ -47,15 +47,15 @@ func _on_scene_started() -> void:
 		text_top.text = top
 		text_bottom.text = bottom
 
-		yield(Tools.timer(credits_timeout), "timeout")
+		yield(Tools.wait(credits_timeout), "completed")
 		
 		text_top.text = ""
 		text_bottom.text = ""
 
-		yield(Tools.timer(credits_delay), "timeout")
+		yield(Tools.wait(credits_delay), "completed")
 	
 	black_screen.fade_in(2.0)
-	yield(Tools.timer(2.0), "timeout")
+	yield(Tools.wait(2.0), "completed")
 
 	var main_scene = ProjectSettings.get_setting("application/run/main_scene")
 	

@@ -83,9 +83,9 @@ func _on_scene_started() -> void:
 
 	if not teleport_player_to_end:
 		SubtitleManager.show_quote(Text.find("Text007"))
-		yield(Tools.timer(15.0), "timeout")
+		yield(Tools.wait(15.0), "completed")
 		SubtitleManager.hide_quote()
-		yield(Tools.timer(2.0), "timeout")
+		yield(Tools.wait(2.0), "completed")
 	
 	black_screen.fade_out(2.0)
 	CursorManager.show()
@@ -142,7 +142,7 @@ func _trigger_game_begin(body: Node) -> void:
 	main_music.play()
 	SubtitleManager.say(Text.find("Narrator004"), 0.5, 3.0)
 	player.unfreeze()
-	yield(Tools.timer(1.0), "timeout")
+	yield(Tools.wait(1.0), "completed")
 	
 	boss.follows = true
 
@@ -158,7 +158,7 @@ func _on_boss_mouth_interaction(body: Node) -> void:
 func _trigger_reset_game() -> void:
 	boss.go_back = true
 	
-	yield(Tools.timer(2.0), "timeout")
+	yield(Tools.wait(2.0), "completed")
 	yield(black_screen.fade_in(2.0), "completed")
 	
 	game_playing = false
@@ -206,13 +206,13 @@ func _on_exit_door_selected() -> void:
 	
 	CursorManager.hide()
 	player.freeze(true)
-	yield(Tools.timer(4.0), "timeout")
+	yield(Tools.wait(4.0), "completed")
 	falling_sound.play()
 	end_tube.open_mouth = true
-	yield(Tools.timer(0.25), "timeout")
+	yield(Tools.wait(0.25), "completed")
 	wall_ending_bottom.disabled = true
-	yield(Tools.timer(3.0), "timeout")
+	yield(Tools.wait(3.0), "completed")
 	yield(black_screen.fade_in(2.0), "completed")
-	yield(Tools.timer(1.0), "timeout")
+	yield(Tools.wait(1.0), "completed")
 	
 	load_next_scene()

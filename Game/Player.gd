@@ -2,7 +2,7 @@ class_name Player
 extends KinematicBody2D
 
 # Animation
-export var animation_frames = preload("res://Animations/Player00.tres")
+export var animation_frames = preload("res://Resources/Animations/Player00.tres")
 
 # Transform effect
 export var transform_effect = preload("res://Prefabs/Effect/Effect_Transforming.tscn")
@@ -178,7 +178,7 @@ func toggle_avatar_mode() -> void:
 	if Animator.is_active(transform_effect_container, "modulate:a"):
 		return
 	
-	Tools.play_packed_particles(transform_effect, self, transform_duration)
+	Tools.play_packed_particles(transform_effect.instance(), self, transform_duration)
 	transform_sound.play()
 	
 	yield(Animator.run(transform_effect_container, "modulate:a", 
@@ -422,7 +422,7 @@ func kill() -> void:
 	frozen = true
 	animated_sprite.visible = false
 	
-	Tools.play_packed_particles(death_effect, self)
+	Tools.play_packed_particles(death_effect.instance(), self)
 	
 	_process_collision_shapes()
 	emit_signal("died")

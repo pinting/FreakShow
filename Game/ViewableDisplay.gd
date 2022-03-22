@@ -5,7 +5,7 @@ extends Node
 export (Script) var selectable_script = preload("res://Prefabs/Selectable/PureSelectable.gd")
 
 # Display material
-export (ShaderMaterial) var display_material = preload("res://Materials/ViewableDisplayMaterial.tres")
+export (ShaderMaterial) var display_material = preload("res://Resources/Materials/ViewableDisplayMaterial.tres")
 
 # Effect name
 export var effect_key: String = "amount"

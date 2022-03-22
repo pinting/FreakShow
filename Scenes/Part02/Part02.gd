@@ -65,11 +65,11 @@ func _ready() -> void:
 		_trigger_ball_in_hoop()
 
 func _on_scene_started() -> void:
-	yield(Tools.timer(1.0), "timeout")
+	yield(Tools.wait(1.0), "completed")
 
 	if not teleport_player_to_end:
 		SubtitleManager.say(Text.find("Narrator002"), 6.0, 12.0)
-		yield(Tools.timer(4.0), "timeout")
+		yield(Tools.wait(4.0), "completed")
 	
 	Tools.animate_pitch(main_music.master_player, 0.01, 1.0)
 	Tools.animate_pitch(main_music.slave_player, 0.01, 1.0)
@@ -101,7 +101,7 @@ func _reaching_hoop_with_ball(_body: Node) -> void:
 	main_music.force_next(music_01)
 
 func _trigger_ball_in_hoop() -> void:
-	yield(Tools.timer(2.0), "timeout")
+	yield(Tools.wait(2.0), "completed")
 
 	ring_sound.play()
 
@@ -116,13 +116,13 @@ func _on_phone_selected() -> void:
 	
 	main_music.kill(2.0)
 	black_screen.fade_in(2.0)
-	yield(Tools.timer(3.0), "timeout")
+	yield(Tools.wait(3.0), "completed")
 
 	ring_sound.stop()
-	yield(Tools.timer(0.5), "timeout")
+	yield(Tools.wait(0.5), "completed")
 
 	pick_up_sound.play()
-	yield(Tools.timer(3.0), "timeout")
+	yield(Tools.wait(3.0), "completed")
 	
 	load_next_scene()
 

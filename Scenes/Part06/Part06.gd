@@ -59,7 +59,7 @@ func _player_on_palm(player: Player) -> void:
 	
 	game_finished = true
 
-	yield(Tools.timer(3.0), "timeout")
+	yield(Tools.wait(3.0), "completed")
 	yield(black_screen.fade_in(2.0), "completed")
 
 	end_animated_sprite.frames = player.animated_sprite.frames
@@ -70,11 +70,11 @@ func _player_on_palm(player: Player) -> void:
 
 	end_fap_sound.play()
 	black_screen.fade_out(5.0)
-	yield(Tools.timer(10.0), "timeout")
+	yield(Tools.wait(10.0), "completed")
 	
 	black_screen.fade_in(5.0)
 	main_music.kill(7.0)
-	yield(Tools.timer(10.0), "timeout")
+	yield(Tools.wait(10.0), "completed")
 	
 	Save.clear()
 	load_next_scene()
@@ -109,7 +109,7 @@ func _on_dildo_inside() -> void:
 	dildo_in_place = true
 	
 	bottom_door.open()
-	yield(Tools.timer(2.0), "timeout")
+	yield(Tools.wait(2.0), "completed")
 	
 	camera.change_zoom()
 	SubtitleManager.say(Text.find("Narrator011"))

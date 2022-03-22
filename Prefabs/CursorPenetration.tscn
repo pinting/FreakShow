@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Materials/ScreenPenetrationMaterial.tres" type="Material" id=1]
+[ext_resource path="res://Resources/Materials/ScreenPenetrationMaterial.tres" type="Material" id=1]
 [ext_resource path="res://Prefabs/CursorPenetration.gd" type="Script" id=2]
 
 [node name="CursorPenetration" type="CanvasLayer" groups=[

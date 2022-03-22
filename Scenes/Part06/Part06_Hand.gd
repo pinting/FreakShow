@@ -20,7 +20,7 @@ func _on_body_entered(player: Node) -> void:
 	
 	player.freeze(true)
 	
-	yield(Tools.timer(1.0), "timeout")
+	yield(Tools.wait(1.0), "completed")
 	
 	player_standing_on_palm = player
 	in_palm_position = player.global_position - detect_area.global_position

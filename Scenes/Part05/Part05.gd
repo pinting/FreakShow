@@ -112,7 +112,7 @@ func _on_scene_started() -> void:
 	black_screen.fade_out(3.0)
 	main_music.play()
 
-	yield(Tools.timer(2.0), "timeout")
+	yield(Tools.wait(2.0), "completed")
 	SubtitleManager.say(Text.find("Narrator009"))
 
 func _on_player_on_train_top() -> void:
@@ -120,7 +120,7 @@ func _on_player_on_train_top() -> void:
 		return
 	
 	main_music.force_next(music_01)
-	camera.change_zoom()
+	camera.change_zoom(camera.change_zoom, 1.0)
 	SubtitleManager.say(Text.find("Narrator010"))
 	
 	first_on_top_called = true
@@ -147,18 +147,18 @@ func _on_exit_selected() -> void:
 	main_music.kill(2.0)
 	
 	black_screen.fade_in(0.5)
-	yield(Tools.timer(0.5), "timeout")
+	yield(Tools.wait(0.5), "completed")
 	
 	club.bass_sound.volume_db = 10
-	yield(Tools.timer(1.0), "timeout")
+	yield(Tools.wait(1.0), "completed")
 	
 	_clean_trains()
-	yield(Tools.timer(0.5), "timeout")
+	yield(Tools.wait(0.5), "completed")
 	
 	load_next_scene()
 
 func _on_player_die() -> void:
-	yield(Tools.timer(2.0), "timeout")
+	yield(Tools.wait(2.0), "completed")
 	
 	main_music.force_next(music_00)
 	move_player(player, player_respawn.global_position)

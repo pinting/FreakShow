@@ -73,11 +73,9 @@ func _process(_delta: float) -> void:
 	if SceneLoader.resource_loader:
 		return
 	
+	# Handle world based selection
 	if not is_instance_valid(world_selection):
 		world_selection = null
-	
-	if not is_instance_valid(viewport_selection):
-		viewport_selection = null
 	
 	if not world_selection or not world_selection.lock:
 		var prev_world_selection = world_selection
@@ -90,6 +88,10 @@ func _process(_delta: float) -> void:
 				emit_signal("cursor_exited", prev_world_selection)
 			
 			emit_signal("cursor_entered", world_selection)
+	
+	# Handle viewport based selection
+	if not is_instance_valid(viewport_selection):
+		viewport_selection = null
 	
 	if not viewport_selection or not viewport_selection.lock:
 		var prev_viewport_selection = viewport_selection
@@ -117,3 +119,4 @@ func _input(event: InputEvent) -> void:
 func clear() -> void:
 	world_selection = null
 	viewport_selection = null
+	disable = false

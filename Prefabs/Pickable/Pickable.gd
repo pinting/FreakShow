@@ -91,7 +91,7 @@ func reset(position: Vector2, rotation = 0.0, reset_v = true, relative = false):
 	trigger_reset = true
 	
 	while trigger_reset:
-		yield(Tools.timer(0.1), "timeout")
+		yield(Tools.wait(0.1), "completed")
 
 func push(direction: Vector2 = Vector2.ZERO) -> void:
 	if is_held() or disabled:

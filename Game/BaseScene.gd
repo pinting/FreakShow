@@ -19,6 +19,8 @@ export var auto_show_cursor: bool = true
 # Disable auto restart
 export var disable_auto_restart: bool = false
 
+const low_performance_environment = preload("res://Resources/LowPerformanceEnvironment.tres")
+
 onready var subtitle_display = $SubtitleDisplay
 onready var viewable_display = $ViewableDisplay 
 onready var black_screen = $BlackScreen
@@ -54,7 +56,7 @@ func _low_performance_mode() -> void:
 		Tools.destroy_node(node)
 	
 	for node in tree.get_nodes_in_group("world_environment"):
-		node.environment = load("res://LowEnvironment.tres")
+		node.environment = low_performance_environment
 
 func _high_performance_mode() -> void:
 	var tree = get_tree()
@@ -142,7 +144,7 @@ func move_player(player: Player, next_position: Vector2, sound: AudioStreamPlaye
 	player.reset()
 	
 	# A small delay is needed for the camera
-	yield(Tools.timer(0.1), "timeout")
+	yield(Tools.wait(0.1), "completed")
 	
 	var camera = CameraManager.current
 	

@@ -1,14 +1,15 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scenes/Part04/Part04_Ditch.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Pickable/Pickable_HandLamp.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Part04/Part04_MaintenanceRoom.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Part04/Part04.gd" type="Script" id=7]
 [ext_resource path="res://Assets/Sounds/Door01.wav" type="AudioStream" id=8]
 [ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=9]
-[ext_resource path="res://DefaultEnvironment.tres" type="Environment" id=10]
+[ext_resource path="res://Resources/HighPerformanceEnvironment.tres" type="Environment" id=10]
 [ext_resource path="res://Assets/Music/Part04.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=14]
@@ -31,9 +32,10 @@ extents = Vector2( 3967.87, 2306.21 )
 [node name="BaseScene" parent="." instance=ExtResource( 5 )]
 script = ExtResource( 7 )
 auto_fade_out = false
+no_intro = true
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 12 )]
-position = Vector2( 1502.24, -2640.3 )
+position = Vector2( -1153.9, 883.372 )
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource( 9 )]
 position = Vector2( 1708.81, -8027.59 )
@@ -41,17 +43,13 @@ scale = Vector2( 0.7, 0.7 )
 zoom = Vector2( 3.5, 3.5 )
 smoothing_speed = 0.5
 follow_node = NodePath("../Player")
-follow_init_offset = Vector2( 0, -5000 )
-follow_offset = Vector2( 0, -416 )
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=[
-"world_environment",
-]]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=["world_environment"]]
 environment = ExtResource( 10 )
 
-[node name="Darkness" type="CanvasModulate" parent="BaseScene"]
+[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=["auto_visible"]]
 light_mask = 524288
-color = Color( 0.235294, 0.235294, 0.235294, 1 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BaseScene"]
 anims/fade_out_ghost = SubResource( 1 )
@@ -106,6 +104,9 @@ z_index = -2
 
 [node name="MaintenanceRoom" parent="BaseScene/Environment/BellowLoop/Container" instance=ExtResource( 6 )]
 position = Vector2( -4.06006, 79.6116 )
+
+[node name="HandLamp" parent="BaseScene/Environment" instance=ExtResource( 3 )]
+position = Vector2( -1459.3, 1166.45 )
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 

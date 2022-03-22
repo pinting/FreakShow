@@ -29,14 +29,12 @@ onready var door_open_sound: AudioStreamPlayer = $Sound/DoorOpenSound
 onready var silent_door_open_sound: AudioStreamPlayer = $Sound/SilentDoorOpenSound
 
 var player_is_in_hallway: bool = false
+var enter_count: int = 0
 var home_index: int = default_home_index
 var previous_player_position: Vector2 = Vector2.ZERO
 var wait_counter: float = 0.0
-var help_disabled: bool = false
 var can_exit_open: bool = false
 var is_exit_open: bool = false
-var enter_count: int = 0
-var exiting: bool = false
 
 var music_00: int
 var music_01: int
@@ -53,22 +51,16 @@ func _ready() -> void:
 	
 	connect("scene_started", self, "_on_scene_started", [], CONNECT_ONESHOT)
 	flat_door.connect("selected", self, "_on_flat_exit_selected")
-	hallway.connect("looped", self, "_on_loop_index_change")
 	
 	for container in hallway.containers:
 		container.connect("door_selected", self, "_on_hallway_door_selected")
 
 func _on_scene_started() -> void:
-	yield(Tools.timer(2.0), "timeout")
+	yield(Tools.wait(2.0), "completed")
 	main_music.play()
-	yield(Tools.timer(1.0), "timeout")
+	yield(Tools.wait(1.0), "completed")
 	black_screen.fade_out(5.0)
 	SubtitleManager.say(Text.find("Narrator000"))
-
-func _on_loop_index_change(_direction: String) -> void:
-	if abs(hallway.loop_index) > help_after_index and not help_disabled:
-		SubtitleManager.say(Text.find("Narrator001"))
-		help_disabled = true
 
 func _enable_next_traffic_lamp(lamps_to_show: int = 0) -> void:
 	if not lamps_to_show:
@@ -99,8 +91,8 @@ func _on_hallway_door_selected(door, index) -> void:
 		if not is_exit_open:
 			hallway_spawn.global_position = door.global_position
 			move_player(player, flat_spawn.position, door_open_sound)
-		elif is_exit_open and not exiting:
-			exiting = true
+		elif is_exit_open:
+			SelectableManager.disable = true
 			waiting_music.kill(3.0)
 			yield(black_screen.fade_in(3.0), "completed")
 			load_next_scene()
@@ -122,6 +114,7 @@ func _on_hallway_door_selected(door, index) -> void:
 		can_exit_open = true
 
 func _reset_hallway_wait() -> void:
+	previous_player_position = player.global_position
 	wait_counter = 0.0
 	
 	if not is_exit_open and not waiting_music.stopped:
@@ -131,41 +124,37 @@ func _reset_hallway_wait() -> void:
 		camera.change_shake(0.0, 1.0)
 
 func _process(delta: float) -> void:
-	if is_exit_open or not can_exit_open:
-		return
-	
-	if not player_is_in_hallway:
+	if not player_is_in_hallway or not can_exit_open or is_exit_open:
 		return
 	
 	var position_x_diff = abs(player.global_position.x - previous_player_position.x)
 	
-	if position_x_diff < max_position_diff_to_wait:
-		wait_counter += delta
-		
-		# Open the door
-		if wait_counter > hallway_open_exit_after:
-			camera.change_shake(0.0, 1.0)
-			main_music.kill(5.0)
-			silent_door_open_sound.play()
-			
-			home_index = hallway.container.get_closest_door(player.global_position)
-			is_exit_open = true
-			
-			hallway.call_each("open_exit", [home_index])
-			
-			for lamp_index in range(len(hallway.container.lamps)):
-				for lamps in hallway.get_each("lamps"):
-					lamps[lamp_index].disable()
-		
-		# Start to play shake effect
-		elif wait_counter > hallway_camera_shake_after:
-			camera.change_shake(10.0, 2.0)
-		
-		# Play the waiting music sequence
-		elif wait_counter > hallway_waiting_music_after:
-			if waiting_music.stopped:
-				waiting_music.play()
-	else:
-		previous_player_position = player.global_position
-		
+	if position_x_diff > max_position_diff_to_wait:
 		_reset_hallway_wait()
+		return
+	
+	wait_counter += delta
+	
+	# Open the door
+	if wait_counter > hallway_open_exit_after:
+		camera.change_shake(0.0, 1.0)
+		main_music.kill(5.0)
+		silent_door_open_sound.play()
+		
+		home_index = hallway.container.get_closest_door(player.global_position)
+		is_exit_open = true
+		
+		hallway.call_each("open_exit", [home_index])
+		
+		for lamp_index in range(len(hallway.container.lamps)):
+			for lamps in hallway.get_each("lamps"):
+				lamps[lamp_index].disable()
+	
+	# Start to play shake effect
+	elif wait_counter > hallway_camera_shake_after:
+		camera.change_shake(10.0, 2.0)
+	
+	# Play the waiting music sequence
+	elif wait_counter > hallway_waiting_music_after:
+		if waiting_music.stopped:
+			waiting_music.play()

@@ -41,9 +41,7 @@ func destroy_node(object: Object, deferred: bool = false):
 	object.set_script(null)
 	object.queue_free()
 
-func play_packed_particles(effect: PackedScene, parent: Node2D, timeout: float = 0.0) -> void:
-	var instance = effect.instance()
-	
+func play_packed_particles(instance: Node2D, parent: Node2D, timeout: float = 0.0) -> void:
 	assert(instance is Particles2D or instance is CPUParticles2D,
 		"Only Particles2D or CPUParticles2D are supported")
 	
@@ -54,10 +52,7 @@ func play_packed_particles(effect: PackedScene, parent: Node2D, timeout: float =
 	if timeout <= 0.0:
 		timeout = instance.lifetime
 	
-	yield(Tools.timer(timeout), "timeout")
-	
-	instance.emitting = false
-	
+	yield(Tools.wait(timeout), "completed")
 	Tools.destroy_node(instance)
 
 # Animate the volume of AudioStreamPlayer
@@ -119,7 +114,7 @@ func set_body_visibility(body: CollisionObject2D, state: float) -> void:
 	set_shapes_disabled(body, not state)
 	
 	# Sometimes the first disabled change is ignored
-	yield(Tools.timer(0.1), "timeout")
+	yield(Tools.wait(0.1), "completed")
 	set_shapes_disabled(body, not state)
 
 # Remove every child not, except one with the given index
@@ -184,9 +179,9 @@ func pad_number(number: int, count: int, c: String = "0") -> String:
 	 
 	return result
 
-# Create a timer
-func timer(duration: float = 1.0) -> SceneTreeTimer:
-	return get_tree().create_timer(duration)
+# Wait for the given duration in seconds
+func wait(duration: float = 1.0) -> void:
+	yield(get_tree().create_timer(duration), "timeout")
 
 # Print a debug message (if enabled in the Config)
 func debug(message: String) -> void:

@@ -10,7 +10,7 @@ export var enable_player_interaction: bool = true
 export var enable_boss_interaction: bool = true
 
 # Effect material
-export (Material) var effect_material = preload("res://Materials/DisintegrateMaterial.tres")
+export (Material) var effect_material = preload("res://Resources/Materials/DisintegrateMaterial.tres")
 
 # Use material at init
 export var effect_material_on_init: bool = true

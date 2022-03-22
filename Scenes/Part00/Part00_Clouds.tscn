@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Environmnent/Cloud01.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Environmnent/Cloud02.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Environmnent/Cloud00.png" type="Texture" id=3]
-[ext_resource path="res://Materials/CloudMaterial.tres" type="Material" id=5]
+[ext_resource path="res://Resources/Materials/CloudMaterial.tres" type="Material" id=5]
 
 [node name="Part00_Clouds" type="Node2D"]
 position = Vector2( -1853.25, -1440.57 )

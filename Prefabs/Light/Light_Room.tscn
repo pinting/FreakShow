@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=2]
-[ext_resource path="res://Materials/FakeLightMaterial.tres" type="Material" id=3]
+[ext_resource path="res://Resources/Materials/FakeLightMaterial.tres" type="Material" id=3]
 
 [node name="Light_Room" type="Node2D"]
 

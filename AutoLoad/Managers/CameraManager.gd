@@ -8,7 +8,7 @@ const debug_camera_wait_before_create: float = 0.5
 const debug_camera_zoom: Vector2 = Vector2(2.0, 2.0)
 
 func _ready() -> void:
-	yield(Tools.timer(debug_camera_wait_before_create), "timeout")
+	yield(Tools.wait(debug_camera_wait_before_create), "completed")
 	
 	if Config.DEBUG and not current:
 		create_debug_camera()

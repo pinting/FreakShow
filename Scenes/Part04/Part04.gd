@@ -1,7 +1,12 @@
 extends "res://Game/BaseScene.gd"
 
+export var no_intro: bool = false
+
 onready var player = $Player
 onready var camera = $GameCamera
+
+onready var bellow_loop = $Environment/BellowLoop
+onready var hand_lamp = $Environment/HandLamp
 
 onready var keypad = $Environment/BellowLoop/Container/Ditch/Wall/Door00/Keypad
 onready var ditch_door = $Environment/BellowLoop/Container/Ditch/Wall/Door01
@@ -31,27 +36,33 @@ func _ready() -> void:
 	
 	next_level_music.add_part(7 * 60 + 5, 8 * 60, true, 5, 2, 0)
 	
+	bellow_loop.register_pickable(hand_lamp)
+	
 	connect("scene_started", self, "_on_scene_started", [], CONNECT_ONESHOT)
 	camera.connect("target_reached", self, "_on_camera_reaches", [], CONNECT_ONESHOT)
 	ditch_door.connect("selected", self, "_on_ditch_door_selected")
 	maintenance_room_door.connect("selected", self, "_on_maintenance_room_door_selected")
 
 func _on_scene_started() -> void:
+	if no_intro:
+		black_screen.fade_out(1.0)
+		return
+	
 	camera.disable_follow = true
 	camera.follow_speed = camera.base_follow_speed / 4
 	
 	CursorManager.hide()
 	player.freeze(true)
-	yield(Tools.timer(1.0), "timeout")
+	yield(Tools.wait(1.0), "completed")
 	main_music.play()
 	
 	SubtitleManager.show_quote(Text.find("Text006"))
-	yield(Tools.timer(25.0), "timeout")
+	yield(Tools.wait(25.0), "completed")
 	
 	camera.disable_follow = false
 	
 	black_screen.fade_out(10.0)
-	yield(Tools.timer(2.0), "timeout")
+	yield(Tools.wait(2.0), "completed")
 	SubtitleManager.hide_quote()
 
 func _on_camera_reaches() -> void:

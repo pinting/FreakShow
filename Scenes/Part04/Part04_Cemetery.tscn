@@ -120,7 +120,7 @@ region_rect = Rect2( 200, 0, 6916, 932 )
 
 [node name="Building" type="Sprite" parent="."]
 light_mask = 0
-position = Vector2( 2179.19, -1414.03 )
+position = Vector2( 2179.19, -934.706 )
 scale = Vector2( 2, 2 )
 z_index = -5
 texture = ExtResource( 10 )
@@ -229,7 +229,7 @@ texture = ExtResource( 15 )
 [node name="Shadow" type="Sprite" parent="Grave00"]
 self_modulate = Color( 0, 0, 0, 1 )
 show_behind_parent = true
-position = Vector2( -5.97876, 208.446 )
+position = Vector2( -6.16046, 194.196 )
 scale = Vector2( 1.5451, 0.816609 )
 texture = ExtResource( 5 )
 
@@ -243,18 +243,19 @@ texture = ExtResource( 1 )
 [node name="Shadow" type="Sprite" parent="Grave01"]
 self_modulate = Color( 0, 0, 0, 1 )
 show_behind_parent = true
-position = Vector2( -15.1343, 233.157 )
+position = Vector2( -15.0735, 225.221 )
 scale = Vector2( 1.85986, 0.817 )
 texture = ExtResource( 5 )
 
 [node name="Grave02" type="Sprite" parent="."]
-position = Vector2( -3563.74, 5.71998 )
+position = Vector2( -3563.74, -154.739 )
+scale = Vector2( 1.25, 1.25 )
 z_index = -3
 texture = ExtResource( 2 )
 
 [node name="Shadow" type="Sprite" parent="Grave02"]
 self_modulate = Color( 0, 0, 0, 1 )
 show_behind_parent = true
-position = Vector2( -9.18433, 323.97 )
+position = Vector2( -9.18433, 330.37 )
 scale = Vector2( 1.8, 0.817 )
 texture = ExtResource( 5 )

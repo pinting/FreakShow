@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://Resources/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Game/SubtitleDisplay.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFontData" id=1]
@@ -13,17 +14,6 @@ use_mipmaps = true
 use_filter = true
 font_data = SubResource( 1 )
 
-[sub_resource type="DynamicFontData" id=3]
-font_path = "res://font.ttf"
-
-[sub_resource type="DynamicFont" id=4]
-size = 22
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-use_mipmaps = true
-use_filter = true
-font_data = SubResource( 3 )
-
 [node name="SubtitleDisplay" type="CanvasLayer"]
 layer = 101
 script = ExtResource( 2 )
@@ -35,7 +25,7 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = 950.0
 margin_bottom = 85.3429
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -53,7 +43,7 @@ margin_left = 10.0
 margin_top = 485.0
 margin_right = 950.0
 margin_bottom = 540.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -71,7 +61,7 @@ margin_left = 10.0
 margin_top = 1.0
 margin_right = 957.0
 margin_bottom = 540.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )

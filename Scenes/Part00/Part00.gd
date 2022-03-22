@@ -23,18 +23,18 @@ func _on_scene_started() -> void:
 	camera.follow_speed = camera.base_follow_speed / 2
 	
 	player.freeze(true)
-	yield(Tools.timer(1.0), "timeout")
+	yield(Tools.wait(1.0), "completed")
 	main_music.play()
 	
 	SubtitleManager.show_quote(Text.find("Text005"))
-	yield(Tools.timer(25.0), "timeout")
+	yield(Tools.wait(25.0), "completed")
 	
 	camera.disable_follow = false
 	
 	black_screen.fade_out(10.0)
-	yield(Tools.timer(5.0), "timeout")
+	yield(Tools.wait(5.0), "completed")
 	SubtitleManager.hide_quote()
-	yield(Tools.timer(7.0), "timeout")
+	yield(Tools.wait(7.0), "completed")
 	SubtitleManager.say(Text.find("Narrator012"))
 
 func _on_camera_reaches() -> void:
@@ -48,5 +48,5 @@ func _on_camera_reaches() -> void:
 func _on_exit_door_selected() -> void:
 	main_music.kill(3.0)
 	yield(black_screen.fade_in(3.0), "completed")
-	yield(Tools.timer(1.0), "timeout")
+	yield(Tools.wait(1.0), "completed")
 	load_next_scene()

@@ -14,6 +14,8 @@ var disable_motion: bool = false
 
 var virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
 var prev_virtual_mouse_position: Vector2 = Vector2(0.0, 0.0)
+var move_speed: Vector2 = Vector2(0.0, 0.0)
+var last_delta: float = 0.0
 
 var prev_virtual_click_left: bool = false
 var prev_virtual_click_right: bool = false
@@ -48,6 +50,8 @@ func set_virtual_mouse_position(viewport_position: Vector2, warp_cursor: bool, f
 	virtual_mouse_position = viewport_position
 	
 	var relative = virtual_mouse_position - prev_virtual_mouse_position
+	
+	move_speed = relative
 	
 	if warp_cursor:
 		CursorManager.apply_movement(viewport_position, relative, from_virtual)
@@ -112,30 +116,34 @@ func _input(event: InputEvent) -> void:
 		
 		set_virtual_mouse_position(mouse_position, true, false)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	last_delta = delta
+	
 	if disable:
 		return
 	
 	if not disable_motion:
-		_process_virtual_motion()
+		_process_virtual_motion(delta)
 	
 	_process_virtual_click()
 
-func _process_virtual_motion() -> void:
+func _process_virtual_motion(delta: float) -> void:
 	var virtual_mouse_right = VirtualInput.get_action_strength("virtual_mouse_right")
 	var virtual_mouse_left = VirtualInput.get_action_strength("virtual_mouse_left")
 	var virtual_mouse_up = VirtualInput.get_action_strength("virtual_mouse_up")
 	var virtual_mouse_down = VirtualInput.get_action_strength("virtual_mouse_down")
 	
 	var virtual_mouse = Vector2(virtual_mouse_right - virtual_mouse_left, virtual_mouse_down - virtual_mouse_up)
-	
+	var relative = Vector2.ZERO
+
 	if virtual_mouse.x != 0.0 or virtual_mouse.y != 0.0:
 		using_virtual_input = true
 		
-		var relative = virtual_mouse * Config.virtual_mouse_speed
-		
+		relative = virtual_mouse * Config.virtual_mouse_speed
+
+	if relative != Vector2.ZERO:
 		set_virtual_mouse_position(virtual_mouse_position + relative, true, true)
-		create_move_event(virtual_mouse_position, relative, Config.virtual_mouse_speed, VIRTUAL_PRESSURE)
+		create_move_event(virtual_mouse_position, relative, move_speed, VIRTUAL_PRESSURE)
 
 func _process_virtual_click() -> void:
 	var virtual_click_left = VirtualInput.is_action_pressed("virtual_click_left")
