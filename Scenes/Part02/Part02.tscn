@@ -84,6 +84,8 @@ position = Vector2( 59.2303, 0.734743 )
 [node name="BaseScene" parent="." instance=ExtResource( 46 )]
 script = ExtResource( 8 )
 auto_fade_out = false
+teleport_player_to_end = false
+auto_trigger_phone_ringing = false
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -6109.33, -417.985 )

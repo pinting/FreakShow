@@ -13,7 +13,7 @@ func find_tween(object: Object, path: String) -> Tween:
 	else:
 		return null
 
-func create_tween(object: Object, path: String, auto_destroy: bool = false) -> Tween:
+func add_tween(object: Object, path: String, auto_destroy: bool = false) -> Tween:
 	var key = generate_key(object, path)
 	var tween = find_tween(object, path)
 	
@@ -43,7 +43,7 @@ func remove_tween(object: Object, path: String) -> void:
 		Tools.destroy_node(tween)
 
 func run(object: Object, path: String, from, to, duration: float, trans_type = Tween.TRANS_LINEAR, ease_type = Tween.EASE_IN_OUT, delay = 0.0) -> void:
-	var tween = create_tween(object, path, true)
+	var tween = add_tween(object, path, true)
 	
 	if object.has_method(path):
 		object.call(path, from)
