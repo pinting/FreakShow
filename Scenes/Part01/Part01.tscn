@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Part01/Part01_Hallway.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part01/Part01.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=13]
 [ext_resource path="res://Assets/Sounds/Knock00.wav" type="AudioStream" id=14]
 [ext_resource path="res://Assets/Music/Part01.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Scenes/Part01/Part01_RandomFlat.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4517.71, 2309.42 )
@@ -25,6 +26,7 @@ extents = Vector2( 4517.71, 2309.42 )
 script = ExtResource( 2 )
 delay = 1.0
 auto_fade_out = false
+random_flat = ExtResource( 16 )
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 8 )]
 position = Vector2( -1106.41, 3.51831 )
@@ -37,9 +39,7 @@ follow_node = NodePath("../Player")
 
 [node name="Sky" parent="BaseScene" instance=ExtResource( 4 )]
 
-[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=[
-"auto_visible",
-]]
+[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=["auto_visible"]]
 visible = false
 light_mask = 524288
 color = Color( 0.392157, 0.392157, 0.392157, 1 )

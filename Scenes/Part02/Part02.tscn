@@ -84,6 +84,8 @@ position = Vector2( 59.2303, 0.734743 )
 [node name="BaseScene" parent="." instance=ExtResource( 46 )]
 script = ExtResource( 8 )
 auto_fade_out = false
+teleport_player_to_end = false
+auto_trigger_phone_ringing = false
 
 [node name="Player" parent="BaseScene" instance=ExtResource( 28 )]
 position = Vector2( -6109.33, -417.985 )
@@ -104,14 +106,10 @@ follow_node = NodePath("../Player")
 follow_init_offset = Vector2( 0, -500 )
 follow_offset = Vector2( 0, -500 )
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=[
-"world_environment",
-]]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=["world_environment"]]
 environment = SubResource( 1 )
 
-[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=[
-"auto_visible",
-]]
+[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=["auto_visible"]]
 visible = false
 light_mask = 0
 color = Color( 0.352941, 0.352941, 0.352941, 1 )
@@ -183,9 +181,7 @@ position = Vector2( -8409.8, 32.6986 )
 scale = Vector2( 0.574805, 0.574805 )
 texture = ExtResource( 32 )
 
-[node name="Graffiti01" type="Sprite" parent="BaseScene/Environment/Fence00" groups=[
-"_right_side",
-]]
+[node name="Graffiti01" type="Sprite" parent="BaseScene/Environment/Fence00" groups=["_right_side"]]
 modulate = Color( 0, 0, 0, 0.823529 )
 position = Vector2( 8084.31, 53.3037 )
 texture = ExtResource( 31 )
@@ -305,14 +301,10 @@ z_index = -1
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 1113, 2138 )
 
-[node name="PhoneBox" parent="BaseScene/Environment" groups=[
-"_right_side",
-] instance=ExtResource( 7 )]
+[node name="PhoneBox" parent="BaseScene/Environment" groups=["_right_side"] instance=ExtResource( 7 )]
 position = Vector2( 12746.6, -329.819 )
 
-[node name="Building03" type="Sprite" parent="BaseScene/Environment" groups=[
-"_right_side",
-]]
+[node name="Building03" type="Sprite" parent="BaseScene/Environment" groups=["_right_side"]]
 position = Vector2( 15407.6, -1647.51 )
 scale = Vector2( 2.5, 2.5 )
 z_index = -1
@@ -326,9 +318,7 @@ texture = ExtResource( 39 )
 
 [node name="Ad" parent="BaseScene/Environment/Building03" instance=ExtResource( 42 )]
 
-[node name="Fence01" type="Sprite" parent="BaseScene/Environment" groups=[
-"_right_side",
-]]
+[node name="Fence01" type="Sprite" parent="BaseScene/Environment" groups=["_right_side"]]
 position = Vector2( 16706, -261.023 )
 scale = Vector2( 1.1, 1 )
 z_index = -4
@@ -338,14 +328,10 @@ texture = ExtResource( 5 )
 position = Vector2( 1400, 0 )
 texture = ExtResource( 48 )
 
-[node name="Hoop" parent="BaseScene/Environment" groups=[
-"_right_side",
-] instance=ExtResource( 12 )]
+[node name="Hoop" parent="BaseScene/Environment" groups=["_right_side"] instance=ExtResource( 12 )]
 position = Vector2( 17340.3, -463.177 )
 
-[node name="Building04" parent="BaseScene/Environment" groups=[
-"_right_side",
-] instance=ExtResource( 16 )]
+[node name="Building04" parent="BaseScene/Environment" groups=["_right_side"] instance=ExtResource( 16 )]
 position = Vector2( 19746.3, -388.684 )
 z_index = 1
 collision_layer = 7

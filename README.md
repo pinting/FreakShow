@@ -17,7 +17,7 @@ The game was imagined based on a selection of music tracks - however, I do not o
 * Clone or download the repository.
 * _(optional)_ Place [the missing proprietary music tracks](docs/Music.md) into the project folder. FFmpeg needs to be available system-wide or put into the bin folder of the project.
 * Run `./setup.sh` to prepare the project. This command will convert and move all the proprietary music tracks into the `Assets/Music` directory. If they are not present, the attached sample (`.ogg.sample`) tracks will be used.
-* Open the project file with [Godot Editor](https://godotengine.org/) `3.3.x`. Importing the assets will take a couple of minutes.
+* Open the project file with [Godot Editor](https://godotengine.org/) `3.5.x`. Importing the assets will take a couple of minutes.
 * Select `Project` -> `Export`.
 * Click on `Export All`.
 * The DMG and EXE application files will be placed into the `out` directory.
@@ -47,6 +47,6 @@ Thank you for the musical inspiration to the following artists (or group of arti
 
 All Rights Reserved.
 
-Copyright (c) 2022 Dénes Tornyi.
+Copyright (c) 2023 Dénes Tornyi.
 
 The project is uploaded for educational purpose, to serve as an example how a game can be built around emotions. Contribution and fair use of the scripts and assets are welcomed, however, please contact me before doing so.
