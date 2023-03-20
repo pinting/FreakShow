@@ -55,9 +55,10 @@ polygon = PoolVector2Array( 17.3332, -57.9855, 28.451, -51.3815, 23.4056, -46.54
 
 [node name="Light" type="Light2D" parent="." groups=["auto_visible", "light"]]
 position = Vector2( 13.668, 39.6677 )
-scale = Vector2( 3, 3 )
+scale = Vector2( 7, 7 )
 texture = ExtResource( 3 )
 color = Color( 1, 0.894118, 0.647059, 1 )
+energy = 0.1
 range_z_min = -128
 range_z_max = 128
 script = ExtResource( 5 )

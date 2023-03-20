@@ -1,3 +1,95 @@
-[gd_scene format=2]
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Environmnent/Totem01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Totem00.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Sky01.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Totem02.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Cloud05.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/Clay00_03.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Environmnent/Cloud04.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Environmnent/Cloud03.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Sun00.png" type="Texture" id=9]
+[ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=11]
+[ext_resource path="res://Resources/Materials/CloudMaterial.tres" type="Material" id=12]
+[ext_resource path="res://Scenes/Part04/Part04_ClayWorld.gd" type="Script" id=13]
 
 [node name="Part04_ClayWorld" type="Node2D"]
+position = Vector2( 13, -13 )
+script = ExtResource( 13 )
+
+[node name="Sky" type="Sprite" parent="."]
+material = ExtResource( 12 )
+position = Vector2( 479, -646 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 5000, 5000 )
+
+[node name="Island00" type="Node2D" parent="."]
+position = Vector2( -162, -469 )
+
+[node name="Ground" type="Sprite" parent="Island00"]
+material = ExtResource( 12 )
+position = Vector2( 487, 114 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1200, 651 )
+
+[node name="Totem" type="Sprite" parent="Island00" groups=["selectable"]]
+position = Vector2( 486, -1 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 2 )
+script = ExtResource( 11 )
+
+[node name="Island01" type="Node2D" parent="."]
+position = Vector2( 1406, 206 )
+
+[node name="Ground" type="Sprite" parent="Island01"]
+material = ExtResource( 12 )
+position = Vector2( 500, 151 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 994, 651 )
+
+[node name="Totem" type="Sprite" parent="Island01" groups=["selectable"]]
+position = Vector2( 506, 20 )
+texture = ExtResource( 1 )
+script = ExtResource( 11 )
+
+[node name="Island02" type="Node2D" parent="."]
+position = Vector2( 1643, -1020 )
+
+[node name="Ground" type="Sprite" parent="Island02"]
+material = ExtResource( 12 )
+position = Vector2( 500, 151 )
+texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 994, 651 )
+
+[node name="Totem" type="Sprite" parent="Island02" groups=["selectable"]]
+position = Vector2( 536, -24 )
+texture = ExtResource( 4 )
+script = ExtResource( 11 )
+
+[node name="Cloud00" type="Sprite" parent="."]
+material = ExtResource( 12 )
+position = Vector2( 415.158, 402.75 )
+scale = Vector2( 1.53346, 1.53346 )
+texture = ExtResource( 8 )
+
+[node name="Cloud01" type="Sprite" parent="."]
+material = ExtResource( 12 )
+position = Vector2( 1493, -143 )
+scale = Vector2( 1.22059, 1.22059 )
+texture = ExtResource( 7 )
+
+[node name="Cloud02" type="Sprite" parent="."]
+material = ExtResource( 12 )
+position = Vector2( 1076, -1098 )
+texture = ExtResource( 5 )
+
+[node name="Sun00" type="Sprite" parent="."]
+material = ExtResource( 12 )
+position = Vector2( -204, -1199 )
+scale = Vector2( 1.64286, 1.64286 )
+texture = ExtResource( 9 )
