@@ -1,6 +1,6 @@
 extends "res://Game/BaseScene.gd"
 
-export var random_flat = preload("res://Scenes/Part01/Part01_RandomFlat.tscn")
+@export var random_flat = preload("res://Scenes/Part01/Part01_RandomFlat.tscn")
 
 const default_home_index: int = 4
 const help_after_index: int = 2
@@ -11,22 +11,22 @@ const hallway_waiting_music_after: float = 5.0
 const hallway_camera_shake_after: float = 10.0
 const hallway_open_exit_after: float = 20.0
 
-onready var player: Player = $Player
-onready var camera: GameCamera = $GameCamera
+@onready var player: Player = $Player
+@onready var camera: GameCamera = $GameCamera
 
-onready var flat_door: Node2D = $Environment/Flat/Inside/Floor/Door
-onready var random_flat_container: Node2D = $Environment/RandomFlatContainer
-onready var hallway: Node2D = $Environment/Hallway
+@onready var flat_door: Node2D = $Environment/Flat/Inside/Floor/Door
+@onready var random_flat_container: Node2D = $Environment/RandomFlatContainer
+@onready var hallway: Node2D = $Environment/Hallway
 
-onready var flat_spawn: Node2D = $Trigger/FlatSpawn
-onready var hallway_spawn: Node2D = $Trigger/HallwaySpawn
-onready var random_flat_spawn: Node2D = $Trigger/RandomFlatSpawn
+@onready var flat_spawn: Node2D = $Trigger/FlatSpawn
+@onready var hallway_spawn: Node2D = $Trigger/HallwaySpawn
+@onready var random_flat_spawn: Node2D = $Trigger/RandomFlatSpawn
 
-onready var main_music: MusicMixer = $Sound/MainMusic
-onready var waiting_music: MusicMixer  = $Sound/WaitingMusic
-onready var knock_sound: AudioStreamPlayer = $Sound/KnockSound
-onready var door_open_sound: AudioStreamPlayer = $Sound/DoorOpenSound
-onready var silent_door_open_sound: AudioStreamPlayer = $Sound/SilentDoorOpenSound
+@onready var main_music: MusicMixer = $Sound/MainMusic
+@onready var waiting_music: MusicMixer  = $Sound/WaitingMusic
+@onready var knock_sound: AudioStreamPlayer = $Sound/KnockSound
+@onready var door_open_sound: AudioStreamPlayer = $Sound/DoorOpenSound
+@onready var silent_door_open_sound: AudioStreamPlayer = $Sound/SilentDoorOpenSound
 
 var player_is_in_hallway: bool = false
 var enter_count: int = 0
@@ -43,22 +43,24 @@ var waiting_music_00: int
 var waiting_music_01: int
 
 func _ready() -> void:
+	super._ready()
+	
 	music_00 = main_music.add_part(2, 5 * 60, false, 5, 5, 0)
 	music_01 = main_music.add_part(30, 5 * 60, true, 5, 5, -5)
 	
 	waiting_music_00 = waiting_music.add_part(13 * 60 + 35, 15 * 60 + 10, false, 10, 5, 0)
 	waiting_music_01 = waiting_music.add_part(13 * 60 + 35, 15 * 60 + 10, true, 5, 5, -10)
 	
-	connect("scene_started", self, "_on_scene_started", [], CONNECT_ONESHOT)
-	flat_door.connect("selected", self, "_on_flat_exit_selected")
+	connect("scene_started", Callable(self, "_on_scene_started").bind(), CONNECT_ONE_SHOT)
+	flat_door.connect("selected", Callable(self, "_on_flat_exit_selected"))
 	
 	for container in hallway.containers:
-		container.connect("door_selected", self, "_on_hallway_door_selected")
+		container.connect("door_selected", Callable(self, "_on_hallway_door_selected"))
 
 func _on_scene_started() -> void:
-	yield(Tools.wait(2.0), "completed")
+	await Tools.wait(2.0)
 	main_music.play()
-	yield(Tools.wait(1.0), "completed")
+	await Tools.wait(1.0)
 	black_screen.fade_out(5.0)
 	SubtitleManager.say(Text.find("Narrator000"))
 
@@ -94,14 +96,14 @@ func _on_hallway_door_selected(door, index) -> void:
 		elif is_exit_open:
 			SelectableManager.disable = true
 			waiting_music.kill(3.0)
-			yield(black_screen.fade_in(3.0), "completed")
+			await black_screen.fade_in(3.0)
 			load_next_scene()
 	else:
 		Tools.random_generator.randomize()
 		
-		var random_flat_instance = random_flat.instance()
+		var random_flat_instance = random_flat.instantiate()
 		
-		random_flat_instance.connect("exit_selected", self, "_on_flat_exit_selected")
+		random_flat_instance.connect("exit_selected", Callable(self, "_on_flat_exit_selected"))
 		
 		Tools.remove_childs(random_flat_container)
 		random_flat_container.add_child(random_flat_instance)
@@ -124,6 +126,8 @@ func _reset_hallway_wait() -> void:
 		camera.change_shake(0.0, 1.0)
 
 func _process(delta: float) -> void:
+	super._process(delta)
+
 	if not player_is_in_hallway or not can_exit_open or is_exit_open:
 		return
 	

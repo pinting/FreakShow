@@ -1,36 +1,38 @@
 extends PureSelectable
 
 # Auto hide the line when ready
-export var hide_on_init: bool = false
+@export var hide_on_init: bool = false
 
 # Enable player interaction
-export var enable_player_interaction: bool = true
+@export var enable_player_interaction: bool = true
 
 # Enable boss interaction
-export var enable_boss_interaction: bool = true
+@export var enable_boss_interaction: bool = true
 
 # Effect material
-export (Material) var effect_material = preload("res://Resources/Materials/DisintegrateMaterial.tres")
+@export var effect_material: Material = preload("res://Resources/Materials/DisintegrateMaterial.tres")
 
 # Use material at init
-export var effect_material_on_init: bool = true
+@export var effect_material_on_init: bool = true
 
 # Effect key
-export var effect_key = "amount"
+@export var effect_key = "amount"
 
 # Speed of step
-export var effect_duration: float = 1.0
+@export var effect_duration: float = 1.0
 
 # Start effect value
-export var effect_min: float = 0.0
+@export var effect_min: float = 0.0
 
 # Max effect value
-export var effect_max: float = 10.0
+@export var effect_max: float = 10.0
 
-onready var line_body = $LineBody
+@onready var line_body = $LineBody
 
 func _ready() -> void:
-	connect("selected", self, "_on_selected")
+	super._ready()
+	
+	connect("selected", Callable(self, "_on_selected"))
 	reset()
 
 func reset() -> void:
@@ -54,23 +56,23 @@ func _set_hide_effect(value: float) -> void:
 	if material:
 		var effect_value = effect_min + value * (effect_max - effect_min)
 
-		material.set_shader_param(effect_key, effect_value)
+		material.set_shader_parameter(effect_key, effect_value)
 
 func _on_selected() -> void:
 	if enable_player_interaction:
-		hide()
+		disappear()
 
-func hide() -> void:
-	yield(Animator.run(self, "_set_hide_effect",
-		0.0, 1.0, effect_duration), "completed")
+func disappear() -> void:
+	await Animator.run(self, "_set_hide_effect",
+		0.0, 1.0, effect_duration)
 	
 	disable()
 
-func show() -> void:
+func appear() -> void:
 	enable()
 	
-	yield(Animator.run(self, "_set_hide_effect",
-		1.0, 0.0, effect_duration), "completed")
+	await Animator.run(self, "_set_hide_effect",
+		1.0, 0.0, effect_duration)
 
 func disable() -> void:
 	visible = false

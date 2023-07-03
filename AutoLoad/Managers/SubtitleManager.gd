@@ -13,8 +13,8 @@ func set_display(subtitle_display: SubtitleDisplay) -> void:
 	
 	display = subtitle_display
 
-	for say in say_queue:
-		display.say(say.text, say.speed, say.timeout)
+	for item in say_queue:
+		display.say(item.text, item.speed, item.timeout)
 	
 	Tools.debug("Subtitle display changed")
 	emit_signal("display_changed")
@@ -34,21 +34,21 @@ func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 	else:
 		display.say(text, speed, timeout)
 	
-	yield(Tools.wait(timeout), "completed")
+	await Tools.wait(timeout)
 
-func set_describe(owner: int, text: String, keep: bool = false) -> void:
+func set_describe(user: int, text: String, keep: bool = false) -> void:
 	if not display:
 		Tools.debug("SubtitleDisplay not exists, but set_describe was called")
 		return
 	
-	display.set_describe(owner, text, keep, describe_duration)
+	display.set_describe(user, text, keep, describe_duration)
 
-func reset_describe(owner: int, force: bool = false) -> void:
+func reset_describe(user: int, force: bool = false) -> void:
 	if not display:
 		Tools.debug("SubtitleDisplay not exists, but reset_describe was called")
 		return
 	
-	display.reset_describe(owner, force, describe_duration)
+	display.reset_describe(user, force, describe_duration)
 
 func show_quote(text: String) -> void:
 	if not display:

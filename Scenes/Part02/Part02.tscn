@@ -3,8 +3,8 @@
 [ext_resource path="res://Scenes/Part02/Part02_Building01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Part02/Part02_Building00.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Sounds/Wind00.ogg" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Environmnent/Building11.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Environmnent/Fence02_A.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/Building11.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets/Environmnent/Fence02_A.png" type="Texture2D" id=5]
 [ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=6]
 [ext_resource path="res://Scenes/Part02/Part02_PhoneBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Part02/Part02.gd" type="Script" id=8]
@@ -12,39 +12,39 @@
 [ext_resource path="res://Prefabs/Static/Static_Car00.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Part02/Part02_Hoop.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Environmnent/Building01.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Environmnent/Building01.png" type="Texture2D" id=13]
 [ext_resource path="res://Prefabs/Pickable/Pickable_BeachBall.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Prefabs/Static/Static_Train.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Prefabs/Static/Static_Building01.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Prefabs/Light/Light_Side.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Prefabs/Light3D/Light_Side.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Prefabs/Static/Static_SideLamp00.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Prefabs/Gamma.gd" type="Script" id=20]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture2D" id=21]
+[ext_resource path="res://Assets/Environmnent/Fence00.png" type="Texture2D" id=22]
 [ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=23]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti01.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti01.png" type="Texture2D" id=24]
 [ext_resource path="res://Prefabs/Static/Static_StreetLamp00.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=27]
+[ext_resource path="res://Prefabs/Light3D/Light_Street.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture2D" id=27]
 [ext_resource path="res://Game/Player.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Ad00.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti05.png" type="Texture" id=30]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti04.png" type="Texture" id=31]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti06.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti05.png" type="Texture2D" id=30]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti04.png" type="Texture2D" id=31]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti06.png" type="Texture2D" id=32]
 [ext_resource path="res://Prefabs/Selectable/Selectable_FoodSign.tscn" type="PackedScene" id=33]
 [ext_resource path="res://Prefabs/Viewable/Viewable_FirestarterPaper.tscn" type="PackedScene" id=34]
 [ext_resource path="res://Prefabs/Viewable/Viewable_DangerousCriminal.tscn" type="PackedScene" id=35]
-[ext_resource path="res://Assets/Environmnent/Misc19.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Environmnent/Misc19.png" type="Texture2D" id=36]
 [ext_resource path="res://Prefabs/Viewable/Viewable_RomanticPartnerPaper.tscn" type="PackedScene" id=37]
 [ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=38]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti27.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti27.png" type="Texture2D" id=39]
 [ext_resource path="res://Assets/Music/Part04.ogg" type="AudioStream" id=40]
 [ext_resource path="res://Assets/Sounds/Phone00.ogg" type="AudioStream" id=41]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Ad05.tscn" type="PackedScene" id=42]
 [ext_resource path="res://Assets/Sounds/Phone01.wav" type="AudioStream" id=45]
 [ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=46]
-[ext_resource path="res://Assets/Environmnent/Fence02_B.png" type="Texture" id=48]
+[ext_resource path="res://Assets/Environmnent/Fence02_B.png" type="Texture2D" id=48]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -56,27 +56,27 @@ glow_hdr_threshold = 0.4
 [sub_resource type="CanvasItemMaterial" id=2]
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 30000, 10 )
+size = Vector2( 30000, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 30000, 10 )
+size = Vector2( 30000, 10 )
 
 [sub_resource type="CanvasItemMaterial" id=5]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 189.365, 24.6057 )
+size = Vector2( 189.365, 24.6057 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 12.73, 53.2883 )
+size = Vector2( 12.73, 53.2883 )
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 3671.5, 3000 )
+size = Vector2( 3671.5, 3000 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 227.945, 5139.76 )
+size = Vector2( 227.945, 5139.76 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 13881.1, 2648 )
+size = Vector2( 13881.1, 2648 )
 
 [node name="Part02" type="Node2D"]
 position = Vector2( 59.2303, 0.734743 )
@@ -121,7 +121,7 @@ script = ExtResource( 20 )
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
-[node name="Road" type="Sprite" parent="BaseScene/Environment"]
+[node name="Road" type="Sprite2D" parent="BaseScene/Environment"]
 light_mask = 3
 material = SubResource( 2 )
 position = Vector2( 8491.99, 92.625 )
@@ -159,7 +159,7 @@ collision_mask = 4
 [node name="Ground" type="CollisionShape2D" parent="BaseScene/Environment/Road/CollisionFront"]
 shape = SubResource( 3 )
 
-[node name="Bellow" type="Sprite" parent="BaseScene/Environment"]
+[node name="Bellow" type="Sprite2D" parent="BaseScene/Environment"]
 light_mask = 0
 position = Vector2( 8420.45, 293.065 )
 scale = Vector2( 2.914, 2 )
@@ -168,20 +168,20 @@ texture = ExtResource( 21 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 12000, 85 )
 
-[node name="Fence00" type="Sprite" parent="BaseScene/Environment"]
+[node name="Fence00" type="Sprite2D" parent="BaseScene/Environment"]
 position = Vector2( 4203.48, -404.366 )
 z_index = -5
 texture = ExtResource( 22 )
 region_enabled = true
 region_rect = Rect2( 0, 1, 22000, 780 )
 
-[node name="Graffiti00" type="Sprite" parent="BaseScene/Environment/Fence00"]
+[node name="Graffiti00" type="Sprite2D" parent="BaseScene/Environment/Fence00"]
 modulate = Color( 0, 0, 0, 0.823529 )
 position = Vector2( -8409.8, 32.6986 )
 scale = Vector2( 0.574805, 0.574805 )
 texture = ExtResource( 32 )
 
-[node name="Graffiti01" type="Sprite" parent="BaseScene/Environment/Fence00" groups=["_right_side"]]
+[node name="Graffiti01" type="Sprite2D" parent="BaseScene/Environment/Fence00" groups=["_right_side"]]
 modulate = Color( 0, 0, 0, 0.823529 )
 position = Vector2( 8084.31, 53.3037 )
 texture = ExtResource( 31 )
@@ -206,7 +206,7 @@ position = Vector2( 20, -3048 )
 position = Vector2( -929.845, 1723.92 )
 scale = Vector2( 0.9, 0.9 )
 
-[node name="Light" parent="BaseScene/Environment/Building01/Lamp00" instance=ExtResource( 26 )]
+[node name="Light3D" parent="BaseScene/Environment/Building01/Lamp00" instance=ExtResource( 26 )]
 position = Vector2( -1184.55, 1002.47 )
 scale = Vector2( 3.67457, 1.10197 )
 
@@ -214,7 +214,7 @@ scale = Vector2( 3.67457, 1.10197 )
 position = Vector2( 1050.15, 1723.92 )
 scale = Vector2( 0.9, 0.9 )
 
-[node name="Light" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource( 26 )]
+[node name="Light3D" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource( 26 )]
 position = Vector2( -1182.14, 1002.47 )
 scale = Vector2( 3.67457, 1.10197 )
 
@@ -256,20 +256,20 @@ shape = SubResource( 7 )
 [node name="Loop" parent="BaseScene/Environment" instance=ExtResource( 38 )]
 position = Vector2( 9242.35, -672.894 )
 player_node = NodePath("../../Player")
-area_shape_node = NodePath("Area/Shape")
+area_shape_node = NodePath("Area3D/Shape3D")
 container_node = NodePath("Container")
 loop_mode = "right"
 mirror_mode = "right"
 
-[node name="Area" type="Area2D" parent="BaseScene/Environment/Loop"]
+[node name="Area3D" type="Area2D" parent="BaseScene/Environment/Loop"]
 
-[node name="Shape" type="CollisionShape2D" parent="BaseScene/Environment/Loop/Area"]
+[node name="Shape3D" type="CollisionShape2D" parent="BaseScene/Environment/Loop/Area3D"]
 visible = false
 shape = SubResource( 8 )
 
 [node name="Container" type="Node2D" parent="BaseScene/Environment/Loop"]
 
-[node name="Graffiti00" type="Sprite" parent="BaseScene/Environment/Loop/Container"]
+[node name="Graffiti00" type="Sprite2D" parent="BaseScene/Environment/Loop/Container"]
 modulate = Color( 0, 0, 0, 0.823529 )
 position = Vector2( -4123.59, 324.768 )
 z_index = -5
@@ -277,14 +277,14 @@ texture = ExtResource( 30 )
 region_enabled = true
 region_rect = Rect2( 1005, 0, 600, 574 )
 
-[node name="Graffiti01" type="Sprite" parent="BaseScene/Environment/Loop/Container"]
+[node name="Graffiti01" type="Sprite2D" parent="BaseScene/Environment/Loop/Container"]
 modulate = Color( 0, 0, 0, 0.823529 )
 position = Vector2( -1912.36, 321.091 )
 scale = Vector2( 0.544392, 0.544392 )
 z_index = -5
 texture = ExtResource( 24 )
 
-[node name="CableBox" type="Sprite" parent="BaseScene/Environment/Loop/Container"]
+[node name="CableBox" type="Sprite2D" parent="BaseScene/Environment/Loop/Container"]
 position = Vector2( -2646.04, 679.745 )
 z_index = 1
 texture = ExtResource( 36 )
@@ -294,7 +294,7 @@ position = Vector2( -110.898, -137.508 )
 rotation = 0.0131753
 scale = Vector2( 0.09, 0.09 )
 
-[node name="Building" type="Sprite" parent="BaseScene/Environment/Loop/Container"]
+[node name="Building" type="Sprite2D" parent="BaseScene/Environment/Loop/Container"]
 position = Vector2( 21.8174, -891.285 )
 scale = Vector2( 2, 2 )
 z_index = -1
@@ -304,13 +304,13 @@ region_rect = Rect2( 0, 0, 1113, 2138 )
 [node name="PhoneBox" parent="BaseScene/Environment" groups=["_right_side"] instance=ExtResource( 7 )]
 position = Vector2( 12746.6, -329.819 )
 
-[node name="Building03" type="Sprite" parent="BaseScene/Environment" groups=["_right_side"]]
+[node name="Building03" type="Sprite2D" parent="BaseScene/Environment" groups=["_right_side"]]
 position = Vector2( 15407.6, -1647.51 )
 scale = Vector2( 2.5, 2.5 )
 z_index = -1
 texture = ExtResource( 13 )
 
-[node name="Graffiti" type="Sprite" parent="BaseScene/Environment/Building03"]
+[node name="Graffiti" type="Sprite2D" parent="BaseScene/Environment/Building03"]
 modulate = Color( 0.447059, 0.447059, 0.447059, 0.666667 )
 position = Vector2( -204.007, 291.77 )
 scale = Vector2( 0.396585, 0.396585 )
@@ -318,13 +318,13 @@ texture = ExtResource( 39 )
 
 [node name="Ad" parent="BaseScene/Environment/Building03" instance=ExtResource( 42 )]
 
-[node name="Fence01" type="Sprite" parent="BaseScene/Environment" groups=["_right_side"]]
+[node name="Fence01" type="Sprite2D" parent="BaseScene/Environment" groups=["_right_side"]]
 position = Vector2( 16706, -261.023 )
 scale = Vector2( 1.1, 1 )
 z_index = -4
 texture = ExtResource( 5 )
 
-[node name="RightPart" type="Sprite" parent="BaseScene/Environment/Fence01"]
+[node name="RightPart" type="Sprite2D" parent="BaseScene/Environment/Fence01"]
 position = Vector2( 1400, 0 )
 texture = ExtResource( 48 )
 
@@ -342,7 +342,7 @@ position = Vector2( -733.645, -457.52 )
 collision_layer = 7
 collision_mask = 7
 
-[node name="Light" parent="BaseScene/Environment/Building04/Lamp" instance=ExtResource( 17 )]
+[node name="Light3D" parent="BaseScene/Environment/Building04/Lamp" instance=ExtResource( 17 )]
 position = Vector2( -562.596, 524.016 )
 
 [node name="Sign" parent="BaseScene/Environment/Building04" instance=ExtResource( 33 )]
@@ -355,7 +355,7 @@ position = Vector2( 734.585, -33.0197 )
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerComment"]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerComment"]
 visible = false
 z_index = 1
 shape = SubResource( 9 )
@@ -365,7 +365,7 @@ position = Vector2( 3308.45, -25.9426 )
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerTrain"]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="BaseScene/Trigger/TriggerTrain"]
 visible = false
 z_index = 1
 shape = SubResource( 9 )
@@ -375,7 +375,7 @@ position = Vector2( 7483.15, -72.9817 )
 collision_layer = 16
 collision_mask = 16
 
-[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingLoopWithBall"]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingLoopWithBall"]
 visible = false
 z_index = 1
 shape = SubResource( 9 )
@@ -385,7 +385,7 @@ position = Vector2( 16337.5, -72.9817 )
 collision_layer = 16
 collision_mask = 2147483664
 
-[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingHoopWithBall"]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="BaseScene/Trigger/ReachingHoopWithBall"]
 visible = false
 z_index = 1
 shape = SubResource( 9 )
@@ -395,7 +395,7 @@ position = Vector2( 5286.36, -2059.8 )
 collision_layer = 16
 collision_mask = 16
 
-[node name="CollisionShape" type="CollisionShape2D" parent="BaseScene/Trigger/BallArea"]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="BaseScene/Trigger/BallArea"]
 visible = false
 z_index = 1
 shape = SubResource( 10 )

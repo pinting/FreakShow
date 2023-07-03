@@ -1,31 +1,31 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=21 format=3]
 
-[ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=1]
-[ext_resource path="res://Scenes/Part04/Part04_Ditch.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Prefabs/Pickable/Pickable_HandLamp.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Part04/Part04_MaintenanceRoom.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Part04/Part04.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Sounds/Door01.wav" type="AudioStream" id=8]
-[ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Resources/HighPerformanceEnvironment.tres" type="Environment" id=10]
-[ext_resource path="res://Assets/Music/Part04.ogg" type="AudioStream" id=11]
-[ext_resource path="res://Game/Player.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=14]
-[ext_resource path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Part04/Part04_Cemetery.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=28]
+[ext_resource type="AudioStream" uid="uid://blrcccl5cibgs" path="res://Assets/Music/Part02.ogg" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Part04/Part04_Ditch.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Prefabs/Pickable/Pickable_HandLamp.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Prefabs/MusicMixer.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Game/BaseScene.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://Scenes/Part04/Part04_MaintenanceRoom.tscn" id="6"]
+[ext_resource type="Script" path="res://Scenes/Part04/Part04.gd" id="7"]
+[ext_resource type="AudioStream" uid="uid://pxt87r6gdhhj" path="res://Assets/Sounds/Door01.wav" id="8"]
+[ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="9"]
+[ext_resource type="Environment" uid="uid://dok0wscd8grfe" path="res://Resources/Environment.tres" id="10"]
+[ext_resource type="AudioStream" uid="uid://bycl6bje33on8" path="res://Assets/Music/Part04.ogg" id="11"]
+[ext_resource type="PackedScene" uid="uid://b668oxoccikke" path="res://Game/Player.tscn" id="12"]
+[ext_resource type="Texture2D" uid="uid://l31qjs5mt86w" path="res://Assets/Environmnent/Surface/Wall08.png" id="14"]
+[ext_resource type="PackedScene" uid="uid://d2vmf4fxvgnhm" path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://Scenes/Part04/Part04_Cemetery.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://Prefabs/Loop.tscn" id="28"]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_out_ghost"
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 6250, 1000 )
+size = Vector2( 6250, 1000 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 3967.87, 2306.21 )
+size = Vector2( 3967.87, 2306.21 )
 
 [node name="Part04" type="Node2D"]
 
@@ -41,7 +41,7 @@ position = Vector2( -1153.9, 883.372 )
 position = Vector2( 1708.81, -8027.59 )
 scale = Vector2( 0.7, 0.7 )
 zoom = Vector2( 3.5, 3.5 )
-smoothing_speed = 0.5
+position_smoothing_speed = 0.5
 follow_node = NodePath("../Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=["world_environment"]]
@@ -63,12 +63,12 @@ anims/fade_out_ghost = SubResource( 1 )
 [node name="CemeteryLoop" parent="BaseScene/Environment" instance=ExtResource( 28 )]
 position = Vector2( 2605.06, -2821.81 )
 player_node = NodePath("../../Player")
-area_shape_node = NodePath("Area/Shape")
+area_shape_node = NodePath("Area3D/Shape3D")
 container_node = NodePath("Cemetery")
 
-[node name="Area" type="Area2D" parent="BaseScene/Environment/CemeteryLoop"]
+[node name="Area3D" type="Area2D" parent="BaseScene/Environment/CemeteryLoop"]
 
-[node name="Shape" type="CollisionShape2D" parent="BaseScene/Environment/CemeteryLoop/Area"]
+[node name="Shape3D" type="CollisionShape2D" parent="BaseScene/Environment/CemeteryLoop/Area3D"]
 visible = false
 shape = SubResource( 2 )
 
@@ -77,19 +77,19 @@ shape = SubResource( 2 )
 [node name="BellowLoop" parent="BaseScene/Environment" instance=ExtResource( 28 )]
 position = Vector2( 619.608, 1573.55 )
 player_node = NodePath("../../Player")
-area_shape_node = NodePath("Area/Shape")
+area_shape_node = NodePath("Area3D/Shape3D")
 container_node = NodePath("Container")
 
-[node name="Area" type="Area2D" parent="BaseScene/Environment/BellowLoop"]
+[node name="Area3D" type="Area2D" parent="BaseScene/Environment/BellowLoop"]
 
-[node name="Shape" type="CollisionShape2D" parent="BaseScene/Environment/BellowLoop/Area"]
+[node name="Shape3D" type="CollisionShape2D" parent="BaseScene/Environment/BellowLoop/Area3D"]
 visible = false
 shape = SubResource( 3 )
 
 [node name="Container" type="Node2D" parent="BaseScene/Environment/BellowLoop"]
 position = Vector2( -6.10352e-05, 0 )
 
-[node name="Background" type="Sprite" parent="BaseScene/Environment/BellowLoop/Container"]
+[node name="Background" type="Sprite2D" parent="BaseScene/Environment/BellowLoop/Container"]
 light_mask = 0
 position = Vector2( 0, -178.139 )
 z_index = -10

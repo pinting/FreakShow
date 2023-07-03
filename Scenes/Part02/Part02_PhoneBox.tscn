@@ -2,14 +2,14 @@
 
 [ext_resource path="res://Scenes/Part02/Part02_PhoneBox.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable_BluePhone.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Environmnent/Phone00.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Environmnent/Phone00_Glow.png" type="Texture" id=5]
+[ext_resource path="res://Prefabs/Light3D/Light_Street.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Environmnent/Phone00.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets/Environmnent/Phone00_Glow.png" type="Texture2D" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
-[node name="Part02_PhoneBox" type="Sprite"]
+[node name="Part02_PhoneBox" type="Sprite2D"]
 z_index = -2
 texture = ExtResource( 4 )
 script = ExtResource( 1 )
@@ -20,11 +20,11 @@ position = Vector2( -1.2998, -42.096 )
 description_key = ""
 effect_max = 1.25
 
-[node name="Lamp" type="Sprite" parent="."]
+[node name="Lamp" type="Sprite2D" parent="."]
 material = SubResource( 1 )
 position = Vector2( -0.856445, 0 )
 texture = ExtResource( 5 )
 
-[node name="Light" parent="Lamp" instance=ExtResource( 3 )]
+[node name="Light3D" parent="Lamp" instance=ExtResource( 3 )]
 position = Vector2( -321.001, 406.521 )
 scale = Vector2( 1.03047, 0.376077 )

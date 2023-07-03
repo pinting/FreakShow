@@ -1,22 +1,22 @@
 extends StaticBody2D
 
 # Disable running-on-top physics script
-export var no_custom_physics: bool = false
+@export var no_custom_physics: bool = false
 
 # Start the train using this X offset
-export var offset: Vector2 = Vector2(-15000.0, 0)
+@export var offset: Vector2 = Vector2(-15000.0, 0)
 
 # Speed and direction to move on the X axis
-export var speed: float = 1600.0
+@export var speed: float = 1600.0
 
 # Recycle the train after this dinstance to the player
-export var recycle_after: float = 50000.0
+@export var recycle_after: float = 50000.0
 
 # Sound of the train
-export var sound: AudioStream = preload("res://Assets/Sounds/Train01.ogg")
+@export var sound: AudioStream = preload("res://Assets/Sounds/Train01.ogg")
 
 # Volume DB of the train
-export var base_volume: float = 20.0
+@export var base_volume: float = 20.0
 
 # Amplitude of the shake (Y axis)
 const shake_amp: float = 1.5
@@ -36,22 +36,22 @@ const speed_scale_m: float = 2.5
 # Duration of turning volume up or down
 const volume_change_duration = 5.0
 
-onready var train_00 = $Train00
-onready var sound_00 = $Sound00
-onready var collision_00 = $CollisionShape00
-onready var on_top_collision_00 = $OnTop/CollisionShape00
+@onready var train_00 = $Train00
+@onready var sound_00 = $Sound00
+@onready var collision_00 = $CollisionShape00
+@onready var on_top_collision_00 = $OnTop/CollisionShape00
 
-onready var train_01 = $Train01
-onready var sound_01 = $Sound01
-onready var collision_01 = $CollisionShape01
-onready var on_top_collision_01 = $OnTop/CollisionShape01
+@onready var train_01 = $Train01
+@onready var sound_01 = $Sound01
+@onready var collision_01 = $CollisionShape01
+@onready var on_top_collision_01 = $OnTop/CollisionShape01
 
-onready var train_02 = $Train02
-onready var sound_02 = $Sound02
-onready var collision_02 = $CollisionShape02
-onready var on_top_collision_02 = $OnTop/CollisionShape02
+@onready var train_02 = $Train02
+@onready var sound_02 = $Sound02
+@onready var collision_02 = $CollisionShape02
+@onready var on_top_collision_02 = $OnTop/CollisionShape02
 
-onready var on_top = $OnTop
+@onready var on_top = $OnTop
 
 signal player_on_top
 
@@ -67,10 +67,12 @@ var enter_list_player = []
 var enter_list_speed_scale = []
 
 func _ready() -> void:
+	super._ready()
+
 	visible = false
 	
-	on_top.connect("body_exited", self, "_player_exited_top")
-	on_top.connect("body_entered", self, "_player_entered_top")
+	on_top.connect("body_exited", Callable(self, "_player_exited_top"))
+	on_top.connect("body_entered", Callable(self, "_player_entered_top"))
 	
 	base_position = global_position
 	
@@ -118,8 +120,8 @@ func pause() -> void:
 	
 	started = false
 	
-	yield(Animator.run(self, "_set_volume", 
-		base_volume, Tools.SILENT, volume_change_duration), "completed")
+	await Animator.run(self, "_set_volume", 
+		base_volume, Tools.SILENT, volume_change_duration)
 	
 	_stop_sound()
 
@@ -133,8 +135,8 @@ func resume() -> void:
 	
 	_play_sound()
 	
-	yield(Animator.run(self, "_set_volume", 
-		Tools.SILENT, base_volume, volume_change_duration), "completed")
+	await Animator.run(self, "_set_volume", 
+		Tools.SILENT, base_volume, volume_change_duration)
 
 func stop():
 	Tools.debug("Train stop called")
@@ -244,6 +246,8 @@ func _process_recycle() -> void:
 		Tools.destroy_node(self, true)
 
 func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+
 	if not started:
 		return
 	
@@ -253,5 +257,7 @@ func _physics_process(delta: float) -> void:
 	_process_movement(delta)
 	_process_player_on_top(delta)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	super._process(delta)
+
 	_process_recycle()

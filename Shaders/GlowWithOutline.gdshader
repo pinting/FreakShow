@@ -8,7 +8,7 @@ uniform float scale = 0.0;
 uniform float glow_scale = 0.5;
 uniform float glow_radius = 10.0;
 uniform float line_thickness = 3.0;
-uniform vec4 line_color: hint_color = vec4(0.96, 0.35, 0.45, 1);
+uniform vec4 line_color: source_color = vec4(0.96, 0.35, 0.45, 1);
 
 vec4 safe_texture(sampler2D tex, vec2 p)
 {

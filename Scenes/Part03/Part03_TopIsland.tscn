@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Environmnent/House01.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Grass00.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/House01.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Environmnent/Grass00.png" type="Texture2D" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 580.928, 14.645 )
+size = Vector2( 580.928, 14.645 )
 
 [node name="Part03_TopIsland" type="StaticBody2D"]
 position = Vector2( 1867.43, -2762.52 )
@@ -12,7 +12,7 @@ scale = Vector2( 2.4, 2.4 )
 collision_layer = 15
 collision_mask = 15
 
-[node name="Grass" type="Sprite" parent="."]
+[node name="Grass" type="Sprite2D" parent="."]
 position = Vector2( -3.22729, 6.58594 )
 scale = Vector2( 0.5, -0.5 )
 z_index = -1
@@ -20,7 +20,7 @@ texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 1300, 0, 2325, 300 )
 
-[node name="House" type="Sprite" parent="."]
+[node name="House" type="Sprite2D" parent="."]
 position = Vector2( -9.01489, -474.032 )
 z_index = -2
 texture = ExtResource( 1 )

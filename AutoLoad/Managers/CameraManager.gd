@@ -5,24 +5,26 @@ signal current_changed
 var current: GameCamera = null
 
 const debug_camera_wait_before_create: float = 0.5
-const debug_camera_zoom: Vector2 = Vector2(2.0, 2.0)
+const debug_camera_zoom: Vector2 = Vector2(0.1, 0.1)
 
 func _ready() -> void:
-	yield(Tools.wait(debug_camera_wait_before_create), "completed")
+	await Tools.wait(debug_camera_wait_before_create)
 	
 	if Config.DEBUG and not current:
 		create_debug_camera()
 
 func create_debug_camera() -> void:
 	var camera = GameCamera.new()
-	
+
 	camera.zoom = Vector2(debug_camera_zoom)
-	camera.current = true
+	
+	camera.make_current()
 	
 	var root = get_tree().get_root()
 	
 	root.add_child(camera)
-	CursorManager.show()
+	CursorManager.appear()
+
 	Tools.debug("Debug camera was created")
 
 func set_current(camera: GameCamera) -> void:

@@ -2,17 +2,17 @@ extends Node
 
 signal display_changed
 
-const CURSOR_DEFAULT: Texture = preload("res://Assets/Cursor/Cursor_Default.png")
-const CURSOR_PICK: Texture = preload("res://Assets/Cursor/Cursor_Pick.png")
-const CURSOR_VIEW: Texture = preload("res://Assets/Cursor/Cursor_View.png")
+const CURSOR_DEFAULT: Texture2D = preload("res://Assets/Cursor/Cursor_Default.png")
+const CURSOR_PICK: Texture2D = preload("res://Assets/Cursor/Cursor_Pick.png")
+const CURSOR_VIEW: Texture2D = preload("res://Assets/Cursor/Cursor_View.png")
 
-const NO_OWNER = -1
+const NO_USER = -1
 
 var display: VirtualCursorDisplay = null
-var current_owner: int = NO_OWNER
+var current_user: int = NO_USER
 
 func _ready() -> void:
-	reset_icon(NO_OWNER, true)
+	reset_icon(NO_USER, true)
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -24,7 +24,7 @@ func set_display(cursor_display: VirtualCursorDisplay) -> void:
 	display = cursor_display
 	VirtualInput.disable = is_lock_needed()
 	
-	reset_icon(NO_OWNER, true)
+	reset_icon(NO_USER, true)
 	Input.set_custom_mouse_cursor(null)
 
 	if is_lock_needed():
@@ -43,8 +43,9 @@ func clear() -> void:
 	display = null
 	VirtualInput.disable = is_lock_needed()
 
-func is_free(owner: int):
-	return not is_hidden() and (current_owner == NO_OWNER or current_owner == owner)
+func is_free(user: int):
+	return not is_hidden() and \
+		(current_user == NO_USER or current_user == user)
 
 func set_cursor_texture(texture: Resource) -> void:
 	if display:
@@ -52,8 +53,8 @@ func set_cursor_texture(texture: Resource) -> void:
 	else:
 		Input.set_custom_mouse_cursor(texture)
 
-func set_icon(type: String, owner: int, force: bool = false):
-	if not force and not is_free(owner):
+func set_icon(type: String, user: int, force: bool = false):
+	if not force and not is_free(user):
 		return
 	
 	match type:
@@ -66,11 +67,11 @@ func set_icon(type: String, owner: int, force: bool = false):
 		_:
 			Tools.debug("Non-existing cursor type was used!")
 	
-	current_owner = owner
+	current_user = user
 
-func reset_icon(owner: int, force: bool = false):
-	if current_owner == owner or force:
-		set_icon("default", NO_OWNER, true);
+func reset_icon(user: int, force: bool = false):
+	if current_user == user or force:
+		set_icon("default", NO_USER, true);
 
 func get_position(viewport_based: bool = false) -> Vector2:
 	if display:
@@ -92,6 +93,7 @@ func apply_movement(viewport_position: Vector2, relative: Vector2, from_virtual:
 		
 		display.cursor.global_position += relative * camera.zoom
 	elif from_virtual:
+		# If no display and the movement does come from the virtual mouse
 		get_viewport().warp_mouse(viewport_position)
 
 func move_to_center() -> void:
@@ -103,17 +105,17 @@ func move_to_center() -> void:
 	else:
 		VirtualInput.set_virtual_mouse_position(center, true, true)
 
-func show(duration: float = 0.5):
+func appear(duration: float = 0.5):
 	if display:
-		display.show(duration)
+		display.appear(duration)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	VirtualInput.disable = is_lock_needed()
 
-func hide(duration: float = 0.5):
+func disappear(duration: float = 0.5):
 	if display:
-		display.hide(duration)
+		display.disappear(duration)
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 

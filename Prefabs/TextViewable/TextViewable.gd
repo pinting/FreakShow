@@ -1,20 +1,22 @@
 extends Viewable
 
 # Text to fill up the Label node with inside
-export var text_key: String = ""
+@export var text_key: String = ""
 
 # Auto adujst the size to the text
-export var auto_size: bool = false
+@export var auto_size: bool = false
 
 # Scale auto size 
-export var auto_size_scale: float = 1.2
+@export var auto_size_scale: float = 1.2
 
 # Inner text node
-export (NodePath) var inner_text_node = "InnerText"
+@export var inner_text_node: NodePath = "InnerText"
 
 var inner_text: Label
 
 func _ready():
+	super._ready()
+	
 	inner_text = get_node(inner_text_node)
 	inner_text.text = Text.find(text_key)
 	
@@ -37,7 +39,7 @@ func _calculate_auto_height() -> void:
 	region_enabled = true
 	region_rect = Rect2(0, 0, sw, sh)
 	
-	inner_text.margin_left = w / -2
-	inner_text.margin_top = sh / -2
-	inner_text.margin_right = sw / 2
-	inner_text.margin_bottom = sh / 2
+	inner_text.offset_left = w / -2
+	inner_text.offset_top = sh / -2
+	inner_text.offset_right = sw / 2
+	inner_text.offset_bottom = sh / 2

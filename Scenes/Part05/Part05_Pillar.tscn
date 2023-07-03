@@ -1,25 +1,25 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture2D" id=2]
 [ext_resource path="res://Scenes/Part05/Part05_Pillar.gd" type="Script" id=3]
 [ext_resource path="res://Prefabs/Static/Static_FactoryLight.tscn" type="PackedScene" id=4]
 
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 249.63, 14847.9 )
+size = Vector2( 249.63, 14847.9 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 267.673, 14851.1 )
+size = Vector2( 267.673, 14851.1 )
 
-[node name="Part05_Pillar" type="Sprite"]
+[node name="Part05_Pillar" type="Sprite2D"]
 z_index = -1
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( -5, 0, 552, 85 )
 script = ExtResource( 3 )
 
-[node name="Wall" type="Sprite" parent="."]
+[node name="Wall" type="Sprite2D" parent="."]
 light_mask = 0
 position = Vector2( 0, 15042 )
 scale = Vector2( 0.8, 1 )
@@ -48,6 +48,6 @@ scale = Vector2( 1.11575, 1 )
 z_index = 100
 shape = SubResource( 2 )
 
-[node name="Light" parent="." instance=ExtResource( 4 )]
+[node name="Light3D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0.335724, -1.74403 )
 scale = Vector2( 1.35, 0.8 )

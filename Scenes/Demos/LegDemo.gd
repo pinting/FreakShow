@@ -1,4 +1,4 @@
 extends BaseScene
 
 func _ready():
-	pass
+	super._ready()

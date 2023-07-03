@@ -1,18 +1,18 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Prefabs/TextViewable/TextViewable.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Environmnent/Decoration/Letter01.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Decoration/Letter01.png" type="Texture2D" id=3]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="FontFile" id=1]
 font_path = "res://font.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 size = 28
 outline_size = 1
 use_filter = true
 font_data = SubResource( 1 )
 
-[node name="TextViewable_Letter01" type="Sprite" groups=[
+[node name="TextViewable_Letter01" type="Sprite2D" groups=[
 "selectable",
 "viewable",
 ]]
@@ -23,13 +23,13 @@ text_key = "Text001"
 
 [node name="InnerText" type="Label" parent="."]
 light_mask = 786432
-margin_left = -313.837
-margin_top = 160.103
-margin_right = 313.163
-margin_bottom = 404.103
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.121569, 0.0705882, 0.0235294, 0.784314 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 0.529412 )
+offset_left = -313.837
+offset_top = 160.103
+offset_right = 313.163
+offset_bottom = 404.103
+theme_override_fonts/font = SubResource( 2 )
+theme_override_colors/font_color = Color( 0.121569, 0.0705882, 0.0235294, 0.784314 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 0.529412 )
 text = "Azért kapsz pirosat, hogy célba érj."
 align = 1
 valign = 1

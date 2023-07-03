@@ -1,17 +1,19 @@
-extends Sprite
+extends Sprite2D
 
-export var y_move_diff: float = 100.0
-export var time_scale: float = 5.0
+@export var y_move_diff: float = 100.0
+@export var time_scale: float = 5.0
 
-onready var hit_area = $HitArea
+@onready var hit_area = $HitArea
 
 var current_second = 0.0
 var base_position = Vector2.ZERO
 
 func _ready() -> void:
+	super._ready()
+	
 	base_position = global_position
 	
-	hit_area.connect("body_entered", self, "_on_player_enter")
+	hit_area.connect("body_entered", Callable(self, "_on_player_enter"))
 
 func _on_player_enter(player: Node) -> void:
 	if not player.is_in_group("player"):
@@ -20,5 +22,7 @@ func _on_player_enter(player: Node) -> void:
 	player.kill()
 
 func _process(delta: float) -> void:
+	super._process(delta)
+
 	current_second += delta
 	position.y += sin(base_position.x + time_scale * current_second) * y_move_diff * delta

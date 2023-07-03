@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c8qag0jktr0xy"]
 
-[ext_resource path="res://Game/BlackScreen.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://Game/BlackScreen.gd" id="1"]
 
 [node name="BlackScreen" type="CanvasLayer"]
 layer = 100
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-margin_right = 960.0
-margin_bottom = 540.0
+modulate = Color(1, 1, 1, 0)
+offset_right = 960.0
+offset_bottom = 540.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)

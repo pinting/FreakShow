@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Environmnent/Clothes00.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Clothes00.png" type="Texture2D" id=4]
 
 [node name="Pickable_ClothesPile" type="RigidBody2D" groups=[
 "pickable",
@@ -12,12 +12,12 @@ collision_layer = 2
 collision_mask = 2
 mass = 0.05
 gravity_scale = 5.0
-contacts_reported = 3
+max_contacts_reported = 3
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 3 )
 
-[node name="Selectable" type="Sprite" parent="." groups=[
+[node name="Selectable" type="Sprite2D" parent="." groups=[
 "selectable",
 ]]
 texture = ExtResource( 4 )
@@ -26,4 +26,4 @@ description_key = "Description005"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PoolVector2Array( -45.1328, 0.943619, -37.9886, -15.9644, -27.2722, -28.4668, -18.461, -30.4909, -11.0787, -40.0166, 8.44885, -41.9217, 28.9289, -35.8491, 30.3578, -31.8007, 25.2378, -23.5849, 38.2164, -18.9411, 38.2164, -9.89178, 43.3364, -5.60525, 46.1941, 9.99297, 40.5978, 13.3269, 39.2881, 18.6851, 25.595, 20.7093, 23.3326, 30.9493, 15.3549, 31.7828, -6.91122, 40.9512, -12.1503, 42.261, -14.5317, 35.9503, -14.5317, 35.9503, -22.6285, 29.7586, -31.5588, 28.0917, -33.3448, 25.4721, -42.5132, 24.8768 )
+polygon = PackedVector2Array( -45.1328, 0.943619, -37.9886, -15.9644, -27.2722, -28.4668, -18.461, -30.4909, -11.0787, -40.0166, 8.44885, -41.9217, 28.9289, -35.8491, 30.3578, -31.8007, 25.2378, -23.5849, 38.2164, -18.9411, 38.2164, -9.89178, 43.3364, -5.60525, 46.1941, 9.99297, 40.5978, 13.3269, 39.2881, 18.6851, 25.595, 20.7093, 23.3326, 30.9493, 15.3549, 31.7828, -6.91122, 40.9512, -12.1503, 42.261, -14.5317, 35.9503, -14.5317, 35.9503, -22.6285, 29.7586, -31.5588, 28.0917, -33.3448, 25.4721, -42.5132, 24.8768 )

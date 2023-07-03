@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Warning03.wav-116ed2592c609cb91525777baddf02bc.sample"
+type="AudioStreamWAV"
+uid="uid://bkdp8ey2nrph7"
+path="res://.godot/imported/Warning03.wav-116ed2592c609cb91525777baddf02bc.sample"
 
 [deps]
 
 source_file="res://Assets/Sounds/Warning03.wav"
-dest_files=[ "res://.import/Warning03.wav-116ed2592c609cb91525777baddf02bc.sample" ]
+dest_files=["res://.godot/imported/Warning03.wav-116ed2592c609cb91525777baddf02bc.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

@@ -1,22 +1,22 @@
 extends Node2D
 
-export var ball_is_stuck_timeout: float = 6.0
+@export var ball_is_stuck_timeout: float = 6.0
 
-onready var inside_hoop: Area2D = $InsideHoop
+@onready var inside_hoop: Area2D = $InsideHoop
 
 signal ball_in_hoop
 
 func _ready():
-	inside_hoop.connect("body_entered", self, "_trigger_in_hoop")
+	inside_hoop.connect("body_entered", Callable(self, "_trigger_in_hoop"))
 
 func _trigger_in_hoop(ball: Node) -> void:
 	if not ball.is_in_group("_ball") or not inside_hoop.visible:
 		return
 	
 	while ball.is_held():
-		yield(Tools.wait(ball_is_stuck_timeout), "completed")
+		await Tools.wait(ball_is_stuck_timeout)
 	
-	yield(Tools.wait(ball_is_stuck_timeout), "completed")
+	await Tools.wait(ball_is_stuck_timeout)
 	
 	if not inside_hoop.overlaps_body(ball):
 		return

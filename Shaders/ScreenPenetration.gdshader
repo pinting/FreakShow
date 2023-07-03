@@ -1,6 +1,8 @@
 shader_type canvas_item;
 render_mode unshaded;
 
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
 uniform vec2 offset = vec2(0.5, 0.5);
 uniform float value = 0.2;
 uniform float dist = 0.2;

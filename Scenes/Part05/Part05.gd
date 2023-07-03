@@ -1,31 +1,31 @@
 extends BaseScene
 
-export var teleport_player_to_end: bool = false
-export var train_tick_length_min: float = 10.0
-export var train_tick_length_max: float = 15.0
-export var number_of_pillars: int = 25
-export var width_between_pillars: float = 3000.0
-export var pillar_high_offset: float = -370.0
-export var pillar_low_offset: float = 335.0
+@export var teleport_player_to_end: bool = false
+@export var train_tick_length_min: float = 10.0
+@export var train_tick_length_max: float = 15.0
+@export var number_of_pillars: int = 25
+@export var width_between_pillars: float = 3000.0
+@export var pillar_high_offset: float = -370.0
+@export var pillar_low_offset: float = 335.0
 
 const train_scene = preload("res://Prefabs/Static/Static_Train.tscn")
 const pillar_scene = preload("res://Scenes/Part05/Part05_DoublePillar.tscn")
 
-onready var player = $Player
-onready var camera = $GameCamera
+@onready var player = $Player
+@onready var camera = $GameCamera
 
-onready var club = $Dynamic/Environment/BuildingEnd/Dirt/Road/Club
+@onready var club = $Dynamic/Environment/BuildingEnd/Dirt/Road/Club
 
-onready var dynamic = $Dynamic
-onready var game_end = $Dynamic/Trigger/GameEnd
-onready var fall_to_died = $Dynamic/Trigger/FallToDeath
-onready var train_spawn = $Trigger/TrainSpawn
-onready var pillar_spawn = $Trigger/PillarSpawn
-onready var teleport_player = $Dynamic/Trigger/TeleportPlayer
-onready var player_respawn = $Trigger/PlayerRespawn
+@onready var dynamic = $Dynamic
+@onready var game_end = $Dynamic/Trigger/GameEnd
+@onready var fall_to_died = $Dynamic/Trigger/FallToDeath
+@onready var train_spawn = $Trigger/TrainSpawn
+@onready var pillar_spawn = $Trigger/PillarSpawn
+@onready var teleport_player = $Dynamic/Trigger/TeleportPlayer
+@onready var player_respawn = $Trigger/PlayerRespawn
 
-onready var main_music = $Sound/MainMusic
-onready var door_sound = $Sound/DoorSound
+@onready var main_music = $Sound/MainMusic
+@onready var door_sound = $Sound/DoorSound
 
 var train_wait_time: float = INF
 var train_counter: float = 0.0
@@ -38,6 +38,8 @@ var music_02
 var music_03
 
 func _ready() -> void:
+	super._ready()
+	
 	dynamic.position.x += width_between_pillars * (number_of_pillars + 1)
 	
 	music_00 = main_music.add_part(0, 19.3, true, 2, 2, -5)
@@ -45,11 +47,11 @@ func _ready() -> void:
 	music_02 = main_music.add_part(30.8, 41.9, false, 0, 2, 0)
 	music_03 = main_music.add_part(0, 19.3, true, 2, 2, -5)
 	
-	connect("scene_started", self, "_on_scene_started")
-	fall_to_died.connect("body_entered", self, "_kill_player")
-	player.connect("died", self, "_on_player_die")
-	game_end.connect("body_entered", self, "_on_player_reach_game_end")
-	club.connect("door_selected", self, "_on_exit_selected")
+	connect("scene_started", Callable(self, "_on_scene_started"))
+	fall_to_died.connect("body_entered", Callable(self, "_kill_player"))
+	player.connect("died", Callable(self, "_on_player_die"))
+	game_end.connect("body_entered", Callable(self, "_on_player_reach_game_end"))
+	club.connect("door_selected", Callable(self, "_on_exit_selected"))
 
 func _generate_pillars():
 	var pillars_y = []
@@ -77,7 +79,7 @@ func _create_pillars(pillars_y: Array) -> void:
 	var pillar
 	
 	for i in range(number_of_pillars):
-		pillar = pillar_scene.instance()
+		pillar = pillar_scene.instantiate()
 		
 		var x_offset = i * width_between_pillars
 		var y_offset = 0
@@ -112,7 +114,7 @@ func _on_scene_started() -> void:
 	black_screen.fade_out(3.0)
 	main_music.play()
 
-	yield(Tools.wait(2.0), "completed")
+	await Tools.wait(2.0)
 	SubtitleManager.say(Text.find("Narrator009"))
 
 func _on_player_on_train_top() -> void:
@@ -147,18 +149,18 @@ func _on_exit_selected() -> void:
 	main_music.kill(2.0)
 	
 	black_screen.fade_in(0.5)
-	yield(Tools.wait(0.5), "completed")
+	await Tools.wait(0.5)
 	
 	club.bass_sound.volume_db = 10
-	yield(Tools.wait(1.0), "completed")
+	await Tools.wait(1.0)
 	
 	_clean_trains()
-	yield(Tools.wait(0.5), "completed")
+	await Tools.wait(0.5)
 	
 	load_next_scene()
 
 func _on_player_die() -> void:
-	yield(Tools.wait(2.0), "completed")
+	await Tools.wait(2.0)
 	
 	main_music.force_next(music_00)
 	move_player(player, player_respawn.global_position)
@@ -167,13 +169,13 @@ func _on_player_die() -> void:
 	reached_end = false
 
 func _create_train() -> void:
-	var new_train = train_scene.instance()
+	var new_train = train_scene.instantiate()
 	
 	new_train.z_index = train_spawn.z_index
 	new_train.position = train_spawn.position
 	new_train.collision_layer = 8
 	new_train.collision_mask = 8
-	new_train.connect("player_on_top", self, "_on_player_on_train_top")
+	new_train.connect("player_on_top", Callable(self, "_on_player_on_train_top"))
 	
 	add_child(new_train)
 	new_train.start()
@@ -182,6 +184,8 @@ func _create_train() -> void:
 	train_counter = 0.0
 
 func _process(delta: float) -> void:
+	super._process(delta)
+
 	if first_on_top_called or reached_end or player.dead:
 		return
 	

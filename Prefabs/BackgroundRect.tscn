@@ -7,8 +7,8 @@ layer = -101
 "auto_visible",
 ]]
 visible = false
-margin_right = 960.0
-margin_bottom = 540.0
+offset_right = 960.0
+offset_bottom = 540.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

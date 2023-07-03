@@ -3,14 +3,8 @@ extends Node
 # Enable debug messages
 const DEBUG: bool = true
 
-# Report endpoint
-const REPORT_URL: String = "https://j82k55n66d.execute-api.us-east-1.amazonaws.com/prod/report"
-
 # Path to the configuration file
 const CONFIG_PATH: String = "user://config.cfg"
-
-# Max loading time per tick (in msec)
-const LOADING_TIME_PER_TICK: int = 100
 
 # Order of scenes
 const SCENES = [
@@ -25,7 +19,7 @@ const SCENES = [
 ]
 
 # Disable sounds
-var no_sound: bool = false
+var no_sound: bool = true
 
 # Gamma
 var gamma: float = 1.35
@@ -37,7 +31,10 @@ var save_path: String = "user://default.save"
 var lock_mouse: bool = true
 
 # Virtual mouse speed
-var virtual_mouse_speed: Vector2 = Vector2(2, 2)
+var virtual_mouse_speed: Vector2 = Vector2(1000, 1000)
+
+# Mouse speed scale
+var mouse_speed_scale: Vector2 = Vector2(3.5, 3.5)
 
 # Low performance
 var low_performance: bool = false
@@ -49,7 +46,7 @@ func _ready() -> void:
 		_load()
 
 func _exists() -> bool:
-	return File.new().file_exists(CONFIG_PATH)
+	return FileAccess.file_exists(CONFIG_PATH)
 
 func _load() -> void:
 	if not _exists():

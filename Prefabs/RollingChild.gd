@@ -1,7 +1,7 @@
 class_name RollingChild
 extends Node2D
 
-export var custom_key = "RollingChild"
+@export var custom_key = "RollingChild"
 
 func _ready():
 	select_child(self, custom_key)

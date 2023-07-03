@@ -1,25 +1,25 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Foot00.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Decoration/Sign03.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Environmnent/Building05.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Foot00.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Environmnent/Decoration/Sign03.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets/Environmnent/Building05.png" type="Texture2D" id=3]
 
 [node name="Static_Building00" type="StaticBody2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 1882, 2120 )
 
-[node name="Foot" type="Sprite" parent="Sprite"]
+[node name="Foot" type="Sprite2D" parent="Sprite2D"]
 position = Vector2( 0, 1159.23 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3765, 400 )
 
-[node name="Sign" type="Sprite" parent="Sprite"]
+[node name="Sign" type="Sprite2D" parent="Sprite2D"]
 position = Vector2( -882.29, 1004.89 )
 rotation = 0.00342183
 scale = Vector2( 0.4, 0.4 )
@@ -27,4 +27,4 @@ texture = ExtResource( 2 )
 
 [node name="Walls" type="CollisionPolygon2D" parent="."]
 z_index = 100
-polygon = PoolVector2Array( -1882.15, -2117.36, 1881.63, -2118.03, 1880.05, 2517.34, -1875.48, 2525.12 )
+polygon = PackedVector2Array( -1882.15, -2117.36, 1881.63, -2118.03, 1880.05, 2517.34, -1875.48, 2525.12 )

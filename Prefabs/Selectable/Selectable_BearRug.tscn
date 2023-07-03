@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Misc15.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Misc15.png" type="Texture2D" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
 
-[node name="Selectable_BearRug" type="Sprite" groups=[
+[node name="Selectable_BearRug" type="Sprite2D" groups=[
 "selectable",
 ]]
 position = Vector2( 10.3159, -187.351 )

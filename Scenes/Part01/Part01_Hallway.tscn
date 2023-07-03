@@ -1,34 +1,34 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Surface/Wall00.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Building05_Bottom.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor01.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti40.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall00.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Environmnent/Building05_Bottom.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor01.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti40.png" type="Texture2D" id=4]
 [ext_resource path="res://Scenes/Part01/Part01_Door_Block.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Prefabs/Selectable/Selectable_BeenStealingGraffiti.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Prefabs/Selectable/Selectable_YouWhoreGraffiti.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Prefabs/Selectable/Selectable_ForeskinGraffiti.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Environmnent/Building05_Top.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti16.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Environmnent/Building05_Top.png" type="Texture2D" id=9]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti16.png" type="Texture2D" id=10]
 [ext_resource path="res://Scenes/Part01/Part01_Hallway.gd" type="Script" id=11]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall02.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall02.png" type="Texture2D" id=12]
 [ext_resource path="res://Prefabs/Static/Static_StopLamp.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Prefabs/Selectable/Selectable_JustStopGraffiti.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Prefabs/Selectable/Selectable_ReadTheSignsGraffiti.tscn" type="PackedScene" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4722.81, 353.699 )
+size = Vector2( 4722.81, 353.699 )
 
 [sub_resource type="OccluderPolygon2D" id=2]
-polygon = PoolVector2Array( -6882.82, -3575.52, -6880.36, -4990.21, 648.825, -4992.66, 647.118, -3579.69 )
+polygon = PackedVector2Array( -6882.82, -3575.52, -6880.36, -4990.21, 648.825, -4992.66, 647.118, -3579.69 )
 
 [sub_resource type="OccluderPolygon2D" id=3]
-polygon = PoolVector2Array( -6881.84, -4986.47, -6881.94, -3582.45, 648.009, -3582.14, 648.061, -4986.54 )
+polygon = PackedVector2Array( -6881.84, -4986.47, -6881.94, -3582.45, 648.009, -3582.14, 648.061, -4986.54 )
 
 [node name="Part01_Hallway" type="Node2D"]
 script = ExtResource( 11 )
 
-[node name="Inside" type="Sprite" parent="."]
+[node name="Inside" type="Sprite2D" parent="."]
 position = Vector2( 0, 22.7603 )
 scale = Vector2( 1.205, 1.2 )
 z_index = -2
@@ -37,7 +37,7 @@ texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 7500, 578 )
 
-[node name="Cellar" type="Sprite" parent="Inside"]
+[node name="Cellar" type="Sprite2D" parent="Inside"]
 light_mask = 3
 position = Vector2( -0.937, -315.524 )
 scale = Vector2( 0.829875, 0.833333 )
@@ -55,7 +55,7 @@ position = Vector2( 120.923, 67.2744 )
 rotation = 0.145549
 scale = Vector2( 0.714607, 0.706647 )
 
-[node name="Graffiti07" type="Sprite" parent="Inside"]
+[node name="Graffiti07" type="Sprite2D" parent="Inside"]
 self_modulate = Color( 0, 0, 0, 0.607843 )
 position = Vector2( -1078.05, 156.862 )
 rotation = 0.222748
@@ -65,14 +65,14 @@ texture = ExtResource( 4 )
 [node name="Graffiti06" parent="Inside" instance=ExtResource( 15 )]
 position = Vector2( -814.368, 224.462 )
 
-[node name="Graffiti08" type="Sprite" parent="Inside"]
+[node name="Graffiti08" type="Sprite2D" parent="Inside"]
 self_modulate = Color( 0, 0, 0, 0.607843 )
 position = Vector2( -952.971, 57.8028 )
 rotation = -0.293743
 scale = Vector2( 0.133158, 0.133621 )
 texture = ExtResource( 4 )
 
-[node name="Graffiti04" type="Sprite" parent="Inside"]
+[node name="Graffiti04" type="Sprite2D" parent="Inside"]
 self_modulate = Color( 1, 0.956863, 0.32549, 0.862745 )
 position = Vector2( -1883.63, 50.6128 )
 scale = Vector2( 0.363072, 0.364585 )
@@ -120,7 +120,7 @@ scale = Vector2( 0.829875, 0.833333 )
 position = Vector2( 3265.5, 91.8744 )
 scale = Vector2( 0.829875, 0.833333 )
 
-[node name="Floor" type="Sprite" parent="Inside"]
+[node name="Floor" type="Sprite2D" parent="Inside"]
 light_mask = 3
 position = Vector2( 0.0960357, 343.481 )
 scale = Vector2( 0.829875, 0.833333 )
@@ -169,7 +169,7 @@ shape = SubResource( 1 )
 position = Vector2( -0.213135, -1362.57 )
 scale = Vector2( 2, 2 )
 
-[node name="Building_Top" type="Sprite" parent="Building"]
+[node name="Building_Top" type="Sprite2D" parent="Building"]
 light_mask = 0
 position = Vector2( -0.5, -126.464 )
 scale = Vector2( 1.2, 1.2 )
@@ -184,7 +184,7 @@ position = Vector2( 1558.9, 2287.83 )
 scale = Vector2( 0.5, 0.5 )
 occluder = SubResource( 2 )
 
-[node name="Building_Bottom" type="Sprite" parent="Building"]
+[node name="Building_Bottom" type="Sprite2D" parent="Building"]
 light_mask = 0
 position = Vector2( 0, 1529.71 )
 scale = Vector2( 1.2, 1.2 )

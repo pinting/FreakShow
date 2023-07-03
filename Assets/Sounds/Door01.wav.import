@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Door01.wav-5d1d08faf2ab0118309e6e3e99490137.sample"
+type="AudioStreamWAV"
+uid="uid://pxt87r6gdhhj"
+path="res://.godot/imported/Door01.wav-5d1d08faf2ab0118309e6e3e99490137.sample"
 
 [deps]
 
 source_file="res://Assets/Sounds/Door01.wav"
-dest_files=[ "res://.import/Door01.wav-5d1d08faf2ab0118309e6e3e99490137.sample" ]
+dest_files=["res://.godot/imported/Door01.wav-5d1d08faf2ab0118309e6e3e99490137.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

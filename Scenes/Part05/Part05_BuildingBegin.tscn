@@ -2,29 +2,29 @@
 
 [ext_resource path="res://Prefabs/Selectable/Selectable_HappyCompanySign.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable_LevelTwoSign.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Environmnent/Door05.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall04.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti17.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall09.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti22.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Environmnent/Door05.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall04.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti17.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture2D" id=6]
+[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture2D" id=8]
+[ext_resource path="res://Assets/Environmnent/Fence01.png" type="Texture2D" id=9]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall09.png" type="Texture2D" id=10]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti22.png" type="Texture2D" id=11]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall08.png" type="Texture2D" id=13]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture2D" id=14]
 [ext_resource path="res://Scenes/Part04/Part04_MineLamp.tscn" type="PackedScene" id=15]
 
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2105.38, 76.7567 )
+size = Vector2( 2105.38, 76.7567 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 750.744, 1372.97 )
+size = Vector2( 750.744, 1372.97 )
 
 [node name="Part05_BuildingBegin" type="Node2D"]
 position = Vector2( -28859, 1421 )
 
-[node name="Background" type="Sprite" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 position = Vector2( -2040.09, -2035.65 )
 scale = Vector2( 0.8, 1 )
 z_index = -4
@@ -37,7 +37,7 @@ position = Vector2( 85.625, 249.283 )
 collision_layer = 15
 collision_mask = 15
 
-[node name="CollisionShape" type="CollisionShape2D" parent="Ground"]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="Ground"]
 position = Vector2( -6.12841, -44.2373 )
 z_index = 100
 shape = SubResource( 1 )
@@ -48,12 +48,12 @@ scale = Vector2( 0.84, 0.84 )
 collision_layer = 15
 collision_mask = 15
 
-[node name="CollisionShape" type="CollisionShape2D" parent="WallLeft"]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="WallLeft"]
 position = Vector2( -0.369629, 0 )
 z_index = 100
 shape = SubResource( 2 )
 
-[node name="Floor" type="Sprite" parent="."]
+[node name="Floor" type="Sprite2D" parent="."]
 light_mask = 3
 position = Vector2( -0.391, 113 )
 z_index = -2
@@ -61,34 +61,34 @@ texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( -45, 0, 3985, 200 )
 
-[node name="Wall" type="Sprite" parent="."]
+[node name="Wall" type="Sprite2D" parent="."]
 position = Vector2( 0, -409.093 )
 z_index = -3
 texture = ExtResource( 9 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3985, 846 )
 
-[node name="Head" type="Sprite" parent="Wall"]
+[node name="Head" type="Sprite2D" parent="Wall"]
 position = Vector2( 0, -968.736 )
 texture = ExtResource( 8 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3985, 115 )
 
-[node name="Above" type="Sprite" parent="Wall"]
+[node name="Above" type="Sprite2D" parent="Wall"]
 position = Vector2( 0, -661.354 )
 z_index = -1
 texture = ExtResource( 10 )
 region_enabled = true
 region_rect = Rect2( 0, 100, 3985, 500 )
 
-[node name="Border" type="Sprite" parent="Wall"]
+[node name="Border" type="Sprite2D" parent="Wall"]
 position = Vector2( 0.25, 645.335 )
 z_index = 3
 texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3986, 85 )
 
-[node name="Under" type="Sprite" parent="Wall"]
+[node name="Under" type="Sprite2D" parent="Wall"]
 light_mask = 0
 position = Vector2( 0, 1164.24 )
 scale = Vector2( 2, 2.25 )
@@ -98,7 +98,7 @@ flip_v = true
 region_enabled = true
 region_rect = Rect2( 0, 0, 1992, 455 )
 
-[node name="Door" type="Sprite" parent="Wall"]
+[node name="Door" type="Sprite2D" parent="Wall"]
 position = Vector2( -984.164, 58.4823 )
 scale = Vector2( 0.749115, 0.749115 )
 texture = ExtResource( 3 )
@@ -107,7 +107,7 @@ texture = ExtResource( 3 )
 position = Vector2( 62.9219, -580.425 )
 scale = Vector2( 1.3, 1.6 )
 
-[node name="Graffiti00" type="Sprite" parent="Wall"]
+[node name="Graffiti00" type="Sprite2D" parent="Wall"]
 self_modulate = Color( 1, 1, 1, 0.784314 )
 position = Vector2( -1647.36, 13.5718 )
 texture = ExtResource( 5 )
@@ -119,7 +119,7 @@ scale = Vector2( 0.412863, 0.412863 )
 [node name="LevelTwoSign" parent="Wall" instance=ExtResource( 2 )]
 description_key = "Description025"
 
-[node name="Graffiti01" type="Sprite" parent="Wall"]
+[node name="Graffiti01" type="Sprite2D" parent="Wall"]
 self_modulate = Color( 1, 1, 1, 0.784314 )
 position = Vector2( 1070.59, 50.3036 )
 texture = ExtResource( 11 )

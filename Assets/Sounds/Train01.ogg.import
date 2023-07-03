@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/Train01.ogg-2a9acbc6a1082190a1174cd07c5bef19.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dtpt87kyh3u7o"
+path="res://.godot/imported/Train01.ogg-2a9acbc6a1082190a1174cd07c5bef19.oggvorbisstr"
 
 [deps]
 
 source_file="res://Assets/Sounds/Train01.ogg"
-dest_files=[ "res://.import/Train01.ogg-2a9acbc6a1082190a1174cd07c5bef19.oggstr" ]
+dest_files=["res://.godot/imported/Train01.ogg-2a9acbc6a1082190a1174cd07c5bef19.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

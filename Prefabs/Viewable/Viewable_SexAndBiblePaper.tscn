@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Decoration/Paper06.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Decoration/Paper06.png" type="Texture2D" id=1]
 [ext_resource path="res://Prefabs/Viewable/Viewable.gd" type="Script" id=3]
 
-[node name="Viewable_SexAndBiblePaper" type="Sprite" groups=[
+[node name="Viewable_SexAndBiblePaper" type="Sprite2D" groups=[
 "selectable",
 "viewable",
 ]]

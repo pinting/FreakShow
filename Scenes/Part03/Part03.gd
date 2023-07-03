@@ -1,6 +1,6 @@
 extends "res://Game/BaseScene.gd"
 
-export var teleport_player_to_end: bool = false
+@export var teleport_player_to_end: bool = false
 
 const camera_change_duration: float = 2.0
 
@@ -24,34 +24,34 @@ const exit_camera_zoom: Vector2 = Vector2(3.0, 3.0)
 const exit_follow_speed_scale: float = 2.0
 const exit_follow_offset: float = 0.5
 
-onready var player = $Player
-onready var camera = $GameCamera
-onready var debug_line = $DebugLine
+@onready var player = $Player
+@onready var camera = $GameCamera
+@onready var debug_line = $DebugLine
 
-onready var boss = $Boss
-onready var boss_mouth = $Boss/MouthArea
+@onready var boss = $Boss
+@onready var boss_mouth = $Boss/MouthArea
 
-onready var entry_block = $Environment/Maze/EntryBlock
-onready var navigation = $Environment/Maze/Navigation
-onready var tile_map = $Environment/Maze/Navigation/TileMap
+@onready var entry_block = $Environment/Maze/EntryBlock
+@onready var navigation = $Environment/Maze/Navigation
+@onready var tile_map = $Environment/Maze/Navigation/TileMap
 
-onready var exit_door = $Environment/EndPlatform/SteelBlock/WallBlock/ExitDoor
-onready var end_tube = $Environment/EndPlatform/EndTube
+@onready var exit_door = $Environment/EndPlatform/SteelBlock/WallBlock/ExitDoor
+@onready var end_tube = $Environment/EndPlatform/EndTube
 
-onready var wall_ending_bottom = $Environment/HiddenWalls/EndingBottom
+@onready var wall_ending_bottom = $Environment/HiddenWalls/EndingBottom
 
-onready var falling_down = $Trigger/FallingDown
-onready var before_game = $Trigger/BeforeGame
-onready var game_begin = $Trigger/GameBegin
-onready var game_end = $Trigger/GameEnd
-onready var exit_door_area = $Trigger/ExitDoorArea
-onready var player_respawn = $Trigger/PlayerRespawn
-onready var teleport_player = $Trigger/TeleportPlayer
+@onready var falling_down = $Trigger/FallingDown
+@onready var before_game = $Trigger/BeforeGame
+@onready var game_begin = $Trigger/GameBegin
+@onready var game_end = $Trigger/GameEnd
+@onready var exit_door_area = $Trigger/ExitDoorArea
+@onready var player_respawn = $Trigger/PlayerRespawn
+@onready var teleport_player = $Trigger/TeleportPlayer
 
-onready var main_music = $Sound/MainMusic
-onready var connect_sound = $Sound/ConnectSound
-onready var wind_sound = $Sound/WindSound
-onready var falling_sound = $Sound/FallingSound
+@onready var main_music = $Sound/MainMusic
+@onready var connect_sound = $Sound/ConnectSound
+@onready var wind_sound = $Sound/WindSound
+@onready var falling_sound = $Sound/FallingSound
 
 var music_00: int
 var music_01: int
@@ -60,18 +60,20 @@ var game_playing: bool = false
 var ending_triggered: bool = false
 
 func _ready() -> void:
+	super._ready()
+	
 	music_00 = main_music.add_part(0, 4 * 60 + 0.7, false, 0, 0, 0)
 	music_01 = main_music.add_part(4 * 60 + 0.7, 4 * 60 + 25, true, 0.5, 0.5, -1)
 	
-	connect("scene_started", self, "_on_scene_started")
+	connect("scene_started", Callable(self, "_on_scene_started"))
 	
-	falling_down.connect("body_entered", self, "_trigger_falling_from_island", [], CONNECT_ONESHOT)
-	before_game.connect("body_entered", self, "_trigger_before_game", [], CONNECT_ONESHOT)
-	game_begin.connect("body_entered", self, "_trigger_game_begin")
-	boss_mouth.connect("body_entered", self, "_on_boss_mouth_interaction")
-	game_end.connect("body_entered", self, "_trigger_game_end")
-	exit_door.connect("selected", self, "_on_exit_door_selected")
-	player.connect("died", self, "_trigger_reset_game")
+	falling_down.connect("body_entered", Callable(self, "_trigger_falling_from_island").bind(), CONNECT_ONE_SHOT)
+	before_game.connect("body_entered", Callable(self, "_trigger_before_game").bind(), CONNECT_ONE_SHOT)
+	game_begin.connect("body_entered", Callable(self, "_trigger_game_begin"))
+	boss_mouth.connect("body_entered", Callable(self, "_on_boss_mouth_interaction"))
+	game_end.connect("body_entered", Callable(self, "_trigger_game_end"))
+	exit_door.connect("selected", Callable(self, "_on_exit_door_selected"))
+	player.connect("died", Callable(self, "_trigger_reset_game"))
 
 func _on_scene_started() -> void:
 	camera.scale_follow_offset(start_follow_offset)
@@ -83,12 +85,12 @@ func _on_scene_started() -> void:
 
 	if not teleport_player_to_end:
 		SubtitleManager.show_quote(Text.find("Text007"))
-		yield(Tools.wait(15.0), "completed")
+		await Tools.wait(15.0)
 		SubtitleManager.hide_quote()
-		yield(Tools.wait(2.0), "completed")
+		await Tools.wait(2.0)
 	
 	black_screen.fade_out(2.0)
-	CursorManager.show()
+	CursorManager.appear()
 	
 	if teleport_player_to_end:
 		_trigger_falling_from_island(player)
@@ -117,7 +119,7 @@ func _trigger_before_game(body: Node) -> void:
 	player.current_velocity.x = 0.0
 	player.freeze(true)
 	
-	CursorManager.hide()
+	CursorManager.disappear()
 
 func _trigger_game_begin(body: Node) -> void:
 	if not body.is_in_group("player") or game_playing:
@@ -135,14 +137,14 @@ func _trigger_game_begin(body: Node) -> void:
 	
 	connect_sound.stop()
 	player.freeze()
-	entry_block.show()
-	yield(player.enable_avatar_mode(), "completed")
+	entry_block.appear()
+	await player.enable_avatar_mode()
 	
 	Tools.animate_volume(wind_sound, -8.0, Tools.SILENT)
 	main_music.play()
 	SubtitleManager.say(Text.find("Narrator004"), 0.5, 3.0)
 	player.unfreeze()
-	yield(Tools.wait(1.0), "completed")
+	await Tools.wait(1.0)
 	
 	boss.follows = true
 
@@ -151,15 +153,15 @@ func _on_boss_mouth_interaction(body: Node) -> void:
 		var removable_line = body.get_parent()
 		
 		if removable_line.enable_boss_interaction:
-			removable_line.hide()
+			removable_line.disappear()
 	elif body.is_in_group("player"):
 		player.kill()
 
 func _trigger_reset_game() -> void:
 	boss.go_back = true
 	
-	yield(Tools.wait(2.0), "completed")
-	yield(black_screen.fade_in(2.0), "completed")
+	await Tools.wait(2.0)
+	await black_screen.fade_in(2.0)
 	
 	game_playing = false
 	
@@ -181,7 +183,7 @@ func _trigger_game_end(body: Node) -> void:
 	camera.scale_follow_speed(end_follow_speed_scale)
 	camera.change_zoom(end_camera_zoom, camera_change_duration)
 	
-	CursorManager.show()
+	CursorManager.appear()
 	
 	if teleport_player_to_end:
 		return
@@ -204,15 +206,15 @@ func _on_exit_door_selected() -> void:
 	camera.scale_follow_speed(exit_follow_speed_scale)
 	camera.change_zoom(exit_camera_zoom, camera_change_duration)
 	
-	CursorManager.hide()
+	CursorManager.disappear()
 	player.freeze(true)
-	yield(Tools.wait(4.0), "completed")
+	await Tools.wait(4.0)
 	falling_sound.play()
 	end_tube.open_mouth = true
-	yield(Tools.wait(0.25), "completed")
+	await Tools.wait(0.25)
 	wall_ending_bottom.disabled = true
-	yield(Tools.wait(3.0), "completed")
-	yield(black_screen.fade_in(2.0), "completed")
-	yield(Tools.wait(1.0), "completed")
+	await Tools.wait(3.0)
+	await black_screen.fade_in(2.0)
+	await Tools.wait(1.0)
 	
 	load_next_scene()

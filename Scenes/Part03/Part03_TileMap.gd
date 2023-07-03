@@ -1,29 +1,31 @@
 extends TileMap
 
-export var map_top_left: Vector2
-export var map_bottom_right: Vector2
-export var number_of_islands: Vector2
+@export var map_top_left: Vector2
+@export var map_bottom_right: Vector2
+@export var number_of_islands: Vector2
 
-export var p_entry: Vector2
-export var p_exit: Vector2
+@export var p_entry: Vector2
+@export var p_exit: Vector2
 
-export var cell_step = Vector2(4, 4)
-export var cell_v_offset = Vector2(2, 0)
-export var cell_h_offset = Vector2(0, 2)
+@export var cell_step = Vector2(4, 4)
+@export var cell_v_offset = Vector2(2, 0)
+@export var cell_h_offset = Vector2(0, 2)
 
-export var E00 = 19
-export var L00 = 15
-export var L01 = 17
-export var L02 = 14
-export var L03 = 16
-export var H00 = 6
-export var V00 = 11
-export var T00 = 13
-export var T01 = 18
-export var T02 = 20
-export var T03 = 21
+@export var E00 = 19
+@export var L00 = 15
+@export var L01 = 17
+@export var L02 = 14
+@export var L03 = 16
+@export var H00 = 6
+@export var V00 = 11
+@export var T00 = 13
+@export var T01 = 18
+@export var T02 = 20
+@export var T03 = 21
 
 func _ready() -> void:
+	super._ready()
+	
 	reset()
 
 func reset() -> void:

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Environmnent/Pot00.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Pot00.png" type="Texture2D" id=4]
 
 [node name="Pickable_CoffeePot" type="RigidBody2D" groups=[
 "pickable",
@@ -12,12 +12,12 @@ collision_layer = 2
 collision_mask = 2
 mass = 0.02
 gravity_scale = 5.0
-contacts_reported = 3
+max_contacts_reported = 3
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 3 )
 
-[node name="Selectable" type="Sprite" parent="." groups=[
+[node name="Selectable" type="Sprite2D" parent="." groups=[
 "selectable",
 ]]
 texture = ExtResource( 4 )
@@ -26,4 +26,4 @@ description_key = "Description012"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PoolVector2Array( -21.7291, -36.5467, 3.08808, -37.2739, 6.36067, -32.456, 7.63335, -30.5469, 14.6331, -30.1833, 22.2691, -23.0018, 25.4508, -10.0932, 25.5417, 2.90623, 23.2691, 3.72437, 18.8147, -12.6386, 14.8149, -20.0928, 10.5423, -21.7291, 6.7243, -16.3657, 9.72417, 27.9961, 9.54236, 35.1776, 7.81516, 37.9048, -23.6381, 38.632, -26.0016, 34.9958, -18.8201, -31.5469 )
+polygon = PackedVector2Array( -21.7291, -36.5467, 3.08808, -37.2739, 6.36067, -32.456, 7.63335, -30.5469, 14.6331, -30.1833, 22.2691, -23.0018, 25.4508, -10.0932, 25.5417, 2.90623, 23.2691, 3.72437, 18.8147, -12.6386, 14.8149, -20.0928, 10.5423, -21.7291, 6.7243, -16.3657, 9.72417, 27.9961, 9.54236, 35.1776, 7.81516, 37.9048, -23.6381, 38.632, -26.0016, 34.9958, -18.8201, -31.5469 )

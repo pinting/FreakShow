@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Door01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Door01.png" type="Texture2D" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
 
-[node name="Selectable_WoodenDoor" type="Sprite" groups=[
+[node name="Selectable_WoodenDoor" type="Sprite2D" groups=[
 "selectable",
 ]]
 texture = ExtResource( 1 )

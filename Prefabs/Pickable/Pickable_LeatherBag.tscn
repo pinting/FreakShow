@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=3]
-[ext_resource path="res://Assets/Environmnent/Bag00.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Bag00.png" type="Texture2D" id=4]
 
 [node name="Pickable_LeatherBag" type="RigidBody2D" groups=[
 "pickable",
@@ -12,12 +12,12 @@ collision_layer = 2
 collision_mask = 2
 mass = 0.1
 gravity_scale = 5.0
-contacts_reported = 3
+max_contacts_reported = 3
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 3 )
 
-[node name="Selectable" type="Sprite" parent="." groups=[
+[node name="Selectable" type="Sprite2D" parent="." groups=[
 "selectable",
 ]]
 scale = Vector2( 0.9, 0.9 )
@@ -28,4 +28,4 @@ description_key = "Description003"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
 scale = Vector2( 0.9, 0.9 )
-polygon = PoolVector2Array( -54.3355, -46.1579, -10.3705, -48.3169, 52.6329, -49.0038, 56.4602, -43.5082, 58.8155, 37.2579, 56.9509, 41.0852, 49.5907, 46.3845, -48.8399, 47.5622, -55.0224, 41.9684, -55.3169, 11.0555, -58.3591, 5.5599, -58.0647, -41.7417 )
+polygon = PackedVector2Array( -54.3355, -46.1579, -10.3705, -48.3169, 52.6329, -49.0038, 56.4602, -43.5082, 58.8155, 37.2579, 56.9509, 41.0852, 49.5907, 46.3845, -48.8399, 47.5622, -55.0224, 41.9684, -55.3169, 11.0555, -58.3591, 5.5599, -58.0647, -41.7417 )

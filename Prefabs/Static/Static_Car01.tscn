@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Car01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Car01.png" type="Texture2D" id=1]
 
 [node name="Static_Car01" type="StaticBody2D"]
 rotation = 3.14159
@@ -8,9 +8,9 @@ scale = Vector2( 1, -1 )
 collision_layer = 15
 collision_mask = 15
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2( -0.000488281, 0 )
 texture = ExtResource( 1 )
 
-[node name="Shape" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 423.14, -351.077, -579.227, -349.576, -567.239, 261.733, -258.588, 261.733, -228.622, 266.227, -227.123, 297.692, -213.639, 324.661, -188.167, 339.644, -138.723, 342.641, -119.245, 336.648, -98.269, 302.186, -90.7775, 275.217, -57.8147, 275.217, -53.3197, 308.18, -38.3366, 329.156, 2.11777, 341.142, 51.5618, 333.65, 78.5313, 305.183, 86.0228, 264.728, 414.152, 263.229, 417.148, 224.273, 531.02, 201.798, 528.023, 174.829, 417.148, 170.334 )
+[node name="Shape3D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array( 423.14, -351.077, -579.227, -349.576, -567.239, 261.733, -258.588, 261.733, -228.622, 266.227, -227.123, 297.692, -213.639, 324.661, -188.167, 339.644, -138.723, 342.641, -119.245, 336.648, -98.269, 302.186, -90.7775, 275.217, -57.8147, 275.217, -53.3197, 308.18, -38.3366, 329.156, 2.11777, 341.142, 51.5618, 333.65, 78.5313, 305.183, 86.0228, 264.728, 414.152, 263.229, 417.148, 224.273, 531.02, 201.798, 528.023, 174.829, 417.148, 170.334 )

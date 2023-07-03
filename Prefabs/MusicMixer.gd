@@ -1,23 +1,23 @@
 class_name MusicMixer
 extends Node
 
+# Debug the music player (Config.debug needs to be true)
+const DEBUG: bool = false
+
 # Playback stream
-export var stream: AudioStream
+@export var stream: AudioStream
 
 # Should the whole thing repeat
-export var global_loop: bool = false
+@export var global_loop: bool = false
 
 # If auto play
-export var autoplay: bool = false
+@export var autoplay: bool = false
 
 # Playing volume in DB
-export var max_volume: int = 0
+@export var max_volume: int = 0
 
-# Debug the music player (Config.debug needs to be true)
-export var debug: bool = false
-
-onready var player_00 = $AudioStreamPlayer00
-onready var player_01 = $AudioStreamPlayer01
+@onready var player_00 = $AudioStreamPlayer00
+@onready var player_01 = $AudioStreamPlayer01
 
 var global_level: float = 1.0
 var master_player: AudioStreamPlayer = null
@@ -176,7 +176,7 @@ func is_playing() -> bool:
 	return master_player.playing or slave_player.playing
 
 func _debug(message: String) -> void:
-	if debug:
+	if DEBUG:
 		Tools.debug(message)
 
 func _debug_if_integer(t: float, message: String) -> void:

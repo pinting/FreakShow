@@ -2,18 +2,18 @@
 
 [ext_resource path="res://Prefabs/Static/Static_Train.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/RandomChild.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Environmnent/Train00.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Train04.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Environmnent/Train00.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Environmnent/Train04.png" type="Texture2D" id=4]
 [ext_resource path="res://Assets/Sounds/Train01.ogg" type="AudioStream" id=5]
-[ext_resource path="res://Assets/Environmnent/Train02.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Environmnent/Train01.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Environmnent/Train03.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Train02.png" type="Texture2D" id=6]
+[ext_resource path="res://Assets/Environmnent/Train01.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets/Environmnent/Train03.png" type="Texture2D" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2047.14, 501.191 )
+size = Vector2( 2047.14, 501.191 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 2036.48, 10.3484 )
+size = Vector2( 2036.48, 10.3484 )
 
 [node name="Static_RandomTrain" type="StaticBody2D" groups=[
 "train",
@@ -24,27 +24,27 @@ script = ExtResource( 1 )
 position = Vector2( -874.948, -816.511 )
 scale = Vector2( 20, 15 )
 
-[node name="Train00" type="Sprite" parent="Train00"]
+[node name="Train00" type="Sprite2D" parent="Train00"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 3 )
 
-[node name="Train01" type="Sprite" parent="Train00"]
+[node name="Train01" type="Sprite2D" parent="Train00"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 7 )
 
-[node name="Train02" type="Sprite" parent="Train00"]
+[node name="Train02" type="Sprite2D" parent="Train00"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 6 )
 
-[node name="Train03" type="Sprite" parent="Train00"]
+[node name="Train03" type="Sprite2D" parent="Train00"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 8 )
 
-[node name="Train04" type="Sprite" parent="Train00"]
+[node name="Train04" type="Sprite2D" parent="Train00"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 4 )
@@ -52,27 +52,27 @@ texture = ExtResource( 4 )
 [node name="Train01" parent="." instance=ExtResource( 2 )]
 position = Vector2( 3348.12, -816.511 )
 
-[node name="Train00" type="Sprite" parent="Train01"]
+[node name="Train00" type="Sprite2D" parent="Train01"]
 light_mask = -2147483648
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 3 )
 
-[node name="Train01" type="Sprite" parent="Train01"]
+[node name="Train01" type="Sprite2D" parent="Train01"]
 light_mask = -2147483648
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 7 )
 
-[node name="Train02" type="Sprite" parent="Train01"]
+[node name="Train02" type="Sprite2D" parent="Train01"]
 light_mask = -2147483648
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 6 )
 
-[node name="Train03" type="Sprite" parent="Train01"]
+[node name="Train03" type="Sprite2D" parent="Train01"]
 light_mask = -2147483648
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 8 )
 
-[node name="Train04" type="Sprite" parent="Train01"]
+[node name="Train04" type="Sprite2D" parent="Train01"]
 light_mask = -2147483648
 scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 4 )
@@ -81,27 +81,27 @@ texture = ExtResource( 4 )
 position = Vector2( 7637.92, -816.511 )
 scale = Vector2( 20, 15 )
 
-[node name="Train00" type="Sprite" parent="Train02"]
+[node name="Train00" type="Sprite2D" parent="Train02"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 3 )
 
-[node name="Train01" type="Sprite" parent="Train02"]
+[node name="Train01" type="Sprite2D" parent="Train02"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 7 )
 
-[node name="Train02" type="Sprite" parent="Train02"]
+[node name="Train02" type="Sprite2D" parent="Train02"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 6 )
 
-[node name="Train03" type="Sprite" parent="Train02"]
+[node name="Train03" type="Sprite2D" parent="Train02"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 8 )
 
-[node name="Train04" type="Sprite" parent="Train02"]
+[node name="Train04" type="Sprite2D" parent="Train02"]
 light_mask = -2147483648
 scale = Vector2( 0.09, 0.12 )
 texture = ExtResource( 4 )

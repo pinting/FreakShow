@@ -1,9 +1,11 @@
 extends "res://Prefabs/PathFindingEnemy.gd"
 
-export var high_speed_after_distance: float = 3000.0
-export var high_speed_scale: float = 1.5
+@export var high_speed_after_distance: float = 3000.0
+@export var high_speed_scale: float = 1.5
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+
 	var d = path_distance()
 	
 	if d > high_speed_after_distance:

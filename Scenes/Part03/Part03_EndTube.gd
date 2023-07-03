@@ -1,11 +1,11 @@
 extends Node2D
 
-export var speed: float = 200.0
-export var length: float = 160.0
+@export var speed: float = 200.0
+@export var length: float = 160.0
 
-onready var meat = $Meat
-onready var tooth_left = $Meat/Tooth00
-onready var tooth_right = $Meat/Tooth01
+@onready var meat = $Meat
+@onready var tooth_left = $Meat/Tooth00
+@onready var tooth_right = $Meat/Tooth01
 
 var open_mouth: bool = false
 var between: float = 0.0

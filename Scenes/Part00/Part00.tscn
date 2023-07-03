@@ -9,10 +9,10 @@
 [ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Part00/Part00_Building01.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Part00/Part00_RoadBlock.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/Environmnent/Lines01.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Environmnent/Help00.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Environmnent/Board01.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Environmnent/Help01.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Environmnent/Lines01.png" type="Texture2D" id=10]
+[ext_resource path="res://Assets/Environmnent/Help00.png" type="Texture2D" id=11]
+[ext_resource path="res://Assets/Environmnent/Board01.png" type="Texture2D" id=12]
+[ext_resource path="res://Assets/Environmnent/Help01.png" type="Texture2D" id=13]
 [ext_resource path="res://Prefabs/Pickable/Pickable_BeachBall_White.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Prefabs/BackgroundRect.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Part00/Part00_Crate.tscn" type="PackedScene" id=16]
@@ -20,14 +20,14 @@
 [ext_resource path="res://Assets/Music/Part00.ogg" type="AudioStream" id=18]
 [ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Resources/Materials/GhostBlackMaterial.tres" type="Material" id=20]
-[ext_resource path="res://Assets/Environmnent/Car00_Stencil.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Environmnent/Car00_Stencil.png" type="Texture2D" id=21]
 [ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=22]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 20000, 76.036 )
+size = Vector2( 20000, 76.036 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 1500, 1500 )
+size = Vector2( 1500, 1500 )
 
 [node name="Part00" type="Node2D"]
 
@@ -42,7 +42,7 @@ material = ExtResource( 4 )
 [node name="Player" parent="BaseScene" instance=ExtResource( 6 )]
 position = Vector2( -2686.45, 466.563 )
 
-[node name="AnimatedSprite" parent="BaseScene/Player" index="0"]
+[node name="AnimatedSprite2D" parent="BaseScene/Player" index="0"]
 material = ExtResource( 20 )
 animation = "a_stand_still"
 frame = 0
@@ -60,7 +60,7 @@ position = Vector2( 4491.52, 891.419 )
 collision_layer = 15
 collision_mask = 15
 
-[node name="Bottom" type="Sprite" parent="BaseScene/Environment/Road"]
+[node name="Bottom" type="Sprite2D" parent="BaseScene/Environment/Road"]
 texture = ExtResource( 10 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 40000, 13 )
@@ -72,16 +72,16 @@ shape = SubResource( 6 )
 [node name="LoopLeft" parent="BaseScene/Environment" instance=ExtResource( 22 )]
 position = Vector2( -7806.94, -601.089 )
 player_node = NodePath("../../Player")
-area_shape_node = NodePath("Area/CollisionShape2D")
+area_shape_node = NodePath("Area3D/CollisionShape2D")
 container_node = NodePath("Container")
 loop_mode = "left"
 mirror_mode = "left"
 
 [node name="Container" type="Node2D" parent="BaseScene/Environment/LoopLeft"]
 
-[node name="Area" type="Area2D" parent="BaseScene/Environment/LoopLeft"]
+[node name="Area3D" type="Area2D" parent="BaseScene/Environment/LoopLeft"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/LoopLeft/Area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/LoopLeft/Area3D"]
 shape = SubResource( 7 )
 
 [node name="Clouds" parent="BaseScene/Environment" instance=ExtResource( 17 )]
@@ -90,23 +90,23 @@ position = Vector2( -3750.77, -1440.57 )
 [node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 16 )]
 position = Vector2( 3577.87, 484.975 )
 
-[node name="Board00" type="Sprite" parent="BaseScene/Environment"]
+[node name="Board00" type="Sprite2D" parent="BaseScene/Environment"]
 position = Vector2( -2724.61, 427.24 )
 z_index = -2
 texture = ExtResource( 12 )
 
-[node name="Help" type="Sprite" parent="BaseScene/Environment/Board00"]
+[node name="Help" type="Sprite2D" parent="BaseScene/Environment/Board00"]
 self_modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 25.42, -56.3737 )
 scale = Vector2( 1.00219, 1.07928 )
 texture = ExtResource( 11 )
 
-[node name="Board01" type="Sprite" parent="BaseScene/Environment"]
+[node name="Board01" type="Sprite2D" parent="BaseScene/Environment"]
 position = Vector2( 460.103, 427.24 )
 z_index = -2
 texture = ExtResource( 12 )
 
-[node name="Help" type="Sprite" parent="BaseScene/Environment/Board01"]
+[node name="Help" type="Sprite2D" parent="BaseScene/Environment/Board01"]
 self_modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 4.71057, -60.0012 )
 scale = Vector2( 0.904466, 1.03368 )
@@ -118,7 +118,7 @@ position = Vector2( 3635.5, 754.339 )
 [node name="Building00" parent="BaseScene/Environment" instance=ExtResource( 5 )]
 position = Vector2( 6912.19, 553.361 )
 
-[node name="Car00" type="Sprite" parent="BaseScene/Environment"]
+[node name="Car00" type="Sprite2D" parent="BaseScene/Environment"]
 position = Vector2( 7371.85, 582.459 )
 z_index = -1
 texture = ExtResource( 21 )

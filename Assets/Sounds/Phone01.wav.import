@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Phone01.wav-27ae288327b81fda5d0773f5fae30867.sample"
+type="AudioStreamWAV"
+uid="uid://dmwkdxq5pvrlg"
+path="res://.godot/imported/Phone01.wav-27ae288327b81fda5d0773f5fae30867.sample"
 
 [deps]
 
 source_file="res://Assets/Sounds/Phone01.wav"
-dest_files=[ "res://.import/Phone01.wav-27ae288327b81fda5d0773f5fae30867.sample" ]
+dest_files=["res://.godot/imported/Phone01.wav-27ae288327b81fda5d0773f5fae30867.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

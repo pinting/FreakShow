@@ -3,18 +3,18 @@
 [ext_resource path="res://Prefabs/Selectable/Selectable_WoodenDoor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/Static/Static_Bed01.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Static/Static_Fridge00.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Prefabs/Light/Light_Room.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Light3D/Light_Room.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Static/Static_RoomLamp00.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Environmnent/Building00_1x7_Bottom.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall02.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor02.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Building00_1x7_Bottom.png" type="Texture2D" id=6]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall02.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor02.png" type="Texture2D" id=8]
 [ext_resource path="res://Prefabs/Static/Static_Shelf01.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Prefabs/Static/Static_Table00.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Prefabs/Static/Static_Chair01.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Prefabs/Viewable/Viewable_TurkishRug.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Prefabs/Pickable/Pickable_ClothesPile.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Prefabs/Pickable/Pickable_DustyPillow.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Environmnent/Shoes00.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Environmnent/Shoes00.png" type="Texture2D" id=15]
 [ext_resource path="res://Prefabs/Pickable/Pickable_YellowSprinkler.tscn" type="PackedScene" id=16]
 [ext_resource path="res://Prefabs/Pickable/Pickable_LargeCup.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Prefabs/Pickable/Pickable_MangoFruit.tscn" type="PackedScene" id=18]
@@ -22,25 +22,25 @@
 [ext_resource path="res://Prefabs/Pickable/Pickable_CoffeePot.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Prefabs/Viewable/Viewable_SexAndBiblePaper.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Blessing01.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Assets/Environmnent/Building00_1x1_Right.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Environmnent/Building00_1x1_Left.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Environmnent/Building00_1x7_Top.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Environmnent/Building00_1x1_Right.png" type="Texture2D" id=23]
+[ext_resource path="res://Assets/Environmnent/Building00_1x1_Left.png" type="Texture2D" id=24]
+[ext_resource path="res://Assets/Environmnent/Building00_1x7_Top.png" type="Texture2D" id=25]
 [ext_resource path="res://Prefabs/Viewable/Viewable_HorseHead.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Assets/Environmnent/Misc18.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Environmnent/Misc18.png" type="Texture2D" id=27]
 [ext_resource path="res://Prefabs/Pickable/Pickable_CanOfCoffee.tscn" type="PackedScene" id=28]
 [ext_resource path="res://Prefabs/Viewable/Viewable_LipstickBitchPaper.tscn" type="PackedScene" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2756.7, 99.7452 )
+size = Vector2( 2756.7, 99.7452 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 208.582, 679.61 )
+size = Vector2( 208.582, 679.61 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 208.582, 679.61 )
+size = Vector2( 208.582, 679.61 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 2176.26, 10 )
+size = Vector2( 2176.26, 10 )
 
 [node name="Part01_Flat" type="Node2D"]
 position = Vector2( -664.621, -49.3025 )
@@ -57,7 +57,7 @@ z_as_relative = false
 collision_layer = 4
 collision_mask = 4
 
-[node name="Light" parent="Inside/RoomLamp00" instance=ExtResource( 4 )]
+[node name="Light3D" parent="Inside/RoomLamp00" instance=ExtResource( 4 )]
 position = Vector2( 14.9398, 7.73397 )
 scale = Vector2( 1.623, 1.15 )
 
@@ -69,11 +69,11 @@ z_as_relative = false
 collision_layer = 4
 collision_mask = 4
 
-[node name="Light" parent="Inside/RoomLamp01" instance=ExtResource( 4 )]
+[node name="Light3D" parent="Inside/RoomLamp01" instance=ExtResource( 4 )]
 position = Vector2( 14.9396, 11.8714 )
 scale = Vector2( 1.625, 1.15 )
 
-[node name="Floor" type="Sprite" parent="Inside"]
+[node name="Floor" type="Sprite2D" parent="Inside"]
 position = Vector2( 33.4587, 383.004 )
 scale = Vector2( 0.999862, 1 )
 z_index = 1
@@ -81,7 +81,7 @@ texture = ExtResource( 8 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 140 )
 
-[node name="Rose" type="Sprite" parent="Inside/Floor"]
+[node name="Rose" type="Sprite2D" parent="Inside/Floor"]
 position = Vector2( -2175.98, -157.695 )
 scale = Vector2( 0.706661, 0.706661 )
 texture = ExtResource( 27 )
@@ -114,7 +114,7 @@ collision_mask = 1
 [node name="Chair" parent="Inside/Floor" instance=ExtResource( 11 )]
 position = Vector2( -238.172, 4.85242 )
 
-[node name="Shoes" type="Sprite" parent="Inside/Floor/Chair"]
+[node name="Shoes" type="Sprite2D" parent="Inside/Floor/Chair"]
 position = Vector2( -317.727, -74.5128 )
 texture = ExtResource( 15 )
 
@@ -181,14 +181,14 @@ z_index = 1
 collision_layer = 1
 collision_mask = 1
 
-[node name="Wall" type="Sprite" parent="Inside"]
+[node name="Wall" type="Sprite2D" parent="Inside"]
 position = Vector2( 34.8443, -46.8263 )
 scale = Vector2( 1.3, 1.3 )
 z_index = -1
 texture = ExtResource( 7 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 4000, 576 )
-region_filter_clip = true
+region_filter_clip_enabled = true
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
 position = Vector2( 376.119, 0 )
@@ -243,25 +243,25 @@ position = Vector2( -12.3802, -690.529 )
 scale = Vector2( 2, 2 )
 z_index = 4
 
-[node name="Building_Top" type="Sprite" parent="Building"]
+[node name="Building_Top" type="Sprite2D" parent="Building"]
 light_mask = 2
 position = Vector2( -19.734, -69.8103 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 25 )
 region_rect = Rect2( 0, 0, 3144, 709 )
 
-[node name="Building_Bottom" type="Sprite" parent="Building"]
+[node name="Building_Bottom" type="Sprite2D" parent="Building"]
 light_mask = 2
 position = Vector2( -20.4164, 779.742 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 6 )
 
-[node name="Building_Left" type="Sprite" parent="Building"]
+[node name="Building_Left" type="Sprite2D" parent="Building"]
 position = Vector2( -1367.09, 354.076 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 24 )
 
-[node name="Building_Right" type="Sprite" parent="Building"]
+[node name="Building_Right" type="Sprite2D" parent="Building"]
 position = Vector2( 1309.16, 354.522 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 23 )

@@ -15,13 +15,9 @@ func _prepare() -> void:
 	temp = {}
 
 func _exists() -> bool:
-	return File.new().file_exists(Config.save_path)
-
-func remove() -> void:
-	Directory.new().remove(Config.save_path)
+	return FileAccess.file_exists(Config.save_path)
 
 func clear() -> void:
-	remove()
 	_prepare()
 	save()
 

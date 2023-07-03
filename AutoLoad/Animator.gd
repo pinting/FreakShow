@@ -13,23 +13,18 @@ func find_tween(object: Object, path: String) -> Tween:
 	else:
 		return null
 
-func add_tween(object: Object, path: String, auto_destroy: bool = false) -> Tween:
+func add_tween(object: Object, path: String) -> Tween:
 	var key = generate_key(object, path)
 	var tween = find_tween(object, path)
 	
 	if tween:
-		tween.stop_all()
+		tween.kill()
 	
-	if not tween:
-		tween = Tween.new()
-		
-		if auto_destroy:
-			tween.connect("tween_all_completed", self, 
-				"remove_tween", [object, path])
-		
-		add_child(tween)
-
-		tweens[key] = tween
+	tween = get_tree().create_tween()
+	
+	tween.finished.connect(Callable(remove_tween).bind(object, path))
+	
+	tweens[key] = tween
 	
 	return tween
 
@@ -38,23 +33,20 @@ func remove_tween(object: Object, path: String) -> void:
 	var tween = find_tween(object, path)
 
 	if tween:
-		tween.stop_all()
+		tween.kill()
 		assert(tweens.erase(key))
-		Tools.destroy_node(tween)
 
-func run(object: Object, path: String, from, to, duration: float, trans_type = Tween.TRANS_LINEAR, ease_type = Tween.EASE_IN_OUT, delay = 0.0) -> void:
-	var tween = add_tween(object, path, true)
+func run(object: Object, path: String, from, to, duration: float) -> void:
+	var tween: Tween = add_tween(object, path)
 	
 	if object.has_method(path):
 		object.call(path, from)
-		tween.interpolate_method(object, path, from, to, duration, trans_type, ease_type, delay)
+		tween.tween_method(Callable(object, path), from, to, duration)
 	else:
 		object.set(path, from)
-		tween.interpolate_property(object, path, from, to, duration, trans_type, ease_type, delay)
+		tween.tween_property(object, path, to, duration)
 	
-	tween.start()
-	
-	yield(tween, "tween_all_completed")
+	await tween.finished
 
 func is_active(object: Object, path: String) -> bool:
 	var tween = find_tween(object, path)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Crate00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Crate00.png" type="Texture2D" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
 [ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=4]
 
@@ -11,11 +11,11 @@ input_pickable = true
 collision_layer = 4
 collision_mask = 4
 gravity_scale = 5.0
-contacts_reported = 3
+max_contacts_reported = 3
 contact_monitor = true
 script = ExtResource( 4 )
 
-[node name="Selectable" type="Sprite" parent="." groups=[
+[node name="Selectable" type="Sprite2D" parent="." groups=[
 "selectable",
 ]]
 texture = ExtResource( 1 )
@@ -25,4 +25,4 @@ description_key = "Description006"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
 position = Vector2( -9.52716, -8.16613 )
-polygon = PoolVector2Array( -101.373, -87.9381, 120.344, -88.1381, 120.015, 104.698, -100.969, 104.613 )
+polygon = PackedVector2Array( -101.373, -87.9381, 120.344, -88.1381, 120.015, 104.698, -100.969, 104.613 )

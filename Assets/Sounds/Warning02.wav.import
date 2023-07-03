@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Warning02.wav-3f9faca6b9a322699ddd768f5cd9ea82.sample"
+type="AudioStreamWAV"
+uid="uid://pnwk6hgo0imn"
+path="res://.godot/imported/Warning02.wav-3f9faca6b9a322699ddd768f5cd9ea82.sample"
 
 [deps]
 
 source_file="res://Assets/Sounds/Warning02.wav"
-dest_files=[ "res://.import/Warning02.wav-3f9faca6b9a322699ddd768f5cd9ea82.sample" ]
+dest_files=["res://.godot/imported/Warning02.wav-3f9faca6b9a322699ddd768f5cd9ea82.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

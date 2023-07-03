@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/Part02.ogg-1df7e87ffb226653d0487631612885dc.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://blrcccl5cibgs"
+path="res://.godot/imported/Part02.ogg-1df7e87ffb226653d0487631612885dc.oggvorbisstr"
 
 [deps]
 
 source_file="res://Assets/Music/Part02.ogg"
-dest_files=[ "res://.import/Part02.ogg-1df7e87ffb226653d0487631612885dc.oggstr" ]
+dest_files=["res://.godot/imported/Part02.ogg-1df7e87ffb226653d0487631612885dc.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

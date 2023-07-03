@@ -1,29 +1,25 @@
 extends Node
 
-var resource_loader: ResourceInteractiveLoader = null
+var loading_path: String
 var count: int = 0
 
 func _process(_delta: float) -> void:
-	if not resource_loader:
+	if loading_path == "":
 		return
 	
-	var now = OS.get_ticks_msec()
+	var progress = [0.0]
+	var result = ResourceLoader.load_threaded_get_status(loading_path, progress)
 	
-	while OS.get_ticks_msec() < now + Config.LOADING_TIME_PER_TICK:
-		var result = resource_loader.poll()
+	if result == ResourceLoader.THREAD_LOAD_LOADED:
+		var resource = ResourceLoader.load_threaded_get(loading_path)
 		
-		if result == ERR_FILE_EOF:
-			_finish_loading(resource_loader.get_resource())
-			break
-		elif result == OK:
-			var current = resource_loader.get_stage()
-			var stage_count = resource_loader.get_stage_count()
-			
-			Tools.debug(str("Loader progress: ", current + 1, "/", stage_count))
-		else:
-			Tools.debug("Error during loading!")
-			resource_loader = null
-			break
+		_finish_loading(resource)
+	elif result == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		Tools.debug("Loader progress: %f" % progress)
+	else:
+		Tools.debug("Error during scene loading!")
+		
+		loading_path = ""
 
 func _finish_loading(scene_resource) -> void:
 	count += 1
@@ -49,23 +45,24 @@ func _finish_loading(scene_resource) -> void:
 	
 	current_scene.queue_free()
 	
-	var next_scene = scene_resource.instance()
+	var next_scene = scene_resource.instantiate()
 	
 	root.add_child(next_scene)
 	
-	resource_loader = null
+	loading_path = ""
 
 func load_scene(path: String, save_progress: bool = false) -> void:
-	if resource_loader:
+	if loading_path != "":
 		return
 	
 	if save_progress:
 		Save.set_value("game", "current_scene", path)
 	
-	Analytics.report_scene(path)
 	VirtualInput.test_keys = {}
 	
-	resource_loader = ResourceLoader.load_interactive(path)
+	var err = ResourceLoader.load_threaded_request(path)
 	
-	if resource_loader == null:
+	if err == OK:
+		loading_path = path
+	else:
 		Tools.debug("Loader failed to initialize!")

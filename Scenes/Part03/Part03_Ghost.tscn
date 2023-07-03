@@ -7,7 +7,7 @@
 [node name="Part03_Ghost" type="Node2D"]
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource( 2 )
 z_index = -1
 frames = ExtResource( 1 )

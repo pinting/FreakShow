@@ -2,29 +2,27 @@ class_name BaseScene
 extends Node2D
 
 # Game restart after this amount of seconds if player is idle
-export var game_restart_after: float = 600.0
+@export var game_restart_after: float = 600.0
 
 # Delay game start
-export var delay: float = 0.0
+@export var delay: float = 0.0
 
 # Fade in and fade out time (2x will used)
-export var move_player_timeout: float = 0.8
+@export var move_player_timeout: float = 0.8
 
 # Auto fade out
-export var auto_fade_out: bool = true
+@export var auto_fade_out: bool = true
 
 # Auto show cursor at scene started
-export var auto_show_cursor: bool = true
+@export var auto_show_cursor: bool = true
 
 # Disable auto restart
-export var disable_auto_restart: bool = false
+@export var disable_auto_restart: bool = false
 
-const low_performance_environment = preload("res://Resources/LowPerformanceEnvironment.tres")
-
-onready var subtitle_display = $SubtitleDisplay
-onready var viewable_display = $ViewableDisplay 
-onready var black_screen = $BlackScreen
-onready var virtual_splash = $VirtualSplash
+@onready var subtitle_display = $SubtitleDisplay
+@onready var viewable_display = $ViewableDisplay 
+@onready var black_screen = $BlackScreen
+@onready var virtual_splash = $VirtualSplash
 
 signal scene_started
 
@@ -36,33 +34,10 @@ var auto_restart_counter: float = 0.0
 var player_move_in_progress: bool = false
 
 func _ready() -> void:
-	if Config.low_performance:
-		_low_performance_mode()
-	else:
-		_high_performance_mode()
-	
 	var tree = get_tree()
 	
 	for node in tree.get_nodes_in_group("auto_visible"):
 		node.visible = true
-
-func _low_performance_mode() -> void:
-	var tree = get_tree()
-	
-	for node in tree.get_nodes_in_group("high_performance"):
-		Tools.destroy_node(node)
-	
-	for node in tree.get_nodes_in_group("light"):
-		Tools.destroy_node(node)
-	
-	for node in tree.get_nodes_in_group("world_environment"):
-		node.environment = low_performance_environment
-
-func _high_performance_mode() -> void:
-	var tree = get_tree()
-	
-	for node in tree.get_nodes_in_group("fake_light"):
-		Tools.destroy_node(node)
 
 func _process(delta: float) -> void:
 	if not virtual_splash.complete:
@@ -81,7 +56,7 @@ func _process(delta: float) -> void:
 			black_screen.fade_out()
 		
 		if auto_show_cursor:
-			CursorManager.show()
+			CursorManager.appear()
 		
 		emit_signal("scene_started")
 	
@@ -113,7 +88,7 @@ func load_next_scene(use_fade = true, freeze_player = true) -> void:
 	
 	# Fade in the black screen
 	if use_fade and not black_screen.is_fading() and not black_screen.is_faded():
-		yield(black_screen.fade_in(), "completed")
+		await black_screen.fade_in()
 	
 	var current_scene_path = get_parent().filename
 	var next_scene_index = Config.SCENES.find(current_scene_path)
@@ -138,19 +113,19 @@ func move_player(player: Player, next_position: Vector2, sound: AudioStreamPlaye
 	if sound:
 		sound.play()
 	
-	yield(black_screen.fade_in(move_player_timeout), "completed")
+	await black_screen.fade_in(move_player_timeout)
 	
 	player.position = next_position
 	player.reset()
 	
 	# A small delay is needed for the camera
-	yield(Tools.wait(0.1), "completed")
+	await Tools.wait(0.1)
 	
 	var camera = CameraManager.current
 	
 	if camera:
 		camera.reset(player.global_position)
 	
-	yield(black_screen.fade_out(move_player_timeout), "completed")
+	await black_screen.fade_out(move_player_timeout)
 	
 	player_move_in_progress = false

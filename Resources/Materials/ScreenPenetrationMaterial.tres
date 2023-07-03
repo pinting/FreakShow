@@ -1,9 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bhjx448fosey7"]
 
-[ext_resource path="res://Shaders/ScreenPenetration.shader" type="Shader" id=1]
+[ext_resource type="Shader" path="res://Shaders/ScreenPenetration.gdshader" id="1"]
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/value = 0.0
-shader_param/dist = 0.2
+shader = ExtResource("1")
+shader_parameter/offset = Vector2(0.5, 0.5)
+shader_parameter/value = 0.0
+shader_parameter/dist = 0.2

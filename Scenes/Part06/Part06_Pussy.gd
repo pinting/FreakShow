@@ -1,13 +1,15 @@
 extends Selectable
 
-onready var inside = $Inside
-onready var filled = $Filled
-onready var light = $Light
+@onready var inside = $Inside
+@onready var filled = $Filled
+@onready var light = $Light3D
 
 signal dildo_inside
 
 func _ready() -> void:
-	inside.connect("body_entered", self, "_on_body_entered")
+	super._ready()
+	
+	inside.connect("body_entered", Callable(self, "_on_body_entered"))
 	
 	visible = false
 	filled.visible = false

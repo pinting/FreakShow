@@ -1,9 +1,9 @@
 extends Node2D
 
-export var pi_per_pixel: float = PI * 0.0025
-export var limit: float = 1350
-export var speed: float = 0.5
-export var y_scale: float = 2.0
+@export var pi_per_pixel: float = PI * 0.0025
+@export var limit: float = 1350
+@export var speed: float = 0.5
+@export var y_scale: float = 2.0
 
 var base_position: Vector2
 var direction: float = 1

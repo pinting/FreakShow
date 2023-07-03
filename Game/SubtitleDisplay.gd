@@ -1,17 +1,17 @@
 class_name SubtitleDisplay
 extends Node
 
-# Debug the subtitle display (Config.debug needs to be true)
-export var debug: bool = false
+# Debug the subtitle display (through global debug)
+@export var debug: bool = false
 
 # Line break
-export var line_break: String = "\r\n"
+@export var line_break: String = "\r\n"
 
-onready var top_label: Label = $TopLabel
-onready var bottom_label: Label = $BottomLabel
-onready var center_label: Label = $CenterLabel
+@onready var top_label: Label = $TopLabel
+@onready var bottom_label: Label = $BottomLabel
+@onready var center_label: Label = $CenterLabel
 
-var current_describe_owner = null
+var current_describe_user = null
 var keep_describe = false
 var lines = []
 
@@ -69,43 +69,43 @@ func say(text: String, speed: float = 2.0, timeout: float = 10.0) -> void:
 		"show_percentage": 0.0 if speed > 0.0 else 1.0
 	})
 
-func set_describe(owner: int, text: String, keep: bool = false, duration: float = 0.33) -> void:
-	_debug(str("Set describe for '", owner, "'", " and keep" if keep else ""))
+func set_describe(user: int, text: String, keep: bool = false, duration: float = 0.33) -> void:
+	_debug(str("Set describe for '", user, "'", " and keep" if keep else ""))
 
 	if keep_describe:
 		return
 	
 	top_label.text = text
-	current_describe_owner = owner
+	current_describe_user = user
 	keep_describe = keep
 	
-	yield(Animator.run(top_label, "modulate:a",
-		top_label.modulate.a, 1.0, duration), "completed")
+	await Animator.run(top_label, "modulate:a",
+		top_label.modulate.a, 1.0, duration)
 
-func reset_describe(owner: int, force: bool = false, duration: float = 0.33) -> void:
-	_debug(str("Remove describe for '", owner, "'", " with force" if force else ""))
+func reset_describe(user: int, force: bool = false, duration: float = 0.33) -> void:
+	_debug(str("Remove describe for '", user, "'", " with force" if force else ""))
 
-	if current_describe_owner != owner and not force:
+	if current_describe_user != user and not force:
 		return
 	
-	current_describe_owner = null
+	current_describe_user = null
 	keep_describe = false
 
-	yield(Animator.run(top_label, "modulate:a",
-		top_label.modulate.a, 0.0, duration), "completed")
+	await Animator.run(top_label, "modulate:a",
+		top_label.modulate.a, 0.0, duration)
 	
-	if current_describe_owner == null:
+	if current_describe_user == null:
 		top_label.text = ""
 
 func show_quote(text: String, duration: float = 5.0) -> void:
 	center_label.text = text
 
-	yield(Animator.run(center_label, "modulate:a",
-		center_label.modulate.a, 1.0, duration), "completed")
+	await Animator.run(center_label, "modulate:a",
+		center_label.modulate.a, 1.0, duration)
 
 func hide_quote(duration: float = 5.0) -> void:	
-	yield(Animator.run(center_label, "modulate:a",
-		center_label.modulate.a, 0.0, duration), "completed")
+	await Animator.run(center_label, "modulate:a",
+		center_label.modulate.a, 0.0, duration)
 
 func _debug(message: String) -> void:
 	if debug:

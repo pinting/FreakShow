@@ -1,110 +1,102 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=3 uid="uid://b0hifya0lm0lq"]
 
-[ext_resource path="res://Prefabs/FloatingText.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Resources/HighPerformanceEnvironment.tres" type="Environment" id=2]
-[ext_resource path="res://Assets/Environmnent/Road00.png" type="Texture" id=3]
-[ext_resource path="res://Prefabs/Gamma.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Demos/LegDemo.gd" type="Script" id=5]
-[ext_resource path="res://Game/Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Environmnent/Dirt00.png" type="Texture" id=11]
-[ext_resource path="res://Scenes/Demos/Leg.tscn" type="PackedScene" id=12]
+[ext_resource type="PackedScene" path="res://Prefabs/FloatingText.tscn" id="1"]
+[ext_resource type="Environment" uid="uid://dok0wscd8grfe" path="res://Resources/Environment.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://62cnsldnk2nq" path="res://Assets/Environmnent/Road00.png" id="3"]
+[ext_resource type="Script" path="res://Prefabs/Gamma.gd" id="4"]
+[ext_resource type="Script" path="res://Scenes/Demos/LegDemo.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://b668oxoccikke" path="res://Game/Player.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://d2vmf4fxvgnhm" path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://Game/BaseScene.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://drx2ue7f6rmef" path="res://Assets/Environmnent/Dirt00.png" id="11"]
+[ext_resource type="PackedScene" uid="uid://1vfi20taxh2q" path="res://Scenes/Demos/Leg.tscn" id="12"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1458.7, 55.4996 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(3139, 71.7387)
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1458.7, 55.4996 )
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(77.8741, 1769.97)
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 70.4053, 1210.01 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 70.4053, 1210.01 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(74.0449, 1735.97)
 
 [node name="LegDemo" type="Node2D"]
-__meta__ = {
-"_edit_vertical_guides_": [ -452.68 ]
-}
 
-[node name="BaseScene" parent="." instance=ExtResource( 10 )]
-script = ExtResource( 5 )
+[node name="BaseScene" parent="." instance=ExtResource("10")]
+script = ExtResource("5")
 
-[node name="Player" parent="BaseScene" instance=ExtResource( 6 )]
-position = Vector2( 1730.55, 854.889 )
+[node name="Player" parent="BaseScene" instance=ExtResource("6")]
+position = Vector2(1730.55, 854.889)
 
-[node name="FloatingText" parent="BaseScene/Player" instance=ExtResource( 1 )]
-position = Vector2( 6.42139, 111.303 )
+[node name="FloatingText" parent="BaseScene/Player" instance=ExtResource("1")]
 z_index = 1
-labels = [ "Kill yourself", "Commit suicide", "Just give up" ]
+position = Vector2(6.42139, 111.303)
+labels = ["Kill yourself", "Commit suicide", "Just give up"]
 auto_start = true
 
-[node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
-position = Vector2( 1730.55, 854.889 )
-scale = Vector2( 0.7, 0.7 )
-smoothing_speed = 1.0
+[node name="GameCamera" parent="BaseScene" instance=ExtResource("7")]
+position = Vector2(1730.55, 854.889)
+scale = Vector2(0.7, 0.7)
+position_smoothing_speed = 1.0
 follow_node = NodePath("../Player")
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=["auto_visible"]]
 visible = false
 light_mask = 0
-color = Color( 0.470588, 0.470588, 0.470588, 1 )
-script = ExtResource( 4 )
+color = Color(0.470588, 0.470588, 0.470588, 1)
+script = ExtResource("4")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=["world_environment"]]
-environment = ExtResource( 2 )
+environment = ExtResource("2")
 
-[node name="Sky" parent="BaseScene" instance=ExtResource( 8 )]
+[node name="Sky" parent="BaseScene" instance=ExtResource("8")]
 
-[node name="Fog" parent="BaseScene" instance=ExtResource( 9 )]
+[node name="Fog" parent="BaseScene" instance=ExtResource("9")]
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
-position = Vector2( 99.8936, -23.7839 )
+position = Vector2(99.8936, -23.7839)
 
-[node name="Road" type="Sprite" parent="BaseScene/Environment"]
+[node name="Road" type="Sprite2D" parent="BaseScene/Environment"]
 light_mask = 3
-position = Vector2( 1641.43, 1306.05 )
 z_index = -1
-texture = ExtResource( 3 )
+texture_repeat = 2
+position = Vector2(1641.43, 1306.05)
+texture = ExtResource("3")
 region_enabled = true
-region_rect = Rect2( 0, 0, 2900, 300 )
+region_rect = Rect2(0, 0, 2900, 300)
 
-[node name="Dirt" type="Sprite" parent="BaseScene/Environment/Road"]
-position = Vector2( 0, 286.343 )
-texture = ExtResource( 11 )
+[node name="Dirt" type="Sprite2D" parent="BaseScene/Environment/Road"]
+texture_repeat = 2
+position = Vector2(0, 286.343)
+texture = ExtResource("11")
 region_enabled = true
-region_rect = Rect2( 0, 0, 2900, 300 )
+region_rect = Rect2(0, 0, 2900, 300)
 
 [node name="Walls" type="StaticBody2D" parent="BaseScene/Environment"]
-position = Vector2( 184.394, 1172.53 )
 z_index = -2
+position = Vector2(184.394, 1172.53)
 collision_layer = 7
 collision_mask = 7
 
-[node name="Top" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
-position = Vector2( 1453.57, -2183.42 )
-shape = SubResource( 1 )
-
 [node name="Bottom" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
-position = Vector2( 1453.57, 113.265 )
-shape = SubResource( 2 )
+position = Vector2(1465.21, 121.385)
+shape = SubResource("2")
 
 [node name="Left" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
-position = Vector2( -67.959, -1030.71 )
-shape = SubResource( 3 )
+position = Vector2(-64.2246, -750.731)
+shape = SubResource("3")
 
 [node name="Right" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
-position = Vector2( 2978.87, -1030.71 )
-shape = SubResource( 4 )
+position = Vector2(2980.69, -767.731)
+shape = SubResource("4")
 
-[node name="Leg" parent="BaseScene/Environment" instance=ExtResource( 12 )]
-position = Vector2( 2335.69, 250.531 )
+[node name="Leg00" parent="BaseScene/Environment" instance=ExtResource("12")]
+position = Vector2(922.915, 255.288)
+scale = Vector2(-1, 1)
 
-[node name="Leg2" parent="BaseScene/Environment" instance=ExtResource( 12 )]
-position = Vector2( 922.915, 255.288 )
-scale = Vector2( -1, 1 )
+[node name="Leg01" parent="BaseScene/Environment" instance=ExtResource("12")]
+position = Vector2(2335.69, 250.531)
 
 [editable path="BaseScene"]

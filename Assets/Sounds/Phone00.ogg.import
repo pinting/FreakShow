@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/Phone00.ogg-797e3fd40cd444ea3162f4810a8aec7e.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bgjirrfpxapbx"
+path="res://.godot/imported/Phone00.ogg-797e3fd40cd444ea3162f4810a8aec7e.oggvorbisstr"
 
 [deps]
 
 source_file="res://Assets/Sounds/Phone00.ogg"
-dest_files=[ "res://.import/Phone00.ogg-797e3fd40cd444ea3162f4810a8aec7e.oggstr" ]
+dest_files=["res://.godot/imported/Phone00.ogg-797e3fd40cd444ea3162f4810a8aec7e.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,8 +1,8 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cod7axo1bfole"]
 
-[ext_resource path="res://Shaders/Tremble.shader" type="Shader" id=1]
+[ext_resource type="Shader" path="res://Shaders/Tremble.gdshader" id="1"]
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/time_factor = 0.5
-shader_param/amplitude = Vector2( 100, 0 )
+shader = ExtResource("1")
+shader_parameter/time_factor = 0.5
+shader_parameter/amplitude = Vector2(100, 0)

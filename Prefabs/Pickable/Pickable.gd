@@ -2,21 +2,21 @@ class_name Pickable
 extends RigidBody2D
 
 # Force the body can be grabbed
-export var grab_force = Vector2(10.0, 10.0)
+@export var grab_force = Vector2(10.0, 10.0)
 
 # How far from the cursor grabbing force is applied
-onready var grab_distance: float = 40.0
+@onready var grab_distance: float = 40.0
 
 # Force max kick velocity
-export var max_velocity: Vector2 = Vector2(400.0, 400.0)
+@export var max_velocity: Vector2 = Vector2(400.0, 400.0)
 
 # Disable at init
-export var disable_at_init: bool = false
+@export var disable_at_init: bool = false
 
 # Disable shapes when disabled
-export var disable_with_shapes: bool = true
+@export var disable_with_shapes: bool = true
 
-onready var selectable = $Selectable
+@onready var selectable = $Selectable
 
 var disabled: bool = false
 
@@ -33,7 +33,7 @@ func _ready() -> void:
 	assert(is_in_group("pickable"), "Pickable not in group of 'pickable'")
 	assert(selectable.is_in_group("selectable"), "Selectable not in group of 'selectable'")
 	
-	selectable.connect("selected", self, "hold")
+	selectable.connect("selected", Callable(self, "hold"))
 	
 	if disable_at_init:
 		disable()
@@ -83,15 +83,15 @@ func _physics_process(_delta: float) -> void:
 	else:
 		sleeping = true
 
-func reset(position: Vector2, rotation = 0.0, reset_v = true, relative = false):
-	reset_position = position
-	reset_rotation = rotation
-	reset_velocity = reset_v
-	reset_relative = relative
+func reset(new_position: Vector2, new_rotation = 0.0, with_reset_velocity = true, with_reset_relative = false):
+	reset_position = new_position
+	reset_rotation = new_rotation
+	reset_velocity = with_reset_velocity
+	reset_relative = with_reset_relative
 	trigger_reset = true
 	
 	while trigger_reset:
-		yield(Tools.wait(0.1), "completed")
+		await Tools.wait(0.1)
 
 func push(direction: Vector2 = Vector2.ZERO) -> void:
 	if is_held() or disabled:
@@ -123,8 +123,9 @@ func disable() -> void:
 	PickableManager.drop(self)
 	
 	disabled = true
-	mode = RigidBody2D.MODE_STATIC
+	freeze = false
 	
+	# TODO: Is this needed?
 	if disable_with_shapes:
 		Tools.set_shapes_disabled(self, true)
 	
@@ -133,19 +134,20 @@ func disable() -> void:
 
 func enable() -> void:
 	disabled = false
-	mode = RigidBody2D.MODE_RIGID
+	freeze = true
 	
+	# TODO: Is this needed?
 	if disable_with_shapes:
 		Tools.set_shapes_disabled(self, false)
 	
 	selectable.enable()
 
-func hide() -> void:
-	yield(selectable.hide(), "completed")
+func disappear() -> void:
+	await selectable.disappear()
 	drop()
 
-func show() -> void:
-	yield(selectable.show(), "completed")
+func appear() -> void:
+	await selectable.appear()
 
 func create_clone() -> Pickable:
 	var clone = self.duplicate()

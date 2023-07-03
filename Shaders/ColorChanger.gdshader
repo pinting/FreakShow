@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
-uniform vec4 color_key : hint_color;
-uniform vec4 replacement_color : hint_color;
+uniform vec4 color_key : source_color;
+uniform vec4 replacement_color : source_color;
 uniform float tolerance;
 
 void fragment()

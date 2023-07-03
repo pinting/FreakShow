@@ -1,14 +1,14 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Table00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Table00.png" type="Texture2D" id=1]
 
 [node name="Static_Table00" type="StaticBody2D"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -1015.48, 151.167 )
 z_index = 1
-polygon = PoolVector2Array( 767.065, -224.356, 1261.19, -225.91, 1277.38, -212.272, 1277.68, -203.46, 1181.93, -203.496, 1183.59, -49.0267, 1163.91, -48.5078, 1164.78, -189.839, 857.23, -189.469, 858.227, -50.0644, 836.807, -50.0644, 838.544, -202.095, 752.861, -203.133, 754.562, -214.422 )
+polygon = PackedVector2Array( 767.065, -224.356, 1261.19, -225.91, 1277.38, -212.272, 1277.68, -203.46, 1181.93, -203.496, 1183.59, -49.0267, 1163.91, -48.5078, 1164.78, -189.839, 857.23, -189.469, 858.227, -50.0644, 836.807, -50.0644, 838.544, -202.095, 752.861, -203.133, 754.562, -214.422 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2( 1.115, 1 )
 texture = ExtResource( 1 )

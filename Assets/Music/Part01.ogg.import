@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/Part01.ogg-90ebfc042ed3fd315fd37a9defa72f86.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://crynck7alr3mo"
+path="res://.godot/imported/Part01.ogg-90ebfc042ed3fd315fd37a9defa72f86.oggvorbisstr"
 
 [deps]
 
 source_file="res://Assets/Music/Part01.ogg"
-dest_files=[ "res://.import/Part01.ogg-90ebfc042ed3fd315fd37a9defa72f86.oggstr" ]
+dest_files=["res://.godot/imported/Part01.ogg-90ebfc042ed3fd315fd37a9defa72f86.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

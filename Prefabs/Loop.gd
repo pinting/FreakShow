@@ -2,19 +2,21 @@ class_name Loop
 extends Node2D
 
 # Player node path
-export (NodePath) var player_node
+@export var player_node: NodePath
 
 # Area shape node path
-export (NodePath) var area_shape_node
+@export var area_shape_node: NodePath
 
 # Container node path
-export (NodePath) var container_node
+@export var container_node: NodePath
 
 # Loop both, left or right sides
-export (String, "both", "left", "right", "none") var loop_mode = "both"
+# Values: "both", "left", "right", "none"
+@export var loop_mode: String = "both"
 
 # Copy the container to both, left or right sides
-export (String, "both", "left", "right", "none") var mirror_mode = "both"
+# Values: "both", "left", "right", "none"
+@export var mirror_mode: String = "both"
 
 var player: Player
 var area_shape: CollisionShape2D
@@ -39,16 +41,18 @@ func _ready() -> void:
 	area = area_shape.get_parent()
 
 	assert(player, "Player is not set")
-	assert(area_shape.shape is RectangleShape2D, "Shape is not RectangleShape2D")
+	assert(area_shape.shape is RectangleShape2D, "Shape3D is not RectangleShape2D")
 	assert(area.position == Vector2.ZERO, "Area2D relative position needs to be zero")
 	assert(area_shape.position == Vector2.ZERO, "RectangleShape2D relative position needs to be zero")
 
-	var extents = area_shape.shape.extents
+	var size = area_shape.shape.size
 
-	loop_top_left = global_position - Vector2(extents.x, extents.y)
-	loop_bottom_right = global_position + Vector2(extents.x, extents.y)
+	loop_top_left = global_position - Vector2(size.x, size.y) / 2
+	loop_bottom_right = global_position + Vector2(size.x, size.y) / 2
 	
 	if container_node:
+		Tools.debug("Auto mirroring")
+		
 		container = get_node(container_node)
 		
 		mirror()
@@ -61,6 +65,8 @@ func undo_mirror():
 
 func mirror():
 	if not container:
+		Tools.debug("Mirror failed, no container")
+		
 		return
 	
 	containers.push_back(container)
@@ -72,24 +78,28 @@ func mirror():
 		_mirror_right()
 
 func _mirror_left():
-	var extents = area_shape.shape.extents
+	var size = area_shape.shape.size
 	var left_mirror = container.duplicate()
 	
-	left_mirror.position.x -= 2 * extents.x
+	left_mirror.position.x -= size.x
 	
 	containers.push_front(left_mirror)
 	mirrors.push_back(left_mirror)
 	add_child(left_mirror)
+	
+	Tools.debug("Mirror left done")
 
 func _mirror_right():
-	var extents = area_shape.shape.extents
+	var size = area_shape.shape.size
 	var right_mirror = container.duplicate()
 	
-	right_mirror.position.x += 2 * extents.x
+	right_mirror.position.x += size.x
 	
 	containers.push_back(right_mirror)
 	mirrors.push_back(right_mirror)
 	add_child(right_mirror)
+	
+	Tools.debug("Mirror right done")
 
 # When reaching the end of the loop the player is teleported to the
 # beginning, but a shallow clone stays at the old position for one
@@ -151,8 +161,8 @@ func _disable_node(node: Node2D) -> void:
 	node.visible = false
 
 func _apply_diff(node: Node2D, d: int) -> void:
-	var extents = area_shape.shape.extents
-	var diff = Vector2(d * 2 * extents.x, 0)
+	var size = area_shape.shape.size
+	var diff = Vector2(d * 2 * size.x, 0)
 	
 	if node.is_in_group("pickable"):
 		# Position of a RigidBody cannot be manipulated directly
@@ -181,6 +191,8 @@ func _update_looped_nodes(d: int) -> void:
 
 func _turn(d: int) -> void:
 	assert(d == -1 or d == 1, "Difference needs to be minus or plus one")
+	
+	Tools.debug("Player loop triggered with %d" % d)
 	
 	_update_player(d)
 	_update_node_index_store()

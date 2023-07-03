@@ -1,19 +1,19 @@
 class_name ColorChanger
 extends Node2D
 
-export var color_change_speed: float = 0.5
+@export var color_change_speed: float = 0.5
 
 # Name of the property on the self to change 
-export var color_property: String = "modulate"
+@export var color_property: String = "modulate"
 
 # Name of the shader parameter on the material to change
-export var color_shader_param: String = ""
+@export var color_shader_param: String = ""
 
 # Add this offset to the result
-export var offset: Color = Color(0.75, 0.75, 0.75)
+@export var offset: Color = Color(0.75, 0.75, 0.75)
 
 # Scale color with this property
-export var scale_color: Color = Color(0.33, 0.33, 0.33)
+@export var scale_color: Color = Color(0.33, 0.33, 0.33)
 
 var current: Color = Color(0.0, 0.0, 0.0)
 var current_second: float = 0
@@ -67,4 +67,4 @@ func _process(delta: float) -> void:
 		set(color_property, result)
 	
 	if color_shader_param and material:
-		material.set_shader_param(color_shader_param, result)
+		material.set_shader_parameter(color_shader_param, result)

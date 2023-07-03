@@ -1,22 +1,22 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Prefabs/FloatingTextChild.gd" type="Script" id=1]
-[ext_resource path="res://Resources/DefaultFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Resources/DefaultFont.tres" type="FontFile" id=2]
 
 [sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("Viewport")
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.259136, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.750831, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=3]
-offsets = PoolRealArray( 0, 0.1, 0.9, 1 )
-colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.1, 0.9, 1 )
+colors = PackedColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="FloatingTextChild" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="Viewport" type="Viewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2( 200, 100 )
 own_world = true
 transparent_bg = true
@@ -25,12 +25,12 @@ usage = 0
 gui_disable_input = true
 gui_snap_controls_to_pixels = false
 
-[node name="Label" type="Label" parent="Viewport"]
-margin_left = 200.0
-margin_right = 400.0
-margin_bottom = 31.0
-rect_scale = Vector2( -1, 1 )
-custom_fonts/font = ExtResource( 2 )
+[node name="Label" type="Label" parent="SubViewport"]
+offset_left = 200.0
+offset_right = 400.0
+offset_bottom = 31.0
+scale = Vector2( -1, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "Label"
 align = 1
 valign = 1

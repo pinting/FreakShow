@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Dildo00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Dildo00.png" type="Texture2D" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
 [ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=4]
 
@@ -14,11 +14,11 @@ collision_layer = 4
 collision_mask = 4
 mass = 0.06
 gravity_scale = 5.0
-contacts_reported = 3
+max_contacts_reported = 3
 contact_monitor = true
 script = ExtResource( 4 )
 
-[node name="Selectable" type="Sprite" parent="." groups=[
+[node name="Selectable" type="Sprite2D" parent="." groups=[
 "selectable",
 ]]
 light_mask = 1025
@@ -27,8 +27,8 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 description_key = "Description008"
 
-[node name="CollisionShape" type="CollisionPolygon2D" parent="."]
+[node name="CollisionShape3D" type="CollisionPolygon2D" parent="."]
 visible = false
 position = Vector2( -6.66901, -5.71629 )
 scale = Vector2( 0.7, 0.7 )
-polygon = PoolVector2Array( -149.83, 31.6107, -136.739, 5.9314, -89.9116, 9.45599, 66.9653, -12.2099, 81.3894, -38.9473, 116.57, -45.6317, 164.364, -36.3639, 163.356, 45.7091, -104.514, 62.8286, -141.774, 47.2196 )
+polygon = PackedVector2Array( -149.83, 31.6107, -136.739, 5.9314, -89.9116, 9.45599, 66.9653, -12.2099, 81.3894, -38.9473, 116.57, -45.6317, 164.364, -36.3639, 163.356, 45.7091, -104.514, 62.8286, -141.774, 47.2196 )

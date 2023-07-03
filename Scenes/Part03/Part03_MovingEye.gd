@@ -1,12 +1,12 @@
 extends Node2D
 
 # Player node to follow
-export (NodePath) var player_node
+@export var player_node: NodePath
 
 # The X diff in which the eye reacts to the player
-export var max_diff: float = 2000
+@export var max_diff: float = 2000
 
-onready var eye_ball = $EyeBack/EyeBall
+@onready var eye_ball = $EyeBack/EyeBall
 
 var player: Player
 

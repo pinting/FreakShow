@@ -1,13 +1,13 @@
 extends CanvasLayer
 
 # Hide the splash after this amount of seconds
-export var hide_after: float = 1.0
+@export var hide_after: float = 1.0
 
 # Duration of the hide animation
-export var hide_duration: float = 1.0
+@export var hide_duration: float = 1.0
 
-onready var container = $Container
-onready var color_rect = $Container/ColorRect
+@onready var container = $Container
+@onready var color_rect = $Container/ColorRect
 
 var complete: bool = false
 
@@ -21,10 +21,8 @@ func play():
 	color_rect.color = ProjectSettings.get_setting("application/boot_splash/bg_color")
 	container.visible = true
 	
-	yield(Tools.wait(hide_after), "completed")
-	
-	yield(Animator.run(container, "modulate:a",
-		1.0, 0.0, hide_duration), "completed")
+	await Tools.wait(hide_after)
+	await Animator.run(container, "modulate:a", 1.0, 0.0, hide_duration)
 	
 	done()
 

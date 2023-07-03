@@ -1,11 +1,13 @@
 extends "res://Game/BaseScene.gd"
 
-onready var new_game = $Menu/NewGame
-onready var continue_game = $Menu/ContinueGame
+@onready var new_game = $Menu/NewGame
+@onready var continue_game = $Menu/ContinueGame
 
 func _ready() -> void:
-	new_game.connect("selected", self, "_on_new_game_selected")
-	continue_game.connect("selected", self, "_on_continue_game_selected")
+	super._ready()
+	
+	new_game.connect("selected", Callable(self, "_on_new_game_selected"))
+	continue_game.connect("selected", Callable(self, "_on_continue_game_selected"))
 	
 	VirtualInput.test_keys = {
 		"player_right": 1.0,
@@ -14,7 +16,7 @@ func _ready() -> void:
 
 func _on_new_game_selected() -> void:
 	CursorManager.lock()
-	yield(black_screen.fade_in(), "completed")
+	await black_screen.fade_in()
 	Save.clear()
 	load_next_scene()
 
@@ -23,5 +25,5 @@ func _on_continue_game_selected() -> void:
 	
 	if last_scene:
 		CursorManager.lock()
-		yield(black_screen.fade_in(), "completed")
+		await black_screen.fade_in()
 		SceneLoader.load_scene(last_scene)

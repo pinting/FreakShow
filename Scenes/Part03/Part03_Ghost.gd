@@ -1,12 +1,12 @@
 extends Node2D
 
 # Player node to mirror to
-export (NodePath) var player_node
+@export var player_node: NodePath
 
 # Origo point to mirror with
-export (NodePath) var origo_node
+@export var origo_node: NodePath
 
-onready var animated_sprite = $AnimatedSprite
+@onready var animated_sprite = $AnimatedSprite2D
 
 var player: Player
 var origo: Node2D

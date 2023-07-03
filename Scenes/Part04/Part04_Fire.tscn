@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Prefabs/CandleLight.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Effect/Effect_Flame.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Environmnent/Misc06.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Environmnent/Misc24.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Environmnent/Misc06.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets/Environmnent/Misc24.png" type="Texture2D" id=5]
 [ext_resource path="res://Resources/Materials/FakeLightMaterial.tres" type="Material" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
@@ -13,7 +13,7 @@ blend_mode = 1
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.365909 ), 0.0, 0.0, 0, 0 ]
 
-[node name="Fire00" type="Sprite"]
+[node name="Fire00" type="Sprite2D"]
 light_mask = 2
 position = Vector2( -470.961, 166.948 )
 scale = Vector2( 0.8, 0.8 )
@@ -22,7 +22,7 @@ texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 315, 150 )
 
-[node name="Stand" type="Sprite" parent="."]
+[node name="Stand" type="Sprite2D" parent="."]
 light_mask = 0
 position = Vector2( -1.836, 308.929 )
 scale = Vector2( 0.807011, 0.807011 )
@@ -36,7 +36,7 @@ emitting = true
 speed_scale = 2.0
 scale_amount_curve = SubResource( 2 )
 
-[node name="CandleLight" type="Light2D" parent="." groups=["auto_visible", "light"]]
+[node name="CandleLight" type="PointLight2D" parent="." groups=["auto_visible", "light"]]
 visible = false
 position = Vector2( 4.92847, -225.536 )
 scale = Vector2( 5, 3.3 )
@@ -49,7 +49,7 @@ min_energy = 0.775
 max_energy = 0.8
 speed = 0.25
 
-[node name="FakeLight" type="Sprite" parent="." groups=["fake_light"]]
+[node name="FakeLight" type="Sprite2D" parent="." groups=["fake_light"]]
 self_modulate = Color( 1, 0.894118, 0.647059, 0.294118 )
 material = ExtResource( 6 )
 position = Vector2( -14.8821, -206.051 )

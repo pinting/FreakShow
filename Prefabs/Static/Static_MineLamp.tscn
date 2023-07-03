@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Lamp04_Glow.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Environmnent/Lamp04.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Environmnent/Lamp04_Glow.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Environmnent/Lamp04.png" type="Texture2D" id=2]
 
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
-[node name="Static_MineLamp" type="Sprite"]
+[node name="Static_MineLamp" type="Sprite2D"]
 position = Vector2( -925.406, -134.624 )
 texture = ExtResource( 2 )
 
-[node name="Glow" type="Sprite" parent="."]
+[node name="Glow" type="Sprite2D" parent="."]
 material = SubResource( 1 )
 position = Vector2( -6.89764, 11.1732 )
 texture = ExtResource( 1 )

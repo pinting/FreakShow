@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Gravity00.wav-ba923222a23a64cac1d32ef83d0f551c.sample"
+type="AudioStreamWAV"
+uid="uid://cojwb0271kvi5"
+path="res://.godot/imported/Gravity00.wav-ba923222a23a64cac1d32ef83d0f551c.sample"
 
 [deps]
 
 source_file="res://Assets/Sounds/Gravity00.wav"
-dest_files=[ "res://.import/Gravity00.wav-ba923222a23a64cac1d32ef83d0f551c.sample" ]
+dest_files=["res://.godot/imported/Gravity00.wav-ba923222a23a64cac1d32ef83d0f551c.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

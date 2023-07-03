@@ -1,267 +1,271 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://1vfi20taxh2q"]
 
-[ext_resource path="res://Assets/Environmnent/Leg00_Full.png" type="Texture" id=1]
-[ext_resource path="res://Prefabs/RandomAnimationPlayer.gd" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://cuqw6nih7pnyi" path="res://Assets/Environmnent/Leg00_Full.png" id="1"]
+[ext_resource type="Script" path="res://Prefabs/RandomAnimationPlayer.gd" id="2"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 length = 0.001
-loop = true
 tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Skeleton2D/TopBone:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 347.861, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Skeleton2D/TopBone:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 41.439, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Skeleton2D/TopBone:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( -0.562366, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Skeleton2D/TopBone/BottomBone:position:x")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( -23.5955, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Skeleton2D/TopBone/BottomBone:position:y")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"points": PoolRealArray( 432.338, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Skeleton2D/TopBone/BottomBone:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"points": PoolRealArray( 93.7355, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("Skeleton2D/TopBone/BottomBone/FeetBone:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"points": PoolRealArray( 457.552, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
 tracks/7/path = NodePath("Skeleton2D/TopBone/BottomBone/FeetBone:position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
 tracks/7/keys = {
-"points": PoolRealArray( 24.9919, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
 tracks/8/path = NodePath("Skeleton2D/TopBone/BottomBone/FeetBone:rotation_degrees")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
 tracks/8/keys = {
-"points": PoolRealArray( 55.9496, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
 }
 tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
 tracks/9/path = NodePath("Skeleton2D/TopBone:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 347.861, 41.439 ) ]
+"values": [Vector2(347.861, 41.439)]
 }
 tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
 tracks/10/path = NodePath("Skeleton2D/TopBone/BottomBone:position")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( -23.5955, 432.338 ) ]
+"values": [Vector2(-23.5955, 432.338)]
 }
 tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
 tracks/11/path = NodePath("Skeleton2D/TopBone/BottomBone/FeetBone:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
 tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 457.552, 24.9919 ) ]
+"values": [Vector2(457.552, 24.9919)]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "auto_move_x"
 length = 2.2
-loop = true
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Skeleton2D/TopBone:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7, 0.9, 1.3, 1.8, 2.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.7, 0.9, 1.3, 1.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Vector2( 347.861, 41.439 ), Vector2( 347.861, 41.439 ), Vector2( 347.861, 41.439 ), Vector2( 347.861, 41.439 ), Vector2( 347.861, 41.439 ), Vector2( 347.861, 41.439 ) ]
+"values": [Vector2(347.861, 41.439), Vector2(347.861, 41.439), Vector2(347.861, 41.439), Vector2(347.861, 41.439), Vector2(347.861, 41.439), Vector2(347.861, 41.439)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Skeleton2D/TopBone:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.7, 0.9, 1.3, 1.8, 2.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.7, 0.9, 1.3, 1.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ -0.562366, 42.8281, 42.8281, 42.8281, 15.5243, -0.562366 ]
+"values": [-0.562366, 42.8281, 42.8281, 42.8281, 15.5243, -0.562366]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Skeleton2D/TopBone/BottomBone:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.7, 0.9, 1.3, 1.8, 2.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.7, 0.9, 1.3, 1.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Vector2( -23.5955, 432.338 ), Vector2( -23.5955, 432.338 ), Vector2( -23.5955, 432.338 ), Vector2( -23.5955, 432.338 ), Vector2( -23.5955, 432.338 ), Vector2( -23.5955, 432.338 ) ]
+"values": [Vector2(-23.5955, 432.338), Vector2(-23.5955, 432.338), Vector2(-23.5955, 432.338), Vector2(-23.5955, 432.338), Vector2(-23.5955, 432.338), Vector2(-23.5955, 432.338)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Skeleton2D/TopBone/BottomBone:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.7, 0.9, 1.3, 1.8, 2.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.7, 0.9, 1.3, 1.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ 93.7355, 66.496, 84.7891, 72.7596, 70.5383, 93.7355 ]
+"values": [93.7355, 66.496, 84.7891, 72.7596, 70.5383, 93.7355]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Skeleton2D/TopBone/BottomBone/FeetBone:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.7, 0.9, 1.3, 1.8, 2.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.7, 0.9, 1.3, 1.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Vector2( 457.552, 24.9919 ), Vector2( 457.552, 24.9919 ), Vector2( 457.552, 24.9919 ), Vector2( 457.552, 24.9919 ), Vector2( 457.552, 24.9919 ), Vector2( 457.552, 24.9919 ) ]
+"values": [Vector2(457.552, 24.9919), Vector2(457.552, 24.9919), Vector2(457.552, 24.9919), Vector2(457.552, 24.9919), Vector2(457.552, 24.9919), Vector2(457.552, 24.9919)]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Skeleton2D/TopBone/BottomBone/FeetBone:rotation_degrees")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.7, 0.9, 1.3, 1.8, 2.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.7, 0.9, 1.3, 1.8, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ 55.9496, 12.3358, 37.1392, 20.6679, 54.5904, 55.9496 ]
+"values": [55.9496, 12.3358, 37.1392, 20.6679, 54.5904, 55.9496]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dwjcu"]
+_data = {
+"RESET": SubResource("1"),
+"auto_move_x": SubResource("2")
 }
 
 [node name="Leg" type="Node2D"]
-position = Vector2( 228.418, 79.2854 )
+position = Vector2(228.418, 79.2854)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "auto_move_x"
-anims/RESET = SubResource( 1 )
-anims/auto_move_x = SubResource( 2 )
-script = ExtResource( 2 )
+libraries = {
+"": SubResource("AnimationLibrary_dwjcu")
+}
+script = ExtResource("2")
 scale_time = 0.01
 scale_mod = 0.2
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
 
 [node name="TopBone" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( 347.861, 41.439 )
+position = Vector2(347.861, 41.439)
 rotation = -0.00981513
-rest = Transform2D( 1, 0, 0, 1, 347.861, 41.439 )
+rest = Transform2D(1, 0, 0, 1, 347.861, 41.439)
 
 [node name="BottomBone" type="Bone2D" parent="Skeleton2D/TopBone"]
-position = Vector2( -23.5955, 432.338 )
+position = Vector2(-23.5955, 432.338)
 rotation = 1.63599
-rest = Transform2D( 0.000965313, 1, -1, 0.000965313, -23.5955, 432.338 )
-__meta__ = {
-"_edit_bone_": true
-}
+rest = Transform2D(0.000965313, 1, -1, 0.000965313, -23.5955, 432.338)
 
 [node name="FeetBone" type="Bone2D" parent="Skeleton2D/TopBone/BottomBone"]
-position = Vector2( 457.552, 24.9919 )
+position = Vector2(457.552, 24.9919)
 rotation = 0.976504
-rest = Transform2D( 0.381597, 0.924329, -0.924329, 0.381597, 457.552, 24.9919 )
-default_length = 180.0
-__meta__ = {
-"_edit_bone_": true
-}
+rest = Transform2D(0.381597, 0.924329, -0.924329, 0.381597, 457.552, 24.9919)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Skeleton2D/TopBone/BottomBone/FeetBone"]
 collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Skeleton2D/TopBone/BottomBone/FeetBone/StaticBody2D"]
-polygon = PoolVector2Array( 251.916, 35.2938, 174.534, 42.0787, 99.5898, 35.5713, 23.5297, 49.0328, -72.8425, -56.2419, -57.5903, -85.6825, -8.80908, -90.0056, 67.8139, -48.0704, 171.026, -30.8822, 264.552, 4.77026 )
+polygon = PackedVector2Array(251.916, 35.2938, 174.534, 42.0787, 99.5898, 35.5713, 23.5297, 49.0328, -72.8425, -56.2419, -57.5903, -85.6825, -8.80908, -90.0056, 67.8139, -48.0704, 171.026, -30.8822, 264.552, 4.77026)
 
 [node name="Polygons" type="Node2D" parent="."]
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Polygon2D" type="Polygon2D" parent="Polygons"]
-texture = ExtResource( 1 )
+texture = ExtResource("1")
 skeleton = NodePath("../../Skeleton2D")
-polygon = PoolVector2Array( 251.22, 36.5854, 463.415, 31.7073, 478.049, 43.9024, 478.049, 112.195, 431.707, 258.537, 417.073, 370.732, 392.683, 436.585, 421.951, 539.024, 397.561, 719.512, 392.683, 985.366, 370.732, 1014.63, 260.976, 1002.44, 129.268, 1036.59, 36.5854, 1036.59, 36.5854, 985.366, 141.463, 931.707, 251.22, 890.244, 273.171, 795.122, 258.537, 485.366, 222.581, 369.355, 229.268, 102.439, 252.404, 361.55, 300.962, 355.3, 343.75, 358.185, 393.75, 362.031 )
-uv = PoolVector2Array( 251.22, 36.5854, 463.415, 31.7073, 478.049, 43.9024, 478.049, 112.195, 431.707, 258.537, 417.073, 370.732, 392.683, 436.585, 421.951, 539.024, 397.561, 719.512, 392.683, 985.366, 370.732, 1014.63, 260.976, 1002.44, 129.268, 1036.59, 36.5854, 1036.59, 36.5854, 985.366, 141.463, 931.707, 251.22, 890.244, 273.171, 795.122, 258.537, 485.366, 222.581, 369.355, 229.268, 102.439, 252.404, 361.55, 300.962, 355.3, 343.75, 358.185, 393.75, 362.031 )
-polygons = [ PoolIntArray( 27, 16, 29, 30 ), PoolIntArray( 27, 22, 21, 28 ), PoolIntArray( 16, 15, 14, 13, 12, 11, 10 ), PoolIntArray( 19, 21, 22, 23, 24, 5, 4, 3, 2, 1, 0, 20 ), PoolIntArray( 19, 18, 17, 16, 10, 9, 8, 7, 6, 5, 24, 23, 22, 21 ) ]
-bones = [ "TopBone", PoolRealArray( 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1 ), "TopBone/BottomBone", PoolRealArray( 0, 0, 0, 0, 0.5, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1 ), "TopBone/BottomBone/FeetBone", PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ) ]
+polygon = PackedVector2Array(264.607, 32.5843, 463.415, 31.7073, 473.034, 51.1236, 467.978, 114.607, 428.09, 253.371, 408.427, 367.416, 392.683, 436.585, 417.284, 549.236, 395.062, 720.841, 392.683, 985.366, 370.732, 1014.63, 260.976, 1002.44, 129.268, 1036.59, 36.5854, 1036.59, 36.5854, 985.366, 144.218, 933.171, 261.905, 897.797, 282.099, 744.915, 262.963, 478.865, 238.764, 370.225, 239.326, 76.4045, 252.404, 361.55, 300.962, 355.3, 343.75, 358.185, 393.75, 362.031)
+uv = PackedVector2Array(264.607, 32.5843, 463.415, 31.7073, 473.034, 51.1236, 467.978, 114.607, 428.09, 253.371, 408.427, 367.416, 392.683, 436.585, 417.284, 549.236, 395.062, 720.841, 392.683, 985.366, 370.732, 1014.63, 260.976, 1002.44, 129.268, 1036.59, 36.5854, 1036.59, 36.5854, 985.366, 144.218, 933.171, 261.905, 897.797, 282.099, 744.915, 262.963, 478.865, 238.764, 370.225, 239.326, 76.4045, 252.404, 361.55, 300.962, 355.3, 343.75, 358.185, 393.75, 362.031)
+polygons = [PackedInt32Array(27, 16, 29, 30), PackedInt32Array(27, 22, 21, 28), PackedInt32Array(16, 15, 14, 13, 12, 11, 10), PackedInt32Array(19, 21, 22, 23, 24, 5, 4, 3, 2, 1, 0, 20), PackedInt32Array(19, 18, 17, 16, 10, 9, 8, 7, 6, 5, 24, 23, 22, 21)]
+bones = ["TopBone", PackedFloat32Array(1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1), "TopBone/BottomBone", PackedFloat32Array(0, 0, 0, 0, 0.5, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1), "TopBone/BottomBone/FeetBone", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)]
 internal_vertex_count = 4

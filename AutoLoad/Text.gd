@@ -2,18 +2,17 @@ extends Node
 
 var external_text_cache: Dictionary = {}
 
-func _ready() -> void:
-	pass
-
 func _get_external_text(path: String) -> String:
 	if external_text_cache.has(path):
 		return external_text_cache[path]
 	
-	var file = File.new()
-	var error = file.open("res://" + path, File.READ)
+	var file = FileAccess.open("res://" + path, FileAccess.READ)
 	
-	if error != OK:
-		Tools.debug(str("Loading external text failed for '", path, "'"))
+	if file == null:
+		var err = FileAccess.get_open_error()
+		
+		Tools.debug("Loading external text failed for '%s' with '%s'" % [path, err])
+		
 		return ""
 
 	var content = file.get_as_text()
@@ -25,14 +24,15 @@ func _get_external_text(path: String) -> String:
 	return content
 
 func find(key: String) -> String:
-	if not key or not len(key):
+	if key == "":
 		return ""
 	
 	var value = tr(key)
 	var length = len(value)
 
 	if not length or value == key:
-		Tools.debug(str("Translation for key '", key, "' was not found."))
+		Tools.debug("Translation for key '%s' was not found." % key)
+		
 		return ""
 	
 	# If translation value contains a path surrended by

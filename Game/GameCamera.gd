@@ -2,24 +2,24 @@ class_name GameCamera
 extends Camera2D
 
 # Node to follow
-export (NodePath) var follow_node
+@export var follow_node: NodePath
 
 # Initial position offset to start with
-export var follow_init_offset: Vector2 = Vector2(0.0, 0.0)
+@export var follow_init_offset: Vector2 = Vector2(0.0, 0.0)
 
 # Position offset to follow with
-export var follow_offset: Vector2 = Vector2(0.0, 0.0)
+@export var follow_offset: Vector2 = Vector2(0.0, 0.0)
 
 # Speed to follow with
-export var follow_speed: Vector2 = Vector2(1000.0, 1000.0)
+@export var follow_speed: Vector2 = Vector2(1000.0, 1000.0)
 
 # Maximum shake in pixels.
-export var shake_max_offset = Vector2(100, 75)
+@export var shake_max_offset = Vector2(100, 75)
 
 # Maximum rotation in radians
-export var shake_max_roll = 0.1
+@export var shake_max_roll = 0.1
 
-const debug_zoom_speed: Vector2 = Vector2(0.2, 0.2)
+const debug_zoom_speed: Vector2 = Vector2(0.05, 0.05)
 const debug_move_speed: Vector2 = Vector2(10.0, 10.0)
 
 const follow_scale_speed_after_distance: float = 1200.0
@@ -42,7 +42,7 @@ var instant_follow: bool = false
 signal target_reached
 
 func _ready() -> void:
-	assert(not smoothing_enabled, "Smoothing is not supported!")
+	assert(not position_smoothing_enabled, "Smoothing is not supported!")
 	
 	_process_current()
 	
@@ -68,7 +68,7 @@ func _process_debug_zoom_control() -> void:
 	
 	var diff = -1 * debug_zoom_speed * zoom_in + debug_zoom_speed * zoom_out
 	
-	zoom = Vector2(max(1.0, zoom.x + diff.x), max(1.0, zoom.y + diff.y))
+	zoom = Vector2(max(0.01, zoom.x + diff.x), max(0.01, zoom.y + diff.y))
 	
 	var camera_left = VirtualInput.get_action_strength("camera_left")
 	var camera_right = VirtualInput.get_action_strength("camera_right")
@@ -81,7 +81,7 @@ func _process_debug_zoom_control() -> void:
 	position += Vector2(x, y) * debug_move_speed
 
 func _process_current():
-	if current and CameraManager.current != self:
+	if is_current() and CameraManager.current != self:
 		CameraManager.set_current(self)
 
 func _process_follow(delta: float) -> void:
@@ -111,6 +111,7 @@ func _process_shake(delta: float) -> void:
 		rotation = 0.0
 		offset.x = 0.0
 		offset.y = 0.0
+		
 		return
 	
 	shake_offset_y += delta
@@ -120,12 +121,10 @@ func _process_shake(delta: float) -> void:
 	offset.y = shake_max_offset.y * shake * Tools.noise.get_noise_2d(Tools.noise.seed * 3, shake_offset_y)
 
 func change_zoom(amount: Vector2, duration: float) -> void:
-	yield(Animator.run(self, "zoom", 
-		zoom, amount, duration), "completed")
+	await Animator.run(self, "zoom", zoom, amount, duration)
 
 func change_shake(amount: float, duration: float) -> void:
-	yield(Animator.run(self, "shake", 
-		shake, amount, duration), "completed")
+	await Animator.run(self, "shake", shake, amount, duration)
 
 func reset(new_position: Vector2, with_scrolling_vector: bool = true) -> void:
 	var old_position = global_position
@@ -137,8 +136,8 @@ func reset(new_position: Vector2, with_scrolling_vector: bool = true) -> void:
 	
 	CursorManager.reset(old_position, new_position)
 
-func scale_follow_speed(scale: float) -> void:
-	follow_speed = base_follow_speed * scale
+func scale_follow_speed(value: float) -> void:
+	follow_speed = base_follow_speed * value
 
-func scale_follow_offset(scale: float) -> void:
-	follow_offset = base_follow_offset * scale
+func scale_follow_offset(value: float) -> void:
+	follow_offset = base_follow_offset * value

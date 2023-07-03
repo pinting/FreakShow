@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c6n45baq3e3xn"]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id="1"]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
@@ -27,5 +27,5 @@ void fragment()
 "
 
 [resource]
-shader = SubResource( 1 )
-shader_param/amount = 0.0
+shader = SubResource("1")
+shader_parameter/amount = 0.0

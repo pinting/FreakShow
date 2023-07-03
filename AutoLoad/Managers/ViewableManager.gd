@@ -22,9 +22,9 @@ func clear() -> void:
 	
 	display = null
 
-func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
+func appear(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	if not display:
 		Tools.debug("ViewableDisplay not exists, but show was called")
 		return
 	
-	display.show(viewable, enlarged_zoom, description_text)
+	display.appear(viewable, enlarged_zoom, description_text)

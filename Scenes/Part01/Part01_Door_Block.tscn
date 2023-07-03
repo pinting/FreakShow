@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Prefabs/Light/Light_Street.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Environmnent/Door02.png" type="Texture" id=3]
+[ext_resource path="res://Prefabs/Light3D/Light_Street.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Environmnent/Door02.png" type="Texture2D" id=3]
 [ext_resource path="res://Prefabs/Static/Static_RoomLamp01.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Part01/Part01_Door_Block.gd" type="Script" id=6]
-[ext_resource path="res://Assets/Environmnent/Door02_OpenBlack.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Environmnent/Door02_OpenBlack.png" type="Texture2D" id=8]
 
 [node name="Part01_Hallway_Block" type="Node2D"]
 script = ExtResource( 6 )
@@ -15,18 +15,18 @@ position = Vector2( -2.9668, -466.238 )
 scale = Vector2( 0.7, 0.7 )
 z_index = 2
 
-[node name="Light" parent="Lamp" groups=["auto_visible", "light"] instance=ExtResource( 2 )]
+[node name="Light3D" parent="Lamp" groups=["auto_visible", "light"] instance=ExtResource( 2 )]
 visible = false
 position = Vector2( -475.43, 1063.28 )
 scale = Vector2( 1.52205, 0.532185 )
 
-[node name="DoorOpen" type="Sprite" parent="." groups=["selectable"]]
+[node name="DoorOpen" type="Sprite2D" parent="." groups=["selectable"]]
 position = Vector2( 0, -62.433 )
 scale = Vector2( 0.95, 0.95 )
 texture = ExtResource( 8 )
 script = ExtResource( 5 )
 
-[node name="DoorClosed" type="Sprite" parent="." groups=["selectable"]]
+[node name="DoorClosed" type="Sprite2D" parent="." groups=["selectable"]]
 position = Vector2( 0, -61.046 )
 scale = Vector2( 0.95, 0.95 )
 texture = ExtResource( 3 )

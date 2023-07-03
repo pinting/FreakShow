@@ -2,17 +2,17 @@ class_name SlidingNode
 extends Node2D
 
 # Start with an offset
-export var start_with_offset: Vector2 = Vector2(0, 0)
+@export var start_with_offset: Vector2 = Vector2(0, 0)
 
 # Stop after this amount of movement (no negative numbers) 
-export var stop_after: Vector2 = Vector2(0, 1000)
+@export var stop_after: Vector2 = Vector2(0, 1000)
 
 # Speed to move with (this is inverted, when moving back)
-export var speed: Vector2 = Vector2(0, 100)
+@export var speed: Vector2 = Vector2(0, 100)
 
-onready var door_start: AudioStreamPlayer2D = $StartSound
-onready var door_move: AudioStreamPlayer2D = $MoveSound
-onready var door_stop: AudioStreamPlayer2D = $StopSound
+@onready var door_start: AudioStreamPlayer2D = $StartSound
+@onready var door_move: AudioStreamPlayer2D = $MoveSound
+@onready var door_stop: AudioStreamPlayer2D = $StopSound
 
 var is_open: bool = false
 
@@ -37,8 +37,7 @@ func open() -> void:
 	if door_move:
 		door_move.play()
 	
-	yield(Animator.run(self, "position",
-		close_position, open_position, change_duration), "completed")
+	await Animator.run(self, "position", close_position, open_position, change_duration)
 	
 	is_open = true
 
@@ -49,7 +48,6 @@ func close() -> void:
 	if door_start:
 		door_start.play()
 	
-	yield(Animator.run(self, "position",
-		close_position, open_position, change_duration), "completed")
+	await Animator.run(self, "position", close_position, open_position, change_duration)
 	
 	is_open = false

@@ -1,62 +1,62 @@
 class_name Player
-extends KinematicBody2D
+extends CharacterBody2D
 
 # Animation
-export var animation_frames = preload("res://Resources/Animations/Player00.tres")
+@export var animation_frames = preload("res://Resources/Animations/Player00.tres")
 
 # Transform effect
-export var transform_effect = preload("res://Prefabs/Effect/Effect_Transforming.tscn")
+@export var transform_effect = preload("res://Prefabs/Effect/Effect_Transforming.tscn")
 
 # Death effect
-export var death_effect = preload("res://Prefabs/Effect/Effect_PlayerDeath.tscn")
+@export var death_effect = preload("res://Prefabs/Effect/Effect_PlayerDeath.tscn")
 
 # Register player to the store
-export var register_player: bool = true
+@export var register_player: bool = true
 
 # Sync player movement with others
-export var sync_player: bool = false
+@export var sync_player: bool = false
 
 # Disable jumping
-export var disable_jump: bool = false
+@export var disable_jump: bool = false
 
 # Max velocity
-export var max_speed: float = 320.0
+@export var max_speed: float = 320.0
 
 # Max acceleration
-export var normal_acceleration: float = 800.0
+@export var normal_acceleration: float = 800.0
 
 # Friction on the platform (only X axis)
-export var friction: float = 0.001
+@export var friction: float = 0.001
 
 # Avatar max speed
-export var avatar_max_speed: float = 900.0
+@export var avatar_max_speed: float = 900.0
 
 # Avatar acceleration
-export var avatar_acceleration: float = 1800.0
+@export var avatar_acceleration: float = 1800.0
 
 # Jump force
-export var jump_force: float = 800.0
+@export var jump_force: float = 800.0
 
 # Gravity (only Y axis)
-export var gravity: float = 1000.0
+@export var gravity: float = 1000.0
 
 # Speed of the animation
-export var animation_speed: float = 0.95
+@export var animation_speed: float = 0.95
 
 # In which direction does the floor pushes the player
-export var floor_normal: Vector2 = Vector2.UP
+@export var floor_normal: Vector2 = Vector2.UP
 
 # The player dies after taking this amount of a hit
-export var hit_to_die: Vector2 = Vector2(20.0, 50.0)
+@export var hit_to_die: Vector2 = Vector2(20.0, 50.0)
 
 # Scale velocity
-export var scale_velocity: Vector2 = Vector2(1.0, 1.0)
+@export var scale_velocity: Vector2 = Vector2(1.0, 1.0)
 
 # Force pickable bodies are kicked with
-export var kick_force = Vector2(10.0, 0.0)
+@export var kick_force = Vector2(10.0, 0.0)
 
 # Force pickable bodies are pushed with
-export var push_force = Vector2(1.0, 1.0)
+@export var push_force = Vector2(1.0, 1.0)
 
 # Duration of the transform effect
 const transform_duration: float = 2.0
@@ -76,21 +76,21 @@ const walk_wave_offset: float = 0.5
 # A small number which is used to check for near-ZERO numbers
 const eps: float = 1.0
 
-onready var animated_sprite = $AnimatedSprite
+@onready var animated_sprite = $AnimatedSprite2D
 
-onready var platform_detector_00 = $PlatformDetector00
-onready var platform_detector_01 = $PlatformDetector01
-onready var top_detector = $TopDetector
+@onready var platform_detector_00 = $PlatformDetector00
+@onready var platform_detector_01 = $PlatformDetector01
+@onready var top_detector = $TopDetector
 
-onready var stand_collision_shape = $StandCollisionShape
-onready var crouch_collision_shape = $CrouchCollisionShape
-onready var avatar_collision_shape = $AvatarCollisionShape
+@onready var stand_collision_shape = $StandCollisionShape
+@onready var crouch_collision_shape = $CrouchCollisionShape
+@onready var avatar_collision_shape = $AvatarCollisionShape
 
-onready var kick_area = $KickArea
-onready var kick_area_collision_shape = $KickArea/CollisionShape
+@onready var kick_area = $KickArea
+@onready var kick_area_collision_shape = $KickArea/CollisionShape3D
 
-onready var transform_sound = $TransformSound
-onready var transform_effect_container = $TransformEffectContainer
+@onready var transform_sound = $TransformSound
+@onready var transform_effect_container = $TransformEffectContainer
 
 signal reseted
 signal died
@@ -178,24 +178,24 @@ func toggle_avatar_mode() -> void:
 	if Animator.is_active(transform_effect_container, "modulate:a"):
 		return
 	
-	Tools.play_packed_particles(transform_effect.instance(), self, transform_duration)
+	Tools.play_packed_particles(transform_effect.instantiate(), self, transform_duration)
 	transform_sound.play()
 	
-	yield(Animator.run(transform_effect_container, "modulate:a", 
-		0.0, 1.0, transform_duration / 2.0), "completed")
+	await Animator.run(transform_effect_container, "modulate:a", 
+		0.0, 1.0, transform_duration / 2.0)
 	
 	avatar_mode = not avatar_mode
 	
-	yield(Animator.run(transform_effect_container, "modulate:a", 
-		0.0, 1.0, transform_duration / 2.0), "completed")
+	await Animator.run(transform_effect_container, "modulate:a", 
+		0.0, 1.0, transform_duration / 2.0)
 
 func enable_avatar_mode() -> void:
 	if not avatar_mode:
-		yield(toggle_avatar_mode(), "completed")
+		await toggle_avatar_mode()
 
 func disable_avatar_mode() -> void:
 	if avatar_mode:
-		yield(toggle_avatar_mode(), "completed")
+		await toggle_avatar_mode()
 
 func _process(_delta: float) -> void:
 	if dead:
@@ -219,13 +219,13 @@ func _physics_process(delta: float) -> void:
 	_process_pickable_kick()
 
 func _process_fall_damage():
-	for i in get_slide_count():
+	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		
 		if not collision:
 			continue
 		
-		var hit = collision.travel - collision.remainder
+		var hit = collision.get_travel() - collision.get_remainder()
 		
 		if hit.abs() > hit_to_die:
 			pass
@@ -244,34 +244,54 @@ func _process_velocity(delta: float, direction: Vector2, skip_sync: bool = false
 		if not avatar_mode and force_gravity:
 			var next_velocity = _calculate_next_velocity(delta, Vector2.ZERO, normal_acceleration, skip_sync)
 			var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
-			var snap_vector = -1 * floor_normal * floor_detect_distance if direction.y == 0 else Vector2.ZERO
+			var next_floor_snap_length = floor_detect_distance if direction.y == 0.0 else 0.0
 			
-			current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, floor_normal, on_platform, 4, 0.9, false)
+			set_velocity(next_velocity)
+			set_floor_snap_length(next_floor_snap_length)
+			set_up_direction(floor_normal)
+			set_floor_stop_on_slope_enabled(on_platform)
+			set_max_slides(4)
+			set_floor_max_angle(0.9)
+			move_and_slide()
+			
+			current_velocity = velocity
 		else:
 			current_velocity = Vector2.ZERO
 	elif avatar_mode:
 		var next_velocity = _calculate_next_velocity(delta, direction, avatar_acceleration, skip_sync)
 		
-		current_velocity = move_and_slide(next_velocity)
+		set_velocity(next_velocity)
+		move_and_slide()
+		
+		current_velocity = velocity
 	else:
 		var next_velocity = _calculate_next_velocity(delta, direction, normal_acceleration, skip_sync)
 		var on_platform = platform_detector_00.is_colliding() or platform_detector_01.is_colliding()
+		var next_floor_snap_length = floor_detect_distance if direction.y == 0.0 else 0.0
 		
 		if abs(current_velocity.x) > eps:
 			var s = walk_wave_count * current_second * animation_speed + walk_wave_offset
 			
-			current_max_speed = max_speed * abs(sin(PI * s))	
+			current_max_speed = max_speed * abs(sin(PI * s))
 		
-		var snap_vector = -1 * floor_normal * floor_detect_distance if direction.y == 0 else Vector2.ZERO
+		set_velocity(next_velocity)
+		set_floor_snap_length(next_floor_snap_length)
+		set_up_direction(floor_normal)
+		set_floor_stop_on_slope_enabled(on_platform)
+		set_max_slides(4)
+		set_floor_max_angle(0.9)
+		move_and_slide()
 		
-		current_velocity = move_and_slide_with_snap(next_velocity, snap_vector, floor_normal, on_platform, 4, 0.9, false)
+		current_velocity = velocity
 
 func _push_pickable(body: Node, force: Vector2) -> void:
+	if not body.is_in_group("pickable"):
+		return
+
 	var position_diff = body.global_position - global_position
 	var direction = position_diff.normalized()
-	
-	if body.is_in_group("pickable"):
-		body.push(direction * force)
+
+	body.push(direction * force)
 
 func _process_pickable_kick() -> void:
 	# Body kick force (when touches the lower part of the body)
@@ -280,9 +300,9 @@ func _process_pickable_kick() -> void:
 			_push_pickable(body, kick_force)
 
 	# Body push force (when touches the body)
-	for i in get_slide_count():
+	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		var body = collision.collider
+		var body = collision.get_collider()
 		
 		if body and body.is_in_group("pickable"):
 			_push_pickable(body, push_force)
@@ -301,9 +321,13 @@ func _process_animation(direction: Vector2) -> void:
 	else:
 		animated_sprite.speed_scale = animation_speed
 	
-	var d = "_" if len(animation_prefix) > 0 else ""
+	var seprator = "_" if animation_prefix != "" else ""
+	var name_with_prefix = animation_prefix + seprator + next_animation.name
 	
-	animated_sprite.animation = animation_prefix + d + next_animation.name
+	if name_with_prefix != animated_sprite.animation:
+		animated_sprite.play(name_with_prefix)
+		
+		Tools.debug("Player animation changed: %s" % name_with_prefix)
 
 func _process_facing(direction: Vector2) -> void:
 	if avatar_mode:
@@ -422,7 +446,7 @@ func kill() -> void:
 	frozen = true
 	animated_sprite.visible = false
 	
-	Tools.play_packed_particles(death_effect.instance(), self)
+	Tools.play_packed_particles(death_effect.instantiate(), self)
 	
 	_process_collision_shapes()
 	emit_signal("died")
@@ -444,8 +468,9 @@ func _get_next_animation(direction: Vector2) -> Dictionary:
 	var pause = false
 	
 	var current_animation = animated_sprite.animation
-	var last_frame = animated_sprite.frames.get_frame_count(current_animation) - 1
-	var animation_looped = animated_sprite.frames.get_animation_loop(current_animation)
+	var sprite_frames = animated_sprite.sprite_frames
+	var last_frame = sprite_frames.get_frame_count(current_animation) - 1
+	var animation_looped = sprite_frames.get_animation_loop(current_animation)
 	
 	if avatar_mode:
 		if direction.x == 0.0 and direction.y == 0.0:

@@ -1,9 +1,9 @@
 shader_type canvas_item;
 
-uniform vec4 shadow_color : hint_color;
+uniform vec4 shadow_color : source_color;
 uniform float tile_factor = 1.0;
 uniform float aspect_ratio = 0.6;
-uniform sampler2D texture_offset_uv : hint_black;
+uniform sampler2D texture_offset_uv : hint_default_black;
 uniform vec2 texture_offset_scale = vec2(1.0, 0.5);
 uniform float texture_offset_height = 0.04;
 uniform float texture_offset_time_scale = 0.03;
@@ -36,5 +36,5 @@ void fragment()
 
 	COLOR = mix(texture(TEXTURE, adjusted_uv), shadow_color, water_height * 0.4 * shadow_color.a);
 	
-	NORMALMAP = texture(NORMAL_TEXTURE, adjusted_uv / 5.0).rgb;
+	NORMAL_MAP = texture(NORMAL_TEXTURE, adjusted_uv / 5.0).rgb;
 }

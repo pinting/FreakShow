@@ -1,28 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dmc0mlrhnicg0"]
 
-[ext_resource path="res://Assets/Environmnent/Light00.png" type="Texture" id=2]
-[ext_resource path="res://Resources/Materials/FakeLightMaterial.tres" type="Material" id=3]
+[ext_resource type="Texture2D" uid="uid://ddcbed0kcpov6" path="res://Assets/Environmnent/Light00.png" id="2"]
 
 [node name="Light_Room" type="Node2D"]
 
-[node name="DirectionalLight" type="Light2D" parent="." groups=[
-"auto_visible",
-"light",
-]]
-visible = false
-position = Vector2( -30.416, 321.667 )
-scale = Vector2( 3.5, 2 )
-texture = ExtResource( 2 )
+[node name="Light" type="PointLight2D" parent="."]
+position = Vector2(-30.416, 321.667)
+scale = Vector2(3.5, 2)
 range_z_min = -128
 range_z_max = 128
-
-[node name="FakeDirectionalLight" type="Sprite" parent="." groups=[
-"fake_light",
-]]
-self_modulate = Color( 1, 1, 1, 0.431373 )
-material = ExtResource( 3 )
-position = Vector2( -30.416, 321.667 )
-scale = Vector2( 3.5, 2 )
-z_index = 99
-z_as_relative = false
-texture = ExtResource( 2 )
+texture = ExtResource("2")

@@ -1,22 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://dc4hohap7rbre"]
 
-[ext_resource path="res://Resources/Materials/ScreenPenetrationMaterial.tres" type="Material" id=1]
-[ext_resource path="res://Prefabs/CursorPenetration.gd" type="Script" id=2]
+[ext_resource type="Material" uid="uid://bhjx448fosey7" path="res://Resources/Materials/ScreenPenetrationMaterial.tres" id="1"]
+[ext_resource type="Script" path="res://Prefabs/CursorPenetration.gd" id="2"]
 
-[node name="CursorPenetration" type="CanvasLayer" groups=[
-"high_performance",
-]]
+[node name="CursorPenetration" type="CanvasLayer" groups=["high_performance"]]
 layer = 2
-script = ExtResource( 2 )
+script = ExtResource("2")
 
-[node name="ColorRect" type="ColorRect" parent="." groups=[
-"auto_visible",
-]]
+[node name="ColorRect" type="ColorRect" parent="." groups=["auto_visible"]]
 visible = false
 show_behind_parent = true
-material = ExtResource( 1 )
-margin_right = 960.0
-margin_bottom = 540.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+material = ExtResource("1")
+offset_right = 960.0
+offset_bottom = 540.0

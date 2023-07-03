@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform vec2 offset = vec2(0.0, 0.0);
 uniform float width = 1;
-uniform vec4 color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform float noise_scale = 20.0;
 uniform float alpha_power = 2.0;
 uniform int octaves = 4;

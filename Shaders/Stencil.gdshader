@@ -2,8 +2,8 @@ shader_type canvas_item;
 
 // Based on github.com/kzerot edge detection shader
 
-uniform vec4 edge_color: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform vec4 background_color: hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 edge_color: source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 background_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform float line_thickness: hint_range(0, 10) = 1.0;
 
 void fragment() {

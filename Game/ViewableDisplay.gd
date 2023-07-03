@@ -2,29 +2,29 @@ class_name ViewableDisplay
 extends Node
 
 # Selectable script
-export (Script) var selectable_script = preload("res://Prefabs/Selectable/PureSelectable.gd")
+@export var selectable_script: Script = preload("res://Prefabs/Selectable/PureSelectable.gd")
 
 # Display material
-export (ShaderMaterial) var display_material = preload("res://Resources/Materials/ViewableDisplayMaterial.tres")
+@export var display_material: ShaderMaterial = preload("res://Resources/Materials/ViewableDisplayMaterial.tres")
 
 # Effect name
-export var effect_key: String = "amount"
+@export var effect_key: String = "amount"
 
 # Effect fade in and fade out speed
-export var effect_duration: float = 0.5
+@export var effect_duration: float = 0.5
 
 # Effect minimum (fade-in: min to max, fade-out: max to min) 
-export var effect_min: float = 0.0
+@export var effect_min: float = 0.0
 
 # Effect maximum
-export var effect_max: float = 20.0
+@export var effect_max: float = 20.0
 
 # Process user input after this amount of seconds, so the user cannot click through stuff
-export var input_delay: float = 0.1
+@export var input_delay: float = 0.1
 
-onready var inner_display: Node2D = $InnerDisplay
-onready var container: Node2D = $InnerDisplay/Container
-onready var background_light: Sprite = $InnerDisplay/BackgroundLight
+@onready var inner_display: Node2D = $InnerDisplay
+@onready var container: Node2D = $InnerDisplay/Container
+@onready var background_light: Sprite2D = $InnerDisplay/BackgroundLight
 
 var visible_since: float = 0.0
 
@@ -37,9 +37,9 @@ func _set_effect(value: float) -> void:
 	var effect_value = effect_min + (1.0 - value) * (effect_max - effect_min)
 
 	for child in container.get_children():
-		child.material.set_shader_param(effect_key, effect_value)
+		child.material.set_shader_parameter(effect_key, effect_value)
 
-func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
+func appear(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	# Calculate the right child scale and center position
 	var project_size = VirtualInput.get_project_size()
 	var texture_size = viewable.texture.get_size()
@@ -56,7 +56,7 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	
 	dupe.set_script(selectable_script)
 	dupe.material = display_material
-	dupe.material.set_shader_param(effect_key, effect_max)
+	dupe.material.set_shader_parameter(effect_key, effect_max)
 	dupe.scale = Vector2(child_scale, child_scale)
 	dupe.rotation_degrees = 0.0
 	dupe.position = Vector2.ZERO
@@ -66,7 +66,7 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	container.add_child(dupe)
 
 	# Hide cursor
-	CursorManager.hide(0.0)
+	CursorManager.disappear(0.0)
 	
 	# Disable motion input
 	VirtualInput.disable_motion = true
@@ -90,13 +90,13 @@ func show(viewable: Viewable, enlarged_zoom: float, description_text: String):
 	# Force reset the description text and set it to the new value
 	SubtitleManager.set_describe(container.get_instance_id(), description_text, true)
 
-func hide() -> void:
+func disappear() -> void:
 	# Reset describe text
 	SubtitleManager.reset_describe(container.get_instance_id(), true)
 	
 	# Play effect
-	yield(Animator.run(self, "_set_effect",
-		1.0, 0.0, effect_duration), "completed")
+	await Animator.run(self, "_set_effect",
+		1.0, 0.0, effect_duration)
 	
 	# Unfreeze players
 	PlayerManager.call_each("unfreeze")
@@ -111,7 +111,7 @@ func hide() -> void:
 	VirtualInput.disable_motion = false
 
 	# Show cursor
-	CursorManager.show()
+	CursorManager.appear()
 
 	# Enable selectables
 	SelectableManager.disable = false
@@ -131,4 +131,4 @@ func _input(event: InputEvent) -> void:
 	if is_tween_active or visible_since < input_delay:
 		return
 	
-	hide()
+	disappear()

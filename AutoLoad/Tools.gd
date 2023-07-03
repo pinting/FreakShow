@@ -1,19 +1,19 @@
 extends Node
 
 var random_generator: RandomNumberGenerator
-var noise: OpenSimplexNoise
+var noise: FastNoiseLite
 
 const SILENT: float = -100.0
 
 func _ready() -> void:
 	random_generator = RandomNumberGenerator.new()
-	noise = OpenSimplexNoise.new()
+	noise = FastNoiseLite.new()
 	
 	random_generator.randomize()
 	
 	noise.seed = randi()
-	noise.period = 4
-	noise.octaves = 2
+	noise.frequency = 0.25
+	noise.fractal_octaves = 2
 
 	if Config.no_sound:
 		# Mute each audio server
@@ -23,7 +23,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# Process toggle fullscreen button
 	if VirtualInput.is_action_just_pressed("toggle_fullscreen"):
-		OS.window_fullscreen = not OS.window_fullscreen
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (not ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
 
 # Destroy an object, remove it from its parent and mark for garbage collection
 func destroy_node(object: Object, deferred: bool = false):
@@ -42,8 +42,8 @@ func destroy_node(object: Object, deferred: bool = false):
 	object.queue_free()
 
 func play_packed_particles(instance: Node2D, parent: Node2D, timeout: float = 0.0) -> void:
-	assert(instance is Particles2D or instance is CPUParticles2D,
-		"Only Particles2D or CPUParticles2D are supported")
+	assert(instance is GPUParticles2D or instance is CPUParticles2D,
+		"Only GPUParticles2D or CPUParticles2D are supported")
 	
 	parent.add_child(instance)
 	
@@ -52,7 +52,7 @@ func play_packed_particles(instance: Node2D, parent: Node2D, timeout: float = 0.
 	if timeout <= 0.0:
 		timeout = instance.lifetime
 	
-	yield(Tools.wait(timeout), "completed")
+	await Tools.wait(timeout)
 	Tools.destroy_node(instance)
 
 # Animate the volume of AudioStreamPlayer
@@ -105,19 +105,15 @@ func uuid():
 func set_shapes_disabled(body: CollisionObject2D, disabled: bool) -> void:
 	for child in body.get_children():
 		if child is CollisionPolygon2D or child is CollisionShape2D:
-			child.disabled = disabled
+			set_deferred("disabled", disabled)
 
 # Change body visibility and disable/enable the shapes
 func set_body_visibility(body: CollisionObject2D, state: float) -> void:
 	body.visible = state
 	
 	set_shapes_disabled(body, not state)
-	
-	# Sometimes the first disabled change is ignored
-	yield(Tools.wait(0.1), "completed")
-	set_shapes_disabled(body, not state)
 
-# Remove every child not, except one with the given index
+# Remove every child, except one with the given index
 func keep_child_at(parent: Node, index: int):
 	var children = parent.get_children()
 	var count = parent.get_child_count()
@@ -137,8 +133,8 @@ func keep_child_at(parent: Node, index: int):
 	return chosen
 
 # Change group visibility and disable/enable the shapes
-func set_group_visibility(name: String, state: bool, with_shapes: bool = false) -> void:
-	var nodes = get_tree().get_nodes_in_group(name)
+func set_group_visibility(group_name: String, state: bool, with_shapes: bool = false) -> void:
+	var nodes = get_tree().get_nodes_in_group(group_name)
 	
 	for node in nodes:
 		node.visible = state
@@ -176,12 +172,12 @@ func pad_number(number: int, count: int, c: String = "0") -> String:
 
 	for _i in range(pad_count):
 		result = c + result
-	 
+	
 	return result
 
 # Wait for the given duration in seconds
-func wait(duration: float = 1.0) -> void:
-	yield(get_tree().create_timer(duration), "timeout")
+func wait(duration: float = 1.0):
+	await get_tree().create_timer(duration).timeout
 
 # Print a debug message (if enabled in the Config)
 func debug(message: String) -> void:

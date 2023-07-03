@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Shelf00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Shelf00.png" type="Texture2D" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 272.658, 107.434 )
+size = Vector2( 272.658, 107.434 )
 
 [node name="Static_Shelf00" type="StaticBody2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2( 0.9, 0.8 )
 texture = ExtResource( 1 )
 

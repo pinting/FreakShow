@@ -1,11 +1,11 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture2D" id=1]
 [ext_resource path="res://Prefabs/Pickable/Pickable_Dildo.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti36.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor08.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Environmnent/Misc22.png" type="Texture" id=8]
-[ext_resource path="res://Shaders/Club.shader" type="Shader" id=9]
+[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti36.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor08.png" type="Texture2D" id=6]
+[ext_resource path="res://Assets/Environmnent/Misc22.png" type="Texture2D" id=8]
+[ext_resource path="res://Shaders/Club.gdshader" type="Shader" id=9]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Magazine13.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Part06/Part06_MechanicDoor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Part06/Part06_Hand.tscn" type="PackedScene" id=12]
@@ -16,19 +16,19 @@
 [ext_resource path="res://Prefabs/Viewable/Viewable_Magazine12.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Prefabs/Static/Static_Chair01.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Prefabs/Selectable/Selectable_Button.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall01.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall01.png" type="Texture2D" id=28]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1792.48, 40.5972 )
+size = Vector2( 1792.48, 40.5972 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1792.48, 40.5972 )
+size = Vector2( 1792.48, 40.5972 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 38.8239, 496.48 )
+size = Vector2( 38.8239, 496.48 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 46.1909, 496.48 )
+size = Vector2( 46.1909, 496.48 )
 
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 9 )
@@ -36,16 +36,16 @@ shader_param/time_offset = 40000.0
 
 [node name="Part06_Bottom" type="Node2D"]
 
-[node name="Inside" type="Sprite" parent="."]
+[node name="Inside" type="Sprite2D" parent="."]
 light_mask = 1536
 position = Vector2( -256.277, -39.5439 )
 z_index = -2
 texture = ExtResource( 28 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3580, 910 )
-region_filter_clip = true
+region_filter_clip_enabled = true
 
-[node name="Floor" type="Sprite" parent="Inside"]
+[node name="Floor" type="Sprite2D" parent="Inside"]
 light_mask = 1024
 position = Vector2( 2, 455.396 )
 z_index = 1
@@ -60,13 +60,13 @@ collision_mask = 4
 
 [node name="Dildo" parent="Inside/Floor" instance=ExtResource( 2 )]
 
-[node name="Speaker00" type="Sprite" parent="Inside"]
+[node name="Speaker00" type="Sprite2D" parent="Inside"]
 light_mask = 1024
 position = Vector2( -1545.19, -182.647 )
 rotation = -0.0846504
 texture = ExtResource( 8 )
 
-[node name="Speaker01" type="Sprite" parent="Inside"]
+[node name="Speaker01" type="Sprite2D" parent="Inside"]
 light_mask = 1024
 position = Vector2( 1519.92, -178.58 )
 rotation = 0.0585922
@@ -90,7 +90,7 @@ light_mask = 1024
 [node name="Pajtas05" parent="Inside" instance=ExtResource( 10 )]
 light_mask = 1024
 
-[node name="Graffiti" type="Sprite" parent="Inside"]
+[node name="Graffiti" type="Sprite2D" parent="Inside"]
 self_modulate = Color( 1, 1, 1, 0.784314 )
 light_mask = 1024
 position = Vector2( 916.275, 1.34961 )
@@ -102,7 +102,7 @@ texture = ExtResource( 5 )
 light_mask = 1536
 position = Vector2( -1037.31, 45.6472 )
 
-[node name="Light" type="Light2D" parent="Inside/Button"]
+[node name="Light3D" type="PointLight2D" parent="Inside/Button"]
 visible = false
 position = Vector2( -4.04822, -4.08722 )
 scale = Vector2( 0.383806, 0.383806 )
@@ -161,11 +161,11 @@ speed = Vector2( 500, 0 )
 self_modulate = Color( 1, 1, 1, 0.588235 )
 light_mask = 1024
 material = SubResource( 5 )
-margin_left = 1534.0
-margin_top = -503.0
-margin_right = 5114.0
-margin_bottom = 486.0
-rect_scale = Vector2( -1, 1 )
+offset_left = 1534.0
+offset_top = -503.0
+offset_right = 5114.0
+offset_bottom = 486.0
+scale = Vector2( -1, 1 )
 mouse_filter = 2
 color = Color( 0.972549, 0.972549, 0.972549, 1 )
 __meta__ = {

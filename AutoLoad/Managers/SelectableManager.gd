@@ -41,25 +41,35 @@ func get_absolute_z_index(target: Node2D) -> int:
 	return z_index
 
 func get_top(mouse_position: Vector2, viewport_based: bool) -> PureSelectable:
-	var tree = get_tree()
-	var selectable_group = tree.get_nodes_in_group("selectable")
+	var selectable_group = get_tree().get_nodes_in_group("selectable")
 	
 	var result = null
-	var result_z_index = -INF
 	
-	for selectable in selectable_group:
+	var max_z_index = -INF
+	var max_tree_index = -INF
+	
+	for i in range(len(selectable_group)):
+		var selectable = selectable_group[i]
+		
 		if selectable.viewport_based_cursor != viewport_based:
 			continue
+			
+		if not selectable.visible:
+			continue
 		
-		var selectable_z_index = get_absolute_z_index(selectable)
+		var hovering = is_hovering(selectable, mouse_position)
 		
-		var is_selected = is_hovering(selectable, mouse_position)
-		var is_front = selectable_z_index > result_z_index
-		var is_visible = selectable.visible
-		
-		if is_selected and is_front and is_visible:
-			result = selectable
-			result_z_index = selectable_z_index
+		if hovering:
+			var z_index = get_absolute_z_index(selectable)
+			
+			var tree_front = z_index == max_z_index and i > max_tree_index
+			var z_front = z_index > max_z_index
+			
+			if tree_front or z_front:
+				max_z_index = z_index
+				max_tree_index = i
+				
+				result = selectable
 	
 	return result
 
@@ -70,7 +80,7 @@ func is_selected(selectable: PureSelectable) -> bool:
 	return selectable == world_selection
 
 func _process(_delta: float) -> void:
-	if SceneLoader.resource_loader:
+	if SceneLoader.loading_path != "":
 		return
 	
 	# Handle world based selection
@@ -106,7 +116,7 @@ func _process(_delta: float) -> void:
 			emit_signal("cursor_entered", viewport_selection)
 
 func _input(event: InputEvent) -> void:
-	if SceneLoader.resource_loader:
+	if SceneLoader.loading_path != "":
 		return
 	
 	if event is InputEventMouseButton and event.pressed:

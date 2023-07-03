@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Light03.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Light03.png" type="Texture2D" id=1]
 [ext_resource path="res://Scenes/Part05/Part05_WarningLampYellow.gd" type="Script" id=2]
 [ext_resource path="res://Prefabs/Static/Static_MineLamp.tscn" type="PackedScene" id=3]
 
@@ -13,7 +13,7 @@ modulate = Color( 0.968627, 0.956863, 0.243137, 1 )
 position = Vector2( 0.611633, -19.7506 )
 scale = Vector2( 1, -1 )
 
-[node name="DirectionalLight" type="Light2D" parent="TopLamp"]
+[node name="DirectionalLight3D" type="PointLight2D" parent="TopLamp"]
 position = Vector2( -5.70821, 262.65 )
 scale = Vector2( 6, 4 )
 z_index = 1
@@ -27,7 +27,7 @@ range_z_max = 128
 modulate = Color( 0.968627, 0.956863, 0.243137, 1 )
 position = Vector2( 0.611633, 0.565781 )
 
-[node name="DirectionalLight" type="Light2D" parent="BottomLamp"]
+[node name="DirectionalLight3D" type="PointLight2D" parent="BottomLamp"]
 position = Vector2( -5.70821, 260.38 )
 scale = Vector2( 6, 4 )
 z_index = 1

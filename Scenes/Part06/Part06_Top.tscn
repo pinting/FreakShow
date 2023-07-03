@@ -1,14 +1,14 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture2D" id=1]
 [ext_resource path="res://Scenes/Part06/Part06_Pussy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Selectable/Selectable_BearRug.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture" id=4]
-[ext_resource path="res://Shaders/Club.shader" type="Shader" id=10]
+[ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture2D" id=4]
+[ext_resource path="res://Shaders/Club.gdshader" type="Shader" id=10]
 [ext_resource path="res://Scenes/Part06/Part06_Hand.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Magazine04.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Prefabs/Selectable/Selectable_Button.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall11.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Environmnent/Surface/Wall11.png" type="Texture2D" id=18]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Magazine00.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Magazine01.tscn" type="PackedScene" id=25]
 [ext_resource path="res://Prefabs/Viewable/Viewable_Magazine02.tscn" type="PackedScene" id=26]
@@ -18,19 +18,19 @@
 [ext_resource path="res://Prefabs/Viewable/Viewable_Magazine05.tscn" type="PackedScene" id=30]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1792.48, 40.5972 )
+size = Vector2( 1792.48, 40.5972 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1792.48, 40.5972 )
+size = Vector2( 1792.48, 40.5972 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 1792.48, 40.5972 )
+size = Vector2( 1792.48, 40.5972 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 38.8239, 496.48 )
+size = Vector2( 38.8239, 496.48 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 46.1909, 496.48 )
+size = Vector2( 46.1909, 496.48 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 10 )
@@ -39,16 +39,16 @@ shader_param/time_offset = 30000.0
 [node name="Part06_Top" type="Node2D"]
 position = Vector2( -0.230225, -1035.3 )
 
-[node name="Inside" type="Sprite" parent="."]
+[node name="Inside" type="Sprite2D" parent="."]
 light_mask = 513
 position = Vector2( -256.277, -41.5771 )
 z_index = -2
 texture = ExtResource( 18 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 3580, 910 )
-region_filter_clip = true
+region_filter_clip_enabled = true
 
-[node name="Floor" type="Sprite" parent="Inside"]
+[node name="Floor" type="Sprite2D" parent="Inside"]
 position = Vector2( 0.77799, 486 )
 scale = Vector2( 0.895869, 0.769231 )
 z_index = 1
@@ -76,7 +76,7 @@ region_rect = Rect2( 0, 0, 4000, 140 )
 light_mask = -2147483135
 position = Vector2( 1064.14, 36.2056 )
 
-[node name="Light" type="Light2D" parent="Inside/Button"]
+[node name="Light3D" type="PointLight2D" parent="Inside/Button"]
 visible = false
 position = Vector2( -4.04822, -4.08722 )
 scale = Vector2( 0.383806, 0.383806 )
@@ -137,10 +137,10 @@ speed = Vector2( 500, 0 )
 [node name="Effect" type="ColorRect" parent="."]
 self_modulate = Color( 1, 1, 1, 0.588235 )
 material = SubResource( 6 )
-margin_left = -2046.77
-margin_top = -494.7
-margin_right = 1536.23
-margin_bottom = 500.3
+offset_left = -2046.77
+offset_top = -494.7
+offset_right = 1536.23
+offset_bottom = 500.3
 mouse_filter = 2
 color = Color( 0.972549, 0.972549, 0.972549, 1 )
 __meta__ = {

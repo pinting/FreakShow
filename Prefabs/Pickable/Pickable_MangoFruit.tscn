@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Fruit00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Fruit00.png" type="Texture2D" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
 [ext_resource path="res://Prefabs/Pickable/Pickable.gd" type="Script" id=4]
 
@@ -16,12 +16,12 @@ collision_mask = 2
 mass = 0.025
 physics_material_override = SubResource( 1 )
 gravity_scale = 5.0
-contacts_reported = 3
+max_contacts_reported = 3
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 4 )
 
-[node name="Selectable" type="Sprite" parent="." groups=[
+[node name="Selectable" type="Sprite2D" parent="." groups=[
 "selectable",
 ]]
 texture = ExtResource( 1 )
@@ -30,4 +30,4 @@ description_key = "Description010"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PoolVector2Array( -21.0241, 0.517475, -13.0579, -9.64416, 3.18816, -13.8468, 18.3679, -8.01328, 21.2533, 2.52471, 14.7925, 12.2473, 4.0036, 14.5681, -14.5633, 12.2473, -21.275, 7.16645 )
+polygon = PackedVector2Array( -21.0241, 0.517475, -13.0579, -9.64416, 3.18816, -13.8468, 18.3679, -8.01328, 21.2533, 2.52471, 14.7925, 12.2473, 4.0036, 14.5681, -14.5633, 12.2473, -21.275, 7.16645 )

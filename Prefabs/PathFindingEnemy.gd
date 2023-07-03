@@ -1,22 +1,22 @@
 class_name PathFindingEnemy
-extends KinematicBody2D
+extends CharacterBody2D
 
 # Navigation node
-export (NodePath) var navigation_node
+@export var navigation_node: NodePath
 
 # Target node
-export (NodePath) var target_node
+@export var target_node: NodePath
 
 # Speed of the enemy
-export var speed: float = 250.0
+@export var speed: float = 250.0
 
 # Rotation speed of the enemy
-export var rotation_speed: float = 10.0
+@export var rotation_speed: float = 10.0
 
 # How often should the path refreshed
-export var finding_interval: float = 0.5
+@export var finding_interval: float = 0.5
 
-var path : = PoolVector2Array()
+var path : = PackedVector2Array()
 var current_speed = speed
 
 var base_position: Vector2
@@ -33,6 +33,8 @@ var follows: bool = false
 var go_back: bool = false
 
 func _ready() -> void:
+	super._ready()
+
 	base_position = global_position
 	base_rotation = rotation_degrees
 	
@@ -56,6 +58,8 @@ func path_distance() -> float:
 	return sum
 
 func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
+
 	if path.size() == 0:
 		return
 	
@@ -65,7 +69,9 @@ func _physics_process(delta: float) -> void:
 	if distance < current_speed * delta:
 		path.remove(0)
 	
-	current_velocity = move_and_slide(direction * current_speed)
+	set_velocity(direction * current_speed)
+	move_and_slide()
+	current_velocity = velocity
 	target_rotation = 180 * (direction.angle() / PI)
 	
 	var rotation_diff = target_rotation - rotation_degrees
@@ -86,6 +92,8 @@ func reset() -> void:
 	go_back = false
 
 func _process(delta: float) -> void:
+	super._process(delta)
+
 	if not follows:
 		return
 	

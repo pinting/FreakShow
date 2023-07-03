@@ -1,32 +1,32 @@
 extends "res://Game/BaseScene.gd"
 
-export var player_sync_fix_max_diff: float = 10.0
+@export var player_sync_fix_max_diff: float = 10.0
 
-onready var player_top = $PlayerTop
-onready var player_bottom = $PlayerBottom
-onready var camera = $GameCamera
+@onready var player_top = $PlayerTop
+@onready var player_bottom = $PlayerBottom
+@onready var camera = $GameCamera
 
-onready var top_rug = $Environment/Top/Inside/Rug
-onready var top_pussy = $Environment/Top/Inside/Pussy
-onready var top_button = $Environment/Top/Inside/Button
-onready var top_hand = $Environment/Top/Hand
-onready var top_player_collision_right_shape = $Environment/Top/CollisionPlayer/Right
-onready var top_button_light = $Environment/Top/Inside/Button/Light
+@onready var top_rug = $Environment/Top/Inside/Rug
+@onready var top_pussy = $Environment/Top/Inside/Pussy
+@onready var top_button = $Environment/Top/Inside/Button
+@onready var top_hand = $Environment/Top/Hand
+@onready var top_player_collision_right_shape = $Environment/Top/CollisionPlayer/Right
+@onready var top_button_light = $Environment/Top/Inside/Button/Light3D
 
-onready var bottom_door = $Environment/Bottom/Door
-onready var bottom_button = $Environment/Bottom/Inside/Button
-onready var bottom_hand = $Environment/Bottom/Hand
-onready var bottom_player_collision_left_shape = $Environment/Bottom/CollisionPlayer/Left
-onready var bottom_button_light = $Environment/Bottom/Inside/Button/Light
+@onready var bottom_door = $Environment/Bottom/Door
+@onready var bottom_button = $Environment/Bottom/Inside/Button
+@onready var bottom_hand = $Environment/Bottom/Hand
+@onready var bottom_player_collision_left_shape = $Environment/Bottom/CollisionPlayer/Left
+@onready var bottom_button_light = $Environment/Bottom/Inside/Button/Light3D
 
-onready var end_camera = $Environment/End/Camera
-onready var end_animated_sprite = $Environment/End/AnimatedSprite
-onready var end_fap_sound = $Environment/End/FapSound
+@onready var end_camera = $Environment/End/Camera3D
+@onready var end_animated_sprite = $Environment/End/AnimatedSprite2D
+@onready var end_fap_sound = $Environment/End/FapSound
 
-onready var fall_to_death = $Trigger/FallToDeath
+@onready var fall_to_death = $Trigger/FallToDeath
 
-onready var main_music = $Sound/MainMusic
-onready var not_close_enough_sound = $Sound/NotCloseEnoughSound
+@onready var main_music = $Sound/MainMusic
+@onready var not_close_enough_sound = $Sound/NotCloseEnoughSound
 
 var dildo_in_place = false
 var game_over = false
@@ -36,17 +36,19 @@ var music_00
 var music_01
 
 func _ready() -> void:
+	super._ready()
+
 	music_00 = main_music.add_part(0, 60 + 21, false, 0, 0.5, 0)
 	music_01 = main_music.add_part(15, 60 + 21, true, 0.5, 0.5, -1)
 	
-	connect("scene_started", self, "_on_scene_started")
-	top_pussy.connect("dildo_inside", self, "_on_dildo_inside")
-	bottom_button.connect("selected", self, "_on_bottom_button_selected")
-	top_button.connect("selected", self, "_on_top_button_selected")
-	bottom_hand.connect("player_on_palm", self, "_player_on_palm")
-	top_hand.connect("player_on_palm", self, "_player_on_palm")
-	fall_to_death.connect("body_entered", self, "_on_fall_to_death")
-	top_rug.connect("selected", self, "_remove_rug")
+	connect("scene_started", Callable(self, "_on_scene_started"))
+	top_pussy.connect("dildo_inside", Callable(self, "_on_dildo_inside"))
+	bottom_button.connect("selected", Callable(self, "_on_bottom_button_selected"))
+	top_button.connect("selected", Callable(self, "_on_top_button_selected"))
+	bottom_hand.connect("player_on_palm", Callable(self, "_player_on_palm"))
+	top_hand.connect("player_on_palm", Callable(self, "_player_on_palm"))
+	fall_to_death.connect("body_entered", Callable(self, "_on_fall_to_death"))
+	top_rug.connect("selected", Callable(self, "_remove_rug"))
 
 func _remove_rug() -> void:
 	top_rug.get_parent().remove_child(top_rug)
@@ -59,8 +61,8 @@ func _player_on_palm(player: Player) -> void:
 	
 	game_finished = true
 
-	yield(Tools.wait(3.0), "completed")
-	yield(black_screen.fade_in(2.0), "completed")
+	await Tools.wait(3.0)
+	await black_screen.fade_in(2.0)
 
 	end_animated_sprite.frames = player.animated_sprite.frames
 	end_animated_sprite.playing = true 
@@ -70,11 +72,11 @@ func _player_on_palm(player: Player) -> void:
 
 	end_fap_sound.play()
 	black_screen.fade_out(5.0)
-	yield(Tools.wait(10.0), "completed")
+	await Tools.wait(10.0)
 	
 	black_screen.fade_in(5.0)
 	main_music.kill(7.0)
-	yield(Tools.wait(10.0), "completed")
+	await Tools.wait(10.0)
 	
 	Save.clear()
 	load_next_scene()
@@ -109,7 +111,7 @@ func _on_dildo_inside() -> void:
 	dildo_in_place = true
 	
 	bottom_door.open()
-	yield(Tools.wait(2.0), "completed")
+	await Tools.wait(2.0)
 	
 	camera.change_zoom()
 	SubtitleManager.say(Text.find("Narrator011"))
@@ -142,7 +144,7 @@ func _on_fall_to_death(body: Node) -> void:
 			return
 	
 	main_music.kill(2.0);
-	yield(black_screen.fade_in(2.0), "completed")
+	await black_screen.fade_in(2.0)
 	
 	# Reload current scene
 	reload_scene()
@@ -151,6 +153,8 @@ func _on_fall_to_death(body: Node) -> void:
 # This function validates if they are still in sync and if not their position X
 # is set to the average distance X from the origo.
 func _process(_delta: float):
+	super._process(delta)
+
 	if not is_instance_valid(player_top) or not is_instance_valid(player_bottom):
 		return
 	

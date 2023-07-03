@@ -1,13 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c3xocq3lf8qyh"]
 
-[ext_resource path="res://Shaders/GlowWithOutline.shader" type="Shader" id=1]
+[ext_resource type="Shader" path="res://Shaders/GlowWithOutline.gdshader" id="1"]
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/keep_size = true
-shader_param/offset = Vector2( 0.5, 0.5 )
-shader_param/scale = 0.0
-shader_param/glow_scale = 0.66
-shader_param/glow_radius = 10.0
-shader_param/line_thickness = 3.0
-shader_param/line_color = Color( 0.96, 0.35, 0.45, 1 )
+shader = ExtResource("1")
+shader_parameter/keep_size = true
+shader_parameter/offset = Vector2(0.5, 0.5)
+shader_parameter/scale = 0.0
+shader_parameter/glow_scale = 0.66
+shader_parameter/glow_radius = 10.0
+shader_parameter/line_thickness = 3.0
+shader_parameter/line_color = Color(0.96, 0.35, 0.45, 1)

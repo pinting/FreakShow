@@ -1,15 +1,15 @@
 extends Node2D
 
-export var duration: float = 0.5
+@export var duration: float = 0.5
 
-onready var door_closed: Selectable = $DoorClosed
-onready var door_open: Selectable = $DoorOpen
+@onready var door_closed: Selectable = $DoorClosed
+@onready var door_open: Selectable = $DoorOpen
 
 signal selected
 
 func _ready() -> void:
-	door_closed.connect("selected", self, "_on_door_selected")
-	door_open.connect("selected", self, "_on_door_selected")
+	door_closed.connect("selected", Callable(self, "_on_door_selected"))
+	door_open.connect("selected", Callable(self, "_on_door_selected"))
 	
 	door_closed.visible = true
 	door_open.visible = false
@@ -25,6 +25,6 @@ func _set_effect(value: float) -> void:
 func open() -> void:
 	door_open.visible = true
 	
-	yield(Animator.run(self, "_set_effect", 0.0, 1.0, duration), "completed")
+	await Animator.run(self, "_set_effect", 0.0, 1.0, duration)
 	
 	door_closed.visible = false

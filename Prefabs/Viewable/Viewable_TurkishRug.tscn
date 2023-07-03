@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Prefabs/Viewable/Viewable.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Environmnent/Misc13.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Misc13.png" type="Texture2D" id=3]
 
-[node name="Viewable_TurkishRug" type="Sprite" groups=[
+[node name="Viewable_TurkishRug" type="Sprite2D" groups=[
 "selectable",
 "viewable",
 ]]

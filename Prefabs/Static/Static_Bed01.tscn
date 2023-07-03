@@ -1,13 +1,13 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Bed01.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Bed01.png" type="Texture2D" id=1]
 
 [node name="Static_Bed01" type="StaticBody2D"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( -1.82904, 0 )
-polygon = PoolVector2Array( -444.072, -124.709, -424.798, -143.352, -391.913, -144.843, -383.492, -2.39319, 446.645, 7.43094, 445.294, 143.617, -405.201, 145.446, -437.948, 115.677, -459.158, 30.2173 )
+polygon = PackedVector2Array( -444.072, -124.709, -424.798, -143.352, -391.913, -144.843, -383.492, -2.39319, 446.645, 7.43094, 445.294, 143.617, -405.201, 145.446, -437.948, 115.677, -459.158, 30.2173 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2( -0.315979, 0 )
 texture = ExtResource( 1 )

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Part03/Part03_Boss.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Animations/Enemy00.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Shaders/ColorChanger.shader" type="Shader" id=4]
+[ext_resource path="res://Shaders/ColorChanger.gdshader" type="Shader" id=4]
 [ext_resource path="res://Prefabs/ColorChanger.gd" type="Script" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -15,7 +15,7 @@ shader_param/tolerance = 0.95
 radius = 169.863
 height = 328.573
 
-[node name="Part03_Boss" type="KinematicBody2D" groups=[
+[node name="Part03_Boss" type="CharacterBody2D" groups=[
 "_boss",
 ]]
 scale = Vector2( 0.5, 0.5 )
@@ -25,10 +25,10 @@ script = ExtResource( 1 )
 speed = 800.0
 rotation_speed = 60.0
 
-[node name="CollisionShape" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -493.689, 519.875, 135.318, 382.208, 443.867, 18.72, 535.074, -393.054, 352.66, -504.389, -11.4785 )
+[node name="CollisionShape3D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array( -398.431, -258.715, -63.0984, -423.943, 223.936, -493.689, 519.875, 135.318, 382.208, 443.867, 18.72, 535.074, -393.054, 352.66, -504.389, -11.4785 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource( 1 )
 frames = ExtResource( 2 )
 playing = true
@@ -43,6 +43,6 @@ scale_color = Color( 1, 1, 1, 1 )
 collision_layer = 8
 collision_mask = 8
 
-[node name="CollisionShape" type="CollisionShape2D" parent="MouthArea"]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="MouthArea"]
 position = Vector2( 434.308, 143.989 )
 shape = SubResource( 2 )

@@ -2,6 +2,8 @@ shader_type canvas_item;
 
 // Based on github.com/henriquelalves CRT shader
 
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
 uniform float screen_width = 1920;
 uniform float screen_height = 1080;
 

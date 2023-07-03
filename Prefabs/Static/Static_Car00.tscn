@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environmnent/Car00.png" type="Texture2D" id=1]
 [ext_resource path="res://Prefabs/Selectable/Selectable_CarSaleSign.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 481.622, 180.532 )
+size = Vector2( 481.622, 180.532 )
 
 [node name="Static_Car00" type="StaticBody2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource( 1 )
 scale = Vector2( 0.8997, 0.8997 )
 texture = ExtResource( 1 )

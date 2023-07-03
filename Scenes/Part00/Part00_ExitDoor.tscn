@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Environmnent/Door07.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Environmnent/Door07.png" type="Texture2D" id=3]
 
-[node name="ExitDoor" type="Sprite" groups=[
+[node name="ExitDoor" type="Sprite2D" groups=[
 "selectable",
 ]]
 position = Vector2( 11718.1, 394.615 )
