@@ -88,3 +88,6 @@ func disappear() -> void:
 func _debug(message) -> void:
 	if DEBUG:
 		Tools.debug(message)
+
+func create_clone() -> PureSelectable:
+	return duplicate()

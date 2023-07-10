@@ -36,6 +36,9 @@ func _physics_process(delta: float) -> void:
 	_process_missing_ball(delta)
 
 func _process_missing_ball(delta: float) -> void:
+	# Disable this for now
+	return
+	
 	if ball_reposition_sleep > 0:
 		ball_reposition_sleep -= delta
 	elif not ball.disabled and not ball_area.overlaps_body(ball):

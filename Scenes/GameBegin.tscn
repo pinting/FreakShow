@@ -33,10 +33,13 @@ size = Vector2(2997, 1500)
 script = ExtResource("2")
 disable_auto_restart = true
 
-[node name="CursorDisplay" parent="BaseScene" index="3"]
+[node name="InventoryDisplay" parent="BaseScene" index="0"]
+margin = Vector2(100, 100)
+
+[node name="CursorDisplay" parent="BaseScene" index="4"]
 disable = true
 
-[node name="CursorPenetration" parent="BaseScene" index="5"]
+[node name="CursorPenetration" parent="BaseScene" index="6"]
 strength = 0.2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene"]
@@ -65,19 +68,7 @@ z_index = 1
 position = Vector2(366.678, 499.636)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("24")
-effect_material = null
-vanish_material = null
-effect_key = null
-effect_offset_key = null
-effect_min = null
-effect_max = null
-effect_duration = null
-vanish_key = null
-vanish_min = null
-vanish_max = null
-vanish_duration = null
 description_key = "Description058"
-selection_area = null
 viewport_based_cursor = true
 
 [node name="ContinueGame" parent="BaseScene/Menu" instance=ExtResource("9")]
@@ -86,19 +77,7 @@ z_index = 1
 position = Vector2(584.408, 499.636)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("23")
-effect_material = null
-vanish_material = null
-effect_key = null
-effect_offset_key = null
-effect_min = null
-effect_max = null
-effect_duration = null
-vanish_key = null
-vanish_min = null
-vanish_max = null
-vanish_duration = null
 description_key = "Description059"
-selection_area = null
 viewport_based_cursor = true
 
 [node name="ScreenEffect" parent="BaseScene" instance=ExtResource("20")]

@@ -216,7 +216,7 @@ func _physics_process(delta: float) -> void:
 	_process_facing(direction)
 	_process_animation(direction)
 	_process_fall_damage()
-	_process_pickable_kick()
+	_process_pickable_touch()
 
 func _process_fall_damage():
 	for i in get_slide_collision_count():
@@ -284,7 +284,9 @@ func _process_velocity(delta: float, direction: Vector2, skip_sync: bool = false
 		
 		current_velocity = velocity
 
-func _push_pickable(body: Node, force: Vector2) -> void:
+func _handle_pickable_push(body: Node, force: Vector2) -> void:
+	Tools.debug("Pushing Pickable node: %s" % body.get_instance_id())
+
 	if not body.is_in_group("pickable"):
 		return
 
@@ -293,11 +295,11 @@ func _push_pickable(body: Node, force: Vector2) -> void:
 
 	body.push(direction * force)
 
-func _process_pickable_kick() -> void:
+func _process_pickable_touch() -> void:
 	# Body kick force (when touches the lower part of the body)
 	for body in kick_area.get_overlapping_bodies():
 		if body and body.is_in_group("pickable"):
-			_push_pickable(body, kick_force)
+			_handle_pickable_push(body, kick_force)
 
 	# Body push force (when touches the body)
 	for i in get_slide_collision_count():
@@ -305,7 +307,16 @@ func _process_pickable_kick() -> void:
 		var body = collision.get_collider()
 		
 		if body and body.is_in_group("pickable"):
-			_push_pickable(body, push_force)
+			if body.is_held():
+				body.enable_float()
+				
+				await Tools.wait(1.0)
+				
+				# Checking if the body is still floating
+				if body.is_floating:
+					InventoryManager.pick(body)
+			else:
+				_handle_pickable_push(body, push_force)
 
 func _process_crouch() -> void:
 	var crouch_pressed = VirtualInput.is_action_just_pressed("player_crouch")

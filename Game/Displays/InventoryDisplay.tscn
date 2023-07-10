@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bip5p2e7o2mi1"]
+
+[ext_resource type="Script" path="res://Game/Displays/InventoryDisplay.gd" id="1_y2wu2"]
+[ext_resource type="PackedScene" uid="uid://cdc1rvmkp4e4x" path="res://Game/Inventory/InventoryWheel.tscn" id="2_nlin7"]
+
+[node name="InventoryDisplay" type="Node2D"]
+script = ExtResource("1_y2wu2")
+
+[node name="Container" type="Node2D" parent="."]
+
+[node name="Inventory" parent="Container" groups=["auto_visible"] instance=ExtResource("2_nlin7")]
+position = Vector2(375, 150)
+scale = Vector2(0.5, 0.2)
+item_scale = Vector2(3, 7.5)

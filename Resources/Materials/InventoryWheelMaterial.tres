@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c25idigaaxhr"]
+
+[ext_resource type="Shader" path="res://Shaders/InventoryWheel.gdshader" id="1_kkxai"]
+
+[resource]
+shader = ExtResource("1_kkxai")
+shader_parameter/width = 0.1

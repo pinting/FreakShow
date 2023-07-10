@@ -16,7 +16,7 @@ extends RigidBody2D
 # Disable shapes when disabled
 @export var disable_with_shapes: bool = true
 
-@onready var selectable = $Selectable
+@onready var selectable: PureSelectable = $Selectable
 
 var disabled: bool = false
 
@@ -26,6 +26,11 @@ var reset_position: Vector2 = Vector2.ZERO
 var reset_velocity: bool = true
 var reset_relative: bool = true
 
+var base_collision_layer: int
+var base_collision_mask: int
+
+var is_floating: bool = false
+
 signal picked(pickable)
 signal dropped(pickable)
 
@@ -34,6 +39,9 @@ func _ready() -> void:
 	assert(selectable.is_in_group("selectable"), "Selectable not in group of 'selectable'")
 	
 	selectable.connect("selected", Callable(self, "hold"))
+	
+	base_collision_layer = collision_layer
+	base_collision_mask = collision_mask
 	
 	if disable_at_init:
 		disable()
@@ -69,6 +77,7 @@ func _physics_process(_delta: float) -> void:
 	
 	if not is_held():
 		reset_cursor()
+		
 		return
 	
 	set_cursor()
@@ -168,3 +177,13 @@ func reset_cursor() -> void:
 
 func _exit_tree():
 	reset_cursor()
+
+func enable_float() -> void:
+	collision_layer = 0
+	collision_mask = 0
+	is_floating = true
+	
+func disable_float() -> void:
+	collision_layer = base_collision_layer
+	collision_mask = base_collision_mask
+	is_floating = false

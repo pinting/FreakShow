@@ -133,3 +133,11 @@ func appear() -> void:
 		await Animator.run(self, "_set_vanish", 0.0, 1.0, vanish_duration)
 		
 		material = null
+
+func create_clone() -> PureSelectable:
+	var clone = duplicate()
+	
+	if clone.effect_material:
+		clone.material = null
+	
+	return clone

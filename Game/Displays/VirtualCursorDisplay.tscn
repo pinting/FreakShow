@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cg0lam374mjsh"]
 
-[ext_resource type="Script" path="res://Game/VirtualCursorDisplay.gd" id="1"]
+[ext_resource type="Script" path="res://Game/Displays/VirtualCursorDisplay.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://1kv2v57qwwxq" path="res://Assets/Cursor/Cursor_Default.png" id="2"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]

@@ -1,15 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx8bkufwvfn8x"]
+[gd_scene load_steps=9 format=3 uid="uid://dx8bkufwvfn8x"]
 
-[ext_resource type="PackedScene" path="res://Game/ViewableDisplay.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://Prefabs/VirtualSplash.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://Game/BlackScreen.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://Game/VirtualCursorDisplay.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://d4fdlub4x1mpl" path="res://Game/Displays/ViewableDisplay.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bm0ueyw4gdoqn" path="res://Prefabs/VirtualSplash.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c8qag0jktr0xy" path="res://Game/BlackScreen.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cg0lam374mjsh" path="res://Game/Displays/VirtualCursorDisplay.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dc4hohap7rbre" path="res://Prefabs/CursorPenetration.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://Game/SubtitleDisplay.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://d0d7de0arwmw6" path="res://Game/Displays/SubtitleDisplay.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://bip5p2e7o2mi1" path="res://Game/Displays/InventoryDisplay.tscn" id="8_pqtmr"]
 [ext_resource type="Script" path="res://Game/BaseScene.gd" id="11"]
 
 [node name="BaseScene" type="Node2D"]
 script = ExtResource("11")
+
+[node name="InventoryDisplay" parent="." instance=ExtResource("8_pqtmr")]
 
 [node name="SubtitleDisplay" parent="." instance=ExtResource("8")]
 

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_HappyCompanySign.tscn" id="12_b03am"]
 [ext_resource type="PackedScene" path="res://Prefabs/Pickable/Pickable_Crate.tscn" id="13_mkgyu"]
 [ext_resource type="PackedScene" uid="uid://d2vmf4fxvgnhm" path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" id="14"]
-[ext_resource type="PackedScene" path="res://Prefabs/Pickable/Pickable_BeachBall.tscn" id="14_6s8bq"]
+[ext_resource type="PackedScene" uid="uid://cfvrnanhdr1nd" path="res://Prefabs/Pickable/Pickable_BeachBall.tscn" id="14_6s8bq"]
 [ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Ad02.tscn" id="14_pun6p"]
 [ext_resource type="PackedScene" uid="uid://d4hrc7iwwuyno" path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" id="15"]
 [ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Ad05.tscn" id="15_84jjg"]
@@ -42,7 +42,7 @@ script = ExtResource("1")
 follow_node = NodePath("../Player")
 
 [node name="Player" parent="BaseScene" instance=ExtResource("6")]
-position = Vector2(1730.55, 854.889)
+position = Vector2(1730.55, 683)
 
 [node name="Ball" parent="BaseScene" instance=ExtResource("14_6s8bq")]
 position = Vector2(2545, 1085)

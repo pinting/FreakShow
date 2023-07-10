@@ -56,6 +56,7 @@ func show_quote(text: String) -> void:
 		return
 	
 	display.show_quote(text)
+
 func hide_quote() -> void:
 	if not display:
 		Tools.debug("SubtitleDisplay not exists, but hide_quote was called")
