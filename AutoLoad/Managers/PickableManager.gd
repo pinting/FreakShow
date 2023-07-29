@@ -2,23 +2,24 @@ extends Node
 
 var current: Pickable = null
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and current and not event.pressed:
-		if is_instance_valid(current):
-			current.drop(Vector2.ZERO)
-		else:
-			current = null
-
 func is_held(pickable: Pickable) -> bool:
 	return pickable == current
 
-func pick(pickable: Pickable) -> void:
-	if not current:
-		current = pickable
+func pick(pickable: Pickable) -> bool:
+	if current or pickable.disabled:
+		return false
+	
+	current = pickable
+		
+	return true
 
-func drop(pickable: Pickable) -> void:
-	if current == pickable:
-		current = null
+func drop(pickable: Pickable) -> bool:
+	if current != pickable:
+		return false
+	
+	current = null
+	
+	return true
 
 func clear() -> void:
 	current = null

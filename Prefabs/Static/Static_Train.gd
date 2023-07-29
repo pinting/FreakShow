@@ -67,8 +67,6 @@ var enter_list_player = []
 var enter_list_speed_scale = []
 
 func _ready() -> void:
-	super._ready()
-
 	visible = false
 	
 	on_top.connect("body_exited", Callable(self, "_player_exited_top"))
@@ -246,8 +244,6 @@ func _process_recycle() -> void:
 		Tools.destroy_node(self, true)
 
 func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
-
 	if not started:
 		return
 	
@@ -258,6 +254,4 @@ func _physics_process(delta: float) -> void:
 	_process_player_on_top(delta)
 
 func _process(delta: float) -> void:
-	super._process(delta)
-
 	_process_recycle()

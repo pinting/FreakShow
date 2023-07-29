@@ -13,25 +13,39 @@ const DEBUG: bool = false
 # Cursor according to viewport (if false, according to world)
 @export var viewport_based_cursor: bool = false
 
-var disabled: bool = false
-var lock: bool = false
+# Enable drag by cursor
+@export var drag: bool = false
 
-signal selected
+var disabled: bool = false
+var hover_lock: bool = false
+
+var prev_cursor_position: Vector2
+var cursor_position: Vector2
+
+var item_selected: Callable
+var item_released: Callable
+
 signal cursor_entered
 signal cursor_exited
+signal selected
+signal released
 
 func _ready() -> void:
 	assert(is_in_group("selectable"), "Selectable not in group of 'selectable'")
-	
-	SelectableManager.connect("cursor_entered", Callable(self, "_on_cursor_entered"))
-	SelectableManager.connect("cursor_exited", Callable(self, "_on_cursor_exited"))
 
-func select() -> void:
-	var is_disabled = SelectableManager.disable or disabled
-	var is_selected = SelectableManager.is_selected(self)
+func _process(_delta: float) -> void:
+	if drag:
+		_process_drag()
+
+func _process_drag() -> void:
+	prev_cursor_position = cursor_position
+	cursor_position = CursorManager.get_position()
 	
-	if not is_disabled and is_selected:
-		emit_signal("selected")
+	if SelectableManager.is_selected(self):
+		var diff = cursor_position - prev_cursor_position
+		
+		global_position += diff
+	
 
 func get_selection_area() -> Rect2:
 	if selection_area:
@@ -41,37 +55,39 @@ func get_selection_area() -> Rect2:
 	
 	return get_rect()
 
-func _on_cursor_entered(target: Object) -> void:
-	if target != self:
-		return
-	
+func on_cursor_entered() -> void:
 	if description_key:
 		SubtitleManager.set_describe(get_instance_id(), Text.find(description_key))
 	
 	_debug("Cursor entered the PureSelectable %d" % get_instance_id())
+	
 	emit_signal("cursor_entered")
 
-func _on_cursor_exited(target: Object) -> void:
-	if target != self:
-		return
-	
+func on_cursor_exited() -> void:
 	if description_key:
 		SubtitleManager.reset_describe(get_instance_id())
 	
 	_debug("Cursor exited the PureSelectable %d" % get_instance_id())
+	
 	emit_signal("cursor_exited")
 
+func on_selected() -> void:
+	emit_signal("selected")
+
+func on_released() -> void:
+	emit_signal("released")
+
 func _exit_tree():
-	_on_cursor_exited(self)
+	on_cursor_exited()
 
 func disable() -> void:
 	if disabled:
 		return
 	
 	disabled = true
-	lock = false
+	hover_lock = false
 	
-	_on_cursor_exited(self)
+	on_cursor_exited()
 
 func enable() -> void:
 	if not disabled:

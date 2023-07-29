@@ -49,19 +49,46 @@ func _process_rotate(delta: float) -> void:
 		item.rotation_degrees = -container.rotation_degrees
 
 func pick(pickable: Pickable) -> void:
-	var item: PureSelectable = pickable.selectable.create_clone()
+	pickable.enable_float()
+	pickable.drop()
 	
-	item.scale = Vector2.ONE / scale
-	item.light_mask = light.light_mask
+	var item = RemoteTransform2D.new()
+	var selectable: PureSelectable = pickable.selectable
+	
+	selectable.item_selected = Callable(self, "item_selected").bind(pickable, item)
+	selectable.connect("selected", selectable.item_selected)
 	
 	container.add_child(item)
 	
 	item.global_position = pickable.global_position
-	
-	pickable.disable()
-	pickable.disappear()
+	item.global_scale = pickable.global_scale
+	item.global_rotation = pickable.global_rotation
+	item.use_global_coordinates = true
+	item.remote_path = pickable.get_path()
 	
 	refresh_inventory_layout()
+
+func item_selected(pickable: Pickable, item: RemoteTransform2D) -> void:
+	var selectable: PureSelectable = pickable.selectable
+	
+	selectable.disconnect("selected", selectable.item_selected)
+	
+	selectable.item_released = Callable(self, "item_released").bind(pickable)
+	
+	selectable.connect("released", selectable.item_released)
+	
+	item.get_parent().remove_child(item)
+	
+	var tween = get_tree().create_tween()
+	
+	tween.parallel().tween_property(pickable, "scale", Vector2.ONE, refresh_inventory_duration)
+	
+	pickable.disable_float()
+
+func item_released(pickable: Pickable) -> void:
+	var selectable: PureSelectable = pickable.selectable
+	
+	selectable.disconnect("released", selectable.item_released)
 
 func refresh_inventory_layout() -> void:
 	var items = container.get_children()
@@ -69,10 +96,14 @@ func refresh_inventory_layout() -> void:
 	
 	for i in range(count):
 		var item = items[i]
+		
 		var direction = Vector2.from_angle(float(i) / float(count) * PI * 2.0)
 		var offset = direction * (wheel_radius - item_radius)
 
-		var texture_size = item.texture.get_size()
+		var pickable = get_node(item.remote_path)
+		var selectable = pickable.selectable
+		
+		var texture_size = selectable.texture.get_size()
 		var length = texture_size.length()
 		var fit_scale = 2 * item_radius / length
 		var new_scale = Vector2(fit_scale * item_scale.x, fit_scale * item_scale.y)

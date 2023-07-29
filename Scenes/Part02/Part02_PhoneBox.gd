@@ -9,8 +9,6 @@ var flashing_phone_light = false
 var current_second = 0.0
 
 func _process(delta: float) -> void:
-	super._process(delta)
-
 	current_second += delta
 	
 	if flashing_phone_light and fmod(current_second, randf()) <= zero:

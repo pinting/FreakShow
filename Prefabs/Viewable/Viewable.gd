@@ -11,28 +11,26 @@ extends Selectable
 @export var enlarged_z_index = 99
 
 func _ready() -> void:
+	super()
+	
 	assert(is_in_group("viewable"), "Viewable not in group of 'viewable'")
 
-	connect("selected", Callable(self, "_on_selected"))
-	SelectableManager.connect("cursor_entered", Callable(self, "set_cursor"))
-	SelectableManager.connect("cursor_exited", Callable(self, "reset_cursor"))
+func on_selected():
+	super.on_selected()
 
-func _on_selected():
-	emit_signal("cursor_exited")
+	on_cursor_exited()
 
 	var inner_description_key_value = get("inner_description_key")
 	var inner_description_text = Text.find(inner_description_key_value)
 	
 	ViewableManager.appear(self, enlarged_zoom, inner_description_text)
 
-func set_cursor(target: PureSelectable) -> void:
-	if target != self:
-		return
+func on_cursor_entered() -> void:
+	super.on_cursor_entered()
 	
 	CursorManager.set_icon("view", get_instance_id())
 
-func reset_cursor(target: PureSelectable) -> void:
-	if target != self:
-		return
+func on_cursor_exited() -> void:
+	super.on_cursor_exited()
 	
 	CursorManager.reset_icon(get_instance_id())

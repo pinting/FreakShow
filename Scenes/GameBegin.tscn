@@ -33,9 +33,6 @@ size = Vector2(2997, 1500)
 script = ExtResource("2")
 disable_auto_restart = true
 
-[node name="InventoryDisplay" parent="BaseScene" index="0"]
-margin = Vector2(100, 100)
-
 [node name="CursorDisplay" parent="BaseScene" index="4"]
 disable = true
 

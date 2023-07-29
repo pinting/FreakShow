@@ -7,8 +7,6 @@ const duration: float = 2.0
 signal shutter_opened
 
 func _ready() -> void:
-	super._ready()
-	
 	shutter.connect("selected", Callable(self, "_on_shutter_selected").bind(), CONNECT_ONE_SHOT)
 
 func _on_shutter_selected() -> void:

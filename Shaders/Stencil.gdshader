@@ -50,4 +50,6 @@ void fragment() {
 	vec4 color_behind = mix(base_color, background_color, base_color.a);
 	
 	COLOR = mix(color_behind, second_pass, second_pass.a);
+	
+	COLOR.a = COLOR.a * (1.0 - COLOR.r * COLOR.b * COLOR.g);
 }

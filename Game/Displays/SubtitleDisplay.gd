@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 		i += 1
 	
 	for n in marked:
-		lines.remove(n)
+		lines.remove_at(n)
 		emit_signal("line_timeout")
 	
 	bottom_label.text = text

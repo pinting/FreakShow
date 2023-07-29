@@ -21,8 +21,13 @@ func _process(delta: float) -> void:
 	
 	var accept_pressed = VirtualInput.is_action_just_pressed("ui_accept")
 	
-	if accept_pressed and ball.disabled:
-		ball.enable()
+	if accept_pressed:
+		if ball.disabled:
+			ball.enable()
+			SubtitleManager.say("Ball enabled!")
+		else:
+			ball.disable()
+			SubtitleManager.say("Ball disabled!")
 
 func _body_entered_lock_area(body: PhysicsBody2D) -> void:
 	if not body.is_in_group("pickable"):

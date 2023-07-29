@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cfyfylivhwauk" path="res://Assets/Sounds/Transformation00.wav" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(284.286, 117.059)
+size = Vector2(152.143, 117.059)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(-1.66553, -111.588)
@@ -17,7 +17,7 @@ script = ExtResource("1")
 light_mask = 1025
 position = Vector2(-0.811218, -3.40119)
 sprite_frames = ExtResource("2")
-animation = &"a_stand_move"
+animation = &"a_stand_still"
 
 [node name="PlatformDetector00" type="RayCast2D" parent="."]
 position = Vector2(72.4627, 495.781)
@@ -54,7 +54,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="KickArea"]
-position = Vector2(-4.04922, 437.983)
+position = Vector2(99.594, 437.588)
 shape = SubResource("1")
 
 [node name="TransformSound" type="AudioStreamPlayer" parent="."]

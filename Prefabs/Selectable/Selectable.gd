@@ -37,8 +37,7 @@ extends PureSelectable
 func _ready() -> void:
 	super._ready()
 
-	assert(not material or not effect_material, 
-		"Both material and effect_material exists")
+	assert(not material or not effect_material, "Both material and effect_material exists")
 
 func _set_effect(value: float) -> void:
 	if material and effect_material and effect_key != "":
@@ -46,17 +45,19 @@ func _set_effect(value: float) -> void:
 		
 		material.set_shader_parameter(effect_key, effect_value)
 
-func _process(_delta: float) -> void:
-	var is_selected = SelectableManager.is_selected(self)
+func _process(delta: float) -> void:
+	super(delta)
+
+	var is_hovering = SelectableManager.is_cursor_hovering(self)
 	
-	if not is_selected:
+	if not is_hovering:
 		return
 	
-	var cursor_position = CursorManager.get_position(viewport_based_cursor)
+	var p = CursorManager.get_position(viewport_based_cursor)
 	
 	if material and effect_material and effect_offset_key != "":
 		var rect = get_selection_area()
-		var effect_offset = to_local(cursor_position) / rect.size
+		var effect_offset = to_local(p) / rect.size
 		
 		if centered:
 			effect_offset += Vector2(0.5, 0.5)
@@ -65,11 +66,8 @@ func _process(_delta: float) -> void:
 		
 		material.set_shader_parameter(effect_offset_key, effect_offset)
 
-func _on_cursor_entered(target: Object) -> void:
-	super._on_cursor_entered(target)
-	
-	if target != self:
-		return
+func on_cursor_entered() -> void:
+	super.on_cursor_entered()
 	
 	super._debug("Cursor entered the Selectable %d" % get_instance_id())
 	
@@ -79,11 +77,8 @@ func _on_cursor_entered(target: Object) -> void:
 	if material and effect_material and effect_key != "":
 		await Animator.run(self, "_set_effect", 0.0, 1.0, effect_duration)
 
-func _on_cursor_exited(target: Object) -> void:
-	super._on_cursor_exited(target)
-	
-	if target != self:
-		return
+func on_cursor_exited() -> void:
+	super.on_cursor_exited()
 	
 	super._debug("Cursor exited the Selectable %d" % get_instance_id())
 	
@@ -93,7 +88,7 @@ func _on_cursor_exited(target: Object) -> void:
 	if effect_material and effect_key != "":
 		await Animator.run(self, "_set_effect", 1.0, 0.0, effect_duration)
 	
-	if not SelectableManager.is_selected(self):
+	if not SelectableManager.is_cursor_hovering(self):
 		# Do not waste resources on unused materials
 		material = null
 

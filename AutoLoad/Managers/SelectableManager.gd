@@ -2,11 +2,16 @@ extends Node
 
 var disable: bool = false
 
+var viewport_cursor_hovering: PureSelectable = null
+var world_cursor_hovering: PureSelectable = null
+
 var viewport_selection: PureSelectable = null
 var world_selection: PureSelectable = null
 
 signal cursor_entered(selectable)
 signal cursor_exited(selectable)
+signal selected(selectable)
+signal released(selectable)
 
 func can_hover(selectable: PureSelectable) -> bool:
 	var selectable_id = selectable.get_instance_id()
@@ -73,60 +78,72 @@ func get_top(mouse_position: Vector2, viewport_based: bool) -> PureSelectable:
 	
 	return result
 
+func is_cursor_hovering(selectable: PureSelectable) -> bool:
+	if selectable.viewport_based_cursor:
+		return selectable == viewport_cursor_hovering
+	
+	return selectable == world_cursor_hovering
+
 func is_selected(selectable: PureSelectable) -> bool:
 	if selectable.viewport_based_cursor:
 		return selectable == viewport_selection
 	
 	return selectable == world_selection
 
+func _process_hovering(current: PureSelectable, viewport_based: bool) -> PureSelectable:
+	if not is_instance_valid(current):
+		current = null
+	
+	if current and current.hover_lock:
+		return current
+	
+	var cursor_position = CursorManager.get_position(viewport_based)
+	var next = get_top(cursor_position, viewport_based)
+	
+	if next != current:
+		if current != null:
+			emit_signal("cursor_exited", current)
+
+			current.on_cursor_exited()
+		
+		if next != null:
+			emit_signal("cursor_entered", next)
+
+			next.on_cursor_entered()
+	
+		return next
+	
+	return current
+
 func _process(_delta: float) -> void:
-	if SceneLoader.loading_path != "":
-		return
-	
-	# Handle world based selection
-	if not is_instance_valid(world_selection):
-		world_selection = null
-	
-	if not world_selection or not world_selection.lock:
-		var prev_world_selection = world_selection
-		var world_cursor_position = CursorManager.get_position(false)
-		
-		world_selection = get_top(world_cursor_position, false)
-		
-		if prev_world_selection != world_selection:
-			if prev_world_selection != null:
-				emit_signal("cursor_exited", prev_world_selection)
+	world_cursor_hovering = _process_hovering(world_cursor_hovering, false)
+	viewport_cursor_hovering = _process_hovering(viewport_cursor_hovering, true)
+
+func _handle_select(current: PureSelectable, hovering: PureSelectable, mouse_pressed: bool) -> PureSelectable:
+	if mouse_pressed:
+		if hovering:
+			hovering.on_selected()
 			
-			emit_signal("cursor_entered", world_selection)
-	
-	# Handle viewport based selection
-	if not is_instance_valid(viewport_selection):
-		viewport_selection = null
-	
-	if not viewport_selection or not viewport_selection.lock:
-		var prev_viewport_selection = viewport_selection
-		var viewport_cursor_position = CursorManager.get_position(true)
-		
-		viewport_selection = get_top(viewport_cursor_position, true)
-		
-		if prev_viewport_selection != viewport_selection:
-			if prev_viewport_selection != null:
-				emit_signal("cursor_exited", prev_viewport_selection)
+			emit_signal("selected", hovering)
 			
-			emit_signal("cursor_entered", viewport_selection)
+			return hovering
+	elif current:
+		current.on_released()
+
+		emit_signal("released", current)
+
+	return null
 
 func _input(event: InputEvent) -> void:
-	if SceneLoader.loading_path != "":
-		return
-	
-	if event is InputEventMouseButton and event.pressed:
-		if world_selection:
-			world_selection.select()
-		
-		if viewport_selection:
-			viewport_selection.select()
+	if event is InputEventMouseButton:
+		viewport_selection = _handle_select(viewport_selection, viewport_cursor_hovering, event.pressed)
+		world_selection = _handle_select(world_selection, world_cursor_hovering, event.pressed)
 
 func clear() -> void:
-	world_selection = null
+	viewport_cursor_hovering = null
+	world_cursor_hovering = null
+
 	viewport_selection = null
+	world_selection = null
+
 	disable = false

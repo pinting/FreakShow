@@ -13,9 +13,6 @@ extends RigidBody2D
 # Disable at init
 @export var disable_at_init: bool = false
 
-# Disable shapes when disabled
-@export var disable_with_shapes: bool = true
-
 @onready var selectable: PureSelectable = $Selectable
 
 var disabled: bool = false
@@ -39,6 +36,7 @@ func _ready() -> void:
 	assert(selectable.is_in_group("selectable"), "Selectable not in group of 'selectable'")
 	
 	selectable.connect("selected", Callable(self, "hold"))
+	selectable.connect("released", Callable(self, "drop"))
 	
 	base_collision_layer = collision_layer
 	base_collision_mask = collision_mask
@@ -72,12 +70,11 @@ func _integrate_forces(state):
 
 func _physics_process(_delta: float) -> void:
 	if disabled:
-		sleeping = true
 		return
 	
 	if not is_held():
 		reset_cursor()
-		
+
 		return
 	
 	set_cursor()
@@ -97,6 +94,7 @@ func reset(new_position: Vector2, new_rotation = 0.0, with_reset_velocity = true
 	reset_rotation = new_rotation
 	reset_velocity = with_reset_velocity
 	reset_relative = with_reset_relative
+
 	trigger_reset = true
 	
 	while trigger_reset:
@@ -109,46 +107,42 @@ func push(direction: Vector2 = Vector2.ZERO) -> void:
 	apply_central_impulse(direction)
 
 func drop(impulse: Vector2 = Vector2.ZERO) -> void:
-	if not is_held():
+	if not PickableManager.drop(self):
 		return
 	
-	selectable.lock = false
+	selectable.hover_lock = false
 	
 	apply_central_impulse(impulse)
-	
-	PickableManager.drop(self)
 	emit_signal("dropped", self)
 
 func hold() -> void:
-	if is_held() or disabled:
+	if not PickableManager.pick(self):
 		return
 	
-	selectable.lock = true
+	selectable.hover_lock = true
 	
-	PickableManager.pick(self)
 	emit_signal("picked", self)
 
 func disable() -> void:
-	PickableManager.drop(self)
+	drop()
 	
 	disabled = true
-	freeze = false
 	
-	# TODO: Is this needed?
-	if disable_with_shapes:
-		Tools.set_shapes_disabled(self, true)
+	freeze_mode = RigidBody2D.FREEZE_MODE_STATIC
+	freeze = true
+	sleeping = true
 	
+	enable_float()
 	selectable.disable()
 	reset_cursor()
 
 func enable() -> void:
 	disabled = false
-	freeze = true
 	
-	# TODO: Is this needed?
-	if disable_with_shapes:
-		Tools.set_shapes_disabled(self, false)
+	freeze = false
+	sleeping = false
 	
+	disable_float()
 	selectable.enable()
 
 func disappear() -> void:
