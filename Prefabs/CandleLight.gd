@@ -15,13 +15,9 @@ var current_second: float = 0.0
 var base_energy: float
 
 func _ready() -> void:
-	super._ready()
-
 	base_energy = energy
 
 func _process(delta: float) -> void:
-	super._process(delta)
-
 	current_second += speed * delta
 	
 	var x = p.x * cos(current_second) - p.y * sin(current_second)

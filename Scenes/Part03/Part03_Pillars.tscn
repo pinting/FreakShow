@@ -1,73 +1,74 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://df80o4owfkqn1"]
 
-[ext_resource path="res://Assets/Environmnent/Misc23.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Environmnent/Pillar09.png" type="Texture2D" id=2]
+[ext_resource type="Texture2D" uid="uid://cd1kuamuw6bm2" path="res://Assets/Environmnent/Misc23.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://co6tbp3eaxw2m" path="res://Assets/Environmnent/Pillar09.png" id="2"]
 
 [node name="Part03_PillarsContainer" type="Node2D"]
 
 [node name="Top" type="Sprite2D" parent="."]
-position = Vector2( 0, 2186.97 )
 z_index = 1
-texture = ExtResource( 1 )
+texture_repeat = 2
+position = Vector2(0, 2186.97)
+texture = ExtResource("1")
 region_enabled = true
-region_rect = Rect2( 100, 0, 13230, 630 )
+region_rect = Rect2(100, 0, 13230, 630)
 
 [node name="Pillars" type="Node2D" parent="."]
-position = Vector2( 0, 8.8809 )
 z_index = 1
+position = Vector2(0, 8.8809)
 
 [node name="Pillar00" type="Sprite2D" parent="Pillars"]
-position = Vector2( -5836.62, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(-5836.62, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar01" type="Sprite2D" parent="Pillars"]
-position = Vector2( -4953.4, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(-4953.4, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar02" type="Sprite2D" parent="Pillars"]
-position = Vector2( -4070.17, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(-4070.17, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar03" type="Sprite2D" parent="Pillars"]
-position = Vector2( -3186.94, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(-3186.94, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar04" type="Sprite2D" parent="Pillars"]
-position = Vector2( -2307.21, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(-2307.21, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar05" type="Sprite2D" parent="Pillars"]
-position = Vector2( -1423.98, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(-1423.98, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar06" type="Sprite2D" parent="Pillars"]
-position = Vector2( -540.75, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(-540.75, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar07" type="Sprite2D" parent="Pillars"]
-position = Vector2( 340.655, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(340.655, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar08" type="Sprite2D" parent="Pillars"]
-position = Vector2( 1223.89, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(1223.89, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar09" type="Sprite2D" parent="Pillars"]
-position = Vector2( 2107.12, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(2107.12, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar10" type="Sprite2D" parent="Pillars"]
-position = Vector2( 3867.22, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(3867.22, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar11" type="Sprite2D" parent="Pillars"]
-position = Vector2( 4749.65, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(4749.65, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar12" type="Sprite2D" parent="Pillars"]
-position = Vector2( 5632.88, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(5632.88, 2969.81)
+texture = ExtResource("2")
 
 [node name="Pillar13" type="Sprite2D" parent="Pillars"]
-position = Vector2( 6516.11, 2969.81 )
-texture = ExtResource( 2 )
+position = Vector2(6516.11, 2969.81)
+texture = ExtResource("2")

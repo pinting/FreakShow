@@ -1,200 +1,205 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=19 format=3 uid="uid://4h7hx43rp8pi"]
 
-[ext_resource path="res://Assets/Environmnent/Surface/Wall00.png" type="Texture2D" id=1]
-[ext_resource path="res://Assets/Environmnent/Building05_Bottom.png" type="Texture2D" id=2]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor01.png" type="Texture2D" id=3]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti40.png" type="Texture2D" id=4]
-[ext_resource path="res://Scenes/Part01/Part01_Door_Block.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/Selectable/Selectable_BeenStealingGraffiti.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Prefabs/Selectable/Selectable_YouWhoreGraffiti.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Prefabs/Selectable/Selectable_ForeskinGraffiti.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Environmnent/Building05_Top.png" type="Texture2D" id=9]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti16.png" type="Texture2D" id=10]
-[ext_resource path="res://Scenes/Part01/Part01_Hallway.gd" type="Script" id=11]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall02.png" type="Texture2D" id=12]
-[ext_resource path="res://Prefabs/Static/Static_StopLamp.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Prefabs/Selectable/Selectable_JustStopGraffiti.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Prefabs/Selectable/Selectable_ReadTheSignsGraffiti.tscn" type="PackedScene" id=15]
+[ext_resource type="Texture2D" uid="uid://ofxxi3ay5j6y" path="res://Assets/Environmnent/Surface/Wall00.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://b4t5qgtx78et0" path="res://Assets/Environmnent/Building05_Bottom.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://brblebjnhde5w" path="res://Assets/Environmnent/Surface/Floor01.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dmeo20bn4ykvd" path="res://Assets/Environmnent/Decoration/Graffiti40.png" id="4"]
+[ext_resource type="PackedScene" path="res://Scenes/Part01/Part01_Door_Block.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_BeenStealingGraffiti.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_YouWhoreGraffiti.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_ForeskinGraffiti.tscn" id="8"]
+[ext_resource type="Texture2D" uid="uid://c7lqoclqkxj61" path="res://Assets/Environmnent/Building05_Top.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://dlvkqkiplrwgf" path="res://Assets/Environmnent/Decoration/Graffiti16.png" id="10"]
+[ext_resource type="Script" path="res://Scenes/Part01/Part01_Hallway.gd" id="11"]
+[ext_resource type="Texture2D" uid="uid://do17rw443r10v" path="res://Assets/Environmnent/Surface/Wall02.png" id="12"]
+[ext_resource type="PackedScene" path="res://Prefabs/Static/Static_StopLamp.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_JustStopGraffiti.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_ReadTheSignsGraffiti.tscn" id="15"]
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 4722.81, 353.699 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(4722.81, 353.699)
 
-[sub_resource type="OccluderPolygon2D" id=2]
-polygon = PackedVector2Array( -6882.82, -3575.52, -6880.36, -4990.21, 648.825, -4992.66, 647.118, -3579.69 )
+[sub_resource type="OccluderPolygon2D" id="2"]
+polygon = PackedVector2Array(-6882.82, -3575.52, -6880.36, -4990.21, 648.825, -4992.66, 647.118, -3579.69)
 
-[sub_resource type="OccluderPolygon2D" id=3]
-polygon = PackedVector2Array( -6881.84, -4986.47, -6881.94, -3582.45, 648.009, -3582.14, 648.061, -4986.54 )
+[sub_resource type="OccluderPolygon2D" id="3"]
+polygon = PackedVector2Array(-6881.84, -4986.47, -6881.94, -3582.45, 648.009, -3582.14, 648.061, -4986.54)
 
 [node name="Part01_Hallway" type="Node2D"]
-script = ExtResource( 11 )
+script = ExtResource("11")
 
 [node name="Inside" type="Sprite2D" parent="."]
-position = Vector2( 0, 22.7603 )
-scale = Vector2( 1.205, 1.2 )
 z_index = -2
 z_as_relative = false
-texture = ExtResource( 1 )
+texture_repeat = 2
+position = Vector2(0, 22.7603)
+scale = Vector2(1.205, 1.2)
+texture = ExtResource("1")
 region_enabled = true
-region_rect = Rect2( 0, 0, 7500, 578 )
+region_rect = Rect2(0, 0, 7500, 578)
 
 [node name="Cellar" type="Sprite2D" parent="Inside"]
 light_mask = 3
-position = Vector2( -0.937, -315.524 )
-scale = Vector2( 0.829875, 0.833333 )
-texture = ExtResource( 12 )
+texture_repeat = 2
+position = Vector2(-0.937, -315.524)
+scale = Vector2(0.829875, 0.833333)
+texture = ExtResource("12")
 region_enabled = true
-region_rect = Rect2( 450, 300, 9036, 140 )
+region_rect = Rect2(450, 300, 9036, 140)
 
-[node name="Graffiti00" parent="Inside" instance=ExtResource( 7 )]
-position = Vector2( -1111.5, 42.5123 )
+[node name="Graffiti00" parent="Inside" instance=ExtResource("7")]
+position = Vector2(-1111.5, 42.5123)
 rotation = 0.00900319
-scale = Vector2( 0.420059, 0.425299 )
+scale = Vector2(0.420059, 0.425299)
 
-[node name="Graffiti01" parent="Inside" instance=ExtResource( 8 )]
-position = Vector2( 120.923, 67.2744 )
+[node name="Graffiti01" parent="Inside" instance=ExtResource("8")]
+position = Vector2(120.923, 67.2744)
 rotation = 0.145549
-scale = Vector2( 0.714607, 0.706647 )
+scale = Vector2(0.714607, 0.706647)
 
 [node name="Graffiti07" type="Sprite2D" parent="Inside"]
-self_modulate = Color( 0, 0, 0, 0.607843 )
-position = Vector2( -1078.05, 156.862 )
+self_modulate = Color(0, 0, 0, 0.607843)
+position = Vector2(-1078.05, 156.862)
 rotation = 0.222748
-scale = Vector2( 0.133158, 0.133621 )
-texture = ExtResource( 4 )
+scale = Vector2(0.133158, 0.133621)
+texture = ExtResource("4")
 
-[node name="Graffiti06" parent="Inside" instance=ExtResource( 15 )]
-position = Vector2( -814.368, 224.462 )
+[node name="Graffiti06" parent="Inside" instance=ExtResource("15")]
+position = Vector2(-814.368, 224.462)
 
 [node name="Graffiti08" type="Sprite2D" parent="Inside"]
-self_modulate = Color( 0, 0, 0, 0.607843 )
-position = Vector2( -952.971, 57.8028 )
+self_modulate = Color(0, 0, 0, 0.607843)
+position = Vector2(-952.971, 57.8028)
 rotation = -0.293743
-scale = Vector2( 0.133158, 0.133621 )
-texture = ExtResource( 4 )
+scale = Vector2(0.133158, 0.133621)
+texture = ExtResource("4")
 
 [node name="Graffiti04" type="Sprite2D" parent="Inside"]
-self_modulate = Color( 1, 0.956863, 0.32549, 0.862745 )
-position = Vector2( -1883.63, 50.6128 )
-scale = Vector2( 0.363072, 0.364585 )
-texture = ExtResource( 10 )
+self_modulate = Color(1, 0.956863, 0.32549, 0.862745)
+position = Vector2(-1883.63, 50.6128)
+scale = Vector2(0.363072, 0.364585)
+texture = ExtResource("10")
 
-[node name="Graffiti05" parent="Inside" instance=ExtResource( 14 )]
-position = Vector2( 1851.39, 43.6947 )
-scale = Vector2( 0.819254, 0.822667 )
+[node name="Graffiti05" parent="Inside" instance=ExtResource("14")]
+position = Vector2(1851.39, 43.6947)
+scale = Vector2(0.819254, 0.822667)
 
-[node name="Graffiti02" parent="Inside" instance=ExtResource( 6 )]
-self_modulate = Color( 0, 0, 0, 0.588235 )
-position = Vector2( 2579.55, 172.558 )
+[node name="Graffiti02" parent="Inside" instance=ExtResource("6")]
+self_modulate = Color(0, 0, 0, 0.588235)
+position = Vector2(2579.55, 172.558)
 rotation = -0.14796
-scale = Vector2( 0.82995, 0.833259 )
+scale = Vector2(0.82995, 0.833259)
 
-[node name="Door00" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -3298.81, 93.2153 )
-scale = Vector2( 0.829875, 0.833333 )
+[node name="Door00" parent="Inside" instance=ExtResource("5")]
+position = Vector2(-3298.81, 93.2153)
+scale = Vector2(0.829875, 0.833333)
 
-[node name="Door01" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -2361.05, 93.2153 )
-scale = Vector2( 0.829875, 0.833333 )
+[node name="Door01" parent="Inside" instance=ExtResource("5")]
+position = Vector2(-2361.05, 93.2153)
+scale = Vector2(0.829875, 0.833333)
 
-[node name="Door02" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -1423.29, 91.8744 )
-scale = Vector2( 0.829875, 0.833333 )
+[node name="Door02" parent="Inside" instance=ExtResource("5")]
+position = Vector2(-1423.29, 91.8744)
+scale = Vector2(0.829875, 0.833333)
 
-[node name="Door03" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( -485.53, 91.8744 )
-scale = Vector2( 0.829875, 0.833333 )
+[node name="Door03" parent="Inside" instance=ExtResource("5")]
+position = Vector2(-485.53, 91.8744)
+scale = Vector2(0.829875, 0.833333)
 
-[node name="Door04" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 452.23, 91.8744 )
-scale = Vector2( 0.829875, 0.833333 )
+[node name="Door04" parent="Inside" instance=ExtResource("5")]
+position = Vector2(452.23, 91.8744)
+scale = Vector2(0.829875, 0.833333)
 
-[node name="Door05" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 1389.99, 91.8744 )
-scale = Vector2( 0.829875, 0.833333 )
+[node name="Door05" parent="Inside" instance=ExtResource("5")]
+position = Vector2(1389.99, 91.8744)
+scale = Vector2(0.829875, 0.833333)
 
-[node name="Door06" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 2327.75, 91.8744 )
-scale = Vector2( 0.829875, 0.833333 )
+[node name="Door06" parent="Inside" instance=ExtResource("5")]
+position = Vector2(2327.75, 91.8744)
+scale = Vector2(0.829875, 0.833333)
 
-[node name="Door07" parent="Inside" instance=ExtResource( 5 )]
-position = Vector2( 3265.5, 91.8744 )
-scale = Vector2( 0.829875, 0.833333 )
+[node name="Door07" parent="Inside" instance=ExtResource("5")]
+position = Vector2(3265.5, 91.8744)
+scale = Vector2(0.829875, 0.833333)
 
 [node name="Floor" type="Sprite2D" parent="Inside"]
 light_mask = 3
-position = Vector2( 0.0960357, 343.481 )
-scale = Vector2( 0.829875, 0.833333 )
-texture = ExtResource( 3 )
+texture_repeat = 2
+position = Vector2(0.0960357, 343.481)
+scale = Vector2(0.829875, 0.833333)
+texture = ExtResource("3")
 region_enabled = true
-region_rect = Rect2( 0, 0, 9036, 140 )
+region_rect = Rect2(0, 0, 9036, 140)
 
-[node name="StopLamp00" parent="Inside" instance=ExtResource( 13 )]
+[node name="StopLamp00" parent="Inside" instance=ExtResource("13")]
 visible = false
-position = Vector2( -2824.25, -52.3081 )
+position = Vector2(-2824.25, -52.3081)
 rotation = 0.000742329
-scale = Vector2( 0.829875, 0.833333 )
+scale = Vector2(0.829875, 0.833333)
 
-[node name="StopLamp01" parent="Inside" instance=ExtResource( 13 )]
+[node name="StopLamp01" parent="Inside" instance=ExtResource("13")]
 visible = false
-position = Vector2( -903.481, -52.3081 )
+position = Vector2(-903.481, -52.3081)
 rotation = 0.0188071
-scale = Vector2( 0.829876, 0.833332 )
+scale = Vector2(0.829876, 0.833332)
 
-[node name="StopLamp02" parent="Inside" instance=ExtResource( 13 )]
+[node name="StopLamp02" parent="Inside" instance=ExtResource("13")]
 visible = false
-position = Vector2( 876.076, -52.3081 )
+position = Vector2(876.076, -52.3081)
 rotation = -0.0237599
-scale = Vector2( 0.829877, 0.833331 )
+scale = Vector2(0.829877, 0.833331)
 
-[node name="StopLamp03" parent="Inside" instance=ExtResource( 13 )]
+[node name="StopLamp03" parent="Inside" instance=ExtResource("13")]
 visible = false
-position = Vector2( 2778.54, -52.3081 )
+position = Vector2(2778.54, -52.3081)
 rotation = 0.000742328
-scale = Vector2( 0.829875, 0.833333 )
+scale = Vector2(0.829875, 0.833333)
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
-position = Vector2( 0.784424, 219.525 )
+position = Vector2(0.784424, 219.525)
 collision_layer = 15
 collision_mask = 15
 
 [node name="Top" type="CollisionShape2D" parent="CollisionAll"]
-position = Vector2( 9.52588, -930.36 )
-shape = SubResource( 1 )
+position = Vector2(9.52588, -930.36)
+shape = SubResource("1")
 
 [node name="Bottom" type="CollisionShape2D" parent="CollisionAll"]
-position = Vector2( 0, 584.659 )
-shape = SubResource( 1 )
+position = Vector2(0, 584.659)
+shape = SubResource("1")
 
 [node name="Building" type="Node2D" parent="."]
-position = Vector2( -0.213135, -1362.57 )
-scale = Vector2( 2, 2 )
+position = Vector2(-0.213135, -1362.57)
+scale = Vector2(2, 2)
 
 [node name="Building_Top" type="Sprite2D" parent="Building"]
 light_mask = 0
-position = Vector2( -0.5, -126.464 )
-scale = Vector2( 1.2, 1.2 )
 z_index = 3
 z_as_relative = false
-texture = ExtResource( 9 )
+texture_repeat = 2
+position = Vector2(-0.5, -126.464)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("9")
 region_enabled = true
-region_rect = Rect2( 0, 0, 3765, 1000 )
+region_rect = Rect2(0, 0, 3765, 1000)
 
 [node name="Top" type="LightOccluder2D" parent="Building/Building_Top"]
-position = Vector2( 1558.9, 2287.83 )
-scale = Vector2( 0.5, 0.5 )
-occluder = SubResource( 2 )
+position = Vector2(1558.9, 2287.83)
+scale = Vector2(0.5, 0.5)
+occluder = SubResource("2")
 
 [node name="Building_Bottom" type="Sprite2D" parent="Building"]
 light_mask = 0
-position = Vector2( 0, 1529.71 )
-scale = Vector2( 1.2, 1.2 )
 z_index = 3
 z_as_relative = false
-texture = ExtResource( 2 )
+texture_repeat = 2
+position = Vector2(0, 1529.71)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2")
 region_enabled = true
-region_rect = Rect2( 0, 0, 3765, 1000 )
+region_rect = Rect2(0, 0, 3765, 1000)
 
 [node name="Bottom" type="LightOccluder2D" parent="Building/Building_Bottom"]
-position = Vector2( 1558.47, 1993.27 )
-scale = Vector2( 0.5, 0.5 )
-occluder = SubResource( 3 )
+position = Vector2(1558.47, 1993.27)
+scale = Vector2(0.5, 0.5)
+occluder = SubResource("3")

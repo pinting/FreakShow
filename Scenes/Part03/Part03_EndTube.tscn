@@ -1,113 +1,112 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://6n4mwtpv5qbb"]
 
-[ext_resource path="res://Assets/Environmnent/Meat00.png" type="Texture2D" id=3]
-[ext_resource path="res://Assets/Environmnent/Pillar06.png" type="Texture2D" id=7]
-[ext_resource path="res://Scenes/Part03/Part03_EndTube.gd" type="Script" id=8]
-[ext_resource path="res://Assets/Environmnent/Tooth00.png" type="Texture2D" id=9]
-[ext_resource path="res://Assets/Environmnent/Tooth01.png" type="Texture2D" id=10]
+[ext_resource type="Texture2D" uid="uid://bbgonwd0rf0hh" path="res://Assets/Environmnent/Meat00.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://c4t7ibled12c7" path="res://Assets/Environmnent/Pillar06.png" id="7"]
+[ext_resource type="Script" path="res://Scenes/Part03/Part03_EndTube.gd" id="8"]
+[ext_resource type="Texture2D" uid="uid://byxg40fihn411" path="res://Assets/Environmnent/Tooth00.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://b3cb45j8b2o7u" path="res://Assets/Environmnent/Tooth01.png" id="10"]
 
-[sub_resource type="Gradient" id=1]
-offsets = PackedFloat32Array( 0, 0.362319, 1 )
-colors = PackedColorArray( 0, 0, 0, 1, 0.107563, 0.00945854, 0.00945854, 0.637681, 0.296875, 0.0261056, 0.0261056, 0 )
+[sub_resource type="Gradient" id="1"]
+offsets = PackedFloat32Array(0, 0.362319, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.107563, 0.00945854, 0.00945854, 0.637681, 0.296875, 0.0261056, 0.0261056, 0)
 
-[sub_resource type="GradientTexture2D" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture2D" id="2"]
+gradient = SubResource("1")
 width = 250
 
-[sub_resource type="GradientTexture2D" id=3]
+[sub_resource type="GradientTexture2D" id="3"]
 
-[sub_resource type="RectangleShape2D" id=4]
-size = Vector2( 62.211, 15000 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(62.211, 15000)
 
-[sub_resource type="RectangleShape2D" id=5]
-size = Vector2( 62.211, 15000 )
+[sub_resource type="RectangleShape2D" id="5"]
+size = Vector2(62.211, 15000)
 
 [node name="Part04_Entry" type="Node2D"]
-script = ExtResource( 8 )
+script = ExtResource("8")
 
 [node name="Meat" type="Sprite2D" parent="."]
-position = Vector2( 0, 11000 )
-scale = Vector2( 2, 2 )
 z_index = -1
-texture = ExtResource( 3 )
+texture_repeat = 2
+position = Vector2(0, 11000)
+scale = Vector2(2, 2)
+texture = ExtResource("3")
 region_enabled = true
-region_rect = Rect2( 0, 0, 250, 15000 )
+region_rect = Rect2(0, 0, 250, 15000)
 
 [node name="Tooth00" type="Sprite2D" parent="Meat"]
-position = Vector2( -51.7041, 0 )
-scale = Vector2( 2.3, 1 )
 z_index = 1
-texture = ExtResource( 9 )
+texture_repeat = 2
+position = Vector2(-51.7041, 0)
+scale = Vector2(2.3, 1)
+texture = ExtResource("9")
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 15000 )
+region_rect = Rect2(0, 0, 64, 15000)
 
 [node name="Tooth01" type="Sprite2D" parent="Meat"]
-position = Vector2( 53.2733, 0 )
-scale = Vector2( 2.2, 1 )
 z_index = 1
-texture = ExtResource( 10 )
+texture_repeat = 2
+position = Vector2(53.2733, 0)
+scale = Vector2(2.2, 1)
+texture = ExtResource("10")
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 15000 )
+region_rect = Rect2(0, 0, 64, 15000)
 
 [node name="GradientEnd" type="Sprite2D" parent="Meat"]
-position = Vector2( 0, 6817.71 )
+position = Vector2(0, 6817.71)
 rotation = -1.5708
-texture = SubResource( 2 )
+texture = SubResource("2")
 region_enabled = true
-region_rect = Rect2( 0, 0, 300, 250 )
+region_rect = Rect2(0, 0, 300, 250)
 
 [node name="BlackEnd" type="Sprite2D" parent="Meat"]
-position = Vector2( 0, 7230.9 )
+position = Vector2(0, 7230.9)
 rotation = -1.5708
-scale = Vector2( 1.7831, 1 )
-texture = SubResource( 3 )
+scale = Vector2(1.7831, 1)
+texture = SubResource("3")
 region_enabled = true
-region_rect = Rect2( 0, 0, 300, 250 )
+region_rect = Rect2(0, 0, 300, 250)
 
 [node name="PillarLeft" type="Sprite2D" parent="."]
-position = Vector2( -305.264, 11000 )
-texture = ExtResource( 7 )
+texture_repeat = 3
+position = Vector2(-305.264, 11000)
+texture = ExtResource("7")
 region_enabled = true
-region_rect = Rect2( 0, 0, 120, 30000 )
+region_rect = Rect2(0, 0, 120, 30000)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PillarLeft"]
-position = Vector2( 0, -12 )
+position = Vector2(0, -12)
 collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarLeft/StaticBody2D"]
-shape = SubResource( 4 )
+shape = SubResource("4")
 
 [node name="PillarRight" type="Sprite2D" parent="."]
-position = Vector2( 304.906, 11000 )
-texture = ExtResource( 7 )
+texture_repeat = 3
+position = Vector2(304.906, 11000)
+texture = ExtResource("7")
 region_enabled = true
-region_rect = Rect2( 0, 0, 120, 30000 )
+region_rect = Rect2(0, 0, 120, 30000)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="PillarRight"]
-position = Vector2( 1.86548, -12 )
+position = Vector2(1.86548, -12)
 collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PillarRight/StaticBody2D"]
-shape = SubResource( 5 )
+shape = SubResource("5")
 
 [node name="CurtainLeft" type="ColorRect" parent="."]
 offset_left = -507.306
 offset_top = -4000.0
 offset_right = -364.306
 offset_bottom = 26000.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color(0, 0, 0, 1)
 
 [node name="CurtainRight" type="ColorRect" parent="."]
 offset_left = 365.898
 offset_top = -4000.0
 offset_right = 531.898
 offset_bottom = 26000.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color(0, 0, 0, 1)

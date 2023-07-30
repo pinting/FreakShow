@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jsk1m421car8"
-path.s3tc="res://.godot/imported/poem.png-ea77951dab931f4b2c9f9259fcc444dc.s3tc.ctex"
+uid="uid://bbc0l8awu3bue"
+path.s3tc="res://.godot/imported/Bag01.png-8c51d87b4733666b684d9377bd459b2f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://poem.png"
-dest_files=["res://.godot/imported/poem.png-ea77951dab931f4b2c9f9259fcc444dc.s3tc.ctex"]
+source_file="res://Assets/Environmnent/Bag01.png"
+dest_files=["res://.godot/imported/Bag01.png-8c51d87b4733666b684d9377bd459b2f.s3tc.ctex"]
 
 [params]
 

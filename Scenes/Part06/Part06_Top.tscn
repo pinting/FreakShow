@@ -1,148 +1,147 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=23 format=3 uid="uid://tdaglu4e5bgx"]
 
-[ext_resource path="res://Assets/Environmnent/Light01.png" type="Texture2D" id=1]
-[ext_resource path="res://Scenes/Part06/Part06_Pussy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Prefabs/Selectable/Selectable_BearRug.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture2D" id=4]
-[ext_resource path="res://Shaders/Club.gdshader" type="Shader" id=10]
-[ext_resource path="res://Scenes/Part06/Part06_Hand.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Magazine04.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Prefabs/Selectable/Selectable_Button.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Environmnent/Surface/Wall11.png" type="Texture2D" id=18]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Magazine00.tscn" type="PackedScene" id=24]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Magazine01.tscn" type="PackedScene" id=25]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Magazine02.tscn" type="PackedScene" id=26]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Magazine03.tscn" type="PackedScene" id=27]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Magazine06.tscn" type="PackedScene" id=28]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Magazine07.tscn" type="PackedScene" id=29]
-[ext_resource path="res://Prefabs/Viewable/Viewable_Magazine05.tscn" type="PackedScene" id=30]
+[ext_resource type="Texture2D" uid="uid://7x4v45flbofn" path="res://Assets/Environmnent/Light01.png" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Part06/Part06_Pussy.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_BearRug.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://rksv3mrc3buj" path="res://Assets/Environmnent/Surface/Floor05.png" id="4"]
+[ext_resource type="Shader" path="res://Shaders/Club.gdshader" id="10"]
+[ext_resource type="PackedScene" path="res://Scenes/Part06/Part06_Hand.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Magazine04.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_Button.tscn" id="17"]
+[ext_resource type="Texture2D" uid="uid://cil77xj5a0pay" path="res://Assets/Environmnent/Surface/Wall11.png" id="18"]
+[ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Magazine00.tscn" id="24"]
+[ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Magazine01.tscn" id="25"]
+[ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Magazine02.tscn" id="26"]
+[ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Magazine03.tscn" id="27"]
+[ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Magazine06.tscn" id="28"]
+[ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Magazine07.tscn" id="29"]
+[ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_Magazine05.tscn" id="30"]
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 1792.48, 40.5972 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(1792.48, 40.5972)
 
-[sub_resource type="RectangleShape2D" id=2]
-size = Vector2( 1792.48, 40.5972 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(1792.48, 40.5972)
 
-[sub_resource type="RectangleShape2D" id=3]
-size = Vector2( 1792.48, 40.5972 )
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(2039.69, 40.5972)
 
-[sub_resource type="RectangleShape2D" id=4]
-size = Vector2( 38.8239, 496.48 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(38.8239, 496.48)
 
-[sub_resource type="RectangleShape2D" id=5]
-size = Vector2( 46.1909, 496.48 )
+[sub_resource type="RectangleShape2D" id="5"]
+size = Vector2(46.1909, 496.48)
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 10 )
-shader_param/time_offset = 30000.0
+[sub_resource type="ShaderMaterial" id="6"]
+shader = ExtResource("10")
+shader_parameter/time_offset = 30000.0
 
 [node name="Part06_Top" type="Node2D"]
-position = Vector2( -0.230225, -1035.3 )
+position = Vector2(-0.230225, -1035.3)
 
 [node name="Inside" type="Sprite2D" parent="."]
 light_mask = 513
-position = Vector2( -256.277, -41.5771 )
 z_index = -2
-texture = ExtResource( 18 )
+texture_repeat = 2
+position = Vector2(-256.277, -41.5771)
+texture = ExtResource("18")
 region_enabled = true
-region_rect = Rect2( 0, 0, 3580, 910 )
+region_rect = Rect2(0, 0, 3580, 910)
 region_filter_clip_enabled = true
 
 [node name="Floor" type="Sprite2D" parent="Inside"]
-position = Vector2( 0.77799, 486 )
-scale = Vector2( 0.895869, 0.769231 )
 z_index = 1
-texture = ExtResource( 4 )
+texture_repeat = 2
+position = Vector2(0.77799, 486)
+scale = Vector2(0.895869, 0.769231)
+texture = ExtResource("4")
 region_enabled = true
-region_rect = Rect2( 0, 0, 4000, 140 )
+region_rect = Rect2(0, 0, 4000, 140)
 
-[node name="Pajtas00" parent="Inside" instance=ExtResource( 24 )]
+[node name="Pajtas00" parent="Inside" instance=ExtResource("24")]
 
-[node name="Pajtas01" parent="Inside" instance=ExtResource( 25 )]
+[node name="Pajtas01" parent="Inside" instance=ExtResource("25")]
 
-[node name="Pajtas02" parent="Inside" instance=ExtResource( 26 )]
+[node name="Pajtas02" parent="Inside" instance=ExtResource("26")]
 
-[node name="Pajtas03" parent="Inside" instance=ExtResource( 27 )]
+[node name="Pajtas03" parent="Inside" instance=ExtResource("27")]
 
-[node name="Pajtas04" parent="Inside" instance=ExtResource( 15 )]
+[node name="Pajtas04" parent="Inside" instance=ExtResource("15")]
 
-[node name="Pajtas05" parent="Inside" instance=ExtResource( 30 )]
+[node name="Pajtas05" parent="Inside" instance=ExtResource("30")]
 
-[node name="Pajtas06" parent="Inside" instance=ExtResource( 28 )]
+[node name="Pajtas06" parent="Inside" instance=ExtResource("28")]
 
-[node name="Pajtas07" parent="Inside" instance=ExtResource( 29 )]
+[node name="Pajtas07" parent="Inside" instance=ExtResource("29")]
 
-[node name="Button" parent="Inside" instance=ExtResource( 17 )]
+[node name="Button" parent="Inside" instance=ExtResource("17")]
 light_mask = -2147483135
-position = Vector2( 1064.14, 36.2056 )
+position = Vector2(1064.14, 36.2056)
 
 [node name="Light3D" type="PointLight2D" parent="Inside/Button"]
 visible = false
-position = Vector2( -4.04822, -4.08722 )
-scale = Vector2( 0.383806, 0.383806 )
-texture = ExtResource( 1 )
+position = Vector2(-4.04822, -4.08722)
+scale = Vector2(0.383806, 0.383806)
 range_item_cull_mask = 512
+texture = ExtResource("1")
 
-[node name="Pussy" parent="Inside" instance=ExtResource( 2 )]
+[node name="Pussy" parent="Inside" instance=ExtResource("2")]
 visible = false
-position = Vector2( 29.5511, -53.1812 )
+position = Vector2(29.5511, -53.1812)
 
-[node name="Rug" parent="Inside" instance=ExtResource( 3 )]
-position = Vector2( 10.3159, -70.7712 )
+[node name="Rug" parent="Inside" instance=ExtResource("3")]
+position = Vector2(10.3159, -70.7712)
 
 [node name="CollisionBack" type="StaticBody2D" parent="."]
-position = Vector2( 190.474, 63.1156 )
+position = Vector2(190.474, 63.1156)
 collision_layer = 4
 collision_mask = 4
 
 [node name="Bottom" type="CollisionShape2D" parent="CollisionBack"]
-position = Vector2( -444.34, 385.087 )
-shape = SubResource( 1 )
+position = Vector2(-444.34, 385.087)
+shape = SubResource("1")
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
-position = Vector2( 190.244, 40.8778 )
+position = Vector2(190.244, 40.8778)
 collision_layer = 15
 collision_mask = 15
 
 [node name="Top" type="CollisionShape2D" parent="CollisionAll"]
-position = Vector2( -446.483, -555.699 )
-shape = SubResource( 2 )
+position = Vector2(-446.483, -555.699)
+shape = SubResource("2")
 
 [node name="Bottom" type="CollisionShape2D" parent="CollisionAll"]
-position = Vector2( -448.465, 451.058 )
-shape = SubResource( 3 )
+position = Vector2(-324.859, 451.058)
+shape = SubResource("3")
 
 [node name="CollisionPlayer" type="StaticBody2D" parent="."]
-position = Vector2( 190.244, 40.8778 )
+position = Vector2(190.244, 40.8778)
 collision_layer = 8
 collision_mask = 8
 
 [node name="Left" type="CollisionShape2D" parent="CollisionPlayer"]
-position = Vector2( -2197.11, -47.1997 )
-shape = SubResource( 4 )
+position = Vector2(-2197.11, -47.1997)
+shape = SubResource("4")
 
 [node name="Right" type="CollisionShape2D" parent="CollisionPlayer"]
-position = Vector2( 1299.97, -47.1997 )
-shape = SubResource( 5 )
+position = Vector2(1299.97, -47.1997)
+shape = SubResource("5")
 
-[node name="Hand" parent="." instance=ExtResource( 13 )]
-position = Vector2( 2370.93, 585.586 )
-rotation = 3.14159
-scale = Vector2( 1, -1 )
+[node name="Hand" parent="." instance=ExtResource("13")]
 z_index = 1
-start_with_offset = Vector2( -700, 0 )
-stop_after = Vector2( 700, 0 )
-speed = Vector2( 500, 0 )
+position = Vector2(2370.93, 585.586)
+rotation = 3.14159
+scale = Vector2(1, -1)
+start_with_offset = Vector2(-700, 0)
+stop_after = Vector2(700, 0)
+speed = Vector2(500, 0)
 
 [node name="Effect" type="ColorRect" parent="."]
-self_modulate = Color( 1, 1, 1, 0.588235 )
-material = SubResource( 6 )
+self_modulate = Color(1, 1, 1, 0.588235)
+material = SubResource("6")
 offset_left = -2046.77
 offset_top = -494.7
 offset_right = 1536.23
 offset_bottom = 500.3
 mouse_filter = 2
-color = Color( 0.972549, 0.972549, 0.972549, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+color = Color(0.972549, 0.972549, 0.972549, 1)

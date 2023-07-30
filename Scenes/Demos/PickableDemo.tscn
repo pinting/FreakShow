@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://kdbrexgtxv2v"]
+[gd_scene load_steps=24 format=3 uid="uid://kdbrexgtxv2v"]
 
-[ext_resource type="Script" path="res://Scenes/Demos/Demo.gd" id="1"]
+[ext_resource type="Script" path="res://Scenes/Demos/PickableDemo.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dx8bkufwvfn8x" path="res://Game/BaseScene.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://b668oxoccikke" path="res://Game/Player.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="7"]
@@ -16,13 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://drx2ue7f6rmef" path="res://Assets/Environmnent/Dirt00.png" id="17"]
 [ext_resource type="Texture2D" uid="uid://86us1dgcvawm" path="res://Assets/Environmnent/Bag00.png" id="17_w4vw6"]
 [ext_resource type="Script" path="res://Prefabs/Selectable/Selectable.gd" id="18_dx5ik"]
-[ext_resource type="Texture2D" uid="uid://jsk1m421car8" path="res://poem.png" id="19_k5w7r"]
-[ext_resource type="Shader" path="res://PoemShader.gdshader" id="19_xi86m"]
-[ext_resource type="Material" uid="uid://b7f72hp61frtu" path="res://Resources/Materials/GhostBlackMaterial.tres" id="20_xmd3p"]
-[ext_resource type="Texture2D" uid="uid://bwvbqoa15dtcs" path="res://Assets/Environmnent/Ball00.png" id="21_8i2bo"]
-[ext_resource type="Texture2D" uid="uid://bns7uuoso2mij" path="res://Diary.png" id="21_d031i"]
 [ext_resource type="Environment" uid="uid://dok0wscd8grfe" path="res://Resources/HighPerformanceEnvironment.tres" id="22"]
-[ext_resource type="Texture2D" uid="uid://c1qfygt1smwnj" path="res://Assets/Environmnent/Misc17.png" id="22_xa7df"]
 [ext_resource type="Script" path="res://Prefabs/Gamma.gd" id="23"]
 
 [sub_resource type="RectangleShape2D" id="2"]
@@ -40,11 +34,7 @@ size = Vector2(2928, 1402)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3p57"]
 size = Vector2(90, 79)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yljhm"]
-shader = ExtResource("19_xi86m")
-shader_parameter/scale = 2.995
-
-[node name="Demo" type="Node2D"]
+[node name="PickableDemo" type="Node2D"]
 
 [node name="BaseScene" parent="." instance=ExtResource("2")]
 position = Vector2(0, -1)
@@ -56,10 +46,10 @@ follow_node = NodePath("../Player")
 [node name="Player" parent="BaseScene" instance=ExtResource("6")]
 position = Vector2(1730.55, 683)
 
-[node name="Ball" parent="BaseScene" instance=ExtResource("14_6s8bq")]
+[node name="Ball00" parent="BaseScene" instance=ExtResource("14_6s8bq")]
 position = Vector2(2545, 1085)
 
-[node name="Ball2" parent="BaseScene" instance=ExtResource("14_6s8bq")]
+[node name="Ball01" parent="BaseScene" instance=ExtResource("14_6s8bq")]
 position = Vector2(2716, 1085)
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=["auto_visible"]]
@@ -165,34 +155,6 @@ offset_top = -39.0
 offset_right = 44.0
 offset_bottom = 40.0
 color = Color(1, 0, 0.968627, 1)
-
-[node name="DiaryContainer" type="Node2D" parent="."]
-position = Vector2(1721, 712)
-scale = Vector2(1.1, 1.1)
-
-[node name="Diary" type="Sprite2D" parent="DiaryContainer"]
-light_mask = 0
-texture = ExtResource("21_d031i")
-
-[node name="Ball" type="Sprite2D" parent="DiaryContainer/Diary"]
-material = ExtResource("20_xmd3p")
-position = Vector2(421.818, -96.3636)
-scale = Vector2(0.909091, 0.909091)
-texture = ExtResource("21_8i2bo")
-
-[node name="Can" type="Sprite2D" parent="DiaryContainer/Diary"]
-material = ExtResource("20_xmd3p")
-position = Vector2(282.727, -127.273)
-scale = Vector2(0.909091, 0.909091)
-texture = ExtResource("22_xa7df")
-
-[node name="Poem" type="Sprite2D" parent="DiaryContainer/Diary"]
-light_mask = 0
-z_index = 999
-material = SubResource("ShaderMaterial_yljhm")
-position = Vector2(429, -433.5)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("19_k5w7r")
 
 [editable path="BaseScene"]
 [editable path="BaseScene/BlackScreen"]

@@ -1,76 +1,74 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=25 format=3 uid="uid://bqmc1p6xwn7xe"]
 
-[ext_resource path="res://Scenes/Part00/Part00.gd" type="Script" id=1]
-[ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Part00/Part00_Building02.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Resources/Materials/CursorBlackMaterial.tres" type="Material" id=4]
-[ext_resource path="res://Scenes/Part00/Part00_Building00.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Game/Player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Part00/Part00_Building01.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Part00/Part00_RoadBlock.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/Environmnent/Lines01.png" type="Texture2D" id=10]
-[ext_resource path="res://Assets/Environmnent/Help00.png" type="Texture2D" id=11]
-[ext_resource path="res://Assets/Environmnent/Board01.png" type="Texture2D" id=12]
-[ext_resource path="res://Assets/Environmnent/Help01.png" type="Texture2D" id=13]
-[ext_resource path="res://Prefabs/Pickable/Pickable_BeachBall_White.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Prefabs/BackgroundRect.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Scenes/Part00/Part00_Crate.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Scenes/Part00/Part00_Clouds.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Music/Part00.ogg" type="AudioStream" id=18]
-[ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=19]
-[ext_resource path="res://Resources/Materials/GhostBlackMaterial.tres" type="Material" id=20]
-[ext_resource path="res://Assets/Environmnent/Car00_Stencil.png" type="Texture2D" id=21]
-[ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=22]
+[ext_resource type="Script" path="res://Scenes/Part00/Part00.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dx8bkufwvfn8x" path="res://Game/BaseScene.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://Scenes/Part00/Part00_Building02.tscn" id="3"]
+[ext_resource type="Material" uid="uid://bfyy0vmko6t04" path="res://Resources/Materials/CursorBlackMaterial.tres" id="4"]
+[ext_resource type="PackedScene" path="res://Scenes/Part00/Part00_Building00.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://b668oxoccikke" path="res://Game/Player.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://Scenes/Part00/Part00_Building01.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://Scenes/Part00/Part00_RoadBlock.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://b7243davxpdkb" path="res://Assets/Environmnent/Lines01.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://bv8ooua1h1wko" path="res://Assets/Environmnent/Help00.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://bgfjukxyykk6e" path="res://Assets/Environmnent/Board01.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://blr2eto1rdsev" path="res://Assets/Environmnent/Help01.png" id="13"]
+[ext_resource type="PackedScene" path="res://Prefabs/Pickable/Pickable_BeachBall_White.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://Prefabs/BackgroundRect.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://Scenes/Part00/Part00_Crate.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://Scenes/Part00/Part00_Clouds.tscn" id="17"]
+[ext_resource type="AudioStream" uid="uid://c2tukmortemrh" path="res://Assets/Music/Part00.ogg" id="18"]
+[ext_resource type="PackedScene" path="res://Prefabs/MusicMixer.tscn" id="19"]
+[ext_resource type="Material" uid="uid://b7f72hp61frtu" path="res://Resources/Materials/GhostBlackMaterial.tres" id="20"]
+[ext_resource type="Texture2D" uid="uid://c8lowxpmpq2kn" path="res://Assets/Environmnent/Car00_Stencil.png" id="21"]
+[ext_resource type="PackedScene" path="res://Prefabs/Loop.tscn" id="22"]
 
-[sub_resource type="RectangleShape2D" id=6]
-size = Vector2( 20000, 76.036 )
+[sub_resource type="RectangleShape2D" id="6"]
+size = Vector2(20000, 76.036)
 
-[sub_resource type="RectangleShape2D" id=7]
-size = Vector2( 1500, 1500 )
+[sub_resource type="RectangleShape2D" id="7"]
+size = Vector2(1500, 1500)
 
 [node name="Part00" type="Node2D"]
 
-[node name="BaseScene" parent="." instance=ExtResource( 2 )]
-script = ExtResource( 1 )
+[node name="BaseScene" parent="." instance=ExtResource("2")]
+script = ExtResource("1")
 auto_fade_out = false
 auto_show_cursor = false
 
 [node name="Cursor" parent="BaseScene/CursorDisplay" index="0"]
-material = ExtResource( 4 )
+material = ExtResource("4")
 
-[node name="Player" parent="BaseScene" instance=ExtResource( 6 )]
-position = Vector2( -2686.45, 466.563 )
+[node name="Player" parent="BaseScene" instance=ExtResource("6")]
+position = Vector2(-2686.45, 466.563)
 
 [node name="AnimatedSprite2D" parent="BaseScene/Player" index="0"]
-material = ExtResource( 20 )
-animation = "a_stand_still"
-frame = 0
+material = ExtResource("20")
 
-[node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
+[node name="GameCamera" parent="BaseScene" instance=ExtResource("7")]
 follow_node = NodePath("../Player")
-follow_init_offset = Vector2( 0, -14000 )
+follow_init_offset = Vector2(0, -14000)
 
-[node name="BackgroundRect" parent="BaseScene" instance=ExtResource( 15 )]
+[node name="BackgroundRect" parent="BaseScene" instance=ExtResource("15")]
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
 [node name="Road" type="StaticBody2D" parent="BaseScene/Environment"]
-position = Vector2( 4491.52, 891.419 )
+position = Vector2(4491.52, 891.419)
 collision_layer = 15
 collision_mask = 15
 
 [node name="Bottom" type="Sprite2D" parent="BaseScene/Environment/Road"]
-texture = ExtResource( 10 )
+texture = ExtResource("10")
 region_enabled = true
-region_rect = Rect2( 0, 0, 40000, 13 )
+region_rect = Rect2(0, 0, 40000, 13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/Road"]
-position = Vector2( 4.75684, 0 )
-shape = SubResource( 6 )
+position = Vector2(4.75684, 0)
+shape = SubResource("6")
 
-[node name="LoopLeft" parent="BaseScene/Environment" instance=ExtResource( 22 )]
-position = Vector2( -7806.94, -601.089 )
+[node name="LoopLeft" parent="BaseScene/Environment" instance=ExtResource("22")]
+position = Vector2(-7806.94, -601.089)
 player_node = NodePath("../../Player")
 area_shape_node = NodePath("Area3D/CollisionShape2D")
 container_node = NodePath("Container")
@@ -82,60 +80,60 @@ mirror_mode = "left"
 [node name="Area3D" type="Area2D" parent="BaseScene/Environment/LoopLeft"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseScene/Environment/LoopLeft/Area3D"]
-shape = SubResource( 7 )
+shape = SubResource("7")
 
-[node name="Clouds" parent="BaseScene/Environment" instance=ExtResource( 17 )]
-position = Vector2( -3750.77, -1440.57 )
+[node name="Clouds" parent="BaseScene/Environment" instance=ExtResource("17")]
+position = Vector2(-3750.77, -1440.57)
 
-[node name="Crate" parent="BaseScene/Environment" instance=ExtResource( 16 )]
-position = Vector2( 3577.87, 484.975 )
+[node name="Crate" parent="BaseScene/Environment" instance=ExtResource("16")]
+position = Vector2(3577.87, 484.975)
 
 [node name="Board00" type="Sprite2D" parent="BaseScene/Environment"]
-position = Vector2( -2724.61, 427.24 )
 z_index = -2
-texture = ExtResource( 12 )
+position = Vector2(-2724.61, 427.24)
+texture = ExtResource("12")
 
 [node name="Help" type="Sprite2D" parent="BaseScene/Environment/Board00"]
-self_modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 25.42, -56.3737 )
-scale = Vector2( 1.00219, 1.07928 )
-texture = ExtResource( 11 )
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(25.42, -56.3737)
+scale = Vector2(1.00219, 1.07928)
+texture = ExtResource("11")
 
 [node name="Board01" type="Sprite2D" parent="BaseScene/Environment"]
-position = Vector2( 460.103, 427.24 )
 z_index = -2
-texture = ExtResource( 12 )
+position = Vector2(460.103, 427.24)
+texture = ExtResource("12")
 
 [node name="Help" type="Sprite2D" parent="BaseScene/Environment/Board01"]
-self_modulate = Color( 0, 0, 0, 1 )
-position = Vector2( 4.71057, -60.0012 )
-scale = Vector2( 0.904466, 1.03368 )
-texture = ExtResource( 13 )
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(4.71057, -60.0012)
+scale = Vector2(0.904466, 1.03368)
+texture = ExtResource("13")
 
-[node name="RoadBlock" parent="BaseScene/Environment" instance=ExtResource( 9 )]
-position = Vector2( 3635.5, 754.339 )
+[node name="RoadBlock" parent="BaseScene/Environment" instance=ExtResource("9")]
+position = Vector2(3635.5, 754.339)
 
-[node name="Building00" parent="BaseScene/Environment" instance=ExtResource( 5 )]
-position = Vector2( 6912.19, 553.361 )
+[node name="Building00" parent="BaseScene/Environment" instance=ExtResource("5")]
+position = Vector2(6912.19, 553.361)
 
 [node name="Car00" type="Sprite2D" parent="BaseScene/Environment"]
-position = Vector2( 7371.85, 582.459 )
 z_index = -1
-texture = ExtResource( 21 )
+position = Vector2(7371.85, 582.459)
+texture = ExtResource("21")
 
-[node name="Ball" parent="BaseScene/Environment" instance=ExtResource( 14 )]
-position = Vector2( 10742.7, 747.386 )
+[node name="Ball" parent="BaseScene/Environment" instance=ExtResource("14")]
+position = Vector2(10742.7, 747.386)
 
-[node name="Building01" parent="BaseScene/Environment" instance=ExtResource( 8 )]
-position = Vector2( 9247.96, 553.361 )
+[node name="Building01" parent="BaseScene/Environment" instance=ExtResource("8")]
+position = Vector2(9247.96, 553.361)
 
-[node name="Building02" parent="BaseScene/Environment" instance=ExtResource( 3 )]
-position = Vector2( 14458, 201.836 )
+[node name="Building02" parent="BaseScene/Environment" instance=ExtResource("3")]
+position = Vector2(14458, 201.836)
 
 [node name="Sound" type="Node" parent="BaseScene"]
 
-[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource( 19 )]
-stream = ExtResource( 18 )
+[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource("19")]
+stream = ExtResource("18")
 max_volume = 10
 
 [connection signal="selected" from="BaseScene/Environment/Building02/Block00/Door" to="BaseScene" method="_on_exit_door_selected"]

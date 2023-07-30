@@ -1,99 +1,99 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=18 format=3 uid="uid://c3121mrdb1bsa"]
 
-[ext_resource path="res://Scenes/Part01/Part01_Hallway.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Part01/Part01.gd" type="Script" id=2]
-[ext_resource path="res://Prefabs/Gamma.gd" type="Script" id=3]
-[ext_resource path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Prefabs/Loop.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Game/BaseScene.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Game/GameCamera.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Game/Player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Part01/Part01_Flat.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Assets/Sounds/Door01.wav" type="AudioStream" id=10]
-[ext_resource path="res://Prefabs/MusicMixer.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/Music/Part02.ogg" type="AudioStream" id=12]
-[ext_resource path="res://Assets/Sounds/Door00.wav" type="AudioStream" id=13]
-[ext_resource path="res://Assets/Sounds/Knock00.wav" type="AudioStream" id=14]
-[ext_resource path="res://Assets/Music/Part01.ogg" type="AudioStream" id=15]
-[ext_resource path="res://Scenes/Part01/Part01_RandomFlat.tscn" type="PackedScene" id=16]
+[ext_resource type="PackedScene" uid="uid://4h7hx43rp8pi" path="res://Scenes/Part01/Part01_Hallway.tscn" id="1"]
+[ext_resource type="Script" path="res://Scenes/Part01/Part01.gd" id="2"]
+[ext_resource type="Script" path="res://Prefabs/Gamma.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://d2vmf4fxvgnhm" path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Prefabs/Loop.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://dx8bkufwvfn8x" path="res://Game/BaseScene.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://b668oxoccikke" path="res://Game/Player.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://3y4j5wsjtm04" path="res://Scenes/Part01/Part01_Flat.tscn" id="9"]
+[ext_resource type="AudioStream" uid="uid://pxt87r6gdhhj" path="res://Assets/Sounds/Door01.wav" id="10"]
+[ext_resource type="PackedScene" path="res://Prefabs/MusicMixer.tscn" id="11"]
+[ext_resource type="AudioStream" uid="uid://blrcccl5cibgs" path="res://Assets/Music/Part02.ogg" id="12"]
+[ext_resource type="AudioStream" uid="uid://omkds7uw8nlf" path="res://Assets/Sounds/Door00.wav" id="13"]
+[ext_resource type="AudioStream" uid="uid://cqef2r53v7vxo" path="res://Assets/Sounds/Knock00.wav" id="14"]
+[ext_resource type="AudioStream" uid="uid://crynck7alr3mo" path="res://Assets/Music/Part01.ogg" id="15"]
+[ext_resource type="PackedScene" path="res://Scenes/Part01/Part01_RandomFlat.tscn" id="16"]
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 4517.71, 2309.42 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(4517.71, 2309.42)
 
 [node name="Part01" type="Node2D"]
 
-[node name="BaseScene" parent="." instance=ExtResource( 6 )]
-script = ExtResource( 2 )
+[node name="BaseScene" parent="." instance=ExtResource("6")]
+script = ExtResource("2")
+random_flat = ExtResource("16")
 delay = 1.0
 auto_fade_out = false
-random_flat = ExtResource( 16 )
 
-[node name="Player" parent="BaseScene" instance=ExtResource( 8 )]
-position = Vector2( -1106.41, 3.51831 )
+[node name="Player" parent="BaseScene" instance=ExtResource("8")]
+position = Vector2(-1106.41, -118)
 disable_jump = true
 
-[node name="GameCamera" parent="BaseScene" instance=ExtResource( 7 )]
-position = Vector2( -1270.34, -49.9356 )
-scale = Vector2( 0.7, 0.7 )
+[node name="GameCamera" parent="BaseScene" instance=ExtResource("7")]
+position = Vector2(-1270.34, -49.9356)
+scale = Vector2(0.7, 0.7)
 follow_node = NodePath("../Player")
 
-[node name="Sky" parent="BaseScene" instance=ExtResource( 4 )]
+[node name="Sky" parent="BaseScene" instance=ExtResource("4")]
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=["auto_visible"]]
 visible = false
 light_mask = 524288
-color = Color( 0.392157, 0.392157, 0.392157, 1 )
-script = ExtResource( 3 )
+color = Color(0.392157, 0.392157, 0.392157, 1)
+script = ExtResource("3")
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
-[node name="Flat" parent="BaseScene/Environment" instance=ExtResource( 9 )]
-position = Vector2( 23.72, -12.897 )
+[node name="Flat" parent="BaseScene/Environment" instance=ExtResource("9")]
+position = Vector2(23.72, -12.897)
 
 [node name="RandomFlatContainer" type="Node2D" parent="BaseScene/Environment"]
-position = Vector2( 16.72, 10201.3 )
-scale = Vector2( 0.896382, 1 )
+position = Vector2(16.72, 10201.3)
+scale = Vector2(0.896382, 1)
 
-[node name="Hallway" parent="BaseScene/Environment" instance=ExtResource( 5 )]
-position = Vector2( 166.52, 5220.86 )
+[node name="Hallway" parent="BaseScene/Environment" instance=ExtResource("5")]
+position = Vector2(166.52, 5220.86)
 player_node = NodePath("../../Player")
 area_shape_node = NodePath("Area3D/Shape3D")
 container_node = NodePath("Container")
 
-[node name="Container" parent="BaseScene/Environment/Hallway" instance=ExtResource( 1 )]
+[node name="Container" parent="BaseScene/Environment/Hallway" instance=ExtResource("1")]
 
 [node name="Area3D" type="Area2D" parent="BaseScene/Environment/Hallway"]
 collision_layer = 0
 collision_mask = 0
 
 [node name="Shape3D" type="CollisionShape2D" parent="BaseScene/Environment/Hallway/Area3D"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 
 [node name="HallwaySpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( 701.674, 5338.83 )
+position = Vector2(701.674, 5338.83)
 
 [node name="FlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( -3.36622, 11.6346 )
+position = Vector2(-3.36622, 11.6346)
 
 [node name="RandomFlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( -487.468, 10181.4 )
+position = Vector2(-487.468, 10181.4)
 
 [node name="Sound" type="Node" parent="BaseScene"]
 
-[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource( 11 )]
-stream = ExtResource( 15 )
+[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource("11")]
+stream = ExtResource("15")
 
-[node name="WaitingMusic" parent="BaseScene/Sound" instance=ExtResource( 11 )]
-stream = ExtResource( 12 )
+[node name="WaitingMusic" parent="BaseScene/Sound" instance=ExtResource("11")]
+stream = ExtResource("12")
 max_volume = 5
 
 [node name="KnockSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
-stream = ExtResource( 14 )
+stream = ExtResource("14")
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
-stream = ExtResource( 10 )
+stream = ExtResource("10")
 
 [node name="SilentDoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
-stream = ExtResource( 13 )
+stream = ExtResource("13")

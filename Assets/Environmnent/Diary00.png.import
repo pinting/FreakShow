@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbc0l8awu3bue"
-path.s3tc="res://.godot/imported/Bag.png-90c112d18b4d78eb2f9a122fa7528046.s3tc.ctex"
+uid="uid://bns7uuoso2mij"
+path.s3tc="res://.godot/imported/Diary00.png-240121b73a9c81d5f00ca130f9c1d3ef.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Bag.png"
-dest_files=["res://.godot/imported/Bag.png-90c112d18b4d78eb2f9a122fa7528046.s3tc.ctex"]
+source_file="res://Assets/Environmnent/Diary00.png"
+dest_files=["res://.godot/imported/Diary00.png-240121b73a9c81d5f00ca130f9c1d3ef.s3tc.ctex"]
 
 [params]
 

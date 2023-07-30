@@ -17,15 +17,11 @@ var current_second: float = 0.0
 var base_energy: float = 1.0
 
 func _ready() -> void:
-	super._ready()
-	
 	base_energy = glow_light_00.energy
 	
 	door.connect("selected", Callable(self, "_on_door_selected"))
 
 func _process(delta: float) -> void:
-	super._process(delta)
-
 	current_second += delta
 	
 	var extra = abs(sin(current_second * time_scale)) * extra_energy

@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c4dsegklys67y"]
 
-[ext_resource path="res://Assets/Environmnent/Fridge00.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://c6aegvitth8dg" path="res://Assets/Environmnent/Fridge00.png" id="1"]
 
 [node name="Static_Fridge00" type="StaticBody2D"]
-position = Vector2( 1759.99, -289.52 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array( -119.916, 228.559, 121.219, 227.894, 120.848, -226.622, -121.029, -227.287 )
+position = Vector2(1759.99, -289.52)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2( 1.00577, 0.901431 )
-texture = ExtResource( 1 )
+scale = Vector2(1.00577, 0.901431)
+texture = ExtResource("1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-119.916, 228.559, 121.219, 227.894, 120.848, -226.622, -121.029, -227.287)

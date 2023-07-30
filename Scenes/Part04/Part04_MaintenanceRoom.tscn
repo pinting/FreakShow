@@ -1,132 +1,136 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=16 format=3 uid="uid://cvu4g1m0sb7ye"]
 
-[ext_resource path="res://Assets/Environmnent/Surface/Wall11.png" type="Texture2D" id=2]
-[ext_resource path="res://Assets/Environmnent/Misc09.png" type="Texture2D" id=3]
-[ext_resource path="res://Scenes/Part04/Part04_Platform.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor06.png" type="Texture2D" id=5]
-[ext_resource path="res://Prefabs/Static/Static_SideLamp00.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Environmnent/Surface/Floor05.png" type="Texture2D" id=7]
-[ext_resource path="res://Prefabs/Selectable/Selectable_IronDoor.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Environmnent/Pillar07.png" type="Texture2D" id=9]
-[ext_resource path="res://Prefabs/Light/Light_Side.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti13.png" type="Texture2D" id=18]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti43.png" type="Texture2D" id=19]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti42.png" type="Texture2D" id=20]
-[ext_resource path="res://Assets/Environmnent/Decoration/Graffiti46.png" type="Texture2D" id=21]
-[ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=23]
+[ext_resource type="Texture2D" uid="uid://cil77xj5a0pay" path="res://Assets/Environmnent/Surface/Wall11.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://vpqg2vvbhd6x" path="res://Assets/Environmnent/Misc09.png" id="3"]
+[ext_resource type="PackedScene" path="res://Scenes/Part04/Part04_Platform.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://5y4qt8uulynf" path="res://Assets/Environmnent/Surface/Floor06.png" id="5"]
+[ext_resource type="PackedScene" path="res://Prefabs/Static/Static_SideLamp00.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://rksv3mrc3buj" path="res://Assets/Environmnent/Surface/Floor05.png" id="7"]
+[ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_IronDoor.tscn" id="8"]
+[ext_resource type="Texture2D" uid="uid://dlhyno2666vd0" path="res://Assets/Environmnent/Pillar07.png" id="9"]
+[ext_resource type="PackedScene" uid="uid://bbiewg1553o6u" path="res://Prefabs/Light/Light_Side.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://on5ndramoaj" path="res://Assets/Environmnent/Decoration/Graffiti13.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://cex8vk6b0xxlp" path="res://Assets/Environmnent/Decoration/Graffiti43.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://oyp4jteb8ws0" path="res://Assets/Environmnent/Decoration/Graffiti42.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://dvos6iovxtd81" path="res://Assets/Environmnent/Decoration/Graffiti46.png" id="21"]
+[ext_resource type="Script" path="res://Prefabs/Selectable/Selectable.gd" id="23"]
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 4200, 61.679 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(4200, 61.679)
 
 [node name="MaintenanceRoom" type="Node2D"]
-scale = Vector2( 0.993, 1 )
+scale = Vector2(0.993, 1)
 
 [node name="Wall" type="Sprite2D" parent="."]
-position = Vector2( 0, 1000.26 )
 z_index = -5
-texture = ExtResource( 2 )
+texture_repeat = 2
+position = Vector2(0, 1000.26)
+texture = ExtResource("2")
 region_enabled = true
-region_rect = Rect2( 0, 0, 8000, 722 )
+region_rect = Rect2(0, 0, 8000, 722)
 
 [node name="Graffiti00" type="Sprite2D" parent="Wall" groups=["selectable"]]
-self_modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( 431.59, 20.8414 )
-scale = Vector2( 1.02686, 1.02686 )
-texture = ExtResource( 18 )
-script = ExtResource( 23 )
+self_modulate = Color(1, 1, 1, 0.784314)
+position = Vector2(431.59, 20.8414)
+scale = Vector2(1.02686, 1.02686)
+texture = ExtResource("18")
+script = ExtResource("23")
 description_key = "Description039"
 
 [node name="Graffiti01" type="Sprite2D" parent="Wall"]
-self_modulate = Color( 0, 0, 0, 0.784314 )
-position = Vector2( -3438.19, -105.82 )
+self_modulate = Color(0, 0, 0, 0.784314)
+position = Vector2(-3438.19, -105.82)
 rotation = -0.0891102
-scale = Vector2( 0.514186, 0.514185 )
-texture = ExtResource( 19 )
+scale = Vector2(0.514186, 0.514185)
+texture = ExtResource("19")
 
 [node name="Graffiti02" type="Sprite2D" parent="Wall"]
-self_modulate = Color( 1, 1, 1, 0.784314 )
-position = Vector2( -1441.26, 47.0723 )
+self_modulate = Color(1, 1, 1, 0.784314)
+position = Vector2(-1441.26, 47.0723)
 rotation = -0.029391
-scale = Vector2( 0.514186, 0.514185 )
-texture = ExtResource( 21 )
+scale = Vector2(0.514186, 0.514185)
+texture = ExtResource("21")
 
 [node name="Graffiti03" type="Sprite2D" parent="Wall"]
-self_modulate = Color( 0, 0, 0, 0.784314 )
-position = Vector2( 3461.11, -47.4074 )
-scale = Vector2( 0.514186, 0.514186 )
-texture = ExtResource( 20 )
+self_modulate = Color(0, 0, 0, 0.784314)
+position = Vector2(3461.11, -47.4074)
+scale = Vector2(0.514186, 0.514186)
+texture = ExtResource("20")
 
 [node name="Floor" type="Sprite2D" parent="."]
 light_mask = 3
-position = Vector2( 0, 1589.39 )
-scale = Vector2( 1.009, 1 )
 z_index = -1
-texture = ExtResource( 7 )
+texture_repeat = 2
+position = Vector2(0, 1589.39)
+scale = Vector2(1.009, 1)
+texture = ExtResource("7")
 region_enabled = true
-region_rect = Rect2( 0, 0, 7930, 300 )
+region_rect = Rect2(0, 0, 7930, 300)
 
 [node name="Foot" type="Sprite2D" parent="Floor"]
-position = Vector2( 0, -184.264 )
-scale = Vector2( 0.99108, 1.27463 )
-texture = ExtResource( 5 )
+texture_repeat = 2
+position = Vector2(0, -184.264)
+scale = Vector2(0.99108, 1.27463)
+texture = ExtResource("5")
 region_enabled = true
-region_rect = Rect2( 0, 0, 8000, 85 )
+region_rect = Rect2(0, 0, 8000, 85)
 
 [node name="BottomFrame" type="Sprite2D" parent="Floor"]
-position = Vector2( 0, 205.601 )
-scale = Vector2( 0.99108, 1 )
-texture = ExtResource( 9 )
+texture_repeat = 2
+position = Vector2(0, 205.601)
+scale = Vector2(0.99108, 1)
+texture = ExtResource("9")
 region_enabled = true
-region_rect = Rect2( 0, 0, 8000, 115 )
+region_rect = Rect2(0, 0, 8000, 115)
 
 [node name="FloorFront" type="StaticBody2D" parent="Floor"]
-position = Vector2( 0, 153.565 )
-scale = Vector2( 0.99108, 1 )
+position = Vector2(0, 153.565)
+scale = Vector2(0.99108, 1)
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="Floor/FloorFront"]
-position = Vector2( 0, -23.362 )
-shape = SubResource( 1 )
+position = Vector2(0, -23.362)
+shape = SubResource("1")
 
 [node name="FloorCenter" type="StaticBody2D" parent="Floor"]
-position = Vector2( 0, 94.059 )
-scale = Vector2( 0.99108, 1 )
+position = Vector2(0, 94.059)
+scale = Vector2(0.99108, 1)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="Floor/FloorCenter"]
-position = Vector2( 0, -23.362 )
-shape = SubResource( 1 )
+position = Vector2(0, -23.362)
+shape = SubResource("1")
 
 [node name="FloorBack" type="StaticBody2D" parent="Floor"]
-position = Vector2( 0, 47.9896 )
-scale = Vector2( 0.99108, 1 )
+position = Vector2(0, 47.9896)
+scale = Vector2(0.99108, 1)
 collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="Floor/FloorBack"]
-position = Vector2( 0, -23.362 )
-shape = SubResource( 1 )
+position = Vector2(0, -23.362)
+shape = SubResource("1")
 
 [node name="Misc00" type="Sprite2D" parent="."]
-position = Vector2( -3189.46, 1339.71 )
-scale = Vector2( 0.66627, 0.66627 )
 z_index = -1
-texture = ExtResource( 3 )
+position = Vector2(-3189.46, 1339.71)
+scale = Vector2(0.66627, 0.66627)
+texture = ExtResource("3")
 
-[node name="SideLamp" parent="." instance=ExtResource( 6 )]
-position = Vector2( -1811.1, 771.463 )
+[node name="SideLamp" parent="." instance=ExtResource("6")]
+z_index = -1
+position = Vector2(-1811.1, 771.463)
 rotation = -2.94975
-scale = Vector2( 0.624367, -0.74031 )
-z_index = -1
+scale = Vector2(0.624367, -0.74031)
 
-[node name="SideLight" parent="SideLamp" instance=ExtResource( 10 )]
-position = Vector2( -853.839, 458.33 )
+[node name="SideLight" parent="SideLamp" instance=ExtResource("10")]
+position = Vector2(-853.839, 458.33)
 rotation = 0.16312
-scale = Vector2( 2.73768, 1.39242 )
+scale = Vector2(2.73768, 1.39242)
 
-[node name="Platform" parent="." instance=ExtResource( 4 )]
-position = Vector2( 115.938, -0.848175 )
+[node name="Platform" parent="." instance=ExtResource("4")]
+position = Vector2(115.938, -0.848175)
 
-[node name="Door00" parent="." instance=ExtResource( 8 )]
-position = Vector2( 2789.14, 1195.3 )
+[node name="Door00" parent="." instance=ExtResource("8")]
 z_index = -1
+position = Vector2(2789.14, 1195.3)

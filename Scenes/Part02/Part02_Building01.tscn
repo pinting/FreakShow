@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://171tmmx5bwrp" path="res://Assets/Environmnent/Decoration/Graffiti49.png" id="13"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(1880.44, 1920.86)
+size = Vector2(3764.8, 3846.4)
 
 [node name="Part02_Building01" type="StaticBody2D"]
 z_index = -2
@@ -90,5 +90,6 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("2")
 
 [node name="Shape3D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 512.855)
+position = Vector2(2.44141e-05, 512)
+scale = Vector2(1, 1)
 shape = SubResource("1")

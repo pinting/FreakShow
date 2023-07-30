@@ -6,14 +6,10 @@ var wait: float = 0.0
 var disabled: bool = true
 
 func _ready() -> void:
-	super._ready()
-
 	if disabled:
 		red_figure.visible = false
 
 func _process(delta: float) -> void:
-	super._process(delta)
-
 	if disabled:
 		return
 	

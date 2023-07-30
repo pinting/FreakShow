@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://67a8dc8cthoy"]
+
+[ext_resource type="Shader" path="res://Shaders/Decay.gdshader" id="1_xwhpg"]
+
+[resource]
+shader = ExtResource("1_xwhpg")
+shader_parameter/scale = 1000.0

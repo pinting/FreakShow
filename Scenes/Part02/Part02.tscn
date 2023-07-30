@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://blg3e18uwahrk"]
+[gd_scene load_steps=54 format=3 uid="uid://blg3e18uwahrk"]
 
 [ext_resource type="PackedScene" uid="uid://dssewbm5ykxss" path="res://Scenes/Part02/Part02_Building01.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://cyokt5hlguc7a" path="res://Scenes/Part02/Part02_Building00.tscn" id="2"]
@@ -19,11 +19,8 @@
 [ext_resource type="PackedScene" path="res://Prefabs/Static/Static_SideLamp00.tscn" id="19"]
 [ext_resource type="Script" path="res://Prefabs/Gamma.gd" id="20"]
 [ext_resource type="Texture2D" uid="uid://5y4qt8uulynf" path="res://Assets/Environmnent/Surface/Floor06.png" id="21"]
-[ext_resource type="Texture2D" uid="uid://jsk1m421car8" path="res://poem.png" id="21_7ykv1"]
-[ext_resource type="Shader" path="res://PoemShader.gdshader" id="21_d4oo7"]
 [ext_resource type="Texture2D" uid="uid://c0b33734cjsu" path="res://Assets/Environmnent/Fence00.png" id="22"]
 [ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="23"]
-[ext_resource type="Script" path="res://Poem.gd" id="23_b12qj"]
 [ext_resource type="Texture2D" uid="uid://b2bt04htgewrh" path="res://Assets/Environmnent/Decoration/Graffiti01.png" id="24"]
 [ext_resource type="PackedScene" uid="uid://q20nq3pmsdkg" path="res://Prefabs/Static/Static_StreetLamp00.tscn" id="25"]
 [ext_resource type="PackedScene" uid="uid://c0kdkbdgwfkk3" path="res://Prefabs/Light/Light_Street.tscn" id="26"]
@@ -70,10 +67,6 @@ size = Vector2(189.365, 24.6057)
 [sub_resource type="RectangleShape2D" id="7"]
 size = Vector2(12.73, 53.2883)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_plgdv"]
-shader = ExtResource("21_d4oo7")
-shader_parameter/scale = 1.0
-
 [sub_resource type="RectangleShape2D" id="8"]
 size = Vector2(3671.5, 3000)
 
@@ -89,7 +82,7 @@ position = Vector2(59.2303, 0.734743)
 [node name="BaseScene" parent="." instance=ExtResource("46")]
 
 [node name="Player" parent="BaseScene" instance=ExtResource("28")]
-position = Vector2(370.77, -424.735)
+position = Vector2(-3422.23, -424.735)
 
 [node name="Ball" parent="BaseScene" instance=ExtResource("14")]
 z_index = -4
@@ -246,13 +239,6 @@ shape = SubResource("7")
 [node name="Right" type="CollisionShape2D" parent="BaseScene/Environment/Building01/BallFloor"]
 position = Vector2(166.014, -76.6644)
 shape = SubResource("7")
-
-[node name="Poem00" type="Sprite2D" parent="BaseScene/Environment"]
-z_index = -4
-material = SubResource("ShaderMaterial_plgdv")
-position = Vector2(3225.77, -1205.73)
-texture = ExtResource("21_7ykv1")
-script = ExtResource("23_b12qj")
 
 [node name="Loop" parent="BaseScene/Environment" instance=ExtResource("38")]
 position = Vector2(9242.35, -672.894)

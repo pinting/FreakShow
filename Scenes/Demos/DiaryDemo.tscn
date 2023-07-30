@@ -1,0 +1,123 @@
+[gd_scene load_steps=20 format=3 uid="uid://dd23ieakfnotu"]
+
+[ext_resource type="PackedScene" uid="uid://dx8bkufwvfn8x" path="res://Game/BaseScene.tscn" id="1_cm14l"]
+[ext_resource type="Script" path="res://Scenes/Demos/PickableDemo.gd" id="2_b2ljf"]
+[ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="3_vn5hx"]
+[ext_resource type="PackedScene" uid="uid://b668oxoccikke" path="res://Game/Player.tscn" id="4_bowfy"]
+[ext_resource type="Script" path="res://Prefabs/Gamma.gd" id="6_o2dab"]
+[ext_resource type="Environment" uid="uid://dok0wscd8grfe" path="res://Resources/HighPerformanceEnvironment.tres" id="7_850eq"]
+[ext_resource type="PackedScene" uid="uid://d2vmf4fxvgnhm" path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" id="8_1q3qi"]
+[ext_resource type="PackedScene" uid="uid://d4hrc7iwwuyno" path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" id="9_wlltb"]
+[ext_resource type="Texture2D" uid="uid://62cnsldnk2nq" path="res://Assets/Environmnent/Road00.png" id="10_bywtk"]
+[ext_resource type="Texture2D" uid="uid://drx2ue7f6rmef" path="res://Assets/Environmnent/Dirt00.png" id="11_cdrrk"]
+[ext_resource type="Shader" path="res://Shaders/Decay.gdshader" id="15_5kw4k"]
+[ext_resource type="Texture2D" uid="uid://bns7uuoso2mij" path="res://Assets/Environmnent/Diary00.png" id="19_q6bf2"]
+[ext_resource type="Material" uid="uid://b7f72hp61frtu" path="res://Resources/Materials/GhostBlackMaterial.tres" id="20_ho4wh"]
+[ext_resource type="Texture2D" uid="uid://bwvbqoa15dtcs" path="res://Assets/Environmnent/Ball00.png" id="21_0e166"]
+[ext_resource type="Texture2D" uid="uid://c1qfygt1smwnj" path="res://Assets/Environmnent/Misc17.png" id="22_ysvbd"]
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(3145, 318.739)
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(397, 923)
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(457, 927)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yljhm"]
+shader = ExtResource("15_5kw4k")
+shader_parameter/scale = 2.995
+
+[node name="DiaryDemo" type="Node2D"]
+
+[node name="BaseScene" parent="." instance=ExtResource("1_cm14l")]
+position = Vector2(0, -1)
+script = ExtResource("2_b2ljf")
+
+[node name="GameCamera" parent="BaseScene" instance=ExtResource("3_vn5hx")]
+follow_node = NodePath("../Player")
+
+[node name="Player" parent="BaseScene" instance=ExtResource("4_bowfy")]
+position = Vector2(1730.55, 683)
+
+[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=["auto_visible"]]
+light_mask = 0
+color = Color(0.470588, 0.470588, 0.470588, 1)
+script = ExtResource("6_o2dab")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=["world_environment"]]
+environment = ExtResource("7_850eq")
+
+[node name="Sky" parent="BaseScene" instance=ExtResource("8_1q3qi")]
+
+[node name="Fog" parent="BaseScene" instance=ExtResource("9_wlltb")]
+
+[node name="Environment" type="Node2D" parent="BaseScene"]
+position = Vector2(99.8936, -23.7839)
+
+[node name="Road" type="Sprite2D" parent="BaseScene/Environment"]
+light_mask = 3
+z_index = -1
+texture_repeat = 2
+position = Vector2(1641.43, 1306.05)
+texture = ExtResource("10_bywtk")
+region_enabled = true
+region_rect = Rect2(0, 0, 2900, 300)
+
+[node name="Dirt" type="Sprite2D" parent="BaseScene/Environment/Road"]
+texture_repeat = 2
+position = Vector2(0, 286.343)
+texture = ExtResource("11_cdrrk")
+region_enabled = true
+region_rect = Rect2(0, 0, 2900, 300)
+
+[node name="Walls" type="StaticBody2D" parent="BaseScene/Environment"]
+z_index = -2
+position = Vector2(184.394, 1172.53)
+collision_layer = 7
+collision_mask = 7
+
+[node name="Bottom" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
+position = Vector2(1445.21, 244.885)
+shape = SubResource("2")
+
+[node name="Left" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
+position = Vector2(-217.788, -330.246)
+shape = SubResource("3")
+
+[node name="Right" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
+position = Vector2(3130.21, -354.246)
+shape = SubResource("4")
+
+[node name="Trigger" type="Node2D" parent="BaseScene"]
+
+[node name="DiaryContainer" type="Node2D" parent="."]
+position = Vector2(1721, 712)
+scale = Vector2(1.1, 1.1)
+
+[node name="Diary" type="Sprite2D" parent="DiaryContainer"]
+light_mask = 0
+texture = ExtResource("19_q6bf2")
+
+[node name="Ball" type="Sprite2D" parent="DiaryContainer/Diary"]
+material = ExtResource("20_ho4wh")
+position = Vector2(421.818, -96.3636)
+scale = Vector2(0.909091, 0.909091)
+texture = ExtResource("21_0e166")
+
+[node name="Can" type="Sprite2D" parent="DiaryContainer/Diary"]
+material = ExtResource("20_ho4wh")
+position = Vector2(282.727, -127.273)
+scale = Vector2(0.909091, 0.909091)
+texture = ExtResource("22_ysvbd")
+
+[node name="Poem" type="Sprite2D" parent="DiaryContainer/Diary"]
+light_mask = 0
+z_index = 999
+material = SubResource("ShaderMaterial_yljhm")
+position = Vector2(429, -433.5)
+scale = Vector2(0.5, 0.5)
+
+[editable path="BaseScene"]
+[editable path="BaseScene/BlackScreen"]

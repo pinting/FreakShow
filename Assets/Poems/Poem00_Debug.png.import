@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bns7uuoso2mij"
-path.s3tc="res://.godot/imported/Diary.png-30d62cfa2d6ad7da2789199e150907be.s3tc.ctex"
+uid="uid://jsk1m421car8"
+path.s3tc="res://.godot/imported/Poem00_Debug.png-fcf75317491ce93d66312d4a02f9d6a5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Diary.png"
-dest_files=["res://.godot/imported/Diary.png-30d62cfa2d6ad7da2789199e150907be.s3tc.ctex"]
+source_file="res://Assets/Poems/Poem00_Debug.png"
+dest_files=["res://.godot/imported/Poem00_Debug.png-fcf75317491ce93d66312d4a02f9d6a5.s3tc.ctex"]
 
 [params]
 

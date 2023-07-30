@@ -1,67 +1,74 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=22 format=3 uid="uid://bge3dxs1cbaei"]
 
 [ext_resource type="AudioStream" uid="uid://blrcccl5cibgs" path="res://Assets/Music/Part02.ogg" id="1"]
-[ext_resource type="PackedScene" path="res://Scenes/Part04/Part04_Ditch.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dtvrib0538q0h" path="res://Scenes/Part04/Part04_Ditch.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://Prefabs/Pickable/Pickable_HandLamp.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://Prefabs/MusicMixer.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://Game/BaseScene.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://Scenes/Part04/Part04_MaintenanceRoom.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://dx8bkufwvfn8x" path="res://Game/BaseScene.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://cvu4g1m0sb7ye" path="res://Scenes/Part04/Part04_MaintenanceRoom.tscn" id="6"]
 [ext_resource type="Script" path="res://Scenes/Part04/Part04.gd" id="7"]
 [ext_resource type="AudioStream" uid="uid://pxt87r6gdhhj" path="res://Assets/Sounds/Door01.wav" id="8"]
 [ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="9"]
-[ext_resource type="Environment" uid="uid://dok0wscd8grfe" path="res://Resources/Environment.tres" id="10"]
+[ext_resource type="Environment" uid="uid://dok0wscd8grfe" path="res://Resources/HighPerformanceEnvironment.tres" id="10"]
 [ext_resource type="AudioStream" uid="uid://bycl6bje33on8" path="res://Assets/Music/Part04.ogg" id="11"]
 [ext_resource type="PackedScene" uid="uid://b668oxoccikke" path="res://Game/Player.tscn" id="12"]
 [ext_resource type="Texture2D" uid="uid://l31qjs5mt86w" path="res://Assets/Environmnent/Surface/Wall08.png" id="14"]
 [ext_resource type="PackedScene" uid="uid://d2vmf4fxvgnhm" path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" id="15"]
-[ext_resource type="PackedScene" path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" id="16"]
-[ext_resource type="PackedScene" path="res://Scenes/Part04/Part04_Cemetery.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://d4hrc7iwwuyno" path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://bwd08dfmim4oe" path="res://Scenes/Part04/Part04_Cemetery.tscn" id="17"]
 [ext_resource type="PackedScene" path="res://Prefabs/Loop.tscn" id="28"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "fade_out_ghost"
 
-[sub_resource type="RectangleShape2D" id=2]
-size = Vector2( 6250, 1000 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pms1t"]
+_data = {
+"fade_out_ghost": SubResource("1")
+}
 
-[sub_resource type="RectangleShape2D" id=3]
-size = Vector2( 3967.87, 2306.21 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(6250, 1000)
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(3967.87, 2306.21)
 
 [node name="Part04" type="Node2D"]
 
-[node name="BaseScene" parent="." instance=ExtResource( 5 )]
-script = ExtResource( 7 )
-auto_fade_out = false
+[node name="BaseScene" parent="." instance=ExtResource("5")]
+script = ExtResource("7")
 no_intro = true
+auto_fade_out = false
 
-[node name="Player" parent="BaseScene" instance=ExtResource( 12 )]
-position = Vector2( -1153.9, 883.372 )
+[node name="Player" parent="BaseScene" instance=ExtResource("12")]
+position = Vector2(-1153.9, 883.372)
 
-[node name="GameCamera" parent="BaseScene" instance=ExtResource( 9 )]
-position = Vector2( 1708.81, -8027.59 )
-scale = Vector2( 0.7, 0.7 )
-zoom = Vector2( 3.5, 3.5 )
+[node name="GameCamera" parent="BaseScene" instance=ExtResource("9")]
+position = Vector2(1708.81, -8027.59)
+scale = Vector2(0.7, 0.7)
 position_smoothing_speed = 0.5
 follow_node = NodePath("../Player")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=["world_environment"]]
-environment = ExtResource( 10 )
+environment = ExtResource("10")
 
 [node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=["auto_visible"]]
+visible = false
 light_mask = 524288
-color = Color( 0, 0, 0, 1 )
+color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BaseScene"]
-anims/fade_out_ghost = SubResource( 1 )
+libraries = {
+"": SubResource("AnimationLibrary_pms1t")
+}
 
-[node name="Sky" parent="BaseScene" instance=ExtResource( 15 )]
+[node name="Sky" parent="BaseScene" instance=ExtResource("15")]
 
-[node name="Fog" parent="BaseScene" instance=ExtResource( 16 )]
+[node name="Fog" parent="BaseScene" instance=ExtResource("16")]
 
 [node name="Environment" type="Node2D" parent="BaseScene"]
 
-[node name="CemeteryLoop" parent="BaseScene/Environment" instance=ExtResource( 28 )]
-position = Vector2( 2605.06, -2821.81 )
+[node name="CemeteryLoop" parent="BaseScene/Environment" instance=ExtResource("28")]
+position = Vector2(2605.06, -2821.81)
 player_node = NodePath("../../Player")
 area_shape_node = NodePath("Area3D/Shape3D")
 container_node = NodePath("Cemetery")
@@ -70,12 +77,12 @@ container_node = NodePath("Cemetery")
 
 [node name="Shape3D" type="CollisionShape2D" parent="BaseScene/Environment/CemeteryLoop/Area3D"]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource("2")
 
-[node name="Cemetery" parent="BaseScene/Environment/CemeteryLoop" instance=ExtResource( 17 )]
+[node name="Cemetery" parent="BaseScene/Environment/CemeteryLoop" instance=ExtResource("17")]
 
-[node name="BellowLoop" parent="BaseScene/Environment" instance=ExtResource( 28 )]
-position = Vector2( 619.608, 1573.55 )
+[node name="BellowLoop" parent="BaseScene/Environment" instance=ExtResource("28")]
+position = Vector2(619.608, 1573.55)
 player_node = NodePath("../../Player")
 area_shape_node = NodePath("Area3D/Shape3D")
 container_node = NodePath("Container")
@@ -84,45 +91,46 @@ container_node = NodePath("Container")
 
 [node name="Shape3D" type="CollisionShape2D" parent="BaseScene/Environment/BellowLoop/Area3D"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource("3")
 
 [node name="Container" type="Node2D" parent="BaseScene/Environment/BellowLoop"]
-position = Vector2( -6.10352e-05, 0 )
+position = Vector2(-6.10352e-05, 0)
 
 [node name="Background" type="Sprite2D" parent="BaseScene/Environment/BellowLoop/Container"]
 light_mask = 0
-position = Vector2( 0, -178.139 )
 z_index = -10
-texture = ExtResource( 14 )
+texture_repeat = 2
+position = Vector2(0, -178.139)
+texture = ExtResource("14")
 region_enabled = true
-region_rect = Rect2( 180, 0, 8005, 7000 )
+region_rect = Rect2(180, 0, 8005, 7000)
 
-[node name="Ditch" parent="BaseScene/Environment/BellowLoop/Container" instance=ExtResource( 2 )]
-position = Vector2( 0, -521.019 )
-scale = Vector2( 0.993, 1 )
+[node name="Ditch" parent="BaseScene/Environment/BellowLoop/Container" instance=ExtResource("2")]
 z_index = -2
+position = Vector2(0, -521.019)
+scale = Vector2(0.993, 1)
 
-[node name="MaintenanceRoom" parent="BaseScene/Environment/BellowLoop/Container" instance=ExtResource( 6 )]
-position = Vector2( -4.06006, 79.6116 )
+[node name="MaintenanceRoom" parent="BaseScene/Environment/BellowLoop/Container" instance=ExtResource("6")]
+position = Vector2(-4.06006, 79.6116)
 
-[node name="HandLamp" parent="BaseScene/Environment" instance=ExtResource( 3 )]
-position = Vector2( -1459.3, 1166.45 )
+[node name="HandLamp" parent="BaseScene/Environment" instance=ExtResource("3")]
+position = Vector2(-1459.3, 1166.45)
 
 [node name="Trigger" type="Node2D" parent="BaseScene"]
 
 [node name="DitchSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( 3261.05, 918.543 )
+position = Vector2(3261.05, 918.543)
 
 [node name="MaintenanceRoomSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2( 3405.16, 2922.79 )
+position = Vector2(3405.16, 2922.79)
 
 [node name="Sound" type="Node" parent="BaseScene"]
 
-[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource( 4 )]
-stream = ExtResource( 11 )
+[node name="MainMusic" parent="BaseScene/Sound" instance=ExtResource("4")]
+stream = ExtResource("11")
 
-[node name="NextLevelMusic" parent="BaseScene/Sound" instance=ExtResource( 4 )]
-stream = ExtResource( 1 )
+[node name="NextLevelMusic" parent="BaseScene/Sound" instance=ExtResource("4")]
+stream = ExtResource("1")
 
 [node name="DoorOpenSound" type="AudioStreamPlayer" parent="BaseScene/Sound"]
-stream = ExtResource( 8 )
+stream = ExtResource("8")
