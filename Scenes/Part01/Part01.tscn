@@ -29,12 +29,13 @@ delay = 1.0
 auto_fade_out = false
 
 [node name="Player" parent="BaseScene" instance=ExtResource("8")]
-position = Vector2(-1106.41, -118)
+position = Vector2(-1230, -142)
 disable_jump = true
 
 [node name="GameCamera" parent="BaseScene" instance=ExtResource("7")]
 position = Vector2(-1270.34, -49.9356)
 scale = Vector2(0.7, 0.7)
+zoom = Vector2(0.15, 0.15)
 follow_node = NodePath("../Player")
 
 [node name="Sky" parent="BaseScene" instance=ExtResource("4")]
@@ -75,7 +76,7 @@ shape = SubResource("1")
 position = Vector2(701.674, 5338.83)
 
 [node name="FlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
-position = Vector2(-3.36622, 11.6346)
+position = Vector2(176, -60)
 
 [node name="RandomFlatSpawn" type="Node2D" parent="BaseScene/Trigger"]
 position = Vector2(-487.468, 10181.4)

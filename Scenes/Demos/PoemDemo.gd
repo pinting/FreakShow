@@ -12,4 +12,5 @@ func _process(delta: float) -> void:
 	var accept_pressed = VirtualInput.is_action_just_pressed("ui_accept")
 	
 	if accept_pressed:
+		print("Pressed")
 		poem.appear()

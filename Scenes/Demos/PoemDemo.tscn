@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://sf6gdcpxyisy"]
+[gd_scene load_steps=29 format=3 uid="uid://sf6gdcpxyisy"]
 
 [ext_resource type="PackedScene" uid="uid://dx8bkufwvfn8x" path="res://Game/BaseScene.tscn" id="1_cn870"]
+[ext_resource type="Script" path="res://Scenes/Demos/PoemDemo.gd" id="2_lrykg"]
 [ext_resource type="PackedScene" uid="uid://b668oxoccikke" path="res://Game/Player.tscn" id="2_nbhpo"]
 [ext_resource type="PackedScene" uid="uid://cfvrnanhdr1nd" path="res://Prefabs/Pickable/Pickable_BeachBall.tscn" id="3_ultcp"]
 [ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="4_57ker"]
@@ -46,6 +47,7 @@ size = Vector2(22097, 318.739)
 position = Vector2(59.2303, 0.734743)
 
 [node name="BaseScene" parent="." instance=ExtResource("1_cn870")]
+script = ExtResource("2_lrykg")
 
 [node name="Player" parent="BaseScene" instance=ExtResource("2_nbhpo")]
 position = Vector2(2233.77, -424.735)

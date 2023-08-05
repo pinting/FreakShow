@@ -1,10 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://hipu8rifi8qu"]
 
-[ext_resource path="res://Assets/Environmnent/Door01.png" type="Texture2D" id=1]
-[ext_resource path="res://Prefabs/Selectable/Selectable.gd" type="Script" id=2]
+[ext_resource type="Texture2D" uid="uid://cll6ck1hwj4ic" path="res://Assets/Environmnent/Door01.png" id="1"]
+[ext_resource type="Script" path="res://Prefabs/Selectable/Selectable.gd" id="2"]
 
-[node name="Selectable_WoodenDoor" type="Sprite2D" groups=[
-"selectable",
-]]
-texture = ExtResource( 1 )
-script = ExtResource( 2 )
+[node name="Selectable_WoodenDoor" type="Sprite2D" groups=["selectable"]]
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("1")
+script = ExtResource("2")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://3y4j5wsjtm04"]
 
-[ext_resource type="PackedScene" path="res://Prefabs/Selectable/Selectable_WoodenDoor.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://hipu8rifi8qu" path="res://Prefabs/Selectable/Selectable_WoodenDoor.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://727w15nhfun0" path="res://Prefabs/Static/Static_Bed01.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c4dsegklys67y" path="res://Prefabs/Static/Static_Fridge00.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://dmc0mlrhnicg0" path="res://Prefabs/Light/Light_Room.tscn" id="4"]
@@ -31,20 +31,19 @@
 [ext_resource type="PackedScene" path="res://Prefabs/Viewable/Viewable_LipstickBitchPaper.tscn" id="29"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(4605.18, 99.7452)
+size = Vector2(6512.59, 813.873)
 
 [sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(208.582, 1009.19)
+size = Vector2(455.66, 1502.19)
 
 [sub_resource type="RectangleShape2D" id="3"]
-size = Vector2(208.582, 1090.19)
+size = Vector2(421.291, 1533.09)
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(4890.77, 12.974)
+size = Vector2(6873.01, 12.974)
 
 [node name="Part01_Flat" type="Node2D"]
 position = Vector2(-664.621, -49.3025)
-scale = Vector2(0.896382, 1)
 
 [node name="Inside" type="Node2D" parent="."]
 z_index = -3
@@ -76,11 +75,11 @@ scale = Vector2(1.625, 1.15)
 [node name="Floor" type="Sprite2D" parent="Inside"]
 z_index = 1
 texture_repeat = 2
-position = Vector2(33.4587, 383.004)
+position = Vector2(788.621, 383.004)
 scale = Vector2(0.999862, 1)
 texture = ExtResource("8")
 region_enabled = true
-region_rect = Rect2(0, 0, 5000, 140)
+region_rect = Rect2(0, 0, 7000, 140)
 
 [node name="Rose" type="Sprite2D" parent="Inside/Floor"]
 position = Vector2(-2175.98, -157.695)
@@ -126,8 +125,7 @@ collision_layer = 1
 collision_mask = 1
 
 [node name="Door" parent="Inside/Floor" instance=ExtResource("1")]
-position = Vector2(-72.5966, -368.65)
-scale = Vector2(0.975135, 0.975)
+position = Vector2(-642.926, -458.702)
 description_key = "Description000"
 
 [node name="Shelf" parent="Inside/Floor" instance=ExtResource("9")]
@@ -185,11 +183,11 @@ collision_mask = 1
 [node name="Wall" type="Sprite2D" parent="Inside"]
 z_index = -1
 texture_repeat = 2
-position = Vector2(34.8443, -46.8263)
-scale = Vector2(1.3, 1.3)
+position = Vector2(777.621, -173.698)
+scale = Vector2(2.2, 2.2)
 texture = ExtResource("7")
 region_enabled = true
-region_rect = Rect2(0, 0, 4000, 576)
+region_rect = Rect2(0, 0, 3000, 576)
 region_filter_clip_enabled = true
 
 [node name="CollisionAll" type="StaticBody2D" parent="."]
@@ -197,40 +195,46 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="Top" type="CollisionShape2D" parent="CollisionAll"]
-position = Vector2(-73.0779, -447.627)
+z_index = 100
+position = Vector2(764.326, -1150.76)
 shape = SubResource("1")
 
 [node name="Left" type="CollisionShape2D" parent="CollisionAll"]
-position = Vector2(-2303.01, -25.1008)
+z_index = 100
+position = Vector2(-2426.55, -271.602)
 shape = SubResource("2")
 
 [node name="Right" type="CollisionShape2D" parent="CollisionAll"]
-position = Vector2(2139.93, -65.6008)
+z_index = 100
+position = Vector2(4018.62, -181.697)
 shape = SubResource("3")
 
 [node name="CollisionBack" type="StaticBody2D" parent="."]
 z_index = 100
-position = Vector2(0, 360.302)
+position = Vector2(730.621, 348.302)
 
 [node name="Ground" type="CollisionShape2D" parent="CollisionBack"]
+z_index = 100
 shape = SubResource("4")
 
 [node name="CollisionCenter" type="StaticBody2D" parent="."]
 z_index = 100
-position = Vector2(0, 396.302)
+position = Vector2(730.621, 384.302)
 collision_layer = 2
 collision_mask = 2
 
 [node name="Ground" type="CollisionShape2D" parent="CollisionCenter"]
+z_index = 100
 shape = SubResource("4")
 
 [node name="CollisionFront" type="StaticBody2D" parent="."]
 z_index = 100
-position = Vector2(0, 427.302)
+position = Vector2(730.621, 415.302)
 collision_layer = 4
 collision_mask = 4
 
 [node name="Ground" type="CollisionShape2D" parent="CollisionFront"]
+z_index = 100
 shape = SubResource("4")
 
 [node name="Building" type="Node2D" parent="."]
@@ -240,23 +244,23 @@ scale = Vector2(2, 2)
 
 [node name="Building_Top" type="Sprite2D" parent="Building"]
 light_mask = 2
-position = Vector2(-19.734, -69.8103)
-scale = Vector2(1.2, 1.2)
+position = Vector2(430.001, -346.584)
+scale = Vector2(1.7, 1.7)
 texture = ExtResource("25")
 region_rect = Rect2(0, 0, 3144, 709)
 
 [node name="Building_Bottom" type="Sprite2D" parent="Building"]
 light_mask = 2
-position = Vector2(-20.4164, 779.742)
-scale = Vector2(1.2, 1.2)
+position = Vector2(430.001, 851.916)
+scale = Vector2(1.7, 1.7)
 texture = ExtResource("6")
 
 [node name="Building_Left" type="Sprite2D" parent="Building"]
-position = Vector2(-1367.09, 354.076)
-scale = Vector2(1.2, 1.2)
+position = Vector2(-1477.5, 252.416)
+scale = Vector2(1.7, 1.7)
 texture = ExtResource("24")
 
 [node name="Building_Right" type="Sprite2D" parent="Building"]
-position = Vector2(1309.16, 354.522)
-scale = Vector2(1.2, 1.2)
+position = Vector2(2313.5, 252.916)
+scale = Vector2(1.7, 1.7)
 texture = ExtResource("23")

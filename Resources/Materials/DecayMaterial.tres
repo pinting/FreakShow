@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource("1_xwhpg")
-shader_parameter/scale = 1000.0
+shader_parameter/scale = 6.0
