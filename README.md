@@ -17,7 +17,7 @@ The game was imagined based on a selection of music tracks - however, I do not o
 * Clone or download the repository.
 * _(optional)_ Place [the missing proprietary music tracks](docs/Music.md) into the project folder. FFmpeg needs to be available system-wide or put into the bin folder of the project.
 * Run `./setup.sh` to prepare the project. This command will convert and move all the proprietary music tracks into the `Assets/Music` directory. If they are not present, the attached sample (`.ogg.sample`) tracks will be used.
-* Open the project file with [Godot Editor](https://godotengine.org/) `3.4.5`. Importing the assets will take a couple of minutes.
+* Open the project file with [Godot Editor](https://godotengine.org/) `3.5.3`. Importing the assets will take a couple of minutes.
 * Select `Project` -> `Export`.
 * Click on `Export All`.
 * The DMG and EXE application files will be placed into the `out` directory.
