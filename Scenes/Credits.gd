@@ -1,13 +1,13 @@
 extends "res://Game/BaseScene.gd"
 
 # Timeout of a credit block
-export var credits_timeout: float = 30.0
+export var credits_timeout: float = 15.0
 
 # Delay between credits
-export var credits_delay: float = 5.0
+export var credits_delay: float = 3.0
 
 # How many lines of credits to display
-export var credits_count: int = 6
+export var credits_count: int = 5
 
 # Prefix of the credits entries in the translation file
 export var text_prefix = "Credits"

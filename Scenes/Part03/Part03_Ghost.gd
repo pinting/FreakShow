@@ -15,7 +15,7 @@ var radius: float
 var last_x: float = 0.0
 var avg_delta: float = 0.0
 
-const eps: float = 0.5
+const eps: float = 0.2
 
 func _ready() -> void:
 	player = get_node(player_node)

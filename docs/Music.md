@@ -43,33 +43,3 @@ https://music.apple.com/us/album/acid-tracks-ep/885922990
 Required minimum length is 4 minutes and 44 seconds
 
 Copyright (c) 2000 Trax Records
-
-## Neu - Sonderangebot
-
-https://www.youtube.com/watch?v=p4fmKS8Apug
-
-https://music.apple.com/us/album/sonderangebot/566610553
-
-Required minimum length is 4 minutes and 51 seconds
-
-Copyright (c) 2012 Groenland Records
-
-## Booka Shade - Pong Pang
-
-https://www.youtube.com/watch?v=2QdvXm3NR94
-
-https://music.apple.com/us/album/movements/1448710972
-
-Required minimum length is 5 minutes and 51 seconds
-
-Copyright (c) 2012 Kammermeier & Merziger GbR
-
-## Pye Corner Audio - Sleep Games
-
-https://www.youtube.com/watch?v=YHtA23tt26U
-
-https://ghostbox.greedbag.com/buy/sleep-games
-
-Required minimum length is 5 minutes and 5 seconds
-
-Copyright (c) 2012 Ghost Box

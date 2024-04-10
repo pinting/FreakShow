@@ -88,14 +88,12 @@ Text005,<Assets/Text/English/Text005.txt>
 Text006,<Assets/Text/English/Text006.txt>
 Text007,<Assets/Text/English/Text007.txt>
 Credits000,Music
-Credits001,"Brian Eno, Cluster, Phuture, Neu,\nBooka Shade, Pye Corner Audio"
-Credits002,"Programming"
-Credits003,Denes Tornyi
-Credits004,"Poetry"
+Credits001,"Delia Derbyshire, Brian Eno, Neu, Cluster, Phuture"
+Credits002,Concept & Development
+Credits003,Dénes Tornyi
+Credits004,Poetry
 Credits005,Zsuzsa Buka
-Credits006,"Writings, translations and acting"
-Credits007,"Denes Tornyi, Zsuzsa Buka, Gergo Tornyi"
-Credits008,Visual contributions
-Credits009,"Denes Tornyi, Zsuzsa Buka, Diana Baranyi,\nKatalin Bito, Zsofi Szabo, Babett Farkas"
-Credits010,Special thanks to
-Credits011,"Janos Bito, Gergo Tornyi, Godot Engine contributors"
+Credits006,Contributions
+Credits007,"Zsuzsa Buka, Gergő Tornyi, Diana Baranyi\nKatalin Bitó, János Bitó, Zsófi Szabó, Babett Farkas"
+Credits008,Special thanks to
+Credits009,"Godot Engine contributors"
