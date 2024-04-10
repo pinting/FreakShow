@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://q20nq3pmsdkg"]
+[gd_scene load_steps=5 format=3 uid="uid://q20nq3pmsdkg"]
 
 [ext_resource type="Texture2D" uid="uid://c12ipocq8jve6" path="res://Assets/Environmnent/Lamp00.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://7x4v45flbofn" path="res://Assets/Environmnent/Light01.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://d30lrpyasv32p" path="res://Assets/Environmnent/Lamp00_Glow.png" id="3"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
@@ -23,10 +22,8 @@ position = Vector2(2.15933, -763.063)
 texture = ExtResource("3")
 
 [node name="Light" type="PointLight2D" parent="Sprite2D/Glow"]
-position = Vector2(-0.659332, 2.063)
-scale = Vector2(0.240848, 0.320611)
-energy = 12.0
-texture = ExtResource("2")
+energy = 2.0
+texture = ExtResource("3")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-1.52588e-05, 0.192993)

@@ -52,7 +52,7 @@ func _ready() -> void:
 	
 	if follow_node:
 		follow_target = get_node(follow_node)
-		global_position = follow_target.global_position + follow_init_offset
+		global_position = follow_target.global_position + follow_init_offset / zoom
 
 func _process(delta: float) -> void:
 	if Config.DEBUG:
@@ -88,7 +88,7 @@ func _process_follow(delta: float) -> void:
 	if not follow_target or disable_follow:
 		return
 	
-	var destination = follow_target.global_position + follow_offset
+	var destination = follow_target.global_position + follow_offset / zoom
 	var direction = global_position.direction_to(destination)
 	var distance = global_position.distance_to(destination)
 

@@ -1,0 +1,231 @@
+[gd_scene load_steps=29 format=3 uid="uid://ct4q4uk8dg4se"]
+
+[ext_resource type="PackedScene" uid="uid://dx8bkufwvfn8x" path="res://Game/BaseScene.tscn" id="1_qcts7"]
+[ext_resource type="Script" path="res://Scenes/Demos/PoseDemo.gd" id="2_k5rmo"]
+[ext_resource type="PackedScene" uid="uid://b668oxoccikke" path="res://Game/Player.tscn" id="3_dsi3b"]
+[ext_resource type="PackedScene" uid="uid://cfvrnanhdr1nd" path="res://Prefabs/Pickable/Pickable_BeachBall.tscn" id="4_1otiq"]
+[ext_resource type="PackedScene" uid="uid://dot0bpyssv6a2" path="res://Game/GameCamera.tscn" id="5_ybxvt"]
+[ext_resource type="Script" path="res://Prefabs/Gamma.gd" id="6_aanx3"]
+[ext_resource type="PackedScene" uid="uid://d2vmf4fxvgnhm" path="res://Prefabs/Effect/ScreenEffect_Sky.tscn" id="7_6cbuf"]
+[ext_resource type="PackedScene" uid="uid://d4hrc7iwwuyno" path="res://Prefabs/Effect/ScreenEffect_Fog.tscn" id="8_mkpnt"]
+[ext_resource type="Texture2D" uid="uid://62cnsldnk2nq" path="res://Assets/Environmnent/Road00.png" id="9_plqpd"]
+[ext_resource type="Texture2D" uid="uid://5y4qt8uulynf" path="res://Assets/Environmnent/Surface/Floor06.png" id="10_0sk3m"]
+[ext_resource type="Texture2D" uid="uid://c0b33734cjsu" path="res://Assets/Environmnent/Fence00.png" id="11_yhu7a"]
+[ext_resource type="Texture2D" uid="uid://vpthneob01ag" path="res://Assets/Environmnent/Decoration/Graffiti06.png" id="12_t38n4"]
+[ext_resource type="Texture2D" uid="uid://brkdn2irbbtha" path="res://Assets/BackArmBottom.png" id="13_rx41d"]
+[ext_resource type="Texture2D" uid="uid://c6xolw4i5bxas" path="res://Assets/BackArmTop.png" id="14_dk3kv"]
+[ext_resource type="Texture2D" uid="uid://crg8ajopoy07w" path="res://Assets/BackLegBottom.png" id="15_nnynl"]
+[ext_resource type="Texture2D" uid="uid://c3vnd7ogu80vi" path="res://Assets/BackLegTop.png" id="16_fejrt"]
+[ext_resource type="Texture2D" uid="uid://dl2jyu55ln2bq" path="res://Assets/FrontLegBottom.png" id="17_fk0el"]
+[ext_resource type="Texture2D" uid="uid://bqay3ugt4xnw0" path="res://Assets/FrontLegTop.png" id="18_ds4px"]
+[ext_resource type="Texture2D" uid="uid://dp6o500rvaw1a" path="res://Assets/Torso.png" id="19_0sbio"]
+[ext_resource type="Texture2D" uid="uid://k85rasymp1ee" path="res://Assets/FrontArmHand.png" id="20_whpda"]
+[ext_resource type="Texture2D" uid="uid://0xm7dg8xxmbd" path="res://Assets/FrontArmTop.png" id="21_t7euc"]
+[ext_resource type="Texture2D" uid="uid://b4kf3so0pkpkw" path="res://Assets/Head.png" id="22_luqhl"]
+
+[sub_resource type="Environment" id="1"]
+background_mode = 4
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 1.4
+glow_hdr_threshold = 0.4
+
+[sub_resource type="CanvasItemMaterial" id="2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hk0fk"]
+size = Vector2(22097, 318.739)
+
+[sub_resource type="Animation" id="Animation_yyafp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1225.77, -2497.73)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0199655]
+}
+
+[sub_resource type="Animation" id="Animation_36u16"]
+resource_name = "test"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FrontArmHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9, 10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 11.0, 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7, 11.8, 11.9, 12.0),
+"transitions": PackedFloat32Array(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+"update": 0,
+"values": [Vector2(0.020709, 0.066890), Vector2(0.019957, 0.069609), Vector2(0.019242, 0.069563), Vector2(0.019954, 0.072264), Vector2(0.019966, 0.070916), Vector2(0.020682, 0.072188), Vector2(0.020729, 0.068237), Vector2(0.020715, 0.065440), Vector2(0.022245, 0.057364), Vector2(0.025316, 0.053233), Vector2(0.025299, 0.053145), Vector2(0.027560, 0.053153), Vector2(0.026851, 0.053117), Vector2(0.027580, 0.053150), Vector2(0.026797, 0.053221), Vector2(0.022266, 0.057285), Vector2(0.021474, 0.059980), Vector2(0.019953, 0.065567), Vector2(0.019963, 0.069532), Vector2(0.022967, 0.061455), Vector2(0.022206, 0.060067), Vector2(0.023717, 0.061385), Vector2(-0.138904, -0.200525), Vector2(-0.138939, -0.197872), Vector2(0.022987, 0.050418), Vector2(-0.138131, -0.201982), Vector2(0.022995, 0.049090), Vector2(0.021505, 0.051748), Vector2(0.022193, 0.053140), Vector2(0.022946, 0.054428), Vector2(-0.143480, -0.199161), Vector2(-0.148808, -0.208775), Vector2(0.019932, 0.050464), Vector2(0.023021, 0.049104), Vector2(0.023729, 0.051778), Vector2(-0.151880, -0.206068), Vector2(-0.155689, -0.199224), Vector2(0.021421, 0.051806), Vector2(0.022276, 0.064076), Vector2(0.027581, 0.061319), Vector2(0.024559, 0.058632), Vector2(0.025319, 0.059873), Vector2(0.029096, 0.055852), Vector2(0.027649, 0.050432), Vector2(0.032154, 0.050463), Vector2(0.029865, 0.049178), Vector2(0.025319, 0.042289), Vector2(0.028351, 0.043648), Vector2(0.026854, 0.046340), Vector2(-0.390455, -0.395620), Vector2(-0.392777, -0.390224), Vector2(-0.397372, -0.390220), Vector2(-0.404218, -0.388849), Vector2(-0.405815, -0.388841), Vector2(-0.411918, -0.388920), Vector2(-0.415799, -0.388923), Vector2(-0.418846, -0.390195), Vector2(-0.425709, -0.390278), Vector2(-0.428821, -0.390261), Vector2(-0.432663, -0.394246), Vector2(-0.441053, -0.398394), Vector2(-0.213372, -0.211481), Vector2(-0.220956, -0.218300), Vector2(-0.456433, -0.398396), Vector2(-0.464901, -0.398365), Vector2(-0.469460, -0.394306), Vector2(-0.235474, -0.200575), Vector2(-0.480188, -0.388908), Vector2(-0.487074, -0.394262), Vector2(0.017690, 0.072353), Vector2(0.021491, 0.064090), Vector2(0.024550, 0.057256), Vector2(0.034503, 0.059951), Vector2(0.034557, 0.054550), Vector2(0.039850, 0.051875), Vector2(0.039150, 0.046352), Vector2(0.042137, 0.044992), Vector2(0.040636, 0.045047), Vector2(0.042929, 0.043494), Vector2(0.042157, 0.040905), Vector2(0.041393, 0.045091), Vector2(0.037552, 0.044968), Vector2(0.029949, 0.045067), Vector2(0.029873, 0.043605), Vector2(0.026083, 0.046427), Vector2(-0.268498, -0.220997), Vector2(-0.272341, -0.208696), Vector2(-0.275366, -0.216894), Vector2(-0.574501, -0.398336), Vector2(0.019916, -0.036789), Vector2(0.013039, -0.035471), Vector2(-0.286103, -0.204679), Vector2(-0.286897, -0.195159), Vector2(-0.022208, 0.068124), Vector2(-0.290706, -0.196515), Vector2(-0.291457, -0.195189), Vector2(-0.292261, -0.197877), Vector2(-0.602119, -0.380651), Vector2(-0.602888, -0.380683), Vector2(-0.604432, -0.382017), Vector2(-0.606692, -0.382000), Vector2(-0.293035, -0.195173), Vector2(-0.294534, -0.196580), Vector2(0.026049, 0.059928), Vector2(0.023788, 0.053113), Vector2(0.026042, 0.051784), Vector2(0.028371, 0.047689), Vector2(0.029143, 0.040981), Vector2(0.029110, 0.043615), Vector2(0.026080, 0.047711), Vector2(0.025278, 0.046319), Vector2(0.024484, 0.049131), Vector2(0.022227, 0.054483), Vector2(0.022983, 0.055821), Vector2(-0.297567, -0.197939), Vector2(-0.297606, -0.200648), Vector2(-0.297613, -0.199245), Vector2(-0.297633, -0.203355), Vector2(-0.298345, -0.195175), Vector2(-0.297587, -0.199246), Vector2(-0.299176, -0.195178)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FrontArmHand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.0, 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9, 10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9, 11.0, 11.1, 11.2, 11.3, 11.4, 11.5, 11.6, 11.7, 11.8, 11.9, 12.0),
+"transitions": PackedFloat32Array(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+"update": 0,
+"values": PackedFloat32Array(1.6698241423830942, 1.6934544688503335, 1.6936761465470656, 1.7191280045140929, 1.715139101141017, 1.7374293795127735, 1.732728056791259, 1.7282560463424756, 1.7717851611430386, 1.710335170942006, 1.7103974102436998, 1.6888470032102512, 1.691935599771804, 1.6920767983471747, 1.714118817743715, 1.7781192531182068, 1.767452307452343, 1.7622329454494456, 1.7012740248176361, 1.677139050845001, 1.6834557498322382, 1.7137471994232862, -0.8903596623503967, -0.8938018485003221, 1.710280556850003, -0.8819030456560867, 1.6726675946742653, 1.6759351819719694, 1.6534736081268029, 1.6339983624044097, -0.8883507908102183, -0.8642071062935729, 1.718880442918071, 1.6131335384735481, 1.6676010462233168, -0.8507064364055906, -0.874536603362988, 1.6559999820845952, 1.6898174939166013, 1.7230388472351565, 1.7118342819789434, 1.8126959924897983, 1.8185130249341632, 1.8460082051438973, 1.8914364891058322, 1.9169279196011662, 1.8065121566173081, 1.820089696667759, 1.8290998375940035, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -0.6839340363803775, -0.6713976219910865, 0.0, 0.0, 0.0, -0.6688673717023967, 0.0, 0.0, 1.83583320259776, 1.835508037140593, 1.8795474807433912, 2.014439754856243, 1.9618159450622359, 2.065709628832254, 2.116089369885742, 2.1179225685598295, 2.152721614310769, 2.150912630554791, 2.101642789978213, 2.117354438148697, 2.0825191040943407, 2.0040172737379867, 1.887003218844637, 1.8125830496550748, -0.552404337847369, -0.5781352216532105, -0.5467497479491499, 0.0, -2.721406125517346, -2.797630441023024, -0.5473595360150396, -0.5560664301775241, 1.4926464883947188, -0.545050179130049, -0.5439106866327159, -0.535183239675007, 0.0, 0.0, 0.0, 0.0, -0.5383557034896909, -0.5341252175022047, 1.70653911020635, 1.7922402223693497, 1.7930167249009792, 1.7892668836458225, 1.7918499175174107, 1.7682123397492149, 1.788020336973461, 1.750077372121011, 1.743630846754182, 1.7739076641678595, 1.651588978182161, -0.5319524049226594, -0.5255486164550004, -0.5287772359627252, -0.5190391869098636, -0.5351632334146217, -0.5266952462451105, -0.5331240966150054)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eagh0"]
+_data = {
+"RESET": SubResource("Animation_yyafp"),
+"test": SubResource("Animation_36u16")
+}
+
+[node name="PoemDemo" type="Node2D"]
+position = Vector2(59.2303, 0.734743)
+
+[node name="BaseScene" parent="." instance=ExtResource("1_qcts7")]
+script = ExtResource("2_k5rmo")
+
+[node name="Player" parent="BaseScene" instance=ExtResource("3_dsi3b")]
+position = Vector2(2233.77, -424.735)
+
+[node name="Ball" parent="BaseScene" instance=ExtResource("4_1otiq")]
+z_index = -4
+position = Vector2(1738.71, -859.669)
+collision_layer = 18
+collision_mask = 2147483666
+grab_force = Vector2(3, 3)
+
+[node name="GameCamera" parent="BaseScene" instance=ExtResource("5_ybxvt")]
+position = Vector2(1134.94, 1919.12)
+offset = Vector2(0, -1400)
+zoom = Vector2(0.2, 0.2)
+follow_node = NodePath("../Player")
+follow_init_offset = Vector2(0, -125)
+follow_offset = Vector2(0, -125)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=["world_environment"]]
+environment = SubResource("1")
+
+[node name="Darkness" type="CanvasModulate" parent="BaseScene" groups=["auto_visible"]]
+visible = false
+light_mask = 0
+color = Color(0.352941, 0.352941, 0.352941, 1)
+script = ExtResource("6_aanx3")
+
+[node name="Sky" parent="BaseScene" instance=ExtResource("7_6cbuf")]
+
+[node name="Fog" parent="BaseScene" instance=ExtResource("8_mkpnt")]
+
+[node name="Environment" type="Node2D" parent="BaseScene"]
+
+[node name="Road" type="Sprite2D" parent="BaseScene/Environment"]
+light_mask = 3
+z_index = -2
+texture_repeat = 2
+material = SubResource("2")
+position = Vector2(8491.99, 92.625)
+scale = Vector2(1.049, 1)
+texture = ExtResource("9_plqpd")
+region_enabled = true
+region_rect = Rect2(0, 0, 34000, 250)
+
+[node name="Bellow" type="Sprite2D" parent="BaseScene/Environment"]
+light_mask = 0
+z_index = -2
+texture_repeat = 2
+position = Vector2(8420.45, 293.065)
+scale = Vector2(2.914, 2)
+texture = ExtResource("10_0sk3m")
+region_enabled = true
+region_rect = Rect2(0, 0, 12000, 85)
+
+[node name="Fence00" type="Sprite2D" parent="BaseScene/Environment"]
+z_index = -5
+texture_repeat = 2
+position = Vector2(4203.48, -404.366)
+texture = ExtResource("11_yhu7a")
+region_enabled = true
+region_rect = Rect2(0, 1, 22000, 780)
+
+[node name="Graffiti00" type="Sprite2D" parent="BaseScene/Environment/Fence00"]
+modulate = Color(0, 0, 0, 0.823529)
+position = Vector2(-8409.8, 32.6986)
+scale = Vector2(0.574805, 0.574805)
+texture = ExtResource("12_t38n4")
+
+[node name="Walls" type="StaticBody2D" parent="BaseScene/Environment"]
+z_index = -2
+position = Vector2(184.394, 233.265)
+collision_layer = 7
+collision_mask = 7
+
+[node name="Bottom" type="CollisionShape2D" parent="BaseScene/Environment/Walls"]
+position = Vector2(793.876, 75.0003)
+shape = SubResource("RectangleShape2D_hk0fk")
+
+[node name="Node2D" type="Node2D" parent="BaseScene"]
+position = Vector2(4.57764e-05, 0.000120282)
+
+[node name="BackArmTop" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(1244.27, -2353.73)
+texture = ExtResource("14_dk3kv")
+
+[node name="BackArmBottom" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(1251.77, -2201.73)
+texture = ExtResource("13_rx41d")
+
+[node name="BackLegBottom" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(1283.77, -1902.73)
+texture = ExtResource("15_nnynl")
+
+[node name="BackLegTop" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(1238.77, -2098.73)
+texture = ExtResource("16_fejrt")
+
+[node name="FrontLegBottom" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(1183.77, -1890.73)
+texture = ExtResource("17_fk0el")
+
+[node name="FrontLegTop" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(1150.77, -2105.73)
+texture = ExtResource("18_ds4px")
+
+[node name="Torso" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(1194.77, -2323.73)
+texture = ExtResource("19_0sbio")
+
+[node name="FrontArmHand" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(-0.299176, -0.195178)
+rotation = -0.533124
+texture = ExtResource("20_whpda")
+
+[node name="FrontArmTop" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(1140.77, -2367.73)
+texture = ExtResource("21_t7euc")
+
+[node name="Head" type="Sprite2D" parent="BaseScene/Node2D"]
+position = Vector2(1225.77, -2497.73)
+rotation = 0.0199655
+texture = ExtResource("22_luqhl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BaseScene/Node2D"]
+libraries = {
+"": SubResource("AnimationLibrary_eagh0")
+}

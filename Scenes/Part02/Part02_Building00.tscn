@@ -25,8 +25,8 @@ collision_mask = 7
 [node name="Inside" type="Sprite2D" parent="."]
 z_index = -2
 texture_repeat = 2
-position = Vector2(960.583, 2616.24)
-scale = Vector2(1.33436, 1.33436)
+position = Vector2(1078, 2470)
+scale = Vector2(1.835, 1.835)
 texture = ExtResource("3")
 region_enabled = true
 region_rect = Rect2(0, 0, 1500, 578)
@@ -54,13 +54,13 @@ texture = ExtResource("4")
 
 [node name="Graffiti00" type="Sprite2D" parent="Inside"]
 modulate = Color(0, 0, 0, 0.823529)
-position = Vector2(-287.664, -34.7262)
+position = Vector2(-170.966, -30.9309)
 scale = Vector2(0.409751, 0.409752)
 texture = ExtResource("11")
 
 [node name="Graffiti01" type="Sprite2D" parent="Inside"]
 modulate = Color(0, 0, 0, 0.823529)
-position = Vector2(365.205, 33.4097)
+position = Vector2(481.903, 37.2048)
 scale = Vector2(0.409752, 0.409752)
 texture = ExtResource("5")
 
@@ -74,9 +74,9 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1495, 140)
 
 [node name="Stairs" type="Sprite2D" parent="."]
-z_index = 2
+z_index = 4
 z_as_relative = false
-position = Vector2(2453.43, 3053.49)
+position = Vector2(2945, 3103.6)
 scale = Vector2(1.03806, 0.972781)
 texture = ExtResource("6")
 
@@ -85,37 +85,37 @@ light_mask = 2
 z_index = 3
 z_as_relative = false
 texture_repeat = 2
-position = Vector2(-3.11753, 3180.49)
-scale = Vector2(1.24802, 1.1714)
+position = Vector2(65.3, 3173)
+scale = Vector2(1.05, 1.05)
 texture = ExtResource("7")
 region_enabled = true
-region_rect = Rect2(0, 0, 3143, 195)
+region_rect = Rect2(0, 0, 4800, 195)
 
 [node name="Building" type="Node2D" parent="."]
 z_index = 2
+position = Vector2(5, 18)
 scale = Vector2(1.25, 1.25)
 
 [node name="Left" type="Sprite2D" parent="Building"]
-position = Vector2(-800.033, 2144.03)
-scale = Vector2(2, 2)
+position = Vector2(-1004, 1998.7)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("14")
 
 [node name="Top" type="Sprite2D" parent="Building"]
 texture_repeat = 2
-position = Vector2(0, -329.22)
-scale = Vector2(2, 2)
+position = Vector2(-3, -1093.3)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("2")
 region_enabled = true
 region_rect = Rect2(0, 0, 1572, 2118)
 
 [node name="LightOccluder" type="LightOccluder2D" parent="."]
 visible = false
-position = Vector2(901.344, 2623.34)
+position = Vector2(887, 2576)
 scale = Vector2(1.25, 1.09773)
 occluder = SubResource("2")
 
 [node name="GroundCollision" type="CollisionPolygon2D" parent="."]
-visible = false
 z_index = 100
 z_as_relative = false
 position = Vector2(3.79406, 107.858)
@@ -123,15 +123,16 @@ scale = Vector2(1.25, 1.1714)
 polygon = PackedVector2Array(-33.3467, 2491.76, 1552.65, 2485.88, 2615.03, 2726.04, 2566.94, 2723.69, 1552.65, 2512.44, -31.773, 2523.06)
 
 [node name="WallCollision" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2(-0.139465, 0.459595)
 scale = Vector2(1.25, 1.25)
 polygon = PackedVector2Array(-28.8685, 1788.68, 1569.39, 1789.08, 1570.13, -2494.04, -1577.78, -2499.21, -1568.93, 2633.67, 1567.59, 2635.08, 1565.3, 2454.31, -33.7491, 2456.96)
 
 [node name="PlayerBlock" type="StaticBody2D" parent="."]
+position = Vector2(121, -162)
 collision_layer = 8
 collision_mask = 8
 
 [node name="BeforeWallCollision" type="CollisionPolygon2D" parent="PlayerBlock"]
-scale = Vector2(1.25, 1.25)
+position = Vector2(-143, -517)
+scale = Vector2(1.5, 1.5)
 polygon = PackedVector2Array(30.5609, 1826.42, 31.8317, 2543.21, -138.464, 2542.55, -139.675, 1670.53, 1570.33, 1675.36, 1570.12, 1829.98)

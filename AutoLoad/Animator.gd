@@ -37,22 +37,45 @@ func remove_tween(object: Object, path: String) -> void:
 		assert(tweens.erase(key))
 
 func run(object: Object, path: String, from, to, duration: float) -> void:
-	var tween: Tween = add_tween(object, path)
-	
 	if object.has_method(path):
-		object.call(path, from)
-		tween.tween_method(Callable(object, path), from, to, duration)
+		await tween_method(object, path, from, to, duration)
 	else:
-		object.set(path, from)
-		tween.tween_property(object, path, to, duration)
+		await tween_property(object, path, from, to, duration)
+
+func tween_property(object: Object, prop: String, from, to, duration: float) -> void:
+	var tween: Tween = add_tween(object, prop)
+	
+	object.set(prop, from)
+	tween.tween_property(object, prop, to, duration)
 	
 	await tween.finished
+
+func tween_method(object: Object, method: String, from, to, duration: float) -> void:
+	var tween: Tween = add_tween(object, method)
+	var callable = Callable(object, method)
+	
+	callable.call(from)
+	tween.tween_method(callable, from, to, duration)
+	
+	await tween.finished
+
+func tween_material(object: Object, parameter: String, from, to, duration: float) -> void:
+	var tween: Tween = add_tween(object, parameter)
+	var callable = Callable(self, "_set_shader_parameter").bind(parameter, object.material)
+
+	callable.call(from)
+	tween.tween_method(callable, from, to, duration)
+	
+	await tween.finished
+
+func _set_shader_parameter(value, parameter: String, material: Material):
+	material.set_shader_parameter(parameter, value)
 
 func is_active(object: Object, path: String) -> bool:
 	var tween = find_tween(object, path)
 
 	if tween:
-		return tween.is_active()
+		return tween.is_running()
 	
 	return false
 

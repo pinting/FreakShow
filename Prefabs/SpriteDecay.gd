@@ -10,24 +10,14 @@ func _ready():
 	refresh()
 
 func refresh():
-	_set_material_scale(effect_max)
-
-func _set_material_scale(value):
-	material.set_shader_parameter("scale", value)
-	print(value)
+	material.set_shader_parameter("scale", effect_max)
 
 func appear():
-	var tween = get_tree().create_tween()
-	var method = Callable(self, "_set_material_scale")
-	
-	tween.tween_method(method, effect_max, effect_min, effect_duration)
+	Animator.tween_material(self, "scale", effect_max, effect_min, effect_duration)
 	
 	appeared = true
 
 func disappear():
-	var tween = get_tree().create_tween()
-	var method = Callable(self, "_set_material_scale")
-	
-	tween.tween_method(method, effect_min, effect_max, effect_duration)
+	Animator.tween_material(self, "scale", effect_max, effect_min, effect_duration)
 	
 	appeared = false

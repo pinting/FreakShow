@@ -82,7 +82,7 @@ position = Vector2(59.2303, 0.734743)
 [node name="BaseScene" parent="." instance=ExtResource("46")]
 
 [node name="Player" parent="BaseScene" instance=ExtResource("28")]
-position = Vector2(-3422.23, -424.735)
+position = Vector2(-4431.23, -1784.73)
 
 [node name="Ball" parent="BaseScene" instance=ExtResource("14")]
 z_index = -4
@@ -94,10 +94,10 @@ grab_force = Vector2(3, 3)
 [node name="GameCamera" parent="BaseScene" instance=ExtResource("23")]
 position = Vector2(-6109.33, -417.985)
 scale = Vector2(0.7, 0.7)
-zoom = Vector2(0.25, 0.25)
+zoom = Vector2(0.2, 0.2)
 follow_node = NodePath("../Player")
-follow_init_offset = Vector2(0, -500)
-follow_offset = Vector2(0, -500)
+follow_init_offset = Vector2(0, -125)
+follow_offset = Vector2(0, -125)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="BaseScene" groups=["world_environment"]]
 environment = SubResource("1")
@@ -194,7 +194,7 @@ position = Vector2(-929.845, 1723.92)
 scale = Vector2(0.9, 0.9)
 
 [node name="Light3D" parent="BaseScene/Environment/Building01/Lamp00" instance=ExtResource("26")]
-position = Vector2(-1184.55, 1002.47)
+position = Vector2(-1143.04, 985.213)
 scale = Vector2(3.67457, 1.10197)
 
 [node name="Lamp01" parent="BaseScene/Environment/Building01" instance=ExtResource("25")]
@@ -202,7 +202,7 @@ position = Vector2(1050.15, 1723.92)
 scale = Vector2(0.9, 0.9)
 
 [node name="Light3D" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource("26")]
-position = Vector2(-1182.14, 1002.47)
+position = Vector2(-1140.63, 985.213)
 scale = Vector2(3.67457, 1.10197)
 
 [node name="Paper" parent="BaseScene/Environment/Building01/Lamp01" instance=ExtResource("29")]
