@@ -20,6 +20,7 @@ The game was imagined based on a selection of music tracks - however, I do not o
 * Open the project file with [Godot Editor](https://godotengine.org/) `3.5.3`. Importing the assets will take a couple of minutes.
 * Select `Project` -> `Export`.
 * Click on `Export All`.
+* Only DEBUG works currently.
 * The DMG and EXE application files will be placed into the `out` directory.
 
 ## Credits
